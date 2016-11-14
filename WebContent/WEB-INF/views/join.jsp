@@ -95,18 +95,18 @@
 									<div id="wizard" class="form_wizard wizard_horizontal">
 										<ul class="wizard_steps">
 											<li><a href="#step-1"> <span class="step_no">1</span>
-													<span class="step_descr"> Step 1<br /> <small>Step
-															1 description</small>
+													<span class="step_descr"> Step 1<br /> <small>
+															약관동의</small>
 												</span>
 											</a></li>
 											<li><a href="#step-2"> <span class="step_no">2</span>
-													<span class="step_descr"> Step 2<br /> <small>Step
-															2 description</small>
+													<span class="step_descr"> Step 2<br /> <small>
+															정보작성</small>
 												</span>
 											</a></li>
-											<li><a href="#step-3"> <span class="step_no">3</span>
-													<span class="step_descr"> Step 3<br /> <small>Step
-															3 description</small>
+											<li><a href="#step-2"> <span class="step_no">3</span>
+													<span class="step_descr"> Step 3<br /> <small>
+															가입완료</small>
 												</span>
 											</a></li>
 
@@ -118,9 +118,9 @@
 													<h5 style="font-weight:bold; text-align: left">제 1 조 (목적)</h5>
 													 <p style="text-align: left">이 약관은 KOSBUS 주식회사 ("회사" 또는 “KOSBUS")가 제공하는 KOSBUS 및 KOSBUS 관련 제
 													 반  서비스 이용과 관련하여 회사와 회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
-													 <form action="">
-														<input type="checkbox" name="agree" value="agree">이용 약관에 동의 합니다<br>														
-													 </form>					
+													 <div style = "text-align:right">
+														<input type="checkbox" name="class[1]" value="agree1" id = "agree1" class="input_check">이용 약관에 동의 합니다<br>														
+													 </div>					
 												</div><br>
 												<div class="my-box">
 												<p style="text-align: left">
@@ -128,15 +128,18 @@
 													<h5 style="font-weight:bold; text-align: left">1. 수집하는 개인정보</h5>
 													<p style="text-align: left">이용자는 회원가입을 하지 않아도 정보 검색, 뉴스 보기 등 대부분의 네이버 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 네이버는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
 													
-													<form action="">
-														<input type="checkbox" name="agree" value="agree">이용 약관에 동의 합니다<br>														
-													 </form>
+													<div style = "text-align:right">
+														<input type="checkbox" name="class[2]" value="agree2" id = "agree2" class="input_check">이용 약관에 동의 합니다<br>														
+													 </div>
 												</div>
+											</div>
+											<div style = "text-align:right">
+												<input type="checkbox" name="agree" value="agree" id = "all-agree">전체 동의<br>
 											</div>
 										</div>
 
 
-										<div id="step-2">
+										<!-- <div id="step-2">
 											<form class="form-horizontal form-label-left">
 												<h2 class="StepTitle" style="text-align: center">Email
 													인증</h2>
@@ -156,8 +159,8 @@
 													</div>
 												</div>
 											</form>
-										</div>
-										<div id="step-3">
+										</div> -->
+										<div id="step-2">
 											<form class="form-horizontal form-label-left">
 
 												<div class="form-group">
