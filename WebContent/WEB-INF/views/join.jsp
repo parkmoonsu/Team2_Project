@@ -3,7 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<style type="text/css">
+.my-box { border:1px solid; padding:10px; }
+</style>
+</head>
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -108,11 +111,26 @@
 											</a></li>
 
 										</ul>
-										<div id="step-1" style="text-align: center;">
+										<div id="step-1" style="text-align: center;" class="my-box">
 											<h2 class="StepTitle">개인정보 이용약관</h2>
-											<div class="form-group">
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<textarea rows="" cols=""></textarea>
+											<div class="form-group" style="padding: 25px">
+												<div class="my-box" >
+													<h5 style="font-weight:bold; text-align: left">제 1 조 (목적)</h5>
+													 <p style="text-align: left">이 약관은 KOSBUS 주식회사 ("회사" 또는 “KOSBUS")가 제공하는 KOSBUS 및 KOSBUS 관련 제
+													 반 서비스 이용과 관련하여 회사와 회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
+													 <form action="">
+														<input type="checkbox" name="agree" value="agree">이용 약관에 동의 합니다<br>														
+													 </form>					
+												</div><br>
+												<div class="my-box">
+												<p style="text-align: left">
+													정보통신망법 규정에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.<br>
+													<h5 style="font-weight:bold; text-align: left">1. 수집하는 개인정보</h5>
+													<p style="text-align: left">이용자는 회원가입을 하지 않아도 정보 검색, 뉴스 보기 등 대부분의 네이버 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 네이버는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
+													
+													<form action="">
+														<input type="checkbox" name="agree" value="agree">이용 약관에 동의 합니다<br>														
+													 </form>
 												</div>
 											</div>
 										</div>
