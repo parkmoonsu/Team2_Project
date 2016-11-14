@@ -5,6 +5,7 @@
 <head>
 <style type="text/css">
 .my-box { border:1px solid; padding:10px; }
+
 </style>
 </head>
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -53,6 +54,9 @@
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
+
+
+
 
 </head>
 <body>
@@ -165,64 +169,156 @@
 
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="first-name">First Name <span class="required">*</span>
+														for="m_id">아이디
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" id="first-name" required="required"
+														<input type="text" id="m_id" name = "m_id" required="required"
 															class="form-control col-md-7 col-xs-12">
 													</div>
+													<div class = "col-md-1 col-sm-1">
+														<input type = "button" class = "btn btn-default" id = "checkid" value = "중복확인">
+													</div>
+													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
+														<span id = "check"></span>
+													</div>
 												</div>
+												
+							
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="last-name">Last Name <span class="required">*</span>
+														for="m_pw">비밀번호
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" id="last-name" name="last-name"
+														<input type="password" id="m_pw" name="m_pw"
 															required="required"
 															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
 												<div class="form-group">
-													<label for="middle-name"
-														class="control-label col-md-3 col-sm-3 col-xs-12">Middle
-														Name / Initial</label>
+													<label class="control-label col-md-3 col-sm-3 col-xs-12"
+														for="m_pw2">비밀번호 다시입력
+													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input id="middle-name"
+														<input type="password" id="m_pw2" name="m_pw2"
+															required="required"
+															class="form-control col-md-7 col-xs-12">
+													</div>
+												</div>
+												
+												
+												
+												<div class="form-group">
+													<label for="m_name"
+														class="control-label col-md-3 col-sm-3 col-xs-12">이름
+														</label>
+													<div class="col-md-6 col-sm-6 col-xs-12">
+														<input id="m_name"
 															class="form-control col-md-7 col-xs-12" type="text"
-															name="middle-name">
+															name="m_name">
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+													<label for="j_code"
+														class="control-label col-md-3 col-sm-3 col-xs-12">직책
+														</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<div id="gender" class="btn-group" data-toggle="buttons">
+														<select class = "form-control col-md-7 col-xs-12">
+															<option>선택</option>
+															<option value = "01">최고관리자</option>
+															<option value = "02">매니저</option>
+															<option value = "03">기사</option>
+															
+														</select>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="control-label col-md-3 col-sm-3 col-xs-12">성별</label>
+													<div class="col-md-6 col-sm-6 col-xs-12">
+														<div id="m_gender" class="btn-group" data-toggle="buttons">
 															<label class="btn btn-default"
 																data-toggle-class="btn-primary"
 																data-toggle-passive-class="btn-default"> <input
-																type="radio" name="gender" value="male"> &nbsp;
-																Male &nbsp;
+																type="radio" name="m_gender" value="male"> 
+																남성 
 															</label> <label class="btn btn-default"
 																data-toggle-class="btn-primary"
 																data-toggle-passive-class="btn-default"> <input
-																type="radio" name="gender" value="female">
-																Female
+																type="radio" name="m_gender" value="female">
+																여성
 															</label>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3 col-sm-3 col-xs-12">Date
-														Of Birth <span class="required">*</span>
+													<label for = "m_phone" 
+														class="control-label col-md-3 col-sm-3 col-xs-12">연락처
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input id="birthday"
-															class="date-picker form-control col-md-7 col-xs-12"
-															required="required" type="text">
+														<input id="m_phone" name ="m_phone"
+															class="form-control col-md-7 col-xs-12"
+															 type="text">
 													</div>
 												</div>
-
+												<div class="form-group">
+													<label for="m_email"
+														class="control-label col-md-3 col-sm-3 col-xs-12">이메일
+													</label>
+													<div class="col-md-3 col-sm-6 col-xs-12">
+														<input id="m_email"
+															class="form-control col-md-7 col-xs-12" type="email"
+															name="m_email">
+													</div>
+													<div class = "col-md-4 col-sm-4">
+														<input type = "button" value = "인증" id = "emailbtn"
+															class = "btn btn-default">
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="m_license"
+														class="control-label col-md-3 col-sm-3 col-xs-12">운전면허증
+													</label>
+													<div class="col-md-6 col-sm-6 col-xs-12">
+														<input id="m_license"
+															class="col-md-7 col-xs-12" type="file"
+															name="m_license">
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="m_photo"
+														class="control-label col-md-3 col-sm-3 col-xs-12">사진
+													</label>
+													<div class="col-md-6 col-sm-6 col-xs-12">
+														<input id="m_photo"
+															class="col-md-7 col-xs-12" type="file"
+															name="m_photo">
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="m_addr"
+														class="control-label col-md-3 col-sm-3 col-xs-12">우편주소
+													</label>
+													<div class="col-md-3 col-sm-6 col-xs-12">
+														<input id="m_addr"
+															class="form-control col-md-7 col-xs-12" type="text"
+															name="m_addr">
+													</div>
+													<div class = "col-md-4 col-sm-4">
+														<input type = "button" id = "addrbtn" value = "주소검색"
+															class = "btn btn-default">
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="m_daddr"
+														class="control-label col-md-3 col-sm-3 col-xs-12">상세주소
+													</label>
+													<div class="col-md-6 col-sm-6 col-xs-12">
+														<input id="m_daddr"
+															class="form-control col-md-7 col-xs-12" type="text"
+															name="m_daddr">
+													</div>
+												</div>
 											</form>
-
 										</div>
 
 
@@ -267,12 +363,45 @@
 		<!-- Custom Theme Scripts -->
 		<script
 			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-
+		<!-- ajax -->
+		
 		<!-- jQuery Smart Wizard -->
 		<script>
+		
 			$(document).ready(function() {
+				var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 	
 				$("#emailbtn").click(function() {
-					alert("Email 전송 완료");
+					if(regExp.test($("#m_email").val().trim())){
+						alert("Email 전송 완료");
+
+						var popUrl = "popup.htm";    //팝업창에 출력될 페이지 URL
+				    	var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no";    //팝업창 옵션(optoin)
+				        window.open(popUrl,"",popOption);
+					}else{
+						alert("Email 형식이 잘못 되었습니다.");
+					}
+					
+				});
+				
+				$("#checkid").click(function(){
+					$.ajax({
+						url:"checkid.htm",
+						type:"post",
+						data:{m_id:$("#m_id").val().trim()},
+						success:function(rd){
+							console.log($.trim(rd));
+							$("#check").empty();
+							if($.trim(rd)=="y"){
+								$('#check').append("<font color = 'red'>이미 있는 ID 입니다!</font>");
+								$('#m_id').focus();
+							}else if($.trim(rd)=="n" && $("#m_id").val().trim().length >= 8){
+								$('#check').append("<font color = '#369F36'>사용 가능한 ID 입니다!</font>");
+							}else{
+								$('#check').append("<font color = 'red'>ID는 8자 이상입니다!</font>");
+							}
+						}
+						
+					});
 				});
 				
 				
