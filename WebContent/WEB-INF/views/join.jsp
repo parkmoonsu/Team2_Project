@@ -117,7 +117,7 @@
 												<div class="my-box" >
 													<h5 style="font-weight:bold; text-align: left">제 1 조 (목적)</h5>
 													 <p style="text-align: left">이 약관은 KOSBUS 주식회사 ("회사" 또는 “KOSBUS")가 제공하는 KOSBUS 및 KOSBUS 관련 제
-													 반 서비스 이용과 관련하여 회사와 회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
+													 반  서비스 이용과 관련하여 회사와 회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
 													 <form action="">
 														<input type="checkbox" name="agree" value="agree">이용 약관에 동의 합니다<br>														
 													 </form>					
