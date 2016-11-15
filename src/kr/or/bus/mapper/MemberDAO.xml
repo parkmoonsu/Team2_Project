@@ -8,7 +8,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(m_id) from member where m_id = #{m_id}
 	</select>
 	
-	<select id="emailApp" resultType = "String">
-		select a_num from approve;
+	<select id="emailApp" resultType = "kr.or.bus.dto.ApproveDTO">
+		select a_num from approve
 	</select>
+	
+	<select id="emailCheck" resultType = "int" parameterType = "String">
+		select count(a_num) from approve where a_num = #{a_num}
+	</select>
+	
+	<update id="updateApp">
+		update approve set a_num = #{a_num}
+	</update>
 </mapper>

@@ -1,16 +1,20 @@
 /*
-*	@FileName : MemberDTO.java
+*	@FileName : JoinDTO.java
 *	@Project	: KosBus
-*	@Date	: 2016. 11.14
+*	@Date	: 2016. 11.15
 *	@Author	: 박문수
-*	@Discription : MDTAIL table DTO
+*	@Discription : Member,MDetail,ResRecord Join DTO
 */
 
 
 package kr.or.bus.dto;
 
-public class MDetailDTO {
+public class JoinDTO {
 	private String m_id;
+	private String j_code;
+	private String m_name;
+	private String m_pw;
+	
 	private String m_addr;
 	private String m_daddr;
 	private String m_phone;
@@ -22,18 +26,31 @@ public class MDetailDTO {
 	private int m_annual;
 	private String m_gender;
 	
-	
-	public String getM_gender() {
-		return m_gender;
-	}
-	public void setM_gender(String m_gender) {
-		this.m_gender = m_gender;
-	}
+	private String res_num;
+	private String rr_detail;
 	public String getM_id() {
 		return m_id;
 	}
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
+	}
+	public String getJ_code() {
+		return j_code;
+	}
+	public void setJ_code(String j_code) {
+		this.j_code = j_code;
+	}
+	public String getM_name() {
+		return m_name;
+	}
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
+	}
+	public String getM_pw() {
+		return m_pw;
+	}
+	public void setM_pw(String m_pw) {
+		this.m_pw = m_pw;
 	}
 	public String getM_addr() {
 		return m_addr;
@@ -89,11 +106,31 @@ public class MDetailDTO {
 	public void setM_annual(int m_annual) {
 		this.m_annual = m_annual;
 	}
+	public String getM_gender() {
+		return m_gender;
+	}
+	public void setM_gender(String m_gender) {
+		this.m_gender = m_gender;
+	}
+	public String getRes_num() {
+		return res_num;
+	}
+	public void setRes_num(String res_num) {
+		this.res_num = res_num;
+	}
+	public String getRr_detail() {
+		return rr_detail;
+	}
+	public void setRr_detail(String rr_detail) {
+		this.rr_detail = rr_detail;
+	}
 	@Override
 	public String toString() {
-		return "MDetailDTO [m_id=" + m_id + ", m_addr=" + m_addr + ", m_daddr=" + m_daddr + ", m_phone=" + m_phone
-				+ ", m_email=" + m_email + ", m_echeck=" + m_echeck + ", m_license=" + m_license + ", m_photo="
-				+ m_photo + ", m_birth=" + m_birth + ", m_annual=" + m_annual + ", m_gender=" + m_gender + "]";
+		return "JoinDTO [m_id=" + m_id + ", j_code=" + j_code + ", m_name=" + m_name + ", m_pw=" + m_pw + ", m_addr="
+				+ m_addr + ", m_daddr=" + m_daddr + ", m_phone=" + m_phone + ", m_email=" + m_email + ", m_echeck="
+				+ m_echeck + ", m_license=" + m_license + ", m_photo=" + m_photo + ", m_birth=" + m_birth
+				+ ", m_annual=" + m_annual + ", m_gender=" + m_gender + ", res_num=" + res_num + ", rr_detail="
+				+ rr_detail + "]";
 	}
 	
 	

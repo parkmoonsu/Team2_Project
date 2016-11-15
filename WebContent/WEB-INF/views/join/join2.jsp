@@ -60,6 +60,7 @@
 
 </head>
 <body>
+
 	<header>
 		<jsp:include page="/sidebar/header.jsp" />
 	</header>
@@ -86,7 +87,7 @@
 							<div class="x_panel">
 								<div class="x_title">
 									<h2>
-										회원가입 <small>Sessions</small>
+										회원가입 <small>KosBus</small>
 									</h2>
 
 									<div class="clearfix"></div>
@@ -98,7 +99,7 @@
 									
 									<div id="wizard" class="form_wizard wizard_horizontal">
 										<ul class="wizard_steps">
-											<li><a href="#step-1"> <span class="step_no">1</span>
+											<li><a href="#step-2"> <span class="step_no">1</span>
 													<span class="step_descr"> Step 1<br /> <small>
 															약관동의</small>
 												</span>
@@ -115,64 +116,16 @@
 											</a></li>
 
 										</ul>
-										<div id="step-1" style="text-align: center;" class="my-box">
-											<h2 class="StepTitle">개인정보 이용약관</h2>
-											<div class="form-group" style="padding: 25px">
-												<div class="my-box" >
-													<h5 style="font-weight:bold; text-align: left">제 1 조 (목적)</h5>
-													 <p style="text-align: left">이 약관은 KOSBUS 주식회사 ("회사" 또는 “KOSBUS")가 제공하는 KOSBUS 및 KOSBUS 관련 제
-													 반  서비스 이용과 관련하여 회사와 회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
-													 <div style = "text-align:right">
-														<input type="checkbox" name="class[1]" value="agree1" id = "agree1" class="input_check">이용 약관에 동의 합니다<br>														
-													 </div>					
-												</div><br>
-												<div class="my-box">
-												<p style="text-align: left">
-													정보통신망법 규정에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.<br>
-													<h5 style="font-weight:bold; text-align: left">1. 수집하는 개인정보</h5>
-													<p style="text-align: left">이용자는 회원가입을 하지 않아도 정보 검색, 뉴스 보기 등 대부분의 네이버 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 네이버는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
-													
-													<div style = "text-align:right">
-														<input type="checkbox" name="class[2]" value="agree2" id = "agree2" class="input_check">이용 약관에 동의 합니다<br>														
-													 </div>
-												</div>
-											</div>
-											<div style = "text-align:right">
-												<input type="checkbox" name="agree" value="agree" id = "all-agree">전체 동의<br>
-											</div>
-										</div>
-
-
-										<!-- <div id="step-2">
-											<form class="form-horizontal form-label-left">
-												<h2 class="StepTitle" style="text-align: center">Email
-													인증</h2>
-												<div class="container">
-													<div class="row">
-														<div class="form-group">
-															<label class="control-label col-sm-3" for="first-name">Email</label>
-
-															<div class="col-sm-6">
-																<input type="text" id="email" class="form-control">
-															</div>
-															<div class="col-sm-3">
-																<input type="button" id="emailbtn"
-																	class="btn btn-default" value="인증">
-															</div>
-														</div>
-													</div>
-												</div>
-											</form>
-										</div> -->
+										
 										<div id="step-2">
-											<form class="form-horizontal form-label-left">
+											<form class="form-horizontal form-label-left" method = "post" action = "join3.htm" enctype = "multipart/form-data">
 
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
 														for="m_id">아이디
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" id="m_id" name = "m_id" required="required"
+														<input type="text" id="m_id" name = "m_id"
 															class="form-control col-md-7 col-xs-12">
 													</div>
 													<div class = "col-md-1 col-sm-1">
@@ -190,7 +143,6 @@
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input type="password" id="m_pw" name="m_pw"
-															required="required"
 															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
@@ -200,12 +152,9 @@
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input type="password" id="m_pw2" name="m_pw2"
-															required="required"
 															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
-												
-												
 												
 												<div class="form-group">
 													<label for="m_name"
@@ -227,7 +176,22 @@
 															name="m_email">
 													</div>
 													<div class = "col-md-4 col-sm-4">
-														<input type = "button" value = "인증" id = "emailbtn"
+														<input type = "button" value = "인증번호전송" id = "emailbtn"
+															class = "btn btn-default">
+													</div>
+												</div>
+												<div class="form-group" id = "change">
+													<label for="m_echeck"
+														class="control-label col-md-3 col-sm-3 col-xs-12">인증번호
+													</label>
+					
+													<div class="col-md-3 col-sm-6 col-xs-12">
+														<input id="m_echeck"
+															class="form-control col-md-7 col-xs-12" type="text"
+															name="m_echeck">
+													</div>
+													<div class = "col-md-4 col-sm-4">
+														<input type = "button" value = "인증" id = "echeckbtn"
 															class = "btn btn-default">
 													</div>
 												</div>
@@ -307,9 +271,10 @@
 															name="m_addr">
 													</div>
 													<div class = "col-md-4 col-sm-4">
-														<input type = "button" id = "addrbtn" value = "주소검색"
-															class = "btn btn-default">
+														<input type = "button" value = "주소검색"
+															class = "btn btn-default" onclick = "sample4_execDaumPostcode()">
 													</div>
+													<span id="guide" style="color: #999; display:none;" ></span>
 												</div>
 												<div class="form-group">
 													<label for="m_daddr"
@@ -340,16 +305,25 @@
 															class="form-control col-md-7 col-xs-12" type="text"
 															name="rr_detail">
 													</div>
+													<div class = "col-md-3 col-sm-3">
+														<input type = "button" value ="+" id = "plusbtn" class = "btn btn-default">
+													</div>
+												</div>
+												<div id = "plus">
+												
+												</div>
+
+												<div style="float: right; margin: 30px;">
+													<input type="button" value="이전" class="btn btn-primary"
+														id="prev" onclick="history.go(-1)"> 
+													<input type="submit" value="다음" class="btn btn-success" 
+														id="next">
 												</div>
 											</form>
+
+
 										</div>
-
-
-
 										<!-- End SmartWizard Content -->
-
-
-
 									</div>
 									<!-- End SmartWizard Content -->
 								</div>
@@ -358,6 +332,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 			<!-- /page content -->
 
 			<!-- footer content -->
@@ -366,45 +341,96 @@
 			</footer>
 			<!-- /footer content -->
 		</div>
-	</div>
+
+
+	<!-- 다음 우편번호 -->
+
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script>
+		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+		function sample4_execDaumPostcode() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+							// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+							var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraRoadAddr += data.bname;
+							}
+							// 건물명이 있고, 공동주택일 경우 추가한다.
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+							if (extraRoadAddr !== '') {
+								extraRoadAddr = ' (' + extraRoadAddr + ')';
+							}
+							// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+							if (fullRoadAddr !== '') {
+								fullRoadAddr += extraRoadAddr;
+							}
+
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							/* document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+							document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+							document.getElementById('sample4_jibunAddress').value = data.jibunAddress; */
+							var str = data.zonecode + " " + fullRoadAddr + " "
+									+ data.jibunAddress;
+							document.getElementById('m_addr').value = str;
+
+							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+							if (data.autoRoadAddress) {
+								//예상되는 도로명 주소에 조합형 주소를 추가한다.
+								var expRoadAddr = data.autoRoadAddress
+										+ extraRoadAddr;
+								document.getElementById('guide').innerHTML = '(예상 도로명 주소 : '
+										+ expRoadAddr + ')';
+
+							} else if (data.autoJibunAddress) {
+								var expJibunAddr = data.autoJibunAddress;
+								document.getElementById('guide').innerHTML = '(예상 지번 주소 : '
+										+ expJibunAddr + ')';
+
+							} else {
+								document.getElementById('guide').innerHTML = '';
+							}
+						}
+					}).open();
+		}
+	</script>
 
 
 
 
-<!-- BEGIN # MODAL LOGIN -->
-	<div class="modal fade" id="email-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	<div class="modal-dialog">
-			<div class="modal-content">      
-                <!-- Begin # DIV Form -->
-                <div id="div-forms">
-                <div class="modal-header" align="center">
-					<h3>이메일 인증</h3>
-					<hr>
-				</div>
-                    <!-- Begin # Login Form -->
-                    <form id="login-form" action="" method="post">
-		                <div class="modal-body">
-				    		<div id="div-login-msg">
-                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                <span id="text-login-msg">인증번호를 입력하세요.</span>
-                            </div>
-				    		<input id="login_username" name="username" class="form-control" type="text" placeholder="인증번호 입력" required>
-        		    	</div>
-        		    	<div class="modal-footer">
-                            <div>
-                                <a href="redirect:/join.htm"><button type="submit" class="btn btn-primary btn-lg btn-block">완료</button></a>
-                            </div>
-        		    	</div>
-                    </form>
-                    <!-- End # Login Form -->  
-                </div>
-                <!-- End # DIV Form --> 
-			</div>
-		</div>
-	</div>
-    <!-- END # MODAL LOGIN -->
 
-		<!-- jQuery -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- jQuery -->
 		<script
 			src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap -->
@@ -426,14 +452,13 @@
 		
 		<!-- jQuery Smart Wizard -->
 		<script>
-		
 			$(document).ready(function() {
 				var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 	
+				
 				$("#emailbtn").click(function() {
 					if(regExp.test($("#m_email").val().trim())){
 						
-						alert("Email 전송 완료");
-						$("#email-modal").modal();
+						alert("인증번호 전송 완료");
 						$.ajax({
 							url : "popup.htm",
 							type : "post",
@@ -445,6 +470,32 @@
 					}
 					
 				});	
+				
+				$("#echeckbtn").click(function(){
+					$.ajax({
+						url:"echeck.htm",
+						type:"post",
+						data:{m_echeck:$("#m_echeck").val().trim()},
+						success:function(rd){
+							console.log(rd.echeck);
+							if($.trim(rd.echeck) == "y"){
+								alert("인증 되었습니다.");
+								$("#change").empty();
+								$("#change").append("<input type = 'hidden' name = 'm_echeck' value = 'y'>");
+								
+								$.ajax({
+									url:"updateapp.htm",
+									type:"post"
+								});
+							}else{
+								alert("인증번호를 잘못 입력하셨습니다.");
+								$("#m_echeck").focus();
+							}
+							
+							
+						}
+					});
+				});
 				
 				$("#checkid").click(function(){
 					$.ajax({
@@ -467,6 +518,48 @@
 					});
 				});
 				
+				if($("#m_id").val() != "" && $("#m_pw").val() != "" && $("#m_pw2").val() != ""
+						&& $("#m_name").val() != "" && $("#m_email").val() != "" &&
+						$("#j_code").val() != "" && $("#m_gender").is(":selected") &&
+						$("#m_phone").val() != "" && $("#m_license").val() != "" &&
+						$("#m_photo").val() != "" && $("#m_addr").val() != "" &&
+						$("#m_daddr").val() != "" && $("#res_num").val() != "" &&
+						$("#rr_detail").val() != ""){
+					$("#next").attr('disabled', false);
+				}else{
+					$("#next").attr('disabled', true);
+				}
+				
+				$("#rr_detail").keyup(function(){
+					if($("#rr_detail") != ""){
+						$("#next").attr('disabled', false);
+					}else{
+						$("#next").attr('disabled', true);
+					}
+				})
+				
+				var i = 2;
+				$("#plusbtn").click(function(){
+					var plus = "<div class='form-group'>";
+					plus += "<label for='res_num' class='control-label col-md-3 col-sm-3 col-xs-12'>이력사항" + i++ + "</label>";
+					plus += "<div class = 'col md-3 col-sm-3'>";
+					plus += "<select name = 'res_num' class = 'form-control col-md-3 col-sm-3'>";
+					plus += "<option>선택</option>";
+					plus += "<option value = '01'>마을버스</option>";
+					plus += "<option value = '02'>시내버스</option>";
+					plus += "<option value = '03'>시외버스</option>";
+					plus += "<option value = '04'>고속버스</option>";
+					plus += "</select></div>";
+					plus += "<div class='col-md-3 col-sm-3 col-xs-12'>";
+					plus += "<input class='form-control col-md-7 col-xs-12' type='text' name='rr_detail'>";
+					plus += "</div></div>";
+					$("#plus").append(plus);
+					
+					if(i>4){
+						 $("#plusbtn").unbind("click");
+					}
+				});
+				
 				
 				$('#wizard').smartWizard();
 
@@ -474,9 +567,6 @@
 					transitionEffect : 'slide'
 				});
 
-				$('.buttonNext').addClass('btn btn-success');
-				$('.buttonPrevious').addClass('btn btn-primary');
-				$('.buttonFinish').addClass('btn btn-default');
 			});
 		</script>
 		<!-- /jQuery Smart Wizard -->

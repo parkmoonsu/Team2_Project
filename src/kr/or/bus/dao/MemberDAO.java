@@ -8,9 +8,15 @@
 
 package kr.or.bus.dao;
 
+import kr.or.bus.dto.ApproveDTO;
+
 public interface MemberDAO {
 	//아이디 중복 체크
 	public int checkId(String m_id);
 	//이메일 인증번호 보내기
-	public String emailApp();
+	public ApproveDTO emailApp();
+	//이메일 인증번호 검증
+	public int emailCheck(String a_num);
+	//인증번호 번호 변경
+	public void updateApp(String a_num);
 }

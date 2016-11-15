@@ -20,11 +20,11 @@ function SmartWizard(target, options) {
     this.msgBox = $('<div class="msgBox"><div class="content"></div><a href="#" class="close">X</a></div>');
     this.elmStepContainer = $('<div></div>').addClass("stepContainer");
     this.loader = $('<div>Loading</div>').addClass("loader");
-    this.buttons = {
+   /* this.buttons = {
         next : $('<a>'+options.labelNext+'</a>').attr("href","#").addClass("buttonNext"),
         previous : $('<a>'+options.labelPrevious+'</a>').attr("href","#").addClass("buttonPrevious"),
         finish  : $('<a>'+options.labelFinish+'</a>').attr("href","#").addClass("buttonFinish")
-    };
+    };*/
 
     /*
      * Private functions
@@ -277,11 +277,41 @@ function SmartWizard(target, options) {
                     $($this.buttons.next).hide();
                 }
             }else{
+            	
             	if($("#all-agree").is(":checked")){	
             		$($this.buttons.next).removeClass("buttonDisabled");
             	}else{
             		$($this.buttons.next).addClass("buttonDisabled");
             	}
+            	$("#agree1").click(function(){
+            		if($("#agree1").is(":checked") && $("#agree2").is(":checked")){
+            			$("input:checkbox[id='all-agree']").prop(
+								"checked", true);
+            			$($this.buttons.next).removeClass(
+						"buttonDisabled");
+            		}else{
+            			$("input:checkbox[id='all-agree']").prop(
+								"checked", false);
+            			$($this.buttons.next)
+						.addClass("buttonDisabled");
+            		}
+            	});
+            	
+            	
+            	$("#agree2").click(function(){
+            		if($("#agree1").is(":checked") && $("#agree2").is(":checked")){
+            			$("input:checkbox[id='all-agree']").prop(
+								"checked", true);
+            			$($this.buttons.next).removeClass(
+						"buttonDisabled");
+            		}else{
+            			$("input:checkbox[id='all-agree']").prop(
+								"checked", false);
+            			$($this.buttons.next)
+						.addClass("buttonDisabled");
+            		}
+            	});
+            	
             	//전체 동의 클릭시 
             	$('#all-agree').click(function(){
             		if ($("#all-agree").is(":checked")) {
@@ -292,14 +322,14 @@ function SmartWizard(target, options) {
 
 								$($this.buttons.next).removeClass(
 										"buttonDisabled");
-							} else {
+					} else {
 								$($this.buttons.next)
 										.addClass("buttonDisabled");
 								$("input:checkbox[id='agree1']").prop(
 										"checked", false);
 								$("input:checkbox[id='agree2']").prop(
 										"checked", false);
-							}	
+					}	
             	});
                 if ($this.options.hideButtonsOnDisabled) {
                 	
