@@ -18,6 +18,10 @@ public class IndexController {
 	
 	@RequestMapping("/bus.htm")
 	public String bus(){
+		return "index2";
+	}	
+	@RequestMapping("/login.htm")
+	public String login(){
 		return "bus";
 	}
 	

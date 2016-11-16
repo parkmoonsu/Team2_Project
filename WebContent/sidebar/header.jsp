@@ -150,27 +150,7 @@
                 	
                 
                     <!-- Begin # Login Form -->
-                    <form id="login-form" action="" method="post">
-		                <div class="modal-body">
-				    		<div id="div-login-msg">
-                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                <span id="text-login-msg">사용자 아이디와 비밀번호를 입력하세요</span>
-                            </div>
-				    		<input id="login_username" name="username" class="form-control" type="text" placeholder="ID 입력" required>
-				    		<input id="login_password" name="userpwd" class="form-control" type="password" placeholder="비밀번호 입력" required>
-                          
-        		    	</div>
-				        <div class="modal-footer">
-                            <div>
-                                <a href="login.do"><button type="submit" class="btn btn-primary btn-lg btn-block">Login</button></a>
-                            </div>
-				    	    <div>
-				    	    	<button id="login_lost_btn" type="button" class="btn btn-link">ID 잊었니?</button>
-                                <button id="login_lost_btn" type="button" class="btn btn-link">비밀번호 잊었니?</button>
-                                <button id="login_register_btn" type="button" class="btn btn-link">회원가입</button>
-                            </div>
-				        </div>
-                    </form>
+                   
                     <!-- End # Login Form -->
                     
                     <!-- Begin | Lost Password Form -->
@@ -240,7 +220,7 @@
           <form class="navbar-form navbar-right">
     
             <div class="form-group" style="vertical-align: middle; margin:15px">
-            <a href="#" style="text-decoration:none; color: white" data-toggle="modal" data-target="#login-modal">로그인</a>&nbsp;&nbsp;
+            <a href="login.htm">로그인</a>&nbsp;&nbsp;
            	<a href="join.htm" style="text-decoration:none; color: white" >회원가입</a>
             
             </div>
