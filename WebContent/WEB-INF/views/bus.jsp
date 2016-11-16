@@ -87,7 +87,7 @@
     </style>
    
   </head>
-<body style="height:1500px">
+<body>
 	<div class="container">
   	<header>
   		<div w3-include-html="sidebar/header.jsp"></div>
