@@ -305,7 +305,7 @@
 													</label>
 													<div class = "col md-3 col-sm-3">
 													<select name = "res_num" id = "res_num" class = "form-control col-md-3 col-sm-3">
-														<option>선택</option>
+														<option value ="">선택</option>
 														<option value = "100">마을버스</option>
 														<option value = "200">시내버스</option>
 														<option value = "300">시외버스</option>
@@ -605,7 +605,6 @@
 						return false;
 					}else if($("#res_num").val() ==""){
 						alert("이력사항을 선택하세요.");
-						$("#res_num").focus();
 						return false;
 					}else if($("#rr_detail").val() ==""){
 						alert("이력사항을 입력하세요.");
