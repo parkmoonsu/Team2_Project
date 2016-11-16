@@ -14,7 +14,21 @@
   					  http://www.springframework.org/schema/tx 
   					 http://www.springframework.org/schema/tx/spring-tx.xsd
   					 ">
+	<security:http>
+		<security:csrf disabled="true" />
+		<security:form-login login-page="/login.htm"
+			authentication-failure-url="/login.htm?error" />
+		<security:logout logout-success-url="/bus.htm" />
 
+		<!-- <security:intercept-url pattern="/customer/noticeDetail.htm"
+			access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/customer/noticeReg.htm"
+			access="hasRole('ROLE_ADMIN')" /> -->
+		<!-- <security:intercept-url pattern="/customer/*Reg.htm"
+			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/customer/*Detail.htm"
+			access="hasRole('ROLE_USER')" /> -->	
+	</security:http>
 
 
 
