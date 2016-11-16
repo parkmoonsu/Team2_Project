@@ -91,7 +91,11 @@
 </div>
 	</div>
 
-	<footer> <jsp:include page="/sidebar/footer.jsp" /> </footer>
+	<footer> 
+		<div class ="container">
+			<jsp:include page="/sidebar/footer.jsp" /> 
+		</div>
+	</footer>
 	<!-- Javascript -->
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
