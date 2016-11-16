@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -41,6 +42,9 @@ public class JoinService {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public void join3(MDetailDTO ddto , MemberDTO mdto , ResRecordDTO rdto , HttpServletRequest request) throws IOException{
 		
@@ -79,6 +83,9 @@ public class JoinService {
 		
 		ddto.setM_license(filenames.get(0));
 		ddto.setM_photo(filenames.get(1));
+		
+		//비밀번호 암호화
+		mdto.setM_pw(this.bCryptPasswordEncoder.encode(mdto.getM_pw()));
 		
 		dao.insertMember(mdto);
 		dao.insertDetail(ddto);

@@ -45,10 +45,7 @@ public class JoinController {
 	
 	@Autowired
 	private View jsonview;
-	
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	private JoinService service;
 	
