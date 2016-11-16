@@ -88,6 +88,7 @@
    
   </head>
 <body style="height:1500px">
+	<div class="container">
   	<header>
   		<div w3-include-html="sidebar/header.jsp"></div>
   	</header>
@@ -206,8 +207,11 @@
       </div>
     </div> <!-- /container -->
 </div>
+	<div class="container footer">
         <hr class="featurette-divider">
  		<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+ 		        </div>
+ 		        </div>
     <!-- /container -->
 
     <script>

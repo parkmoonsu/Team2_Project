@@ -220,7 +220,7 @@
           <form class="navbar-form navbar-right">
     
             <div class="form-group" style="vertical-align: middle; margin:15px">
-            <a href="login.htm">로그인</a>&nbsp;&nbsp;
+            <a href="login2.htm">로그인</a>&nbsp;&nbsp;
            	<a href="join.htm" style="text-decoration:none; color: white" >회원가입</a>
             
             </div>

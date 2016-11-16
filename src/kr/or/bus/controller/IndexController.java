@@ -18,11 +18,11 @@ public class IndexController {
 	
 	@RequestMapping("/bus.htm")
 	public String bus(){
-		return "index2";
-	}	
-	@RequestMapping("/login.htm")
-	public String login(){
 		return "bus";
+	}	
+	@RequestMapping("/login2.htm")
+	public String login(){
+		return "index2";
 	}
 	
 }

@@ -4,12 +4,7 @@ jQuery(document).ready(function() {
     /*
         Fullscreen background
     */
-    $.backstretch([
-                    "assets/img/backgrounds/bono.jpg"
-	              , "assets/img/backgrounds/bono.jpg"
-	              , "assets/img/backgrounds/bono.jpg"
-	             ], {duration: 3000, fade: 750});
-    
+  
     /*
         Form validation
     */
