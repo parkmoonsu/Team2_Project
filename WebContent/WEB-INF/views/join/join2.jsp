@@ -184,7 +184,7 @@
 													<label for="m_echeck"
 														class="control-label col-md-3 col-sm-3 col-xs-12">인증번호
 													</label>
-					
+													<input type = 'hidden' id = 'm_nocheck' value = 'n'>
 													<div class="col-md-3 col-sm-6 col-xs-12">
 														<input id="m_echeck"
 															class="form-control col-md-7 col-xs-12" type="text"
@@ -203,12 +203,13 @@
 														</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<select class = "form-control col-md-7 col-xs-12" name ="j_code" id = "j_code">
-															<option>선택</option>
+															<option value ="">선택</option>
 															<option value = "01">최고관리자</option>
 															<option value = "02">매니저</option>
 															<option value = "03">기사</option>
 															
 														</select>
+														
 													</div>
 												</div>
 												
@@ -227,6 +228,7 @@
 																type="radio" name="m_gender" value="female">
 																여성
 															</label>
+															
 														</div>
 													</div>
 												</div>
@@ -304,10 +306,10 @@
 													<div class = "col md-3 col-sm-3">
 													<select name = "res_num" id = "res_num" class = "form-control col-md-3 col-sm-3">
 														<option>선택</option>
-														<option value = "01">마을버스</option>
-														<option value = "02">시내버스</option>
-														<option value = "03">시외버스</option>
-														<option value = "04">고속버스</option>
+														<option value = "100">마을버스</option>
+														<option value = "200">시내버스</option>
+														<option value = "300">시외버스</option>
+														<option value = "400">고속버스</option>
 													</select>
 													</div>
 													<div class="col-md-3 col-sm-3 col-xs-12">
@@ -418,28 +420,6 @@
 					}).open();
 		}
 	</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- jQuery -->
 		<script
 			src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
@@ -508,6 +488,7 @@
 				});
 				
 				$("#checkid").click(function(){
+					
 					$.ajax({
 						url:"checkid.htm",
 						type:"post",
@@ -567,6 +548,71 @@
 					
 					if(i>4){
 						 $("#plusbtn").unbind("click");
+					}
+				});
+				
+				$("#next").click(function(){
+					if($("#m_id").val() == ""){
+						alert("ID를 입력하세요.");
+						$("#m_id").focus();
+				        return false;
+					}else if($("#m_pw").val() == ""){
+						alert("비밀번호를 입력하세요.");
+						$("#m_pw").focus();
+				        return false;
+					}else if($("#m_pw2").val() == "" || ($("#m_pw").val() != $("#m_pw2").val())){
+						alert("비밀번호가 일치 하지 않습니다.");
+						$("#m_pw2").focus();
+						return false;
+					}else if($("#m_name").val() == ""){
+						alert("이름을 입력하세요.");
+						$("#m_name").focus();
+						return false;
+					}else if($("#m_email").val() == ""){
+						alert("이메일을 입력하세요.");
+						$("#m_email").focus();
+						return false;
+					}else if($("#m_nocheck").val() == "n"){
+						alert("이메일을 통해 인증하세요.");
+						$("#m_email").focus();
+						return false;
+					}else if($("#j_code").val() == ""){
+						alert("직책을 선택하세요.");
+						return false;
+					}else if($("#m_birth").val() ==""){
+						alert("생년월일을 입력하세요.");
+						$("#m_birth").focus();
+						return false;
+					}else if($("#m_phone").val() ==""){
+						alert("연락처를 입력하세요.");
+						$("#m_phone").focus();
+						return false;
+					}else if($("#m_license").val() ==""){
+						alert("운전면허증 사본을 첨부하세요.");
+						$("#m_license").focus();
+						return false;
+					}else if($("#m_photo").val() ==""){
+						alert("사진을 첨부하세요.");
+						$("#m_photo").focus();
+						return false;
+					}else if($("#m_addr").val() ==""){
+						alert("우편주소를 입력하세요.");
+						$("#m_addr").focus();
+						return false;
+					}else if($("#m_daddr").val() ==""){
+						alert("상세주소를 입력하세요.");
+						$("#m_daddr").focus();
+						return false;
+					}else if($("#res_num").val() ==""){
+						alert("이력사항을 선택하세요.");
+						$("#res_num").focus();
+						return false;
+					}else if($("#rr_detail").val() ==""){
+						alert("이력사항을 입력하세요.");
+						$("#rr_detail").focus();
+						return false;
+					}else{
+						return true;
 					}
 				});
 				
