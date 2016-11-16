@@ -20,11 +20,11 @@ function SmartWizard(target, options) {
     this.msgBox = $('<div class="msgBox"><div class="content"></div><a href="#" class="close">X</a></div>');
     this.elmStepContainer = $('<div></div>').addClass("stepContainer");
     this.loader = $('<div>Loading</div>').addClass("loader");
-    this.buttons = {
+   /* this.buttons = {
         next : $('<a>'+options.labelNext+'</a>').attr("href","#").addClass("buttonNext"),
         previous : $('<a>'+options.labelPrevious+'</a>').attr("href","#").addClass("buttonPrevious"),
         finish  : $('<a>'+options.labelFinish+'</a>').attr("href","#").addClass("buttonFinish")
-    };
+    };*/
 
     /*
      * Private functions
@@ -277,9 +277,64 @@ function SmartWizard(target, options) {
                     $($this.buttons.next).hide();
                 }
             }else{
-                $($this.buttons.next).removeClass("buttonDisabled");
+            	
+            	if($("#all-agree").is(":checked")){	
+            		$($this.buttons.next).removeClass("buttonDisabled");
+            	}else{
+            		$($this.buttons.next).addClass("buttonDisabled");
+            	}
+            	$("#agree1").click(function(){
+            		if($("#agree1").is(":checked") && $("#agree2").is(":checked")){
+            			$("input:checkbox[id='all-agree']").prop(
+								"checked", true);
+            			$($this.buttons.next).removeClass(
+						"buttonDisabled");
+            		}else{
+            			$("input:checkbox[id='all-agree']").prop(
+								"checked", false);
+            			$($this.buttons.next)
+						.addClass("buttonDisabled");
+            		}
+            	});
+            	
+            	
+            	$("#agree2").click(function(){
+            		if($("#agree1").is(":checked") && $("#agree2").is(":checked")){
+            			$("input:checkbox[id='all-agree']").prop(
+								"checked", true);
+            			$($this.buttons.next).removeClass(
+						"buttonDisabled");
+            		}else{
+            			$("input:checkbox[id='all-agree']").prop(
+								"checked", false);
+            			$($this.buttons.next)
+						.addClass("buttonDisabled");
+            		}
+            	});
+            	
+            	//전체 동의 클릭시 
+            	$('#all-agree').click(function(){
+            		if ($("#all-agree").is(":checked")) {
+								$("input:checkbox[id='agree1']").prop(
+										"checked", true);
+								$("input:checkbox[id='agree2']").prop(
+										"checked", true);
+
+								$($this.buttons.next).removeClass(
+										"buttonDisabled");
+					} else {
+								$($this.buttons.next)
+										.addClass("buttonDisabled");
+								$("input:checkbox[id='agree1']").prop(
+										"checked", false);
+								$("input:checkbox[id='agree2']").prop(
+										"checked", false);
+					}	
+            	});
                 if ($this.options.hideButtonsOnDisabled) {
-                    $($this.buttons.next).show();
+                	
+                	$($this.buttons.next).show();
+                	
                 }
             }
         }
@@ -434,12 +489,14 @@ $.fn.smartWizard.defaults = {
     contentURL:null, // content url, Enables Ajax content loading
     contentCache:true, // cache step contents, if false content is fetched always from ajax url
     cycleSteps: false, // cycle step navigation
+    
+ 
     enableFinishButton: false, // make finish button enabled always
-	hideButtonsOnDisabled: false, // when the previous/next/finish buttons are disabled, hide them instead?
+	hideButtonsOnDisabled: true, // when the previous/next/finish buttons are disabled, hide them instead?
     errorSteps:[],    // Array Steps with errors
-    labelNext:'Next',
-    labelPrevious:'Previous',
-    labelFinish:'Finish',
+    labelNext:'다음',
+    labelPrevious:'이전',
+    labelFinish:'완료',
     noForwardJumping: false,
     onLeaveStep: null, // triggers when leaving a step
     onShowStep: null,  // triggers when showing a step

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.bus.dao.MemberDAO">
+	<select id="checkId" resultType = "int" parameterType = "String">
+		select count(m_id) from member where m_id = #{m_id}
+	</select>
+	
+	<select id="emailApp" resultType = "kr.or.bus.dto.ApproveDTO">
+		select a_num from approve
+	</select>
+	
+	<select id="emailCheck" resultType = "int" parameterType = "String">
+		select count(a_num) from approve where a_num = #{a_num}
+	</select>
+	
+	<update id="updateApp">
+		update approve set a_num = #{a_num}
+	</update>
+	
+	<insert id="insertMember" parameterType = "kr.or.bus.dto.MemberDTO">
+		insert into member(m_id,j_code,m_pw,m_name) values (#{m_id},#{j_code},#{m_pw},#{m_name})
+	</insert>
+	<insert id="insertDetail" parameterType = "kr.or.bus.dto.MDetailDTO">
+		insert into mdetail(m_id,m_addr,m_daddr,m_phone,m_email,m_license,m_photo,m_birth,M_ANNUAL,m_gender,m_echeck,m_check) 
+		values (#{m_id},#{m_addr},#{m_daddr},#{m_phone},#{m_email},#{m_license},#{m_photo},#{m_birth},18,#{m_gender},#{m_echeck},'N')
+	</insert>
+</mapper>
