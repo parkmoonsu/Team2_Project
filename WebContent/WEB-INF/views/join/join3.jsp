@@ -122,7 +122,7 @@
 											<font size="4" >가입이 완료되었습니다.<br>
 											    관리자의 승인 후 이용해 주세요</font>
 											<div style = "text-align:center; margin:30px;">
-												<input type = "button" value = "ap" class = "btn btn-default" id = "next">
+												<input type = "button" value = "메인화면으로" class = "btn btn-default" id = "next">
 											</div>
 
 										</div>
@@ -167,7 +167,11 @@
 		<script>
 		
 			$(document).ready(function() {
-						$('#wizard').smartWizard();
+				$("#next").click(function(){
+					location.href = "bus.htm";
+				});		
+				
+				$('#wizard').smartWizard();
 
 						$('#wizard_verticle').smartWizard({
 							transitionEffect : 'slide'

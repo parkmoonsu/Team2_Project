@@ -19,4 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateApp">
 		update approve set a_num = #{a_num}
 	</update>
+	
+	<insert id="insertMember" parameterType = "kr.or.bus.dto.MemberDTO">
+		insert into member(m_id,j_code,m_pw,m_name) values (#{m_id},#{j_code},#{m_pw},#{m_name})
+	</insert>
+	<insert id="insertDetail" parameterType = "kr.or.bus.dto.MDetailDTO">
+		insert into mdetail(m_id,m_addr,m_daddr,m_phone,m_email,m_license,m_photo,m_birth,M_ANNUAL,m_gender,m_echeck,m_check) 
+		values (#{m_id},#{m_addr},#{m_daddr},#{m_phone},#{m_email},#{m_license},#{m_photo},#{m_birth},18,#{m_gender},#{m_echeck},'N')
+	</insert>
 </mapper>

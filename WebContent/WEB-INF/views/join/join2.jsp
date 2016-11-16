@@ -231,6 +231,16 @@
 													</div>
 												</div>
 												<div class="form-group">
+													<label for = "m_birth" 
+														class="control-label col-md-3 col-sm-3 col-xs-12">생년월일
+													</label>
+													<div class="col-md-6 col-sm-6 col-xs-12">
+														<input id="m_birth" name ="m_birth"
+															class="form-control col-md-7 col-xs-12"
+															 type="text">
+													</div>
+												</div>
+												<div class="form-group">
 													<label for = "m_phone" 
 														class="control-label col-md-3 col-sm-3 col-xs-12">연락처
 													</label>
