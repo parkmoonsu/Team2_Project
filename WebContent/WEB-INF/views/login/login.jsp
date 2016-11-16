@@ -15,14 +15,6 @@
 <link rel="stylesheet" href="assets/css/form-elements.css">
 <link rel="stylesheet" href="assets/css/style.css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-<!-- Favicon and touch icons -->
 <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bootstrap-3.3.7/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <script src="bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
@@ -38,6 +30,47 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link
+	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Font Awesome -->
+<link
+	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet">
+<!-- NProgress -->
+<link
+	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
+	rel="stylesheet">
+
+<!-- Custom Theme Style -->
+<link href="${pageContext.request.contextPath}/build/css/custom.min.css"
+	rel="stylesheet">
+
+
+
+
+<!-- Bootstrap core CSS -->
+<link
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/ie10-viewport-bug-workaround.css"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/carousel/carousel.css"
+	rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
+
+
+
 </head>
 
 <body>
@@ -49,13 +82,10 @@
 	<div class="top-content" style="margin-top:30px">
 		<div class="inner-bg">
 			<div class="container">
-				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 text">
+					<div class="x_panel">
+					<div class="row">
 						<img src="${pageContext.request.contextPath}/images/logo2.png" style="width:300px;height:200px">
-					</div>
-				</div>
-				<div class="row" style="margin: 0px;">
-					<div class="col-sm-6 col-sm-offset-3 form-box">
 						<div class="form-top">
 							<div class="form-top-center">
 
@@ -86,6 +116,8 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		</div>
 		</div>
 </div>
 </div>
