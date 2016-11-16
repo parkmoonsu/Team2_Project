@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="calendar.dao">
+		
+	<!-- public int delete(String seq) -->
+	<select id="select" resultType="calendar.dto">
+		select * from dto
+	</select>
+	
+	<delete id="delete">
+		DELETE dto WHERE id=#{id}
+	</delete>
+	
+	<!-- jdbcType=VARCHAR 값이 오지 않으면 null을 기본으로 처리하겠다 -->
+	<update id="update">		
+		UPDATE dto
+		SET title=#{title},
+			allDay=#{allDay},
+			sstart=#{sstart},
+			eend=#{eend},
+			url=#{url}
+		WHERE id=#{id}
+	</update>
+	
+	<insert id="insert">
+		INSERT INTO dto
+		VALUES(test_seq.nextval, #{title}, #{allDay}, #{sstart}, #{eend}, #{url})
+	</insert>
+	
+	<select id="selectseq" resultType="calendar.dto">
+		select * from dto
+		where id=
+		(select max(id) from dto)
+	</select>
+		
+</mapper>
