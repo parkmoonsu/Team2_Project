@@ -23,7 +23,6 @@ public class MDetailDTO {
 	private String m_license;
 	private String m_photo;
 	private String m_birth;
-	private int m_annual;
 	private String m_gender;
 	
 	//멀티 파일 업로드///////////////////////////////
@@ -96,17 +95,12 @@ public class MDetailDTO {
 	public void setM_birth(String m_birth) {
 		this.m_birth = m_birth;
 	}
-	public int getM_annual() {
-		return m_annual;
-	}
-	public void setM_annual(int m_annual) {
-		this.m_annual = m_annual;
-	}
+	
 	@Override
 	public String toString() {
 		return "MDetailDTO [m_id=" + m_id + ", m_addr=" + m_addr + ", m_daddr=" + m_daddr + ", m_phone=" + m_phone
 				+ ", m_email=" + m_email + ", m_echeck=" + m_echeck + ", m_license=" + m_license + ", m_photo="
-				+ m_photo + ", m_birth=" + m_birth + ", m_annual=" + m_annual + ", m_gender=" + m_gender + ", files="
+				+ m_photo + ", m_birth=" + m_birth + ", m_gender=" + m_gender + ", files="
 				+ files + "]";
 	}
 	
