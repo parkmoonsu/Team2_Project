@@ -113,13 +113,9 @@ public class JoinService {
 		ApproveDTO dto = dao.emailApp();
 		System.out.println("num : " + dto.getA_num());
 		String htmlContent = "<div style = 'text-align:center;'>";
-		htmlContent += "<img src = 'https://www.google.co.kr/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiK0tXDka3QAhXEKZQKHfxOAucQjRwIBQ&url=http%3A%2F%2Fkarenkolbcoaching.com%2Fcontact-me%2F&psig=AFQjCNHVAzacjiIAie4yk8_vI11x56TZeA&ust=1479380921320547'>";
-		htmlContent +=	"KOSBUS 이메일 인증번호는<br> <font color = 'green'>" + 
-					dto.getA_num() + 
-					"</font>입니다.</div>";
-		
-		
-		
+		htmlContent += "<img src = 'http://karenkolbcoaching.com/wp-content/uploads/2011/09/166152840.jpg'><br>";
+		htmlContent +=	"<h2>KOSBUS 이메일 인증번호는<br> <font color = 'green'><strong>" + dto.getA_num() + "</strong></font>입니다.</h2></div>";
+
 		mimemessage.setText(htmlContent, "utf-8", "html");
 		
 		mimemessage.addRecipient(RecipientType.TO, new InternetAddress(m_email));
