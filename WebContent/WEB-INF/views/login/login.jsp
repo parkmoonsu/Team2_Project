@@ -71,7 +71,7 @@
 									<label class="sr-only" for="form-password">Password</label> <input
 										type="password" name="form-password" placeholder="Password..."
 										class="form-password form-control" id="form-password">
-								
+								<br>
 								<button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
 								<br>
 								<div class="col-sm-6" align="center">
