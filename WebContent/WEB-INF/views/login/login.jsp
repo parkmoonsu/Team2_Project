@@ -71,7 +71,7 @@
 									<label class="sr-only" for="form-password">Password</label> <input
 										type="password" name="form-password" placeholder="Password..."
 										class="form-password form-control" id="form-password">
-								</div>
+								
 								<button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
 								<br>
 								<div class="col-sm-6" align="center">
@@ -79,6 +79,7 @@
 								</div>
 								<div class="col-sm-6" align="center">
 									<button class="btn btn-primary">회원가입</button>
+								</div>
 								</div>
 							</form>
 						</div>
@@ -94,7 +95,9 @@
 	<!-- Javascript -->
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
-	<script src="assets/js/scripts.js"></script>
+	<script src="assets/js/placeholder.js"></script>
+	<script src="assets/js/placeholder.js"></script>
+	<script src="assets/js/jquery-1.11.1.js"></script>
 
 	<!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>

@@ -4,7 +4,12 @@ jQuery(document).ready(function() {
     /*
         Fullscreen background
     */
-  
+    $.backstretch([
+                    "/images/winter.png"
+	              , "/images/winter2.jpg"
+	              , "/images/winter3.jpg"
+	             ], {duration: 3000, fade: 750});
+    
     /*
         Form validation
     */
