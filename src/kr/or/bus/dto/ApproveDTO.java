@@ -1,3 +1,11 @@
+/*
+*	@FileName : ApproveDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.16
+*	@Author	: 박문수
+*	@Discription : Approve table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class ApproveDTO {
