@@ -103,7 +103,7 @@
 										<div>
 										<div class="my-box" style="margin:30px" >
 
-												<h2 class="StepTitle">아이디 찾기</h2>
+												<h2 class="StepTitle">비밀번호 변경</h2>
 												<div class="form-group" style="padding: 25px">
 													<div id="step-2">
 														<form class="form-horizontal form-label-left"
@@ -127,6 +127,10 @@
 														<input type="password" id="m_pw2" name="m_pw2"
 															class="form-control col-md-7 col-xs-12">
 													</div>
+												</div>
+												<div style="float: right; margin: 30px;">
+													<a  class="btn btn-success" 
+														id="okay">확인</a>
 												</div>
 												
 															</form>
@@ -179,67 +183,9 @@
 				$(document).ready(
 						function() {
 
-							$("#next").click(function() {
-								location.href = "join2.htm";
-							});
-
-							if ($("#all-agree").is(":checked")) {
-								$("#next").attr('disabled', false);
-							} else {
-								$("#next").attr('disabled', true);
-							}
-							$("#agree1")
-									.click(
-											function() {
-												if ($("#agree1").is(":checked")
-														&& $("#agree2").is(
-																":checked")) {
-													$("#all-agree").prop(
-															"checked", true);
-													$("#next").attr('disabled',
-															false);
-												} else {
-													$("#all-agree").prop(
-															"checked", false);
-													$("#next").attr('disabled',
-															true);
-												}
-											});
-							$("#agree2")
-									.click(
-											function() {
-												if ($("#agree1").is(":checked")
-														&& $("#agree2").is(
-																":checked")) {
-													$("#all-agree").prop(
-															"checked", true);
-													$("#next").attr('disabled',
-															false);
-												} else {
-													$("#all-agree").prop(
-															"checked", false);
-													$("#next").attr('disabled',
-															true);
-												}
-											});
-							$('#all-agree').click(function() {
-								if ($("#all-agree").is(":checked")) {
-									$("#agree1").prop("checked", true);
-									$("#agree2").prop("checked", true);
-									$("#next").attr('disabled', false);
-
-								} else {
-
-									$("#agree1").prop("checked", false);
-									$("#agree2").prop("checked", false);
-									$("#next").attr('disabled', true);
-								}
-							});
-
-							$('#wizard').smartWizard();
-
-							$('#wizard_verticle').smartWizard({
-								transitionEffect : 'slide'
+							$("#okay").click(function() {
+								alert("변경되었습니다 ^^");
+								location.href ="bus.htm";
 							});
 
 						});

@@ -109,6 +109,16 @@
 														<form class="form-horizontal form-label-left"
 															method="post" action="join3.htm"
 															enctype="multipart/form-data">
+												
+												<div class="form-group">
+													<label class="control-label col-md-3 col-sm-3 col-xs-12"
+														for="m_email">이름
+													</label>
+													<div class="col-md-6 col-sm-6 col-xs-12">
+														<input type="text" id="m_email" name = "m_email"
+															class="form-control col-md-5 col-xs-12">
+													</div>
+												</div>
 
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -119,28 +129,14 @@
 															class="form-control col-md-5 col-xs-12">
 													</div>
 													<div class = "col-md-1 col-sm-1">
-													<a href="searchDetail.jsp" class ="btn btn-default" id= "emailbtn">전송</a>
+													<a class ="btn btn-default" id= "emailbtn1">전송</a>
 													</div>
 													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
 														<span id = "check"></span>
 													</div>
 												</div>
 												
-												<div class="form-group">
-													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="m_email">이메일
-													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" id="m_email" name = "m_email"
-															class="form-control col-md-5 col-xs-12">
-													</div>
-													<div class = "col-md-1 col-sm-1">
-													<a href="searchDetail.jsp" class ="btn btn-default" id= "emailbtn">전송</a>
-													</div>
-													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
-														<span id = "check"></span>
-													</div>
-												</div>
+											
 															</form>
 													</div>															
 													</div>
@@ -179,7 +175,7 @@
 															class="form-control col-md-5 col-xs-12">
 													</div>
 													<div class = "col-md-1 col-sm-1">
-											<a href="searchDetail.jsp" class ="btn btn-default" id= "emailbtn">전송</a>
+											<a href="searchDetail.jsp" class ="btn btn-default" id= "emailbtn2">전송</a>
 													</div>
 													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
 														<span id = "check"></span>
@@ -234,72 +230,13 @@
 			<script>
 				$(document).ready(
 						function() {
-
-							$("#next").click(function() {
-								location.href = "join2.htm";
-							});
-
-							if ($("#all-agree").is(":checked")) {
-								$("#next").attr('disabled', false);
-							} else {
-								$("#next").attr('disabled', true);
-							}
-							$("#agree1")
-									.click(
-											function() {
-												if ($("#agree1").is(":checked")
-														&& $("#agree2").is(
-																":checked")) {
-													$("#all-agree").prop(
-															"checked", true);
-													$("#next").attr('disabled',
-															false);
-												} else {
-													$("#all-agree").prop(
-															"checked", false);
-													$("#next").attr('disabled',
-															true);
-												}
-											});
-							$("#agree2")
-									.click(
-											function() {
-												if ($("#agree1").is(":checked")
-														&& $("#agree2").is(
-																":checked")) {
-													$("#all-agree").prop(
-															"checked", true);
-													$("#next").attr('disabled',
-															false);
-												} else {
-													$("#all-agree").prop(
-															"checked", false);
-													$("#next").attr('disabled',
-															true);
-												}
-											});
-							$('#all-agree').click(function() {
-								if ($("#all-agree").is(":checked")) {
-									$("#agree1").prop("checked", true);
-									$("#agree2").prop("checked", true);
-									$("#next").attr('disabled', false);
-
-								} else {
-
-									$("#agree1").prop("checked", false);
-									$("#agree2").prop("checked", false);
-									$("#next").attr('disabled', true);
-								}
-							});
-
-							$('#wizard').smartWizard();
-
-							$('#wizard_verticle').smartWizard({
-								transitionEffect : 'slide'
+					
+							$("#emailbtn1").click(function() {
+								alert("이메일로 전송 되었습니다 ^^");
+								location.href ="bus.htm";
 							});
 
 						});
 			</script>
-			<!-- /jQuery Smart Wizard -->
 </body>
 </html>
