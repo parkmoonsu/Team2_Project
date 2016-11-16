@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Bootstrap Login Form Template</title>
+<title>KOSBUS 로그인</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
@@ -39,7 +39,7 @@
 	<header> <jsp:include page="/sidebar/header.jsp" /> </header>
 
 	<!-- Top content -->
-	<div class="top-content">
+	<div class="top-content" style="margin-top:30px">
 		<div class="inner-bg">
 			<div class="container">
 				<div class="row">
@@ -47,11 +47,11 @@
 						<img src="${pageContext.request.contextPath}/images/logo2.png" style="width:300px;height:200px">
 					</div>
 				</div>
-				<div class="row" style="margin: 0px">
+				<div class="row" style="margin: 0px;">
 					<div class="col-sm-6 col-sm-offset-3 form-box">
 						<div class="form-top">
 							<div class="form-top-center">
-								<h3 align="center">로그인</h3>
+
 						<div class="form-bottom">
 							<form role="form" action="login2.htm" method="post"
 								class="login-form">
@@ -65,7 +65,7 @@
 										type="password" name="form-password" placeholder="Password..."
 										class="form-password form-control" id="form-password">
 								</div>
-								<button type="submit" class="btn">접속하기</button>
+								<button type="submit" class="btn">로그인</button>
 								<div class="col-sm-4" align="center">
 									<a>아이디찾기</a>
 								</div>
