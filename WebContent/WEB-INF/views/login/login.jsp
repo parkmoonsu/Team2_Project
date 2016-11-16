@@ -23,20 +23,27 @@
         <![endif]-->
 
 <!-- Favicon and touch icons -->
-<link rel="shortcut icon" href="assets/ico/favicon.png">
-<link rel="apple-touch-icon-precomposed" sizes="144x144"
-	href="assets/ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114"
-	href="assets/ico/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72"
-	href="assets/ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed"
-	href="assets/ico/apple-touch-icon-57-precomposed.png">
-
+<link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap-3.3.7/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <script src="bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+  	<script src="bootstrap-3.3.7/assets/css/carousel/jssor.slider-21.1.6.mini.js" type="text/javascript"></script>
+  	<script src="bootstrap-3.3.7/assets/css/carousel/docs.min.js" type="text/javascript"></script>
+  	<script src="bootstrap-3.3.7/assets/css/carousel/bootstrap.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="bootstrap-3.3.7/assets/css/carousel/ie10-viewport-bug-workaround.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.3.7/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="bootstrap-3.3.7/assets/js/vendor/holder.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
-	<header> <jsp:include page="/sidebar/header.jsp" /> </header>
+	<header>
+	 <jsp:include page="/sidebar/header.jsp" /> 
+	 </header>
 
 	<!-- Top content -->
 	<div class="top-content" style="margin-top:30px">
@@ -65,15 +72,13 @@
 										type="password" name="form-password" placeholder="Password..."
 										class="form-password form-control" id="form-password">
 								</div>
-								<button type="submit" class="btn">로그인</button>
-								<div class="col-sm-4" align="center">
-									<a>아이디찾기</a>
+								<button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
+								<br>
+								<div class="col-sm-6" align="center">
+									<button class="btn btn-primary">아이디/비밀번호찾기</button>
 								</div>
-								<div class="col-sm-4" align="center">
-									<a>비밀번호찾기</a>
-								</div>
-								<div class="col-sm-4" align="center">
-									<a>회원가입</a>
+								<div class="col-sm-6" align="center">
+									<button class="btn btn-primary">회원가입</button>
 								</div>
 							</form>
 						</div>
@@ -88,7 +93,6 @@
 	<footer> <jsp:include page="/sidebar/footer.jsp" /> </footer>
 	<!-- Javascript -->
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
 

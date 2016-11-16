@@ -11,7 +11,7 @@ body {
 strong { font-weight: 500; }
 
 a, a:hover, a:focus {
-	color: #de995e;
+	color: blue;
 	text-decoration: none;
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
@@ -33,16 +33,16 @@ h3 {
 
 img { max-width: 100%; }
 
-::-moz-selection { background: #de995e; color: #fff; text-shadow: none; }
-::selection { background: #de995e; color: #fff; text-shadow: none; }
+::-moz-selection { background: ; color: #fff; text-shadow: none; }
+::selection { background: gray; color: #fff; text-shadow: none; }
 
 
-.btn-link-1 {
+/* .btn-link-1 {
 	display: inline-block;
 	height: 50px;
 	margin: 5px;
 	padding: 16px 20px 0 20px;
-	background: #de995e;
+	background: gray;
 	font-size: 16px;
     font-weight: 300;
     line-height: 16px;
@@ -77,7 +77,7 @@ img { max-width: 100%; }
 }
 .btn-link-2:hover, .btn-link-2:focus, 
 .btn-link-2:active, .btn-link-2:active:focus { outline: 0; opacity: 0.6; background: rgba(0, 0, 0, 0.3); color: #fff; }
-
+ */
 
 /***** Top content *****/
 
@@ -149,7 +149,7 @@ img { max-width: 100%; }
 }
 
 .form-bottom form .input-error {
-	border-color: #de995e;
+	border-color: gray;
 }
 
 .social-login {
