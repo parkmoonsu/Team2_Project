@@ -82,16 +82,18 @@
 	<div class="top-content" style="margin-top:30px">
 		<div class="inner-bg">
 			<div class="container">
+			<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+								<div class="x_panel">
 					<div class="col-sm-8 col-sm-offset-2 text">
-					<div class="x_panel">
 					<div class="row">
-						<img src="${pageContext.request.contextPath}/images/logo2.png" style="width:300px;height:200px">
+						<img src="${pageContext.request.contextPath}/images/logo2.png" style="width:300px;height:200px;margin-top:20px">
 						<div class="form-top">
 							<div class="form-top-center">
 
 						<div class="form-bottom">
 							<form role="form" action="login2.htm" method="post"
-								class="login-form">
+								class="login-form" style="margin-bottom: 20px ">
 								<div class="form-group">
 									<label class="sr-only" for="form-username">Username</label> <input
 										type="text" name="form-username" placeholder="ID.."
@@ -105,10 +107,10 @@
 								<button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
 								<br>
 								<div class="col-sm-6" align="center">
-									<button class="btn btn-primary">아이디/비밀번호찾기</button>
+								<a href="search.jsp" class="btn btn-primary btn-sm btn-block">아이디/비밀번호찾기</a>
 								</div>
 								<div class="col-sm-6" align="center">
-									<button class="btn btn-primary">회원가입</button>
+							<a href="join.htm" class="btn btn-primary btn-sm btn-block">회원가입</a>
 								</div>
 								</div>
 							</form>
@@ -119,6 +121,7 @@
 		</div>
 		</div>
 		</div>
+		
 </div>
 </div>
 	</div>
