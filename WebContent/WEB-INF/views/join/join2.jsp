@@ -118,7 +118,7 @@
 										</ul>
 										
 										<div id="step-2">
-											<form class="form-horizontal form-label-left" method = "post" action = "join3.htm" enctype = "multipart/form-data">
+											<form class="form-horizontal form-label-left" method = "post" action = "join3.htm" enctype="multipart/form-data">
 
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -241,26 +241,26 @@
 													</div>
 												</div>
 												
-												<div class="form-group">
+												 <div class="form-group">
 													<label for="m_license"
 														class="control-label col-md-3 col-sm-3 col-xs-12">운전면허증
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input id="m_license"
 															class="col-md-7 col-xs-12" type="file"
-															name="m_license">
+															name="files[0]">
 													</div>
 												</div>
-												<div class="form-group">
+												 <div class="form-group">
 													<label for="m_photo"
 														class="control-label col-md-3 col-sm-3 col-xs-12">사진
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input id="m_photo"
 															class="col-md-7 col-xs-12" type="file"
-															name="m_photo">
+															name="files[1]">
 													</div>
-												</div>
+												</div> 
 												<div class="form-group">
 													<label for="m_addr"
 														class="control-label col-md-3 col-sm-3 col-xs-12">우편주소

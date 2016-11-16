@@ -9,6 +9,10 @@
 
 package kr.or.bus.dto;
 
+import java.util.List;
+
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class MDetailDTO {
 	private String m_id;
 	private String m_addr;
@@ -22,7 +26,16 @@ public class MDetailDTO {
 	private int m_annual;
 	private String m_gender;
 	
-	
+	//멀티 파일 업로드///////////////////////////////
+		private List<CommonsMultipartFile> files;
+			
+		public List<CommonsMultipartFile> getFiles() {
+			return files;
+		}
+		public void setFiles(List<CommonsMultipartFile> files) {
+			this.files = files;
+		}
+		////////////////////////////////////////////////
 	public String getM_gender() {
 		return m_gender;
 	}
@@ -93,7 +106,8 @@ public class MDetailDTO {
 	public String toString() {
 		return "MDetailDTO [m_id=" + m_id + ", m_addr=" + m_addr + ", m_daddr=" + m_daddr + ", m_phone=" + m_phone
 				+ ", m_email=" + m_email + ", m_echeck=" + m_echeck + ", m_license=" + m_license + ", m_photo="
-				+ m_photo + ", m_birth=" + m_birth + ", m_annual=" + m_annual + ", m_gender=" + m_gender + "]";
+				+ m_photo + ", m_birth=" + m_birth + ", m_annual=" + m_annual + ", m_gender=" + m_gender + ", files="
+				+ files + "]";
 	}
 	
 	

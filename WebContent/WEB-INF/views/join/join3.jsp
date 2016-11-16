@@ -114,12 +114,16 @@
 												</span>
 											</a></li>
 
-										</ul>
-										<div id="step-3" style="text-align: center;" class="my-box">
-											가입완료
-										<div style = "text-align:right; margin:30px;">
-											<input type = "button" value = "다음" class = "btn btn-success" id = "next">
-										</div>
+										</ul><!-- class='rounded' -->
+										
+										<div id="step-3" style="text-align: center; border-radius: 10px; border: 1px solid #ccc; height:300px" >
+											<br>
+											<p style="margin-top:90px">
+											<font size="4" >가입이 완료되었습니다.<br>
+											    관리자의 승인 후 이용해 주세요</font>
+											<div style = "text-align:center; margin:30px;">
+												<input type = "button" value = "ap" class = "btn btn-default" id = "next">
+											</div>
 
 										</div>
 										<!-- End SmartWizard Content -->
