@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="calendar.dao">
+<mapper namespace="kr.or.bus.dao.CalendarDAO">
 		
 	<!-- public int delete(String seq) -->
-	<select id="select" resultType="calendar.dto">
+	<select id="select" resultType="kr.or.bus.dto.CalendarDTO">
 		select * from dto
 	</select>
 	
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(test_seq.nextval, #{title}, #{allDay}, #{sstart}, #{eend}, #{url})
 	</insert>
 	
-	<select id="selectseq" resultType="calendar.dto">
+	<select id="selectseq" resultType="kr.or.bus.dto.CalendarDTO">
 		select * from dto
 		where id=
 		(select max(id) from dto)
