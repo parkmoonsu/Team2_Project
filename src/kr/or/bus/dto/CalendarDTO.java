@@ -1,4 +1,4 @@
-package calendar;
+package kr.or.bus.dto;
 
 import java.sql.Date;
 
@@ -14,7 +14,7 @@ import java.sql.Date;
  * @author kosta
  *
  */
-public class dto {
+public class CalendarDTO {
 	String id;	
 	String title;	
 	String allDay;	
