@@ -34,6 +34,9 @@ public View select(String search,Model model){
 	
 		return jsonview;
 	}
-	
+@RequestMapping("/ChangeForm.htm")
+public String ChangeForm(){
+		return "main/ChangeForm";
+	}
 
 }

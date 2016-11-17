@@ -18,7 +18,7 @@
 								킹갓한제너럴종 <span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a id="mod">개인정보</a></li>
+									<li><a href="ChangeForm.htm">개인정보</a></li>
 									<li><a href="${pageContext.request.contextPath}/logout"><i
 											class="fa fa-sign-out pull-right"></i>로그아웃</a></li>
 								</ul></li>
