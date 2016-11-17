@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,7 +38,14 @@
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
-          <jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
+        	<c:choose>
+          		<c:when test ="${jobname == '기사'}">
+          			<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
+          		</c:when>
+          		<c:otherwise>
+          			<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+          		</c:otherwise>
+       		</c:choose>
         </div>
 			
 			<!--상단 menu -->
@@ -51,7 +59,7 @@
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-              <div class="count">2500 ${jobname}</div>
+              <div class="count">2500</div>
               <span class="count_bottom"><i class="green">4% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
