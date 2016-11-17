@@ -1,5 +1,14 @@
+<!--
+	제너용럴킹갓현  
+	2016-11-17
+	관리자-  사용자 정보 수정 페이지
+ -->
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -94,7 +103,7 @@
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
 											<input type="text" class="form-control"
-												placeholder="Search for..."> <span
+												placeholder="Search for..." id="search"> <span
 												class="input-group-btn">
 												<button class="btn btn-default" type="button">Go!</button>
 											</span>
@@ -113,8 +122,10 @@
 											</tr>
 										</thead>
 										<tbody>
+											<c:set value="${dto}" var="d"/>
+											<c:forEach var="i" items="${d}">
 											<tr>
-												<td>번호</td>
+												<td>${i.m_id}</td>
 												<td><a>아이디</a></td>
 												<td><small>이름</small></td>
 												<td>연락처</td>
@@ -125,6 +136,7 @@
 													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
 														삭제 </a></td>
 											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 									<!-- end project list -->
@@ -211,6 +223,20 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	 $('#search').click( function () {
+	$.ajax({
+		url:"SearchMember.htm",
+		type:"get",
+		success:function(data){
+			console.log(data);
+			
+		}
+		});
+	 });
+});
 
-</body>
+</script>
+</body> 	
 </html>

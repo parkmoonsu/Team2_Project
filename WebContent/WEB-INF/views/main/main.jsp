@@ -11,7 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Gentellela Alela! | </title>
-
+  <!-- jQuery -->
+    <script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -35,15 +36,14 @@
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
-          <jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+          <jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
         </div>
 			
 			<!--상단 menu -->
-		<div id="sidebar-menu"
-						class="main_menu_side hidden-print main_menu">
-			 <jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>	
-		</div>	
 			
+			<div class="top_nav">
+				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
+			</div>
         <!-- page content -->
         <div class="right_col" role="main">
           <!-- top tiles -->
@@ -752,8 +752,7 @@
       </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+  
     <!-- Bootstrap -->
     <script src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -1050,6 +1049,7 @@
       gauge.animationSpeed = 32;
       gauge.set(3200);
       gauge.setTextField(document.getElementById("gauge-text"));
+      
     </script>
     <!-- /gauge.js -->
   </body>

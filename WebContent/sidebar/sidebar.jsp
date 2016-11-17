@@ -1,3 +1,10 @@
+<!--
+	제너용럴킹갓현  
+	2016-11-17
+	메인 관리자 사이드바 생성
+ -->
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="left_col scroll-view">

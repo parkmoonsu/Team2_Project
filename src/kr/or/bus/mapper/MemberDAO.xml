@@ -8,8 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(m_id) from member where m_id = #{m_id}
 	</select>
 	
-	<select id="SelectAll" resultType = "kr.or.bus.dto.MemberDTO">
-		select * from member 
+	<select id="SelectAll" resultType = "kr.or.bus.dto.MemberDTO" parameterType="String">
+		select m_id from member where m_id like '%${search}%'
 	</select>
 	
 	<select id="emailApp" resultType = "kr.or.bus.dto.ApproveDTO">

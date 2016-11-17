@@ -28,6 +28,7 @@ public class LoginController {
 	
 	@RequestMapping("/main.htm")
 	public String mainGo(){
+		
 		return "main/main";
 	}
 	

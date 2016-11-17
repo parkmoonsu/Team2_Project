@@ -8,6 +8,8 @@
 
 package kr.or.bus.dao;
 
+import java.util.List;
+
 import kr.or.bus.dto.ApproveDTO;
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
@@ -29,7 +31,7 @@ public interface MemberDAO {
 	//mdtail table insert
 	public int insertDetail(MDetailDTO dto);
 	
-	public MemberDTO SelectAll();
+	public List<MemberDTO> SelectAll(String search);
 	//resrecord table insert
 	//public int insertRecord(ResRecordDTO dto);
 	
