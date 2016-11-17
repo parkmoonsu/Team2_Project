@@ -16,6 +16,7 @@ public class LoginController {
 	
 	@RequestMapping("/login.htm")
 	public String login(){
+		System.out.println("오냐");
 		return "login/login";
 	}
 	

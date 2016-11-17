@@ -8,6 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(m_id) from member where m_id = #{m_id}
 	</select>
 	
+	<select id="SelectAll" resultType = "kr.or.bus.dto.MemberDTO">
+		select * from member 
+	</select>
+	
 	<select id="emailApp" resultType = "kr.or.bus.dto.ApproveDTO">
 		select a_num from approve
 	</select>

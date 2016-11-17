@@ -102,6 +102,7 @@
 													<span class="step_descr"> Step 1<br /> <small>
 															약관동의</small>
 												</span>
+									
 											</a></li>
 											<li><a href="#step-1"> <span class="step_no">2</span>
 													<span class="step_descr"> Step 2<br /> <small>

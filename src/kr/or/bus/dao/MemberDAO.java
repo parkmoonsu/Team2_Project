@@ -29,6 +29,7 @@ public interface MemberDAO {
 	//mdtail table insert
 	public int insertDetail(MDetailDTO dto);
 	
+	public MemberDTO SelectAll();
 	//resrecord table insert
 	//public int insertRecord(ResRecordDTO dto);
 	
