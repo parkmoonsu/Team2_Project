@@ -94,13 +94,14 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">
-
+									
 
 									<!-- Smart Wizard -->
 
 									<div id="wizard" class="form_wizard wizard_horizontal">
 								<div id="step-1" style="text-align: center;" class="my-box">
 										<div>
+										아이디와 비밀번호는 이메일로 전송됩니다.
 										<div class="my-box" style="margin:30px" >
 
 												<h2 class="StepTitle">아이디 찾기</h2>

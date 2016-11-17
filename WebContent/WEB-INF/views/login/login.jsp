@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html >
 <html>
 <head>
@@ -85,6 +86,13 @@
 			<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 								<div class="x_panel">
+									<div class="x_title">
+									<h2>
+										로그인 <small>KosBus</small>
+									</h2>
+
+									<div class="clearfix"></div>
+								</div>
 					<div class="col-sm-8 col-sm-offset-2 text">
 					<div class="row">
 						<img src="${pageContext.request.contextPath}/images/logo2.png" style="width:300px;height:200px;margin-top:20px">
@@ -92,29 +100,48 @@
 							<div class="form-top-center">
 
 						<div class="form-bottom">
-							<form role="form" action="login2.htm" method="post"
+							<form role="form" action="${pageContext.request.contextPath}/login" method="post" name = "f"
 								class="login-form" style="margin-bottom: 20px ">
 								<div class="form-group">
 									<label class="sr-only" for="form-username">Username</label> <input
-										type="text" name="form-username" placeholder="ID.."
+										type="text" name="username" placeholder="ID.."
 										class="form-username form-control" id="form-username">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password">Password</label> <input
-										type="password" name="form-password" placeholder="Password..."
+										type="password" name="password" placeholder="Password..."
 										class="form-password form-control" id="form-password">
 								<br>
-								<button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
+								<input type="submit" class="btn btn-primary btn-lg btn-block" value = "로그인">
 								<br>
 								<div class="col-sm-6" align="center">
-								<a href="search.jsp" class="btn btn-primary btn-sm btn-block">아이디/비밀번호찾기</a>
+								<a href="search.htm" class="btn btn-primary btn-sm btn-block">아이디/비밀번호찾기</a>
 								</div>
 								<div class="col-sm-6" align="center">
 							<a href="join.htm" class="btn btn-primary btn-sm btn-block">회원가입</a>
 								</div>
 								</div>
 							</form>
-						</div>
+							
+							
+							
+											<c:if test="${param.error != null}">
+												<div>
+
+													로그인 실패 <br>
+													<script>
+														alert("노답");
+													</script>
+													<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+      												이유 : <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+													</c:if>
+												</div>
+											</c:if>
+											
+											
+											
+											
+										</div>
 					</div>
 				</div>
 			</div>

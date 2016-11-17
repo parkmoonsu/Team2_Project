@@ -18,4 +18,9 @@ public class LoginController {
 	public String login(){
 		return "login/login";
 	}
+	
+	@RequestMapping("/main.htm")
+	public String mainGo(){
+		return "main/main";
+	}
 }
