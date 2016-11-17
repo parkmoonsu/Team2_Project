@@ -23,7 +23,7 @@
 		<security:logout logout-success-url="/bus.htm" />
 
 
-		 <security:intercept-url pattern="/main/main.htm"
+		 <security:intercept-url pattern="/main.htm"
 			access="hasRole('ROLE_USER')" />
 		
 	
