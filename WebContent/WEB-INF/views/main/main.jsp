@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="se" uri ="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,9 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentellela Alela! | </title>
-  <!-- jQuery -->
+
     <script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+
+    <title>KOSBUS</title>
+
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -50,7 +51,7 @@
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-              <div class="count">2500</div>
+              <div class="count">2500 ${jobname}</div>
               <span class="count_bottom"><i class="green">4% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">

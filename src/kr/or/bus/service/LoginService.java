@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.ApproveDTO;
+import kr.or.bus.dto.MemberJoinJobDTO;
 
 @Service
 public class LoginService {
@@ -103,5 +104,12 @@ public class LoginService {
 		}
 		
 		return check;
+	}
+	
+	public MemberJoinJobDTO mainGo(String username){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		MemberJoinJobDTO dto = dao.getJobName(username);
+		
+		return dto;
 	}
 }

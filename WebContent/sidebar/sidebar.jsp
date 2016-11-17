@@ -7,9 +7,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="se" uri ="http://www.springframework.org/security/tags" %>
 <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-           <img src="${pageContext.request.contextPath}/images/logo.jpg" style="width:100%;height:60px">
+           <img src="${pageContext.request.contextPath}/images/logo4.png" style="width:100%;height:60px">
             </div>
 
             <div class="clearfix"></div>
@@ -20,9 +21,8 @@
                 <img src="${pageContext.request.contextPath}/images/logo2.png" class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>환영합니다</span>
-                <se:authentication property="name" var = "LoginUser"/>
-                <h2>${LoginUser}</h2>
+                <span>안전운행 합시다</span>
+                
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -32,7 +32,9 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>관리자</h3>
+               <se:authentication property="name" var = "LoginUser"/>
+               
+                <h3>&nbsp;&nbsp;&nbsp;&nbsp;${LoginUser}</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-edit"></i> 버스관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">

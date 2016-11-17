@@ -58,4 +58,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set m_pw = #{param2}
 		where m_id = #{param1}
 	</select>
+	
+	<select id="getJobName" resultType = "kr.or.bus.dto.MemberJoinJobDTO" parameterType = "String">
+		select j.j_name 
+		from member m join job j
+		on m.j_code = j.j_code
+		where m_id = #{username}
+	</select>
 </mapper>
