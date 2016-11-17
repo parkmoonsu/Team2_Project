@@ -20,7 +20,8 @@
 		<security:form-login login-page="/login.htm"
 			default-target-url="/main.htm"
 			authentication-failure-url="/login.htm?error" />
-		<security:logout logout-success-url="/bus.htm" />
+		<security:logout logout-success-url="/bus.htm"
+						 invalidate-session="true" />
 
 
 		 <security:intercept-url pattern="/main.htm"
