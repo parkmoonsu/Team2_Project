@@ -11,6 +11,7 @@ package kr.or.bus.dao;
 import kr.or.bus.dto.ApproveDTO;
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.ResRecordDTO;
 
 public interface MemberDAO {
@@ -48,6 +49,9 @@ public interface MemberDAO {
 	
 	//비밀번호 찾기 (매치된 ID,이메일로부터 가져온 비밀번호를 임시비밀번호로 변경)
 	public void updatePw(String m_id , String temp);
+	
+	//권한별 사이드바 바꾸기
+	public MemberJoinJobDTO getJobName(String username);
 	
 	
 }
