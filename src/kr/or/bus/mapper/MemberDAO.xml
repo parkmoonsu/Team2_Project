@@ -31,4 +31,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into mdetail(m_id,m_addr,m_daddr,m_phone,m_email,m_license,m_photo,m_birth,M_ANNUAL,m_gender,m_echeck,m_check) 
 		values (#{m_id},#{m_addr},#{m_daddr},#{m_phone},#{m_email},#{m_license},#{m_photo},#{m_birth},18,#{m_gender},#{m_echeck},'N')
 	</insert>
+	
+	<select id="searchNameEmail" resultType = "int">
+		select count(*) from member m join mdetail d
+		on m.m_id = d.m_id where m.m_name = #{param1} and d.m_email = #{param2}
+	</select>
+	
+	<select id="searchId" resultType = "kr.or.bus.dto.MemberDTO">
+		select m.m_id from member m join mdetail d
+		on m.m_id = d.m_id where m.m_name = #{param1} and d.m_email = #{param2}
+	</select>
+	
+	<select id="searchIdEmail" resultType = "int">
+		select count(*) from member m join mdetail d
+		on m.m_id = d.m_id where m.m_id = #{param1} and d.m_email = #{param2}
+	</select>
+	
+	<select id="getName" resultType = "kr.or.bus.dto.MemberDTO" parameterType = "String">
+		select m_name
+		from member
+		where m_id = #{m_id}
+	</select>
+	
+	<select id="updatePw" resultType = "int">
+		update member
+		set m_pw = #{param2}
+		where m_id = #{param1}
+	</select>
 </mapper>
