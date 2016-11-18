@@ -55,5 +55,8 @@ public interface MemberDAO {
 	//권한별 사이드바 바꾸기
 	public MemberJoinJobDTO getJobName(String username);
 	
+	//승인여부 구하기 (N인 사람만 뽑기)
+	public List<MemberDTO> getMcheck();
+	
 	
 }

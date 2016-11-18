@@ -39,4 +39,13 @@ public String ChangeForm(){
 		return "main/ChangeForm";
 	}
 
+@RequestMapping("/Allow.htm")
+public String alloew(Model model){
+	List<MemberDTO> dto=service.Mcheck();
+	
+	model.addAttribute("dto",dto);
+		return "main/Allow";
+	}
+
+
 }
