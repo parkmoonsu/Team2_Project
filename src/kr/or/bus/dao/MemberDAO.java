@@ -14,6 +14,7 @@ import kr.or.bus.dto.ApproveDTO;
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
+import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.dto.ResRecordDTO;
 
 public interface MemberDAO {
@@ -58,5 +59,8 @@ public interface MemberDAO {
 	//승인여부 구하기 (N인 사람만 뽑기)
 	public List<MemberDTO> getMcheck();
 	
+	//로그인한 정보로 회원의 개인정보 확인 ( 수정 넘어가기 전 )
+	public MemberJoinMDetailDTO getMemberInfo(String m_id);
+
 	
 }
