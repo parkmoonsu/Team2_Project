@@ -340,7 +340,8 @@ h5{
 						$("#agree1").click(
 								function() {
 									if ($("#agree1").is(":checked")
-											&& $("#agree2").is(":checked")) {
+											&& $("#agree2").is(":checked")
+											&& $("#agree3").is(":checked")){
 										$("#all-agree").prop("checked", true);
 										$("#next").attr('disabled', false);
 									} else {
@@ -351,7 +352,20 @@ h5{
 						$("#agree2").click(
 								function() {
 									if ($("#agree1").is(":checked")
-											&& $("#agree2").is(":checked")) {
+											&& $("#agree2").is(":checked")
+											&& $("#agree3").is(":checked")){
+										$("#all-agree").prop("checked", true);
+										$("#next").attr('disabled', false);
+									} else {
+										$("#all-agree").prop("checked", false);
+										$("#next").attr('disabled', true);
+									}
+								});
+						$("#agree3").click(
+								function() {
+									if ($("#agree1").is(":checked")
+											&& $("#agree2").is(":checked")
+											&& $("#agree3").is(":checked")){
 										$("#all-agree").prop("checked", true);
 										$("#next").attr('disabled', false);
 									} else {
@@ -363,12 +377,14 @@ h5{
 							if ($("#all-agree").is(":checked")) {
 								$("#agree1").prop("checked", true);
 								$("#agree2").prop("checked", true);
+								$("#agree3").prop("checked", true);
 								$("#next").attr('disabled', false);
 
 							} else {
 
 								$("#agree1").prop("checked", false);
 								$("#agree2").prop("checked", false);
+								$("#agree3").prop("checked", false);
 								$("#next").attr('disabled', true);
 							}
 						});
