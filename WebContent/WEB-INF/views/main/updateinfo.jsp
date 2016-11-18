@@ -47,11 +47,11 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-	
+
 
 <script type="text/javascript">
-	$(function(){
-		$("#photo_swipe").click(function(){
+	$(function() {
+		$("#photo_swipe").click(function() {
 			$("#photo").click();
 		});
 	});
@@ -98,6 +98,7 @@
 												<div class="panel-body">
 													<div class="row">
 														<div class="col-sm-2" align="center">
+
 															<div class="row">
 
 																<!-- <a style = "display:none"><input type = "file" id = "photo"></a>
@@ -114,110 +115,127 @@
 																<table class="table table-user-information">
 																	<tr>
 																		<td>
-																		<div class="form-group">
-                        <label class="control-label col-sm-3">아이디</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" placeholder="Default Input">
-                        </div>
-                      </div>
+																			<div class="form-group">
+																				<span class="col-sm-3">아이디</span>
+																				<div class="col-sm-9">
+																					<input type="text" class="form-control"
+																						disabled>
+																				</div>
+																			</div>
 																		</td>
+
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">비밀번호</span>
+																				<div class="col-sm-9">
+																					<input type="password" id="m_pw" name="m_pw"
+																						class="form-control">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">다시입력</span>
+																				<div class="col-sm-9">
+																					<input type="password" id="m_pw2" name="m_pw2"
+																						class="form-control">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">이름</span>
+																				<div class="col-sm-9">
+																					<input id="m_name" class="form-control" type="text"
+																						name="form-control">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
 																	
-																		</tr>
-																		<tr>
-																		<td><span class="col-sm-3">비밀번호</span></td>
-																		<td><input type="password" id="m_pw" name="m_pw"
-																			class="form-control col-md-7 col-xs-12"></td>
+																	
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">연락처</span>
+																				<div class="col-sm-9">
+																					<input id="m_phone" name="m_phone"
+																						class="form-control" type="text">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">운전면허</span>
+																				<div class="col-sm-9">
+																					<input id="m_license" class="control" type="file"
+																						name="files[0]">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">사진</span>
+																				<div class="col-sm-9">
+																					<input id="m_license" class="control" type="file"
+																						name="files[1]">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">주소</span>
+																				<div class="col-sm-6">
+																					<input id="m_addr" class="form-control" type="text"
+																						name="m_addr"> 
+																				</div>
+																				<div class = "col-sm-3">	
+																					<input type="button"
+																						value="주소검색" class="btn btn-default"
+																						onclick="sample4_execDaumPostcode()">
+																				
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">상세주소</span>
+																				<div class="col-sm-9">
+																					<input id="m_daddr" class="form-control"
+																						type="text" name="m_daddr">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																		<div class="form-group">
+																				<span class="col-sm-3">이력사항</span>
+																				<div class="col-sm-9">
+																					<input  class="form-control"
+																						type="text" value = "턱봉이가 처리">
+																				</div>
+																			</div>
+																		
+																		</td>
 
 																	</tr>
-																	<tr>
-																		<td><span class="col-sm-3">비밀번호 다시입력</span></td>
-																		<td><input type="password" id="m_pw2"
-																			name="m_pw2" class="form-control col-md-7 col-xs-12">
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>이름</td>
-																		<td><input id="m_name"
-																			class="form-control col-md-7 col-xs-12" type="text"
-																			name="m_name"></td>
-																	</tr>
-																	<tr>
-																		<td>이메일 <input id="m_email"
-																			class="form-control col-md-7 col-xs-12" type="email"
-																			name="m_email"></td>
-																		<td><input type="button" value="인증번호전송"
-																			id="emailbtn" class="btn btn-default"></td>
-																	</tr>
-																	<tr>
-																		<td>인증번호<input id="m_echeck"
-																			class="form-control col-md-7 col-xs-12" type="text"
-																			name="m_echeck"></td>
-																		<td><input type="button" value="인증"
-																			id="echeckbtn" class="btn btn-default"></td>
-																	</tr>
-																	<tr>
-																		<td>성별</td>
-																		<td><input type="radio" name="m_gender"
-																			value="male"> 남성 <input type="radio"
-																			name="m_gender" value="female"> 여성</td>
-																	</tr>
-																	<tr>
-																		<td>생년월일</td>
-																		<td><input id="m_birth" name="m_birth"
-																			class="form-control col-md-7 col-xs-12" type="text">
-																		</td>
 
-																	</tr>
-																	<tr>
-																		<td>연락처</td>
-																		<td><input id="m_phone" name="m_phone"
-																			class="form-control col-md-7 col-xs-12" type="text">
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>운전면허증</td>
-																		<td><input id="m_license"
-																			class="col-md-7 col-xs-12" type="file"
-																			name="files[0]"></td>
-																	</tr>
-																	<tr>
-																		<td>사진</td>
-																		<td><input id="m_photo"
-																			class="col-md-7 col-xs-12" type="file"
-																			name="files[1]"></td>
-																	</tr>
-																	<tr>
-																		<td>우편주소 <input id="m_addr"
-																			class="form-control col-md-7 col-xs-12" type="text"
-																			name="m_addr"></td>
-																		<td><input type="button" value="주소검색"
-																			class="btn btn-default"
-																			onclick="sample4_execDaumPostcode()"></td>
-																	</tr>
-																	<tr>
-																		<td>상세주소</td>
-																		<td><input id="m_daddr"
-																			class="form-control col-md-7 col-xs-12" type="text"
-																			name="m_daddr"></td>
-																	</tr>
-																	<tr>
-																		<td>이력사항 <select name="res_num" id="res_num"
-																			class="form-control col-md-3 col-sm-3">
-																				<option value="">선택</option>
-																				<option value="100">마을버스</option>
-																				<option value="200">시내버스</option>
-																				<option value="300">시외버스</option>
-																				<option value="400">고속버스</option>
-																		</select></td>
-
-																		<td><input id="rr_detail"
-																			class="form-control col-md-7 col-xs-12" type="text"
-																			name="rr_detail"> <input type="button"
-																			value="+" id="plusbtn" class="btn btn-default">
-																		</td>
-																	</tr>
-															
-																		</table>
+																</table>
 
 																<div style="float: right; margin: 30px;">
 																	<input type="button" value="이전" class="btn btn-primary"
