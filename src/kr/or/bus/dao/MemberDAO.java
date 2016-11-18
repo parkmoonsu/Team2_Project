@@ -62,5 +62,6 @@ public interface MemberDAO {
 	//로그인한 정보로 회원의 개인정보 확인 ( 수정 넘어가기 전 )
 	public MemberJoinMDetailDTO getMemberInfo(String m_id);
 
-	
+	//수정할때 비밀번호 검증
+	public int passMatch(String m_id , String m_pw);
 }

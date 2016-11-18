@@ -48,14 +48,6 @@
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
 
-
-<script type="text/javascript">
-	$(function() {
-		$("#photo_swipe").click(function() {
-			$("#photo").click();
-		});
-	});
-</script>
 </head>
 
 
@@ -76,7 +68,6 @@
 				<!-- top tiles -->
 				<div class="row tile_count"></div>
 				<!-- /top tiles -->
-
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="dashboard_graph">
@@ -90,7 +81,6 @@
 									<div class="row">
 										<div class="col-sm-2"></div>
 										<div class="col-sm-8">
-
 											<div class="panel panel-info">
 												<div class="panel-heading">
 													<h3 class="panel-title">회원 정보수정</h3>
@@ -98,19 +88,15 @@
 												<div class="panel-body">
 													<div class="row">
 														<div class="col-sm-2" align="center">
-
 															<div class="row">
-
 																<!-- <a style = "display:none"><input type = "file" id = "photo"></a>
 																<button class="btn btn-primary" style="margin-top:10px;margin-right: 10px" id = "photo_swipe">사진변경</button>
 																 -->
-
 															</div>
 														</div>
 														<div class="col-sm-8">
-
 															<form class="form-horizontal form-label-left"
-																method="post" action="join3.htm"
+																method="post" action="updateMember.htm"
 																enctype="multipart/form-data">
 																<table class="table table-user-information">
 																	<tr>
@@ -118,7 +104,7 @@
 																			<div class="form-group">
 																				<span class="col-sm-3">아이디</span>
 																				<div class="col-sm-9">
-																					<input type="text" class="form-control"
+																					<input type="text" class="form-control" value = "${dto.m_id}"
 																						disabled>
 																				</div>
 																			</div>
@@ -152,43 +138,31 @@
 																			<div class="form-group">
 																				<span class="col-sm-3">이름</span>
 																				<div class="col-sm-9">
-																					<input id="m_name" class="form-control" type="text"
-																						name="form-control">
+																					<input id="m_name" class="form-control" type="text" value = "${dto.m_name}"
+																						name="m_name">
 																				</div>
 																			</div>
 																		</td>
-																	</tr>
-																	
-																	
+																	</tr>	
 																	<tr>
 																		<td>
 																			<div class="form-group">
 																				<span class="col-sm-3">연락처</span>
 																				<div class="col-sm-9">
-																					<input id="m_phone" name="m_phone"
+																					<input id="m_phone" name="m_phone" value = "${dto.m_phone}"
 																						class="form-control" type="text">
 																				</div>
 																			</div>
 																		</td>
 																	</tr>
-																	<tr>
-																		<td>
-																			<div class="form-group">
-																				<span class="col-sm-3">운전면허</span>
-																				<div class="col-sm-9">
-																					<input id="m_license" class="control" type="file"
-																						name="files[0]">
-																				</div>
-																			</div>
-																		</td>
-																	</tr>
+												
 																	<tr>
 																		<td>
 																			<div class="form-group">
 																				<span class="col-sm-3">사진</span>
 																				<div class="col-sm-9">
-																					<input id="m_license" class="control" type="file"
-																						name="files[1]">
+																					<input id="m_photo" class="control" type="file" value = "${dto.m_photo}"
+																						name="file">
 																				</div>
 																			</div>
 																		</td>
@@ -198,7 +172,7 @@
 																			<div class="form-group">
 																				<span class="col-sm-3">주소</span>
 																				<div class="col-sm-6">
-																					<input id="m_addr" class="form-control" type="text"
+																					<input id="m_addr" class="form-control" type="text" value = "${dto.m_addr}"
 																						name="m_addr"> 
 																				</div>
 																				<div class = "col-sm-3">	
@@ -215,7 +189,7 @@
 																			<div class="form-group">
 																				<span class="col-sm-3">상세주소</span>
 																				<div class="col-sm-9">
-																					<input id="m_daddr" class="form-control"
+																					<input id="m_daddr" class="form-control" value = "${dto.m_daddr}"
 																						type="text" name="m_daddr">
 																				</div>
 																			</div>
@@ -240,7 +214,7 @@
 																<div style="float: right; margin: 30px;">
 																	<input type="button" value="이전" class="btn btn-primary"
 																		id="prev" onclick="history.go(-1)"> <input
-																		class="btn btn-primary" type="submit" value="수정완료">
+																		class="btn btn-primary" type="submit" value="수정완료" id = "update">
 																</div>
 
 															</form>
@@ -334,5 +308,20 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+	
+	<script type="text/javascript">
+		$(function(){
+			$("#update").click(function(){
+				if($("#m_pw2").val() == "" || ($("#m_pw").val() != $("#m_pw2").val())){
+					alert("비밀번호가 일치 하지 않습니다.");
+					$("#m_pw2").focus();
+					return false;
+				}else{
+					alert("수정 완료");
+					return true;
+				}
+			});
+		});
+	</script>
 </body>
 </html>

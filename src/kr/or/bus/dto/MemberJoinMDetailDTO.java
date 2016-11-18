@@ -8,6 +8,8 @@
 
 package kr.or.bus.dto;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class MemberJoinMDetailDTO {
 	private String m_id;
 	private String j_code;
@@ -31,6 +33,18 @@ public class MemberJoinMDetailDTO {
 	
 	private String j_name;
 
+////////////////////////////////////////////////
+	//턱봉 이력쪽 파일 업로드 추가하려면 list로 바꿀것
+	private CommonsMultipartFile file;
+
+	public CommonsMultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(CommonsMultipartFile file) {
+		this.file = file;
+	}
+///////////////////////////////////////////////
 	public String getM_id() {
 		return m_id;
 	}
