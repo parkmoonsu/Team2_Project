@@ -119,6 +119,7 @@ public class JoinService {
 		mimemessage.setText(htmlContent, "utf-8", "html");
 		
 		mimemessage.addRecipient(RecipientType.TO, new InternetAddress(m_email));
+		System.out.println(mimemessage.toString());
 		mailSender.send(mimemessage);
 	}
 	

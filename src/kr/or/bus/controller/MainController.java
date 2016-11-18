@@ -46,9 +46,19 @@ public class MainController {
 		model.addAttribute("dto", dto);
 		return "main/ChangeForm";
 	}
+
+@RequestMapping("/Allow.htm")
+public String allow(Model model){
+	List<MemberJoinMDetailDTO> list = service.ncheck();
 	
+	model.addAttribute("list",list);
+		return "main/Allow";
+	}
+
+
 	@RequestMapping("/updateinfo.htm")
 	public String updateinfo(){
 		return "main/updateinfo";
 	}
+
 }

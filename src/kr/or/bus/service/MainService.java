@@ -16,6 +16,8 @@ public class MainService {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	
+	//모든 유저 구하기
 	public List<MemberDTO> selectall(String search){
 		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
 		
@@ -23,10 +25,18 @@ public class MainService {
 		
 		return dto;
 	}
-	
+	//
+	public List<MemberJoinMDetailDTO> ncheck(){
+		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
+		
+		List<MemberJoinMDetailDTO> list=dao.getNcheck();
+		
+		return list;
+	}
 	public MemberJoinMDetailDTO getMemberInfo(String m_id){
 		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
 		MemberJoinMDetailDTO dto = dao.getMemberInfo(m_id);
+
 		
 		return dto;
 	}
