@@ -180,9 +180,10 @@ h5{
 													②"회사"는 "회원"이 안전하게 "서비스"를 이용할 수 있도록 개인정보(신용정보 포함)보호를 위해 보안시스템을 갖추어야 하며 개인정보처리방침을 공시하고 준수합니다.
 													③"회사"는 서비스이용과 관련하여 "회원"으로부터 제기된 의견이나 불만이 정당하다고 인정할 경우에는 이를 처리하여야 합니다. "회원"이 제기한 의견이나 불만사항에 대해서는 게시판을 활용하거나 전자우편 등을 통하여 "회원"에게 처리과정 및 결과를 전달합니다.
 													</p>																							 
-													 <div style = "text-align:right">
+													 				
+												</div>
+												<div style = "text-align:right">
 														<input type="checkbox" name="class[1]" value="agree1" id = "agree1" class="input_check">이용 약관에 동의 합니다<br>														
-													 </div>					
 												</div><br>
 												<div class="my-box" style="height: 150px;overflow: scroll; overflow-x: hidden;">
 												<p style="text-align: left">
@@ -220,14 +221,11 @@ h5{
 													- 전자금융거래법 
 													전자금융에 관한 기록: 5년 보관
 													- 통신비밀보호법 
-													로그인 기록: 3개월
-													<div style = "text-align:right">
-														<input type="checkbox" name="class[2]" value="agree2" id = "agree2" class="input_check">이용 약관에 동의 합니다<br>														
-													 </div>
+													로그인 기록: 3개월													
 												</div>
-											
-											
-											<br>
+												<div style = "text-align:right">
+														<input type="checkbox" name="class[2]" value="agree2" id = "agree2" class="input_check">이용 약관에 동의 합니다<br>														
+												</div><br>
 											<div class="my-box" style="height: 150px; overflow: scroll; overflow-x: hidden;">
 												<p>
 													위치정보 이용약관에 동의하시면, 위치를 활용한 광고 정보 수신 등을 포함하는 네이버 위치기반 서비스를 이용할 수 있습니다.	</p>
@@ -271,10 +269,10 @@ h5{
 													전화번호 : 1588-3820
 													이메일 주소 : privacy@naver.com
 																									
-													<div style = "text-align:right">
+																									
+												</div><div style = "text-align:right">
 														<input type="checkbox" name="class[3]" value="agree3" id = "agree3" class="input_check">이용 약관에 동의 합니다<br>														
-													 </div>													
-												</div>
+													 </div>	<br>
 											</div>
 											
 											
