@@ -20,10 +20,11 @@
 		<security:form-login login-page="/login.htm"
 			default-target-url="/main.htm"
 			authentication-failure-url="/login.htm?error" />
-		<security:logout logout-success-url="/bus.htm" />
+		<security:logout logout-success-url="/bus.htm"
+						 invalidate-session="true" />
 
 
-		 <security:intercept-url pattern="/main/main.htm"
+		 <security:intercept-url pattern="/main.htm"
 			access="hasRole('ROLE_USER')" />
 		
 	
@@ -32,11 +33,11 @@
 		<security:authentication-provider>
 			<security:jdbc-user-service
 				data-source-ref="driverManagerDataSource"
-				users-by-username-query="select m_name as username,  m_pw as password, 1 enabled from member where m_id=?"
+				users-by-username-query="select m_id as username,  m_pw as password, 1 enabled from member where m_id=?"
 				authorities-by-username-query="select m.m_id, a.a_name
 											from member m join authority a
 											on m.m_id = a.m_id
-											where m.m_name=?" />
+											where m.m_id=?" />
 			<security:password-encoder ref="bCryptPasswordEncoder" />
 		</security:authentication-provider>
 	</security:authentication-manager>

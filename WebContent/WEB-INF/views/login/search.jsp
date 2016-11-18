@@ -108,15 +108,14 @@
 												<div class="form-group" style="padding: 25px">
 													<div id="step-2">
 														<form class="form-horizontal form-label-left"
-															method="post" action="join3.htm"
-															enctype="multipart/form-data">
+															method="post" action="searchid.htm">
 												
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="m_email">이름
+														for="m_name">이름
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" id="m_email" name = "m_email"
+														<input type="text" id="m_name" name = "m_name"
 															class="form-control col-md-5 col-xs-12">
 													</div>
 												</div>
@@ -130,10 +129,7 @@
 															class="form-control col-md-5 col-xs-12">
 													</div>
 													<div class = "col-md-1 col-sm-1">
-													<a class ="btn btn-default" id= "emailbtn1">전송</a>
-													</div>
-													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
-														<span id = "check"></span>
+													<input type ="submit" class ="btn btn-default" id= "emailbtn1" value = "전송">
 													</div>
 												</div>
 												
@@ -148,8 +144,7 @@
 												<div class="form-group" style="padding: 25px">
 													<div id="step-2">
 														<form class="form-horizontal form-label-left"
-															method="post" action="join3.htm"
-															enctype="multipart/form-data">
+															method="post" action="searchpw.htm">
 
 													<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -159,12 +154,6 @@
 														<input type="text" id="m_id" name = "m_id"
 															class="form-control col-md-7 col-xs-12">
 													</div>
-													<div class = "col-md-1 col-sm-1">
-														<input type = "button" class = "btn btn-default" id = "checkid" value = "아이디확인">
-													</div>
-													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
-														<span id = "check"></span>
-													</div>
 												</div>
 
 												<div class="form-group">
@@ -172,15 +161,13 @@
 														for="m_email">이메일
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" id="m_email" name = "m_email"
+														<input type="email" id="m_email" name = "m_email"
 															class="form-control col-md-5 col-xs-12">
 													</div>
 													<div class = "col-md-1 col-sm-1">
-											<a href="searchDetail.jsp" class ="btn btn-default" id= "emailbtn2">전송</a>
+														<input type = "submit" class ="btn btn-default" id= "emailbtn2" value = "전송">
 													</div>
-													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
-														<span id = "check"></span>
-													</div>
+													
 												</div>
 															</form>
 													</div>															
@@ -227,17 +214,5 @@
 				src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 			<!-- ajax -->
 
-			<!-- jQuery Smart Wizard -->
-			<script>
-				$(document).ready(
-						function() {
-					
-							$("#emailbtn1").click(function() {
-								alert("이메일로 전송 되었습니다 ^^");
-								location.href ="bus.htm";
-							});
-
-						});
-			</script>
 </body>
 </html>
