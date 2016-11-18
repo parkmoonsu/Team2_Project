@@ -57,7 +57,7 @@ public interface MemberDAO {
 	public MemberJoinJobDTO getJobName(String username);
 	
 	//승인여부 구하기 (N인 사람만 뽑기)
-	public List<MemberDTO> getMcheck();
+	public List<MemberJoinMDetailDTO> getNcheck();
 	
 	//로그인한 정보로 회원의 개인정보 확인 ( 수정 넘어가기 전 )
 	public MemberJoinMDetailDTO getMemberInfo(String m_id);

@@ -116,10 +116,11 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:set value="${dto}" var="d"/>
+											
+											<c:forEach var ="d"  items="${list}">
 											<tr>
 												<td>1.</td>
-												<td><a>아이디</a></td>
+												<td><a>${d.m_id}</a></td>
 												<td><small>이름</small></td>
 												<td>연락처</td>
 												<td><small>등급</small></td>
@@ -129,6 +130,7 @@
 													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
 														삭제 </a></td>
 											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 									<!-- end project list -->

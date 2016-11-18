@@ -48,10 +48,10 @@ public class MainController {
 	}
 
 @RequestMapping("/Allow.htm")
-public String alloew(Model model){
-	List<MemberDTO> dto=service.Mcheck();
+public String allow(Model model){
+	List<MemberJoinMDetailDTO> list = service.ncheck();
 	
-	model.addAttribute("dto",dto);
+	model.addAttribute("list",list);
 		return "main/Allow";
 	}
 

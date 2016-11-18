@@ -26,11 +26,13 @@ public class MainService {
 		return dto;
 	}
 	//
-	public List<MemberDTO> Mcheck(){
+	public List<MemberJoinMDetailDTO> ncheck(){
 		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
 		
-		List<MemberDTO> dto=dao.getMcheck();
-
+		List<MemberJoinMDetailDTO> list=dao.getNcheck();
+		
+		return list;
+	}
 	public MemberJoinMDetailDTO getMemberInfo(String m_id){
 		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
 		MemberJoinMDetailDTO dto = dao.getMemberInfo(m_id);
