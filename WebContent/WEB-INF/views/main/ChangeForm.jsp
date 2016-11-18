@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +48,15 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+<script type="text/javascript">
+	$(function(){
+		$("#photo_swipe").click(function(){
+			$("#photo").click();
+		});
+	});
+</script>
 </head>
+
 
 <body class="nav-md">
 	<div class="container body">
@@ -83,73 +92,92 @@
 
 											<div class="panel panel-info">
 												<div class="panel-heading">
-													<h3 class="panel-title">이력서</h3>
+													<h3 class="panel-title">개인정보</h3>
 												</div>
 												<div class="panel-body">
 													<div class="row">
 														<div class="col-sm-5" align="center">
 															<div class="row">
 																<div class="col-sm-12">
+																	
 																	<img
-																		src="${pageContext.request.contextPath}/images/bono.jpg"
-																		style="width: 200px; height: 200px;">
+																		src="${pageContext.request.contextPath}/join/upload/${dto.m_photo}"
+																		style="width: 200px; height: 200px;" class = "img img-thumbnail">
 																</div>
+																<!-- <a style = "display:none"><input type = "file" id = "photo"></a>
+																<button class="btn btn-primary" style="margin-top:10px;margin-right: 10px" id = "photo_swipe">사진변경</button>
+																 -->
 																
-																<button class="btn btn-primary" style="margin-top:10px;margin-right: 10px">사진변경</button>
-																<button class="btn btn-primary" style="margin-top: 10px" id="watch">이력보기</button>
-
 															</div>
 														</div>
 														<div class="col-sm-7">
 															<table class="table table-user-information">
 																<tbody>
 																	<tr>
-																		<td>이름:</td>
-																		<td>읍읍이</td>
+																		<td>이름</td>
+																		<td>${dto.m_name}</td>
 																	</tr>
 																	<tr>
 																		<td>ID</td>
-																		<td>刀천재Z1존도적風</td>
+																		<td>${dto.m_id}</td>
 																	</tr>
 																	<tr>
-																		<td>주소</td>
-																		<td>서울역</td>
+																		<td>연락처</td>
+																		<td>${dto.m_phone}</td>
+																	</tr>
+																	<tr>
+																		<td>성별</td>
+																		<c:choose>
+																			<c:when test = "${dto.m_gender == 'male'}">
+																				<td>남성</td>
+																			</c:when>
+																			<c:otherwise>
+																				<td>여성</td>
+																			</c:otherwise>
+																		</c:choose>
+																		
+																	</tr>
+																	
+																	<tr>
+																		<td>우편주소</td>
+																		<td>${dto.m_addr}</td>
 																	</tr>
 																	<tr>
 																		<td>상세주소</td>
-																		<td>3번출구 5번째 계단</td>
+																		<td>${dto.m_daddr}</td>
 																	</tr>
 																	<tr>
-																		<td>등급</td>
-																		<td>1급현역</td>
+																		<td>직책</td>
+																		<td>${dto.j_name}</td>
 																	</tr>
 																	<tr>
 																		<td>면허증</td>
-																		<td>2종보통</td>
+																		<td>${dto.m_license}</td>
 																	</tr>
 																	<tr>
 																		<td>이력서</td>
-																		<td><a>나 금메달 메고왔는데^^</a></td>
+																		<td><a>이력사항 dto에 넣어야함</a></td>
 																	</tr>
 																	<tr>
 																		<td>E-Mail</td>
-																		<td><a href="www.president.go.kr">www.president.go.kr</a>
+																		<td>${dto.m_email}
 																		</td>
 
 																	</tr>
 																	<tr>
 																		<td>생년월일</td>
-																		<td>500706</td>
+																		<td>${dto.m_birth}</td>
 																	</tr>
 																	<tr>
-																		<td>정기휴무</td>
-																		<td>캘린더api...</td>
+																		<td>사용 가능 연차</td>
+																		<td>${dto.m_annual}일</td>
 																	</tr>
 																</tbody>
 															</table>
 
-															<a href="#" class="btn btn-primary">수정</a> <a href="#"
-																class="btn btn-primary">??</a>
+															<a href="updateinfo.htm" class="btn btn-primary">정보수정</a> 
+															<a class="btn btn-primary" id="watch">이력보기</a>
+															
 														</div>
 													</div>
 												</div>
@@ -194,7 +222,7 @@
 		                	<table class="table">
 		                	<thead>
 		                		<tr>
-		                			<th style="width: 20%">아력구분</th>
+		                			<th style="width: 20%">이력구분</th>
 		                			<th style="width: 35%">근무기간</th>
 		                			<th>근무회사</th>
 		                		</tr>
@@ -216,7 +244,7 @@
 				     	</div>
         		    	<div class="modal-footer">
                             <div>
-                                <a href="redirect:/join.htm"><button type="submit" class="btn btn-primary btn-lg btn-block">완료</button></a>
+                                <a href="redirect:/ChangeForm.htm"><button type="submit" class="btn btn-primary btn-lg btn-block">완료</button></a>
                             </div>
         		    	</div>
                     </form>

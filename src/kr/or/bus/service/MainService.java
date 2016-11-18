@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.MemberJoinMDetailDTO;
 
 @Controller
 public class MainService {
@@ -19,6 +20,13 @@ public class MainService {
 		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
 		
 		List<MemberDTO> dto=dao.SelectAll(search);
+		
+		return dto;
+	}
+	
+	public MemberJoinMDetailDTO getMemberInfo(String m_id){
+		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
+		MemberJoinMDetailDTO dto = dao.getMemberInfo(m_id);
 		
 		return dto;
 	}
