@@ -175,7 +175,7 @@
 																</tbody>
 															</table>
 
-															<a href="updateinfo.htm" class="btn btn-primary">정보수정</a> 
+															<a class="btn btn-primary" id="pass">정보수정</a> 
 															<a class="btn btn-primary" id="watch">이력보기</a>
 															
 														</div>
@@ -254,6 +254,39 @@
 			</div>
 		</div>
 	</div>
+	<!-- end modal -->
+	
+	<!-- BEGIN # MODAL LOGIN -->
+	<div class="modal fade" id="pass-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	<div class="modal-dialog">
+			<div class="modal-content">      
+                <!-- Begin # DIV Form -->
+                <div id="div-forms">
+                <div class="modal-header" align="center">
+					<h3>비밀번호 입력</h3>
+				</div>
+                    <!-- Begin # Login Form -->
+                    <form id="login-form" action="updateinfo.htm" method="post">
+		                <div class="modal-body">
+		                	<div style = "text-align:center">
+		                	<label for ="m_pw">비밀번호 </label>
+		                	<input type = "text" name = "m_pw" id = "m_pw">
+		                	</div>
+				     	</div>
+        		    	<div class="modal-footer">
+                            <div>
+                                <input type="submit" class="btn btn-primary btn-lg btn-block" value = "완료">
+                            </div>
+        		    	</div>
+                    </form>
+                    <!-- End # Login Form -->  
+                </div>
+                <!-- End # DIV Form --> 
+			</div>
+		</div>
+	</div>
+	<!-- end modal -->
+	
 	
 	<script type="text/javascript">
 	$(document).ready(function() {
@@ -261,6 +294,9 @@
 			$('#new-modal').modal();
 		});
 		
+		$("#pass").click(function(){
+			$("#pass-modal").modal();
+		});
 	});
 	
 	</script>

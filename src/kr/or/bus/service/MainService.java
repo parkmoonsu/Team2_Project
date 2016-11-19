@@ -34,6 +34,7 @@ public class MainService {
 		return list;
 	}
 	public MemberJoinMDetailDTO getMemberInfo(String m_id){
+		System.out.println("m_id : " + m_id);
 		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
 		MemberJoinMDetailDTO dto = dao.getMemberInfo(m_id);
 
