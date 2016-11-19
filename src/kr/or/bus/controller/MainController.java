@@ -50,7 +50,7 @@ public class MainController {
 	public String ChangeForm(Model model, Principal principal) {
 		System.out.println("세션 ID : " + principal.getName());
 		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-
+		
 		model.addAttribute("dto", dto);
 		return "main/ChangeForm";
 	}
