@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,10 @@ public class MainController {
 
 	@Autowired
 	private View jsonview;
-
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	@RequestMapping("/InfoChange.htm")
 	public String login() {
 		return "main/InfoChange";
@@ -64,13 +68,27 @@ public String allow(Model model){
 	public String updateinfo(Model model , Principal principal , String m_pw){
 		System.out.println("세션 ID : " + principal.getName());
 		
+		String encodepass = service.getPass(principal.getName());
+		System.out.println("m_pw : " + m_pw);
+		System.out.println("encodePass : " + encodepass);
 		
+		boolean result = bCryptPasswordEncoder.matches(m_pw, encodepass);
+		
+		System.out.println("result : " + result);
+		
+		String viewpage = "";
 		
 		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-
+		
 		model.addAttribute("dto", dto);
 		
-		return "main/updateinfo";
+		if(result){
+			viewpage = "main/updateinfo";
+		}else{
+			viewpage = "main/matchfailpass";
+		}
+		
+		return viewpage;
 	}
 	
 	@RequestMapping(value="/updateMember.htm",method=RequestMethod.POST)

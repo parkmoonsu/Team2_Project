@@ -24,7 +24,7 @@ public class MDetailDTO {
 	private String m_photo;
 	private String m_birth;
 	private String m_gender;
-	
+	private String m_resume;
 	//멀티 파일 업로드///////////////////////////////
 		private List<CommonsMultipartFile> files;
 			
@@ -96,6 +96,12 @@ public class MDetailDTO {
 		this.m_birth = m_birth;
 	}
 	
+	public String getM_resume() {
+		return m_resume;
+	}
+	public void setM_resume(String m_resume) {
+		this.m_resume = m_resume;
+	}
 	@Override
 	public String toString() {
 		return "MDetailDTO [m_id=" + m_id + ", m_addr=" + m_addr + ", m_daddr=" + m_daddr + ", m_phone=" + m_phone

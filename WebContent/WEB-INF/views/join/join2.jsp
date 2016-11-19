@@ -118,7 +118,7 @@
 										</ul>
 										
 										<div id="step-2">
-											<form class="form-horizontal form-label-left" method = "post" action = "join3.htm" enctype="multipart/form-data">
+											<form id="register" class="form-horizontal form-label-left" method = "post" action = "join3.htm" enctype="multipart/form-data">
 
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -272,7 +272,17 @@
 															class="col-md-7 col-xs-12" type="file"
 															name="files[1]">
 													</div>
-												</div> 
+												</div>
+												<div class="form-group">
+													<label for="m_resume"
+														class="control-label col-md-3 col-sm-3 col-xs-12">이력서
+													</label>
+													<div class="col-md-6 col-sm-6 col-xs-12">
+														<input id="m_resume"
+															class="col-md-7 col-xs-12" type="file"
+															name="files[2]" onchange="xlscheck(this)">
+													</div>
+												</div>  
 												<div class="form-group">
 													<label for="m_addr"
 														class="control-label col-md-3 col-sm-3 col-xs-12">우편주소
@@ -299,7 +309,8 @@
 													</div>
 												</div>
 												
-												<div class="form-group">
+												
+												<!-- <div class="form-group">
 													<label for="res_num"
 														class="control-label col-md-3 col-sm-3 col-xs-12">이력사항
 													</label>
@@ -323,7 +334,7 @@
 												</div>
 												<div id = "plus">
 												
-												</div>
+												</div> -->
 
 												<div style="float: right; margin: 30px;">
 													<input type="button" value="이전" class="btn btn-primary"
@@ -439,9 +450,16 @@
 		<script
 			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 		<!-- ajax -->
-		
+		<script src="http://malsup.github.io/jquery.form.js"></script>
 		<!-- jQuery Smart Wizard -->
 		<script>
+			function xlscheck(file){
+				var filelen = file.value.length;
+				if(file.value.substring(filelen-3,filelen)!="xls"){
+					alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
+					file.value = "";
+				}
+			}
 			$(document).ready(function() {
 				var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 	
 				
@@ -509,7 +527,7 @@
 					});
 				});
 				
-				if($("#m_id").val() != "" && $("#m_pw").val() != "" && $("#m_pw2").val() != ""
+			/* 	if($("#m_id").val() != "" && $("#m_pw").val() != "" && $("#m_pw2").val() != ""
 						&& $("#m_name").val() != "" && $("#m_email").val() != "" &&
 						$("#j_code").val() != "" && $("#m_gender").is(":selected") &&
 						$("#m_phone").val() != "" && $("#m_license").val() != "" &&
@@ -519,7 +537,7 @@
 					$("#next").attr('disabled', false);
 				}else{
 					$("#next").attr('disabled', true);
-				}
+				} */
 				
 				$("#rr_detail").keyup(function(){
 					if($("#rr_detail") != ""){
@@ -529,7 +547,7 @@
 					}
 				})
 				
-				var i = 2;
+				/* var i = 2;
 				$("#plusbtn").click(function(){
 					var plus = "<div class='form-group'>";
 					plus += "<label for='res_num' class='control-label col-md-3 col-sm-3 col-xs-12'>이력사항" + i++ + "</label>";
@@ -549,7 +567,7 @@
 					if(i>4){
 						 $("#plusbtn").unbind("click");
 					}
-				});
+				}); */
 				
 				$("#next").click(function(){
 					if($("#m_id").val() == ""){
@@ -594,6 +612,10 @@
 					}else if($("#m_photo").val() ==""){
 						alert("사진을 첨부하세요.");
 						$("#m_photo").focus();
+						return false;
+					}else if($('#m_resume').val()==""){
+						alert("이력서를 첨부하세요.");
+						$('#m_resume').focus();
 						return false;
 					}else if($("#m_addr").val() ==""){
 						alert("우편주소를 입력하세요.");

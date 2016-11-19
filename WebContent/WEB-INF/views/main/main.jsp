@@ -39,14 +39,14 @@
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
-        	<%-- <c:choose>
+        	<c:choose>
           		<c:when test ="${jobname == '기사'}">
           			<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
           		</c:when>
-          		<c:otherwise> --%>
+          		<c:otherwise>
           			<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
-         <%--  		</c:otherwise>
-       		</c:choose> --%>
+          		</c:otherwise>
+       		</c:choose>
        		
        		<%-- <se:authorize access="hasRole('ROLE_USER')">
        			<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
