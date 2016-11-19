@@ -32,6 +32,9 @@ public interface MemberDAO {
 	//mdtail table insert
 	public int insertDetail(MDetailDTO dto);
 	
+	//resrecord table insert
+	public int insertResrecord(ResRecordDTO dto);
+	
 	public List<MemberDTO> SelectAll(String search);
 	//resrecord table insert
 	//public int insertRecord(ResRecordDTO dto);
@@ -41,7 +44,6 @@ public interface MemberDAO {
 	
 	//아이디 찾기 (매칭된 이름,이메일로부터 ID 가져옴)
 	public MemberDTO searchId(String m_name , String m_email);
-	
 	
 	//비밀번호 찾기 (가입된 ID와 이메일 확인)
 	public int searchIdEmail(String m_id , String m_email);
