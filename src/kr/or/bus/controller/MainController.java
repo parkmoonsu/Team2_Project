@@ -95,8 +95,6 @@ public String allow(Model model){
 	public String updateMember(MemberDTO mdto ,MDetailDTO ddto ,Principal principal, HttpServletRequest request ,Model model) throws Exception{
 		System.out.println(ddto.toString());
 		System.out.println(mdto.toString());
-		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-
 		service.updateMember(mdto, ddto, principal.getName(), request);
 
 		return "main/updatesuccess";

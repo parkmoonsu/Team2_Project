@@ -116,7 +116,7 @@
 																			<div class="form-group">
 																				<span class="col-sm-3">비밀번호</span>
 																				<div class="col-sm-9">
-																					<input type="password" id="m_pw" name="m_pw"
+																					<input type="password" id="m_pw" name="m_pw" value = "${dto.m_pw}"
 																						class="form-control">
 																				</div>
 																			</div>
@@ -128,7 +128,7 @@
 																				<span class="col-sm-3">다시입력</span>
 																				<div class="col-sm-9">
 																					<input type="password" id="m_pw2" name="m_pw2"
-																						class="form-control">
+																						class="form-control" value = "${dto.m_pw}">
 																				</div>
 																			</div>
 																		</td>
@@ -161,7 +161,7 @@
 																			<div class="form-group">
 																				<span class="col-sm-3">사진</span>
 																				<div class="col-sm-9">
-																					<input id="m_photo" class="control" type="file" value = "${dto.m_photo}"
+																					<input id="m_photo" class="control" type="file"
 																						name="files[0]">
 																				</div>
 																			</div>
@@ -300,7 +300,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#update").click(function(){
-				if($("#m_pw2").val() == "" || ($("#m_pw").val() != $("#m_pw2").val())){
+				if(($("#m_pw").val() != $("#m_pw2").val())){
 					alert("비밀번호가 일치 하지 않습니다.");
 					$("#m_pw2").focus();
 					return false;

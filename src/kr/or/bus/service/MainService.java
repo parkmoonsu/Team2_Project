@@ -61,11 +61,13 @@ public class MainService {
 	
 	public void updateMember(MemberDTO mdto , MDetailDTO ddto , String m_id ,HttpServletRequest request) throws Exception{
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		
 		List<CommonsMultipartFile> files = ddto.getFiles();
+		System.out.println("files주소???"+files);
 		List<String> filenames = new ArrayList<String>();
 		
 		if (files != null && files.size() > 0) { // 업로드한 파일이 하나라도 있다면
-
+			System.out.println("여기탐");
 			for (CommonsMultipartFile multipartfile : files) {
 
 				String fname = multipartfile.getOriginalFilename(); // 파일명 얻기
@@ -81,10 +83,16 @@ public class MainService {
 					fs.close();
 				}	filenames.add(fname); // 실 DB Insert 작업시 .. 파일명
 			}
+			ddto.setM_photo(filenames.get(0));
+		}else{
+			ddto.setM_photo(null);
 		}
 		
-		ddto.setM_photo(filenames.get(0));
+		
 		mdto.setM_pw(this.bCryptPasswordEncoder.encode(mdto.getM_pw()));
+		
+		System.out.println(ddto.toString());
+		System.out.println(mdto.toString());
 		
 		dao.updateMember1(mdto, m_id);
 		dao.updateMember2(ddto, m_id);
