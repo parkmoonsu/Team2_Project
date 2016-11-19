@@ -5,7 +5,6 @@
 <head>
 <style type="text/css">
 .my-box { border:1px solid; padding:10px; }
-p{
  text-align: left;
 }
 
