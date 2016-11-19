@@ -156,7 +156,7 @@
 																	</tr>
 																	<tr>
 																		<td>이력서</td>
-																		<td><a>이력사항 dto에 넣어야함</a></td>
+																		<td><a>${dto.m_resume}</a></td>
 																	</tr>
 																	<tr>
 																		<td>E-Mail</td>

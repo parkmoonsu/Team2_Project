@@ -3,7 +3,8 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.bus.dao.CalendarDAO">
-		
+	
+	<!-- 기본 캘린더 DAO -->	
 	<!-- public int delete(String seq) -->
 	<select id="select" resultType="kr.or.bus.dto.CalendarDTO">
 		select * from dto
@@ -34,5 +35,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=
 		(select max(id) from dto)
 	</select>
+	<!-- 기본 캘린더 DAO -->
+	
+	<!-- reguloff -->
+	<select id="reguloff_select" resultType="kr.or.bus.dto.RegulOffDTO">
+		select * from reguloff
+	</select>
+	<insert id="reguloff_insert">
+		INSERT INTO reguloff
+		VALUES(#{m_id}, #{o_code}, sysdate, test_seq2.nextval)
+	</insert>
+	<delete id="reguloff_delete">
+		DELETE reguloff WHERE id=#{id}
+	</delete>
+	<update id="reguloff_update">		
+		UPDATE reguloff
+		SET m_id=#{m_id},
+			o_code=#{o_code}		
+		WHERE id=#{id}
+	</update>
+	
+	<!-- reguloffdto -->
 		
 </mapper>

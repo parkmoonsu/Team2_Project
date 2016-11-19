@@ -1,12 +1,20 @@
 package kr.or.bus.service;
 
+
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.bus.dao.MemberDAO;
+import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 
@@ -16,6 +24,8 @@ public class MainService {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	//모든 유저 구하기
 	public List<MemberDTO> selectall(String search){
@@ -47,5 +57,45 @@ public class MainService {
 		String pw = dao.passMatch(m_id).getM_pw();
 		
 		return pw;
+	}
+	
+	public void updateMember(MemberDTO mdto , MDetailDTO ddto , String m_id ,HttpServletRequest request) throws Exception{
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		
+		List<CommonsMultipartFile> files = ddto.getFiles();
+		System.out.println("files주소???"+files);
+		List<String> filenames = new ArrayList<String>();
+		
+		if (files != null && files.size() > 0) { // 업로드한 파일이 하나라도 있다면
+			System.out.println("여기탐");
+			for (CommonsMultipartFile multipartfile : files) {
+
+				String fname = multipartfile.getOriginalFilename(); // 파일명 얻기
+				String path = request.getServletContext().getRealPath("/join/upload");
+				String fullpath = path + "\\" + fname;
+				
+				System.out.println(fname + " / " + path + " / " + fullpath);
+
+				if (!fname.equals("")) {
+					// 서버에 파일 쓰기 작업
+					FileOutputStream fs = new FileOutputStream(fullpath);
+					fs.write(multipartfile.getBytes());
+					fs.close();
+				}	filenames.add(fname); // 실 DB Insert 작업시 .. 파일명
+			}
+			ddto.setM_photo(filenames.get(0));
+		}else{
+			ddto.setM_photo(null);
+		}
+		
+		
+		mdto.setM_pw(this.bCryptPasswordEncoder.encode(mdto.getM_pw()));
+		
+		System.out.println(ddto.toString());
+		System.out.println(mdto.toString());
+		
+		dao.updateMember1(mdto, m_id);
+		dao.updateMember2(ddto, m_id);
+		
 	}
 }

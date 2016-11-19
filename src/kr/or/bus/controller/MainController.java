@@ -50,7 +50,7 @@ public class MainController {
 	public String ChangeForm(Model model, Principal principal) {
 		System.out.println("세션 ID : " + principal.getName());
 		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-
+		
 		model.addAttribute("dto", dto);
 		return "main/ChangeForm";
 	}
@@ -92,9 +92,12 @@ public String allow(Model model){
 	}
 	
 	@RequestMapping(value="/updateMember.htm",method=RequestMethod.POST)
-	public String updateMember(MemberJoinMDetailDTO dto , HttpServletRequest request){
-		System.out.println(dto.toString());
-		return null;
+	public String updateMember(MemberDTO mdto ,MDetailDTO ddto ,Principal principal, HttpServletRequest request ,Model model) throws Exception{
+		System.out.println(ddto.toString());
+		System.out.println(mdto.toString());
+		service.updateMember(mdto, ddto, principal.getName(), request);
+
+		return "main/updatesuccess";
 	}
 
 }
