@@ -82,4 +82,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where m_id = #{m_id}
     </select>
 	
+	<select id="passMatch" resultType = "kr.or.bus.dto.MemberDTO" parameterType = "String">
+		select m_pw
+		from member
+		where m_id = #{m_id}
+	</select> 
+	
 </mapper>

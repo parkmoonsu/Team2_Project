@@ -63,5 +63,5 @@ public interface MemberDAO {
 	public MemberJoinMDetailDTO getMemberInfo(String m_id);
 
 	//수정할때 비밀번호 검증
-	public int passMatch(String m_id , String m_pw);
+	public MemberDTO passMatch(String m_id);
 }

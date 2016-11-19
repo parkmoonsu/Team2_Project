@@ -41,4 +41,11 @@ public class MainService {
 		
 		return dto;
 	}
+	
+	public String getPass(String m_id){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		String pw = dao.passMatch(m_id).getM_pw();
+		
+		return pw;
+	}
 }
