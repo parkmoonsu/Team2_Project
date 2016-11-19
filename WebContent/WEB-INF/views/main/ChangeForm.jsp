@@ -270,7 +270,7 @@
 		                <div class="modal-body">
 		                	<div style = "text-align:center">
 		                	<label for ="m_pw">비밀번호 </label>
-		                	<input type = "text" name = "m_pw" id = "m_pw">
+		                	<input type = "password" name = "m_pw" id = "m_pw">
 		                	</div>
 				     	</div>
         		    	<div class="modal-footer">

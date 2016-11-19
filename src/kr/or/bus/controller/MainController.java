@@ -85,7 +85,7 @@ public String allow(Model model){
 		if(result){
 			viewpage = "main/updateinfo";
 		}else{
-			viewpage = "main/ChangeForm";
+			viewpage = "main/matchfailpass";
 		}
 		
 		return viewpage;
