@@ -12,6 +12,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select m_id from member where m_id like '%${search}%'
 	</select>
 	
+	<select id="getNcheck" resultType = "kr.or.bus.dto.MemberJoinMDetailDTO">
+		select m.m_id,m.m_name,d.m_email,j.j_name 
+		from member m join mdetail d 
+		on m.m_id=d.m_id 
+		join job j 
+		on m.j_code = j.j_code  
+		where d.M_CHECK='n'
+
+	</select>
+	
 	<select id="emailApp" resultType = "kr.or.bus.dto.ApproveDTO">
 		select a_num from approve
 	</select>
@@ -70,4 +80,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on m.j_code = j.j_code
 		where m_id = #{username}
 	</select>
+	
+	<select id="getMemberInfo" resultType = "kr.or.bus.dto.MemberJoinMDetailDTO" parameterType = "String">
+        select *
+        from member natural join job natural join mdetail
+        where m_id = #{m_id}
+    </select>
+	
+	<select id="passMatch" resultType = "kr.or.bus.dto.MemberDTO" parameterType = "String">
+		select m_pw
+		from member
+		where m_id = #{m_id}
+	</select> 
+	
 </mapper>

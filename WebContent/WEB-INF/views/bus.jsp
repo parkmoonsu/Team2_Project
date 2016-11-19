@@ -170,6 +170,8 @@
             </div>
             <div data-p="225.00" style="display: none;">
                 <img data-u="image" src="bootstrap-3.3.7/assets/css/img/purple.jpg" />
+                 <div style="position: absolute; top: 300px; left: 30px; width: 480px; height: 120px; font-size: 30px; color: #ffffff; line-height: 38px;">배다른 민족입니다..</div>
+               
             </div>
             <a data-u="any" href="http://www.jssor.com" style="display:none">Full Width Slider</a>
             <div data-p="225.00" data-po="80% 55%" style="display: none;">
