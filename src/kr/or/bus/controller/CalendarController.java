@@ -16,6 +16,7 @@ import org.springframework.web.servlet.View;
 
 import kr.or.bus.dao.CalendarDAO;
 import kr.or.bus.dto.CalendarDTO;
+import kr.or.bus.dto.RegulOffDTO;
 
 @Controller
 
@@ -92,4 +93,57 @@ public class CalendarController {
 		
 		return "bus";
 	}
+	
+	////////////////////////
+	@RequestMapping(value="/production/reguloff_insert.htm", method=RequestMethod.POST)
+	public View reguloffInsert(String m_id, String o_code, ModelMap map)
+			throws ClassNotFoundException, SQLException, ParseException{
+		
+		System.out.println("일정 저장하기");
+		RegulOffDTO dto=new RegulOffDTO();
+		dto.setM_id(m_id);
+		dto.setO_code(o_code);
+		
+		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		
+		dao.reguloff_insert(dto);
+		map.addAttribute("data", dto);
+		return jsonview;//str;
+	}
+	
+	@RequestMapping(value="/production/reguloff_select.htm", method=RequestMethod.POST)
+	public View reguloffSelect(ModelMap map) throws ClassNotFoundException, SQLException{
+		System.out.println("전체일정 불러오기");
+		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		List<RegulOffDTO> dtolist=dao.reguloff_select();
+		System.out.println(dtolist);
+		map.addAttribute("data", dtolist);
+		return jsonview;
+	}
+	
+	@RequestMapping(value="/production/reguloff_delete.htm", method=RequestMethod.POST)
+	public String reguloffDelete(String id) throws ClassNotFoundException, SQLException, ParseException{
+		System.out.println("일정삭제");
+		
+		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		dao.reguloff_delete(id);
+		
+		return "bus";
+	}
+	
+	@RequestMapping(value="/production/reguloff_update.htm", method=RequestMethod.POST)
+	public View reguloffUpdate(String id, String m_id, String o_code, ModelMap map) throws ClassNotFoundException, SQLException, ParseException{
+		System.out.println("일정수정");
+		RegulOffDTO dto=new RegulOffDTO();
+		dto.setId(id);
+		dto.setM_id(m_id);
+		dto.setO_code(o_code);
+		System.out.println(dto);	
+		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		dao.reguloff_update(dto);
+		
+		map.addAttribute("data", "성공");
+		return jsonview;
+	}
+	
 }

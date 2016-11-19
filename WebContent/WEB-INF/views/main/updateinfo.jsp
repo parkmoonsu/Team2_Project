@@ -104,8 +104,8 @@
 																			<div class="form-group">
 																				<span class="col-sm-3">아이디</span>
 																				<div class="col-sm-9">
-																					<input type="text" class="form-control" value = "${dto.m_id}"
-																						disabled>
+																					<input type="text" class="form-control" value = "${dto.m_id}" 
+																					name = "m_id" readonly>
 																				</div>
 																			</div>
 																		</td>
@@ -162,7 +162,7 @@
 																				<span class="col-sm-3">사진</span>
 																				<div class="col-sm-9">
 																					<input id="m_photo" class="control" type="file" value = "${dto.m_photo}"
-																						name="file">
+																						name="files[0]">
 																				</div>
 																			</div>
 																		</td>
@@ -195,19 +195,7 @@
 																			</div>
 																		</td>
 																	</tr>
-																	<tr>
-																		<td>
-																		<div class="form-group">
-																				<span class="col-sm-3">이력사항</span>
-																				<div class="col-sm-9">
-																					<input  class="form-control"
-																						type="text" value = "턱봉이가 처리">
-																				</div>
-																			</div>
-																		
-																		</td>
-
-																	</tr>
+																
 
 																</table>
 
@@ -317,7 +305,6 @@
 					$("#m_pw2").focus();
 					return false;
 				}else{
-					alert("수정 완료");
 					return true;
 				}
 			});
