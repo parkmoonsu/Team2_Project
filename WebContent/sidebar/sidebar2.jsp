@@ -48,7 +48,9 @@
                       <li><a href="tables_dynamic.html">최종 스케줄</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i>출/퇴근 조회</a>
+                  <!--<li><a><i class="fa fa-bar-chart-o"></i>출/퇴근 조회</a> -->
+                  
+                  <li><a href="comsearch.htm"><i class="fa fa-clone"></i>출/퇴근 조회</a>
                   </li>
                 </ul>
               </div>

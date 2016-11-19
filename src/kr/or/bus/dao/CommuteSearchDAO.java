@@ -13,5 +13,5 @@ import kr.or.bus.dto.MemberJoinCommuteDTO;
 
 public interface CommuteSearchDAO {
 
-	public List<MemberJoinCommuteDTO> select();
+	public List<MemberJoinCommuteDTO> getSelect();
 }

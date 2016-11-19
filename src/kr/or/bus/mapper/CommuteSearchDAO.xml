@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.bus.dao.CommuteSearchDAO">
+
+	<select id="getSelect" resultType = "kr.or.bus.dto.MemberJoinMDetailDTO">
+		select com.c_date, com.c_start, com.c_end
+		from member mem join commute com on mem.m_id=com.m_id
+		where m_id=#{param1};
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
