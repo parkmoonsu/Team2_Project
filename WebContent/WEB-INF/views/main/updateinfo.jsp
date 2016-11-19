@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,13 +47,7 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-<script type="text/javascript">
-	$(function(){
-		$("#photo_swipe").click(function(){
-			$("#photo").click();
-		});
-	});
-</script>
+
 </head>
 
 
@@ -75,7 +68,6 @@
 				<!-- top tiles -->
 				<div class="row tile_count"></div>
 				<!-- /top tiles -->
-
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="dashboard_graph">
@@ -89,95 +81,143 @@
 									<div class="row">
 										<div class="col-sm-2"></div>
 										<div class="col-sm-8">
-
 											<div class="panel panel-info">
 												<div class="panel-heading">
-													<h3 class="panel-title">개인정보</h3>
+													<h3 class="panel-title">회원 정보수정</h3>
 												</div>
 												<div class="panel-body">
 													<div class="row">
-														<div class="col-sm-5" align="center">
+														<div class="col-sm-2" align="center">
 															<div class="row">
-																<div class="col-sm-12">
-																	
-																	<img
-																		src="${pageContext.request.contextPath}/join/upload/${dto.m_photo}"
-																		style="width: 200px; height: 200px;" class = "img img-thumbnail">
-																</div>
 																<!-- <a style = "display:none"><input type = "file" id = "photo"></a>
 																<button class="btn btn-primary" style="margin-top:10px;margin-right: 10px" id = "photo_swipe">사진변경</button>
 																 -->
-																
 															</div>
 														</div>
-														<div class="col-sm-7">
-															<table class="table table-user-information">
-																<tbody>
+														<div class="col-sm-8">
+															<form class="form-horizontal form-label-left"
+																method="post" action="updateMember.htm"
+																enctype="multipart/form-data">
+																<table class="table table-user-information">
 																	<tr>
-																		<td>이름</td>
-																		<td>${dto.m_name}</td>
-																	</tr>
-																	<tr>
-																		<td>ID</td>
-																		<td>${dto.m_id}</td>
-																	</tr>
-																	<tr>
-																		<td>연락처</td>
-																		<td>${dto.m_phone}</td>
-																	</tr>
-																	<tr>
-																		<td>성별</td>
-																		<c:choose>
-																			<c:when test = "${dto.m_gender == 'male'}">
-																				<td>남성</td>
-																			</c:when>
-																			<c:otherwise>
-																				<td>여성</td>
-																			</c:otherwise>
-																		</c:choose>
-																		
-																	</tr>
-																	
-																	<tr>
-																		<td>우편주소</td>
-																		<td>${dto.m_addr}</td>
-																	</tr>
-																	<tr>
-																		<td>상세주소</td>
-																		<td>${dto.m_daddr}</td>
-																	</tr>
-																	<tr>
-																		<td>직책</td>
-																		<td>${dto.j_name}</td>
-																	</tr>
-																	<tr>
-																		<td>면허증</td>
-																		<td>${dto.m_license}</td>
-																	</tr>
-																	<tr>
-																		<td>이력서</td>
-																		<td><a>이력사항 dto에 넣어야함</a></td>
-																	</tr>
-																	<tr>
-																		<td>E-Mail</td>
-																		<td>${dto.m_email}
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">아이디</span>
+																				<div class="col-sm-9">
+																					<input type="text" class="form-control" value = "${dto.m_id}"
+																						disabled>
+																				</div>
+																			</div>
 																		</td>
 
 																	</tr>
 																	<tr>
-																		<td>생년월일</td>
-																		<td>${dto.m_birth}</td>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">비밀번호</span>
+																				<div class="col-sm-9">
+																					<input type="password" id="m_pw" name="m_pw"
+																						class="form-control">
+																				</div>
+																			</div>
+																		</td>
 																	</tr>
 																	<tr>
-																		<td>사용 가능 연차</td>
-																		<td>${dto.m_annual}일</td>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">다시입력</span>
+																				<div class="col-sm-9">
+																					<input type="password" id="m_pw2" name="m_pw2"
+																						class="form-control">
+																				</div>
+																			</div>
+																		</td>
 																	</tr>
-																</tbody>
-															</table>
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">이름</span>
+																				<div class="col-sm-9">
+																					<input id="m_name" class="form-control" type="text" value = "${dto.m_name}"
+																						name="m_name">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>	
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">연락처</span>
+																				<div class="col-sm-9">
+																					<input id="m_phone" name="m_phone" value = "${dto.m_phone}"
+																						class="form-control" type="text">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+												
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">사진</span>
+																				<div class="col-sm-9">
+																					<input id="m_photo" class="control" type="file" value = "${dto.m_photo}"
+																						name="file">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">주소</span>
+																				<div class="col-sm-6">
+																					<input id="m_addr" class="form-control" type="text" value = "${dto.m_addr}"
+																						name="m_addr"> 
+																				</div>
+																				<div class = "col-sm-3">	
+																					<input type="button"
+																						value="주소검색" class="btn btn-default"
+																						onclick="sample4_execDaumPostcode()">
+																				
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<div class="form-group">
+																				<span class="col-sm-3">상세주소</span>
+																				<div class="col-sm-9">
+																					<input id="m_daddr" class="form-control" value = "${dto.m_daddr}"
+																						type="text" name="m_daddr">
+																				</div>
+																			</div>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																		<div class="form-group">
+																				<span class="col-sm-3">이력사항</span>
+																				<div class="col-sm-9">
+																					<input  class="form-control"
+																						type="text" value = "턱봉이가 처리">
+																				</div>
+																			</div>
+																		
+																		</td>
 
-															<a class="btn btn-primary" id="pass">정보수정</a> 
-															<a class="btn btn-primary" id="watch">이력보기</a>
-															
+																	</tr>
+
+																</table>
+
+																<div style="float: right; margin: 30px;">
+																	<input type="button" value="이전" class="btn btn-primary"
+																		id="prev" onclick="history.go(-1)"> <input
+																		class="btn btn-primary" type="submit" value="수정완료" id = "update">
+																</div>
+
+															</form>
 														</div>
 													</div>
 												</div>
@@ -207,100 +247,6 @@
 		</footer>
 		<!-- /footer content -->
 	</div>
-<!-- BEGIN # MODAL LOGIN -->
-	<div class="modal fade" id="new-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	<div class="modal-dialog">
-			<div class="modal-content">      
-                <!-- Begin # DIV Form -->
-                <div id="div-forms">
-                <div class="modal-header" align="center">
-					<h3>이력보기</h3>
-				</div>
-                    <!-- Begin # Login Form -->
-                    <form id="login-form" action="" method="post">
-		                <div class="modal-body">
-		                	<table class="table">
-		                	<thead>
-		                		<tr>
-		                			<th style="width: 20%">이력구분</th>
-		                			<th style="width: 35%">근무기간</th>
-		                			<th>근무회사</th>
-		                		</tr>
-		                	</thead>
-		                	<tbody>
-		                		<tr>
-		                			<td style="width: 20%">학력</td>
-		                			<td style="width: 35%">약 3년</td>
-		                			<td>이화여대</td>
-		                		</tr>
-		                		<tr>
-		                			<td style="width: 20%">대회수상</td>
-		                			<td style="width: 35%">7년간 금메달 5번 수상</td>
-		                			<td>국제대회 및 국내대회 를 휩쓴 유망주</td>
-		                		</tr>		                	
-		                	</tbody>
-		                	
-		                	</table>
-				     	</div>
-        		    	<div class="modal-footer">
-                            <div>
-                                <a href="redirect:/ChangeForm.htm"><button type="submit" class="btn btn-primary btn-lg btn-block">완료</button></a>
-                            </div>
-        		    	</div>
-                    </form>
-                    <!-- End # Login Form -->  
-                </div>
-                <!-- End # DIV Form --> 
-			</div>
-		</div>
-	</div>
-	<!-- end modal -->
-	
-	<!-- BEGIN # MODAL LOGIN -->
-	<div class="modal fade" id="pass-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	<div class="modal-dialog">
-			<div class="modal-content">      
-                <!-- Begin # DIV Form -->
-                <div id="div-forms">
-                <div class="modal-header" align="center">
-					<h3>비밀번호 입력</h3>
-				</div>
-                    <!-- Begin # Login Form -->
-                    <form id="login-form" action="updateinfo.htm" method="post">
-		                <div class="modal-body">
-		                	<div style = "text-align:center">
-		                	<label for ="m_pw">비밀번호 </label>
-		                	<input type = "text" name = "m_pw" id = "m_pw">
-		                	</div>
-				     	</div>
-        		    	<div class="modal-footer">
-                            <div>
-                                <input type="submit" class="btn btn-primary btn-lg btn-block" value = "완료">
-                            </div>
-        		    	</div>
-                    </form>
-                    <!-- End # Login Form -->  
-                </div>
-                <!-- End # DIV Form --> 
-			</div>
-		</div>
-	</div>
-	<!-- end modal -->
-	
-	
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('#watch').click(function(){
-			$('#new-modal').modal();
-		});
-		
-		$("#pass").click(function(){
-			$("#pass-modal").modal();
-		});
-	});
-	
-	</script>
-
 
 	<!-- Bootstrap -->
 	<script
@@ -362,5 +308,20 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+	
+	<script type="text/javascript">
+		$(function(){
+			$("#update").click(function(){
+				if($("#m_pw2").val() == "" || ($("#m_pw").val() != $("#m_pw2").val())){
+					alert("비밀번호가 일치 하지 않습니다.");
+					$("#m_pw2").focus();
+					return false;
+				}else{
+					alert("수정 완료");
+					return true;
+				}
+			});
+		});
+	</script>
 </body>
 </html>
