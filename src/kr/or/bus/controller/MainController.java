@@ -77,15 +77,14 @@ public String allow(Model model){
 		System.out.println("result : " + result);
 		
 		String viewpage = "";
+		
+		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
+		
+		model.addAttribute("dto", dto);
+		
 		if(result){
 			viewpage = "main/updateinfo";
-			MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-			
-			model.addAttribute("dto", dto);
 		}else{
-			MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-
-			model.addAttribute("dto", dto);
 			viewpage = "main/ChangeForm";
 		}
 		
