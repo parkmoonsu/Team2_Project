@@ -38,7 +38,14 @@ public class MemberManageController {
 	}
 	
 	@RequestMapping("/joinapprove.htm")
-	public String joinapprove(){
+	public String joinapprove(String pg , Model model){
+		List<MemberJoinMDetailDTO> list = service.memberNList(pg);
+		int page = service.pg(pg);
+		int ncount = service.memberNCount();
+		
+		model.addAttribute("pgs", page);
+		model.addAttribute("list", list);
+		model.addAttribute("membercount",ncount);
 		
 		return "membermanage/joinapprove";
 	}

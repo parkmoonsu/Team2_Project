@@ -77,5 +77,10 @@ public interface MemberDAO {
 
     //회원 정보 수정 > 이력사항 확인
 	public List<MemberJoinResRecordDTO> getResRecordInfo(String m_id);
-
+	
+	//(관리자) 회원 가입 승인 - 승인 여부 N인 사람만 가져오기
+	public List<MemberJoinMDetailDTO> memberNList(int page);
+	
+	//(관리자) 승인이 안된 회원 총 인원 수
+	public int memberNCount();
 }

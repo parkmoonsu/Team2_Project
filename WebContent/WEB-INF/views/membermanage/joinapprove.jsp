@@ -1,9 +1,9 @@
 <!-- 
-	@FileName : memberinfo.jsp
+	@FileName : joinapprove.jsp
 	@Project	: KosBus
-	@Date	: 2016. 11.17
-	@Author	: 김용현
-	@Discription : (관리자)회원 관리 페이지 View단
+	@Date	: 2016. 11.21
+	@Author	: 박문수
+	@Discription : (관리자)회원가입승인 페이지 View단
  -->
 
 
@@ -118,6 +118,7 @@
 												<th>ID</th>
 												<th>이름</th>
 												<th>직책</th>
+												<th>승인요청일</th>
 												<th style="width: 20%"></th>
 											</tr>
 										</thead>
@@ -129,8 +130,9 @@
 												<td><a>${i.m_id}</a></td>
 												<td><small>${i.m_name}</small></td>
 												<td><small>${i.j_name}</small></td>
+												<td><small>${i.m_regdate}</small></td>
 												<td style = "text-align:center"> <a href="deleteMember.htm?m_id=${i.m_id}"
-													class="btn btn-success btn-xs"><i class="fa fa-trash-o"></i>
+													class="btn btn-success btn-xs"><i class="fa fa-check"></i>
 														승인 </a>
 														
 												</td>
@@ -153,16 +155,16 @@
 									</c:choose>	
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
-											<li><a href="membermanage.htm?pg=${pgc-1}">Previous</a></li>
+											<li><a href="joinapprove.htm?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 										
 										
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="membermanage.htm?pg=${i}">${i}</a></li>
+											<li><a href="joinapprove.htm?pg=${i}">${i}</a></li>
 										</c:forEach>
 										
 										<c:if test="${pgc < mc/10 }">
-											<li><a href="membermanage.htm?pg=${pgc+1}">Next</a></li>
+											<li><a href="joinapprove.htm?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
 								</div>
