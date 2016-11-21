@@ -56,6 +56,10 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+	
+<!-- Editor -->
+<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+
 </head>
 
 <body class="nav-md">
@@ -71,6 +75,60 @@
 			</div>
 
 			<!-- page content -->
+			
+			<!-- modal  -->
+
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel">
+				<div class="modal-dialog" role="document">
+				<form action="mailsend.htm" method="post" enctype="multipart/form-data">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="exampleModalLabel"></h4>
+						</div>
+						<div class="modal-body">
+								<div class="form-group">
+									<i class="fa fa-male"></i>&nbsp;<label for="people" class="control-label"> 받는 사람</label> <input
+										type="text" class="form-control" id="people" name="to">
+								</div>
+
+								<div class="form-group">
+									<i class="fa fa-pencil-square-o"></i>&nbsp;<label for="subject" class="control-label"> 제목</label> <input
+										type="text" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요">
+								</div>
+
+								<div class="form-group">
+									<i class="fa fa-folder-open-o"></i>&nbsp;<label for="fattach" class="control-label"> 파일첨부 </label> <input
+										type="file" class="form-control" id="fattach" name="filename">
+								</div>
+
+								<div class="form-group">
+									<label for="message-text" class="control-label"> <span
+										class="glyphicon glyphicon-envelope" aria-hidden="true"
+										style="color: gray"></span> 메세지:
+									</label>
+									<textarea class="form-control" id="message-text" name="content" cols="5"></textarea>
+									<script>
+										CKEDITOR.replace('message-text');
+									</script>
+								</div>
+							
+						</div>
+						<div class="modal-footer">
+							<input type="submit" class="btn btn-primary" value="메세지 보내기">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">취소</button>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- 모달끝 -->
 			<div class="right_col" role="main">
 				<div class="">
 					<div class="page-title">
@@ -130,7 +188,7 @@
 												<td>${i.r}</td>
 												<td><a>${i.m_id}</a></td>
 												<td><small>${i.m_name}</small></td>
-												<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">${i.m_email}</button></td>
+												<td><a href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="${i.m_name},${i.m_email}">${i.m_email}</a></td>
 												<td><small>${i.j_name}</small></td>
 												<td>${i.m_annual}일</td>
 												<td><a href="#" class="btn btn-info btn-xs"><i
@@ -261,6 +319,13 @@ $(function() {
 		}
 		});
 	 });
+	 
+	 $('#exampleModal').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget) 
+		  var recipient = button.data('whatever').split(','); 
+		  $('#exampleModalLabel').html("<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"+recipient[0]+'</span>님에게 보내기');
+		  $('#people').val(recipient[1]);
+		});
 });
 
 </script>
