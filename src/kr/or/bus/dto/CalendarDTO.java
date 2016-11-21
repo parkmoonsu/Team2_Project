@@ -1,19 +1,14 @@
+/*
+ * @File Name: CalendarDTO.java
+ * @Author: 길한종
+ * @Data: 2016. 11. 14
+ * @Desc: 일정관리(일반공용) - 캘린더dto
+ */
+
 package kr.or.bus.dto;
 
 import java.sql.Date;
 
-/**
- * @author kosta
- *
- */
-/**
- * @author kosta
- *
- */
-/**
- * @author kosta
- *
- */
 public class CalendarDTO {
 	String id;	
 	String title;	

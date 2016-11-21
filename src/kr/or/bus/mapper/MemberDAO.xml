@@ -12,16 +12,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select m_id from member where m_id like '%${search}%'
 	</select>
 	
-	<select id="getNcheck" resultType = "kr.or.bus.dto.MemberJoinMDetailDTO">
-		select m.m_id,m.m_name,d.m_email,j.j_name 
-		from member m join mdetail d 
-		on m.m_id=d.m_id 
-		join job j 
-		on m.j_code = j.j_code  
-		where d.M_CHECK='n'
-
-	</select>
-	
 	<select id="emailApp" resultType = "kr.or.bus.dto.ApproveDTO">
 		select a_num from approve
 	</select>
@@ -43,8 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="insertResrecord" parameterType = "kr.or.bus.dto.ResRecordDTO">
-		insert into resrecord(res_num,m_id,res_com,res_start,res_end)
-		values (#{res_num},#{m_id},#{res_com},#{res_start},#{res_end})
+		insert into resrecord(res_num,m_id,res_com,res_start,res_end,res_period)
+		values (#{res_num},#{m_id},#{res_com},#{res_start},#{res_end},#{res_period})
 	</insert>
 	
 	<select id="searchNameEmail" resultType = "int">
@@ -95,8 +85,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="updateMember1">
 		update member
-		set m_name = #{param1.m_name} , m_pw = #{param1.m_pw}		
-		
+		set m_name = #{param1.m_name} 
+		<if test ="param3 == 'hidden'">
+			, m_pw = #{param1.m_pw}
+		</if>
 		where m_id = #{param2}
 	</update>
 	
@@ -109,5 +101,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		where m_id = #{param2}
 	</update>
+
+<!-- 	  srow = 1 + (page - 1) * 10;
+ 		  erow = 10 + (page - 1) * 10;  
+-->
+	<select id="memberList" resultType = "kr.or.bus.dto.MemberJoinMDetailDTO" parameterType = "int">
+		select *
+		from (select ROWNUM r , N.*
+        	  from (select * 
+        	  		from member me natural join mdetail md natural join job 
+        	  		order by job.j_name desc) N) 
+		where r between 1 + (#{page} - 1) * 10  and 10 + (#{page} - 1) * 10 
+		
+	</select>
 	
+	<select id="memberCount" resultType = "int">
+		select count(*)
+		from member me natural join mdetail md natural join job
+	</select>
+	
+	<select id="getResRecordInfo" resultType="kr.or.bus.dto.MemberJoinResRecordDTO" parameterType="String">
+		select res.res_name, nvl(rer.res_com,'이력없음') as res_com, nvl(rer.res_start,'이력없음') as res_start , nvl(rer.res_end,'이력없음') as res_end, nvl(rer.res_period,'이력없음') as res_period
+		from member mem
+		join resrecord rer
+		on rer.m_id = mem.m_id
+		join resume res
+		on res.res_num = rer.res_num
+		where rer.m_id = #{param1}
+
+	</select>
+	
+	<select id="memberNList" resultType="kr.or.bus.dto.MemberJoinMDetailDTO" parameterType = "int">
+	select *
+		from (select ROWNUM r , N.*
+        	  from (select * 
+        	  		from member me natural join mdetail md natural join job 
+        	  		where m_check = 'N'
+                order by md.m_regdate desc) N) 
+		where r between 1 + (#{page} - 1) * 10  and 10 + (#{page} - 1) * 10 
+	
+	</select>
+	
+	<select id="memberNCount" resultType = "int">
+		select count(*)
+		from member me natural join mdetail md natural join job
+		where m_check = 'N'
+	</select>
 </mapper>
