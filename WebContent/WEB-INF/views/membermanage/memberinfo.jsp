@@ -152,8 +152,8 @@
 											</c:otherwise>
 									</c:choose>	
 									<ul class="pager">
-										<c:if test="${pg > 1}">
-											<li><a href="membermanage.htm?pa=${pg-1}">Previous</a></li>
+										<c:if test="${pagecount > 2}">
+											<li><a href="membermanage.htm?pg=${pg-1}">Previous</a></li>
 										</c:if>
 										
 										
@@ -161,8 +161,8 @@
 											<li><a href="membermanage.htm?pg=${i}">${i}</a></li>
 										</c:forEach>
 										
-										<c:if test="${pg < mc/10 }">
-											<li><a href="membermanage.htm?pa=${pg+1}">Next</a></li>
+										<c:if test="${pagecount < mc/10 }">
+											<li><a href="membermanage.htm?pg=${pg+1}">Next</a></li>
 										</c:if>
 									</ul>
 								</div>
