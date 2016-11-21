@@ -9,9 +9,9 @@
 package kr.or.bus.dao;
 
 import java.util.List;
-import kr.or.bus.dto.MemberJoinCommuteDTO;
+import kr.or.bus.dto.CommuteDTO;
 
-public interface CommuteSearchDAO {
-
-	public List<MemberJoinCommuteDTO> getSelect();
+public interface CommuteDAO {
+	public List<CommuteDTO> getSelect(String m_id);
+	//public List<CommuteDTO> getSelect(int page, String field, String query,String m_id);
 }
