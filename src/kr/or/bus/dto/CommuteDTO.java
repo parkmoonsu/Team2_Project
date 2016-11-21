@@ -10,26 +10,26 @@ package kr.or.bus.dto;
 
 import java.util.Date;
 
-public class MemberJoinCommuteDTO {
+public class CommuteDTO {
+	private String comm_seq;
 	private String m_id;
-	private String m_name;
 	private Date c_date;
 	private String c_start;
 	private String c_end;
 	
+	public String getComm_seq() {
+		return comm_seq;
+	}
+	public void setComm_seq(String comm_seq) {
+		this.comm_seq = comm_seq;
+	}
 	public String getM_id() {
 		return m_id;
 	}
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
-	public String getM_name() {
-		return m_name;
-	}
-	public void setM_name(String m_name) {
-		this.m_name = m_name;
-	}
-		
+	
 	public Date getC_date() {
 		return c_date;
 	}

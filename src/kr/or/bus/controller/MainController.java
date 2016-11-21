@@ -1,3 +1,12 @@
+/*
+*	@FileName : MainController.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.18
+*	@Author	: 박문수
+*	@Discription : 메인 페이지 Controller
+*/
+
+
 package kr.or.bus.controller;
 
 import java.security.Principal;
@@ -16,8 +25,10 @@ import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.dto.ResRecordDTO;
+import kr.or.bus.service.LoginService;
 import kr.or.bus.service.MainService;
 
 @Controller
@@ -25,17 +36,14 @@ public class MainController {
 
 	@Autowired
 	private MainService service;
-
+	@Autowired
+	private LoginService service2;
+	
 	@Autowired
 	private View jsonview;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	@RequestMapping("/InfoChange.htm")
-	public String login() {
-		return "main/InfoChange";
-	}
 
 	@RequestMapping("/SearchMember.htm")
 	public View select(String search, Model model) {
@@ -50,8 +58,12 @@ public class MainController {
 	public String ChangeForm(Model model, Principal principal) {
 		System.out.println("세션 ID : " + principal.getName());
 		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-
+		MemberJoinJobDTO dto2 = service2.mainGo(principal.getName());
+		String jobname = dto2.getJ_name();
+		
 		model.addAttribute("dto", dto);
+
+		model.addAttribute("jobname", jobname);
 		return "main/ChangeForm";
 	}
 
@@ -82,6 +94,10 @@ public String allow(Model model){
 		
 		model.addAttribute("dto", dto);
 		
+		MemberJoinJobDTO dto2 = service2.mainGo(principal.getName());
+		String jobname = dto2.getJ_name();
+		
+		model.addAttribute("jobname", jobname);
 		if(result){
 			viewpage = "main/updateinfo";
 		}else{
@@ -92,12 +108,11 @@ public String allow(Model model){
 	}
 	
 	@RequestMapping(value="/updateMember.htm",method=RequestMethod.POST)
-	public String updateMember(MemberDTO mdto ,MDetailDTO ddto ,Principal principal, HttpServletRequest request ,Model model) throws Exception{
+	public String updateMember(MemberDTO mdto ,MDetailDTO ddto ,Principal principal,String hidden, HttpServletRequest request ,Model model) throws Exception{
 		System.out.println(ddto.toString());
 		System.out.println(mdto.toString());
-		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-
-		service.updateMember(mdto, ddto, principal.getName(), request);
+		System.out.println("hidden : " + hidden);
+		service.updateMember(mdto, ddto, principal.getName(), hidden, request);
 
 		return "main/updatesuccess";
 	}

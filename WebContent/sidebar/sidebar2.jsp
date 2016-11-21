@@ -3,14 +3,6 @@
 	2016-11-17
 	메인 사용자 사이드바 생성
  -->
-
-
-
-
-
-
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
@@ -48,7 +40,9 @@
                       <li><a href="tables_dynamic.html">최종 스케줄</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i>출/퇴근 조회</a>
+                  <!--<li><a><i class="fa fa-bar-chart-o"></i>출/퇴근 조회</a> -->
+                  
+                  <li><a href="comsearch.htm?m_id=${LoginUser}"><i class="fa fa-clone"></i>출/퇴근 조회</a>
                   </li>
                 </ul>
               </div>

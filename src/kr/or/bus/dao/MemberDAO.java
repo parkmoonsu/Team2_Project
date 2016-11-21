@@ -68,7 +68,7 @@ public interface MemberDAO {
 	public MemberDTO passMatch(String m_id);
 	
 	//회원 정보 수정
-	public void updateMember1(MemberDTO mdto, String m_id);
+	public void updateMember1(MemberDTO mdto, String m_id ,String hidden);
 	public void updateMember2(MDetailDTO ddto, String m_id);
 		
 }

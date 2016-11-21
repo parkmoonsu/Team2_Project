@@ -5,6 +5,7 @@
  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
 					<div class="nav_menu">
 					<nav>
 						<div class="nav toggle">
@@ -14,8 +15,10 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class=""><a href="javascript:;"
 								class="user-profile dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false"> <img src="${pageContext.request.contextPath}/images/bono.jpg" alt="">
-								킹갓한제너럴종 <span class=" fa fa-angle-down"></span>
+								aria-expanded="false"> 
+								<se:authentication property="name" var = "LoginUser"/>      		
+								<img src="${pageContext.request.contextPath}/images/bono.jpg" alt="">
+								${LoginUser} <span class="fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
 									<li><a href="ChangeForm.htm">개인정보</a></li>
