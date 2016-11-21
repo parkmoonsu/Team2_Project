@@ -1,3 +1,12 @@
+/*
+*	@FileName : MainController.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.18
+*	@Author	: 박문수
+*	@Discription : 메인 페이지 Controller
+*/
+
+
 package kr.or.bus.controller;
 
 import java.security.Principal;
@@ -35,11 +44,6 @@ public class MainController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	@RequestMapping("/InfoChange.htm")
-	public String login() {
-		return "main/InfoChange";
-	}
 
 	@RequestMapping("/SearchMember.htm")
 	public View select(String search, Model model) {
