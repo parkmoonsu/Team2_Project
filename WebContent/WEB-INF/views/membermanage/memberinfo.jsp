@@ -130,7 +130,7 @@
 												<td>${i.r}</td>
 												<td><a>${i.m_id}</a></td>
 												<td><small>${i.m_name}</small></td>
-												<td>${i.m_email}</td>
+												<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">${i.m_email}</button></td>
 												<td><small>${i.j_name}</small></td>
 												<td>${i.m_annual}일</td>
 												<td><a href="#" class="btn btn-info btn-xs"><i
