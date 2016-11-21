@@ -109,7 +109,7 @@
 											</span>
 										</div>
 									</div>
-									<table class="table table-striped table-bordered">
+									<table class="table table-striped projects">
 										<thead>
 											<tr>
 												<th>번호</th>
