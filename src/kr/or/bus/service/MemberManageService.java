@@ -40,6 +40,11 @@ public class MemberManageService {
 		return list;
 	}
 	
+	public int pg(String pg){
+		int page = Integer.parseInt(pg);
+		return page;
+	}
+	
 	public int memberCount(){
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		int size = dao.memberCount();

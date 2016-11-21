@@ -145,6 +145,7 @@
 									
 									<!-- 요기서부터 페이징처리 -->
 									<c:set var = "mc" value = "${membercount}"/>
+									<c:set var = "pgc" value = "${pgs}"/>
 									<c:choose>
 											<c:when test="${mc % 10 == 0}">
 												<c:set value = "${mc/10}" var = "pagecount"/>
@@ -154,7 +155,7 @@
 											</c:otherwise>
 									</c:choose>	
 									<ul class="pager">
-										<c:if test="${pagecount > 2}">
+										<c:if test="${pgc > 1}">
 											<li><a href="membermanage.htm?pg=${pg-1}">Previous</a></li>
 										</c:if>
 										
@@ -163,7 +164,7 @@
 											<li><a href="membermanage.htm?pg=${i}">${i}</a></li>
 										</c:forEach>
 										
-										<c:if test="${pagecount < mc/10 }">
+										<c:if test="${pgc < mc/10 }">
 											<li><a href="membermanage.htm?pg=${pg+1}">Next</a></li>
 										</c:if>
 									</ul>

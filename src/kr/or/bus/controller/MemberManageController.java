@@ -29,7 +29,9 @@ public class MemberManageController {
 		
 		List<MemberJoinMDetailDTO> list = service.memberInfo(pg);
 		int membercount = service.memberCount();
+		int page = service.pg(pg);
 		
+		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("membercount",membercount);
 		return "membermanage/memberinfo";
