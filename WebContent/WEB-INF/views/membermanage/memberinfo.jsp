@@ -91,7 +91,7 @@
 										<div class="container-fluid">
 											<ul class="nav navbar-nav">
 												<li><a href="membermanage.htm">회원정보</a></li>
-												<li><a href="#">회원가입승인</a></li>
+												<li><a href="joinapprove.htm">회원가입승인</a></li>
 												<li><a href="#">스케줄관리</a></li>
 											</ul>
 										</div>
@@ -133,8 +133,7 @@
 												<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">${i.m_email}</button></td>
 												<td><small>${i.j_name}</small></td>
 												<td>${i.m_annual}일</td>
-												<td><a href="#" class="btn btn-info btn-xs"><i
-														class="fa fa-pencil"></i> 수정 </a> <a href="#"
+												<td style = "text-align:center"> <a href="deleteMember.htm?m_id=${i.m_id}"
 													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
 														삭제 </a></td>
 											</tr>
@@ -156,7 +155,7 @@
 									</c:choose>	
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
-											<li><a href="membermanage.htm?pg=${pg-1}">Previous</a></li>
+											<li><a href="membermanage.htm?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 										
 										
@@ -165,7 +164,7 @@
 										</c:forEach>
 										
 										<c:if test="${pgc < mc/10 }">
-											<li><a href="membermanage.htm?pg=${pg+1}">Next</a></li>
+											<li><a href="membermanage.htm?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
 								</div>

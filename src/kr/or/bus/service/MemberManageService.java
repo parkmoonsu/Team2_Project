@@ -41,7 +41,10 @@ public class MemberManageService {
 	}
 	
 	public int pg(String pg){
-		int page = Integer.parseInt(pg);
+		int page = 1;
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
 		return page;
 	}
 	
