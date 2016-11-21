@@ -63,34 +63,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m_id=#{m_id}
 	</update> -->
 
-	<update id="update">
+<!-- 	 <update id="update">
 		update commute set cs_code
-		<trim prefix="SET" suffixOverrides=",">
-		<choose>
-			<when test="c_time='am' and c_start  <![CDATA[>]]> (select cs_ams from cstandard)">
+		<trim prefix="SET" suffixOverrides='<'>
+		<choose> -->
+	<!-- 	<when test='id > 3'>
+		3보다 크다	
+		</when>
+		<if test='id > 5'> -->
+	<!-- 	<when test ="author != null and author.name != null">
+			<when test="c_time=am and 'c_start >  (select cs_ams from cstandard)'">
 			'2'
 			</when>
-			<when test="c_time='am' and c_start  <![CDATA[<]]> (select cs_ams from cstandard)">
+			<when test="c_time=am and 'c_start < (select cs_ams from cstandard)'">
 			 '1'
 			</when>
 			<when test="c_time='pm' and c_start  <![CDATA[<]]> (select ce_pms from cstandard)">
 			 '1'
 			</when>
-			<when test="c_time='pm' and c_start  <![CDATA[>]]> (select ce_pms from cstandard)">
+			<when test="c_time='pm' and c_start  > (select ce_pms from cstandard)">
 			 '2'
 			</when>
-			<otherwise>
-			
-			</otherwise>
-			
 		</choose>
-	</update> 
-
-	<select id="select" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
+	</update>
+ -->
+<!-- 	<select id="select" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
 		select c_start, cs.cs_stat
 		from commute com join cstart cs on com.cs_code=cs.cs_code
 		where m_id=#{m_id}
-	</select>
+	</select> -->
 </mapper>
 
 

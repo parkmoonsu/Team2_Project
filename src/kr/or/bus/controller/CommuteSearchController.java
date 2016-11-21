@@ -71,16 +71,17 @@ public class CommuteSearchController {
 	}
 	
 	@RequestMapping(value="/show.htm", method=RequestMethod.POST)
-	public String go(){
+	public String go(Model model,CommuteJoinCstartJoinCendDTO dto, String m_id ){
 		System.out.println("이거는~");
 		
 		CommuteDAO  comdao = sqlsession.getMapper(CommuteDAO.class);
-		CommuteJoinCstartJoinCendDTO dto = new CommuteJoinCstartJoinCendDTO();
-		CommuteJoinCstartJoinCendDTO cjdto = comdao.csupdate(dto);
-		cjdto=csselect();
-		model.addAttribute("cjdto",cjdto);
+		
+		comdao.csupdate(dto);
+		comdao.csselect(m_id);
+		
+		model.addAttribute("comdao",comdao);
 			
-		return "commute/gotowork";
+		//return dto;
 	}
 	
 	
