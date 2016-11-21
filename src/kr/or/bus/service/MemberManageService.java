@@ -43,6 +43,7 @@ private JavaMailSender mailSender;
 	private SqlSession sqlsession;
 	
 	public List<MemberJoinMDetailDTO> memberInfo(String pg){
+		System.out.println("회원 정보 페이지");
 		System.out.println("파라미터로 넘어오는 pg : " + pg);
 		int page = 1;
 		
@@ -55,6 +56,14 @@ private JavaMailSender mailSender;
 		List<MemberJoinMDetailDTO> list = dao.memberList(page);
 		System.out.println(list.get(1).toString());
 		return list;
+	}
+	
+	public int pg(String pg){
+		int page = 1;
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		return page;
 	}
 	
 	public int memberCount(){
@@ -91,4 +100,28 @@ private JavaMailSender mailSender;
 			e.printStackTrace();
 		}
 	}
+
+	public List<MemberJoinMDetailDTO> memberNList(String pg){
+		System.out.println("회원가입승인 페이지");
+		System.out.println("파라미터로 넘어오는 pg : " + pg);
+		int page = 1;
+		
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		System.out.println("page : " + page);
+		
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		List<MemberJoinMDetailDTO> list = dao.memberNList(page);
+		System.out.println(list.get(1).toString());
+		return list;
+	}
+	public int memberNCount(){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		int size = dao.memberNCount();
+		
+		return size;
+	}
+	
+
 }

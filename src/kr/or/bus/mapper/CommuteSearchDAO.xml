@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	       <!--  public List<CommuteDTO> getNotices(int page, String field, String query) 
+	       <!--  public List<CommuteDTO> getNotices(int page, String field, String query, String m_Id) 
 	    	int srow = 1 + (page - 1) * 5; 
 			int erow = 5 + (page - 1) * 5; 
 			int page => param1
@@ -11,8 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			String query => param3 -->
 <mapper namespace="kr.or.bus.dao.CommuteDAO">
 <!-- 	<select id="getSelect" resultType="kr.or.bus.dto.CommuteDTO">
-	    
-	   
+	       
 		select * from 
 					(select rownum num, N.*
 					 from (
@@ -21,14 +20,76 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					 		where ${param2} like '%${param3}%' order by c_date desc
 					 	   )N
 					 ) where num between 1 + (${param1}-1) * 5 and 5 + (${param1}-1)*10
-					  WHERE NUM BETWEEN ${param1} * ${param2} - (${param2}-1) AND ${param1} * ${param2}
-	</select> -->
+		</select> -->
 	
-	<select id="getSelect"  resultType = "kr.or.bus.dto.CommuteDTO">
-		select c_date, c_start, c_end
+ <!--  	<select id="getSelect"  resultType = "kr.or.bus.dto.CommuteDTO">
+		select rownum n, c_date, c_start, c_end
 		from commute
 		where m_id=#{m_id}
 		order by c_date desc
+	</select> -->
+	
+	
+ 	<select id="getSelect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO" parameterType="String">
+		select * from 
+			(select rownum, N.*
+			 from (
+			 		select c_date, c_start, c_end 
+			 		from commute
+			 		where m_id= #{param3} order by c_date desc
+			 	   )N
+			 )where rownum between 1 + (#{param1}-1) * 5 and 5 + (#{param1}-1)*10
+	</select>
+	
+<!-- 	<update id="updateAuthorIfNecessary">
+	  update Author
+	    <set>
+	      <if test="username != null">username=#{username},</if>
+	      <if test="password != null">password=#{password},</if>
+	      <if test="email != null">email=#{email},</if>
+	      <if test="bio != null">bio=#{bio}</if>
+	    </set>
+	  where id=#{id}
+	</update> -->
+
+<!-- 	<update id="update">
+		update commute set cs_code=
+		<set>
+			<if test="c_time='am' and c_start > (select cs_ams from cstandard)">cs_code=#{cs_code},</if>
+			<if test="c_time='am' and c_start <= (select cs_ams from cstandard)">cs_code=#{cs_code},</if>
+			<if test="c_time='pm' and c_start <= (select ce_pms from cstandard)">cs_code=#{cs_code},</if>
+			<if test="c_time='pm' and c_start > (select ce_pms from cstandard)">cs_code=#{cs_code},</if>
+		</set>
+		where m_id=#{m_id}
+	</update> -->
+
+	<update id="update">
+		update commute set cs_code
+		<trim prefix="SET" suffixOverrides=",">
+		<choose>
+			<when test="c_time='am' and c_start  <![CDATA[>]]> (select cs_ams from cstandard)">
+			'2'
+			</when>
+			<when test="c_time='am' and c_start  <![CDATA[<]]> (select cs_ams from cstandard)">
+			 '1'
+			</when>
+			<when test="c_time='pm' and c_start  <![CDATA[<]]> (select ce_pms from cstandard)">
+			 '1'
+			</when>
+			<when test="c_time='pm' and c_start  <![CDATA[>]]> (select ce_pms from cstandard)">
+			 '2'
+			</when>
+			<otherwise>
+			
+			</otherwise>
+			
+		</choose>
+	</update> 
+
+	<select id="select" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
+		select c_start, cs.cs_stat
+		from commute com join cstart cs on com.cs_code=cs.cs_code
+		where m_id=#{m_id}
 	</select>
 </mapper>
 

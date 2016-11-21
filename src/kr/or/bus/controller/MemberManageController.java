@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.service.MemberManageService;
@@ -32,17 +31,32 @@ public class MemberManageController {
 		
 		List<MemberJoinMDetailDTO> list = service.memberInfo(pg);
 		int membercount = service.memberCount();
+		int page = service.pg(pg);
 		
+		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("membercount",membercount);
 		return "membermanage/memberinfo";
 	}
 	
+
 	@RequestMapping(value="/mailsend.htm", method=RequestMethod.POST)
 	public ModelAndView msendToMember(String subject, String to, String content, @RequestParam("filename") MultipartFile filename){
 		
 		service.mailSendToMember(subject, to, content, filename);
 		
 		return new ModelAndView("redirect:/membermanage.htm");
+	}
+	@RequestMapping("/joinapprove.htm")
+	public String joinapprove(String pg , Model model){
+		List<MemberJoinMDetailDTO> list = service.memberNList(pg);
+		int page = service.pg(pg);
+		int ncount = service.memberNCount();
+		
+		model.addAttribute("pgs", page);
+		model.addAttribute("list", list);
+		model.addAttribute("membercount",ncount);
+		
+		return "membermanage/joinapprove";
 	}
 }

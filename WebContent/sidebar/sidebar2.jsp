@@ -40,9 +40,13 @@
                       <li><a href="tables_dynamic.html">최종 스케줄</a></li>
                     </ul>
                   </li>
-                  <!--<li><a><i class="fa fa-bar-chart-o"></i>출/퇴근 조회</a> -->
-                  
-                  <li><a href="comsearch.htm?m_id=${LoginUser}"><i class="fa fa-clone"></i>출/퇴근 조회</a>
+              
+                  <li><a><i class="fa fa-clone"></i>출/퇴근 관리 <span class="fa fa-chevron-down"></span></a>
+                  	<ul class="nav child_menu">
+                  		<li><a href="gotowork.htm?m_id=${LoginUser}">출근하기</a></li>
+                  		<li><a href="getoffwork.htm?m_id=${LoginUser}">퇴근하기</a></li>
+                  		<li><a href="comsearch.htm?m_id=${LoginUser}">출/퇴근 조회</a></li>
+                  	</ul>
                   </li>
                 </ul>
               </div>
