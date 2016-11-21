@@ -43,8 +43,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="insertResrecord" parameterType = "kr.or.bus.dto.ResRecordDTO">
-		insert into resrecord(res_num,m_id,res_com,res_start,res_end)
-		values (#{res_num},#{m_id},#{res_com},#{res_start},#{res_end})
+		insert into resrecord(res_num,m_id,res_com,res_start,res_end,res_period)
+		values (#{res_num},#{m_id},#{res_com},#{res_start},#{res_end},#{res_period})
 	</insert>
 	
 	<select id="searchNameEmail" resultType = "int">
@@ -111,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		where m_id = #{param2}
 	</update>
-	
+
 <!-- 	  srow = 1 + (page - 1) * 10;
  		  erow = 10 + (page - 1) * 10;  
 -->
@@ -128,5 +128,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="memberCount" resultType = "int">
 		select count(*)
 		from member me natural join mdetail md natural join job
+	</select>
+	
+	<select id="getResRecordInfo" resultType="kr.or.bus.dto.MemberJoinResRecordDTO" parameterType="String">
+		select res.res_name, nvl(rer.res_com,'이력없음') as res_com, nvl(rer.res_start,'이력없음') as res_start , nvl(rer.res_end,'이력없음') as res_end, nvl(rer.res_period,'이력없음') as res_period
+		from member mem
+		join resrecord rer
+		on rer.m_id = mem.m_id
+		join resume res
+		on res.res_num = rer.res_num
+		where rer.m_id = #{param1}
+
 	</select>
 </mapper>

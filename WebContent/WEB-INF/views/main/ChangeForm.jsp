@@ -228,22 +228,23 @@
 		                	<table class="table">
 		                	<thead>
 		                		<tr>
-		                			<th style="width: 20%">이력구분</th>
-		                			<th style="width: 35%">근무기간</th>
-		                			<th>근무회사</th>
+		                			<th style="width: 15%">이력구분</th>
+		                			<th style="width: 20%">근무시작일</th>
+		                			<th style="width: 20%">근무종료일</th>
+		                			<th style="width: 20%">근무회사</th>
+		                			<th style="width:25%">근무기간</th>
 		                		</tr>
 		                	</thead>
 		                	<tbody>
+		                		<c:forEach var="lists" items="${list }">
 		                		<tr>
-		                			<td style="width: 20%">학력</td>
-		                			<td style="width: 35%">약 3년</td>
-		                			<td>이화여대</td>
+		                			<td style="width: 15%">${lists.res_name }</td>
+		                			<td style="width: 20%">${lists.res_start }</td>
+		                			<td style="width: 20%">${lists.res_end }</td>
+		                			<td style="width: 20%">${lists.res_com }</td>
+		                			<td style="width: 25%">${lists.res_period }</td>
 		                		</tr>
-		                		<tr>
-		                			<td style="width: 20%">대회수상</td>
-		                			<td style="width: 35%">7년간 금메달 5번 수상</td>
-		                			<td>국제대회 및 국내대회 를 휩쓴 유망주</td>
-		                		</tr>		                	
+		                		</c:forEach>		                	
 		                	</tbody>
 		                	
 		                	</table>

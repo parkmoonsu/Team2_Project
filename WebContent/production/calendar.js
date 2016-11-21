@@ -1,6 +1,16 @@
+/* 
+ * @File Name: calendar.js
+ * @Author: 길한종
+ * @Data: 2016. 11. 14
+ * @Desc: 일정관리(일반공용) -  풀캘린더 컨트롤
+ */
+
+//db연동을 위한 변수
 var array = new Array();
 
-function ajaxLoader() {
+$(window).load(function() {
+
+	//최초 로딩 시 db에서 일정 로드
 	$.ajax({
 		url : 'selectSchedule.htm',
 		type : 'post',
@@ -15,17 +25,105 @@ function ajaxLoader() {
 				};
 				array.push(item);
 			});
+			//ajax데이터를 받기 위해 여기서 풀캘린더 로드
+			loadCalendar();
 		}
 	});
-}
 
-function loadCalendar(){
-	var date = new Date(),
-	d = date.getDate(),
-	m = date.getMonth(),
-	y = date.getFullYear(),
-	started, categoryClass;
+	//일정저장버튼 클릭시 이벤트
+	$(".antosubmit").on("click", function() {
+		title = $("#title").val();
+		var event = {
+			title : title,
+			allDay : true,
+			sstart : startdate,
+			eend : enddate,
+			url : "nourl"
+		};
+		$(".antoclose").click();
 
+		//입력된 일정 db에 저장
+		$.ajax({
+			url : 'insertSchedule.htm',
+			type : 'post',
+			data : event,
+			dataType : "json",
+			success : function(data) {
+				//저장 후 불러와서 표시
+				event = {
+					id : data.data.id,
+					title : data.data.title,
+					allDay : data.data.allDay,
+					start : data.data.sstart,
+					end : data.data.eend
+				};
+				$("#calendar").fullCalendar('renderEvent', event);
+				$("#title").val("");
+				$("#calendar").fullCalendar('unselect');
+			}
+		});
+
+	});
+
+	//일정업데이트버튼 클릭시 이벤트
+	$(".antosubmit2").on("click", function() {
+		title = $("#title2").val();
+		var event = {
+			id : calEventObj.id,
+			title : title,
+			allDay : true,
+			sstart : calEventObj.start.format("YYYY-MM-DD HH:mm:ss"),
+			eend : calEventObj.end.format("YYYY-MM-DD HH:mm:ss"),
+			url : "nope"
+		};
+		$('.antoclose2').click();
+		calEventObj.title = title;
+
+		$.ajax({
+			url : 'updateSchedule.htm',
+			type : 'post',
+			data : event,
+			success : function(data) {
+				$("#calendar").fullCalendar('updateEvent', calEventObj);
+				$("#calendar").fullCalendar('unselect');
+			}
+		});
+
+	});
+
+	//삭제버튼
+	$('#deleteschedule').click(function() {
+		if (confirm("정말 삭제하시겠습니까??") == true) {
+			//숨김처리
+			$("#calendar").fullCalendar('removeEvents', calEventObj.id);
+
+			//db삭제
+			$.ajax({
+				url : 'deleteSchedule.htm',
+				type : 'post',
+				dataType : 'json',
+				data : {
+					id : calEventObj.id
+				},
+				success : function(data) {
+					console.log("삭제성공");
+				}
+			});
+		}
+		$('.antoclose2').click();
+		$("#calendar").fullCalendar('unselect');
+	});
+
+});
+
+//일정 저장 변수
+var title;
+var startdate;
+var enddate;
+var id;
+var calEventObj;
+
+function loadCalendar() {
 	var calendar = $('#calendar').fullCalendar({
 		header : {
 			left : 'prev,next today',
@@ -36,115 +134,32 @@ function loadCalendar(){
 		selectHelper : true,
 		editable : true,
 		events : array,
-		
-		//새로운 일정
+
+		//날짜 클릭시 이벤트 발생
 		select : function(start, end, allDay) {
+
+			//모달 입력창
 			$('#fc_create').click();
-	
-			started = start;
-			ended = end;
-	
-			$(".antosubmit").on("click", function() {
-				var title = $("#title").val();
-				if (end) {
-					ended = end;
-				}
-	
-				categoryClass = $("#event_type").val();
-	
-				if (title) {
-					//입력된 일정 db에 저장
-					$.ajax({
-						url : 'insertSchedule.htm',
-						type : 'post',
-						data : {
-							title : title,
-							allDay : true,
-							sstart : start.format("YYYY-MM-DD HH:mm:ss"),
-							eend : end.format("YYYY-MM-DD HH:mm:ss"),
-							url : "nourl"
-						},
-						dataType : "json",
-						success : function(data) {
-							window.location.reload();
-						}
-					});
-					
-				}
-	
-				$('#title').val('');
-	
-				calendar.fullCalendar('unselect');
-	
-				$('.antoclose').click();
-	
-				return false;
-			});
+
+			//데이터 가져오기
+			startdate = start.format("YYYY-MM-DD");
+			enddate = end.format("YYYY-MM-DD");
 		},
-		
-		//일정 클릭
+
+		//일정 클릭시 이벤트 발생
 		eventClick : function(calEvent, jsEvent, view) {
+
+			//모달 입력창
 			$('#fc_edit').click();
+
+			//데이터 가져오기
 			$('#title2').val(calEvent.title);
-	
-			categoryClass = $("#event_type").val();
-	
-			//일정 업데이트
-			$(".antosubmit2").on("click", function() {
-				calEvent.title = $("#title2").val();
-	
-				calendar.fullCalendar('updateEvent', calEvent);
-				$('.antoclose2').click();
-				
-				$.ajax({
-					url : 'updateSchedule.htm',
-					type : 'post',
-					data : {
-						id : calEvent.id,
-						title : calEvent.title,
-						allDay : true,
-						sstart : calEvent.start.format('YYYY-MM-DD HH:mm:ss'),
-						eend : calEvent.end.format('YYYY-MM-DD HH:mm:ss'),
-						url : "nope"
-					},
-					success : function(data) {
-						window.location.reload();
-					}
-				});
-			});
-			
-			//일정 삭제
-			$('#deleteschedule').click(function() {
-				
-				if (confirm("정말 삭제하시겠습니까??") == true) {
-					//숨김처리
-					//calendar.fullCalendar('removeEvents', calEvent.id);
-					console.log(calEvent.id);
-					//db삭제
-					$.ajax({
-						url : 'deleteSchedule.htm',
-						type : 'post',
-						dataType : 'json',
-						data : {
-							id : calEvent.id
-						},
-						success : function(data) {
-							window.location.reload();
-						},
-						error: function(jqXHR, textStatus, errorThrown) {
-							window.location.reload();
-					    }
-					});
-
-				} 
-					
-			});
-	
-			calendar.fullCalendar('unselect');
+			calEventObj = calEvent;
 		},
-		
-		//일정 드래그
+
+		//날짜드래그 시 이벤트
 		eventDrop : function(event, delta, revertFunc) {
+
 			$.ajax({
 				url : 'updateSchedule.htm',
 				type : 'post',
@@ -157,17 +172,14 @@ function loadCalendar(){
 					url : "nope"
 				},
 				success : function(data) {
-					window.location.reload();
+					console.log("날짜이동성공");
+					$("#calendar").fullCalendar('unselect');
 				}
-
 			});
-
 		},
-		
-		//날짜 길이 늘이기 이벤트
+		//날짜 길이 늘일때 이벤트
 		eventResize : function(event, jsEvent, view) {
-			console.log(event.start);
-			console.log(event.end);
+
 			$.ajax({
 				url : 'updateSchedule.htm',
 				type : 'post',
@@ -180,16 +192,11 @@ function loadCalendar(){
 					url : "nope"
 				},
 				success : function(data) {
-					window.location.reload();
+					console.log("날짜 늘이기 성공");
+					$("#calendar").fullCalendar('unselect');
 				}
+
 			});
-		}	
+		}
 	});
 }
-
-$(window).load(function() {
-	ajaxLoader();
-	$(document).ajaxStop(function() {
-		  loadCalendar();
-	});
-});

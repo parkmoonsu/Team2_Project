@@ -15,6 +15,7 @@ import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinResRecordDTO;
 import kr.or.bus.dto.ResRecordDTO;
 
 public interface MemberDAO {
@@ -70,12 +71,14 @@ public interface MemberDAO {
 	//회원 정보 수정
 	public void updateMember1(MemberDTO mdto, String m_id ,String hidden);
 	public void updateMember2(MDetailDTO ddto, String m_id);
-	
-	
+
 	//(관리자) 회원 정보 리스트 가져오기
 	public List<MemberJoinMDetailDTO> memberList(int page);
 	
 	//(관리자) 회원 정보 개수
 	public int memberCount();
-	
+
+    //회원 정보 수정 > 이력사항 확인
+	public List<MemberJoinResRecordDTO> getResRecordInfo(String m_id);
+
 }
