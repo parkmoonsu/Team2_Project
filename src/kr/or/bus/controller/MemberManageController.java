@@ -8,19 +8,21 @@
 
 
 package kr.or.bus.controller;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.service.MemberManageService;
 @Controller
 public class MemberManageController {
-	
+
 	@Autowired
 	private MemberManageService service;
 	
@@ -37,6 +39,14 @@ public class MemberManageController {
 		return "membermanage/memberinfo";
 	}
 	
+
+	@RequestMapping(value="/mailsend.htm", method=RequestMethod.POST)
+	public ModelAndView msendToMember(String subject, String to, String content, @RequestParam("filename") MultipartFile filename){
+		
+		service.mailSendToMember(subject, to, content, filename);
+		
+		return new ModelAndView("redirect:/membermanage.htm");
+	}
 	@RequestMapping("/joinapprove.htm")
 	public String joinapprove(String pg , Model model){
 		List<MemberJoinMDetailDTO> list = service.memberNList(pg);
