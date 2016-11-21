@@ -1,23 +1,23 @@
-/*
- * @File Name: calendar_reguloff.js
+/* 
+ * @File Name: calendar.js
  * @Author: 길한종
- * @Data: 2016. 11. 20
- * @Desc: 일정관리(정기휴무) -  풀캘린더 컨트롤 
+ * @Data: 2016. 11. 14
+ * @Desc: 일정관리(일반공용) -  풀캘린더 컨트롤
  */
 var array = new Array();
 
 function ajaxLoader() {
 	$.ajax({
-		url : 'reguloff_select.htm',
+		url : 'selectSchedule.htm',
 		type : 'post',
 		dataType : 'json',
 		success : function(data) {
-			console.log('크흠??');
 			$.each(data.data, function(index, obj) {
 				var item = {
 					id : obj.id,
-					title : obj.m_id,
-					dow:[obj.o_code]
+					title : obj.title,
+					start : obj.sstart,
+					end : obj.eend
 				};
 				array.push(item);
 			});
@@ -51,9 +51,7 @@ function loadCalendar(){
 			ended = end;
 	
 			$(".antosubmit").on("click", function() {
-				var m_id = $("#title").val();
-				var o_code=$('#select1').val();
-				
+				var title = $("#title").val();
 				if (end) {
 					ended = end;
 				}
@@ -63,15 +61,17 @@ function loadCalendar(){
 				if (title) {
 					//입력된 일정 db에 저장
 					$.ajax({
-						url : 'reguloff_insert.htm',
+						url : 'insertSchedule.htm',
 						type : 'post',
 						data : {
-							m_id : m_id,
-							o_code : o_code
+							title : title,
+							allDay : true,
+							sstart : start.format("YYYY-MM-DD HH:mm:ss"),
+							eend : end.format("YYYY-MM-DD HH:mm:ss"),
+							url : "nourl"
 						},
 						dataType : "json",
 						success : function(data) {
-							console.log(data);
 							window.location.reload();
 						}
 					});
@@ -92,24 +92,26 @@ function loadCalendar(){
 		eventClick : function(calEvent, jsEvent, view) {
 			$('#fc_edit').click();
 			$('#title2').val(calEvent.title);
-			
+	
 			categoryClass = $("#event_type").val();
 	
 			//일정 업데이트
 			$(".antosubmit2").on("click", function() {
-				var id = calEvent.id;
-				var m_id = $("#title2").val();
-				var o_code=$('#select2').val();
-				
+				calEvent.title = $("#title2").val();
+	
+				calendar.fullCalendar('updateEvent', calEvent);
 				$('.antoclose2').click();
 				
 				$.ajax({
-					url : 'reguloff_update.htm',
+					url : 'updateSchedule.htm',
 					type : 'post',
 					data : {
-						id : id,
-						m_id : m_id,
-						o_code : o_code
+						id : calEvent.id,
+						title : calEvent.title,
+						allDay : true,
+						sstart : calEvent.start.format('YYYY-MM-DD HH:mm:ss'),
+						eend : calEvent.end.format('YYYY-MM-DD HH:mm:ss'),
+						url : "nope"
 					},
 					success : function(data) {
 						window.location.reload();
@@ -126,7 +128,7 @@ function loadCalendar(){
 					console.log(calEvent.id);
 					//db삭제
 					$.ajax({
-						url : 'reguloff_delete.htm',
+						url : 'deleteSchedule.htm',
 						type : 'post',
 						dataType : 'json',
 						data : {
@@ -149,13 +151,26 @@ function loadCalendar(){
 		
 		//일정 드래그
 		eventDrop : function(event, delta, revertFunc) {
-			
+			$.ajax({
+				url : 'updateSchedule.htm',
+				type : 'post',
+				data : {
+					id : event.id,
+					title : event.title,
+					allDay : true,
+					sstart : event.start.format('YYYY-MM-DD HH:mm:ss'),
+					eend : event.end.format('YYYY-MM-DD HH:mm:ss'),
+					url : "nope"
+				},
+				success : function(data) {
 					window.location.reload();
+				}
+
+			});
 
 		},
-		eventStartEditable: false
 		
-		/*//날짜 길이 늘이기 이벤트
+		//날짜 길이 늘이기 이벤트
 		eventResize : function(event, jsEvent, view) {
 			console.log(event.start);
 			console.log(event.end);
@@ -174,7 +189,7 @@ function loadCalendar(){
 					window.location.reload();
 				}
 			});
-		}	*/
+		}	
 	});
 }
 
