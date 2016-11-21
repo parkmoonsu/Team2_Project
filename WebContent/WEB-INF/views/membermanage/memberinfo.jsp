@@ -165,7 +165,7 @@
 											<input type="text" class="form-control"
 												placeholder="Search for..." id="search"> <span
 												class="input-group-btn">
-												<button class="btn btn-default" type="button">Go!</button>
+												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
 											</span>
 										</div>
 									</div>
@@ -315,8 +315,15 @@ $(function() {
 		type:"get",
 		success:function(data){
 			console.log(data);
-			
+	
 		}
+		});
+	 });
+	 
+	 $('#btnsearch').click( function(){
+		console.log($('#search').val());
+		 $.ajax({
+			
 		});
 	 });
 	 
