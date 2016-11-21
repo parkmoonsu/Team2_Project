@@ -90,7 +90,7 @@
 									<nav class="navbar navbar-default">
 										<div class="container-fluid">
 											<ul class="nav navbar-nav">
-												<li><a href="membermanage.htm">회원정보</a></li>
+												<li><a href="membermanage.htm"><strong>회원정보</strong></a></li>
 												<li><a href="joinapprove.htm">회원가입승인</a></li>
 												<li><a href="#">스케줄관리</a></li>
 											</ul>
@@ -111,7 +111,7 @@
 											</span>
 										</div>
 									</div>
-									<table class="table table-striped projects">
+									<table class="table table-hover projects">
 										<thead>
 											<tr>
 												<th>번호</th>

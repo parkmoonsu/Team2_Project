@@ -1,7 +1,9 @@
-<!--
-	제너용럴킹갓현  
-	2016-11-17
-	관리자-  사용자 정보 수정 페이지
+<!-- 
+	@FileName : memberinfo.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.17
+	@Author	: 김용현
+	@Discription : (관리자)회원 관리 페이지 View단
  -->
 
 
@@ -20,7 +22,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Gentellela Alela! |</title>
+<title>회원 관리</title>
 
 <!-- Bootstrap -->
 <link
@@ -57,10 +59,6 @@
 </head>
 
 <body class="nav-md">
-		<a type="hidden" style="display: none">
-				<input type="file">
-		</a>
-
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -78,7 +76,7 @@
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>정보수정</small>
+								<small>회원가입승인</small>
 							</h3>
 						</div>
 					</div>
@@ -92,49 +90,81 @@
 									<nav class="navbar navbar-default">
 										<div class="container-fluid">
 											<ul class="nav navbar-nav">
-												<li><a href="InfoChange.htm">회원정보</a></li>
-												<li><a href="Allow.htm">회원가입승인</a></li>
+												<li><a href="membermanage.htm">회원정보</a></li>
+												<li><a href="joinapprove.htm"><strong>회원가입승인</strong></a></li>
 												<li><a href="#">스케줄관리</a></li>
 											</ul>
 										</div>
 									</nav>
 								</div>
 								<div class="x_content">
-				
+
+
 									<!-- start project list -->
+									<div
+										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+										<div class="input-group">
+											<input type="text" class="form-control"
+												placeholder="Search for..." id="search"> <span
+												class="input-group-btn">
+												<button class="btn btn-default" type="button">Go!</button>
+											</span>
+										</div>
 									</div>
-									<table class="table table-striped projects">
+									<table class="table table-hover projects">
 										<thead>
 											<tr>
 												<th>번호</th>
 												<th>ID</th>
 												<th>이름</th>
-												<th>연락처</th>
-												<th>등급</th>
-												<th>이력구분</th>
+												<th>직책</th>
 												<th style="width: 20%"></th>
 											</tr>
 										</thead>
 										<tbody>
-											
-											<c:forEach var ="d"  items="${list}">
+											<c:set value="${list}" var="d"/>
+											<c:forEach var="i" items="${d}">
 											<tr>
-												<td>1.</td>
-												<td><a>${d.m_id}</a></td>
-												<td><small>이름</small></td>
-												<td>연락처</td>
-												<td><small>등급</small></td>
-												<td>이력구분</td>
-												<td><a href="#" class="btn btn-info btn-xs"><i
-														class="fa fa-pencil"></i> 확인 </a> <a href="#"
-													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
-														삭제 </a></td>
+												<td>${i.r}</td>
+												<td><a>${i.m_id}</a></td>
+												<td><small>${i.m_name}</small></td>
+												<td><small>${i.j_name}</small></td>
+												<td style = "text-align:center"> <a href="deleteMember.htm?m_id=${i.m_id}"
+													class="btn btn-success btn-xs"><i class="fa fa-trash-o"></i>
+														승인 </a>
+														
+												</td>
 											</tr>
 											</c:forEach>
 										</tbody>
 									</table>
 									<!-- end project list -->
-
+									
+									<!-- 요기서부터 페이징처리 -->
+									<c:set var = "mc" value = "${membercount}"/>
+									<c:set var = "pgc" value = "${pgs}"/>
+									<c:choose>
+											<c:when test="${mc % 10 == 0}">
+												<c:set value = "${mc/10}" var = "pagecount"/>
+											</c:when>
+											<c:otherwise>
+												<c:set value = "${mc/10 + 1}" var = "pagecount"/>
+											</c:otherwise>
+									</c:choose>	
+									<ul class="pager">
+										<c:if test="${pgc > 1}">
+											<li><a href="membermanage.htm?pg=${pgc-1}">Previous</a></li>
+										</c:if>
+										
+										
+										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
+											<li><a href="membermanage.htm?pg=${i}">${i}</a></li>
+										</c:forEach>
+										
+										<c:if test="${pgc < mc/10 }">
+											<li><a href="membermanage.htm?pg=${pgc+1}">Next</a></li>
+										</c:if>
+									</ul>
 								</div>
 							</div>
 						</div>

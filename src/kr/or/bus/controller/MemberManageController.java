@@ -36,4 +36,10 @@ public class MemberManageController {
 		model.addAttribute("membercount",membercount);
 		return "membermanage/memberinfo";
 	}
+	
+	@RequestMapping("/joinapprove.htm")
+	public String joinapprove(){
+		
+		return "membermanage/joinapprove";
+	}
 }

@@ -73,15 +73,6 @@ public class MainController {
 		return "main/ChangeForm";
 	}
 
-@RequestMapping("/Allow.htm")
-public String allow(Model model){
-	List<MemberJoinMDetailDTO> list = service.ncheck();
-	
-	model.addAttribute("list",list);
-		return "main/Allow";
-	}
-
-
 	@RequestMapping("/updateinfo.htm")
 	public String updateinfo(Model model , Principal principal , String m_pw){
 		System.out.println("세션 ID : " + principal.getName());
