@@ -1,3 +1,13 @@
+/*
+*	@FileName : MainService.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.17
+*	@Author	: 박문수
+*	@Discription : 회원에 관련된 메인 페이지 Service
+*/
+
+
+
 package kr.or.bus.service;
 
 

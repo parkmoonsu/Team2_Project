@@ -112,4 +112,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m_id = #{param2}
 	</update>
 	
+<!-- 	  srow = 1 + (page - 1) * 10;
+ 		  erow = 10 + (page - 1) * 10;  
+-->
+	<select id="memberList" resultType = "kr.or.bus.dto.MemberJoinMDetailDTO" parameterType = "int">
+		select *
+		from (select ROWNUM r , N.*
+        	  from (select * 
+        	  		from member me natural join mdetail md natural join job 
+        	  		order by job.j_name) N) 
+		where r between 1 + (#{page} - 1) * 10  and 10 + (#{page} - 1) * 10 
+		order by r desc
+	</select>
+	
+	<select id="memberCount" resultType = "int">
+		select count(*)
+		from member me natural join mdetail md natural join job
+	</select>
 </mapper>

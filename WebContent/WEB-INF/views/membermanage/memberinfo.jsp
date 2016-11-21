@@ -88,7 +88,7 @@
 									<nav class="navbar navbar-default">
 										<div class="container-fluid">
 											<ul class="nav navbar-nav">
-												<li><a href="#">회원정보</a></li>
+												<li><a href="membermanage.htm">회원정보</a></li>
 												<li><a href="#">회원가입승인</a></li>
 												<li><a href="#">스케줄관리</a></li>
 											</ul>
@@ -109,28 +109,28 @@
 											</span>
 										</div>
 									</div>
-									<table class="table table-striped projects">
+									<table class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>번호</th>
 												<th>ID</th>
 												<th>이름</th>
-												<th>연락처</th>
-												<th>등급</th>
-												<th>이력구분</th>
+												<th>이메일</th>
+												<th>직책</th>
+												<th>연차</th>
 												<th style="width: 20%"></th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:set value="${dto}" var="d"/>
+											<c:set value="${list}" var="d"/>
 											<c:forEach var="i" items="${d}">
 											<tr>
-												<td>${i.m_id}</td>
-												<td><a>아이디</a></td>
-												<td><small>이름</small></td>
-												<td>연락처</td>
-												<td><small>등급</small></td>
-												<td>이력구분</td>
+												<td>${i.r}</td>
+												<td><a>${i.m_id}</a></td>
+												<td><small>${i.m_name}</small></td>
+												<td>${i.m_email}</td>
+												<td><small>${i.j_name}</small></td>
+												<td>${i.m_annual}일</td>
 												<td><a href="#" class="btn btn-info btn-xs"><i
 														class="fa fa-pencil"></i> 수정 </a> <a href="#"
 													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
@@ -140,7 +140,31 @@
 										</tbody>
 									</table>
 									<!-- end project list -->
-
+									
+									<!-- 요기서부터 페이징처리 -->
+									<c:set var = "mc" value = "${membercount}"/>
+									<c:choose>
+											<c:when test="${mc % 10 == 0}">
+												<c:set value = "${mc/10}" var = "pagecount"/>
+											</c:when>
+											<c:otherwise>
+												<c:set value = "${mc/10 + 1}" var = "pagecount"/>
+											</c:otherwise>
+									</c:choose>	
+									<ul class="pager">
+										<c:if test="${pg > 1}">
+											<li><a href="membermanage.htm?pa=${pg-1}">Previous</a></li>
+										</c:if>
+										
+										
+										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
+											<li><a href="membermanage.htm?pg=${i}">${i}</a></li>
+										</c:forEach>
+										
+										<c:if test="${pg < mc/10 }">
+											<li><a href="membermanage.htm?pa=${pg+1}">Next</a></li>
+										</c:if>
+									</ul>
 								</div>
 							</div>
 						</div>

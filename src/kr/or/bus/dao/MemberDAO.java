@@ -70,5 +70,12 @@ public interface MemberDAO {
 	//회원 정보 수정
 	public void updateMember1(MemberDTO mdto, String m_id ,String hidden);
 	public void updateMember2(MDetailDTO ddto, String m_id);
-		
+	
+	
+	//(관리자) 회원 정보 리스트 가져오기
+	public List<MemberJoinMDetailDTO> memberList(int page);
+	
+	//(관리자) 회원 정보 개수
+	public int memberCount();
+	
 }

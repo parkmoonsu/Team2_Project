@@ -9,13 +9,29 @@
 
 package kr.or.bus.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.service.MemberManageService;
 @Controller
 public class MemberManageController {
 	
+	@Autowired
+	private MemberManageService service;
+	
 	@RequestMapping("/membermanage.htm")
-	public String login() {
+	public String memberInfo(String pg , Model model) {
+		
+		List<MemberJoinMDetailDTO> list = service.memberInfo(pg);
+		int membercount = service.memberCount();
+		
+		model.addAttribute("list", list);
+		model.addAttribute("membercount",membercount);
 		return "membermanage/memberinfo";
 	}
 }
