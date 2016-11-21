@@ -17,6 +17,7 @@ import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinResRecordDTO;
 
 @Controller
 public class MainService {
@@ -57,6 +58,16 @@ public class MainService {
 		String pw = dao.passMatch(m_id).getM_pw();
 		
 		return pw;
+	}
+	
+	public List<MemberJoinResRecordDTO> getResRecordInfo(String m_id){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		List<MemberJoinResRecordDTO> list = dao.getResRecordInfo(m_id);
+		for(int i=0 ;i<list.size();i++){
+			System.out.println("이력기간"+list.get(i).getRes_start());
+			System.out.println("이력회사"+list.get(i).getRes_com());
+		}
+		return list;
 	}
 	
 	public void updateMember(MemberDTO mdto , MDetailDTO ddto , String m_id ,HttpServletRequest request) throws Exception{

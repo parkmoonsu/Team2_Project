@@ -17,6 +17,7 @@ import org.springframework.web.servlet.View;
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinResRecordDTO;
 import kr.or.bus.dto.ResRecordDTO;
 import kr.or.bus.service.MainService;
 
@@ -50,8 +51,9 @@ public class MainController {
 	public String ChangeForm(Model model, Principal principal) {
 		System.out.println("세션 ID : " + principal.getName());
 		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-		
+		List<MemberJoinResRecordDTO> list = service.getResRecordInfo(principal.getName());
 		model.addAttribute("dto", dto);
+		model.addAttribute("list",list);
 		return "main/ChangeForm";
 	}
 
