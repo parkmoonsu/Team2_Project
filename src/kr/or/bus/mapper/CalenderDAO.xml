@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 기본 캘린더 DAO -->
 	
-	<!-- reguloff -->
+	<!-- reguloff DAO -->
 	<select id="reguloff_select" resultType="kr.or.bus.dto.RegulOffDTO">
 		select * from reguloff
 	</select>
@@ -54,7 +54,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			o_code=#{o_code}		
 		WHERE id=#{id}
 	</update>
+	<select id="reguloff_selectseq" resultType="kr.or.bus.dto.RegulOffDTO">
+		select * from reguloff
+		where id=
+		(select max(id) from reguloff)
+	</select>
 	
-	<!-- reguloffdto -->
+	<!-- reguloff DAO -->
 		
 </mapper>
