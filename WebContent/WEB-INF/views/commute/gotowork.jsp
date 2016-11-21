@@ -52,18 +52,19 @@
 	rel="stylesheet">
 <script type="text/javascript">
 	$(function(){
-		var id = ${dto.c_start};
-		console.log(id);
-		$("#go").click(function(){			
-			$("#show").html("<p>dddddd</p>"); 
-			   $.ajax({
-				dataType:"jsp",
-				url:"show.htm",
-				success:function(data){
-					${LoginUser}님의 출근시간은 ${dto.c_start}입니다.<br>
-					${LoginUser}님의 출근상태는 ${dto.cs_stat}입니다.	
-				}	
+		var stime = ${dto.c_start};
+		console.log(stime);
+		$("#go").click(function(){		
+		   $.ajax({
+			url:"show.htm",
+			data: "m_id",
+			success:function(data){
+				$("#show").append("${LoginUser}님의 출근시간은 ${dto.c_start}입니다."+"<br>"
+			 	+ "${LoginUser}님의 출근상태는 ${dto.cs_stat}입니다."); 
+					
+				}	 
 			});  
+		   console.log(m_id);
 		});
 	});
 </script>
