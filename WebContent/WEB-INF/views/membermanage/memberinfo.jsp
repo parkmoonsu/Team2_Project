@@ -1,7 +1,9 @@
-<!--
-	제너용럴킹갓현  
-	2016-11-17
-	관리자-  사용자 정보 수정 페이지
+<!-- 
+	@FileName : memberinfo.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.17
+	@Author	: 김용현
+	@Discription : (관리자)회원 관리 페이지 View단
  -->
 
 
