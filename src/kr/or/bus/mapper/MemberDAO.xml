@@ -120,9 +120,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select ROWNUM r , N.*
         	  from (select * 
         	  		from member me natural join mdetail md natural join job 
-        	  		order by job.j_name) N) 
+        	  		order by job.j_name desc) N) 
 		where r between 1 + (#{page} - 1) * 10  and 10 + (#{page} - 1) * 10 
-		order by r desc
+		
 	</select>
 	
 	<select id="memberCount" resultType = "int">
