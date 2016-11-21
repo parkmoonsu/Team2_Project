@@ -59,7 +59,7 @@ public class MainService {
 		return pw;
 	}
 	
-	public void updateMember(MemberDTO mdto , MDetailDTO ddto , String m_id ,HttpServletRequest request) throws Exception{
+	public void updateMember(MemberDTO mdto , MDetailDTO ddto , String m_id , String hidden ,HttpServletRequest request) throws Exception{
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		
 		List<CommonsMultipartFile> files = ddto.getFiles();
@@ -94,7 +94,7 @@ public class MainService {
 		System.out.println(ddto.toString());
 		System.out.println(mdto.toString());
 		
-		dao.updateMember1(mdto, m_id);
+		dao.updateMember1(mdto, m_id , hidden);
 		dao.updateMember2(ddto, m_id);
 		
 	}
