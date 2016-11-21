@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,9 +13,8 @@
 
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-
+	
 <title>KOSBUS</title>
-
 <!-- Bootstrap -->
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
@@ -48,22 +47,19 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-
+<script type="text/javascript">
+	$(function(){
+		/* $("#photo_swipe").click(function(){
+			$("#photo").click();
+		}); */
+	});
+</script>
 </head>
-
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
-				<c:choose>
-          		<c:when test ="${jobname == '기사'}">
-          			<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
-          		</c:when>
-          		<c:otherwise>
-          			<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
-          		</c:otherwise>
-       		</c:choose>
+				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
 			</div>
 
 			<!--상단 menu -->
@@ -76,146 +72,51 @@
 				<!-- top tiles -->
 				<div class="row tile_count"></div>
 				<!-- /top tiles -->
+
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="dashboard_graph">
 							<div class="row x_title">
 								<div class="col-md-6">
-									<h3>개인정보</h3>
+									<h3>출/퇴근 조회</h3>
 								</div>
 							</div>
 							<div class="clearfix">
 								<div class="container">
 									<div class="row">
-										<div class="col-sm-2"></div>
-										<div class="col-sm-8">
+										<div class="col-sm-1"></div>
+										<div class="col-sm-10">
+
 											<div class="panel panel-info">
 												<div class="panel-heading">
-													<h3 class="panel-title">회원 정보수정</h3>
+													<h3 class="panel-title">출/퇴근 조회</h3>
 												</div>
 												<div class="panel-body">
 													<div class="row">
-														<div class="col-sm-2" align="center">
-															<div class="row">
-																<!-- <a style = "display:none"><input type = "file" id = "photo"></a>
-																<button class="btn btn-primary" style="margin-top:10px;margin-right: 10px" id = "photo_swipe">사진변경</button>
-																 -->
-															</div>
+														<div class="col-sm-1" align="center">
+															<div class="row"></div>
 														</div>
-														<div class="col-sm-8">
-															<form class="form-horizontal form-label-left"
-																method="post" action="updateMember.htm"
-																enctype="multipart/form-data">
-																<table class="table table-user-information">
+														<div class="col-sm-10">
+															<table class="table table-user-information">
+																<tbody style="text-align: center">
 																	<tr>
-																		<td>
-																			<div class="form-group">
-																				<span class="col-sm-3">아이디</span>
-																				<div class="col-sm-9">
-																					<input type="text" class="form-control" value = "${dto.m_id}" 
-																					name = "m_id" readonly>
-																				</div>
-																			</div>
-																		</td>
-
+																		<td>NO.</td>
+																		<td>날짜</td>
+																		<td>출근시간</td>
+																		<td>퇴근시간</td>
 																	</tr>
+																	
+																	<c:forEach var="i" items="${list}">
 																	<tr>
-																		<td>
-																			<div class="form-group">
-																				<span class="col-sm-3">비밀번호</span>
-																				<div class="col-sm-9">
-																					<input type="password" id="m_pw" name="m_pw"
-																						class="form-control">
-																						
-																					<input type = "hidden" id = "hidden" name = "hidden" value = "hidden">
-																				</div>
-																			</div>
-																		</td>
-																	</tr>
+																		<td>${i}</td>
+																	 	<td>${i.c_date}</td>
+																		<td>${i.c_start}</td>
+																		<td>${i.c_end}</td>
 																	<tr>
-																		<td>
-																			<div class="form-group">
-																				<span class="col-sm-3">다시입력</span>
-																				<div class="col-sm-9">
-																					<input type="password" id="m_pw2" name="m_pw2"
-																						class="form-control">
-																				</div>
-																			</div>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<div class="form-group">
-																				<span class="col-sm-3">이름</span>
-																				<div class="col-sm-9">
-																					<input id="m_name" class="form-control" type="text" value = "${dto.m_name}"
-																						name="m_name">
-																				</div>
-																			</div>
-																		</td>
-																	</tr>	
-																	<tr>
-																		<td>
-																			<div class="form-group">
-																				<span class="col-sm-3">연락처</span>
-																				<div class="col-sm-9">
-																					<input id="m_phone" name="m_phone" value = "${dto.m_phone}"
-																						class="form-control" type="text">
-																				</div>
-																			</div>
-																		</td>
-																	</tr>
-												
-																	<tr>
-																		<td>
-																			<div class="form-group">
-																				<span class="col-sm-3">사진</span>
-																				<div class="col-sm-9">
-																					<input id="m_photo" class="control" type="file"
-																						name="files[0]">
-																				</div>
-																			</div>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<div class="form-group">
-																				<span class="col-sm-3">주소</span>
-																				<div class="col-sm-6">
-																					<input id="m_addr" class="form-control" type="text" value = "${dto.m_addr}"
-																						name="m_addr"> 
-																				</div>
-																				<div class = "col-sm-3">	
-																					<input type="button"
-																						value="주소검색" class="btn btn-default"
-																						onclick="sample4_execDaumPostcode()">
-																				
-																				</div>
-																			</div>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<div class="form-group">
-																				<span class="col-sm-3">상세주소</span>
-																				<div class="col-sm-9">
-																					<input id="m_daddr" class="form-control" value = "${dto.m_daddr}"
-																						type="text" name="m_daddr">
-																				</div>
-																			</div>
-																		</td>
-																	</tr>
-																
-
-																</table>
-
-																<div style="float: right; margin: 30px;">
-																	<input type="button" value="이전" class="btn btn-primary"
-																		id="prev" onclick="history.go(-1)"> <input
-																		class="btn btn-primary" type="submit" value="수정완료" id = "update">
-																</div>
-
-															</form>
+																	</c:forEach>
+																	
+																</tbody>
+															</table>															
 														</div>
 													</div>
 												</div>
@@ -245,7 +146,8 @@
 		</footer>
 		<!-- /footer content -->
 	</div>
-
+	
+	
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -307,22 +209,7 @@
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 	
-	<script type="text/javascript">
-		$(function(){
-			$("#update").click(function(){
-				if($("#m_pw").val() == ""){
-					$("#hidden").attr("value","real");
-				}
-				
-				if(($("#m_pw").val() != $("#m_pw2").val())){
-					alert("비밀번호가 일치 하지 않습니다.");
-					$("#m_pw2").focus();
-					return false;
-				}else{
-					return true;
-				}
-			});
-		});
-	</script>
-</body>
+	
+	
+	</body>
 </html>

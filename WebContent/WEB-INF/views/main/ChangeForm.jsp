@@ -62,9 +62,15 @@
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
-				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
-			</div>
-
+			<c:choose>
+          		<c:when test ="${jobname == '기사'}">
+          			<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
+          		</c:when>
+          		<c:otherwise>
+          			<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+          		</c:otherwise>
+       		</c:choose>
+       		</div>
 			<!--상단 menu -->
 
 			<div class="top_nav">
