@@ -322,8 +322,14 @@ $(function() {
 	 
 	 $('#btnsearch').click( function(){
 		console.log($('#search').val());
+		var param = $('#search').val();
 		 $.ajax({
-			
+			url:"searching.htm",
+			type:"post",
+			data: {"param":param},
+			success:function(data){
+				console.log(data);
+			}
 		});
 	 });
 	 
