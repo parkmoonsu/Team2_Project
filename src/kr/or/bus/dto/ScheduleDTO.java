@@ -9,7 +9,7 @@ package kr.or.bus.dto;
 
 import java.sql.Date;
 
-public class CalendarDTO {
+public class ScheduleDTO {
 	String id;	
 	String title;	
 	String allDay;	

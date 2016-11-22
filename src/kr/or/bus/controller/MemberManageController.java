@@ -30,7 +30,7 @@ public class MemberManageController {
 	@Autowired
 	private MemberManageService service;
 	
-	@RequestMapping("/membermanage.htm")
+	@RequestMapping("/membermanage.admin")
 	public String memberInfo(String pg , Model model) {
 		
 		List<MemberJoinMDetailDTO> list = service.memberInfo(pg);
@@ -51,7 +51,7 @@ public class MemberManageController {
 		
 		return new ModelAndView("redirect:/membermanage.htm");
 	}
-	@RequestMapping("/joinapprove.htm")
+	@RequestMapping("/joinapprove.admin")
 	public String joinapprove(String pg , Model model){
 		List<MemberJoinMDetailDTO> list = service.memberNList(pg);
 		int page = service.pg(pg);
@@ -70,7 +70,7 @@ public class MemberManageController {
 		return jsonview;
 	}
 	
-	@RequestMapping("/approveMember.htm")
+	@RequestMapping("/approveMember.admin")
 	public String approveMember(String m_id){
 		System.out.println("m_id : " + m_id);
 		
