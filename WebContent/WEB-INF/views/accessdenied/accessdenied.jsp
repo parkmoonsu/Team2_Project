@@ -1,20 +1,8 @@
-<!-- 
-	@FileName : joinapprove.jsp
-	@Project	: KosBus
-	@Date	: 2016. 11.21
-	@Author	: 박문수
-	@Discription : (관리자)회원가입승인 페이지 View단
- -->
-
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="se"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="UTF-8">
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -22,7 +10,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>회원 관리</title>
+
+<script
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+
+<title>KOSBUS</title>
 
 <!-- Bootstrap -->
 <link
@@ -56,147 +48,90 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#button").click(function(){
+			location.href ="main.htm";
+		})
+	});
+</script>
 </head>
+
 
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
-				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
-			</div>
-
+		
+          			<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
+          	
+          		
+       		</div>
 			<!--상단 menu -->
+
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
-
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<div class="">
-					<div class="page-title">
-						<div class="title_left">
-							<h3>
-								<small>회원가입승인</small>
-							</h3>
-						</div>
-					</div>
+				<!-- top tiles -->
+				<div class="row tile_count"></div>
+				<!-- /top tiles -->
 
-					<div class="clearfix"></div>
-
-					<div class="row">
-						<div class="col-md-12">
-							<div class="x_panel">
-								<div class="x_title">
-									<nav class="navbar navbar-default">
-										<div class="container-fluid">
-											<ul class="nav navbar-nav">
-												<li><a href="membermanage.htm">회원정보</a></li>
-												<li><a href="joinapprove.htm"><strong>회원가입승인</strong></a></li>
-												<li><a href="#">스케줄관리</a></li>
-											</ul>
-										</div>
-									</nav>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="dashboard_graph">
+							<div class="row x_title">
+								<div class="col-md-6">
+									<h3>접근권한 없음</h3>
 								</div>
-								<div class="x_content">
+							</div>
+							<div class="clearfix">
+								<div class="container">
+									<div class="row">
+										<div class="col-sm-2"></div>
+										<div class="col-sm-8">
 
-
-									<!-- start project list -->
-									<div
-										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-										<div class="input-group">
-											<input type="text" class="form-control"
-												placeholder="Search for..." id="search"> <span
-												class="input-group-btn">
-												<button class="btn btn-default" type="button">Go!</button>
-											</span>
+											<div class="panel panel-info">
+												<div class="panel-heading">
+													<h3 class="panel-title">접근권한 없음</h3>
+												</div>
+												<div class="panel-body">
+													<div class="row">
+														<div style ="text-align :center">
+															<font size = '3'>접근 권한이 없습니다.<br>
+															관리자에게 문의하세요.</font><br><br>
+															<input type = "button" class = "btn btn-default" value = "메인으로" id = "button">
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
-									<table class="table table-hover projects">
-										<thead>
-											<tr>
-												<th>번호</th>
-												<th>ID</th>
-												<th>이름</th>
-												<th>직책</th>
-												<th>승인요청일</th>
-												<th style="width: 20%"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:set value="${list}" var="d"/>
-											<c:if test ="${d == '[]' }">
-											<tr>
-												<td colspan = '6' align = "center">가입신청 회원 없음</td>
-											</tr>
-											</c:if>
-											<c:forEach var="i" items="${d}">
-											<c:choose>
-											<c:when test="${i != null}">
-											<tr>
-												<td>${i.r}</td>
-												<td><a>${i.m_id}</a></td>
-												<td><small>${i.m_name}</small></td>
-												<td><small>${i.j_name}</small></td>
-												<td><small>${i.m_regdate}</small></td>
-												<td style = "text-align:center"> <a href="approveMember.htm?m_id=${i.m_id}"
-													class="btn btn-success btn-xs"><i class="fa fa-check"></i>
-														승인 </a>
-														
-												</td>
-											</tr>
-											</c:when>
-											</c:choose>
-											</c:forEach>
-										</tbody>
-									</table>
-									<!-- end project list -->
-									
-									<!-- 요기서부터 페이징처리 -->
-									<c:set var = "mc" value = "${membercount}"/>
-									<c:set var = "pgc" value = "${pgs}"/>
-									<c:choose>
-											<c:when test="${mc % 10 == 0}">
-												<c:set value = "${mc/10}" var = "pagecount"/>
-											</c:when>
-											<c:otherwise>
-												<c:set value = "${mc/10 + 1}" var = "pagecount"/>
-											</c:otherwise>
-									</c:choose>	
-									<ul class="pager">
-										<c:if test="${pgc > 1}">
-											<li><a href="joinapprove.htm?pg=${pgc-1}">Previous</a></li>
-										</c:if>
-										
-										
-										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="joinapprove.htm?pg=${i}">${i}</a></li>
-										</c:forEach>
-										
-										<c:if test="${pgc < mc/10 }">
-											<li><a href="joinapprove.htm?pg=${pgc+1}">Next</a></li>
-										</c:if>
-									</ul>
 								</div>
+
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
 
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
 				</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
+				<br />
+
+			</div>
 		</div>
+		<!-- /page content -->
+
+		<!-- footer content -->
+		<footer>
+			<div class="pull-right">
+				Gentelella - Bootstrap Admin Template by <a
+					href="https://colorlib.com">Colorlib</a>
+			</div>
+			<div class="clearfix"></div>
+		</footer>
+		<!-- /footer content -->
 	</div>
+
 
 	<!-- Bootstrap -->
 	<script
@@ -258,12 +193,5 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	
-		
-});
-
-</script>
-</body> 	
+</body>
 </html>

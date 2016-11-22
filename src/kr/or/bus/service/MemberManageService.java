@@ -54,7 +54,7 @@ private JavaMailSender mailSender;
 		
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		List<MemberJoinMDetailDTO> list = dao.memberList(page);
-		System.out.println(list.get(1).toString());
+
 		return list;
 	}
 	
@@ -113,7 +113,7 @@ private JavaMailSender mailSender;
 		
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		List<MemberJoinMDetailDTO> list = dao.memberNList(page);
-		System.out.println(list.get(1).toString());
+
 		return list;
 	}
 	public int memberNCount(){

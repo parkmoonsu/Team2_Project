@@ -10,7 +10,7 @@
 <%@ taglib prefix="se" uri ="http://www.springframework.org/security/tags" %>
 <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-           <img src="${pageContext.request.contextPath}/images/logo4.png" style="width:100%;height:60px">
+           <img src="${pageContext.request.contextPath}/images/logo4.png" style="width:80%;height:60px">
             </div>
 
             <div class="clearfix"></div>
