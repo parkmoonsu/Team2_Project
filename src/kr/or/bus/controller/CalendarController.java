@@ -104,9 +104,9 @@ public class CalendarController {
 		dto.setO_code(o_code);
 		
 		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
-		
 		dao.reguloff_insert(dto);
-		map.addAttribute("data", dto);
+		RegulOffDTO dto2=dao.reguloff_selectseq();
+		map.addAttribute("data", dto2);
 		return jsonview;//str;
 	}
 	

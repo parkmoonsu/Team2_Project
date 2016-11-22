@@ -25,4 +25,5 @@ public interface CalendarDAO {
 	public int reguloff_insert(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
 	public int reguloff_delete(String id) throws ClassNotFoundException, SQLException;
 	public int reguloff_update(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
+	public RegulOffDTO reguloff_selectseq() throws ClassNotFoundException, SQLException;
 }	

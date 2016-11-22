@@ -63,9 +63,20 @@ public class MemberManageController {
 		
 		return "membermanage/joinapprove";
 	}
+
 	@RequestMapping("/searching.htm")
 	public View searching(String param){
 		System.out.println("param"+param);
 		return jsonview;
+	}
+	
+	@RequestMapping("/approveMember.htm")
+	public String approveMember(String m_id){
+		System.out.println("m_id : " + m_id);
+		
+		service.updateCheck(m_id);
+		
+		return "membermanage/updatesuccess";
+
 	}
 }
