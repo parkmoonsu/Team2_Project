@@ -75,18 +75,18 @@
 				<!-- /top tiles -->
 
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-sm-12 col-xs-12">
 						<div class="dashboard_graph">
 							<div class="row x_title">
-								<div class="col-md-6">
+								<div class="col-md-6 col-xs-6">
 									<h3>출/퇴근 조회</h3>
 								</div>
 							</div>
 							<div class="clearfix">
 								<div class="container">
 									<div class="row">
-										<div class="col-sm-1"></div>
-										<div class="col-sm-10">
+										<div class="col-sm-1 col-xs-1"></div>
+										<div class="col-sm-10 col-xs-10">
 
 											<div class="panel panel-info">
 												<div class="panel-heading">
@@ -94,10 +94,10 @@
 												</div>
 												<div class="panel-body">
 													<div class="row">
-														<div class="col-sm-1" align="center">
+														<div class="col-sm-1 col-xs-1" align="center">
 															<div class="row"></div>
 														</div>
-														<div class="col-sm-10">
+														<div class="col-sm-10 col-xs-10">
 															<table class="table table-user-information">
 																<tbody style="text-align: center">
 																	<tr>

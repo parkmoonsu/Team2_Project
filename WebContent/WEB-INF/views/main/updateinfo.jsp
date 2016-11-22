@@ -55,7 +55,7 @@
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
-			<div class="col-md-3 left_col">
+			<div class="col-xs-12 col-md-3 left_col">
 				<c:choose>
           		<c:when test ="${jobname == '기사'}">
           			<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
@@ -77,32 +77,32 @@
 				<div class="row tile_count"></div>
 				<!-- /top tiles -->
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-xs-12 col-sm-12">
 						<div class="dashboard_graph">
 							<div class="row x_title">
-								<div class="col-md-6">
+								<div class="col-xs-6 col-md-6">
 									<h3>개인정보</h3>
 								</div>
 							</div>
 							<div class="clearfix">
 								<div class="container">
 									<div class="row">
-										<div class="col-sm-2"></div>
-										<div class="col-sm-8">
+										<div class="col-xs-2 col-sm-2"></div>
+										<div class="col-xs-12 col-sm-8">
 											<div class="panel panel-info">
 												<div class="panel-heading">
 													<h3 class="panel-title">회원 정보수정</h3>
 												</div>
 												<div class="panel-body">
 													<div class="row">
-														<div class="col-sm-2" align="center">
+														<div class="col-xs-2 col-sm-2" align="center">
 															<div class="row">
 																<!-- <a style = "display:none"><input type = "file" id = "photo"></a>
 																<button class="btn btn-primary" style="margin-top:10px;margin-right: 10px" id = "photo_swipe">사진변경</button>
 																 -->
 															</div>
 														</div>
-														<div class="col-sm-8">
+														<div class="col-xs-12 col-sm-8">
 															<form class="form-horizontal form-label-left"
 																method="post" action="updateMember.htm"
 																enctype="multipart/form-data">
@@ -110,8 +110,8 @@
 																	<tr>
 																		<td>
 																			<div class="form-group">
-																				<span class="col-sm-3">아이디</span>
-																				<div class="col-sm-9">
+																				<span class="col-xs-3 col-sm-3">아이디</span>
+																				<div class="col-xs-9 col-sm-9">
 																					<input type="text" class="form-control" value = "${dto.m_id}" 
 																					name = "m_id" readonly>
 																				</div>
@@ -122,8 +122,8 @@
 																	<tr>
 																		<td>
 																			<div class="form-group">
-																				<span class="col-sm-3">비밀번호</span>
-																				<div class="col-sm-9">
+																				<span class="col-xs-3 col-sm-3">비밀번호</span>
+																				<div class="col-xs-9 col-sm-9">
 																					<input type="password" id="m_pw" name="m_pw"
 																						class="form-control">
 																						
@@ -135,8 +135,8 @@
 																	<tr>
 																		<td>
 																			<div class="form-group">
-																				<span class="col-sm-3">다시입력</span>
-																				<div class="col-sm-9">
+																				<span class="col-xs-3 col-sm-3">다시입력</span>
+																				<div class="col-xs-9 col-sm-9">
 																					<input type="password" id="m_pw2" name="m_pw2"
 																						class="form-control">
 																				</div>
@@ -146,8 +146,8 @@
 																	<tr>
 																		<td>
 																			<div class="form-group">
-																				<span class="col-sm-3">이름</span>
-																				<div class="col-sm-9">
+																				<span class="col-xs-3 col-sm-3">이름</span>
+																				<div class="col-xs-9 col-sm-9">
 																					<input id="m_name" class="form-control" type="text" value = "${dto.m_name}"
 																						name="m_name">
 																				</div>
@@ -157,8 +157,8 @@
 																	<tr>
 																		<td>
 																			<div class="form-group">
-																				<span class="col-sm-3">연락처</span>
-																				<div class="col-sm-9">
+																				<span class="col-xs-3 col-sm-3">연락처</span>
+																				<div class="col-xs-9 col-sm-9">
 																					<input id="m_phone" name="m_phone" value = "${dto.m_phone}"
 																						class="form-control" type="text">
 																				</div>
@@ -169,8 +169,8 @@
 																	<tr>
 																		<td>
 																			<div class="form-group">
-																				<span class="col-sm-3">사진</span>
-																				<div class="col-sm-9">
+																				<span class="col-xs-3 col-sm-3">사진</span>
+																				<div class="col-xs-9 col-sm-9">
 																					<input id="m_photo" class="control" type="file"
 																						name="files[0]">
 																				</div>
@@ -180,12 +180,12 @@
 																	<tr>
 																		<td>
 																			<div class="form-group">
-																				<span class="col-sm-3">주소</span>
-																				<div class="col-sm-6">
+																				<span class="col-xs-3 col-sm-3">주소</span>
+																				<div class="col-xs-6 col-sm-6">
 																					<input id="m_addr" class="form-control" type="text" value = "${dto.m_addr}"
 																						name="m_addr"> 
 																				</div>
-																				<div class = "col-sm-3">	
+																				<div class = "col-xs-3 col-sm-3">	
 																					<input type="button"
 																						value="주소검색" class="btn btn-default"
 																						onclick="sample4_execDaumPostcode()">
@@ -197,8 +197,8 @@
 																	<tr>
 																		<td>
 																			<div class="form-group">
-																				<span class="col-sm-3">상세주소</span>
-																				<div class="col-sm-9">
+																				<span class="col-xs-3 col-sm-3">상세주소</span>
+																				<div class="col-xs-9 col-sm-9">
 																					<input id="m_daddr" class="form-control" value = "${dto.m_daddr}"
 																						type="text" name="m_daddr">
 																				</div>

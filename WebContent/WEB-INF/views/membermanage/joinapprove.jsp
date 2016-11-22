@@ -64,7 +64,7 @@
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
-			<div class="col-md-3 left_col">
+			<div class="col-xs-3 col-md-3 left_col">
 				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
 			</div>
 
@@ -87,14 +87,14 @@
 					<div class="clearfix"></div>
 
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-xs-12 col-md-12">
 							<div class="x_panel">
 								<div class="x_title">
 									<nav class="navbar navbar-default">
 										<div class="container-fluid">
 											<ul class="nav navbar-nav">
-												<li><a href="membermanage.htm">회원정보</a></li>
-												<li><a href="joinapprove.htm"><strong>회원가입승인</strong></a></li>
+												<li><a href="membermanage.admin">회원정보</a></li>
+												<li><a href="joinapprove.admin"><strong>회원가입승인</strong></a></li>
 												<li><a href="#">스케줄관리</a></li>
 											</ul>
 										</div>
@@ -127,19 +127,28 @@
 										</thead>
 										<tbody>
 											<c:set value="${list}" var="d"/>
+											<c:if test ="${d == '[]' }">
+											<tr>
+												<td colspan = '6' align = "center">가입신청 회원 없음</td>
+											</tr>
+											</c:if>
 											<c:forEach var="i" items="${d}">
+											<c:choose>
+											<c:when test="${i != null}">
 											<tr>
 												<td>${i.r}</td>
 												<td><a>${i.m_id}</a></td>
 												<td><small>${i.m_name}</small></td>
 												<td><small>${i.j_name}</small></td>
 												<td><small>${i.m_regdate}</small></td>
-												<td style = "text-align:center"> <a href="approveMember.htm?m_id=${i.m_id}"
+												<td style = "text-align:center"> <a href="approveMember.admin?m_id=${i.m_id}"
 													class="btn btn-success btn-xs"><i class="fa fa-check"></i>
 														승인 </a>
 														
 												</td>
 											</tr>
+											</c:when>
+											</c:choose>
 											</c:forEach>
 										</tbody>
 									</table>
@@ -158,16 +167,16 @@
 									</c:choose>	
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
-											<li><a href="joinapprove.htm?pg=${pgc-1}">Previous</a></li>
+											<li><a href="joinapprove.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 										
 										
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="joinapprove.htm?pg=${i}">${i}</a></li>
+											<li><a href="joinapprove.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
 										
 										<c:if test="${pgc < mc/10 }">
-											<li><a href="joinapprove.htm?pg=${pgc+1}">Next</a></li>
+											<li><a href="joinapprove.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
 								</div>

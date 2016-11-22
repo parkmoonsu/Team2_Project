@@ -10,7 +10,7 @@
 <%@ taglib prefix="se" uri ="http://www.springframework.org/security/tags" %>
 <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-           <img src="${pageContext.request.contextPath}/images/logo4.png" style="width:100%;height:60px">
+           <img src="${pageContext.request.contextPath}/images/logo4.png" style="width:80%;height:60px">
             </div>
 
             <div class="clearfix"></div>
@@ -73,7 +73,7 @@
                       <li><a href="other_charts.html">Other Charts</a></li>
                     </ul>
                   </li>
-                  <li><a href="membermanage.htm"><i class="fa fa-clone"></i>회원 관리</a>
+                  <li><a href="membermanage.admin"><i class="fa fa-clone"></i>회원 관리</a>
                   </li>
                 </ul>
               </div>
