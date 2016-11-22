@@ -20,7 +20,7 @@ public interface CommuteDAO {
 	public List<CommuteJoinCstartJoinCendDTO> getSelect(int page, String query, String m_id);
 	
 	//회원의 출근 시간
-	public CommuteJoinCstartJoinCendDTO csupdate(CommuteJoinCstartJoinCendDTO dto);	
+	public void csupdate(CommuteJoinCstartJoinCendDTO dto);	
 	public String csselect(String m_id);
 	
 	//회원의 퇴근 시간

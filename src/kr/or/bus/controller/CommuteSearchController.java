@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,8 +71,10 @@ public class CommuteSearchController {
 		return "commute/gotowork";
 	}
 	
-	@RequestMapping(value="/show.htm", method=RequestMethod.POST)
-	public String go(Model model,CommuteJoinCstartJoinCendDTO dto, String m_id ){
+	
+/*	@RequestMapping(value="/show.htm", method=RequestMethod.POST)
+	@Scheduled(cron="0 00 09 * * *")
+	public String go(Model model,CommuteJoinCstartJoinCendDTO dto, String m_id){
 		System.out.println("이거는~");
 		
 		CommuteDAO  comdao = sqlsession.getMapper(CommuteDAO.class);
@@ -80,9 +83,10 @@ public class CommuteSearchController {
 		comdao.csselect(m_id);
 		
 		model.addAttribute("comdao",comdao);
+		return m_id;
 			
 		//return dto;
-	}
+	}*/
 	
 	
 	/*@RequestMapping(value="/getoffwork.htm")
