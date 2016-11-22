@@ -125,6 +125,8 @@ function loadCalendar(){
 		selectHelper : true,
 		editable : true,
 		events : array,
+		eventDurationEditable: false,
+		eventStartEditable:false,
 		
 		//새로운 일정
 		select : function(start, end, allDay) {
@@ -149,11 +151,29 @@ function loadCalendar(){
 		
 		//일정 드래그
 		eventDrop : function(event, delta, revertFunc) {
-			
-					window.location.reload();
+			var id = event.id;
+			/*var m_id = event.?;
+			var o_code=event.?;*/
 
-		},
-		//eventStartEditable: false
+			$('.antoclose2').click();
+			
+			/*$.ajax({
+				url : 'reguloff_update.htm',
+				type : 'post',
+				data : {
+					id:id,
+					m_id:m_id,
+					o_code:o_code
+				},
+				success : function(data) {
+
+					//updateEvent, renderEvent를 하기 위해서는.... 표준 event object가 되어야 한다
+					$("#calendar").fullCalendar('refetchEvents');
+					$("#calendar").fullCalendar('unselect');
+				}
+			});*/
+			
+		}
 		
 		/*//날짜 길이 늘이기 이벤트
 		eventResize : function(event, jsEvent, view) {
