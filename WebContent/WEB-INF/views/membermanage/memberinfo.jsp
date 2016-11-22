@@ -186,6 +186,9 @@
 										</thead>
 										<tbody>
 											<c:set value="${list}" var="d"/>
+											<script>
+												console.log("${d}");
+											</script>
 											<c:forEach var="i" items="${d}">
 											<tr>
 												<td>${i.r}</td>
