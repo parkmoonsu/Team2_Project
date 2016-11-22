@@ -157,4 +157,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertAuth" parameterType = "String">
 		insert into authority values (#{m_id},'ROLE_USER')
 	</insert>
+	
+	<select id="getPhoto" resultType = "kr.or.bus.dto.MDetailDTO" parameterType = "String">
+		select m_photo
+		from mdetail
+		where m_id = #{m_id}
+	</select>
 </mapper>

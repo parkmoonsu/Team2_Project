@@ -1,36 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html >
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.my-box { border:1px solid; padding:10px; }
+
+</style>
+</head>
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>KOSBUS 로그인</title>
 
-<!-- CSS -->
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="assets/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/css/form-elements.css">
-<link rel="stylesheet" href="assets/css/style.css">
+<title>회원가입</title>
 
-<link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bootstrap-3.3.7/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <script src="bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
-    <script src="http://www.w3schools.com/lib/w3data.js"></script>
-  	<script src="bootstrap-3.3.7/assets/css/carousel/jssor.slider-21.1.6.mini.js" type="text/javascript"></script>
-  	<script src="bootstrap-3.3.7/assets/css/carousel/docs.min.js" type="text/javascript"></script>
-  	<script src="bootstrap-3.3.7/assets/css/carousel/bootstrap.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="bootstrap-3.3.7/assets/css/carousel/ie10-viewport-bug-workaround.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
-    <script src="bootstrap-3.3.7/assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="bootstrap-3.3.7/assets/js/vendor/holder.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Bootstrap -->
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -72,19 +58,32 @@
 
 
 
-</head>
 
+</head>
 <body>
 	<header>
-	 <jsp:include page="/sidebar/header.jsp" /> 
-	 </header>
+		<jsp:include page="/sidebar/header.jsp" />
+	</header>
 
-	<!-- Top content -->
-	<div class="top-content" style="margin-top:30px">
-		<div class="inner-bg">
-			<div class="container">
-			<div class="col-sm-2"></div>
-				<div class="col-sm-8">
+
+	<div class="container" style="margin-top: 20px;">
+		<div class="main_container">
+
+			<!-- page content -->
+			<div role="main">
+				<!-- class="right_col" 이거 뺌-->
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>Form Wizards</h3>
+						</div>
+
+					</div>
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="col-sm-2"></div>
+							<div class="col-sm-8 col-xs-12">
 								<div class="x_panel">
 									<div class="x_title">
 									<h2>
@@ -93,9 +92,11 @@
 
 									<div class="clearfix"></div>
 								</div>
-					<div class="col-sm-8 col-sm-offset-2 text">
+					<div class="col-xs-12 col-sm-8 col-sm-offset-2 text">
 					<div class="row">
+						<div align="center">
 						<img src="${pageContext.request.contextPath}/images/logo2.png" style="width:300px;height:200px;margin-top:20px">
+						</div>
 						<div class="form-top">
 							<div class="form-top-center">
 
@@ -114,17 +115,14 @@
 								<br>
 								<input type="submit" class="btn btn-primary btn-lg btn-block" value = "로그인">
 								<br>
-								<div class="col-sm-6" align="center">
+								<div class="col-xs-6 col-sm-6" align="center">
 								<a href="search.htm" class="btn btn-primary btn-sm btn-block">아이디/비밀번호찾기</a>
 								</div>
-								<div class="col-sm-6" align="center">
+								<div class="col-xs-6 col-sm-6" align="center">
 							<a href="join.htm" class="btn btn-primary btn-sm btn-block">회원가입</a>
 								</div>
 								</div>
 							</form>
-							
-							
-							
 											<c:if test="${param.error != null}">
 												<div>
 
@@ -150,20 +148,77 @@
 		</div>
 		
 </div>
-</div>
+						
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
 
-	<footer> 
-		<div class ="container">
-			<jsp:include page="/sidebar/footer.jsp" /> 
+			<!-- footer content -->
+			<footer>
+				<jsp:include page="/sidebar/footer.jsp" />
+			</footer>
+			<!-- /footer content -->
 		</div>
-	</footer>
-	<!-- Javascript -->
-	<script src="assets/js/jquery-1.11.1.min.js"></script>
-	<script src="assets/js/jquery.backstretch.min.js"></script>
-	<script src="assets/js/jquery-1.11.1.js"></script>
+	
 
-	<!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
+
+
+
+<!-- BEGIN # MODAL LOGIN -->
+	<div class="modal fade" id="email-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	<div class="modal-dialog">
+			<div class="modal-content">      
+                <!-- Begin # DIV Form -->
+                <div id="div-forms">
+                <div class="modal-header" align="center">
+					<h3>이메일 인증</h3>
+					<hr>
+				</div>
+                    <!-- Begin # Login Form -->
+                    <form id="login-form" action="" method="post">
+		                <div class="modal-body">
+				    		<div id="div-login-msg">
+                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-login-msg">인증번호를 입력하세요.</span>
+                            </div>
+				    		<input id="login_username" name="username" class="form-control" type="text" placeholder="인증번호 입력" required>
+        		    	</div>
+        		    	<div class="modal-footer">
+                            <div>
+                                <a href="redirect:/join.htm"><button type="submit" class="btn btn-primary btn-lg btn-block">완료</button></a>
+                            </div>
+        		    	</div>
+                    </form>
+                    <!-- End # Login Form -->  
+                </div>
+                <!-- End # DIV Form --> 
+			</div>
+		</div>
+	</div>
+    <!-- END # MODAL LOGIN -->
+
+		<!-- jQuery -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+		<!-- Bootstrap -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+		<!-- FastClick -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
+		<!-- NProgress -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
+		<!-- jQuery Smart Wizard -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+		<!-- Custom Theme Scripts -->
+		<script
+			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+		<!-- ajax -->
+		
+		<!-- jQuery Smart Wizard -->
+		
 </body>
 </html>

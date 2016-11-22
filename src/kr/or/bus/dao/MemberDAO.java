@@ -50,7 +50,8 @@ public interface MemberDAO {
 	//비밀번호 찾기 (가입된 ID와 이메일 확인)
 	public int searchIdEmail(String m_id , String m_email);
 	
-	//비밀번호 찾기(가입된 ID의 이름 가져와서 이메일 보낼때 활용)
+	//1 . 비밀번호 찾기(가입된 ID의 이름 가져와서 이메일 보낼때 활용)
+	//2 . include 하는 페이지들의 세션 아이디를 통해 이름을 얻음
 	public MemberDTO getName(String m_id);
 	
 	//비밀번호 찾기 (매치된 ID,이메일로부터 가져온 비밀번호를 임시비밀번호로 변경)
@@ -89,4 +90,6 @@ public interface MemberDAO {
 	//승인시 권한 부여
 	public void insertAuth(String m_id);
 	
+	//회원 사진 가져오기
+	public MDetailDTO getPhoto(String m_id);
 }

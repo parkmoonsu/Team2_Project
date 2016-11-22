@@ -56,12 +56,15 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+<!-- jQuery -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 </head>
 
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
-			<div class="col-md-3 left_col">
+			<div class="col-xs-3 col-md-3 left_col">
 				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
 			</div>
 
@@ -84,7 +87,7 @@
 					<div class="clearfix"></div>
 
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-xs-12 col-md-12">
 							<div class="x_panel">
 								<div class="x_title">
 									<nav class="navbar navbar-default">
@@ -124,7 +127,14 @@
 										</thead>
 										<tbody>
 											<c:set value="${list}" var="d"/>
+											<c:if test ="${d == '[]' }">
+											<tr>
+												<td colspan = '6' align = "center">가입신청 회원 없음</td>
+											</tr>
+											</c:if>
 											<c:forEach var="i" items="${d}">
+											<c:choose>
+											<c:when test="${i != null}">
 											<tr>
 												<td>${i.r}</td>
 												<td><a>${i.m_id}</a></td>
@@ -137,6 +147,8 @@
 														
 												</td>
 											</tr>
+											</c:when>
+											</c:choose>
 											</c:forEach>
 										</tbody>
 									</table>
@@ -186,9 +198,6 @@
 		</div>
 	</div>
 
-	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>

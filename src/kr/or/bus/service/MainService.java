@@ -115,4 +115,18 @@ public class MainService {
 		dao.updateMember2(ddto, m_id);
 		
 	}
+	
+	public MemberDTO getName(String m_id){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		MemberDTO dto = dao.getName(m_id);
+		
+		return dto;
+	}
+	
+	public MDetailDTO getPhoto(String m_id){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		MDetailDTO dto = dao.getPhoto(m_id);
+		
+		return dto;
+	}
 }

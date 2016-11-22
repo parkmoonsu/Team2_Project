@@ -102,9 +102,9 @@
 												</div>
 												<div class="panel-body">
 													<div class="row">
-														<div class="col-sm-5" align="center">
+														<div class="col-xs-12 col-sm-5" align="center">
 															<div class="row">
-																<div class="col-sm-12">
+																<div class="col-xs-12 col-sm-12">
 																	
 																	<img
 																		src="${pageContext.request.contextPath}/join/upload/${dto.m_photo}"
@@ -116,7 +116,7 @@
 																
 															</div>
 														</div>
-														<div class="col-sm-7">
+														<div class="col-xs-12 col-sm-7">
 															<table class="table table-user-information">
 																<tbody>
 																	<tr>
@@ -180,10 +180,10 @@
 																	</tr>
 																</tbody>
 															</table>
-
+															<div class="col-xs-12">
 															<a class="btn btn-primary" id="pass">정보수정</a> 
 															<a class="btn btn-primary" id="watch">이력보기</a>
-															
+															</div>
 														</div>
 													</div>
 												</div>
