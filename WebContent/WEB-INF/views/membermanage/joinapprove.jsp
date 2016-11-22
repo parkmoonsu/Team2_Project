@@ -131,7 +131,7 @@
 												<td><small>${i.m_name}</small></td>
 												<td><small>${i.j_name}</small></td>
 												<td><small>${i.m_regdate}</small></td>
-												<td style = "text-align:center"> <a href="deleteMember.htm?m_id=${i.m_id}"
+												<td style = "text-align:center"> <a href="approveMember.htm?m_id=${i.m_id}"
 													class="btn btn-success btn-xs"><i class="fa fa-check"></i>
 														승인 </a>
 														
@@ -251,16 +251,8 @@
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	 $('#search').click( function () {
-	$.ajax({
-		url:"SearchMember.htm",
-		type:"get",
-		success:function(data){
-			console.log(data);
-			
-		}
-		});
-	 });
+	
+		
 });
 
 </script>

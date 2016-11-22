@@ -83,4 +83,10 @@ public interface MemberDAO {
 	
 	//(관리자) 승인이 안된 회원 총 인원 수
 	public int memberNCount();
+	
+	//(관리자) 승인 클릭시 m_check -> y로 업데이트
+	public void updateCheck(String m_id);
+	//승인시 권한 부여
+	public void insertAuth(String m_id);
+	
 }
