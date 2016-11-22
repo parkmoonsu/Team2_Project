@@ -129,8 +129,10 @@
 													</div>
 												</div>
 												<div style="float: right; margin: 30px;">
+												<div class="col-xs-12">
 													<a  class="btn btn-success" 
-														id="okay">확인</a>
+														id="okay" >확인</a>
+														</div>
 												</div>
 												
 															</form>

@@ -68,7 +68,7 @@
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
-			<div class="col-md-3 left_col">
+			<div class="col-xs-12  col-md-3 left_col">
 				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
 			</div>
 
@@ -145,7 +145,7 @@
 					<div class="clearfix"></div>
 
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
 									<nav class="navbar navbar-default">
