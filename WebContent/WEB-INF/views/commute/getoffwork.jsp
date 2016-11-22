@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,9 +51,18 @@
 	rel="stylesheet">
 <script type="text/javascript">
 	$(function(){
-		/* $("#photo_swipe").click(function(){
-			$("#photo").click();
-		}); */
+		$("#go").click(function(){
+			$.ajax({
+				dataType:"jsp",
+				url:"gotowork2.jsp",
+				data: ,
+				success:function(data){
+					("#show").append();
+				},
+				
+				
+			});
+		});
 	});
 </script>
 </head>
@@ -72,57 +83,49 @@
 				<!-- top tiles -->
 				<div class="row tile_count"></div>
 				<!-- /top tiles -->
-
+	
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="dashboard_graph">
 							<div class="row x_title">
 								<div class="col-md-6">
-									<h3>출/퇴근 조회</h3>
+									<h3>퇴근</h3>
 								</div>
 							</div>
-							<div class="clearfix">
-								<div class="container">
-									<div class="row">
+							<div class="clearfix" style="margin-top:20px">
+								<div class="container" >
+								<div class="col-sm-5"></div>
+									<input type="button" id="go" value="퇴근하기" onclick="go()" class="btn btn-primary"/>
+
+									<div class="row" style="margin-top:20px">
 										<div class="col-sm-1"></div>
 										<div class="col-sm-10">
-
-											<div class="panel panel-info">
-												<div class="panel-heading">
-													<h3 class="panel-title">출/퇴근 조회</h3>
-												</div>
+											<div id="show"></div>
+											 <div class="panel panel-info">
+												<!-- <div class="panel-heading">
+													
+												</div> -->
 												<div class="panel-body">
 													<div class="row">
 														<div class="col-sm-1" align="center">
 															<div class="row"></div>
 														</div>
 														<div class="col-sm-10">
-															<table class="table table-user-information">
-																<tbody style="text-align: center">
-																	<tr>
-																		<td>NO.</td>
-																		<td>날짜</td>
-																		<td>출근시간</td>
-																		<td>퇴근시간</td>
-																	</tr>
-																	
-																	<c:forEach var="i" items="${list}">
-																	<tr>
-																		<td>${i}</td>
-																	 	<td>${i.c_date}</td>
-																		<td>${i.c_start}</td>
-																		<td>${i.c_end}</td>
-																	<tr>
-																	</c:forEach>
-																	
-																</tbody>
-															</table>															
+														<form>
+															<div class="my-box">
+															<se:authentication property="name" var = "LoginUser"/>       													
+																${LoginUser}님의 퇴근시간은 ${dto.c_end}입니다.<br>
+																${LoginUser}님의 퇴근상태는 ${dto.ce_stat}입니다.															
+															
+																<input type="submit" value="출/퇴근 조회하기">
+ 															</div>
+ 														</form>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									</div> 
 								</div>
 
 							</div>
@@ -136,17 +139,19 @@
 		</div>
 		<!-- /page content -->
 
-		<!-- footer content -->
-		<footer>
-			<div class="pull-right">
-				Gentelella - Bootstrap Admin Template by <a
-					href="https://colorlib.com">Colorlib</a>
-			</div>
-			<div class="clearfix"></div>
-		</footer>
-		<!-- /footer content -->
+
+
+
+	<!-- footer content -->
+	<footer>
+		<div class="pull-right">
+			Gentelella - Bootstrap Admin Template by <a
+				href="https://colorlib.com">Colorlib</a>
+		</div>
+		<div class="clearfix"></div>
+	</footer>
+	<!-- /footer content -->
 	</div>
-	
 	
 	<!-- Bootstrap -->
 	<script
@@ -211,5 +216,5 @@
 	
 	
 	
-	</body>
-</html>
+</body>
+</html> --%>
