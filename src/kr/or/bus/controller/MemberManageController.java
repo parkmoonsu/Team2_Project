@@ -17,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.service.MemberManageService;
 @Controller
 public class MemberManageController {
 
+	@Autowired
+	private View jsonview;
+	
 	@Autowired
 	private MemberManageService service;
 	
@@ -59,6 +63,12 @@ public class MemberManageController {
 		
 		return "membermanage/joinapprove";
 	}
+
+	@RequestMapping("/searching.htm")
+	public View searching(String param){
+		System.out.println("param"+param);
+		return jsonview;
+	}
 	
 	@RequestMapping("/approveMember.htm")
 	public String approveMember(String m_id){
@@ -67,5 +77,6 @@ public class MemberManageController {
 		service.updateCheck(m_id);
 		
 		return "membermanage/updatesuccess";
+
 	}
 }

@@ -56,8 +56,7 @@
 		<!-- <constructor-arg name="strength" value="20"></constructor-arg> -->
 	</bean>
 
-	<!-- scheduled -->
-	<task:scheduler id="schedule" pool-size="4"/>
+	
 	
 </beans>
 
