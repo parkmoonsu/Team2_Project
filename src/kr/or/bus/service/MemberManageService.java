@@ -78,4 +78,11 @@ public class MemberManageService {
 		return size;
 	}
 	
+	//승인여부 y 로 바꾸고 권한 부여
+	public void updateCheck(String m_id){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		dao.updateCheck(m_id);
+		dao.insertAuth(m_id);
+	}
+
 }

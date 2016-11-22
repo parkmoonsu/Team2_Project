@@ -28,8 +28,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into member(m_id,j_code,m_pw,m_name) values (#{m_id},#{j_code},#{m_pw},#{m_name})
 	</insert>
 	<insert id="insertDetail" parameterType = "kr.or.bus.dto.MDetailDTO">
-		insert into mdetail(m_id,m_addr,m_daddr,m_phone,m_email,m_license,m_photo,m_birth,M_ANNUAL,m_gender,m_echeck,m_check,m_resume) 
-		values (#{m_id},#{m_addr},#{m_daddr},#{m_phone},#{m_email},#{m_license},#{m_photo},#{m_birth},18,#{m_gender},#{m_echeck},'N',#{m_resume})
+		insert into mdetail(m_id,m_addr,m_daddr,m_phone,m_email,m_license,m_photo,m_birth,M_ANNUAL,m_gender,m_echeck,m_check,m_resume,m_regdate) 
+		values (#{m_id},#{m_addr},#{m_daddr},#{m_phone},#{m_email},#{m_license},#{m_photo},#{m_birth},18,#{m_gender},#{m_echeck},'N',#{m_resume},sysdate)
 	</insert>
 	
 	<insert id="insertResrecord" parameterType = "kr.or.bus.dto.ResRecordDTO">
@@ -147,4 +147,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member me natural join mdetail md natural join job
 		where m_check = 'N'
 	</select>
+	
+	<update id="updateCheck" parameterType = "String">
+		update mdetail
+		set m_check = 'Y'
+		where m_id = #{m_id}
+	</update>
+	
+	<insert id="insertAuth" parameterType = "String">
+		insert into authority values (#{m_id},'ROLE_USER')
+	</insert>
 </mapper>
