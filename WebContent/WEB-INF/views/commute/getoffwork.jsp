@@ -1,18 +1,10 @@
-<!--
-	제너용럴킹갓현  
-	2016-11-17
-	관리자-  사용자 정보 수정 페이지
- -->
-
-
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="se"
-	uri="http://www.springframework.org/security/tags"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="UTF-8">
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -20,8 +12,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Gentellela Alela! |</title>
 
+<script
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+	
+<title>KOSBUS</title>
 <!-- Bootstrap -->
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
@@ -54,115 +49,110 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+<script type="text/javascript">
+	$(function(){
+		$("#go").click(function(){
+			$.ajax({
+				dataType:"jsp",
+				url:"gotowork2.jsp",
+				data: ,
+				success:function(data){
+					("#show").append();
+				},
+				
+				
+			});
+		});
+	});
+</script>
 </head>
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
-				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
 			</div>
 
 			<!--상단 menu -->
+
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
-
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<div class="">
-					<div class="page-title">
-						<div class="title_left">
-							<h3>
-								<small>정보수정</small>
-							</h3>
-						</div>
-					</div>
-
-					<div class="clearfix"></div>
-
-					<div class="row">
-						<div class="col-md-12">
-							<div class="x_panel">
-								<div class="x_title">
-									<nav class="navbar navbar-default">
-										<div class="container-fluid">
-											<ul class="nav navbar-nav">
-												<li><a href="#">회원정보</a></li>
-												<li><a href="#">회원가입승인</a></li>
-												<li><a href="#">스케줄관리</a></li>
-											</ul>
-										</div>
-									</nav>
+				<!-- top tiles -->
+				<div class="row tile_count"></div>
+				<!-- /top tiles -->
+	
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="dashboard_graph">
+							<div class="row x_title">
+								<div class="col-md-6">
+									<h3>퇴근</h3>
 								</div>
-								<div class="x_content">
+							</div>
+							<div class="clearfix" style="margin-top:20px">
+								<div class="container" >
+								<div class="col-sm-5"></div>
+									<input type="button" id="go" value="퇴근하기" onclick="go()" class="btn btn-primary"/>
 
-
-									<!-- start project list -->
-									<div
-										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-										<div class="input-group">
-											<input type="text" class="form-control"
-												placeholder="Search for..." id="search"> <span
-												class="input-group-btn">
-												<button class="btn btn-default" type="button">Go!</button>
-											</span>
+									<div class="row" style="margin-top:20px">
+										<div class="col-sm-1"></div>
+										<div class="col-sm-10">
+											<div id="show"></div>
+											 <div class="panel panel-info">
+												<!-- <div class="panel-heading">
+													
+												</div> -->
+												<div class="panel-body">
+													<div class="row">
+														<div class="col-sm-1" align="center">
+															<div class="row"></div>
+														</div>
+														<div class="col-sm-10">
+														<form>
+															<div class="my-box">
+															<se:authentication property="name" var = "LoginUser"/>       													
+																${LoginUser}님의 퇴근시간은 ${dto.c_end}입니다.<br>
+																${LoginUser}님의 퇴근상태는 ${dto.ce_stat}입니다.															
+															
+																<input type="submit" value="출/퇴근 조회하기">
+ 															</div>
+ 														</form>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-									<table class="table table-striped projects">
-										<thead>
-											<tr>
-												<th>번호</th>
-												<th>ID</th>
-												<th>이름</th>
-												<th>연락처</th>
-												<th>등급</th>
-												<th>이력구분</th>
-												<th style="width: 20%"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:set value="${dto}" var="d"/>
-											<c:forEach var="i" items="${d}">
-											<tr>
-												<td>${i.m_id}</td>
-												<td><a>아이디</a></td>
-												<td><small>이름</small></td>
-												<td>연락처</td>
-												<td><small>등급</small></td>
-												<td>이력구분</td>
-												<td><a href="#" class="btn btn-info btn-xs"><i
-														class="fa fa-pencil"></i> 수정 </a> <a href="#"
-													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
-														삭제 </a></td>
-											</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-									<!-- end project list -->
-
+									</div> 
 								</div>
+
 							</div>
 						</div>
 					</div>
+
 				</div>
+				<br />
+
 			</div>
-
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
 		</div>
-	</div>
+		<!-- /page content -->
 
-	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+
+
+
+	<!-- footer content -->
+	<footer>
+		<div class="pull-right">
+			Gentelella - Bootstrap Admin Template by <a
+				href="https://colorlib.com">Colorlib</a>
+		</div>
+		<div class="clearfix"></div>
+	</footer>
+	<!-- /footer content -->
+	</div>
+	
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -223,20 +213,8 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	 $('#search').click( function () {
-	$.ajax({
-		url:"SearchMember.htm",
-		type:"get",
-		success:function(data){
-			console.log(data);
-			
-		}
-		});
-	 });
-});
-
-</script>
-</body> 	
-</html>
+	
+	
+	
+</body>
+</html> --%>

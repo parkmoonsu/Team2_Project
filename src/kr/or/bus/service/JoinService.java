@@ -99,6 +99,7 @@ public class JoinService {
 			          rdto.setRes_com(sheet.getCell(2, rowindex).getContents());
 			          rdto.setRes_start(sheet.getCell(3, rowindex).getContents());
 			          rdto.setRes_end(sheet.getCell(4, rowindex).getContents());
+			          rdto.setRes_period(sheet.getCell(5, rowindex).getContents());
 			          
 			          reslist.add(rdto);
 				 }

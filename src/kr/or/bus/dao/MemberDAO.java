@@ -15,6 +15,7 @@ import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinResRecordDTO;
 import kr.or.bus.dto.ResRecordDTO;
 
 public interface MemberDAO {
@@ -49,7 +50,8 @@ public interface MemberDAO {
 	//비밀번호 찾기 (가입된 ID와 이메일 확인)
 	public int searchIdEmail(String m_id , String m_email);
 	
-	//비밀번호 찾기(가입된 ID의 이름 가져와서 이메일 보낼때 활용)
+	//1 . 비밀번호 찾기(가입된 ID의 이름 가져와서 이메일 보낼때 활용)
+	//2 . include 하는 페이지들의 세션 아이디를 통해 이름을 얻음
 	public MemberDTO getName(String m_id);
 	
 	//비밀번호 찾기 (매치된 ID,이메일로부터 가져온 비밀번호를 임시비밀번호로 변경)
@@ -58,9 +60,6 @@ public interface MemberDAO {
 	//권한별 사이드바 바꾸기
 	public MemberJoinJobDTO getJobName(String username);
 	
-	//승인여부 구하기 (N인 사람만 뽑기)
-	public List<MemberJoinMDetailDTO> getNcheck();
-	
 	//로그인한 정보로 회원의 개인정보 확인 ( 수정 넘어가기 전 )
 	public MemberJoinMDetailDTO getMemberInfo(String m_id);
 
@@ -68,7 +67,29 @@ public interface MemberDAO {
 	public MemberDTO passMatch(String m_id);
 	
 	//회원 정보 수정
-	public void updateMember1(MemberDTO mdto, String m_id);
+	public void updateMember1(MemberDTO mdto, String m_id ,String hidden);
 	public void updateMember2(MDetailDTO ddto, String m_id);
-		
+
+	//(관리자) 회원 정보 리스트 가져오기
+	public List<MemberJoinMDetailDTO> memberList(int page);
+	
+	//(관리자) 회원 정보 개수
+	public int memberCount();
+
+    //회원 정보 수정 > 이력사항 확인
+	public List<MemberJoinResRecordDTO> getResRecordInfo(String m_id);
+	
+	//(관리자) 회원 가입 승인 - 승인 여부 N인 사람만 가져오기
+	public List<MemberJoinMDetailDTO> memberNList(int page);
+	
+	//(관리자) 승인이 안된 회원 총 인원 수
+	public int memberNCount();
+	
+	//(관리자) 승인 클릭시 m_check -> y로 업데이트
+	public void updateCheck(String m_id);
+	//승인시 권한 부여
+	public void insertAuth(String m_id);
+	
+	//회원 사진 가져오기
+	public MDetailDTO getPhoto(String m_id);
 }

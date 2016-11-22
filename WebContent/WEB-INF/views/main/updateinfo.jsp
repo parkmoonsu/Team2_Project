@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +56,14 @@
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
-				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
+				<c:choose>
+          		<c:when test ="${jobname == '기사'}">
+          			<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
+          		</c:when>
+          		<c:otherwise>
+          			<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+          		</c:otherwise>
+       		</c:choose>
 			</div>
 
 			<!--상단 menu -->
@@ -116,8 +124,10 @@
 																			<div class="form-group">
 																				<span class="col-sm-3">비밀번호</span>
 																				<div class="col-sm-9">
-																					<input type="password" id="m_pw" name="m_pw" value = "${dto.m_pw}"
+																					<input type="password" id="m_pw" name="m_pw"
 																						class="form-control">
+																						
+																					<input type = "hidden" id = "hidden" name = "hidden" value = "hidden">
 																				</div>
 																			</div>
 																		</td>
@@ -128,7 +138,7 @@
 																				<span class="col-sm-3">다시입력</span>
 																				<div class="col-sm-9">
 																					<input type="password" id="m_pw2" name="m_pw2"
-																						class="form-control" value = "${dto.m_pw}">
+																						class="form-control">
 																				</div>
 																			</div>
 																		</td>
@@ -300,6 +310,10 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#update").click(function(){
+				if($("#m_pw").val() == ""){
+					$("#hidden").attr("value","real");
+				}
+				
 				if(($("#m_pw").val() != $("#m_pw2").val())){
 					alert("비밀번호가 일치 하지 않습니다.");
 					$("#m_pw2").focus();

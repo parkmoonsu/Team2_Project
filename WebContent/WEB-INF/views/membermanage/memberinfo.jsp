@@ -1,7 +1,9 @@
-<!--
-	제너용럴킹갓현  
-	2016-11-17
-	관리자-  사용자 정보 수정 페이지
+<!-- 
+	@FileName : memberinfo.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.17
+	@Author	: 김용현
+	@Discription : (관리자)회원 관리 페이지 View단
  -->
 
 
@@ -20,7 +22,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Gentellela Alela! |</title>
+<title>회원 관리</title>
 
 <!-- Bootstrap -->
 <link
@@ -54,13 +56,16 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+	
+<!-- Editor -->
+<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+<!-- jQuery -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+
 </head>
 
 <body class="nav-md">
-		<a type="hidden" style="display: none">
-				<input type="file">
-		</a>
-
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -73,6 +78,60 @@
 			</div>
 
 			<!-- page content -->
+			
+			<!-- modal  -->
+
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel">
+				<div class="modal-dialog" role="document">
+				<form action="mailsend.htm" method="post" enctype="multipart/form-data">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="exampleModalLabel"></h4>
+						</div>
+						<div class="modal-body">
+								<div class="form-group">
+									<i class="fa fa-male"></i>&nbsp;<label for="people" class="control-label"> 받는 사람</label> <input
+										type="text" class="form-control" id="people" name="to">
+								</div>
+
+								<div class="form-group">
+									<i class="fa fa-pencil-square-o"></i>&nbsp;<label for="subject" class="control-label"> 제목</label> <input
+										type="text" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요">
+								</div>
+
+								<div class="form-group">
+									<i class="fa fa-folder-open-o"></i>&nbsp;<label for="fattach" class="control-label"> 파일첨부 </label> <input
+										type="file" class="form-control" id="fattach" name="filename">
+								</div>
+
+								<div class="form-group">
+									<label for="message-text" class="control-label"> <span
+										class="glyphicon glyphicon-envelope" aria-hidden="true"
+										style="color: gray"></span> 메세지:
+									</label>
+									<textarea class="form-control" id="message-text" name="content" cols="5"></textarea>
+									<script>
+										CKEDITOR.replace('message-text');
+									</script>
+								</div>
+							
+						</div>
+						<div class="modal-footer">
+							<input type="submit" class="btn btn-primary" value="메세지 보내기">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">취소</button>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- 모달끝 -->
 			<div class="right_col" role="main">
 				<div class="">
 					<div class="page-title">
@@ -92,41 +151,50 @@
 									<nav class="navbar navbar-default">
 										<div class="container-fluid">
 											<ul class="nav navbar-nav">
-												<li><a href="InfoChange.htm">회원정보</a></li>
-												<li><a href="Allow.htm">회원가입승인</a></li>
+												<li><a href="membermanage.htm"><strong>회원정보</strong></a></li>
+												<li><a href="joinapprove.htm">회원가입승인</a></li>
 												<li><a href="#">스케줄관리</a></li>
 											</ul>
 										</div>
 									</nav>
 								</div>
 								<div class="x_content">
-				
+
+
 									<!-- start project list -->
+									<div
+										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+										<div class="input-group">
+											<input type="text" class="form-control"
+												placeholder="Search for..." id="search"> <span
+												class="input-group-btn">
+												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
+											</span>
+										</div>
 									</div>
-									<table class="table table-striped projects">
+									<table class="table table-hover projects">
 										<thead>
 											<tr>
 												<th>번호</th>
 												<th>ID</th>
 												<th>이름</th>
-												<th>연락처</th>
-												<th>등급</th>
-												<th>이력구분</th>
+												<th>이메일</th>
+												<th>직책</th>
+												<th>연차</th>
 												<th style="width: 20%"></th>
 											</tr>
 										</thead>
 										<tbody>
-											
-											<c:forEach var ="d"  items="${list}">
+											<c:set value="${list}" var="d"/>
+											<c:forEach var="i" items="${d}">
 											<tr>
-												<td>1.</td>
-												<td><a>${d.m_id}</a></td>
-												<td><small>이름</small></td>
-												<td>연락처</td>
-												<td><small>등급</small></td>
-												<td>이력구분</td>
-												<td><a href="#" class="btn btn-info btn-xs"><i
-														class="fa fa-pencil"></i> 확인 </a> <a href="#"
+												<td>${i.r}</td>
+												<td><a>${i.m_id}</a></td>
+												<td><small>${i.m_name}</small></td>
+												<td><a href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="${i.m_name},${i.m_email}">${i.m_email}</a></td>
+												<td><small>${i.j_name}</small></td>
+												<td>${i.m_annual}일</td>
+												<td style = "text-align:center"> <a href="deleteMember.htm?m_id=${i.m_id}"
 													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
 														삭제 </a></td>
 											</tr>
@@ -134,7 +202,32 @@
 										</tbody>
 									</table>
 									<!-- end project list -->
-
+									
+									<!-- 요기서부터 페이징처리 -->
+									<c:set var = "mc" value = "${membercount}"/>
+									<c:set var = "pgc" value = "${pgs}"/>
+									<c:choose>
+											<c:when test="${mc % 10 == 0}">
+												<c:set value = "${mc/10}" var = "pagecount"/>
+											</c:when>
+											<c:otherwise>
+												<c:set value = "${mc/10 + 1}" var = "pagecount"/>
+											</c:otherwise>
+									</c:choose>	
+									<ul class="pager">
+										<c:if test="${pgc > 1}">
+											<li><a href="membermanage.htm?pg=${pgc-1}">Previous</a></li>
+										</c:if>
+										
+										
+										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
+											<li><a href="membermanage.htm?pg=${i}">${i}</a></li>
+										</c:forEach>
+										
+										<c:if test="${pgc < mc/10 }">
+											<li><a href="membermanage.htm?pg=${pgc+1}">Next</a></li>
+										</c:if>
+									</ul>
 								</div>
 							</div>
 						</div>
@@ -154,9 +247,6 @@
 		</div>
 	</div>
 
-	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -225,10 +315,30 @@ $(function() {
 		type:"get",
 		success:function(data){
 			console.log(data);
-			
+	
 		}
 		});
 	 });
+	 
+	 $('#btnsearch').click( function(){
+		console.log($('#search').val());
+		var param = $('#search').val();
+		 $.ajax({
+			url:"searching.htm",
+			type:"post",
+			data: {"param":param},
+			success:function(data){
+				console.log(data);
+			}
+		});
+	 });
+	 
+	 $('#exampleModal').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget) 
+		  var recipient = button.data('whatever').split(','); 
+		  $('#exampleModalLabel').html("<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"+recipient[0]+'</span>님에게 보내기');
+		  $('#people').val(recipient[1]);
+		});
 });
 
 </script>

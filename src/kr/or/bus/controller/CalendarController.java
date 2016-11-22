@@ -36,10 +36,9 @@ public class CalendarController {
 		CalendarDTO dto=new CalendarDTO();
 		dto.setTitle(title);
 			
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date sqldate=new Date(sdf.parse(sstart).getTime());
+		java.sql.Date sqldate=java.sql.Date.valueOf(sstart);
 		dto.setSstart(sqldate);
-		sqldate=new Date(sdf.parse(eend).getTime());
+		sqldate=java.sql.Date.valueOf(eend);
 		dto.setEend(sqldate);
 		dto.setAllDay(allDay);
 		dto.setUrl("http"+url);
@@ -105,9 +104,9 @@ public class CalendarController {
 		dto.setO_code(o_code);
 		
 		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
-		
 		dao.reguloff_insert(dto);
-		map.addAttribute("data", dto);
+		RegulOffDTO dto2=dao.reguloff_selectseq();
+		map.addAttribute("data", dto2);
 		return jsonview;//str;
 	}
 	

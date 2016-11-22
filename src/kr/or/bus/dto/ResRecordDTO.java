@@ -23,6 +23,14 @@ public class ResRecordDTO {
 	private String res_com;
 	private String res_start;
 	private String res_end;
+	private String res_period;
+	
+	public String getRes_period() {
+		return res_period;
+	}
+	public void setRes_period(String res_period) {
+		this.res_period = res_period;
+	}
 	public String getRes_num() {
 		return res_num;
 	}
