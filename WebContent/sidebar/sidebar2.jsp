@@ -43,9 +43,9 @@
               
                   <li><a><i class="fa fa-clone"></i>출/퇴근 관리 <span class="fa fa-chevron-down"></span></a>
                   	<ul class="nav child_menu">
-                  		<li><a href="gotowork.htm?m_id=${LoginUser}">출근하기</a></li>
-                  		<li><a href="getoffwork.htm?m_id=${LoginUser}">퇴근하기</a></li>
-                  		<li><a href="comsearch.htm?m_id=${LoginUser}">출/퇴근 조회</a></li>
+                  		<li><a href="gotowork.member?m_id=${LoginUser}">출근하기</a></li>
+                  		<li><a href="getoffwork.member?m_id=${LoginUser}">퇴근하기</a></li>
+                  		<li><a href="comsearch.member?m_id=${LoginUser}">출/퇴근 조회</a></li>
                   	</ul>
                   </li>
                 </ul>

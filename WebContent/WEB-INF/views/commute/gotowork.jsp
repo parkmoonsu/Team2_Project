@@ -50,21 +50,26 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-<script type="text/javascript">
-	$(function(){
-		var stime = ${dto.c_start};
-		console.log(stime);
-		$("#go").click(function(){		
-		   $.ajax({
-			url:"show.htm",
-			data: "m_id",
+ <script type="text/javascript">
+ 	
+	$(function(){ 
+	var id="${LoginUser}";
+		$("#go").click(function(){
+			console.log("ihiuhiu")
+			alert("떠떠떠떠");
+		    $.ajax({
+			url:"gotowork.member",
+			data: {
+				m_id:id
+			},
+
+			type:"post",
 			success:function(data){
-				$("#show").append("${LoginUser}님의 출근시간은 ${dto.c_start}입니다."+"<br>"
-			 	+ "${LoginUser}님의 출근상태는 ${dto.cs_stat}입니다."); 
-					
-				}	 
-			});  
-		   console.log(m_id);
+				console.log(data.dto.c_start);
+				
+				$("#show").append(id+"님의 출근시간은 "+data.dto.c_start+"입니다."+"<br>"+id+"님의 출근상태는"+ data.dto.cs_stat+"입니다."); 					
+			}
+			});   
 		});
 	});
 </script>
@@ -98,28 +103,29 @@
 							<div class="clearfix" style="margin-top:20px">
 								<div class="container" >
 								<div class="col-sm-5"></div>
-									<input type="button" id="go" value="출근하기" class="btn btn-primary"/>
-
+									
 									<div class="row" style="margin-top:20px">
 										<div class="col-sm-1"></div>
 										<div class="col-sm-10">
 											
-											 <div class="panel panel-info">
-												<div class="panel-heading">
-													
+											 <div class="panel panel-info" id="show">
+										 		<div style="margin-top: 30px; padding-left: 370px">
+													<input type="button" id="go" value="출근하기" class="btn btn-primary"/>
 												</div>
 												<div class="panel-body">
 													<div class="row">
 														<div class="col-sm-1" align="center">
 															<div class="row"></div>
 														</div>
-														<div class="col-sm-10">
-															<div class="my-box" id="show">
-																																
+														<div class="col-sm-10" id="show">
+															<div class="my-box">
+																<%-- <p>${LoginUser}님의 출근시간은 ${dto.c_start}입니다.<br>
+																   ${LoginUser}님의 출근상태는 ${dto.cs_stat}입니다. 			 --%>								
 															</div>
 														</div>
 													</div>
-												</div>
+												</div>  
+										
 											</div>
 										</div>
 									</div> 
