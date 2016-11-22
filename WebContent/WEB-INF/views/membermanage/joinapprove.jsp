@@ -56,6 +56,9 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+<!-- jQuery -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 </head>
 
 <body class="nav-md">
@@ -186,9 +189,6 @@
 		</div>
 	</div>
 
-	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>

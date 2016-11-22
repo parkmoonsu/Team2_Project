@@ -113,5 +113,20 @@ public class MainController {
 
 		return "main/updatesuccess";
 	}
+	
+	@RequestMapping("/name.htm")
+	public View getName(String m_id , Model model){
+		System.out.println("getName의 m_id : " + m_id);
+		MemberDTO dto = service.getName(m_id);
+		System.out.println("가져온 이름 : " + dto.getM_name());
+		model.addAttribute("m_name", dto.getM_name());
+		return jsonview;
+	}
 
+	@RequestMapping("/photo.htm")
+	public View getPhoto(String m_id , Model model){
+		MDetailDTO dto = service.getPhoto(m_id);
+		model.addAttribute("m_photo",dto.getM_photo());
+		return jsonview;
+	}
 }

@@ -59,6 +59,9 @@
 	
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+<!-- jQuery -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
 </head>
 
@@ -244,9 +247,6 @@
 		</div>
 	</div>
 
-	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
