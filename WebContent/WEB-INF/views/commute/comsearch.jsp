@@ -1,18 +1,9 @@
-<!--
-	제너용럴킹갓현  
-	2016-11-17
-	관리자-  사용자 정보 수정 페이지
- -->
-
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="se"
-	uri="http://www.springframework.org/security/tags"%>
+    pageEncoding="UTF-8"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="UTF-8">
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -20,8 +11,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Gentellela Alela! |</title>
 
+<script
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+	
+<title>KOSBUS</title>
 <!-- Bootstrap -->
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
@@ -54,109 +48,107 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+<script type="text/javascript">
+	$(function(){
+		/* $("#photo_swipe").click(function(){
+			$("#photo").click();
+		}); */
+	});
+</script>
 </head>
-
 <body class="nav-md">
-		<a type="hidden" style="display: none">
-				<input type="file">
-		</a>
-
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
-				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
 			</div>
 
 			<!--상단 menu -->
+
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
-
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<div class="">
-					<div class="page-title">
-						<div class="title_left">
-							<h3>
-								<small>정보수정</small>
-							</h3>
-						</div>
-					</div>
+				<!-- top tiles -->
+				<div class="row tile_count"></div>
+				<!-- /top tiles -->
 
-					<div class="clearfix"></div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="dashboard_graph">
+							<div class="row x_title">
+								<div class="col-md-6">
+									<h3>출/퇴근 조회</h3>
+								</div>
+							</div>
+							<div class="clearfix">
+								<div class="container">
+									<div class="row">
+										<div class="col-sm-1"></div>
+										<div class="col-sm-10">
 
-					<div class="row">
-						<div class="col-md-12">
-							<div class="x_panel">
-								<div class="x_title">
-									<nav class="navbar navbar-default">
-										<div class="container-fluid">
-											<ul class="nav navbar-nav">
-												<li><a href="InfoChange.htm">회원정보</a></li>
-												<li><a href="Allow.htm">회원가입승인</a></li>
-												<li><a href="#">스케줄관리</a></li>
-											</ul>
+											<div class="panel panel-info">
+												<div class="panel-heading">
+													<h3 class="panel-title">출/퇴근 조회</h3>
+												</div>
+												<div class="panel-body">
+													<div class="row">
+														<div class="col-sm-1" align="center">
+															<div class="row"></div>
+														</div>
+														<div class="col-sm-10">
+															<table class="table table-user-information">
+																<tbody style="text-align: center">
+																	<tr>
+																		<td>NO.</td>
+																		<td>날짜</td>
+																		<td>출근시간</td>
+																		<td>퇴근시간</td>
+																	</tr>
+																	
+																	<c:forEach var="i" items="${list}">
+																	<tr>																	
+																		<td>${i.rownum}</td>
+																	 	<td><fmt:formatDate value="${i.c_date}" pattern="yyyy/MM/dd"/></td>
+																		<td>${i.c_start}</td>
+																		<td>${i.c_end}</td>
+																	<tr>
+																	</c:forEach>
+																	
+																</tbody>
+															</table>															
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-									</nav>
-								</div>
-								<div class="x_content">
-				
-									<!-- start project list -->
 									</div>
-									<table class="table table-striped projects">
-										<thead>
-											<tr>
-												<th>번호</th>
-												<th>ID</th>
-												<th>이름</th>
-												<th>연락처</th>
-												<th>등급</th>
-												<th>이력구분</th>
-												<th style="width: 20%"></th>
-											</tr>
-										</thead>
-										<tbody>
-											
-											<c:forEach var ="d"  items="${list}">
-											<tr>
-												<td>1.</td>
-												<td><a>${d.m_id}</a></td>
-												<td><small>이름</small></td>
-												<td>연락처</td>
-												<td><small>등급</small></td>
-												<td>이력구분</td>
-												<td><a href="#" class="btn btn-info btn-xs"><i
-														class="fa fa-pencil"></i> 확인 </a> <a href="#"
-													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
-														삭제 </a></td>
-											</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-									<!-- end project list -->
-
 								</div>
+
 							</div>
 						</div>
 					</div>
+
 				</div>
+				<br />
+
 			</div>
-
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
 		</div>
-	</div>
+		<!-- /page content -->
 
-	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+		<!-- footer content -->
+		<footer>
+			<div class="pull-right">
+				Gentelella - Bootstrap Admin Template by <a
+					href="https://colorlib.com">Colorlib</a>
+			</div>
+			<div class="clearfix"></div>
+		</footer>
+		<!-- /footer content -->
+	</div>
+	
+	
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -217,20 +209,8 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	 $('#search').click( function () {
-	$.ajax({
-		url:"SearchMember.htm",
-		type:"get",
-		success:function(data){
-			console.log(data);
-			
-		}
-		});
-	 });
-});
-
-</script>
-</body> 	
+	
+	
+	
+	</body>
 </html>

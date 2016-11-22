@@ -15,6 +15,7 @@ import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinResRecordDTO;
 import kr.or.bus.dto.ResRecordDTO;
 
 public interface MemberDAO {
@@ -58,9 +59,6 @@ public interface MemberDAO {
 	//권한별 사이드바 바꾸기
 	public MemberJoinJobDTO getJobName(String username);
 	
-	//승인여부 구하기 (N인 사람만 뽑기)
-	public List<MemberJoinMDetailDTO> getNcheck();
-	
 	//로그인한 정보로 회원의 개인정보 확인 ( 수정 넘어가기 전 )
 	public MemberJoinMDetailDTO getMemberInfo(String m_id);
 
@@ -70,5 +68,19 @@ public interface MemberDAO {
 	//회원 정보 수정
 	public void updateMember1(MemberDTO mdto, String m_id ,String hidden);
 	public void updateMember2(MDetailDTO ddto, String m_id);
-		
+
+	//(관리자) 회원 정보 리스트 가져오기
+	public List<MemberJoinMDetailDTO> memberList(int page);
+	
+	//(관리자) 회원 정보 개수
+	public int memberCount();
+
+    //회원 정보 수정 > 이력사항 확인
+	public List<MemberJoinResRecordDTO> getResRecordInfo(String m_id);
+	
+	//(관리자) 회원 가입 승인 - 승인 여부 N인 사람만 가져오기
+	public List<MemberJoinMDetailDTO> memberNList(int page);
+	
+	//(관리자) 승인이 안된 회원 총 인원 수
+	public int memberNCount();
 }

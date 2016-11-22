@@ -32,8 +32,21 @@ public class MemberJoinMDetailDTO {
 	private String m_resume;
 	
 	private String j_name;
+	
+	private int r;
+	
+	
+	
 
-////////////////////////////////////////////////
+	public int getR() {
+		return r;
+	}
+
+	public void setR(int r) {
+		this.r = r;
+	}
+
+	////////////////////////////////////////////////
 	//턱봉 이력쪽 파일 업로드 추가하려면 list로 바꿀것
 	private CommonsMultipartFile file;
 
@@ -204,8 +217,10 @@ public class MemberJoinMDetailDTO {
 				+ m_phone + ", m_email=" + m_email + ", m_license=" + m_license + ", m_photo=" + m_photo + ", m_birth="
 				+ m_birth + ", m_annual=" + m_annual + ", m_gender=" + m_gender + ", m_echeck=" + m_echeck
 				+ ", m_check=" + m_check + ", m_regdate=" + m_regdate + ", m_resume=" + m_resume + ", j_name=" + j_name
-				+ "]";
+				+ ", r=" + r + ", file=" + file + "]";
 	}
+
+	
 	
 	
 }

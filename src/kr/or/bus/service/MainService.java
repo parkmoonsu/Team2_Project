@@ -1,3 +1,13 @@
+/*
+*	@FileName : MainService.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.17
+*	@Author	: 박문수
+*	@Discription : 회원에 관련된 메인 페이지 Service
+*/
+
+
+
 package kr.or.bus.service;
 
 
@@ -17,6 +27,7 @@ import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinResRecordDTO;
 
 @Controller
 public class MainService {
@@ -35,14 +46,7 @@ public class MainService {
 		
 		return dto;
 	}
-	//
-	public List<MemberJoinMDetailDTO> ncheck(){
-		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
-		
-		List<MemberJoinMDetailDTO> list=dao.getNcheck();
-		
-		return list;
-	}
+
 	public MemberJoinMDetailDTO getMemberInfo(String m_id){
 		System.out.println("m_id : " + m_id);
 		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
@@ -59,7 +63,20 @@ public class MainService {
 		return pw;
 	}
 	
+
+	public List<MemberJoinResRecordDTO> getResRecordInfo(String m_id){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		List<MemberJoinResRecordDTO> list = dao.getResRecordInfo(m_id);
+		for(int i=0 ;i<list.size();i++){
+			System.out.println("이력기간"+list.get(i).getRes_start());
+			System.out.println("이력회사"+list.get(i).getRes_com());
+		}
+		return list;
+	}
+	
+
 	public void updateMember(MemberDTO mdto , MDetailDTO ddto , String m_id , String hidden ,HttpServletRequest request) throws Exception{
+
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		
 		List<CommonsMultipartFile> files = ddto.getFiles();

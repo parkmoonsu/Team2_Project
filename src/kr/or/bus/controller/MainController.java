@@ -27,6 +27,7 @@ import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinResRecordDTO;
 import kr.or.bus.dto.ResRecordDTO;
 import kr.or.bus.service.LoginService;
 import kr.or.bus.service.MainService;
@@ -58,23 +59,19 @@ public class MainController {
 	public String ChangeForm(Model model, Principal principal) {
 		System.out.println("세션 ID : " + principal.getName());
 		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
+
+		List<MemberJoinResRecordDTO> list = service.getResRecordInfo(principal.getName());
+	
+
 		MemberJoinJobDTO dto2 = service2.mainGo(principal.getName());
 		String jobname = dto2.getJ_name();
 		
+		model.addAttribute("list",list);
 		model.addAttribute("dto", dto);
-
 		model.addAttribute("jobname", jobname);
+
 		return "main/ChangeForm";
 	}
-
-@RequestMapping("/Allow.htm")
-public String allow(Model model){
-	List<MemberJoinMDetailDTO> list = service.ncheck();
-	
-	model.addAttribute("list",list);
-		return "main/Allow";
-	}
-
 
 	@RequestMapping("/updateinfo.htm")
 	public String updateinfo(Model model , Principal principal , String m_pw){
