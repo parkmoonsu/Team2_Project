@@ -73,7 +73,7 @@
                       <li><a href="other_charts.html">Other Charts</a></li>
                     </ul>
                   </li>
-                  <li><a href="membermanage.htm"><i class="fa fa-clone"></i>회원 관리</a>
+                  <li><a href="membermanage.admin"><i class="fa fa-clone"></i>회원 관리</a>
                   </li>
                 </ul>
               </div>

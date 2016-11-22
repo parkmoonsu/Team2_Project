@@ -151,8 +151,8 @@
 									<nav class="navbar navbar-default">
 										<div class="container-fluid">
 											<ul class="nav navbar-nav">
-												<li><a href="membermanage.htm"><strong>회원정보</strong></a></li>
-												<li><a href="joinapprove.htm">회원가입승인</a></li>
+												<li><a href="membermanage.admin"><strong>회원정보</strong></a></li>
+												<li><a href="joinapprove.admin">회원가입승인</a></li>
 												<li><a href="#">스케줄관리</a></li>
 											</ul>
 										</div>
@@ -197,7 +197,7 @@
 												<td><a href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="${i.m_name},${i.m_email}">${i.m_email}</a></td>
 												<td><small>${i.j_name}</small></td>
 												<td>${i.m_annual}일</td>
-												<td style = "text-align:center"> <a href="deleteMember.htm?m_id=${i.m_id}"
+												<td style = "text-align:center"> <a href="deleteMember.admin?m_id=${i.m_id}"
 													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
 														삭제 </a></td>
 											</tr>
@@ -219,16 +219,16 @@
 									</c:choose>	
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
-											<li><a href="membermanage.htm?pg=${pgc-1}">Previous</a></li>
+											<li><a href="membermanage.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 										
 										
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="membermanage.htm?pg=${i}">${i}</a></li>
+											<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
 										
 										<c:if test="${pgc < mc/10 }">
-											<li><a href="membermanage.htm?pg=${pgc+1}">Next</a></li>
+											<li><a href="membermanage.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
 								</div>
