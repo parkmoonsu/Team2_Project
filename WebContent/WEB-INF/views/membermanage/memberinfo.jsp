@@ -278,7 +278,20 @@
 
 			<!-- 수현:삭제모달 끝 -->
 
-
+			<div class="modal fade" id="memberresrecord" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" id="resrecordtitle">
+								 
+							</h4>
+						</div>
+						<div class="modal-body" aria-labelledby="myModalLabel"
+							id="resrecordtable"></div>
+					</div>
+				</div>
+			</div>
 
 
 
@@ -428,7 +441,13 @@ $(function() {
 	            }
 	         });
 	       });
-
+	     
+	      $('#memberresrecord').on('show.bs.modal', function (event) {
+			  var button = $(event.relatedTarget) 
+			  var recipient = button.data('whatever');
+			  $('#resrecordtitle').html("<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"+recipient+'</span>이력사항');
+			  
+			});
 });
 
 
@@ -451,6 +470,15 @@ function smodal(m_id) {
 					success:function(data1){
 						$('#reguloffrtable').empty();
 						$('#reguloffrtable').append(data1);
+						$.ajax({
+							url:"memberresrecord.admin",
+							type:"post",
+							data:{"param":m_id},
+							success:function(data2){
+							$('#resrecordtable').empty();
+							$('#resrecordtable').append(data2);
+							}
+						});
 					}
 				}); 
 			}

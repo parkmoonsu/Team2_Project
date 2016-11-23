@@ -20,10 +20,10 @@
 				<div class="col-sm-6 col-md-6">
 					<div class="thumbnail">
 						<img
-							src="<%=request.getServletContext().getContextPath()%>/join/upload/${dto.m_photo}"
+							src="<%=request.getServletContext().getContextPath()%>/join/upload/${mjdrodto.m_photo}"
 							alt="...">
 						<div class="caption">
-							<h3>${dto.m_id },${dto.m_photo}</h3>
+							<h3>${mjdrodto.m_id },${mjdrodto.m_photo}</h3>
 							<p>...</p>
 							<p>
 								<a href="#" class="btn btn-default btn-sm" role="button">사진변경</a>
@@ -36,26 +36,26 @@
 
 				<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
 					<input type="text" class="form-control has-feedback-left"
-						id="inputSuccess2" value="${dto.m_id }"> <span
+						id="inputSuccess2" value="${mjdrodto.m_id }" readonly> <span
 						class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 				</div>
 
 				<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-					<input type="text" class="form-control" id="inputSuccess3"
-						placeholder="Last Name"> <span
+					<input type="text" class="form-control" id="inputSuccess3" 
+						value="${mjdrodto.m_name }" readonly> <span
 						class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
 				</div>
 
 				<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 					<input type="text" class="form-control has-feedback-left"
-						id="inputSuccess4" placeholder="Email"> <span
+						id="inputSuccess4" value="${mjdrodto.m_addr }" readonly> <span
 						class="fa fa-envelope form-control-feedback left"
 						aria-hidden="true"></span>
 				</div>
 
 				<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 					<input type="text" class="form-control" id="inputSuccess5"
-						placeholder="Phone"> <span
+						value="${mjdrodto.m_daddr }" readonly> <span
 						class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
 				</div>
 				
@@ -76,12 +76,12 @@
 	
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="text" class="form-control"
-									placeholder="Default Input">
+									value="${mjdrodto.j_name }" readonly>
 					</div>
 				
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<input type="text" class="form-control" disabled="disabled"
-							placeholder="Disabled Input">
+							value="${mjdrodto.m_email }" readonly>
 					
 					</div>
 				</div> 
@@ -91,32 +91,26 @@
 				<div class="form-group">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<input type="text" class="form-control" readonly="readonly"
-							value="${dto.o_date}">
+							value="${mjdrodto.m_license}" readonly>
 					</div>
 					
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<input class="form-control" required="required" type="text"
-							placeholder="...">
+							value="${mjdrodto.m_birth }" readonly>
 					</div>
 				</div>
-			<!-- 	<div class="form-group">
-
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<input class="form-control" required="required" type="text"
-							placeholder="...">
-					</div>
-				</div> -->
+			
 				
 				<div class="form-group">
 
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<input class="form-control" required="required" type="text"
-							placeholder="...">
+							value="${mjdrodto.m_resume }" readonly>
 					</div>
 					
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<input class="form-control" required="required" type="text"
-							placeholder="...">
+							value="${mjdrodto.o_date }" readonly>
 					</div>
 				</div>
 				
@@ -131,7 +125,7 @@
 
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-success">확인</button>
+			<button type="button" data-toggle="modal" data-target="#memberresrecord" data-whatever="${mjdrodto.m_name }" class="btn btn-success">이력확인</button>
 		</div>
 
 	</div>
