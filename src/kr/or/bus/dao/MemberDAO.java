@@ -91,12 +91,12 @@ public interface MemberDAO {
 	public void updateCheck(String m_id);
 	//승인시 권한 부여
 	public void insertAuth(String m_id);
-<<<<<<< HEAD
+
 	//(관리자) 회원 정보 상세 확인
 	public MemberJoinMDetailRegulOffDTO getMemberDetailRegulOff(String m_id);
 	//(관리자) 회원 정보 상세 확인 > 휴무 기록 확인
 	public List<MemberJoinRegulOffrDTO> getRegulOffr(String m_id);
-=======
+
 	
 	//회원 사진 가져오기
 	public MDetailDTO getPhoto(String m_id);
@@ -125,5 +125,5 @@ public interface MemberDAO {
 	public void deleteMember(String m_id);
 	/* 김수현추가 끝 */
 
->>>>>>> 3c5414907e8f0241260eac8ee61b7ed23b8e0de4
+
 }
