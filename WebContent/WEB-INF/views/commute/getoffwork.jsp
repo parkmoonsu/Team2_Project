@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
@@ -12,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+<se:authentication property="name" var = "LoginUser"/>       													
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 	
@@ -50,20 +50,36 @@
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
 <script type="text/javascript">
-	$(function(){
+  $(function(){ 
+	var id="${LoginUser}";
+	$("p").hide();
+	 $("#search").hide(); 
 		$("#go").click(function(){
-			$.ajax({
-				dataType:"jsp",
-				url:"gotowork2.jsp",
-				data: ,
-				success:function(data){
-					("#show").append();
-				},
-				
-				
-			});
+			console.log("ihiuhiu")
+			alert("떠떠떠떠");
+		    $.ajax({
+			url:"getoffwork.member",
+			data: {
+				m_id:id
+			},
+			type:"post",
+			success:function(data){
+				console.log(data.dto.c_start);				
+				/* $("#show").html(id+"님의 퇴근시간은 "+data.dto.c_end+"입니다."+
+						           "<br>"+id+"님의 퇴근상태는 "+ data.dto.ce_stat+"입니다."); 
+				$("#search").show(); */
+				$("p").show();
+				$("#search").show()
+			}
+			});   
 		});
-	});
+		
+	}); 
+	function click() {
+		console.log('?');
+		//location.href='commute/comsearch.jsp';
+	}
+	
 </script>
 </head>
 <body class="nav-md">
@@ -92,7 +108,7 @@
 									<h3>퇴근</h3>
 								</div>
 							</div>
-							<div class="clearfix" style="margin-top:20px">
+							<div class="clearfix" style="margin-top:20px;">
 								<div class="container" >
 								<div class="col-sm-5"></div>
 									<input type="button" id="go" value="퇴근하기" onclick="go()" class="btn btn-primary"/>
@@ -105,20 +121,20 @@
 												<!-- <div class="panel-heading">
 													
 												</div> -->
-												<div class="panel-body">
+												<div class="panel-body" style="order-radius: 4em">
 													<div class="row">
-														<div class="col-sm-1" align="center">
+														<div class="col-sm-1" >
 															<div class="row"></div>
 														</div>
 														<div class="col-sm-10">
 														<form>
 															<div class="my-box">
-															<se:authentication property="name" var = "LoginUser"/>       													
-																${LoginUser}님의 퇴근시간은 ${dto.c_end}입니다.<br>
-																${LoginUser}님의 퇴근상태는 ${dto.ce_stat}입니다.															
-															
-																<input type="submit" value="출/퇴근 조회하기">
- 															</div>
+																<p style="text-align:center; font-size:1.5em;">
+																${LoginUser}님의 퇴근시간은 ${m_id.dto.c_end}입니다.<br><br>
+																${LoginUser}님의 퇴근상태는 ${dto.ce_stat}입니다.</p><br><br>	
+																<input id="search" type="button" value="출/퇴근 조회하기" onClick="location.href='comsearch.member?m_id=${LoginUser}'" class="btn btn-success">
+<%--   																<button id="search" type="button" value="출/퇴근 조회하기" onclick="location.href='<%=request.getContextPath()%>/WEB-INF/views/commute/comsearch.jsp'" class="btn btn-success">출/퇴근 조회하기</button>
+--%> 															</div>
  														</form>
 														</div>
 													</div>
@@ -217,4 +233,4 @@
 	
 	
 </body>
-</html> --%>
+</html>
