@@ -135,6 +135,7 @@
 											<c:forEach var="i" items="${d}">
 											<c:choose>
 											<c:when test="${i != null}">
+											
 											<tr>
 												<td>${i.r}</td>
 												<td><a>${i.m_id}</a></td>
