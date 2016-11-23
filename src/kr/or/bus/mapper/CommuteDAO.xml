@@ -18,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 )where rownum between 1 + (#{param1}-1) * 5 and 5 + (#{param1}-1)*10
 	</select>
 	
+	<!-- 회원의 출근시간  -->
 	<update id="csupdate">
 	update commute 
 	<set>
@@ -28,10 +29,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<when test="c_time='am' and c_start &lt; '0900'">
 			cs_code='1'
 			</when>
-			<when test="c_time='pm' and c_start &lt; '0900'">
+			<when test="c_time='pm' and c_start &lt; '1300'">
 			cs_code='1'
 			</when>
-			<when test="c_time='pm' and c_start &gt; '0900'">
+			<when test="c_time='pm' and c_start &gt; '1300'">
 			cs_code='2'
 			</when>
 		</choose>
@@ -42,6 +43,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="csselect"  resultType = "kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
 		select c_start, cs_stat
 		from commute com join cstart cs on com.cs_code=cs.cs_code
+		where m_id=#{m_id}
+	</select>
+	
+	<!-- 회원의 퇴근시간 -->
+	<update id="ceupdate">
+	update commute 
+	<set>
+		<choose>
+			<when test="c_time='am' and c_end &lt; '1800'">
+			ce_code='2'
+			</when>		
+			<when test="c_time='am' and c_end &gt; '1800'">
+			ce_code='1'
+			</when>
+			<when test="c_time='pm' and c_end &gt; '2300'">
+			ce_code='1'
+			</when>
+			<when test="c_time='pm' and c_end &lt; '2300'">
+			ce_code='2'
+			</when>
+		</choose>
+	</set>	
+	where m_id=#{m_id}
+	</update>
+ 	
+	<select id="ceselect"  resultType = "kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
+		select c_end, ce_stat
+		from commute com join cend ce on com.ce_code=ce.ce_code
 		where m_id=#{m_id}
 	</select>
 </mapper>

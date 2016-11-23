@@ -96,12 +96,41 @@ public class CommuteController {
 		dto2.setM_id(m_id);
 		dao.csupdate(dto2);
 		CommuteJoinCstartJoinCendDTO dto= dao.csselect(dto2);
-		
-		//model.addAttribute("dto",dto);
+			
 		map.addAttribute("dto",dto);
 		return jsonview;
 		
 		//System.out.println("dto값" + dto.getC_start() + dto.getCe_stat());
 	
+	}
+	
+	//회원의 퇴근시간
+	@RequestMapping(value="/getoffwork.member", method=RequestMethod.GET)
+	public String eshow(Model model, CommuteJoinCstartJoinCendDTO ce_code, String m_id){
+		System.out.println("이거는 들어왔냐고~~"); 
+		
+		return "commute/getoffwork";
+	}
+	
+	
+	@RequestMapping(value="/getoffwork.member", method=RequestMethod.POST)
+	public View ego(ModelMap map, String m_id){
+		System.out.println("이거는~");
+		
+		CommuteDAO  dao = sqlsession.getMapper(CommuteDAO.class);
+		CommuteJoinCstartJoinCendDTO dto2=new CommuteJoinCstartJoinCendDTO();
+		dto2.setM_id(m_id);
+		dao.ceupdate(dto2);
+		CommuteJoinCstartJoinCendDTO dto= dao.ceselect(dto2);
+				
+		map.addAttribute("dto",dto);
+		return jsonview;
+	}
+	
+	@RequestMapping(value="/test.member")
+	public String test(){
+		System.out.println("이거는 들어왔냐고~~"); 
+		
+		return "commute/test";
 	}
 }
