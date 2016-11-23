@@ -51,7 +51,7 @@ public class MemberManageController {
 		
 		service.mailSendToMember(subject, to, content, filename);
 		
-		return new ModelAndView("redirect:/membermanage.htm");
+		return new ModelAndView("redirect:/membermanage.admin");
 	}
 	@RequestMapping("/joinapprove.admin")
 	public String joinapprove(String pg , Model model){
@@ -82,9 +82,9 @@ public class MemberManageController {
 
 	}
 
-	@RequestMapping("/memberdetail.htm")
+	@RequestMapping("/memberdetail.admin")
 	public String memberDetail(String param, Model model){
-		System.out.println("memberdetail.htm시작");
+		System.out.println("memberdetail.admin시작");
 		System.out.println("param"+param);
 		MemberJoinMDetailRegulOffDTO dto = service.memberDetail(param);
 		model.addAttribute("dto", dto);
