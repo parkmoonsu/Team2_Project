@@ -5,6 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <mapper namespace="kr.or.bus.dao.CommuteDAO">
+	<!-- 출/퇴근 표준 시간 -->
+	<select id="getStandardTime" resultType = "kr.or.bus.dto.CstandardDTO">
+		select cs_ams, cs_ame, cs_pms, cs_pme
+		from cstandard
+	</select>
 
 	<!-- 회원의 출/퇴근 정보 조회 -->
  	<select id="getSelect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO" parameterType="String">
@@ -19,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 회원의 출근시간  -->
-	<update id="csupdate">
+	<!-- <update id="csupdate">
 	update commute 
 	<set>
 		<choose>
@@ -38,8 +43,87 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	</set>	
 	where m_id=#{m_id}
-	</update>
- 	
+	</update> -->
+	<insert id="insertCommuteInfo" parameterType = "String">
+		insert into commute(m_id,m_name,c_date,c_start) values (#{param1}, #{param2}, sysdate+9/24, sysdate+9/24)
+	</insert>
+	
+	<update id="csupdate">
+<!-- 	UPDATE AUTHOR
+	<trim prefix="SET" suffixOverrides=",">
+		<if test="username != null">username=#{username},</if>
+		<if test="password != null">password=#{password},</if>
+		<if test="email != null">email=#{email},</if>
+		<if test="bio != null">bio=#{bio},</if>
+	</trim>
+WHERE id=#{id} -->
+
+
+
+		<!-- update commute
+		<trim prefix="set" suffixOverrides="to_char">
+			<choose>
+			<when test="(c_start,'HH24MI') &gt; '0930' and C_TIME = 'am'">
+			cs_code='2'			
+			</when>	
+			<when test="(c_start,'HH24MI') &lt; '0930' and C_TIME = 'am'">
+			cs_code='1'
+			</when>
+			<when test="(c_start,'HH24MI') &lt; '1800' and C_TIME = 'pm'">
+			cs_code='1'
+			</when>
+			<when test="(c_start,'HH24MI') &gt; '1800' and C_TIME = 'pm'">
+			cs_code='2'
+			</when>
+		</choose>
+		where m_id=#{m_id} and to_char(c_date,'yyyy-mm-dd') = to_char(sysdate,'yyyy-mm-dd')
+		</trim> -->
+		
+		
+		update commute
+		<trim prefix="set">
+			<choose>
+			<when test="c_start.toString() &gt; '0930' and C_TIME = 'am'">
+			cs_code='2'			
+			</when>	
+			<when test="c_start.toString() &lt; '0930' and C_TIME = 'am'">
+			cs_code='1'
+			</when>
+			<when test="c_start.toString() &lt; '1800' and C_TIME = 'pm'">
+			cs_code='1'
+			</when>
+			<when test="c_start.toString() &gt; '1800' and C_TIME = 'pm'">
+			cs_code='2'
+			</when>
+		</choose>
+		where m_id=#{m_id} and to_char(c_date,'yyyy-mm-dd') = to_char(sysdate,'yyyy-mm-dd')
+		</trim>
+		
+		</update>
+		
+	
+	<!-- <trim prefix="set" prefixOverrides="to_char()">
+	update commute 
+	<set>
+		<choose>
+			<when test="to_char(c_start,'HH24MI') &gt; '0930' and C_TIME = 'am'">
+			cs_code='2'			
+			</when>	
+			<when test="to_char(c_start,'HH24MI') &lt; '0930' and C_TIME = 'am'">
+			cs_code='1'
+			</when>
+			<when test="to_char(c_start,'HH24MI') &lt; '1800' and C_TIME = 'pm'">
+			cs_code='1'
+			</when>
+			<when test="to_char(c_start,'HH24MI') &gt; '1800' and C_TIME = 'pm'">
+			cs_code='2'
+			</when>
+		</choose>
+	</set>	
+	where m_id=#{m_id} and to_char(c_date,'yyyy-mm-dd') = to_char(sysdate,'yyyy-mm-dd')
+	</trim> -->
+
+	
 	<select id="csselect"  resultType = "kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
 		select c_start, cs_stat
 		from commute com join cstart cs on com.cs_code=cs.cs_code
@@ -47,6 +131,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 회원의 퇴근시간 -->
+	<!-- offinsertCommuteInfo -->
+	
 	<update id="ceupdate">
 	update commute 
 	<set>
@@ -73,6 +159,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from commute com join cend ce on com.ce_code=ce.ce_code
 		where m_id=#{m_id}
 	</select>
+	
+	<select id="getOnlyName" parameterType="String" resultType="String">
+		select m_name
+		from member 
+		where m_id = #{m_id}
+	</select>
+	
 </mapper>
 
 

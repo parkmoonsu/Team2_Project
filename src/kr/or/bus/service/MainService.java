@@ -66,7 +66,7 @@ public class MainService {
 
 	public List<MemberJoinResRecordDTO> getResRecordInfo(String m_id){
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
-		List<MemberJoinResRecordDTO> list = dao.getResRecordInfo(m_id);
+		 List<MemberJoinResRecordDTO> list = dao.getResRecordInfo(m_id);
 		for(int i=0 ;i<list.size();i++){
 			System.out.println("이력기간"+list.get(i).getRes_start());
 			System.out.println("이력회사"+list.get(i).getRes_com());

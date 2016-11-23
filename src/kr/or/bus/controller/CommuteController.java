@@ -17,10 +17,13 @@ import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import kr.or.bus.dao.CommuteDAO;
 import kr.or.bus.dto.CommuteJoinCstartJoinCendDTO;
+import kr.or.bus.service.CommuteService;
 
 
 @Controller
 public class CommuteController {
+	@Autowired
+	private CommuteService service;
 	
 	@Autowired
 	private SqlSession sqlsession;
@@ -89,17 +92,14 @@ public class CommuteController {
 	
 	@RequestMapping(value="/gotowork.member", method=RequestMethod.POST)
 	public View go(ModelMap map, String m_id){
-		System.out.println("이거는~");
-		
-		CommuteDAO  dao = sqlsession.getMapper(CommuteDAO.class);
-		CommuteJoinCstartJoinCendDTO dto2=new CommuteJoinCstartJoinCendDTO();
-		dto2.setM_id(m_id);
-		dao.csupdate(dto2);
-		CommuteJoinCstartJoinCendDTO dto= dao.csselect(dto2);
+		System.out.println("이거는gotowork.member싲가~");
 			
-		map.addAttribute("dto",dto);
-		return jsonview;
+		service.go(m_id, map);
+			
+		//map.addAttribute("dto",dto);
 		
+		//return jsonview;
+		return null;
 		//System.out.println("dto값" + dto.getC_start() + dto.getCe_stat());
 	
 	}

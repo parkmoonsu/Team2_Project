@@ -53,11 +53,10 @@
  <script type="text/javascript">
   $(function(){ 
 	var id="${LoginUser}";
-<<<<<<< HEAD
 	 $("#search").hide(); 
-=======
+
 	console.log("LoginUser는 " + id);
->>>>>>> 3c5414907e8f0241260eac8ee61b7ed23b8e0de4
+
 		$("#go").click(function(){
 			console.log("ihiuhiu")
 			alert("떠떠떠떠");
@@ -68,39 +67,16 @@
 			},
 			type:"post",
 			success:function(data){
-				console.log(data.dto.c_start);				
-				$("#show").html(id+"님의 출근시간은 "+data.dto.c_start+"입니다."+
-						           "<br>"+id+"님의 출근상태는"+ data.dto.cs_stat+"입니다."); 
-				$("#search").show();
+				console.log(data.cdto3.c_start);				
+				/* $("#show").html(id+"님의 출근시간은 "+data.cdto3.c_start+"입니다."+
+						           "<br>"+id+"님의 출근상태는"+ data.cdto3.cs_stat+"입니다."); 
+				$("#search").show(); */
 			}
 			});   
 		});
 	}); 
 	
-	 /* $(function(){ 
-		  $(".regin").hide();
-			$("#search").hide() ;
-	  
-			var id="${LoginUser}";
-				$("#go").click(function(){
-					console.log("ihiuhiu")
-					alert("떠떠떠떠");
-				    $.ajax({
-					url:"gotowork.member",
-					data: {
-						m_id:id
-					},
-					type:"post",
-					success:function(data){
-						console.log(data.dto.c_start);				
-						$("#show").append(id+"님의 출근시간은 "+data.dto.c_start+"입니다."+
-								           "<br>"+id+"님의 출근상태는"+ data.dto.cs_stat+"입니다."); 
-						$(".regin").show();
-						$("#search").show();
-					}
-					});   
-				});
-			}); */
+
 </script>
 </head>
 <body class="nav-md">
@@ -159,7 +135,7 @@
 										</div>
 									</div> 
 								</div>
-
+							</div>
 							</div>
 						</div>
 					</div>
