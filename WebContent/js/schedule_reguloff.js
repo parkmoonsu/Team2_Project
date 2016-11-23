@@ -183,9 +183,11 @@ function loadCalendar(){
 		
 		//일정 드래그
 		eventDrop : function(event, delta, revertFunc, jsEvent) {
+			
 			var id = event.id;
 			var dow= Number(event.dow[0])+delta.days();
 			var m_id=event.title;
+			
 			
 			if (dow>6){
 				dow=dow%7;
@@ -194,8 +196,37 @@ function loadCalendar(){
 			} else {
 			}
 			event.dow[0]=dow;
-			console.log(event.start.format("YYYY-MM-DD"));
+			
 			$.ajax({
+				url : "dowcount.member",
+				type : "post",
+				data:{o_code : dow},
+				success:function(data){
+					console.log(data.dow);
+					if(data.dow >= 3){
+						alert("넌 꺼져");
+					}else{
+						$.ajax({
+							url : 'reguloff_update.htm',
+							type : 'post',
+							data : {
+								id:id,
+								m_id:m_id,
+								o_code:dow
+							},
+							success : function(data) {
+
+								//updateEvent, renderEvent를 하기 위해서는.... 표준 event object가 되어야 한다
+								$("#calendar").fullCalendar('refetchEvents');
+								//$("#calendar").fullCalendar('unselect');
+							}
+						});
+					}
+				}
+				
+			});
+			console.log(event.start.format("YYYY-MM-DD"));
+			/*$.ajax({
 				url : 'reguloff_update.htm',
 				type : 'post',
 				data : {
@@ -209,7 +240,7 @@ function loadCalendar(){
 					$("#calendar").fullCalendar('refetchEvents');
 					//$("#calendar").fullCalendar('unselect');
 				}
-			});
+			});*/
 			
 		}
 		

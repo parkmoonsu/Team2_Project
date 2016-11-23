@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="modal-dialog modal-lg" role="document">
+
    <div class="modal-content">
       <div class="modal-header">
          <button type="button" class="close" data-dismiss="modal"
@@ -23,7 +24,7 @@
                      src="<%=request.getServletContext().getContextPath()%>/join/upload/${dto.m_photo}"
                      alt="...">
                   <div class="caption">
-                     <h3>${dto.m_id },${dto.m_photo}</h3>
+                     <h3></h3>
                      <p>...</p>
                      <p>
                         <a href="#" class="btn btn-default btn-sm" role="button">사진변경</a>
@@ -36,29 +37,20 @@
             <label class="control-label col-md-1 col-sm-2 col-xs-1">이름</label> 
              <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
                <input type="text" class="form-control has-feedback-left"
-                  id="inputSuccess2" value="${dto.m_id }"> <span
+                  id="inputSuccess2" value="${mjdrodto.m_name }" readonly> <span
                   class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
             </div> 
-            
-            
-            <%-- <div class="form-group">
-                 <label class="control-label col-md-1 col-sm-1 col-xs-1">이름</label> 
-                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input type="text" class="form-control" id="inputSuccess2" value="${dto.m_id }" placeholder="Default Input">
-               </div>
-            </div> --%>
             
            <label class="control-label col-md-1 col-sm-2 col-xs-1">ID</label> 
             <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
                <input type="text" class="form-control" id="inputSuccess3"
-                  placeholder="Last Name"> <!-- <span
-                  class="fa fa-user form-control-feedback right" aria-hidden="true"> --></span>
+                  value="${mjdrodto.m_name }" readonly> 
             </div>
 
             <label class="control-label col-md-1 col-sm-2 col-xs-1">우편번호</label> 
             <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
                <input type="text" class="form-control has-feedback-left"
-                  id="inputSuccess4" placeholder="Email"> <span
+                  id="inputSuccess4" value="${mjdrodto.m_addr }" readonly> <span
                   class="fa fa-envelope form-control-feedback left"
                   aria-hidden="true"></span>
             </div>
@@ -66,7 +58,7 @@
             <label class="control-label col-md-1 col-sm-2 col-xs-1">상세주소</label> 
             <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
                <input type="text" class="form-control" id="inputSuccess5"
-                  placeholder="Phone"> <span
+                  value="${mjdrodto.m_daddr }" readonly> <span
                   class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
             </div>
             
@@ -86,13 +78,13 @@
                <div class="form-group">
                  <label class="control-label col-md-2 col-sm-2 col-xs-1">등급</label> 
                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input type="text" class="form-control" placeholder="Default Input">
+                        <input type="text" class="form-control" value="${mjdrodto.j_name }" readonly>
                </div>
                
                
                <label class="control-label col-md-1 col-sm-1 col-xs-1">Email</label> 
                <div class="col-md-4 col-sm-4 col-xs-12">
-                     <input type="text" class="form-control" placeholder="Default Input">
+                     <input type="text" class="form-control" value="${mjdrodto.m_email }" readonly>
                </div>
                </div>
             
@@ -100,13 +92,13 @@
             <div class="form-group">
                <label class="control-label col-md-2 col-sm-2 col-xs-1">면허증</label>
                   <div class="col-md-4 col-sm-4 col-xs-12">
-                  <input type="text" class="form-control" readonly="readonly"
-                     value="${dto.o_date}">
+                  <input type="text" class="form-control"
+                    value="${mjdrodto.m_license}" readonly>
                </div>
                <label class="control-label col-md-1 col-sm-1 col-xs-1">생년월일</label>
                <div class="col-md-4 col-sm-4 col-xs-12">
                   <input class="form-control" required="required" type="text"
-                     placeholder="...">
+                     value="${mjdrodto.m_birth }" readonly>
                </div>
                </div>
 
@@ -114,12 +106,12 @@
             <div class="form-group">
                <label class="control-label col-md-2 col-sm-2 col-xs-1">이력서</label>
                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <a href="">dfadsfasdf</a>
+                  <a href="">${mjdrodto.m_resume }</a>
                </div>
             <label class="control-label col-md-1 col-sm-1 col-xs-1">정기휴무</label>
                <div class="col-md-4 col-sm-4 col-xs-122">
                   <input class="form-control" required="required" type="text"
-                     placeholder="...">
+                    value="${mjdrodto.o_date }" readonly>
                </div>
                </div>
             
