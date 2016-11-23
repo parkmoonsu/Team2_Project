@@ -142,6 +142,10 @@ public class ScheduleController {
 		dto.setId(id);
 		dto.setM_id(m_id);
 		dto.setO_code(o_code);
+		
+		/*java.sql.Date sqldate=java.sql.Date.valueOf(startdate);
+		dto.setStartdate(sqldate);*/
+		
 		System.out.println(dto);	
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.reguloff_update(dto);
