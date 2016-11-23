@@ -138,14 +138,14 @@ function loadCalendar(){
 		header : {
 			left : 'prev,next today',
 			center : 'title',
-			right : 'month,agendaWeek,agendaDay'
+			right : 'null'
 		},
 		selectable : true,
 		selectHelper : true,
 		editable : true,
 		events : array,
 		eventDurationEditable: false,
-		eventStartEditable:false,
+		eventStartEditable:true,
 		
 		//새로운 일정
 		select : function(start, end, allDay) {
