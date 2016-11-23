@@ -434,9 +434,10 @@ $(function() {
 
 
 	
-function smodal(m_id) {		
+function smodal(m_id) {	
+		console.log(m_id);
 		$.ajax({
-			url:"memberdetail.htm",
+			url:"memberdetail.admin",
 			type:"post",
 			data:{"param":m_id},
 			success:function(data){
