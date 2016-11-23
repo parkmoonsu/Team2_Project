@@ -84,7 +84,7 @@
             
                
                <div class="form-group">
-                 <label class="control-label col-md-1 col-sm-1 col-xs-1">등급</label> 
+                 <label class="control-label col-md-2 col-sm-2 col-xs-1">등급</label> 
                      <div class="col-md-4 col-sm-4 col-xs-12">
                         <input type="text" class="form-control" placeholder="Default Input">
                </div>
@@ -98,7 +98,7 @@
             
          
             <div class="form-group">
-               <label class="control-label col-md-1 col-sm-1 col-xs-1">면허증</label>
+               <label class="control-label col-md-2 col-sm-2 col-xs-1">면허증</label>
                   <div class="col-md-4 col-sm-4 col-xs-12">
                   <input type="text" class="form-control" readonly="readonly"
                      value="${dto.o_date}">
@@ -112,7 +112,7 @@
 
             
             <div class="form-group">
-               <label class="control-label col-md-1 col-sm-1 col-xs-1">이력서</label>
+               <label class="control-label col-md-2 col-sm-2 col-xs-1">이력서</label>
                <div class="col-md-4 col-sm-4 col-xs-12">
                   <a href="">dfadsfasdf</a>
                </div>
