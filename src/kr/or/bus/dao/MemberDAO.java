@@ -52,7 +52,8 @@ public interface MemberDAO {
 	//비밀번호 찾기 (가입된 ID와 이메일 확인)
 	public int searchIdEmail(String m_id , String m_email);
 	
-	//비밀번호 찾기(가입된 ID의 이름 가져와서 이메일 보낼때 활용)
+	//1 . 비밀번호 찾기(가입된 ID의 이름 가져와서 이메일 보낼때 활용)
+	//2 . include 하는 페이지들의 세션 아이디를 통해 이름을 얻음
 	public MemberDTO getName(String m_id);
 	
 	//비밀번호 찾기 (매치된 ID,이메일로부터 가져온 비밀번호를 임시비밀번호로 변경)
@@ -90,8 +91,39 @@ public interface MemberDAO {
 	public void updateCheck(String m_id);
 	//승인시 권한 부여
 	public void insertAuth(String m_id);
+<<<<<<< HEAD
 	//(관리자) 회원 정보 상세 확인
 	public MemberJoinMDetailRegulOffDTO getMemberDetailRegulOff(String m_id);
 	//(관리자) 회원 정보 상세 확인 > 휴무 기록 확인
 	public List<MemberJoinRegulOffrDTO> getRegulOffr(String m_id);
+=======
+	
+	//회원 사진 가져오기
+	public MDetailDTO getPhoto(String m_id);
+	
+	/* 김수현 추가 2016.11.23 */
+
+	// 권한 삭제
+	public void deleteAuthority(String m_id);
+
+	// 정규휴무기록 삭제
+	public void deleteReguloff(String m_id);
+
+	// 출퇴근 삭제
+	public void deleteCommute(String m_id);
+
+	// 정규휴무 삭제
+	public void deleteRealoff(String m_id);
+
+	// 이력 삭제
+	public void deleteResrecord(String m_id);
+
+	// 사원상세 삭제
+	public void deleteMdetail(String m_id);
+
+	// 사원 삭제
+	public void deleteMember(String m_id);
+	/* 김수현추가 끝 */
+
+>>>>>>> 3c5414907e8f0241260eac8ee61b7ed23b8e0de4
 }

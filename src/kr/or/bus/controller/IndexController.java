@@ -21,4 +21,8 @@ public class IndexController {
 		return "bus";
 	}
 	
+	@RequestMapping("/accessdenied.htm")
+	public String denied(){
+		return "accessdenied/accessdenied";
+	}
 }

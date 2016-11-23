@@ -9,17 +9,17 @@ package kr.or.bus.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import kr.or.bus.dto.CalendarDTO;
+import kr.or.bus.dto.ScheduleDTO;
 import kr.or.bus.dto.RegulOffDTO;
 
 //CRUD
-public interface CalendarDAO {
+public interface ScheduleDAO {
 	
 	public int delete(String id) throws ClassNotFoundException, SQLException;
-	public int update(CalendarDTO dto) throws ClassNotFoundException, SQLException;
-	public List<CalendarDTO> select() throws ClassNotFoundException, SQLException;
-	public int insert(CalendarDTO dto) throws ClassNotFoundException, SQLException;
-	public CalendarDTO selectseq() throws ClassNotFoundException, SQLException;
+	public int update(ScheduleDTO dto) throws ClassNotFoundException, SQLException;
+	public List<ScheduleDTO> select() throws ClassNotFoundException, SQLException;
+	public int insert(ScheduleDTO dto) throws ClassNotFoundException, SQLException;
+	public ScheduleDTO selectseq() throws ClassNotFoundException, SQLException;
 	
 	public List<RegulOffDTO> reguloff_select() throws ClassNotFoundException, SQLException;
 	public int reguloff_insert(RegulOffDTO dto) throws ClassNotFoundException, SQLException;

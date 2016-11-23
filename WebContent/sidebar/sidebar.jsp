@@ -10,7 +10,7 @@
 <%@ taglib prefix="se" uri ="http://www.springframework.org/security/tags" %>
 <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-           <img src="${pageContext.request.contextPath}/images/logo4.png" style="width:100%;height:60px">
+           <img src="${pageContext.request.contextPath}/images/logo4.png" style="width:80%;height:60px">
             </div>
 
             <div class="clearfix"></div>
@@ -18,7 +18,7 @@
             <!-- menu profile quick info -->
             <div class="profile">
               <div class="profile_pic">
-                <img src="${pageContext.request.contextPath}/images/logo2.png" class="img-circle profile_img">
+                <img class="img-circle profile_img" id = "m_photo2">
               </div>
               <div class="profile_info">
                 <span>안전운행 합시다</span>
@@ -33,7 +33,7 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
               <se:authentication property="name" var = "LoginUser"/>
-                <h3>${LoginUser}</h3>
+                <h3><span id = "m_name2"></span></h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-edit"></i> 버스관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -73,10 +73,36 @@
                       <li><a href="other_charts.html">Other Charts</a></li>
                     </ul>
                   </li>
-                  <li><a href="membermanage.htm"><i class="fa fa-clone"></i>회원 관리</a>
+                  <li><a href="membermanage.admin"><i class="fa fa-clone"></i>회원 관리</a>
                   </li>
                 </ul>
               </div>
             </div>
             <!-- /sidebar menu -->
           </div>
+          
+          
+<script type="text/javascript">
+	$(function(){
+		$.ajax({
+			url:"name.htm",
+			data:{"m_id":"${LoginUser}"},
+			success:function(data){
+				console.log(data.m_name);
+				
+				$("#m_name2").append(data.m_name);
+			}
+		});
+		
+		$.ajax({
+			url:"photo.htm",
+			data:{"m_id":"${LoginUser}"},
+			success:function(data){
+				console.log(data.m_photo);
+				
+				$("#m_photo2").attr("src", "${pageContext.request.contextPath}/join/upload/"+data.m_photo);
+			}
+		});
+	});
+</script>
+          

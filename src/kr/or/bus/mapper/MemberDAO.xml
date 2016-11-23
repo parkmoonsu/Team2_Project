@@ -158,6 +158,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into authority values (#{m_id},'ROLE_USER')
 	</insert>
 	
+
 	<select id="getMemberDetailRegulOff" parameterType="String" resultType="kr.or.bus.dto.MemberJoinMDetailRegulOffDTO">
 	select mem.M_ID, mem.J_CODE, mem.B_VEHICLENUM , mem.M_NAME, j.J_NAME,
 	mde.M_ADDR, mde.M_DADDR, mde.M_EMAIL, mde.M_BIRTH, mde.M_PHONE,
@@ -193,4 +194,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	on ko.KO_CODE = rofr.KO_CODE
 	where mem.m_id = #{m_id}
 	</select>
+
+	<select id="getPhoto" resultType = "kr.or.bus.dto.MDetailDTO" parameterType = "String">
+		select m_photo
+		from mdetail
+		where m_id = #{m_id}
+	</select>
+	
+	
+	
+	
+	<!-- 회원 정보 삭제 -->
+   
+   <delete id="deleteAuthority" parameterType="String">
+   delete from authority where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteReguloff" parameterType="String">
+   delete from reguloff where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteCommute" parameterType="String">
+   delete from commute where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteRealoff" parameterType="String">
+   delete from realoff where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteResrecord" parameterType="String">
+   delete from resrecord where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteMdetail" parameterType="String">
+   delete from mdetail where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteMember" parameterType="String">
+   delete from member where m_id=#{m_id}
+   </delete>
+	
+
 </mapper>

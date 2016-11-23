@@ -32,7 +32,7 @@ public class MemberManageController {
 	@Autowired
 	private MemberManageService service;
 	
-	@RequestMapping("/membermanage.htm")
+	@RequestMapping("/membermanage.admin")
 	public String memberInfo(String pg , Model model) {
 		
 		List<MemberJoinMDetailDTO> list = service.memberInfo(pg);
@@ -53,7 +53,7 @@ public class MemberManageController {
 		
 		return new ModelAndView("redirect:/membermanage.htm");
 	}
-	@RequestMapping("/joinapprove.htm")
+	@RequestMapping("/joinapprove.admin")
 	public String joinapprove(String pg , Model model){
 		List<MemberJoinMDetailDTO> list = service.memberNList(pg);
 		int page = service.pg(pg);
@@ -72,7 +72,7 @@ public class MemberManageController {
 		return jsonview;
 	}
 	
-	@RequestMapping("/approveMember.htm")
+	@RequestMapping("/approveMember.admin")
 	public String approveMember(String m_id){
 		System.out.println("m_id : " + m_id);
 		
@@ -81,6 +81,7 @@ public class MemberManageController {
 		return "membermanage/updatesuccess";
 
 	}
+
 	@RequestMapping("/memberdetail.htm")
 	public String memberDetail(String param, Model model){
 		System.out.println("memberdetail.htm시작");
@@ -99,4 +100,17 @@ public class MemberManageController {
 		
 		return "membermanage/memberdetailmodaltable";
 	}
+
+	
+
+	@RequestMapping("/deleteMember.admin")
+	public View deleteMember(String param , Model model , String pg){
+	  System.out.println("member id가 삭제가 될까욧?");
+      System.out.println("삭제 아이디 띄워주세요"+param);
+      service.delete(param);
+      
+      return jsonview;
+   }
+
+
 }

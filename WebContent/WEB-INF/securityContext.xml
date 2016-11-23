@@ -22,11 +22,17 @@
 			authentication-failure-url="/login.htm?error" />
 		<security:logout logout-success-url="/bus.htm"
 						 invalidate-session="true" />
-
-
+		
+		<security:session-management invalid-session-url="/login.htm"/>
+		<security:access-denied-handler error-page="/accessdenied.htm"/>
 		 <security:intercept-url pattern="/main.htm"
 			access="hasRole('ROLE_USER')" />
-		
+		 <security:intercept-url pattern="/*.admin"
+			access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/*.member"
+			access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/updateinfo.htm"
+			access="hasRole('ROLE_USER')"/>
 	
 </security:http>
 <security:authentication-manager>

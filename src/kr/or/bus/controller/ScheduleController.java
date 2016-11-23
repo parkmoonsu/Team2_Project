@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
-import kr.or.bus.dao.CalendarDAO;
-import kr.or.bus.dto.CalendarDTO;
+import kr.or.bus.dao.ScheduleDAO;
+import kr.or.bus.dto.ScheduleDTO;
 import kr.or.bus.dto.RegulOffDTO;
 
 @Controller
 
-public class CalendarController {
+public class ScheduleController {
 	
 	@Autowired
 	private SqlSession sqlsession;
@@ -33,7 +33,7 @@ public class CalendarController {
 			throws ClassNotFoundException, SQLException, ParseException{
 		
 		System.out.println("일정 저장하기");
-		CalendarDTO dto=new CalendarDTO();
+		ScheduleDTO dto=new ScheduleDTO();
 		dto.setTitle(title);
 			
 		java.sql.Date sqldate=java.sql.Date.valueOf(sstart);
@@ -43,10 +43,10 @@ public class CalendarController {
 		dto.setAllDay(allDay);
 		dto.setUrl("http"+url);
 		
-		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		
 		dao.insert(dto);
-		CalendarDTO dto2=dao.selectseq();
+		ScheduleDTO dto2=dao.selectseq();
 		map.addAttribute("data", dto2);
 		return jsonview;//str;
 	}
@@ -54,8 +54,8 @@ public class CalendarController {
 	@RequestMapping(value="/production/selectSchedule.htm", method=RequestMethod.POST)
 	public View selectSchedule(ModelMap map) throws ClassNotFoundException, SQLException{
 		System.out.println("전체일정 불러오기");
-		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
-		List<CalendarDTO> dtolist=dao.select();
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		List<ScheduleDTO> dtolist=dao.select();
 		
 		map.addAttribute("data", dtolist);
 		return jsonview;
@@ -64,7 +64,7 @@ public class CalendarController {
 	@RequestMapping(value="/production/updateSchedule.htm", method=RequestMethod.POST)
 	public View updateSchedule(String id, String title, String sstart, String eend, String allDay, String url, ModelMap map) throws ClassNotFoundException, SQLException, ParseException{
 		System.out.println("일정수정");
-		CalendarDTO dto=new CalendarDTO();
+		ScheduleDTO dto=new ScheduleDTO();
 		dto.setId(id);
 		dto.setTitle(title);
 		
@@ -76,7 +76,7 @@ public class CalendarController {
 		dto.setAllDay(allDay);
 		dto.setUrl("http"+url);
 	
-		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.update(dto);
 		
 		map.addAttribute("data", "성공");
@@ -87,14 +87,19 @@ public class CalendarController {
 	public String updateSchedule(String id) throws ClassNotFoundException, SQLException, ParseException{
 		System.out.println("일정삭제");
 		
-		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.delete(id);
 		
 		return "bus";
 	}
 	
-	////////////////////////
-	@RequestMapping(value="/production/reguloff_insert.htm", method=RequestMethod.POST)
+	//추가시작
+	@RequestMapping("/schedule_reguloff.htm")
+	public String schedule_reguloff(){
+		return "schedule/schedule_reguloff";
+	}
+	
+	@RequestMapping(value="/reguloff_insert.htm", method=RequestMethod.POST)
 	public View reguloffInsert(String m_id, String o_code, ModelMap map)
 			throws ClassNotFoundException, SQLException, ParseException{
 		
@@ -103,34 +108,34 @@ public class CalendarController {
 		dto.setM_id(m_id);
 		dto.setO_code(o_code);
 		
-		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.reguloff_insert(dto);
 		RegulOffDTO dto2=dao.reguloff_selectseq();
 		map.addAttribute("data", dto2);
 		return jsonview;//str;
 	}
 	
-	@RequestMapping(value="/production/reguloff_select.htm", method=RequestMethod.POST)
+	@RequestMapping(value="/reguloff_select.htm", method=RequestMethod.POST)
 	public View reguloffSelect(ModelMap map) throws ClassNotFoundException, SQLException{
 		System.out.println("전체일정 불러오기");
-		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		List<RegulOffDTO> dtolist=dao.reguloff_select();
 		System.out.println(dtolist);
 		map.addAttribute("data", dtolist);
 		return jsonview;
 	}
 	
-	@RequestMapping(value="/production/reguloff_delete.htm", method=RequestMethod.POST)
+	@RequestMapping(value="/reguloff_delete.htm", method=RequestMethod.POST)
 	public String reguloffDelete(String id) throws ClassNotFoundException, SQLException, ParseException{
 		System.out.println("일정삭제");
 		
-		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.reguloff_delete(id);
 		
 		return "bus";
 	}
 	
-	@RequestMapping(value="/production/reguloff_update.htm", method=RequestMethod.POST)
+	@RequestMapping(value="/reguloff_update.htm", method=RequestMethod.POST)
 	public View reguloffUpdate(String id, String m_id, String o_code, ModelMap map) throws ClassNotFoundException, SQLException, ParseException{
 		System.out.println("일정수정");
 		RegulOffDTO dto=new RegulOffDTO();
@@ -138,7 +143,7 @@ public class CalendarController {
 		dto.setM_id(m_id);
 		dto.setO_code(o_code);
 		System.out.println(dto);	
-		CalendarDAO dao=sqlsession.getMapper(CalendarDAO.class);
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.reguloff_update(dto);
 		
 		map.addAttribute("data", "성공");

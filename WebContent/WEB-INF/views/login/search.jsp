@@ -128,7 +128,7 @@
 														<input type="text" id="m_email" name = "m_email"
 															class="form-control col-md-5 col-xs-12">
 													</div>
-													<div class = "col-md-1 col-sm-1">
+													<div class = "col-md-1 col-sm-1 col-xs-12">
 													<input type ="submit" class ="btn btn-default" id= "emailbtn1" value = "전송">
 													</div>
 												</div>
@@ -164,7 +164,7 @@
 														<input type="email" id="m_email" name = "m_email"
 															class="form-control col-md-5 col-xs-12">
 													</div>
-													<div class = "col-md-1 col-sm-1">
+													<div class = "col-md-1 col-sm-1 col-xs-12">
 														<input type = "submit" class ="btn btn-default" id= "emailbtn2" value = "전송">
 													</div>
 													

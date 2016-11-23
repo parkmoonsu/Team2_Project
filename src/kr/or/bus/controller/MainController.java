@@ -59,13 +59,13 @@ public class MainController {
 	public String ChangeForm(Model model, Principal principal) {
 		System.out.println("세션 ID : " + principal.getName());
 		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-
+		
 		List<MemberJoinResRecordDTO> list = service.getResRecordInfo(principal.getName());
 	
 
 		MemberJoinJobDTO dto2 = service2.mainGo(principal.getName());
 		String jobname = dto2.getJ_name();
-		
+		 
 		model.addAttribute("list",list);
 		model.addAttribute("dto", dto);
 		model.addAttribute("jobname", jobname);
@@ -113,5 +113,20 @@ public class MainController {
 
 		return "main/updatesuccess";
 	}
+	
+	@RequestMapping("/name.htm")
+	public View getName(String m_id , Model model){
+		System.out.println("getName의 m_id : " + m_id);
+		MemberDTO dto = service.getName(m_id);
+		System.out.println("가져온 이름 : " + dto.getM_name());
+		model.addAttribute("m_name", dto.getM_name());
+		return jsonview;
+	}
 
+	@RequestMapping("/photo.htm")
+	public View getPhoto(String m_id , Model model){
+		MDetailDTO dto = service.getPhoto(m_id);
+		model.addAttribute("m_photo",dto.getM_photo());
+		return jsonview;
+	}
 }

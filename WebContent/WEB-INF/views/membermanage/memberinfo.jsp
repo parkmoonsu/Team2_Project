@@ -59,13 +59,21 @@
 	
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+<!-- jQuery -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
 </head>
 
 <body class="nav-md">
 	<div class="container body">
+<<<<<<< HEAD
 		<div class="main_container" id="main_container">
 			<div class="col-md-3 left_col">
+=======
+		<div class="main_container">
+			<div class="col-xs-12  col-md-3 left_col">
+>>>>>>> 3c5414907e8f0241260eac8ee61b7ed23b8e0de4
 				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
 			</div>
 
@@ -156,14 +164,14 @@
 					<div class="clearfix"></div>
 
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
 									<nav class="navbar navbar-default">
 										<div class="container-fluid">
 											<ul class="nav navbar-nav">
-												<li><a href="membermanage.htm"><strong>회원정보</strong></a></li>
-												<li><a href="joinapprove.htm">회원가입승인</a></li>
+												<li><a href="membermanage.admin"><strong>회원정보</strong></a></li>
+												<li><a href="joinapprove.admin">회원가입승인</a></li>
 												<li><a href="#">스케줄관리</a></li>
 											</ul>
 										</div>
@@ -197,6 +205,7 @@
 										</thead>
 										<tbody>
 											<c:set value="${list}" var="d"/>
+										
 											<c:forEach var="i" items="${d}">
 											<tr>
 												<td>${i.r}</td>
@@ -205,9 +214,10 @@
 												<td><a href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="${i.m_name},${i.m_email}">${i.m_email}</a></td>
 												<td><small>${i.j_name}</small></td>
 												<td>${i.m_annual}일</td>
-												<td style = "text-align:center"> <a href="deleteMember.htm?m_id=${i.m_id}"
-													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
-														삭제 </a></td>
+												<td style = "text-align:center"> 
+													<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
+                                         			 삭제 </div>
+                                         		</td>
 											</tr>
 											</c:forEach>
 										</tbody>
@@ -227,16 +237,16 @@
 									</c:choose>	
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
-											<li><a href="membermanage.htm?pg=${pgc-1}">Previous</a></li>
+											<li><a href="membermanage.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 										
 										
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="membermanage.htm?pg=${i}">${i}</a></li>
+											<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
 										
 										<c:if test="${pgc < mc/10 }">
-											<li><a href="membermanage.htm?pg=${pgc+1}">Next</a></li>
+											<li><a href="membermanage.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
 								</div>
@@ -245,6 +255,36 @@
 					</div>
 				</div>
 			</div>
+
+      <!-- 수현:삭제모달    -->
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">
+								<i class="fa fa-exclamation-triangle"></i> 회원삭제
+							</h4>
+						</div>
+						<div class="modal-body" aria-labelledby="myModalLabel"
+							id="myModalLabel2"></div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="cancelbutton">삭제</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">취소</button>
+							<input type="hidden" id="hvalue">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 수현:삭제모달 끝 -->
+
+
+
+
 
 			<!-- footer content -->
 			<footer>
@@ -258,9 +298,6 @@
 		</div>
 	</div>
 
-	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -347,6 +384,7 @@ $(function() {
 		});
 	 });
 	 
+
 	 
 	$('#exampleModal').on(
 				'show.bs.modal',
@@ -360,7 +398,45 @@ $(function() {
 				});
 	
 
-	});
+	 $('#exampleModal').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget) 
+		  var recipient = button.data('whatever').split(','); 
+		  $('#exampleModalLabel').html("<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"+recipient[0]+'</span>님에게 보내기');
+		  $('#people').val(recipient[1]);
+		});
+	 
+	 
+	 $('#myModal').on('show.bs.modal', function (event) {
+	        var button = $(event.relatedTarget) 
+	        var recipient = button.data('whatever');
+	        console.log(recipient);
+	        var array = recipient.split(',');
+	       
+	        console.log($('#hvalue').val(array[1]));
+	        
+	        $('#myModalLabel2').html("<span class='blue'>&nbsp;"+array[0]+'</span>님을 삭제하시겠습니까?');
+	      });  
+	     
+	      $('#cancelbutton').click(function(){
+	       //console.log($('#search').val()); 
+	       var param = $('#hvalue').val();
+	        
+	       $.ajax({
+	            url:"deleteMember.admin",
+	            type:"post",
+	            data: {"param":param},        
+	            success:function(data){
+	               alert("삭제 완료");
+	               window.location.reload();
+	               
+	            }
+	         });
+	       });
+
+});
+
+
+
 	
 function smodal(m_id) {		
 		$.ajax({

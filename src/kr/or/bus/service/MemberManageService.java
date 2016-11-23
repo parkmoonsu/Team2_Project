@@ -56,7 +56,7 @@ private JavaMailSender mailSender;
 		
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		List<MemberJoinMDetailDTO> list = dao.memberList(page);
-		System.out.println(list.get(1).toString());
+
 		return list;
 	}
 	
@@ -115,7 +115,7 @@ private JavaMailSender mailSender;
 		
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		List<MemberJoinMDetailDTO> list = dao.memberNList(page);
-		System.out.println(list.get(1).toString());
+
 		return list;
 	}
 	public int memberNCount(){
@@ -149,5 +149,17 @@ private JavaMailSender mailSender;
 		return list;
 	}
 
+	  public void delete(String m_id){
+	      MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+	      dao.deleteAuthority(m_id);
+	      dao.deleteReguloff(m_id);
+	      dao.deleteCommute(m_id);
+	      dao.deleteRealoff(m_id);
+	      dao.deleteResrecord(m_id);
+	      dao.deleteMdetail(m_id);
+	      dao.deleteMember(m_id);
+	      
+	      System.out.println("delete서비스 타나욧?");
+	   }
 
 }

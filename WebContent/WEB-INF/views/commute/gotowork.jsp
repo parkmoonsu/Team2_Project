@@ -50,21 +50,25 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-<script type="text/javascript">
-	$(function(){
-		var stime = ${dto.c_start};
-		console.log(stime);
-		$("#go").click(function(){		
-		   $.ajax({
-			url:"show.htm",
-			data: "m_id",
+ <script type="text/javascript">
+ $(function(){ 
+	var id="${LoginUser}";
+	console.log("LoginUser는 " + id);
+		$("#go").click(function(){
+			console.log("ihiuhiu")
+			alert("떠떠떠떠");
+		    $.ajax({
+			url:"gotowork.member",
+			data: {
+				m_id:id
+			},
+			type:"post",
 			success:function(data){
-				$("#show").append("${LoginUser}님의 출근시간은 ${dto.c_start}입니다."+"<br>"
-			 	+ "${LoginUser}님의 출근상태는 ${dto.cs_stat}입니다."); 
-					
-				}	 
-			});  
-		   console.log(m_id);
+				console.log(data.dto.c_start);				
+				$("#show").append("<div>"+id+"님의 출근시간은 "+data.dto.c_start+"입니다."+
+						           "<br>"+id+"님의 출근상태는"+ data.dto.cs_stat+"입니다.<div>"); 					
+			}
+			});   
 		});
 	});
 </script>
@@ -72,7 +76,7 @@
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
-			<div class="col-md-3 left_col">
+			<div class="col-xs-12 col-md-3 left_col">
 				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
 			</div>
 
@@ -88,38 +92,41 @@
 				<!-- /top tiles -->
 	
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-xs-12 col-sm-12">
 						<div class="dashboard_graph">
 							<div class="row x_title">
-								<div class="col-md-6">
+								<div class="col-xs-6 col-md-6">
 									<h3>출근</h3>
 								</div>
 							</div>
 							<div class="clearfix" style="margin-top:20px">
 								<div class="container" >
 								<div class="col-sm-5"></div>
-									<input type="button" id="go" value="출근하기" class="btn btn-primary"/>
+
+								<div class="col-xs-5 col-sm-5"></div>
+<!-- 									<input type="button" id="go" value="출근하기" class="btn btn-primary"/>
+ -->
 
 									<div class="row" style="margin-top:20px">
-										<div class="col-sm-1"></div>
-										<div class="col-sm-10">
+										<div class="col-xs-1 col-sm-1"></div>
+										<div class="col-xs-10 col-sm-10">
 											
-											 <div class="panel panel-info">
-												<div class="panel-heading">
-													
+										 		<div style="margin-top: 30px; padding-left: 370px">
+													<input type="button" id="go" value="출근하기" class="btn btn-primary"/>
 												</div>
+											 <div class="panel panel-info" id="show">
 												<div class="panel-body">
 													<div class="row">
-														<div class="col-sm-1" align="center">
+														<div class="col-xs-1 col-sm-1" align="center">
 															<div class="row"></div>
 														</div>
-														<div class="col-sm-10">
-															<div class="my-box" id="show">
-																																
-															</div>
+														<div class="col-sm-10" id="show">
+															<input type="submit" value="출/퇴근 조회하기" class="btn btn-success">
+															<!-- <div class="my-box"></div> -->
 														</div>
 													</div>
-												</div>
+												</div>  
+										
 											</div>
 										</div>
 									</div> 
@@ -149,6 +156,7 @@
 	</footer>
 	<!-- /footer content -->
 	</div>
+	
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
