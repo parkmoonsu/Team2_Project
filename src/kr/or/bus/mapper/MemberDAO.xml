@@ -158,6 +158,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into authority values (#{m_id},'ROLE_USER')
 	</insert>
 	
+
+	<select id="getMemberDetailRegulOff" parameterType="String" resultType="kr.or.bus.dto.MemberJoinMDetailRegulOffDTO">
+	select mem.M_ID, mem.J_CODE, mem.B_VEHICLENUM , mem.M_NAME, j.J_NAME,
+	mde.M_ADDR, mde.M_DADDR, mde.M_EMAIL, mde.M_BIRTH, mde.M_PHONE,
+	mde.M_ANNUAL, mde.M_REGDATE, mde.M_LICENSE, mde.M_PHOTO, mde.M_RESUME,
+	o.O_DATE
+	from member mem
+	join mdetail mde
+	on mem.m_id = mde.m_id
+	join reguloff reg
+	on reg.m_id = mem.m_id
+	join off o
+	on o.O_CODE = reg.O_CODE
+	join job j
+	on j.J_CODE = mem.J_CODE
+	where mem.m_id = #{m_id}
+	</select>
+	
+	<select id="getRegulOffr" parameterType="String"
+	resultType="kr.or.bus.dto.MemberJoinRegulOffrDTO">
+	select mem.M_ID,mem.M_NAME, o.O_DATE, memm.M_ID as
+	m_id1,memm.M_NAME as m_name1, offo.O_DATE as o_date1,
+	rofr.RO_REQDATE,rofr.RO_REGDATE, ko.KO_NAME
+	from REGULOFFR rofr
+	join member mem
+	on mem.M_ID = rofr.M_ID
+	join member memm
+	on memm.M_ID = rofr.RO_OBJECT
+	join off o
+	on o.O_CODE = rofr.O_CODE
+	join off offo
+	on offo.o_code = rofr.ro_code
+	join koff ko
+	on ko.KO_CODE = rofr.KO_CODE
+	where mem.m_id = #{m_id}
+	</select>
+
 	<select id="getPhoto" resultType = "kr.or.bus.dto.MDetailDTO" parameterType = "String">
 		select m_photo
 		from mdetail
@@ -197,4 +234,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    delete from member where m_id=#{m_id}
    </delete>
 	
+
 </mapper>

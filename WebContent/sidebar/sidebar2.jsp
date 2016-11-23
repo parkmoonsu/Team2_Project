@@ -57,6 +57,7 @@
           
 <script type="text/javascript">
 	$(function(){
+		
 		$.ajax({
 			url:"name.htm",
 			data:{"m_id":"${LoginUser}"},

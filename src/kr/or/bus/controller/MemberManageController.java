@@ -20,6 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinMDetailRegulOffDTO;
+import kr.or.bus.dto.MemberJoinRegulOffrDTO;
+import kr.or.bus.dto.MemberJoinResRecordDTO;
 import kr.or.bus.service.MemberManageService;
 @Controller
 public class MemberManageController {
@@ -49,7 +52,7 @@ public class MemberManageController {
 		
 		service.mailSendToMember(subject, to, content, filename);
 		
-		return new ModelAndView("redirect:/membermanage.htm");
+		return new ModelAndView("redirect:/membermanage.admin");
 	}
 	@RequestMapping("/joinapprove.admin")
 	public String joinapprove(String pg , Model model){
@@ -79,7 +82,34 @@ public class MemberManageController {
 		return "membermanage/updatesuccess";
 
 	}
-	
+
+	@RequestMapping("/memberdetail.admin")
+	public String memberDetail(String param, Model model){
+		System.out.println("memberdetail.admin시작");
+		System.out.println("param"+param);
+		MemberJoinMDetailRegulOffDTO dto = service.memberDetail(param);
+		model.addAttribute("mjdrodto", dto);
+		return "membermanage/memberdetailmodal";
+	}
+	@RequestMapping("/memberreguloffr.htm")
+	public String memberreguloffr(String param, Model model){
+		System.out.println("memberreguloffr.htm 시작");
+		System.out.println("param"+param);
+		
+		List<MemberJoinRegulOffrDTO> list = service.memberreguloffr(param);
+		model.addAttribute("offrlist", list);
+		
+		return "membermanage/memberdetailmodaltable";
+	}
+
+	@RequestMapping("/memberresrecord.admin")
+	public String memberresrecord(String param, Model model){
+		System.out.println("memberresrecord.admin 시작");
+		System.out.println("param"+param);
+		List<MemberJoinResRecordDTO> list = service.getResRecordInfo(param);
+		model.addAttribute("reslist", list);
+		return "membermanage/memberresrecordmodal";
+	}
 
 	@RequestMapping("/deleteMember.admin")
 	public View deleteMember(String param , Model model , String pg){
@@ -89,5 +119,6 @@ public class MemberManageController {
       
       return jsonview;
    }
+
 
 }

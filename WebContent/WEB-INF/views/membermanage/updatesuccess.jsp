@@ -9,7 +9,7 @@
 <body>
 	<script type="text/javascript">
 		alert("승인 완료");
-		location.href = "joinapprove.htm";
+		location.href = "joinapprove.admin";
 	</script>
 </body>
 </html>

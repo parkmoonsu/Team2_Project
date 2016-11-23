@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -142,11 +143,25 @@ public class ScheduleController {
 		dto.setId(id);
 		dto.setM_id(m_id);
 		dto.setO_code(o_code);
+		
+		/*java.sql.Date sqldate=java.sql.Date.valueOf(startdate);
+		dto.setStartdate(sqldate);*/
+		
 		System.out.println(dto);	
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.reguloff_update(dto);
 		
 		map.addAttribute("data", "성공");
+		return jsonview;
+	}
+	
+	@RequestMapping(value="/dowcount.member",method=RequestMethod.POST)
+	public View dowcount(String o_code , Model model){
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		int dow = dao.dowcount(o_code);
+	
+		model.addAttribute("dow", dow);
+		
 		return jsonview;
 	}
 	

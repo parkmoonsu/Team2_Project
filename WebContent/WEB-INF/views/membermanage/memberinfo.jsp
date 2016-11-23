@@ -69,6 +69,7 @@
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-xs-12  col-md-3 left_col">
+
 				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
 			</div>
 
@@ -78,35 +79,40 @@
 			</div>
 
 			<!-- page content -->
-			
-			<!-- modal  -->
+
+			<!-- modal 1  -->
 
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel">
 				<div class="modal-dialog" role="document">
-				<form action="mailsend.htm" method="post" enctype="multipart/form-data">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<h4 class="modal-title" id="exampleModalLabel"></h4>
-						</div>
-						<div class="modal-body">
+					<form action="mailsend.htm" method="post"
+						enctype="multipart/form-data">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title" id="exampleModalLabel"></h4>
+							</div>
+							<div class="modal-body">
 								<div class="form-group">
-									<i class="fa fa-male"></i>&nbsp;<label for="people" class="control-label"> 받는 사람</label> <input
-										type="text" class="form-control" id="people" name="to">
+									<i class="fa fa-male"></i>&nbsp;<label for="people"
+										class="control-label"> 받는 사람</label> <input type="text"
+										class="form-control" id="people" name="to">
 								</div>
 
 								<div class="form-group">
-									<i class="fa fa-pencil-square-o"></i>&nbsp;<label for="subject" class="control-label"> 제목</label> <input
-										type="text" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요">
+									<i class="fa fa-pencil-square-o"></i>&nbsp;<label for="subject"
+										class="control-label"> 제목</label> <input type="text"
+										class="form-control" id="subject" name="subject"
+										placeholder="제목을 입력하세요">
 								</div>
 
 								<div class="form-group">
-									<i class="fa fa-folder-open-o"></i>&nbsp;<label for="fattach" class="control-label"> 파일첨부 </label> <input
-										type="file" class="form-control" id="fattach" name="filename">
+									<i class="fa fa-folder-open-o"></i>&nbsp;<label for="fattach"
+										class="control-label"> 파일첨부 </label> <input type="file"
+										class="form-control" id="fattach" name="filename">
 								</div>
 
 								<div class="form-group">
@@ -114,24 +120,33 @@
 										class="glyphicon glyphicon-envelope" aria-hidden="true"
 										style="color: gray"></span> 메세지:
 									</label>
-									<textarea class="form-control" id="message-text" name="content" cols="5"></textarea>
+									<textarea class="form-control" id="message-text" name="content"
+										cols="5"></textarea>
 									<script>
 										CKEDITOR.replace('message-text');
 									</script>
 								</div>
-							
+
+							</div>
+							<div class="modal-footer">
+								<input type="submit" class="btn btn-primary" value="메세지 보내기">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">취소</button>
+							</div>
 						</div>
-						<div class="modal-footer">
-							<input type="submit" class="btn btn-primary" value="메세지 보내기">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">취소</button>
-						</div>
-					</div>
 					</form>
 				</div>
 			</div>
 
-			<!-- 모달끝 -->
+			<!-- 모달끝1 -->
+
+			<!--  modal2 -->
+			<div class="modal fade" id="exampleModal2" tabindex="-1"
+				role="dialog" aria-labelledby="myLargeModalLabel">
+			</div>
+		
+		
+		<!-- modal2 끝 -->
 			<div class="right_col" role="main">
 				<div class="">
 					<div class="page-title">
@@ -190,7 +205,7 @@
 											<c:forEach var="i" items="${d}">
 											<tr>
 												<td>${i.r}</td>
-												<td><a>${i.m_id}</a></td>
+												<td><a href="#"  onClick="smodal('${i.m_id}');">${i.m_id}</a></td>
 												<td><small>${i.m_name}</small></td>
 												<td><a href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="${i.m_name},${i.m_email}">${i.m_email}</a></td>
 												<td><small>${i.j_name}</small></td>
@@ -263,7 +278,20 @@
 
 			<!-- 수현:삭제모달 끝 -->
 
-
+			<div class="modal fade" id="memberresrecord" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" id="resrecordtitle">
+								 
+							</h4>
+						</div>
+						<div class="modal-body" aria-labelledby="myModalLabel"
+							id="resrecordtable"></div>
+					</div>
+				</div>
+			</div>
 
 
 
@@ -365,6 +393,20 @@ $(function() {
 		});
 	 });
 	 
+
+	 
+	$('#exampleModal').on(
+				'show.bs.modal',
+				function(event) {
+					var button = $(event.relatedTarget)
+					var recipient = button.data('whatever').split(',');
+					$('#exampleModalLabel').html(
+							"<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"
+									+ recipient[0] + '</span>님에게 보내기');
+					$('#people').val(recipient[1]);
+				});
+	
+
 	 $('#exampleModal').on('show.bs.modal', function (event) {
 		  var button = $(event.relatedTarget) 
 		  var recipient = button.data('whatever').split(','); 
@@ -399,9 +441,49 @@ $(function() {
 	            }
 	         });
 	       });
-
+	     
+	      $('#memberresrecord').on('show.bs.modal', function (event) {
+			  var button = $(event.relatedTarget) 
+			  var recipient = button.data('whatever');
+			  $('#resrecordtitle').html("<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"+recipient+'</span>이력사항');
+			  
+			});
 });
 
+
+
+	
+function smodal(m_id) {	
+		console.log(m_id);
+		$.ajax({
+			url:"memberdetail.admin",
+			type:"post",
+			data:{"param":m_id},
+			success:function(data){
+				$('#exampleModal2').empty();
+				$('#exampleModal2').append(data);
+				$('#exampleModal2').modal('show');
+				 $.ajax({
+					url:"memberreguloffr.htm",
+					type:"post",
+					data:{"param":m_id},
+					success:function(data1){
+						$('#reguloffrtable').empty();
+						$('#reguloffrtable').append(data1);
+						$.ajax({
+							url:"memberresrecord.admin",
+							type:"post",
+							data:{"param":m_id},
+							success:function(data2){
+							$('#resrecordtable').empty();
+							$('#resrecordtable').append(data2);
+							}
+						});
+					}
+				}); 
+			}
+		});
+	}
 </script>
 </body> 	
 </html>

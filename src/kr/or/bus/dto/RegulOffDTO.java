@@ -14,6 +14,7 @@ public class RegulOffDTO {
 	private String o_code;
 	private Date ro_regdate;
 	private String id;
+
 	public String getM_id() {
 		return m_id;
 	}

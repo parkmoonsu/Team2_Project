@@ -28,6 +28,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinMDetailRegulOffDTO;
+import kr.or.bus.dto.MemberJoinRegulOffrDTO;
+import kr.or.bus.dto.MemberJoinResRecordDTO;
 
 @Service
 public class MemberManageService {
@@ -113,7 +116,7 @@ private JavaMailSender mailSender;
 		
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		List<MemberJoinMDetailDTO> list = dao.memberNList(page);
-
+		System.out.println(list);
 		return list;
 	}
 	public int memberNCount(){
@@ -129,6 +132,23 @@ private JavaMailSender mailSender;
 		dao.updateCheck(m_id);
 		dao.insertAuth(m_id);
 	}
+	
+	public MemberJoinMDetailRegulOffDTO memberDetail(String m_id){
+		System.out.println("service 탓니?");
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		MemberJoinMDetailRegulOffDTO dto = dao.getMemberDetailRegulOff(m_id);
+		System.out.println("dto"+dto);
+		return dto;
+	}
+	
+	public List<MemberJoinRegulOffrDTO> memberreguloffr(String m_id){
+		System.out.println("memberreguloffr 서비스 시작");
+		
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		List<MemberJoinRegulOffrDTO> list = dao.getRegulOffr(m_id);
+		System.out.println("list"+list);
+		return list;
+	}
 
 	  public void delete(String m_id){
 	      MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
@@ -142,5 +162,15 @@ private JavaMailSender mailSender;
 	      
 	      System.out.println("delete서비스 타나욧?");
 	   }
+	  
+	  public List<MemberJoinResRecordDTO> getResRecordInfo(String m_id){
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			List<MemberJoinResRecordDTO> list = dao.getResRecordInfo(m_id);
+			for(int i=0 ;i<list.size();i++){
+				System.out.println("이력기간"+list.get(i).getRes_start());
+				System.out.println("이력회사"+list.get(i).getRes_com());
+			}
+			return list;
+		}
 
 }

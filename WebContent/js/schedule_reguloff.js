@@ -137,7 +137,7 @@ function loadCalendar(){
 		header : {
 			left : 'prev,next today',
 			center : 'title',
-			right : 'null'
+			right : 'month,agendaWeek,agendaDay'
 		},
 		selectable : true,
 		selectHelper : true,
@@ -145,18 +145,32 @@ function loadCalendar(){
 		events : array,
 		eventDurationEditable: false,
 		eventStartEditable:true,
-		
+		//maxDate: "2016-11-30", 
+		monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+		monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+		dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+		dayNamesShort: ["일","월","화 ","수 ","목 ","금 ","토 "],
+		titleFormat: "YYYY년 MM월",
+
+
 		//새로운 일정
-		select : function(start, end, allDay) {
-			
-			//모달 입력창
-			$('#fc_create').click();
+		select : function(start, end, jsEvent) {
+			//console.log($(jsEvent.target).hasClass("disabled"));
+			//console.log(jsEvent);
+			//if($(jsEvent.target).hasClass("disabled")){
+				//모달 입력창
+				$('#fc_create').click();
+		    //}else{
+		    	//alert('여긴 안됨');
+		    	//return false;
+		    	
+		    //}
 					
 		},
 		
 		//일정 클릭
 		eventClick : function(calEvent, jsEvent, view) {
-
+			
 			//모달 창 띄우기
 			$('#fc_edit').click();
 			
@@ -169,19 +183,50 @@ function loadCalendar(){
 		
 		//일정 드래그
 		eventDrop : function(event, delta, revertFunc, jsEvent) {
+			
 			var id = event.id;
 			var dow= Number(event.dow[0])+delta.days();
 			var m_id=event.title;
 			
-			if (dow>7){
-				dow=dow-7;
+			
+			if (dow>6){
+				dow=dow%7;
 			} else if (dow<0){
-				dow=dow+7;
+				dow=dow%7+7;
 			} else {
 			}
 			event.dow[0]=dow;
-						
+			
 			$.ajax({
+				url : "dowcount.member",
+				type : "post",
+				data:{o_code : dow},
+				success:function(data){
+					console.log(data.dow);
+					if(data.dow >= 3){
+						alert("넌 꺼져");
+					}else{
+						$.ajax({
+							url : 'reguloff_update.htm',
+							type : 'post',
+							data : {
+								id:id,
+								m_id:m_id,
+								o_code:dow
+							},
+							success : function(data) {
+
+								//updateEvent, renderEvent를 하기 위해서는.... 표준 event object가 되어야 한다
+								$("#calendar").fullCalendar('refetchEvents');
+								//$("#calendar").fullCalendar('unselect');
+							}
+						});
+					}
+				}
+				
+			});
+			console.log(event.start.format("YYYY-MM-DD"));
+			/*$.ajax({
 				url : 'reguloff_update.htm',
 				type : 'post',
 				data : {
@@ -192,12 +237,40 @@ function loadCalendar(){
 				success : function(data) {
 
 					//updateEvent, renderEvent를 하기 위해서는.... 표준 event object가 되어야 한다
-					//$("#calendar").fullCalendar('refetchEvents');
+					$("#calendar").fullCalendar('refetchEvents');
 					//$("#calendar").fullCalendar('unselect');
 				}
-			});
+			});*/
 			
+		}
+		
+		/*dayRender: function( date, cell ) {
+		     // It's an example, do your own test here
+			
+		    if(cell.hasClass("fc-other-month")) {
+		          cell.addClass("disabled");
+		          alert(cell);
+		     } 
+
 		},
+		dayClick: function(date, jsEvent, view) {
+			console.log(jsEvent.target.hasClass("disabled"));
+			console.log(jsEvent.target);
+		    if($(jsEvent.target).hasClass("disabled")){
+		        alert('여긴 안됨');
+		    }
+		    // Your code
+		    // ....
+		}*/
+		
+		/*dayRender: function(date, cell){
+			console.log(date.format("YYYY-MM-DD") > "2016-11-23");
+	        if (date.format("YYYY-MM-DD") > "2016-11-23"){
+	        	console.log(cell);
+	            //$(cell).addClass('fc-future-disabled');
+	            $(cell).addClass('fc-status-disabled');
+	        }
+		}*/
 
 		/*eventDragStop: function( event, jsEvent) {
 			console.log("eventdragstop");

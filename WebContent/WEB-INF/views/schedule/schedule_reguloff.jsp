@@ -11,6 +11,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <style type="text/css">
+  	.disabled{
+  		background-color:black;
+  	}
+  </style>
   <se:authentication property="name" var = "LoginUser"/>
    <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
