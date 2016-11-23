@@ -7,7 +7,6 @@
 
 var array = new Array();
 
-
 $(function() {
 	var id=$('#hidden').val();
 
@@ -138,14 +137,14 @@ function loadCalendar(){
 		header : {
 			left : 'prev,next today',
 			center : 'title',
-			right : 'month,agendaWeek,agendaDay'
+			right : 'null'
 		},
 		selectable : true,
 		selectHelper : true,
 		editable : true,
 		events : array,
 		eventDurationEditable: false,
-		eventStartEditable:false,
+		eventStartEditable:true,
 		
 		//새로운 일정
 		select : function(start, end, allDay) {
@@ -169,30 +168,41 @@ function loadCalendar(){
 		},
 		
 		//일정 드래그
-		eventDrop : function(event, delta, revertFunc) {
+		eventDrop : function(event, delta, revertFunc, jsEvent) {
 			var id = event.id;
-			/*var m_id = event.?;
-			var o_code=event.?;*/
-
-			$('.antoclose2').click();
+			var dow= Number(event.dow[0])+delta.days();
+			var m_id=event.title;
 			
-			/*$.ajax({
+			if (dow>7){
+				dow=dow-7;
+			} else if (dow<0){
+				dow=dow+7;
+			} else {
+			}
+			event.dow[0]=dow;
+						
+			$.ajax({
 				url : 'reguloff_update.htm',
 				type : 'post',
 				data : {
 					id:id,
 					m_id:m_id,
-					o_code:o_code
+					o_code:dow
 				},
 				success : function(data) {
 
 					//updateEvent, renderEvent를 하기 위해서는.... 표준 event object가 되어야 한다
-					$("#calendar").fullCalendar('refetchEvents');
-					$("#calendar").fullCalendar('unselect');
+					//$("#calendar").fullCalendar('refetchEvents');
+					//$("#calendar").fullCalendar('unselect');
 				}
-			});*/
+			});
 			
-		}
+		},
+
+		/*eventDragStop: function( event, jsEvent) {
+			console.log("eventdragstop");
+			console.log(jsEvent);			
+		}*/
 		
 		/*//날짜 길이 늘이기 이벤트
 		eventResize : function(event, jsEvent, view) {

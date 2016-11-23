@@ -53,7 +53,11 @@
  <script type="text/javascript">
   $(function(){ 
 	var id="${LoginUser}";
+<<<<<<< HEAD
 	 $("#search").hide(); 
+=======
+	console.log("LoginUser는 " + id);
+>>>>>>> 3c5414907e8f0241260eac8ee61b7ed23b8e0de4
 		$("#go").click(function(){
 			console.log("ihiuhiu")
 			alert("떠떠떠떠");

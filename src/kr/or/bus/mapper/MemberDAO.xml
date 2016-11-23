@@ -163,4 +163,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from mdetail
 		where m_id = #{m_id}
 	</select>
+	
+	
+	
+	
+	<!-- 회원 정보 삭제 -->
+   
+   <delete id="deleteAuthority" parameterType="String">
+   delete from authority where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteReguloff" parameterType="String">
+   delete from reguloff where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteCommute" parameterType="String">
+   delete from commute where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteRealoff" parameterType="String">
+   delete from realoff where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteResrecord" parameterType="String">
+   delete from resrecord where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteMdetail" parameterType="String">
+   delete from mdetail where m_id=#{m_id}
+   </delete>
+   
+   <delete id="deleteMember" parameterType="String">
+   delete from member where m_id=#{m_id}
+   </delete>
+	
 </mapper>

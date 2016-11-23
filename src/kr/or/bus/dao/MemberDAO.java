@@ -92,4 +92,29 @@ public interface MemberDAO {
 	
 	//회원 사진 가져오기
 	public MDetailDTO getPhoto(String m_id);
+	
+	/* 김수현 추가 2016.11.23 */
+
+	// 권한 삭제
+	public void deleteAuthority(String m_id);
+
+	// 정규휴무기록 삭제
+	public void deleteReguloff(String m_id);
+
+	// 출퇴근 삭제
+	public void deleteCommute(String m_id);
+
+	// 정규휴무 삭제
+	public void deleteRealoff(String m_id);
+
+	// 이력 삭제
+	public void deleteResrecord(String m_id);
+
+	// 사원상세 삭제
+	public void deleteMdetail(String m_id);
+
+	// 사원 삭제
+	public void deleteMember(String m_id);
+	/* 김수현추가 끝 */
+
 }
