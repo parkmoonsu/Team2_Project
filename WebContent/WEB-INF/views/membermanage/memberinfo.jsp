@@ -67,13 +67,9 @@
 
 <body class="nav-md">
 	<div class="container body">
-<<<<<<< HEAD
-		<div class="main_container" id="main_container">
-			<div class="col-md-3 left_col">
-=======
 		<div class="main_container">
 			<div class="col-xs-12  col-md-3 left_col">
->>>>>>> 3c5414907e8f0241260eac8ee61b7ed23b8e0de4
+
 				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
 			</div>
 
