@@ -30,6 +30,7 @@ import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.dto.MemberJoinMDetailRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrDTO;
+import kr.or.bus.dto.MemberJoinResRecordDTO;
 
 @Service
 public class MemberManageService {
@@ -161,5 +162,15 @@ private JavaMailSender mailSender;
 	      
 	      System.out.println("delete서비스 타나욧?");
 	   }
+	  
+	  public List<MemberJoinResRecordDTO> getResRecordInfo(String m_id){
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			List<MemberJoinResRecordDTO> list = dao.getResRecordInfo(m_id);
+			for(int i=0 ;i<list.size();i++){
+				System.out.println("이력기간"+list.get(i).getRes_start());
+				System.out.println("이력회사"+list.get(i).getRes_com());
+			}
+			return list;
+		}
 
 }

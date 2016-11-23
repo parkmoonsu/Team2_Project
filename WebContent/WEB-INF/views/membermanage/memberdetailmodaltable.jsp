@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <table class="table">
-	<caption>Optional table caption.</caption>
+	<caption>&nbsp &nbsp &nbsp  </caption>
 	<thead>
 		<tr>
 			<th>요청자</th>
