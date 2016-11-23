@@ -44,7 +44,7 @@
            <label class="control-label col-md-1 col-sm-2 col-xs-1">ID</label> 
             <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
                <input type="text" class="form-control" id="inputSuccess3"
-                  value="${mjdrodto.m_name }" readonly> 
+                  value="${mjdrodto.m_id }" readonly> 
             </div>
 
             <label class="control-label col-md-1 col-sm-2 col-xs-1">우편번호</label> 
