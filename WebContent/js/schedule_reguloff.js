@@ -137,7 +137,7 @@ function loadCalendar(){
 		header : {
 			left : 'prev,next today',
 			center : 'title',
-			right : 'month,agendaWeek,agendaDay'
+			right : 'null'
 		},
 		selectable : true,
 		selectHelper : true,

@@ -79,4 +79,15 @@ public class MemberManageController {
 		return "membermanage/updatesuccess";
 
 	}
+	
+
+	@RequestMapping("/deleteMember.admin")
+	public View deleteMember(String param , Model model , String pg){
+	  System.out.println("member id가 삭제가 될까욧?");
+      System.out.println("삭제 아이디 띄워주세요"+param);
+      service.delete(param);
+      
+      return jsonview;
+   }
+
 }

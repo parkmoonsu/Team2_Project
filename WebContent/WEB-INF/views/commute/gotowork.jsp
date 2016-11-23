@@ -53,6 +53,7 @@
  <script type="text/javascript">
  $(function(){ 
 	var id="${LoginUser}";
+	console.log("LoginUser는 " + id);
 		$("#go").click(function(){
 			console.log("ihiuhiu")
 			alert("떠떠떠떠");

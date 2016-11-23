@@ -186,9 +186,7 @@
 										</thead>
 										<tbody>
 											<c:set value="${list}" var="d"/>
-											<script>
-												console.log("${d}");
-											</script>
+										
 											<c:forEach var="i" items="${d}">
 											<tr>
 												<td>${i.r}</td>
@@ -197,9 +195,10 @@
 												<td><a href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="${i.m_name},${i.m_email}">${i.m_email}</a></td>
 												<td><small>${i.j_name}</small></td>
 												<td>${i.m_annual}일</td>
-												<td style = "text-align:center"> <a href="deleteMember.admin?m_id=${i.m_id}"
-													class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>
-														삭제 </a></td>
+												<td style = "text-align:center"> 
+													<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
+                                         			 삭제 </div>
+                                         		</td>
 											</tr>
 											</c:forEach>
 										</tbody>
@@ -237,6 +236,36 @@
 					</div>
 				</div>
 			</div>
+
+      <!-- 수현:삭제모달    -->
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">
+								<i class="fa fa-exclamation-triangle"></i> 회원삭제
+							</h4>
+						</div>
+						<div class="modal-body" aria-labelledby="myModalLabel"
+							id="myModalLabel2"></div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="cancelbutton">삭제</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">취소</button>
+							<input type="hidden" id="hvalue">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 수현:삭제모달 끝 -->
+
+
+
+
 
 			<!-- footer content -->
 			<footer>
@@ -342,6 +371,35 @@ $(function() {
 		  $('#exampleModalLabel').html("<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"+recipient[0]+'</span>님에게 보내기');
 		  $('#people').val(recipient[1]);
 		});
+	 
+	 
+	 $('#myModal').on('show.bs.modal', function (event) {
+	        var button = $(event.relatedTarget) 
+	        var recipient = button.data('whatever');
+	        console.log(recipient);
+	        var array = recipient.split(',');
+	       
+	        console.log($('#hvalue').val(array[1]));
+	        
+	        $('#myModalLabel2').html("<span class='blue'>&nbsp;"+array[0]+'</span>님을 삭제하시겠습니까?');
+	      });  
+	     
+	      $('#cancelbutton').click(function(){
+	       //console.log($('#search').val()); 
+	       var param = $('#hvalue').val();
+	        
+	       $.ajax({
+	            url:"deleteMember.admin",
+	            type:"post",
+	            data: {"param":param},        
+	            success:function(data){
+	               alert("삭제 완료");
+	               window.location.reload();
+	               
+	            }
+	         });
+	       });
+
 });
 
 </script>

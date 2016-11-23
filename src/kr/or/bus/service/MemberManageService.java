@@ -130,5 +130,17 @@ private JavaMailSender mailSender;
 		dao.insertAuth(m_id);
 	}
 
+	  public void delete(String m_id){
+	      MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+	      dao.deleteAuthority(m_id);
+	      dao.deleteReguloff(m_id);
+	      dao.deleteCommute(m_id);
+	      dao.deleteRealoff(m_id);
+	      dao.deleteResrecord(m_id);
+	      dao.deleteMdetail(m_id);
+	      dao.deleteMember(m_id);
+	      
+	      System.out.println("delete서비스 타나욧?");
+	   }
 
 }
