@@ -28,6 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinMDetailRegulOffDTO;
+import kr.or.bus.dto.MemberJoinRegulOffrDTO;
 
 @Service
 public class MemberManageService {
@@ -128,6 +130,23 @@ private JavaMailSender mailSender;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		dao.updateCheck(m_id);
 		dao.insertAuth(m_id);
+	}
+	
+	public MemberJoinMDetailRegulOffDTO memberDetail(String m_id){
+		System.out.println("service 탓니?");
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		MemberJoinMDetailRegulOffDTO dto = dao.getMemberDetailRegulOff(m_id);
+		System.out.println("dto"+dto);
+		return dto;
+	}
+	
+	public List<MemberJoinRegulOffrDTO> memberreguloffr(String m_id){
+		System.out.println("memberreguloffr 서비스 시작");
+		
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		List<MemberJoinRegulOffrDTO> list = dao.getRegulOffr(m_id);
+		System.out.println("list"+list);
+		return list;
 	}
 
 	  public void delete(String m_id){

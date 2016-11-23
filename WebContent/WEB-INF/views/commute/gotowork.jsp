@@ -51,9 +51,13 @@
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
  <script type="text/javascript">
- $(function(){ 
+  $(function(){ 
 	var id="${LoginUser}";
+<<<<<<< HEAD
+	 $("#search").hide(); 
+=======
 	console.log("LoginUser는 " + id);
+>>>>>>> 3c5414907e8f0241260eac8ee61b7ed23b8e0de4
 		$("#go").click(function(){
 			console.log("ihiuhiu")
 			alert("떠떠떠떠");
@@ -65,12 +69,38 @@
 			type:"post",
 			success:function(data){
 				console.log(data.dto.c_start);				
-				$("#show").append("<div>"+id+"님의 출근시간은 "+data.dto.c_start+"입니다."+
-						           "<br>"+id+"님의 출근상태는"+ data.dto.cs_stat+"입니다.<div>"); 					
+				$("#show").html(id+"님의 출근시간은 "+data.dto.c_start+"입니다."+
+						           "<br>"+id+"님의 출근상태는"+ data.dto.cs_stat+"입니다."); 
+				$("#search").show();
 			}
 			});   
 		});
-	});
+	}); 
+	
+	 /* $(function(){ 
+		  $(".regin").hide();
+			$("#search").hide() ;
+	  
+			var id="${LoginUser}";
+				$("#go").click(function(){
+					console.log("ihiuhiu")
+					alert("떠떠떠떠");
+				    $.ajax({
+					url:"gotowork.member",
+					data: {
+						m_id:id
+					},
+					type:"post",
+					success:function(data){
+						console.log(data.dto.c_start);				
+						$("#show").append(id+"님의 출근시간은 "+data.dto.c_start+"입니다."+
+								           "<br>"+id+"님의 출근상태는"+ data.dto.cs_stat+"입니다."); 
+						$(".regin").show();
+						$("#search").show();
+					}
+					});   
+				});
+			}); */
 </script>
 </head>
 <body class="nav-md">
@@ -104,14 +134,12 @@
 								<div class="col-sm-5"></div>
 
 								<div class="col-xs-5 col-sm-5"></div>
-<!-- 									<input type="button" id="go" value="출근하기" class="btn btn-primary"/>
- -->
-
 									<div class="row" style="margin-top:20px">
 										<div class="col-xs-1 col-sm-1"></div>
 										<div class="col-xs-10 col-sm-10">
 											
 										 		<div style="margin-top: 30px; padding-left: 370px">
+										 		
 													<input type="button" id="go" value="출근하기" class="btn btn-primary"/>
 												</div>
 											 <div class="panel panel-info" id="show">
@@ -120,13 +148,13 @@
 														<div class="col-xs-1 col-sm-1" align="center">
 															<div class="row"></div>
 														</div>
-														<div class="col-sm-10" id="show">
-															<input type="submit" value="출/퇴근 조회하기" class="btn btn-success">
-															<!-- <div class="my-box"></div> -->
+														<div class="my-box" id="show">
+														<div style="text-align:center;">
+														<!-- <div class="col-sm-10"></div> -->
+														<center><input type="button" id="search" value="출/퇴근 조회하기" class="btn btn-success"></center>
 														</div>
 													</div>
-												</div>  
-										
+												</div> 								
 											</div>
 										</div>
 									</div> 
