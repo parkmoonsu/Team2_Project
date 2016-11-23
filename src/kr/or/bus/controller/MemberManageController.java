@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinMDetailRegulOffDTO;
+import kr.or.bus.dto.MemberJoinRegulOffrDTO;
 import kr.or.bus.service.MemberManageService;
 @Controller
 public class MemberManageController {
@@ -78,5 +80,23 @@ public class MemberManageController {
 		
 		return "membermanage/updatesuccess";
 
+	}
+	@RequestMapping("/memberdetail.htm")
+	public String memberDetail(String param, Model model){
+		System.out.println("memberdetail.htm시작");
+		System.out.println("param"+param);
+		MemberJoinMDetailRegulOffDTO dto = service.memberDetail(param);
+		model.addAttribute("dto", dto);
+		return "membermanage/memberdetailmodal";
+	}
+	@RequestMapping("/memberreguloffr.htm")
+	public String memberreguloffr(String param, Model model){
+		System.out.println("memberreguloffr.htm 시작");
+		System.out.println("param"+param);
+		
+		List<MemberJoinRegulOffrDTO> list = service.memberreguloffr(param);
+		model.addAttribute("offrlist", list);
+		
+		return "membermanage/memberdetailmodaltable";
 	}
 }

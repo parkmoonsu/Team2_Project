@@ -15,6 +15,8 @@ import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
+import kr.or.bus.dto.MemberJoinMDetailRegulOffDTO;
+import kr.or.bus.dto.MemberJoinRegulOffrDTO;
 import kr.or.bus.dto.MemberJoinResRecordDTO;
 import kr.or.bus.dto.ResRecordDTO;
 
@@ -88,5 +90,8 @@ public interface MemberDAO {
 	public void updateCheck(String m_id);
 	//승인시 권한 부여
 	public void insertAuth(String m_id);
-	
+	//(관리자) 회원 정보 상세 확인
+	public MemberJoinMDetailRegulOffDTO getMemberDetailRegulOff(String m_id);
+	//(관리자) 회원 정보 상세 확인 > 휴무 기록 확인
+	public List<MemberJoinRegulOffrDTO> getRegulOffr(String m_id);
 }
