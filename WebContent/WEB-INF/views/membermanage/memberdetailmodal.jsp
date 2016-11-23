@@ -73,17 +73,16 @@
 				
 				
 					<div class="form-group">
-						<div class="form-group">
+	
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="text" class="form-control"
 									placeholder="Default Input">
 					</div>
-					</div>
-					<div class="form-group">
+				
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<input type="text" class="form-control" disabled="disabled"
 							placeholder="Disabled Input">
-					</div>
+					
 					</div>
 				</div> 
 				
