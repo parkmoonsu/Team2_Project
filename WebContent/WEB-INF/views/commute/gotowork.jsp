@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="se"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +12,21 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+#search{
+	border:0;
+	outline:0;
+}
+#show{
+	text-align:center;
+	font-size:1.5em;
+}
+</style>
 
-
-<se:authentication property="name" var = "LoginUser"/>       													
+<se:authentication property="name" var="LoginUser" />
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-	
+
 <title>KOSBUS</title>
 <!-- Bootstrap -->
 <link
@@ -50,16 +60,15 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
- <script type="text/javascript">
+<script type="text/javascript">
   $(function(){ 
 	var id="${LoginUser}";
-	 $("#search").hide(); 
+	// $("#search").hide(); 
 
 	console.log("LoginUser는 " + id);
 
-		$("#go").click(function(){
-			console.log("ihiuhiu")
-			alert("떠떠떠떠");
+		$("#gotowork").click(function(){
+			alert("뜨니??");
 		    $.ajax({
 			url:"gotowork.member",
 			data: {
@@ -67,9 +76,9 @@
 			},
 			type:"post",
 			success:function(data){
-				console.log(data.cdto3.c_start);				
-				 $("#show").html(id+"님의 출근시간은 "+data.cdto3.c_start+"입니다."+
-						           "<br>"+id+"님의 출근상태는"+ data.cdto3.cs_stat+"입니다."); 
+				console.log(data.dto.c_start);				
+				 $("#show").append(id+"님의 출근시간은 "+ data.dto.c_start+"입니다."+"<br>"+
+						 		   id+"님의 출근상태는 "+ data.dto.cs_stat+"입니다."); 
 				$("#search").show(); 
 			}
 			});   
@@ -96,7 +105,7 @@
 				<!-- top tiles -->
 				<div class="row tile_count"></div>
 				<!-- /top tiles -->
-	
+
 				<div class="row">
 					<div class="col-xs-12 col-sm-12">
 						<div class="dashboard_graph">
@@ -105,37 +114,38 @@
 									<h3>출근</h3>
 								</div>
 							</div>
-							<div class="clearfix" style="margin-top:20px">
-								<div class="container" >
-								<div class="col-sm-5"></div>
+							<div class="clearfix" style="margin-top: 20px">
+								<div class="container">
+									<div class="col-sm-5" style="margin-left:40px"></div>
 
-								<div class="col-xs-5 col-sm-5"></div>
-									<div class="row" style="margin-top:20px">
+									<!-- <div class="col-xs-5 col-sm-5"></div>
+									<div class="row" style="margin-top: 20px">
 										<div class="col-xs-1 col-sm-1"></div>
 										<div class="col-xs-10 col-sm-10">
-											
-										 		<div style="margin-top: 30px; padding-left: 370px">
-										 		
-													<input type="button" id="go" value="출근하기" class="btn btn-primary"/>
-												</div>
-											<!--  <div class="panel panel-info" id="show"> -->
-												<div class="panel-body">
-													<div class="row">
-														<div class="col-xs-1 col-sm-1" align="center">
-															<div class="row"></div>
-														</div>
-														<div class="my-box" id="show">
-														<div style="text-align:center;">
-														<!-- <div class="col-sm-10"></div> -->
-														<center><input type="button" id="search" value="출/퇴근 조회하기" class="btn btn-success"></center>
-														</div>
-													</div>
-												</div> 								
+
+											<div style="margin-top: 30px; padding-left: 370px">
+ -->
+											<input type="button" id="gotowork" value="출근하기" class="btn btn-primary" />
 											</div>
-										<!-- </div> -->
-									</div> 
-								</div>
-							</div>
+											<div class="panel-body">
+												<div class="row">
+													<div class="col-xs-1 col-sm-1" align="center">
+														<div class="row"></div>
+													</div>
+													<div class="my-box" >
+													
+														<div id="show" style="text-align: center;line-height:200%">
+																 
+														</div>
+														<center><input type="button" id="search" value="출/퇴근 조회하기" 
+														onClick="location.href='comsearch.member?m_id=${LoginUser}'" class="btn btn-success"></center>
+													</div>
+												</div>
+											</div>
+
+								<!-- 		</div>
+									</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -150,17 +160,17 @@
 
 
 
-	<!-- footer content -->
-	<footer>
-		<div class="pull-right">
-			Gentelella - Bootstrap Admin Template by <a
-				href="https://colorlib.com">Colorlib</a>
-		</div>
-		<div class="clearfix"></div>
-	</footer>
-	<!-- /footer content -->
+		<!-- footer content -->
+		<footer>
+			<div class="pull-right">
+				Gentelella - Bootstrap Admin Template by <a
+					href="https://colorlib.com">Colorlib</a>
+			</div>
+			<div class="clearfix"></div>
+		</footer>
+		<!-- /footer content -->
 	</div>
-	
+
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -221,8 +231,8 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-	
-	
-	
+
+
+
 </body>
 </html>
