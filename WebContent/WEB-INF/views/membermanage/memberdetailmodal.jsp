@@ -92,8 +92,7 @@
             <div class="form-group">
                <label class="control-label col-md-1 col-sm-1 col-xs-1">면허증</label>
                   <div class="col-md-4 col-sm-4 col-xs-12">
-                  <input type="text" class="form-control"
-                    value="${mjdrodto.m_license}" readonly>
+                    <a href="download.admin?folder=upload&filename=${mjdrodto.m_license}">${mjdrodto.m_license}</a>
                </div>
                <label class="control-label col-md-1 col-sm-1 col-xs-1">생년월일</label>
                <div class="col-md-4 col-sm-4 col-xs-12">
@@ -106,7 +105,7 @@
             <div class="form-group">
                <label class="control-label col-md-1 col-sm-1 col-xs-1">이력서</label>
                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <a href="">${mjdrodto.m_resume }</a>
+                  <a href="download.admin?folder=upload&filename=${mjdrodto.m_resume }">${mjdrodto.m_resume }</a>
                </div>
             <label class="control-label col-md-1 col-sm-1 col-xs-1">정기휴무</label>
                <div class="col-md-4 col-sm-4 col-xs-122">
@@ -126,7 +125,7 @@
 
       </div>
       <div class="modal-footer">
-         <button type="button" class="btn btn-success">확인</button>
+         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#memberresrecord" data-whatever="${mjdrodto.m_name }">확인</button>
       </div>
 
    </div>
