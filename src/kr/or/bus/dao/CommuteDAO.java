@@ -14,9 +14,10 @@ public interface CommuteDAO {
 		public void insertCommuteInfo(String m_id, String m_name);
 		
 		//회원의 출근 시간
-		public int csupdate(CommuteJoinCstartJoinCendDTO dto);		
-		public CommuteJoinCstartJoinCendDTO csselect(CommuteJoinCstartJoinCendDTO dto);
+		public void csupdate(String m_id);		
+		public List<CommuteJoinCstartJoinCendDTO> csselect(String m_id);
 		
+		public void csudate(String m_id);
 		//퇴근하기
 		public void offinsertCommuteInfo(String m_id, String m_name);
 				

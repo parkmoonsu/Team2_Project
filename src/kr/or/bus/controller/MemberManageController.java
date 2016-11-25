@@ -8,7 +8,16 @@
 
 
 package kr.or.bus.controller;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,6 +100,32 @@ public class MemberManageController {
 		model.addAttribute("mjdrodto", dto);
 		return "membermanage/memberdetailmodal";
 	}
+	@RequestMapping("/download.admin")
+	public void downloadfile(String folder, String filename, HttpServletRequest request,
+			   HttpServletResponse response) throws IOException{
+		System.out.println("folder"+folder);
+		System.out.println("filename"+filename);
+		String fname = new String(filename.getBytes("euc-kr"), "8859_1");
+		response.setHeader("Content-Disposition", "attachment;filename="
+			    + fname + ";");
+		System.out.println(request.getServletContext().getRealPath("/join"));
+		String fullpath = request.getServletContext().getRealPath(
+			    "/join/" + folder + "/" + filename);
+		 FileInputStream fin = new FileInputStream(fullpath);
+		  // 출력 도구 얻기 :response.getOutputStream()
+		  ServletOutputStream sout = response.getOutputStream();
+		  byte[] buf = new byte[1024]; // 전체를 다읽지 않고 1204byte씩 읽어서
+		  int size = 0;
+		  while ((size = fin.read(buf, 0, buf.length)) != -1) // buffer 에 1024byte
+		               // 담고
+		  { // 마지막 남아있는 byte 담고 그다음 없으면 탈출
+		   sout.write(buf, 0, size); // 1kbyte씩 출력
+		  }
+		  fin.close();
+		  sout.close();
+		 
+	}
+	
 	@RequestMapping("/memberreguloffr.htm")
 	public String memberreguloffr(String param, Model model){
 		System.out.println("memberreguloffr.htm 시작");

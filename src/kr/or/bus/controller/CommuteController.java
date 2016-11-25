@@ -94,12 +94,12 @@ public class CommuteController {
 	public View go(ModelMap map, String m_id){
 		System.out.println("이거는gotowork.member싲가~");
 			
-		service.go(m_id, map);
+		List<CommuteJoinCstartJoinCendDTO> cdto3= service.go(m_id, map);
 			
-		//map.addAttribute("dto",dto);
+		map.addAttribute("cdto3",cdto3);
 		
-		//return jsonview;
-		return null;
+		return jsonview;
+		//return null;
 		//System.out.println("dto값" + dto.getC_start() + dto.getCe_stat());
 	
 	}

@@ -1,5 +1,7 @@
 package kr.or.bus.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ public class CommuteService {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	public int go(String m_id, ModelMap map){
+	public List<CommuteJoinCstartJoinCendDTO> go(String m_id, ModelMap map){
 		
 		/*
 		CommuteJoinCstartJoinCendDTO dto2=new CommuteJoinCstartJoinCendDTO();
@@ -27,22 +29,17 @@ public class CommuteService {
 		 */
 
 		CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
-		String m_name = dao.getOnlyName(m_id);
-		CstandardDTO cdto = dao.getStandardTime();
-		System.out.println("go service -> m_name:="+m_name);
-		dao.insertCommuteInfo(m_id, m_name);
-		System.out.println("go service -> m_id:="+m_id);
-		CommuteJoinCstartJoinCendDTO cdto2=new CommuteJoinCstartJoinCendDTO();
-		cdto2.setM_id(m_id);
-		System.out.println("여기는 값이 들어있나?" + m_id);
-		System.out.println("여기탓니?");
-		dao.csupdate(cdto2);
 		
+		//dao.csupdate(m_id);
+		//dao.csudate(m_id);
 		System.out.println("꺄륵꺄륵꺄륵");
 
-		CommuteJoinCstartJoinCendDTO cdto3=dao.csselect(cdto2);
-	
-		map.addAttribute("cdto3",cdto3);
-		return 0;
+		List<CommuteJoinCstartJoinCendDTO> cdto3=dao.csselect(m_id);
+		System.out.println("cdto3"+cdto3);
+		System.out.println(cdto3.size());
+		System.out.println(cdto3.get(0).getC_start());
+		
+		//map.addAttribute("cdto3",cdto3);
+		return cdto3;
 	}
 }
