@@ -34,32 +34,41 @@
                </div>
             </div>
             
-            <label class="control-label col-md-1 col-sm-2 col-xs-1">이름</label> 
-             <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
-               <input type="text" class="form-control has-feedback-left"
-                  id="inputSuccess2" value="${mjdrodto.m_name }" readonly> <span
-                  class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-            </div> 
             
+            
+            <label class="control-label col-md-1 col-sm-2 col-xs-1">이름</label> 
+             <div class="col-md-4 col-sm-3 col-xs-12 form-group has-feedback">
+               <input type="text" class="form-control has-feedback-left"
+                  id="inputSuccess2" value="${mjdrodto.m_name }" readonly> <!-- <span
+                  class="fa fa-user form-control-feedback left" aria-hidden="true"></span>  -->
+            </div> 
+           
+           
+         
            <label class="control-label col-md-1 col-sm-2 col-xs-1">ID</label> 
-            <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
+            <div class="col-md-4 col-sm-3 col-xs-12 form-group has-feedback">
                <input type="text" class="form-control" id="inputSuccess3"
                   value="${mjdrodto.m_id }" readonly> 
             </div>
-
+		
+			
+			
             <label class="control-label col-md-1 col-sm-2 col-xs-1">우편번호</label> 
-            <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
+            <div class="col-md-4 col-sm-3 col-xs-12 form-group has-feedback">
                <input type="text" class="form-control has-feedback-left"
-                  id="inputSuccess4" value="${mjdrodto.m_addr }" readonly> <span
+                  id="inputSuccess4" value="${mjdrodto.m_addr }" readonly> 
+                  <!-- <span
                   class="fa fa-envelope form-control-feedback left"
-                  aria-hidden="true"></span>
+                  aria-hidden="true"></span> -->
             </div>
 
             <label class="control-label col-md-1 col-sm-2 col-xs-1">상세주소</label> 
-            <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
+            <div class="col-md-4 col-sm-3 col-xs-12 form-group has-feedback">
                <input type="text" class="form-control" id="inputSuccess5"
-                  value="${mjdrodto.m_daddr }" readonly> <span
-                  class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                  value="${mjdrodto.m_daddr }" readonly> 
+                  <!-- <span
+                  class="fa fa-phone form-control-feedback right"
+                  aria-hidden="true"></span> -->
             </div>
             
             <br>
