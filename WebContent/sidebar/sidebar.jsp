@@ -18,10 +18,11 @@
             <!-- menu profile quick info -->
             <div class="profile">
               <div class="profile_pic">
-                <img class="img-circle profile_img" id = "m_photo2">
+                <img class="img-circle profile_img" id = "m_photo2" style="width: 60px; height: 60px;">
               </div>
               <div class="profile_info">
-                <span>안전운행 합시다</span>
+               <se:authentication property="name" var = "LoginUser"/>
+                <span><font color = "white" id = "m_name2"></font>님<br>안전운행 합시다</span>
                 
               </div>
             </div>
@@ -32,17 +33,13 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-              <se:authentication property="name" var = "LoginUser"/>
-                <h3><span id = "m_name2"></span></h3>
+                <h3>&nbsp;</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-edit"></i> 버스관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="busenroll.admin">버스 등록/삭제</a></li>
+                      <li><a href="form_advanced.html">꺄륵쿠</a></li>
+                      <li><a href="form_validation.html">스투스</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i>기사 관리 <span class="fa fa-chevron-down"></span></a>
@@ -90,7 +87,7 @@
 			success:function(data){
 				console.log(data.m_name);
 				
-				$("#m_name2").append(data.m_name);
+				$("#m_name2").prepend(data.m_name);
 			}
 		});
 		

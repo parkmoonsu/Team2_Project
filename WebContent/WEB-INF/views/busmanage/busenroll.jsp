@@ -1,9 +1,9 @@
 <!-- 
-	@FileName : joinapprove.jsp
+	@FileName : busenroll.jsp
 	@Project	: KosBus
-	@Date	: 2016. 11.21
+	@Date	: 2016. 11.25
 	@Author	: 박문수
-	@Discription : (관리자)회원가입승인 페이지 View단
+	@Discription : (관리자)버스 관리 페이지 View단
  -->
 
 
@@ -22,7 +22,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>회원 관리</title>
+<title>버스 관리</title>
 
 <!-- Bootstrap -->
 <link
@@ -56,15 +56,20 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+	
+<!-- Editor -->
+<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+
 </head>
 
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
-			<div class="col-xs-3 col-md-3 left_col">
+			<div class="col-xs-12  col-md-3 left_col">
+
 				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
 			</div>
 
@@ -72,37 +77,38 @@
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
-
-			<!-- page content -->
-			<div class="right_col" role="main">
+			  <!-- page content -->
+        <div class="right_col" role="main">
+          <!-- top tiles -->
+          <div class="row tile_count" style = "text-align: center">
+          	<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          		<span class="count_top"></span>
+          	</div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-bus"></i> 마을버스</span>
+              <div class="count">0</div>          
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-bus"></i> 시내버스</span>
+              <div class="count">0</div>              
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-bus"></i> 시외버스</span>
+              <div class="count">0</div>            
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
+              <div class="count green">0</div>
+            </div>  
+          </div>
+          <!-- /top tiles -->
 				<div class="">
-					<div class="page-title">
-						<div class="title_left">
-							<h3>
-								<small>회원가입승인</small>
-							</h3>
-						</div>
-					</div>
-
 					<div class="clearfix"></div>
 
 					<div class="row">
-						<div class="col-xs-12 col-md-12">
+						<div class="col-md-12 col-xs-12">
 							<div class="x_panel">
-								<div class="x_title">
-									<nav class="navbar navbar-default">
-										<div class="container-fluid">
-											<ul class="nav navbar-nav">
-												<li><a href="membermanage.admin">회원정보</a></li>
-												<li><a href="joinapprove.admin"><strong>회원가입승인</strong></a></li>
-												<li><a href="#">스케줄관리</a></li>
-											</ul>
-										</div>
-									</nav>
-								</div>
 								<div class="x_content">
-
-
 									<!-- start project list -->
 									<div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -110,7 +116,7 @@
 											<input type="text" class="form-control"
 												placeholder="Search for..." id="search"> <span
 												class="input-group-btn">
-												<button class="btn btn-default" type="button">Go!</button>
+												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
 											</span>
 										</div>
 									</div>
@@ -118,38 +124,29 @@
 										<thead>
 											<tr>
 												<th>번호</th>
-												<th>ID</th>
-												<th>이름</th>
-												<th>직책</th>
-												<th>승인요청일</th>
+												<th>차량번호</th>
+												<th>노선번호</th>
+												<th>기사</th>
+												<th>차고지 이름</th>
+												<th>상태</th>
 												<th style="width: 20%"></th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:set value="${list}" var="d"/>
-											<c:if test ="${d == '[]' }">
-											<tr>
-												<td colspan = '6' align = "center">가입신청 회원 없음</td>
-											</tr>
-											</c:if>
+										
 											<c:forEach var="i" items="${d}">
-											<c:choose>
-											<c:when test="${i != null}">
-											
 											<tr>
-												<td>${i.r}</td>
-												<td><a>${i.m_id}</a></td>
-												<td><small>${i.m_name}</small></td>
-												<td><small>${i.j_name}</small></td>
-												<td><small>${i.m_regdate}</small></td>
-												<td style = "text-align:center"> <a href="approveMember.admin?m_id=${i.m_id}"
-													class="btn btn-success btn-xs"><i class="fa fa-check"></i>
-														승인 </a>
-														
-												</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td style = "text-align:center"> 
+													<input type = "checkbox">
+                                         		</td>
 											</tr>
-											</c:when>
-											</c:choose>
 											</c:forEach>
 										</tbody>
 									</table>
@@ -168,24 +165,75 @@
 									</c:choose>	
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
-											<li><a href="joinapprove.admin?pg=${pgc-1}">Previous</a></li>
+											<li><a href="membermanage.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 										
 										
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="joinapprove.admin?pg=${i}">${i}</a></li>
+											<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
 										
 										<c:if test="${pgc < mc/10 }">
-											<li><a href="joinapprove.admin?pg=${pgc+1}">Next</a></li>
+											<li><a href="membermanage.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
+									
+									
 								</div>
+									<div style = "float: right;">
+									<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-check"></i>
+                                         			 등록 </div>
+									<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
+                                         			 삭제 </div>
+									</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
+      <!-- 수현:삭제모달    -->
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">
+								<i class="fa fa-exclamation-triangle"></i> 회원삭제
+							</h4>
+						</div>
+						<div class="modal-body" aria-labelledby="myModalLabel"
+							id="myModalLabel2"></div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="cancelbutton">삭제</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">취소</button>
+							<input type="hidden" id="hvalue">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 수현:삭제모달 끝 -->
+
+			<div class="modal fade" id="memberresrecord" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" id="resrecordtitle">
+								 
+							</h4>
+						</div>
+						<div class="modal-body" aria-labelledby="myModalLabel"
+							id="resrecordtable"></div>
+					</div>
+				</div>
+			</div>
+
+
 
 			<!-- footer content -->
 			<footer>
@@ -198,6 +246,7 @@
 			<!-- /footer content -->
 		</div>
 	</div>
+
 
 	<!-- Bootstrap -->
 	<script
@@ -259,12 +308,6 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	
-		
-});
 
-</script>
 </body> 	
 </html>
