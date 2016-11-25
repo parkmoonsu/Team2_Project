@@ -15,15 +15,32 @@ public class RouteManageController {
 	@Autowired
 	RouteManageService routeManageSerivce;
 	
+	@RequestMapping(value="/route.admin",method=RequestMethod.GET)
+	public String routePageOpen(){
+		return "routemanage/RouteManage";	
+	}
+	
 	//파일의 마커 좌표 저장
-	@RequestMapping(value="/Maplist2.do",method=RequestMethod.GET)
+	@RequestMapping(value="/routeSave.admin",method=RequestMethod.GET)
 	public void routeSave(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		routeManageSerivce.routelocationSave(request , response);
 	}
 		
 	//파일에서 마커 좌표를 읽어온다
-	@RequestMapping(value="/Maplist3.do",method=RequestMethod.GET)
-	public void routeLoad(HttpServletRequest request,HttpServletResponse response) throws Exception{
+	@RequestMapping(value="/routeRead.admin",method=RequestMethod.GET)
+	public void routeRead(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		routeManageSerivce.routelocationRead(request,response);
+	}
+	
+	//마커 좌표 수정
+	@RequestMapping(value="/routeEdit.admin",method=RequestMethod.GET)
+	public void routeEdit(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		routeManageSerivce.routelocationEdit(request , response);
+	}
+	
+	//수정된 마커 좌표 불러오기
+	@RequestMapping(value="/routeEditRead.admin",method=RequestMethod.GET)
+	public void routeEditRead(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		routeManageSerivce.routelocationEditRead(request , response);
 	}
 }
