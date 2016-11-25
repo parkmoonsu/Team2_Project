@@ -44,7 +44,7 @@
            <label class="control-label col-md-1 col-sm-2 col-xs-1">ID</label> 
             <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
                <input type="text" class="form-control" id="inputSuccess3"
-                  value="${mjdrodto.m_name }" readonly> 
+                  value="${mjdrodto.m_id }" readonly> 
             </div>
 
             <label class="control-label col-md-1 col-sm-2 col-xs-1">우편번호</label> 
@@ -76,7 +76,7 @@
             
                
                <div class="form-group">
-                 <label class="control-label col-md-1 col-sm-1 col-xs-1">등급</label> 
+                 <label class="control-label col-md-2 col-sm-2 col-xs-1">등급</label> 
                      <div class="col-md-4 col-sm-4 col-xs-12">
                         <input type="text" class="form-control" value="${mjdrodto.j_name }" readonly>
                </div>
@@ -90,7 +90,7 @@
             
          
             <div class="form-group">
-               <label class="control-label col-md-1 col-sm-1 col-xs-1">면허증</label>
+               <label class="control-label col-md-2 col-sm-2 col-xs-1">면허증</label>
                   <div class="col-md-4 col-sm-4 col-xs-12">
                   <input type="text" class="form-control"
                     value="${mjdrodto.m_license}" readonly>
@@ -104,7 +104,7 @@
 
             
             <div class="form-group">
-               <label class="control-label col-md-1 col-sm-1 col-xs-1">이력서</label>
+               <label class="control-label col-md-2 col-sm-2 col-xs-1">이력서</label>
                <div class="col-md-4 col-sm-4 col-xs-12">
                   <a href="">${mjdrodto.m_resume }</a>
                </div>
