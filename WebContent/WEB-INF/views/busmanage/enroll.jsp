@@ -42,7 +42,7 @@
 									<div class="btn btn-primary btn-xs" style="float: right">
 										<i class="fa fa-check"></i> 등록
 									</div>
-									<div class="btn btn-default btn-xs" style="float: right" id = "plus">
+									<div class="btn btn-default btn-xs" style="float: right" onclick = "plus()">
 										<i class="fa fa-plus"></i> 추가
 									</div>
 		
