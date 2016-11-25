@@ -23,9 +23,11 @@ public class RouteManageService {
         System.out.println(map);
         
         System.out.println("되냐");
+        
+        String path = request.getServletContext().getRealPath("/route/route.json");
             
         try{
-            fw = new FileWriter("D:\\kosta129\\Spring\\SpringLabs_STS\\DaumMapAPI\\WebContent\\Tmap.json");
+            fw = new FileWriter(path);
             bw = new BufferedWriter(fw);
             
                 bw.write(map);
@@ -45,15 +47,15 @@ public class RouteManageService {
 	}
 	
 	//노선 좌표를 파일로부터 읽어오는 함수
-	public void routelocationRead(HttpServletResponse response){
+	public void routelocationRead(HttpServletRequest request, HttpServletResponse response){
 		
 		FileReader fr = null;
         BufferedReader br = null;
         PrintWriter out=null;
         String maps = null;
-        
+        String path = request.getServletContext().getRealPath("/route/route.json");
         try{
-        	fr = new FileReader("D:\\kosta129\\Spring\\SpringLabs_STS\\DaumMapAPI\\WebContent\\Tmap.json");
+        	fr = new FileReader(path);
         	br = new BufferedReader(fr);	        	
         	String line = "";
             for(int i=0; (line = br.readLine())!=null;i++){

@@ -23,7 +23,7 @@ public class RouteManageController {
 		
 	//파일에서 마커 좌표를 읽어온다
 	@RequestMapping(value="/Maplist3.do",method=RequestMethod.GET)
-	public void routeLoad(HttpServletResponse response) throws Exception{
-		routeManageSerivce.routelocationRead(response);
+	public void routeLoad(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		routeManageSerivce.routelocationRead(request,response);
 	}
 }
