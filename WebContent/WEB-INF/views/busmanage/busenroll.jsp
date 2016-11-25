@@ -336,13 +336,46 @@
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 	<script type="text/javascript">
+	var num = 1;
+	function plus(){
+		 num++;
+			var gname = "#g_name" + num;
+			var rnum = "#r_num" + num;
+			var mname = "#mname" + num;	
+			var bvehiclenum = "#b_vehiclenum" + num;
+			var tr = "<tr>";
+			tr += "<td width = 300px>";
+			tr += "<input class='form-control' id='b_vehiclenum"+ num +"' name = 'b_vehiclenum' type='text' size = '3'>";
+			tr += "</td>";
+			tr += "<td width = 300px>";
+			tr += "<select class='form-control' id='g_name" + num + "' name = 'g_name'>";
+			tr += "<option>선택</option>";
+			tr += "</select>";
+			tr += "</td>";
+			tr += "<td width = 300px>";
+			tr += "<select class='form-control' id='r_num" + num + "' name = 'r_num'>";
+			tr += "<option>선택</option>";
+			tr += "</select>";
+			tr += "</td>";
+			tr += "<td width = 300px>";
+			tr += "<select class='form-control' id='mname" + num + "' name = 'm_name'>";
+			tr += "<option>선택</option>";
+			tr += "</select>";
+			tr += "</td>";
+			tr += "</tr>";
+			
+			$("#tbody").append(tr); 
+				
+	}
+	
 	$(function(){
-		var num = 1;
-		var mname = "#mname" + num;
 		
 		var count = 1;
+		
 		//console.log(num);
+
 		$("#ebtn").click(function(){
+			var mname = "#mname" + num;
 			$.ajax({
 				url : "enrollpage.admin",
 				success:function(data){
@@ -372,22 +405,22 @@
 									//console.log(data.gname[0]);
 									
 									for(var i = 0 ; i < data.gname.length; i++){
-										$("#g_name").append("<option value = " + data.gnum[i] + ">" + data.gname[i] + "</option>");
+										$("#g_name1").append("<option value = " + data.gnum[i] + ">" + data.gname[i] + "</option>");
 									}
 							}
 						});
 						
-						$("#g_name").change(function(){
+						$("#g_name1").change(function(){
 							//console.log($("#g_name").val());
 							$.ajax({
 								url : "getroute.admin",
 								type : "post",
-								data:{g_num : $("#g_name").val().trim()},
+								data:{g_num : $("#g_name1").val().trim()},
 								success:function(data){
-										$("#r_num").empty();
-										$("#r_num").append("<option>선택</option>");
+										$("#r_num1").empty();
+										$("#r_num1").append("<option>선택</option>");
 										for(var i = 0 ; i < data.rnum.length; i++){
-											$("#r_num").append("<option value = " + data.rnum[i] + ">" + data.rnum[i] + "</option>");
+											$("#r_num1").append("<option value = " + data.rnum[i] + ">" + data.rnum[i] + "</option>");
 											
 										}
 								}
@@ -399,15 +432,9 @@
 			});
 		});
 		
-		$("#plus").click(function(){
-			$.ajax({
-				
-				success:function(){
-					$("#tbody").append();
-				}
-			});		
-		});
+		
 	});
+	
 	</script>
 </body> 	
 </html>
