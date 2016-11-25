@@ -57,12 +57,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="reguloff_selectseq" resultType="kr.or.bus.dto.RegulOffDTO">
 		select * from reguloff
 		where id=
-		(select max(id) from reguloff)
-	</select>
-	
+		(select max(to_number(id)) from reguloff)
+	</select>	
 	<select id="dowcount" resultType = "int" parameterType = "String">
 		select count(o_code) from reguloff 
 		where o_code = #{o_code}
+	</select>
+	<select id="checkmid" resultType = "int" parameterType = "String">
+		select count(*) from reguloff 
+		where m_id = #{m_id}
+	</select>
+	<select id="returnid" resultType = "String" parameterType = "String">
+		select m_id from reguloff 
+		where id = #{id}
 	</select>
 	
 	<!-- reguloff DAO -->

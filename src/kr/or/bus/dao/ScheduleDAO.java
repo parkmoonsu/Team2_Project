@@ -29,4 +29,8 @@ public interface ScheduleDAO {
 	
 	//dow count 를 가져와서 3개이상일시
 	public int dowcount(String o_code);
+	//동일 m_id가 존재하는지 검색
+	public int checkmid(String m_id);
+	//로그인아이디와 일정m_id 비교
+	public String returnid(String id);
 }	

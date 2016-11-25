@@ -5,103 +5,131 @@
  * @Desc: 일정관리(정기휴무) -  풀캘린더 컨트롤 
  */
 
-var array = new Array();
+var array = new Array(); //db에 저장된 일정을 담는 배열
+var loginid=$('#hidden').val();//{LoginUser}의 id
+var displayname; //일정에 id대신 표시될 이름
 
 $(function() {
-	var id=$('#hidden').val();
-
+	
+	//id로 이름 불러오기
 	$.ajax({
 		url:"name.htm",
-		data:{"m_id":id},
+		data:{"m_id":loginid},
 		success:function(data){
+			displayname=data.m_name;
+			//모달 창에 이름 설정
 			$("#title").val(data.m_name);
-			$("#title2").val(data.m_name);		
-		}
-	});
-	$.ajax({
-		url : 'reguloff_select.htm',
-		type : 'post',
-		dataType : 'json',
-		success : function(data) {
-			$.each(data.data, function(index, obj) {
-				var item = {
-					id : obj.id,
-					title : obj.m_id,
-					dow:[obj.o_code]
-				};
-				array.push(item);
+			$("#title2").val(data.m_name);
+			
+			//db에 저장된 일정 불러오기
+			$.ajax({
+				url : 'reguloff_select.htm',
+				type : 'post',
+				dataType : 'json',
+				success : function(data) {
+					$.each(data.data, function(index, obj) {
+						var item = {
+							id : obj.id,
+							title : obj.m_id,
+							dow:[obj.o_code]
+						};
+						array.push(item);
+					});
+				}
 			});
 		}
-	});
+	});	
 
+	//캘린더 불러오기
 	$(document).ajaxStop(function() {
 		  loadCalendar();
 	});
 	
+	//----------모달 버튼 이벤트-----------
+	
 	//저장버튼
 	$(".antosubmit").on("click", function() {
-		var m_id = $("#title").val();
-		var o_code=$('#select1').val();
-
-		var event = {
-			m_id : m_id,
-			o_code : o_code
-		};
-		$(".antoclose").click();
-		
-		//입력된 일정 db에 저장
+		//ajax로 해서 db에 m_id가 있으면 일정추가 금지
 		$.ajax({
-			url : 'reguloff_insert.htm',
-			type : 'post',
-			data : event,
-			dataType : "json",
-			success : function(data) {
+			url:"checkmid.member",
+			data:{"m_id":loginid},
+			type:"post",
+			success:function(data){
+				$(".antoclose").click();
+				if (data.row != "0"){
+					alert("더는 일정을 추가할 수 없습니다.");
+					$(".antoclose").click();
+				} else {
+					var o_code=$('#select1').val();
 
-				event={
-					id: data.data.id,
-					title : data.data.m_id,
-					dow : [data.data.o_code]
+					var event = {
+						m_id : loginid,
+						o_code : o_code
+					};
+					$(".antoclose").click();
+					
+					//입력된 일정 db에 저장
+					$.ajax({
+						url : 'reguloff_insert.htm',
+						type : 'post',
+						data : event,
+						dataType : "json",
+						success : function(data) {
+		
+							$(document).ajaxStop(function() {
+									event={
+											id: data.data.id,
+											title : data.data.m_id,
+											dow : [data.data.o_code]
+									};
+									console.log(data);
+									
+									$("#calendar").fullCalendar('removeEvents', event.id);
+									$("#calendar").fullCalendar('renderEvent', event);
+									$("#calendar").fullCalendar('unselect');
+							});
+							
+						}
+					});
 				}
-				$("#calendar").fullCalendar('renderEvent', event);
-				//$("#calendar").fullCalendar('refetchEvents');
-				//$("#title").val("");
-				$("#calendar").fullCalendar('unselect');
 			}
-		});
+
+		});	
 	});
 	
 	//업뎃버튼
-	$(".antosubmit2").on("click", function() {
-		var id = calEventObj.id;
-		var m_id = $("#title2").val();
-		var o_code=$("#select2").val();
-		calEventObj.title=m_id;
-		calEventObj.dow[0]=o_code;
+	$(".antosubmit2").on("click", function() {	
 		
-		$("#calendar").fullCalendar('removeEvents', calEventObj.id);
-		var event={
-			id : id,
-			m_id : m_id,
-			o_code : o_code
-		};
+		if (confirm("정말 일정을 변경하시겠습니까??") == true){
+			var o_code=$("#select2").val();
+			
+			calEventObj.dow[0]=o_code;
+			
+			$("#calendar").fullCalendar('removeEvents', calEventObj.id);
+			var event={
+					id : calEventObj.id,
+					m_id : calEventObj.title,
+					o_code : o_code
+			};
+			
+			$.ajax({
+				url : 'reguloff_update.htm',
+				type : 'post',
+				data : event,
+				success : function(data) {
+					event={
+							id: calEventObj.id,
+							title: calEventObj.title,
+							dow:[o_code]
+					};
+					$("#calendar").fullCalendar('renderEvent', event);
+					$("#calendar").fullCalendar('unselect');
+				}
+			});	
+		}
+		
 		$('.antoclose2').click();
-
-		$.ajax({
-			url : 'reguloff_update.htm',
-			type : 'post',
-			data : event,
-			success : function(data) {
-				event={
-					id:id,
-					title:m_id,
-					dow:[o_code]
-				};
-				$("#calendar").fullCalendar('renderEvent', event);
-				//updateEvent, renderEvent를 하기 위해서는.... 표준 event object가 되어야 한다
-				//$("#calendar").fullCalendar('refetchEvents');
-				$("#calendar").fullCalendar('unselect');
-			}
-		});
+		
 	});
 	
 	//삭제버튼
@@ -120,7 +148,6 @@ $(function() {
 					id : calEventObj.id
 				},
 				success : function(data) {
-					$("#title").val("");
 					$("#calendar").fullCalendar('unselect');
 				}
 			});
@@ -128,7 +155,7 @@ $(function() {
 	});
 });
 
-//일정 저장 변수
+//일정객체 저장 변수
 var calEventObj;
 
 function loadCalendar(){
@@ -145,15 +172,13 @@ function loadCalendar(){
 		events : array,
 		eventDurationEditable: false,
 		eventStartEditable:true,
-		//maxDate: "2016-11-30", 
 		monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
 		monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
 		dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
 		dayNamesShort: ["일","월","화 ","수 ","목 ","금 ","토 "],
 		titleFormat: "YYYY년 MM월",
 
-
-		//새로운 일정
+		//날짜 선택시 이벤트
 		select : function(start, end, jsEvent) {
 			//console.log($(jsEvent.target).hasClass("disabled"));
 			//console.log(jsEvent);
@@ -168,81 +193,110 @@ function loadCalendar(){
 					
 		},
 		
-		//일정 클릭
+		//일정 클릭시 이벤트
 		eventClick : function(calEvent, jsEvent, view) {
-			
-			//모달 창 띄우기
-			$('#fc_edit').click();
-			
-			//데이터 저장
-			$("#title2").val(calEvent.title);
-			$("#select2").val(calEvent.dow[0]);
-			calEventObj=calEvent;
-			
+			$.ajax({
+				url:"mid.member",
+				data:{id:calEvent.id},
+				type:"post",
+				dataType:"json",
+				success:function(data){
+					if(data.rid==loginid){
+						//모달 창 띄우기
+						$('#fc_edit').click();
+						
+						//데이터 저장
+						$("#title2").val(calEvent.title);
+						$("#select2").val(calEvent.dow[0]);
+						calEventObj=calEvent;	
+					}else{
+						alert("해당 일정은 편집할 수 없습니다.")
+					}	
+				}
+			});		
 		},
 		
-		//일정 드래그
+		//일정 드래그시 이벤트
 		eventDrop : function(event, delta, revertFunc, jsEvent) {
-			
-			var id = event.id;
-			var dow= Number(event.dow[0])+delta.days();
-			var m_id=event.title;
-			
-			
-			if (dow>6){
-				dow=dow%7;
-			} else if (dow<0){
-				dow=dow%7+7;
-			} else {
-			}
-			event.dow[0]=dow;
-			
 			$.ajax({
-				url : "dowcount.member",
-				type : "post",
-				data:{o_code : dow},
+				url:"mid.member",
+				data:{id:event.id},
+				type:"post",
+				dataType:"json",
 				success:function(data){
-					console.log(data.dow);
-					if(data.dow >= 3){
-						alert("넌 꺼져");
-					}else{
-						$.ajax({
-							url : 'reguloff_update.htm',
-							type : 'post',
-							data : {
-								id:id,
-								m_id:m_id,
-								o_code:dow
-							},
-							success : function(data) {
+					if(data.rid==loginid){
+						var id = event.id;
+						var dow= Number(event.dow[0])+delta.days();
+						var m_id=loginid;
+	
+						if (dow>6){
+							dow=dow%7;
+						} else if (dow<0){
+							dow=dow%7+7;
+						} else {
+						}
+						event.dow[0]=dow;
+						if (confirm("정말 일정을 변경하시겠습니까?") == true) {
 
-								//updateEvent, renderEvent를 하기 위해서는.... 표준 event object가 되어야 한다
-								$("#calendar").fullCalendar('refetchEvents');
-								//$("#calendar").fullCalendar('unselect');
-							}
-						});
-					}
-				}
+							
+							$.ajax({
+								url : "dowcount.member",
+								type : "post",
+								data:{o_code : dow},
+								success:function(data){
 				
-			});
-			console.log(event.start.format("YYYY-MM-DD"));
-			/*$.ajax({
-				url : 'reguloff_update.htm',
-				type : 'post',
-				data : {
-					id:id,
-					m_id:m_id,
-					o_code:dow
-				},
-				success : function(data) {
-
-					//updateEvent, renderEvent를 하기 위해서는.... 표준 event object가 되어야 한다
-					$("#calendar").fullCalendar('refetchEvents');
-					//$("#calendar").fullCalendar('unselect');
+									if(data.dow >= 3){
+										alert("더 이상 일정을 추가할 수 없습니다.");
+									}else{
+										$.ajax({
+											url : 'reguloff_update.htm',
+											type : 'post',
+											data : {
+												id:id,
+												m_id:event.title,
+												o_code:dow
+											},
+											success : function(data) {
+	
+												event={
+														id:id,
+														title:event.title,
+														dow:[dow]	
+												};
+											}
+										});
+										$(document).ajaxStop(function() {
+											$("#calendar").fullCalendar('removeEvents', id);
+											$("#calendar").fullCalendar('renderEvent', event);
+											$("#calendar").fullCalendar('unselect');
+										});
+									}
+								}
+								
+							});
+						} else {
+							//원위치로 돌리기
+							event = {
+								id:id,
+								title:displayname,
+								dow:[dow]
+							};
+							
+							//$("#calendar").fullCalendar('refetchEvents');
+							$("#calendar").fullCalendar('removeEvents', id);
+							$("#calendar").fullCalendar('renderEvent', event);
+							$("#calendar").fullCalendar('unselect');
+						}	
+					}else{
+						alert("해당 일정은 편집할 수 없습니다.");
+						$("#calendar").fullCalendar('refetchEvents');
+						$("#calendar").fullCalendar('unselect');
+					}	
 				}
-			});*/
-			
+			});			
 		}
+	});
+}
 		
 		/*dayRender: function( date, cell ) {
 		     // It's an example, do your own test here
@@ -297,6 +351,5 @@ function loadCalendar(){
 				}
 			});
 		}	*/
-	});
-}
+
 

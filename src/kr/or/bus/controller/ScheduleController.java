@@ -165,4 +165,24 @@ public class ScheduleController {
 		return jsonview;
 	}
 	
+	@RequestMapping(value="/checkmid.member",method=RequestMethod.POST)
+	public View checkmid(String m_id , Model model){
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		int row = dao.checkmid(m_id);
+	
+		model.addAttribute("row", row);
+		
+		return jsonview;
+	}
+		
+	@RequestMapping(value="/mid.member",method=RequestMethod.POST)
+	public View mid(String id , Model model){
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		String rid = dao.returnid(id);
+	
+		model.addAttribute("rid", rid);
+		
+		return jsonview;
+	}
+	
 }
