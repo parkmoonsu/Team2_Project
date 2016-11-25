@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.bus.dao.BusDAO">
+	<select id="busInfo" 
+		resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO" 
+		parameterType = "int">
+		
+		select * 
+		from(
+  			select ROWNUM r , b.B_VEHICLENUM,b.r_num , m.m_name , g.g_name , s.s_name
+  			from bus b join member m
+  			on b.B_VEHICLENUM = m.B_VEHICLENUM
+  			join garage g
+  			on b.G_NUM = g.g_num
+  			join bstatus bs
+  			on b.b_vehiclenum = bs.b_vehiclenum
+  			join status s
+  			on bs.s_code = s.s_code)
+		where r between 1 + (#{page} - 1) * 10  and 10 + (#{page} - 1) * 10 
+	
+	</select>
+	
+	<select id="busCount" resultType = "int">
+		select count(*)
+  		from bus b join member m
+  		on b.B_VEHICLENUM = m.B_VEHICLENUM
+  		join garage g
+ 		 on b.G_NUM = g.g_num
+  		join bstatus bs
+  		on b.b_vehiclenum = bs.b_vehiclenum
+  		join status s
+  		on bs.s_code = s.s_code
+	</select>
+	
+	<select id="getGarageName" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select g_num , g_name
+		from garage
+	</select>
+	
+	<select id="getRouteNum" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO"
+	 parameterType = "String">
+		select r_num
+		from route
+		where g_num = #{g_num}
+	</select>
+	
+	<select id="getMember" resultType = "kr.or.bus.dto.MemberDTO">
+	
+		select m_id , m_name
+		from member
+	</select>
+	
+	<insert id="insertBus">
+	insert into bus(b_vehiclenum 
+	<if test="param2 != '선택'">
+	,r_num 
+	</if>
+	<if test="param3 != '선택'">
+	, g_num
+	</if>
+	, b_order) 
+	values (#{param1}
+	<if test="param2 != '선택'">
+	,#{param2}
+	</if>
+	<if test="param3 != '선택'">
+	,#{param3}
+	</if>
+	,(select max(nvl(b_order,0))+1 from bus))
+	</insert>
+	
+	<update id="updateVehicle">
+	update member
+	set b_vehiclenum = #{param1}
+	where m_id = #{param2}
+	</update>
+	
+	<insert id="insertBStatus">
+	insert into bstatus(b_vehiclenum , s_code 
+	<if test="param2 != '선택'">
+	
+	,r_num 
+	</if>
+	,s_currenty,s_currentx,s_vacancy)
+	values (#{param1} , '900' 
+	<if test="param2 != '선택'">
+	,#{param2}
+	</if>
+	,'0','0',30)
+	</insert>
+</mapper>
