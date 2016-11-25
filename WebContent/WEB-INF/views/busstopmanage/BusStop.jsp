@@ -71,8 +71,10 @@ html, body {
 		<script
 			src="${pageContext.request.contextPath}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
 		<!-- Custom Theme Scripts -->
-		<script
-			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+		<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+		
+		<script src="${pageContext.request.contextPath}/js/jquery.xdomainajax.js"></script>
+			
 <body>
 	<header>
 		<jsp:include page="/sidebar/header.jsp" />
@@ -142,7 +144,7 @@ html, body {
            	map: map,
            	//label: latLng.title,
            	animation: google.maps.Animation.DROP,
-           	icon : 'cccc.png',
+           	icon : '${pageContext.request.contextPath}/images/cccc.png',
            	draggable : true,
            	zindex : "5"
         });
@@ -158,6 +160,7 @@ html, body {
         originalMarkers.push(originalMarker);
         originalMarkersRead(originalMarkers);
         
+        //버스 가 움직이기 위해 좌표 배열에 저장
         dataArray.push(latLng);
         
         
@@ -173,7 +176,7 @@ html, body {
            	map: map,
            	label : as.toString(),
            	animation: google.maps.Animation.DROP,
-           	icon : 'cccc.png',
+           	icon : '${pageContext.request.contextPath}/images/cccc.png',
            	draggable : true
         });    
            
@@ -304,7 +307,10 @@ html, body {
     //경로 그리는 함수
     function routeDraw(locationX, locationY, elocationX, elocationY) {           
           //티맵 으로 부터 데이터를 GeoJson 형식으로 가져와서 지도에 그려준다.
-          
+          map.data.setStyle({
+				strokeWeight: 5,
+				strokeColor:'blue'
+			});
            $.getJSON("https://apis.skplanetx.com/tmap/routes?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=WGS84GEO&startX="
                    + locationX
                    + "&startY="
@@ -333,6 +339,7 @@ html, body {
     	//console.log(dataArray);
     	var BusMarker = new google.maps.Marker({
             position: new google.maps.LatLng(dataArray[0].lat,dataArray[0].lng),
+            icon:'${pageContext.request.contextPath}/images/bus.png',
            	map: map      
         });
     	

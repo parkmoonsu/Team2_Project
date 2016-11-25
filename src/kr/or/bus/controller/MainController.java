@@ -13,7 +13,6 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,12 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
+
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.dto.MemberJoinResRecordDTO;
-import kr.or.bus.dto.ResRecordDTO;
 import kr.or.bus.service.LoginService;
 import kr.or.bus.service.MainService;
 
@@ -129,4 +128,6 @@ public class MainController {
 		model.addAttribute("m_photo",dto.getM_photo());
 		return jsonview;
 	}
+	
+	
 }

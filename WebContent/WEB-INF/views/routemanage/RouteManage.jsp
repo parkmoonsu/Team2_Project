@@ -124,7 +124,6 @@ html, body {
             center : myLatLng,
             zoom : 15
          });
-
          //지도 를 마우스를 클릭시 마커를 생성하는 함수 호출.
          map.addListener('click', function(e) {
             placeMarkerAndPanTo(e.latLng, map);           
@@ -181,7 +180,7 @@ html, body {
          //마커의 드래그가 끝날때마다 지도위에 그려진 경로를 지워준다..(노선을 수정할때...)
          marker.addListener('dragend', function() {
             console.log("마커 :"+markers.length);
-            fuck(marker,markers);          
+            dragLocation(marker,markers);          
          });
          
       }
@@ -202,7 +201,7 @@ html, body {
            
            //마커의 드래그가 끝날때마다 지도위에 그려진 경로를 지워준다..(노선을 수정할때...)
            marker.addListener('dragend', function() {
-              fuck(marker,markers);          
+        	  dragLocation(marker,markers);          
            });
            
         }
@@ -277,7 +276,7 @@ html, body {
                 console.log("출발마커" + (x-1));
                 console.log(locationX +","+ locationY);
                 
-              elocationX = markers[x].getPosition().lng();
+              	elocationX = markers[x].getPosition().lng();
                 elocationY = markers[x].getPosition().lat();
                 
                 console.log("도착마커" + x);
@@ -294,14 +293,14 @@ html, body {
          }
       
       function fmarkerArrayMake(markers){
-         console.log("개좆나");
-          if(markers.length !=null){
+         console.log("드래그 함수 탑니까?");
+         if(markers.length !=null){
              for(var i=0; i<=markers.length-1; i++){
          if(i==0){
-         locationX = markers[i].getPosition().lng();
-          locationY = markers[i].getPosition().lat();
-          console.log("출발마커1");
-          console.log(locationX +","+ locationY); 
+        	 locationX = markers[i].getPosition().lng();
+          	 locationY = markers[i].getPosition().lat();
+          	 console.log("출발마커1");
+          	 console.log(locationX +","+ locationY); 
          }
       
           //출발마커
@@ -317,7 +316,7 @@ html, body {
        }
       
       //좌표 드래그 했을때 값 
-      function fuck(marker,markers){
+      function dragLocation(marker,markers){
          locationX= marker.getPosition().lng(); //X
           locationY= marker.getPosition().lat(); //Y 
     
@@ -347,7 +346,10 @@ html, body {
       //경로 그리는 함수
       function routeDraw(locationX, locationY, elocationX, elocationY) {           
             //티맵 으로 부터 데이터를 GeoJson 형식으로 가져와서 지도에 그려준다.
-            
+            map.data.setStyle({
+				strokeWeight: 5,
+				strokeColor:'blue'
+			});
              $.getJSON("https://apis.skplanetx.com/tmap/routes?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=WGS84GEO&startX="
                      + locationX
                      + "&startY="
@@ -366,7 +368,6 @@ html, body {
                       for(var i=0; i<data.features.length; i++){
                          if(data.features[i].geometry.type == 'LineString'){
                             features = map.data.addGeoJson(data.features[i]);
-
                          }
  
                       }          
@@ -430,7 +431,7 @@ html, body {
               marker=0;
               Dsavelocations =[];
               markers=[];
-                markers2=[];
+              markers2=[];
               
          });
         
