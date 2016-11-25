@@ -306,7 +306,10 @@ html, body {
     //경로 그리는 함수
     function routeDraw(locationX, locationY, elocationX, elocationY) {           
           //티맵 으로 부터 데이터를 GeoJson 형식으로 가져와서 지도에 그려준다.
-          
+          map.data.setStyle({
+				strokeWeight: 5,
+				strokeColor:'blue'
+			});
            $.getJSON("https://apis.skplanetx.com/tmap/routes?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=WGS84GEO&startX="
                    + locationX
                    + "&startY="
