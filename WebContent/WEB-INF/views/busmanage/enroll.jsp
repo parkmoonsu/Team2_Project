@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <div class="x_panel">
 	<div class="x_content">
+	<form action="reg.admin">
 		<table class="table table-hover projects">
+		
 										<thead>
 											<tr>
 												<th>차량번호</th>
@@ -12,7 +14,9 @@
 												
 											</tr>
 										</thead>
+										
 										<tbody id = "tbody">
+											
 											<tr>
 												<td width = 300px>
 													<input class="form-control" id="b_vehiclenum1" name = "b_vehiclenum" type="text" size = "3">
@@ -28,7 +32,7 @@
 													</select>
 												</td>
 												<td width =300px>
-													<select class="form-control" id="mname1" name = "m_name">
+													<select class="form-control" id="mname1" name = "mname">
 													
 														<option>선택</option>
 													</select>
@@ -39,12 +43,15 @@
 										</tbody>
 									</table>
 									
-									<div class="btn btn-primary btn-xs" style="float: right">
-										<i class="fa fa-check"></i> 등록
-									</div>
+									
+									<button class = "btn btn-primary btn-xs" id = "reg" style = "float:right">
+									<i class="fa fa-check"></i> 등록</button>
+									
 									<div class="btn btn-default btn-xs" style="float: right" onclick = "plus()">
 										<i class="fa fa-plus"></i> 추가
 									</div>
+									
+			</form>
 		
 	</div>
 </div>

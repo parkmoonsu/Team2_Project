@@ -77,5 +77,18 @@ public class BusManageService {
 		return member;
 	}
 	
-		
+	public void insertBus(String b_vehiclenum , String r_num , String g_name){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		dao.insertBus(b_vehiclenum, r_num, g_name);
+	}
+	
+	public void updateVehicle(String b_vehiclenum , String mname){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		dao.updateVehicle(b_vehiclenum, mname);
+	}
+	
+	public void insertBStatus(String b_vehiclenum, String r_num){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		dao.insertBStatus(b_vehiclenum, r_num);
+	}
 }
