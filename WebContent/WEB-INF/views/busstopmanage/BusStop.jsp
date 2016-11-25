@@ -71,8 +71,10 @@ html, body {
 		<script
 			src="${pageContext.request.contextPath}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
 		<!-- Custom Theme Scripts -->
-		<script
-			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+		<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+		
+		<script src="${pageContext.request.contextPath}/js/jquery.xdomainajax.js"></script>
+			
 <body>
 	<header>
 		<jsp:include page="/sidebar/header.jsp" />
@@ -142,7 +144,7 @@ html, body {
            	map: map,
            	//label: latLng.title,
            	animation: google.maps.Animation.DROP,
-           	icon : 'cccc.png',
+           	icon : '${pageContext.request.contextPath}/images/cccc.png',
            	draggable : true,
            	zindex : "5"
         });
@@ -173,7 +175,7 @@ html, body {
            	map: map,
            	label : as.toString(),
            	animation: google.maps.Animation.DROP,
-           	icon : 'cccc.png',
+           	icon : '${pageContext.request.contextPath}/images/cccc.png',
            	draggable : true
         });    
            
@@ -333,6 +335,7 @@ html, body {
     	//console.log(dataArray);
     	var BusMarker = new google.maps.Marker({
             position: new google.maps.LatLng(dataArray[0].lat,dataArray[0].lng),
+            icon:'${pageContext.request.contextPath}/images/bus.png',
            	map: map      
         });
     	
