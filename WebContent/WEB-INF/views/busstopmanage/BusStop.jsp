@@ -18,7 +18,66 @@ html, body {
 </style>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
+<!-- Bootstrap -->
+<link
+	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Font Awesome -->
+<link
+	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet">
+<!-- NProgress -->
+<link
+	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
+	rel="stylesheet">
+
+<!-- Custom Theme Style -->
+<link href="${pageContext.request.contextPath}/build/css/custom.min.css"
+	rel="stylesheet">
+
+<!-- Bootstrap core CSS -->
+<link
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/ie10-viewport-bug-workaround.css"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/carousel/carousel.css"
+	rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
+
+
+<!-- jQuery -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+		<!-- Bootstrap -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+		<!-- FastClick -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
+		<!-- NProgress -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
+		<!-- jQuery Smart Wizard -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+		<!-- Custom Theme Scripts -->
+		<script
+			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 <body>
+	<header>
+		<jsp:include page="/sidebar/header.jsp" />
+	</header>
 	<div id="map"></div>
 	<script type="text/javascript">
 	
@@ -392,5 +451,8 @@ html, body {
 	<input type="button" id="busStopLoad" value="버스 정류장 보기">
 	<input type="button" id="busLoad" value="버스 보기">
 	<div id="map"></div>
+	<footer>
+		<jsp:include page="/sidebar/footer.jsp" />
+	</footer>
 </body>
 </html>

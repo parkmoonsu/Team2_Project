@@ -20,7 +20,6 @@ html, body {
    height: 80%;
 }
 </style>
-<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
 </head>
 <!-- Bootstrap -->
 <link
