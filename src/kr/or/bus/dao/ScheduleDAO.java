@@ -1,5 +1,5 @@
 /*
- * @File Name: CalendarDAO.java
+ * @File Name: ScheduleDAO.java
  * @Author: 길한종
  * @Data: 2016. 11. 14
  * @Desc: 일정관리 DAO 공통 인터페이스

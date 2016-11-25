@@ -1,5 +1,5 @@
 /*
- * @File Name: CalendarDTO.java
+ * @File Name: RegulOffDTO.java
  * @Author: 길한종
  * @Data: 2016. 11. 18
  * @Desc: 일정관리(정기휴무) - 캘린더dto
