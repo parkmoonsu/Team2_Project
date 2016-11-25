@@ -316,7 +316,7 @@ html, body {
             
            }
            $.ajax({
-                url : "Maplist4.do",
+                url : "busStoplocationEdit.admin",
                 type : "get",                          
                 data : {
                     kml : JSON.stringify(savelocations)
@@ -332,7 +332,7 @@ html, body {
         $("#saveReturn").click(function() {
         	copyMarkers=[];
           	$.ajax({
-               	url : "Maplist5.do",
+               	url : "busStoplocationEditRead.admin",
                	type : "get",
                	dataType : "json",                
                	success : function(data) {
@@ -362,7 +362,7 @@ html, body {
       //버스 정류장 원본 파일 불러오기
         $("#busStopLoad").click(function() {
            $.ajax({
-                url : "Maplist.do",
+                url : "busStopOriginalRead.admin",
                 type : "get",
                 dataType : "json",                
                 success : function(data) {

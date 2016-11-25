@@ -15,6 +15,10 @@ public class BusStopManageController {
 	@Autowired
 	BusStopManageService busStopManageService;
 	
+	@RequestMapping(value="/busStation.admin",method=RequestMethod.GET)
+	public String busStopOpen(){
+		return "busstopmanage/BusStop";
+	}
 	//수정된 버스정류장 마커 좌표를 저장한다.
 	@RequestMapping(value="/busStoplocationEdit.admin",method=RequestMethod.GET)
 	public void busStopEditSave(HttpServletRequest request, HttpServletResponse response ) throws Exception{
@@ -22,7 +26,7 @@ public class BusStopManageController {
 	}
 		
 	//수정된 버스정류장 좌표를 파일에서 읽어온다.
-	@RequestMapping(value="/busStoplocationRead.admin",method=RequestMethod.GET)
+	@RequestMapping(value="/busStoplocationEditRead.admin",method=RequestMethod.GET)
 	public void busStopEditRead(HttpServletRequest request ,HttpServletResponse response) throws Exception{
 		busStopManageService.busStoplocationEditRead(request, response);
 	}
