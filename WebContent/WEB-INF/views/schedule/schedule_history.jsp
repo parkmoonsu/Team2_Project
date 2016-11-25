@@ -68,7 +68,7 @@
 		<div class="main_container">
 			<div class="col-xs-12  col-md-3 left_col">
 
-				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
 			</div>
 
 			<!--상단 menu -->
@@ -77,7 +77,8 @@
 			</div>
 			  <!-- page content -->
         <div class="right_col" role="main">
-          <!-- top tiles -->
+        
+         <!--  top tiles
           <div class="row tile_count" style = "text-align: center">
           	<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           		<span class="count_top"></span>
@@ -99,12 +100,13 @@
               <div class="count green">0</div>
             </div>  
           </div>
-          <!-- /top tiles -->
+          top tiles -->
+          
 				<div class="">
 				<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>버스등록/삭제</small>
+								<small>교대신청</small>
 							</h3>
 						</div>
 					</div>
@@ -129,10 +131,11 @@
 										<thead>
 											<tr>
 												<th>번호</th>
-												<th>차량번호</th>
-												<th>노선번호</th>
-												<th>기사</th>
-												<th>차고지 이름</th>
+												<th>현재휴무일</th>
+												<th>변경휴무일</th>
+												<th>요청일</th>
+												<th>승인일</th>
+												<th>변경대상</th>
 												<th>상태</th>
 												<th style="width: 20%; text-align:center;">
 												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form">
@@ -149,6 +152,7 @@
 												<td>${i.r_num}</td>
 												<td>${i.m_name}</td>
 												<td>${i.g_name}</td>
+												<td>${i.s_name}</td>
 												<td>${i.s_name}</td>
 												<td style = "text-align:center"> 
 													<input type = "checkbox">
@@ -187,12 +191,7 @@
 									
 									
 								</div>
-									<div style = "float: right;">
-									<div class="btn btn-primary btn-xs" id = "ebtn"><i class="fa fa-check"></i>
-                                         			 등록 </div>
-									<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
-                                         			 삭제 </div>
-									</div>
+									
 									
 									
 									

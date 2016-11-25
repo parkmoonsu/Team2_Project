@@ -103,7 +103,7 @@ public class ScheduleController {
 		return "bus";
 	}
 	
-	//추가시작
+	//reguloff(정기휴무)
 	@RequestMapping("/schedule_reguloff.htm")
 	public String schedule_reguloff(){
 		return "schedule/schedule_reguloff";
@@ -191,8 +191,10 @@ public class ScheduleController {
 		return jsonview;
 	}
 	
+	//기록보기
 	@RequestMapping("/schedule_history.htm")
 	public String viewHistory(){
-		return "schedule_history";
+		return "schedule/schedule_history";
 	}
+	
 }
