@@ -1,3 +1,11 @@
+/*
+ * @File Name: ScheduleController.java
+ * @Author: 길한종
+ * @Data: 2016. 11. 18
+ * @Desc: 일정관리 컨트롤러
+ */
+
+
 package kr.or.bus.controller;
 
 import java.sql.Date;
@@ -183,4 +191,8 @@ public class ScheduleController {
 		return jsonview;
 	}
 	
+	@RequestMapping("/schedule_history.htm")
+	public String viewHistory(){
+		return "schedule_history";
+	}
 }

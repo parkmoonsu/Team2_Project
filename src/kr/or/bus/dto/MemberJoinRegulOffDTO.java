@@ -1,3 +1,10 @@
+/*
+ * @File Name: MemberJoinRegulOffDTO.java
+ * @Author: 길한종
+ * @Data: 2016. 11. 25
+ * @Desc: 일정관리(정기휴무) - 캘린더dto
+ */
+
 package kr.or.bus.dto;
 
 public class MemberJoinRegulOffDTO {
