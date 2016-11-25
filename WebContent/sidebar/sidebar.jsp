@@ -57,8 +57,8 @@
                   </li>
                   <li><a><i class="fa fa-table"></i>노선 관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">노선</a></li>
-                      <li><a href="tables_dynamic.html">정류장</a></li>
+                      <li><a href="route.admin">노선</a></li>
+                      <li><a href="busStation.admin">정류장</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i>운영 관리<span class="fa fa-chevron-down"></span></a>
