@@ -78,9 +78,6 @@ html, body {
 		<script
 			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 <body>
-	<header>
-		<jsp:include page="/sidebar/header.jsp" />
-	</header>
    <div id="map"></div>
    <script type="text/javascript">
    
