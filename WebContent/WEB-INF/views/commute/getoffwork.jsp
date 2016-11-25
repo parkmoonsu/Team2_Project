@@ -65,11 +65,11 @@
 			type:"post",
 			success:function(data){
 				console.log(data.dto.c_start);				
-				/* $("#show").html(id+"님의 퇴근시간은 "+data.dto.c_end+"입니다."+
-						           "<br>"+id+"님의 퇴근상태는 "+ data.dto.ce_stat+"입니다."); 
-				$("#search").show(); */
-				$("p").show();
-				$("#search").show()
+				$("#show").html(id+"님의 퇴근시간은 "+data.dto.c_end+"입니다."+"<br>"+
+								id+"님의 퇴근상태는 "+ data.dto.ce_stat+"입니다."); 
+				//$("#search").show();
+			 	$("p").show();
+				$("#search").show() 
 			}
 			});   
 		});
@@ -116,7 +116,7 @@
 									<div class="row" style="margin-top:20px">
 										<div class="col-sm-1"></div>
 										<div class="col-sm-10">
-											<div id="show"></div>
+											<!-- <div id="show"></div> -->
 											 <div class="panel panel-info">
 												<!-- <div class="panel-heading">
 													
@@ -128,13 +128,12 @@
 														</div>
 														<div class="col-sm-10">
 														<form>
-															<div class="my-box">
-																<p style="text-align:center; font-size:1.5em;">
+															<div class="my-box" id="show">
+																 <p style="text-align:center; font-size:1.5em;">
 																${LoginUser}님의 퇴근시간은 ${m_id.dto.c_end}입니다. <br><br>
 																${LoginUser}님의 퇴근상태는 ${dto.ce_stat}입니다.</p><br><br>
 																<input id="search" type="button" value="출/퇴근 조회하기" onClick="location.href='comsearch.member?m_id=${LoginUser}'" class="btn btn-success">
-<%--   																<button id="search" type="button" value="출/퇴근 조회하기" onclick="location.href='<%=request.getContextPath()%>/WEB-INF/views/commute/comsearch.jsp'" class="btn btn-success">출/퇴근 조회하기</button>
---%> 															</div>
+ 															</div>
  														</form>
 														</div>
 													</div>

@@ -37,7 +37,7 @@ public class BusManageController {
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.busInfo(pg);
 		int page = service.pg(pg);
 		int count = service.busCount();
-		
+		   
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("count",count);
@@ -97,5 +97,20 @@ public class BusManageController {
 		model.addAttribute("m_name", m_name);
 		
 		return jsonview;
+	}
+	
+	@RequestMapping("/reg.admin")
+	public String reg(String[] b_vehiclenum , String[] g_name , String[] r_num , String[] mname){
+		for(int i = 0 ; i < b_vehiclenum.length ; i++){
+			service.insertBus(b_vehiclenum[i], r_num[i], g_name[i]);
+			
+			if(!mname[i].equals("선택")){
+				service.updateVehicle(b_vehiclenum[i], mname[i]);
+			}
+			
+			service.insertBStatus(b_vehiclenum[i], r_num[i]);
+		}
+		
+		return "busmanage/insertbussuccess";
 	}
 }

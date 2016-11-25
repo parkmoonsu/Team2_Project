@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="se"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +13,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<se:authentication property="name" var="LoginUser" />
+<c:set var="page" value="${page}"></c:set>
 
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-	
+
 <title>KOSBUS</title>
 <!-- Bootstrap -->
 <link
@@ -49,13 +53,123 @@
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
 <script type="text/javascript">
-	$(function(){
-		/* $("#photo_swipe").click(function(){
-			$("#photo").click();
-		}); */
+$(function(){ 
+	
+	var id="${LoginUser}";
+	var page="${page}";
+		$("#gotowork").click(function(){
+			alert("떠떠떠떠");
+		    $.ajax({
+			url:"gotowork.member",
+			data: {
+				m_id:id
+			},
+			type:"post",
+			success:function(data){
+				$("#commutestartinfo").empty();
+				$("#commutestartinfo").append('id님의 출근시간은 ' +data.dto.c_start+ '입니다'+"<br>"+'id님의 출근상태는 '+ data.dto.cs_stat+'입니다.'); 
+				$.ajax({
+					url:"comsearchstartinfo.member",
+					data:{
+							m_id:id,
+							pg:page		
+					},
+					type:"post",
+					success:function(data){
+						$('#commutesearchstarttableinfo').empty();
+						$('#commutesearchstarttableinfo').append(data);
+					}
+				});
+			}
+			});   
+		});
+
+	
+	var id="${LoginUser}";
+		$("#getoffwork").click(function(){
+			alert("떠떠떠떠");
+		    $.ajax({
+			url:"getoffwork.member",
+			data: {
+				m_id:id
+			},
+			type:"post",
+			success:function(data){				
+				$("#commuteendinfo").empty();
+				$("#commuteendinfo").append(id+'님의 퇴근시간은 ' +data.dto.c_end+ '입니다'+"<br>"+
+										id+'님의 퇴근상태는 '+ data.dto.ce_stat+'입니다.'); 
+				$.ajax({
+					url:"comsearchstartinfo.member",
+					data:{
+							m_id:id,
+							pg:page		
+					},
+					type:"post",
+					success:function(data){
+						$('#commutesearchstarttableinfo').empty();
+						$('#commutesearchstarttableinfo').append(data);
+					}
+				});
+				
+			}
+			});   
+		});
+		
 	});
 </script>
+<style type="text/css">
+#gotowork {
+	width: "100px";
+}
+</style>
 </head>
+<!-- 출근  -->
+<div class="container">
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">${LoginUser}님의출근정보</h4>
+				</div>
+				<div class="modal-body" id="commutestartinfo"
+					style="text-align: center; font-size: 20px; line-height: 200%">
+
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+<!-- 퇴근 -->
+<div class="container">
+	<!-- Modal -->
+	<div class="modal fade" id="myModal2" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">${LoginUser}님의퇴근정보</h4>
+				</div>
+				<div class="modal-body" id="commuteendinfo" style="text-align: center; font-size: 20px; line-height: 200%">
+				<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -79,7 +193,7 @@
 						<div class="dashboard_graph">
 							<div class="row x_title">
 								<div class="col-md-6 col-xs-6">
-									<h3>출/퇴근 조회</h3>
+									<h3>출/퇴근 관리</h3>
 								</div>
 							</div>
 							<div class="clearfix">
@@ -87,41 +201,53 @@
 									<div class="row">
 										<div class="col-sm-1 col-xs-1"></div>
 										<div class="col-sm-10 col-xs-10">
+											<input type="button" id="gotowork" value="출근"
+												class="btn btn-default" style="width: 100px"
+												data-toggle="modal" data-target="#myModal"> <input
+												type="button" id="getoffwork" value="퇴근"
+												class="btn btn-default" style="width: 100px"
+												data-toggle="modal" data-target="#myModal2">
+											<div id="showdiv">
+												<div class="panel panel-info">
+													<div class="panel-heading">
+														<h3 class="panel-title">출/퇴근 관리</h3>
+													</div>
+													<div class="panel-body">
 
-											<div class="panel panel-info">
-												<div class="panel-heading">
-													<h3 class="panel-title">출/퇴근 조회</h3>
-												</div>
-												<div class="panel-body">
-													<div class="row">
-														<div class="col-sm-1 col-xs-1" align="center">
-															<div class="row"></div>
-														</div>
-														<div class="col-sm-10 col-xs-10">
-															<table class="table table-user-information">
-																<tbody style="text-align: center">
-																	<tr>
-																		<td>NO.</td>
-																		<td>날짜</td>
-																		<td>출근시간</td>
-																		<td>퇴근시간</td>
-																	</tr>
-																	
-																	<c:forEach var="i" items="${list}">
-																	<tr>																	
-																		<td>${i.rownum}</td>
-																	 	<td><fmt:formatDate value="${i.c_date}" pattern="yyyy/MM/dd"/></td>
-																		<td>${i.c_start}</td>
-																		<td>${i.c_end}</td>
-																	<tr>
-																	</c:forEach>
-																	
-																</tbody>
-															</table>															
+														<div class="row">
+															<div class="col-sm-1 col-xs-1" align="center">
+																<div class="row"></div>
+															</div>
+															<div class="col-sm-10 col-xs-10" id="commutesearchstarttableinfo">
+																<table class="table table-user-information">
+																	<tbody style="text-align: center">
+																		<tr>
+																			<td>NO.</td>
+																			<td>날짜</td>
+																			<td>출근시간</td>
+																			<td>퇴근시간</td>
+																		</tr>
+																		<c:set var="show"></c:set>
+																		<c:forEach var="i" items="${list}">
+																			<tr>
+																				<td>${i.rownum}</td>
+																				<td>${i.c_date}</td>
+																				<td>${i.c_start}</td>
+																				<td>${i.c_end}</td>
+																			<tr>
+																		</c:forEach>
+
+																	</tbody>
+																</table>
+															</div>
 														</div>
 													</div>
 												</div>
+
+
 											</div>
+
+
 										</div>
 									</div>
 								</div>
@@ -147,8 +273,8 @@
 		</footer>
 		<!-- /footer content -->
 	</div>
-	
-	
+
+
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -209,8 +335,8 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-	
-	
-	
-	</body>
+
+
+
+</body>
 </html>
