@@ -19,6 +19,7 @@ public class RouteManageController {
 	public String routePageOpen(){
 		return "routemanage/RouteManage";	
 	}
+	//현재 불러오기 버튼이 두개지만.. 추후 하나로 통합할예정.
 	
 	//파일의 마커 좌표 저장
 	@RequestMapping(value="/routeSave.admin",method=RequestMethod.GET)
