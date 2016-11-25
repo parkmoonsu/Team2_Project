@@ -26,4 +26,7 @@ public interface ScheduleDAO {
 	public int reguloff_delete(String id) throws ClassNotFoundException, SQLException;
 	public int reguloff_update(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
 	public RegulOffDTO reguloff_selectseq() throws ClassNotFoundException, SQLException;
+	
+	//dow count 를 가져와서 3개이상일시
+	public int dowcount(String o_code);
 }	

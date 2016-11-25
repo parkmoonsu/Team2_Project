@@ -14,6 +14,7 @@ public class CommuteJoinCstartJoinCendDTO {
 
 	private int rownum;
 	private String m_id;
+	private String m_name;
 	private Date c_date;	
 	private int cs_code;	//출근코드
 	private int ce_code;	//퇴근코드
@@ -23,6 +24,14 @@ public class CommuteJoinCstartJoinCendDTO {
 	private String c_end; 	//퇴근시간
 	private String cs_ams;
 	private String ce_pms;
+	
+	
+	public String getM_name() {
+		return m_name;
+	}
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
+	}
 	public int getRownum() {
 		return rownum;
 	}

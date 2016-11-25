@@ -12,7 +12,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style type="text/css">
+#search{
+	border:0;
+	outline:0;
+}
+#showbox{
+	text-align:center;
+	font-size:1.5em;
+}
+/* #row{
+	border-color:#49936;
+	border-width :thin;
+} */ 
+</style>
 
+<se:authentication property="name" var = "LoginUser"/>    
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 	
@@ -50,7 +65,7 @@
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
 <script type="text/javascript">
-	$(function(){
+/* 	$(function(){
 		$("#go").click(function(){
 			$.ajax({
 				dataType:"jsp",
@@ -62,7 +77,8 @@
 					
 			});
 		});
-	});
+	}); */
+
 </script>
 </head>
 <body class="nav-md">
@@ -93,30 +109,29 @@
 							</div>
 							<div class="clearfix" style="margin-top:20px">
 								<div class="container" >
-								<div class="col-sm-5"></div>
+								<div class="col-sm-5" style="margin-left:40px"></div>
 									<input type="button" id="go" value="퇴근하기" onclick="go()" class="btn btn-primary"/>
-
-									<div class="row" style="margin-top:20px">
-										<div class="col-sm-1"></div>
-										<div class="col-sm-10">
+									
+									<div class="row"  id="row" style="margin-top:20px; padding-left:270px ; width:800px; border-width :thin; border-color :#ccc;" >
+										<div class="col-sm-1"></div>										<div class="col-sm-10">
 											<div id="show"></div>
-											 <div class="panel panel-info">
+											 <div class="panel panel-info" style="border-radius: 4em">
 												<!-- <div class="panel-heading">
 													
 												</div> -->
 												<div class="panel-body">
 													<div class="row">
-														<div class="col-sm-1" align="center">
+														<div class="col-sm-1" align="center" >
 															<div class="row"></div>
 														</div>
 														<div class="col-sm-10">
 														
-															<div class="my-box">
-															<se:authentication property="name" var = "LoginUser"/>       													
+															<div class="my-box" id="showbox">
+															   <p style="line-height:200%; text-align: center ">													
 																${LoginUser}님의 퇴근시간은 ${dto.c_end}입니다.<br>
-																${LoginUser}님의 퇴근상태는 ${dto.ce_stat}입니다.															
+																${LoginUser}님의 퇴근상태는 ${dto.ce_stat}입니다.</p><br>												
 															
-																<input type="submit" value="출/퇴근 조회하기">
+																<center><input id="search" type="button" value="출/퇴근 조회하기" onClick="location.href='comsearch.member?m_id=${LoginUser}'" class="btn btn-success"></center>
  															</div>
  														
 														</div>
