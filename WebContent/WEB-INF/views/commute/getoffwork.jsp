@@ -130,8 +130,8 @@
 														<form>
 															<div class="my-box">
 																<p style="text-align:center; font-size:1.5em;">
-																${LoginUser}님의 퇴근시간은 ${m_id.dto.c_end}입니다.<br><br>
-																${LoginUser}님의 퇴근상태는 ${dto.ce_stat}입니다.</p><br><br>	
+																${LoginUser}님의 퇴근시간은 ${m_id.dto.c_end}입니다. <br><br>
+																${LoginUser}님의 퇴근상태는 ${dto.ce_stat}입니다.</p><br><br>
 																<input id="search" type="button" value="출/퇴근 조회하기" onClick="location.href='comsearch.member?m_id=${LoginUser}'" class="btn btn-success">
 <%--   																<button id="search" type="button" value="출/퇴근 조회하기" onclick="location.href='<%=request.getContextPath()%>/WEB-INF/views/commute/comsearch.jsp'" class="btn btn-success">출/퇴근 조회하기</button>
 --%> 															</div>

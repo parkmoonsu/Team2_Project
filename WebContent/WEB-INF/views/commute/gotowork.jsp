@@ -68,9 +68,9 @@
 			type:"post",
 			success:function(data){
 				console.log(data.cdto3.c_start);				
-				/* $("#show").html(id+"님의 출근시간은 "+data.cdto3.c_start+"입니다."+
+				 $("#show").html(id+"님의 출근시간은 "+data.cdto3.c_start+"입니다."+
 						           "<br>"+id+"님의 출근상태는"+ data.cdto3.cs_stat+"입니다."); 
-				$("#search").show(); */
+				$("#search").show(); 
 			}
 			});   
 		});
@@ -118,7 +118,7 @@
 										 		
 													<input type="button" id="go" value="출근하기" class="btn btn-primary"/>
 												</div>
-											 <div class="panel panel-info" id="show">
+											<!--  <div class="panel panel-info" id="show"> -->
 												<div class="panel-body">
 													<div class="row">
 														<div class="col-xs-1 col-sm-1" align="center">
@@ -132,7 +132,7 @@
 													</div>
 												</div> 								
 											</div>
-										</div>
+										<!-- </div> -->
 									</div> 
 								</div>
 							</div>
