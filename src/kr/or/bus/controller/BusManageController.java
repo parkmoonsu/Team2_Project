@@ -98,4 +98,19 @@ public class BusManageController {
 		
 		return jsonview;
 	}
+	
+	@RequestMapping("/reg.admin")
+	public String reg(String[] b_vehiclenum , String[] g_name , String[] r_num , String[] mname){
+		for(int i = 0 ; i < b_vehiclenum.length ; i++){
+			service.insertBus(b_vehiclenum[i], r_num[i], g_name[i]);
+			
+			if(!mname[i].equals("선택")){
+				service.updateVehicle(b_vehiclenum[i], mname[i]);
+			}
+			
+			service.insertBStatus(b_vehiclenum[i], r_num[i]);
+		}
+		
+		return "busmanage/insertbussuccess";
+	}
 }

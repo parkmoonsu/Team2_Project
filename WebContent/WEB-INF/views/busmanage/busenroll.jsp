@@ -337,6 +337,7 @@
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 	<script type="text/javascript">
 	var num = 1;
+	
 	function plus(){
 		 num++;
 			var gname = "#g_name" + num;
@@ -358,14 +359,54 @@
 			tr += "</select>";
 			tr += "</td>";
 			tr += "<td width = 300px>";
-			tr += "<select class='form-control' id='mname" + num + "' name = 'm_name'>";
+			tr += "<select class='form-control' id='mname" + num + "' name = 'mname'>";
 			tr += "<option>선택</option>";
 			tr += "</select>";
 			tr += "</td>";
 			tr += "</tr>";
 			
 			$("#tbody").append(tr); 
+			
+			
+			$.ajax({
+				url : "getmember.admin",
+				success:function(data){
+					for(var i = 0 ; i < data.m_id.length ; i++){
+						$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "("+data.m_id[i] +")" + "</option>");
+					}
+				}
 				
+			});
+			
+			$.ajax({
+				url : "getgarage.admin",
+				success:function(data){
+						//console.log(data.gname[0]);
+						
+						for(var i = 0 ; i < data.gname.length; i++){
+							$(gname).append("<option value = " + data.gnum[i] + ">" + data.gname[i] + "</option>");
+						}
+				}
+			});
+			
+			$(gname).change(function(){
+				//console.log($("#g_name").val());
+				$.ajax({
+					url : "getroute.admin",
+					type : "post",
+					data:{g_num : $(gname).val().trim()},
+					success:function(data){
+							$(rnum).empty();
+							$(rnum).append("<option>선택</option>");
+							for(var i = 0 ; i < data.rnum.length; i++){
+								$(rnum).append("<option value = " + data.rnum[i] + ">" + data.rnum[i] + "</option>");
+								
+							}
+					}
+					
+				});
+				
+			});
 	}
 	
 	$(function(){
@@ -374,6 +415,10 @@
 		
 		//console.log(num);
 
+		$("#reg").click(function(){
+			$("#reg").submit();
+		});
+		
 		$("#ebtn").click(function(){
 			var mname = "#mname" + num;
 			$.ajax({

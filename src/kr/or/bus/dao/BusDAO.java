@@ -30,4 +30,11 @@ public interface BusDAO {
 	
 	//등록된 기사들의 이름 가져오기
 	public List<MemberDTO> getMember();
+	
+	//버스 등록하기(전체)
+	public void insertBus(String b_vehiclenum , String r_num , String g_name);
+	//기사 차량번호 update
+	public void updateVehicle(String b_vehiclenum , String mname);
+	//버스 상태 테이블 insert
+	public void insertBStatus(String b_vehiclenum ,String r_num);
 }
