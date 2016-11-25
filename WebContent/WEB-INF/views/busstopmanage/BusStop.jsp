@@ -160,6 +160,7 @@ html, body {
         originalMarkers.push(originalMarker);
         originalMarkersRead(originalMarkers);
         
+        //버스 가 움직이기 위해 좌표 배열에 저장
         dataArray.push(latLng);
         
         
