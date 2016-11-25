@@ -38,26 +38,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 기본 캘린더 DAO -->
 	
 	<!-- reguloff DAO -->
-	<select id="reguloff_select" resultType="kr.or.bus.dto.RegulOffDTO">
-		select * from reguloff
+	<select id="reguloff_select" resultType="kr.or.bus.dto.MemberJoinRegulOffDTO">
+		select r.m_id, r.o_code, m.m_name
+		from reguloff r join member m
+		on r.m_id=m.m_id
 	</select>
 	<insert id="reguloff_insert">
 		INSERT INTO reguloff
-		VALUES(reguloff_seq.nextval, #{m_id}, #{o_code}, sysdate)
+		VALUES(#{m_id}, #{o_code}, sysdate)
 	</insert>
 	<delete id="reguloff_delete">
-		DELETE reguloff WHERE id=#{id}
+		DELETE reguloff WHERE m_id=#{m_id}
 	</delete>
 	<update id="reguloff_update">		
 		UPDATE reguloff
-		SET m_id=#{m_id},
-			o_code=#{o_code}		
-		WHERE id=#{id}
+		SET o_code=#{o_code}		
+		WHERE m_id=#{m_id}
 	</update>
-	<select id="reguloff_selectseq" resultType="kr.or.bus.dto.RegulOffDTO">
-		select * from reguloff
-		where id=
-		(select max(to_number(id)) from reguloff)
+	<select id="reguloff_selectseq" parameterType = "String" resultType="kr.or.bus.dto.MemberJoinRegulOffDTO">
+		select r.m_id, r.o_code, m.m_name
+		from reguloff r join member m
+		on r.m_id=m.m_id
+		where r.m_id=#{m_id}
 	</select>	
 	<select id="dowcount" resultType = "int" parameterType = "String">
 		select count(o_code) from reguloff 
@@ -69,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="returnid" resultType = "String" parameterType = "String">
 		select m_id from reguloff 
-		where id = #{id}
+		where m_id = #{m_id}
 	</select>
 	
 	<!-- reguloff DAO -->

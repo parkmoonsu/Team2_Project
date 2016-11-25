@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import kr.or.bus.dto.ScheduleDTO;
+import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
 
 //CRUD
@@ -23,9 +24,9 @@ public interface ScheduleDAO {
 	
 	public List<RegulOffDTO> reguloff_select() throws ClassNotFoundException, SQLException;
 	public int reguloff_insert(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
-	public int reguloff_delete(String id) throws ClassNotFoundException, SQLException;
+	public int reguloff_delete(String m_id) throws ClassNotFoundException, SQLException;
 	public int reguloff_update(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
-	public RegulOffDTO reguloff_selectseq() throws ClassNotFoundException, SQLException;
+	public MemberJoinRegulOffDTO reguloff_selectseq(String m_id) throws ClassNotFoundException, SQLException;
 	
 	//dow count 를 가져와서 3개이상일시
 	public int dowcount(String o_code);
