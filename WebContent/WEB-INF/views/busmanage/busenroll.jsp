@@ -103,6 +103,13 @@
           </div>
           <!-- /top tiles -->
 				<div class="">
+				<div class="page-title">
+						<div class="title_left">
+							<h3>
+								<small>버스등록/삭제</small>
+							</h3>
+						</div>
+					</div>
 					<div class="clearfix"></div>
 
 					<div class="row">
@@ -129,7 +136,9 @@
 												<th>기사</th>
 												<th>차고지 이름</th>
 												<th>상태</th>
-												<th style="width: 20%"></th>
+												<th style="width: 20%; text-align:center;">
+												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form">
+												</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -137,12 +146,12 @@
 										
 											<c:forEach var="i" items="${d}">
 											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>${i.r}</td>
+												<td>${i.b_vehiclenum}</td>
+												<td>${i.r_num}</td>
+												<td>${i.m_name}</td>
+												<td>${i.g_name}</td>
+												<td>${i.s_name}</td>
 												<td style = "text-align:center"> 
 													<input type = "checkbox">
                                          		</td>
@@ -153,40 +162,58 @@
 									<!-- end project list -->
 									
 									<!-- 요기서부터 페이징처리 -->
-									<c:set var = "mc" value = "${membercount}"/>
+									<c:set var = "count" value = "${count}"/>
 									<c:set var = "pgc" value = "${pgs}"/>
 									<c:choose>
-											<c:when test="${mc % 10 == 0}">
-												<c:set value = "${mc/10}" var = "pagecount"/>
+											<c:when test="${count % 10 == 0}">
+												<c:set value = "${count/10}" var = "pagecount"/>
 											</c:when>
 											<c:otherwise>
-												<c:set value = "${mc/10 + 1}" var = "pagecount"/>
+												<c:set value = "${count/10 + 1}" var = "pagecount"/>
 											</c:otherwise>
 									</c:choose>	
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
-											<li><a href="membermanage.admin?pg=${pgc-1}">Previous</a></li>
+											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 										
 										
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
+											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
 										
-										<c:if test="${pgc < mc/10 }">
-											<li><a href="membermanage.admin?pg=${pgc+1}">Next</a></li>
+										<c:if test="${pgc < count/10 }">
+											<li><a href="busenroll.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
 									
 									
 								</div>
 									<div style = "float: right;">
-									<div class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-check"></i>
+									<div class="btn btn-primary btn-xs" id = "ebtn"><i class="fa fa-check"></i>
                                          			 등록 </div>
 									<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
                                          			 삭제 </div>
 									</div>
+									
+									
+									
+									
+									
+									
+									
+									
 							</div>
+							
+							<div id = "enroll">
+							
+							<!-- 여기에 ajax 내용 삽입됨(enroll.jsp) -->
+							</div>	
+								
+							</div>
+							
+							
+							
 						</div>
 					</div>
 				</div>
@@ -245,7 +272,7 @@
 			</footer>
 			<!-- /footer content -->
 		</div>
-	</div>
+
 
 
 	<!-- Bootstrap -->
@@ -308,6 +335,79 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-
+	<script type="text/javascript">
+	$(function(){
+		var num = 1;
+		var mname = "#mname" + num;
+		
+		var count = 1;
+		//console.log(num);
+		$("#ebtn").click(function(){
+			$.ajax({
+				url : "enrollpage.admin",
+				success:function(data){
+						if (count % 2 == 0) {
+							$("#enroll").attr("style", "display:none");
+							count++;
+						} else {
+							$("#enroll").attr("style", "display:inline");
+							count++;
+						}
+						$("#enroll").empty();
+						$("#enroll").append(data);
+						
+						$.ajax({
+							url : "getmember.admin",
+							success:function(data){
+								for(var i = 0 ; i < data.m_id.length ; i++){
+									$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "("+data.m_id[i] +")" + "</option>");
+								}
+							}
+							
+						});
+						
+						$.ajax({
+							url : "getgarage.admin",
+							success:function(data){
+									//console.log(data.gname[0]);
+									
+									for(var i = 0 ; i < data.gname.length; i++){
+										$("#g_name").append("<option value = " + data.gnum[i] + ">" + data.gname[i] + "</option>");
+									}
+							}
+						});
+						
+						$("#g_name").change(function(){
+							//console.log($("#g_name").val());
+							$.ajax({
+								url : "getroute.admin",
+								type : "post",
+								data:{g_num : $("#g_name").val().trim()},
+								success:function(data){
+										$("#r_num").empty();
+										$("#r_num").append("<option>선택</option>");
+										for(var i = 0 ; i < data.rnum.length; i++){
+											$("#r_num").append("<option value = " + data.rnum[i] + ">" + data.rnum[i] + "</option>");
+											
+										}
+								}
+								
+							});
+							
+						});
+				}
+			});
+		});
+		
+		$("#plus").click(function(){
+			$.ajax({
+				
+				success:function(){
+					$("#tbody").append();
+				}
+			});		
+		});
+	});
+	</script>
 </body> 	
 </html>
