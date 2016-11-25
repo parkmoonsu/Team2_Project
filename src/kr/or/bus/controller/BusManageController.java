@@ -37,7 +37,7 @@ public class BusManageController {
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.busInfo(pg);
 		int page = service.pg(pg);
 		int count = service.busCount();
-		
+		   
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("count",count);

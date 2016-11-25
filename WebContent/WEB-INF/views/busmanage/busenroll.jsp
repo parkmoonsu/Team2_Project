@@ -117,7 +117,7 @@
 							<div class="x_panel">
 								<div class="x_content">
 									<!-- start project list -->
-									<div
+									<!-- <div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
 											<input type="text" class="form-control"
@@ -126,7 +126,7 @@
 												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
 											</span>
 										</div>
-									</div>
+									</div> -->
 									<table class="table table-hover projects">
 										<thead>
 											<tr>
@@ -172,22 +172,25 @@
 												<c:set value = "${count/10 + 1}" var = "pagecount"/>
 											</c:otherwise>
 									</c:choose>	
+									
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
 											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 										
+									
 										
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
 											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
+									
 										
 										<c:if test="${pgc < count/10 }">
 											<li><a href="busenroll.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
 									
-									
+								
 								</div>
 									<div style = "float: right;">
 									<div class="btn btn-primary btn-xs" id = "ebtn"><i class="fa fa-check"></i>
