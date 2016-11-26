@@ -113,4 +113,11 @@ public class BusManageController {
 		
 		return "busmanage/insertbussuccess";
 	}
+	@RequestMapping("/chagozi.admin")
+	public String chagozi(){
+		
+		
+		return "redirect:chagozi.jsp";
+	}
+	
 }

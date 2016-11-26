@@ -404,7 +404,7 @@
     	moveBus(BusMarker, map);
     }
     
-    function moveBus(BusMarker) {
+    function moveBus(BusMarker) { 
     	var i=0;
     	setInterval(function(){
     		if(i == dataArray.length){
