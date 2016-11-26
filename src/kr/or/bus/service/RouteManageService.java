@@ -58,15 +58,16 @@ public class RouteManageService {
         	fr = new FileReader(path);
         	br = new BufferedReader(fr);	        	
         	String line = "";
-            for(int i=0; (line = br.readLine())!=null;i++){
-                System.out.println(line);
-                maps=line;
-             }
+        	
+        	for(int i=0; (line = br.readLine())!=null;i++){
+                maps+=line.replaceAll("\\p{Space}","");           
+            }
+        	
             System.out.println("지도 좌표를 파일로 부터  읽어왔습니다.");
         	System.out.println("얘는스트링"+maps);
         	response.setCharacterEncoding("UTF-8");
         	out = response.getWriter();
-        	out.print(maps);
+        	out.print(maps.replace("null",""));
         }catch(Exception e){
         	System.out.println(e.getMessage());
         }finally{
@@ -79,6 +80,7 @@ public class RouteManageService {
         }
 	}
 	
+	//수정한 경로 좌표를 파일에 저장하는 함수
 	public void routelocationEdit(HttpServletRequest request, HttpServletResponse response){
 		
 		FileWriter fw = null;
@@ -110,6 +112,7 @@ public class RouteManageService {
         System.out.println("지도 좌표가 저장되었습니다.");
 	}
 	
+	//수정한 경로 좌표를 파일에서 읽어온다.
 	public void routelocationEditRead(HttpServletRequest request, HttpServletResponse response){
 		
 		FileReader fr = null;
@@ -121,15 +124,16 @@ public class RouteManageService {
         	fr = new FileReader(path);
         	br = new BufferedReader(fr);	        	
         	String line = "";
-            for(int i=0; (line = br.readLine())!=null;i++){
-                System.out.println(line);
-                maps=line;
-             }
+        	
+        	for(int i=0; (line = br.readLine())!=null;i++){
+                maps+=line.replaceAll("\\p{Space}","");           
+            }
+        	
             System.out.println("지도 좌표를 파일로 부터  읽어왔습니다.");
         	System.out.println("얘는스트링"+maps);
         	response.setCharacterEncoding("UTF-8");
         	out = response.getWriter();
-        	out.print(maps);
+        	out.print(maps.replace("null",""));
         }catch(Exception e){
         	System.out.println(e.getMessage());
         }finally{

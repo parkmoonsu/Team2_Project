@@ -23,25 +23,22 @@ public class BusStopManageService {
 		FileReader fr = null;
         BufferedReader br = null;
         PrintWriter out=null;
-        String maps = null;
-        JSONArray object = null;
+        String maps = null;      
         String path = request.getServletContext().getRealPath("/busstop/BusStop.json");
         try{
         	fr = new FileReader(path);
         	br = new BufferedReader(fr);
         	String line = "";
-            for(int i=0; (line = br.readLine())!=null;i++){
-                System.out.println(line);
-                maps=line;           
+        	
+        	for(int i=0; (line = br.readLine())!=null;i++){
+                maps+=line.replaceAll("\\p{Space}","");           
             }
+        	
             System.out.println("버스정류장 좌표를 파일로 부터  읽어왔습니다.");
-            System.out.println("maps 에 담기냐? "+ maps);
-            //object = JSONArray.fromObject(maps);
-            //System.out.println(object);
+            System.out.println("maps 에 담기냐? "+ maps);          
         	response.setCharacterEncoding("UTF-8");
         	out = response.getWriter();
-        	out.print(maps);
-        	//System.out.println(maps);
+        	out.print(maps.replace("null",""));       	
         }catch(Exception e){
         	System.out.println(e.getMessage());
         }finally{
@@ -90,23 +87,23 @@ public class BusStopManageService {
         BufferedReader br = null;
         PrintWriter out=null;
         String maps = null;
-        JSONArray object = null;
+       
         String path = request.getServletContext().getRealPath("/busstop/BusStopEdit.json");
         try{
         	fr = new FileReader(path);
         	br = new BufferedReader(fr);	        	
         	String line = "";
-            for(int i=0; (line = br.readLine())!=null;i++){
-                System.out.println(line);
-                maps=line;           
+        	
+        	for(int i=0; (line = br.readLine())!=null;i++){
+                maps+=line.replaceAll("\\p{Space}","");           
             }
+        	
             System.out.println("버스정류장 좌표를 파일로 부터  읽어왔습니다.");
             System.out.println("maps 에 담기냐? "+maps);
-            object = JSONArray.fromObject(maps);
-            System.out.println(object);
+                       
         	response.setCharacterEncoding("UTF-8");
         	out = response.getWriter();
-        	out.print(object);
+        	out.print(maps.replace("null",""));
         }catch(Exception e){
         	System.out.println(e.getMessage());
         }finally{
