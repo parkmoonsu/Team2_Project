@@ -10,7 +10,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -56,12 +56,12 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-	
+
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
 </head>
 
@@ -77,33 +77,33 @@
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
-			  <!-- page content -->
-        <div class="right_col" role="main">
-          <!-- top tiles -->
-          <div class="row tile_count" style = "text-align: center">
-          	<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-          		<span class="count_top"></span>
-          	</div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-bus"></i> 마을버스</span>
-              <div class="count">0</div>          
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-bus"></i> 시내버스</span>
-              <div class="count">0</div>              
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-bus"></i> 시외버스</span>
-              <div class="count">0</div>            
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
-              <div class="count green">0</div>
-            </div>  
-          </div>
-          <!-- /top tiles -->
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<!-- top tiles -->
+				<div class="row tile_count" style="text-align: center">
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"></span>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 마을버스</span>
+						<div class="count">0</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 시내버스</span>
+						<div class="count">0</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 시외버스</span>
+						<div class="count">0</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
+						<div class="count green">0</div>
+					</div>
+				</div>
+				<!-- /top tiles -->
 				<div class="">
-				<div class="page-title">
+					<div class="page-title">
 						<div class="title_left">
 							<h3>
 								<small>버스등록/삭제</small>
@@ -136,15 +136,16 @@
 												<th>기사</th>
 												<th>차고지 이름</th>
 												<th>상태</th>
-												<th style="width: 20%; text-align:center;">
-												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form">
-												</th>
+												<th style="width: 20%; text-align: center;"><i
+													class="fa fa-trash" style="margin-bottom: 2px"></i> <input
+													type="checkbox" class="form"></th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:set value="${list}" var="d"/>
-										
+											<c:set value="${list}" var="d" />
+
 											<c:forEach var="i" items="${d}">
+
 											<tr>
 												<td>${i.r}</td>
 												<td>${i.b_vehiclenum}</td>
@@ -156,13 +157,15 @@
 													<input type = "checkbox" id = "check${i.r}" value = "${i.b_vehiclenum}" name = "chklist">
                                          		</td>
 											</tr>
+
 											</c:forEach>
 										</tbody>
 									</table>
 									
 									<!-- end project list -->
-									
+
 									<!-- 요기서부터 페이징처리 -->
+
 									<c:set var = "Count" value = "${count}"/>
 									<c:set var = "pgc" value = "${pgs}"/>
 									<c:choose>
@@ -174,25 +177,29 @@
 											</c:otherwise>
 									</c:choose>	
 									
+
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
 											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
-										
-									
-										
+
+
+
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
 											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
+
 									
 										
 										<c:if test="${pgc < Count/10 }">
+
 											<li><a href="busenroll.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
-									
-								
+
+
 								</div>
+
 									<div style = "float: right;">
 									<div class="btn btn-primary btn-xs" id = "ebtn"><i class="fa fa-check"></i>
                                          			 등록 </div>
@@ -213,69 +220,68 @@
 							
 							</div>
 							
-							
+
 							</div>
-							
-							
-							
+
 						</div>
+
+
+
 					</div>
 				</div>
 			</div>
-
-      <!-- 수현:삭제모달    -->
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog modal-sm">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">
-								<i class="fa fa-exclamation-triangle"></i> 회원삭제
-							</h4>
-						</div>
-						<div class="modal-body" aria-labelledby="myModalLabel"
-							id="myModalLabel2"></div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal" id="cancelbutton">삭제</button>
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">취소</button>
-							<input type="hidden" id="hvalue">
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- 수현:삭제모달 끝 -->
-
-			<div class="modal fade" id="memberresrecord" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title" id="resrecordtitle">
-								 
-							</h4>
-						</div>
-						<div class="modal-body" aria-labelledby="myModalLabel"
-							id="resrecordtable"></div>
-					</div>
-				</div>
-			</div>
-
-
-
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
 		</div>
+
+		<!-- 수현:삭제모달    -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">
+							<i class="fa fa-exclamation-triangle"></i> 회원삭제
+						</h4>
+					</div>
+					<div class="modal-body" aria-labelledby="myModalLabel"
+						id="myModalLabel2"></div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="cancelbutton">삭제</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						<input type="hidden" id="hvalue">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 수현:삭제모달 끝 -->
+
+		<div class="modal fade" id="memberresrecord" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" id="resrecordtitle"></h4>
+					</div>
+					<div class="modal-body" aria-labelledby="myModalLabel"
+						id="resrecordtable"></div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- footer content -->
+		<footer>
+			<div class="pull-right">
+				Gentelella - Bootstrap Admin Template by <a
+					href="https://colorlib.com">Colorlib</a>
+			</div>
+			<div class="clearfix"></div>
+		</footer>
+		<!-- /footer content -->
+	</div>
 
 
 
@@ -548,5 +554,5 @@
 	});
 	
 	</script>
-</body> 	
+</body>
 </html>

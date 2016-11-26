@@ -141,7 +141,7 @@
 			<!-- 모달끝1 -->
 
 			<!--  modal2 -->
-			<div class="modal fade" id="exampleModal2" tabindex="-1"
+			<div class="modal fade table-responsive" id="exampleModal2" tabindex="-1"
 				role="dialog" aria-labelledby="myLargeModalLabel">
 			</div>
 		
@@ -173,7 +173,7 @@
 										</div>
 									</nav>
 								</div>
-								<div class="x_content">
+								<div class="x_content table-responsive">
 
 
 									<!-- start project list -->
@@ -187,7 +187,8 @@
 											</span>
 										</div>
 									</div>
-									<table class="table table-hover projects">
+									
+									<table class="table table-hover  projects">
 										<thead>
 											<tr>
 												<th>번호</th>
@@ -199,7 +200,6 @@
 												<th style="width: 20%"></th>
 											</tr>
 										</thead>
-										<tbody>
 											<c:set value="${list}" var="d"/>
 										
 											<c:forEach var="i" items="${d}">
@@ -218,6 +218,7 @@
 											</c:forEach>
 										</tbody>
 									</table>
+									
 									<!-- end project list -->
 									
 									<!-- 요기서부터 페이징처리 -->

@@ -12,6 +12,7 @@ import java.util.List;
 import kr.or.bus.dto.ScheduleDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
+import kr.or.bus.dto.RegulOffrJoinDTO;
 
 //CRUD
 public interface ScheduleDAO {
@@ -34,4 +35,6 @@ public interface ScheduleDAO {
 	public int checkmid(String m_id);
 	//로그인아이디와 일정m_id 비교
 	public String returnid(String id);
+	
+	public List<RegulOffrJoinDTO> history_select();
 }	

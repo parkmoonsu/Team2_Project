@@ -16,7 +16,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-        	<input type="image" src="${pageContext.request.contextPath}/images/logo.jpg" onclick="main()">
+        	<input type="image" onclick="main()">
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">

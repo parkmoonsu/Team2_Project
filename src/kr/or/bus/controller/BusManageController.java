@@ -173,5 +173,12 @@ public class BusManageController {
 		
 		return jsonview;
 	}
+	@RequestMapping("/chagozi.admin")
+	public String chagozi(){
+		
+		
+		return "redirect:chagozi.jsp";
+
+	}
 	
 }
