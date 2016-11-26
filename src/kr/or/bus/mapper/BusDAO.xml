@@ -46,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		select m_id , m_name
 		from member
+		where b_vehiclenum is null
 	</select>
 	
 	<insert id="insertBus">
@@ -86,4 +87,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</if>
 	,'0','0',30)
 	</insert>
+	
+	<select id="getVehicle" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select b.b_vehiclenum , nvl(g.g_num,'(미정)') as "g_num",nvl(g.g_name,'(미정)') as "g_name", nvl(b.r_num,'(미정)') as "r_num" , nvl(m.m_name,'(미정)') as "m_name" , nvl(m.m_id,'(미정)') as "m_id"
+		from bus b left outer join member m  on m.b_vehiclenum = b.b_vehiclenum
+		left outer join garage g on b.g_num = g.g_num
+		where b.b_vehiclenum = #{b_vehiclenum}
+	</select>
+	
+	<select id="getGarage" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO" parameterType = "String">
+		select g_num,g_name from garage where g_num != #{g_num}
+	</select>
+	
+	<select id="getRoute" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO" parameterType = "String">
+		select r_num
+		from route
+		where g_num = #{g_num}
+	</select>
+	
+	
+	<select id="getMembers" resultType = "kr.or.bus.dto.MemberDTO">
+	
+		select m_id , m_name
+		from member
+		where b_vehiclenum is null and m_id != #{mid}
+	</select>
 </mapper>
