@@ -79,6 +79,16 @@ $(function() {
 
 			}
 		});
+		
+		// history에 저장
+		$.ajax({
+			url : '???',
+			type : 'post',
+			data : {},
+			success : function(data) {
+
+			}
+		});
 
 	});
 

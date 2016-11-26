@@ -145,15 +145,15 @@
 										<tbody>
 											<c:set value="${list}" var="d"/>
 										
-											<c:forEach var="i" items="${d}">
+											<c:forEach var="i" items="${d}" varStatus="status">
 											<tr>
-												<td>${i.r}</td>
-												<td>${i.b_vehiclenum}</td>
-												<td>${i.r_num}</td>
-												<td>${i.m_name}</td>
-												<td>${i.g_name}</td>
-												<td>${i.s_name}</td>
-												<td>${i.s_name}</td>
+												<td>${status.count}</td>
+												<td>${i.o_date}</td>
+												<td>${i.ro_code}</td>
+												<td>${i.ro_reqdate}</td>
+												<td>${i.ro_regdate}</td>
+												<td>${i.ro_object}</td>
+												<td>${i.ko_name}</td>
 												<td style = "text-align:center"> 
 													<input type = "checkbox">
                                          		</td>
