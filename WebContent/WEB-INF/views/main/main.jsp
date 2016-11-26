@@ -33,6 +33,8 @@
 
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath}/build/css/custom.min.css" rel="stylesheet">
+
+    
   </head>
 
   <body class="nav-md">

@@ -22,12 +22,12 @@
                <div class="thumbnail">
                   <img
                      src="<%=request.getServletContext().getContextPath()%>/join/upload/${dto.m_photo}"
-                     alt="...">
+                     alt="사진첨부">
                   <div class="caption">
                      <h3></h3>
                      <p>...</p>
                      <p>
-                        <a href="#" class="btn btn-default btn-sm" role="button">사진변경</a>
+                        <a href="#" class="btn btn-default btn-sm" role="button">save<i class="fa fa-floppy-o"></i></a>
                         <a href="#" class="btn btn-default btn-sm" role="button">경력조회</a>
                      </p>
                   </div>
@@ -46,10 +46,13 @@
            
          
            <label class="control-label col-md-1 col-sm-2 col-xs-1">ID</label> 
-            <div class="col-md-4 col-sm-3 col-xs-12 form-group has-feedback">
-               <input type="text" class="form-control" id="inputSuccess3"
-                  value="${mjdrodto.m_id }" readonly> 
-            </div>
+
+            <div class="col-md-5 col-sm-4 col-xs-12 form-group has-feedback">
+               <input type="text" class="form-control has-feedback-left" 
+               id="inputSuccess3" value="${mjdrodto.m_id }" readonly> <span
+                  class="fa fa-qq form-control-feedback left" aria-hidden="true"></span>
+			</div>
+           
 		
 			
 			
@@ -92,7 +95,7 @@
                
                
                <label class="control-label col-md-1 col-sm-1 col-xs-1">Email</label> 
-               <div class="col-md-4 col-sm-4 col-xs-12">
+               <div class="col-md-5 col-sm-4 col-xs-12">
                      <input type="text" class="form-control" value="${mjdrodto.m_email }" readonly>
                </div>
                </div>
@@ -104,9 +107,10 @@
                     <a href="download.admin?folder=upload&filename=${mjdrodto.m_license}">${mjdrodto.m_license}</a>
                </div>
                <label class="control-label col-md-1 col-sm-1 col-xs-1">생년월일</label>
-               <div class="col-md-4 col-sm-4 col-xs-12">
-                  <input class="form-control" required="required" type="text"
-                     value="${mjdrodto.m_birth }" readonly>
+               <div class="col-md-5 col-sm-4 col-xs-12">
+                  <input class="form-control has-feedback-left" required="required" type="text"
+                     value="${mjdrodto.m_birth }" readonly><span
+                  class="fa fa-birthday-cake form-control-feedback left" aria-hidden="true"></span>
                </div>
                </div>
 
@@ -117,7 +121,7 @@
                   <a href="download.admin?folder=upload&filename=${mjdrodto.m_resume }">${mjdrodto.m_resume }</a>
                </div>
             <label class="control-label col-md-1 col-sm-1 col-xs-1">정기휴무</label>
-               <div class="col-md-4 col-sm-4 col-xs-122">
+               <div class="col-md-5 col-sm-4 col-xs-122">
                   <input class="form-control" required="required" type="text"
                     value="${mjdrodto.o_date }" readonly>
                </div>
