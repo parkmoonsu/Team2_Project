@@ -1,5 +1,5 @@
 /*
- * @File Name: calendar_reguloff.js
+ * @File Name: schedule_reguloff.js
  * @Author: 길한종
  * @Data: 2016. 11. 18
  * @Desc: 일정관리(정기휴무) -  풀캘린더 컨트롤 

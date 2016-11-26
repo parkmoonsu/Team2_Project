@@ -10,29 +10,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		select * 
 		from(
-  			select ROWNUM r , b.B_VEHICLENUM,b.r_num , m.m_name , g.g_name , s.s_name
-  			from bus b join member m
-  			on b.B_VEHICLENUM = m.B_VEHICLENUM
-  			join garage g
-  			on b.G_NUM = g.g_num
-  			join bstatus bs
-  			on b.b_vehiclenum = bs.b_vehiclenum
-  			join status s
-  			on bs.s_code = s.s_code)
+  			select ROWNUM r , b.b_vehiclenum , nvl(b.r_num,'(미정)') as "r_num", nvl(m.m_name,'(미정)') as "m_name" , nvl(g.g_name,'(미정)') as "g_name" , s.s_name
+    		from bus b left outer join member m
+    		on b.b_vehiclenum = m.b_vehiclenum
+    		left outer join garage g
+    		on b.G_NUM = g.g_num
+    		left outer join bstatus bs
+    		on b.b_vehiclenum = bs.b_vehiclenum
+    		left outer join status s
+    		on bs.s_code = s.s_code
+    		)
 		where r between 1 + (#{page} - 1) * 10  and 10 + (#{page} - 1) * 10 
+		order by r
 	
 	</select>
 	
 	<select id="busCount" resultType = "int">
 		select count(*)
-  		from bus b join member m
-  		on b.B_VEHICLENUM = m.B_VEHICLENUM
-  		join garage g
- 		 on b.G_NUM = g.g_num
-  		join bstatus bs
-  		on b.b_vehiclenum = bs.b_vehiclenum
-  		join status s
-  		on bs.s_code = s.s_code
+  		from bus
 	</select>
 	
 	<select id="getGarageName" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">

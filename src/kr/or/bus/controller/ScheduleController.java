@@ -1,3 +1,11 @@
+/*
+ * @File Name: ScheduleController.java
+ * @Author: 길한종
+ * @Data: 2016. 11. 18
+ * @Desc: 일정관리 컨트롤러
+ */
+
+
 package kr.or.bus.controller;
 
 import java.sql.Date;
@@ -95,7 +103,7 @@ public class ScheduleController {
 		return "bus";
 	}
 	
-	//추가시작
+	//reguloff(정기휴무)
 	@RequestMapping("/schedule_reguloff.htm")
 	public String schedule_reguloff(){
 		return "schedule/schedule_reguloff";
@@ -181,6 +189,12 @@ public class ScheduleController {
 		model.addAttribute("rid", rid);
 		
 		return jsonview;
+	}
+	
+	//기록보기
+	@RequestMapping("/schedule_history.htm")
+	public String viewHistory(){
+		return "schedule/schedule_history";
 	}
 	
 }

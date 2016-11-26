@@ -160,6 +160,7 @@ html, body {
         originalMarkers.push(originalMarker);
         originalMarkersRead(originalMarkers);
         
+        //버스 가 움직이기 위해 좌표 배열에 저장
         dataArray.push(latLng);
         
         
@@ -211,11 +212,16 @@ html, body {
             }
             console.log(copyMarker.getLabel());         
      	});
+		
+		
       
       	//마커의 라벨 이름을 알기위해 적용. 추후삭제 할것
       	copyMarker.addListener('click', function() {         
         	console.log(copyMarker.getLabel());
       	});
+      	
+      //버스 가 움직이기 위해 좌표 배열에 저장
+      	dataArray.push(latLng);
    	}
     
     
@@ -359,6 +365,15 @@ html, body {
     };
     
     $(function() {
+    	var jsonarray;
+    	$.ajax({
+    		type:"get",
+    		dataType:"text",
+    		url:"busStopOriginalRead.admin",
+    		success:function(data){
+    			console.log(data);
+    		}
+    	});
     	
        	//새로운 좌표 저장
         $("#newsave").click(function() {

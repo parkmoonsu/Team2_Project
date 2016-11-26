@@ -1,18 +1,16 @@
-<!-- 
-	@FileName : busenroll.jsp
-	@Project	: KosBus
-	@Date	: 2016. 11.25
-	@Author	: 박문수
-	@Discription : (관리자)버스 관리 페이지 View단
- -->
-
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
+
+<!--
+ * @File Name: schedule_history.jsp
+ * @Author: 길한종
+ * @Data: 2016. 11. 26
+ * @Desc: 일정관리(변경기록)
+-->
+
 <!DOCTYPE html>
 <html lang="UTF-8">
 <head>
@@ -70,7 +68,7 @@
 		<div class="main_container">
 			<div class="col-xs-12  col-md-3 left_col">
 
-				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
 			</div>
 
 			<!--상단 menu -->
@@ -79,7 +77,8 @@
 			</div>
 			  <!-- page content -->
         <div class="right_col" role="main">
-          <!-- top tiles -->
+        
+         <!--  top tiles
           <div class="row tile_count" style = "text-align: center">
           	<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           		<span class="count_top"></span>
@@ -101,12 +100,13 @@
               <div class="count green">0</div>
             </div>  
           </div>
-          <!-- /top tiles -->
+          top tiles -->
+          
 				<div class="">
 				<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>버스등록/삭제</small>
+								<small>교대신청</small>
 							</h3>
 						</div>
 					</div>
@@ -117,7 +117,7 @@
 							<div class="x_panel">
 								<div class="x_content">
 									<!-- start project list -->
-									<!-- <div
+									<div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
 											<input type="text" class="form-control"
@@ -126,15 +126,16 @@
 												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
 											</span>
 										</div>
-									</div> -->
+									</div>
 									<table class="table table-hover projects">
 										<thead>
 											<tr>
 												<th>번호</th>
-												<th>차량번호</th>
-												<th>노선번호</th>
-												<th>기사</th>
-												<th>차고지 이름</th>
+												<th>현재휴무일</th>
+												<th>변경휴무일</th>
+												<th>요청일</th>
+												<th>승인일</th>
+												<th>변경대상</th>
 												<th>상태</th>
 												<th style="width: 20%; text-align:center;">
 												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form">
@@ -151,6 +152,7 @@
 												<td>${i.r_num}</td>
 												<td>${i.m_name}</td>
 												<td>${i.g_name}</td>
+												<td>${i.s_name}</td>
 												<td>${i.s_name}</td>
 												<td style = "text-align:center"> 
 													<input type = "checkbox">
@@ -172,32 +174,24 @@
 												<c:set value = "${count/10 + 1}" var = "pagecount"/>
 											</c:otherwise>
 									</c:choose>	
-									
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
 											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 										
-									
 										
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
 											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
-									
 										
 										<c:if test="${pgc < count/10 }">
 											<li><a href="busenroll.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
 									
-								
+									
 								</div>
-									<div style = "float: right;">
-									<div class="btn btn-primary btn-xs" id = "ebtn"><i class="fa fa-check"></i>
-                                         			 등록 </div>
-									<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
-                                         			 삭제 </div>
-									</div>
+									
 									
 									
 									
@@ -340,7 +334,6 @@
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 	<script type="text/javascript">
 	var num = 1;
-	
 	function plus(){
 		 num++;
 			var gname = "#g_name" + num;
@@ -362,54 +355,14 @@
 			tr += "</select>";
 			tr += "</td>";
 			tr += "<td width = 300px>";
-			tr += "<select class='form-control' id='mname" + num + "' name = 'mname'>";
+			tr += "<select class='form-control' id='mname" + num + "' name = 'm_name'>";
 			tr += "<option>선택</option>";
 			tr += "</select>";
 			tr += "</td>";
 			tr += "</tr>";
 			
 			$("#tbody").append(tr); 
-			
-			
-			$.ajax({
-				url : "getmember.admin",
-				success:function(data){
-					for(var i = 0 ; i < data.m_id.length ; i++){
-						$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "("+data.m_id[i] +")" + "</option>");
-					}
-				}
 				
-			});
-			
-			$.ajax({
-				url : "getgarage.admin",
-				success:function(data){
-						//console.log(data.gname[0]);
-						
-						for(var i = 0 ; i < data.gname.length; i++){
-							$(gname).append("<option value = " + data.gnum[i] + ">" + data.gname[i] + "</option>");
-						}
-				}
-			});
-			
-			$(gname).change(function(){
-				//console.log($("#g_name").val());
-				$.ajax({
-					url : "getroute.admin",
-					type : "post",
-					data:{g_num : $(gname).val().trim()},
-					success:function(data){
-							$(rnum).empty();
-							$(rnum).append("<option>선택</option>");
-							for(var i = 0 ; i < data.rnum.length; i++){
-								$(rnum).append("<option value = " + data.rnum[i] + ">" + data.rnum[i] + "</option>");
-								
-							}
-					}
-					
-				});
-				
-			});
 	}
 	
 	$(function(){
@@ -418,10 +371,6 @@
 		
 		//console.log(num);
 
-		$("#reg").click(function(){
-			$("#reg").submit();
-		});
-		
 		$("#ebtn").click(function(){
 			var mname = "#mname" + num;
 			$.ajax({

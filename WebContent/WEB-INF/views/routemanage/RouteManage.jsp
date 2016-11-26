@@ -78,9 +78,6 @@ html, body {
 		<script
 			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 <body>
-	<header>
-		<jsp:include page="/sidebar/header.jsp" />
-	</header>
    <div id="map"></div>
    <script type="text/javascript">
    
@@ -180,7 +177,7 @@ html, body {
          //마커의 드래그가 끝날때마다 지도위에 그려진 경로를 지워준다..(노선을 수정할때...)
          marker.addListener('dragend', function() {
             console.log("마커 :"+markers.length);
-            fuck(marker,markers);          
+            dragLocation(marker,markers);          
          });
          
       }
@@ -201,7 +198,7 @@ html, body {
            
            //마커의 드래그가 끝날때마다 지도위에 그려진 경로를 지워준다..(노선을 수정할때...)
            marker.addListener('dragend', function() {
-              fuck(marker,markers);          
+        	  dragLocation(marker,markers);          
            });
            
         }
@@ -276,7 +273,7 @@ html, body {
                 console.log("출발마커" + (x-1));
                 console.log(locationX +","+ locationY);
                 
-              elocationX = markers[x].getPosition().lng();
+              	elocationX = markers[x].getPosition().lng();
                 elocationY = markers[x].getPosition().lat();
                 
                 console.log("도착마커" + x);
@@ -293,14 +290,14 @@ html, body {
          }
       
       function fmarkerArrayMake(markers){
-         console.log("개좆나");
-          if(markers.length !=null){
+         console.log("드래그 함수 탑니까?");
+         if(markers.length !=null){
              for(var i=0; i<=markers.length-1; i++){
          if(i==0){
-         locationX = markers[i].getPosition().lng();
-          locationY = markers[i].getPosition().lat();
-          console.log("출발마커1");
-          console.log(locationX +","+ locationY); 
+        	 locationX = markers[i].getPosition().lng();
+          	 locationY = markers[i].getPosition().lat();
+          	 console.log("출발마커1");
+          	 console.log(locationX +","+ locationY); 
          }
       
           //출발마커
@@ -316,7 +313,7 @@ html, body {
        }
       
       //좌표 드래그 했을때 값 
-      function fuck(marker,markers){
+      function dragLocation(marker,markers){
          locationX= marker.getPosition().lng(); //X
           locationY= marker.getPosition().lat(); //Y 
     
@@ -431,7 +428,7 @@ html, body {
               marker=0;
               Dsavelocations =[];
               markers=[];
-                markers2=[];
+              markers2=[];
               
          });
         
