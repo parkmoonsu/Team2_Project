@@ -76,9 +76,6 @@ html, body {
 		<script src="${pageContext.request.contextPath}/js/jquery.xdomainajax.js"></script>
 			
 <body>
-	<header>
-		<jsp:include page="/sidebar/header.jsp" />
-	</header>
 	<div id="map"></div>
 	<script type="text/javascript">
 	
