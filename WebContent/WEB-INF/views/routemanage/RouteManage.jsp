@@ -70,11 +70,15 @@
             </div>
             	<div class="col-sm-3"></div>
             	<div class="col-sm-6">
-            <input type="button" id="newsave" value="좌표저장">
-			<input type="button" id="saveReturn" value="저장된 경로 불러오기">
+            <input type="button" id="routeSave" value="좌표저장">
+			<input type="button" id="routeRead" value="저장된 경로 불러오기">
 			<input type="button" id="routeRemove" value="경로 지우기">
-			<input type="button" id="busStopLoad" value="버스 정류장 보기">
-			<input type="button" id="busLoad" value="버스 보기">
+			<input type="button" id="routeEdit" value="노선 수정">
+			<input type="button" id="routeEditRead" value="수정 노선 불러오기">
+			<div>
+      			<input id="address" type="text" placeholder="장소명을 입력해주세요">
+      			<input id="submit" type="button" value="Geocode">
+    		</div>
              </div>
 
           </div>

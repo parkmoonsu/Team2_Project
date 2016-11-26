@@ -73,7 +73,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select m_id from reguloff 
 		where m_id = #{m_id}
 	</select>
-	
 	<!-- reguloff DAO -->
+	
+	<!-- history DAO -->
+	<select id="history_select" resultType = "kr.or.bus.dto.RegulOffrJoinDTO">
+		select r.ko_code,
+			r.m_id,
+			r.o_code,
+			r.ro_code,
+			r.ro_reqdate,
+			r.ro_regdate,
+			r.ro_object,
+			k.ko_name,
+			o.o_date,
+			m.m_name
+		from reguloffr r
+		join member m on r.m_id=m.m_id
+		join koff k on r.ko_code=k.ko_code
+		join moff o on r.o_code=o.o_code		
+	</select>
+	<!-- history DAO -->
 		
 </mapper>

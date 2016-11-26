@@ -8,7 +8,7 @@
 <%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
 <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-           <img src="${pageContext.request.contextPath}/images/logo4.png" style="width:100%;height:60px">
+         <!--  <img alt="" src=""> -->
             </div>
 
             <div class="clearfix"></div>
@@ -41,14 +41,9 @@
                       <li><a href="tables_dynamic.html">최종 스케줄</a></li>
                     </ul>
                   </li>
-              
-                  <li><a><i class="fa fa-clone"></i>출/퇴근 관리 <span class="fa fa-chevron-down"></span></a>
-                  	<ul class="nav child_menu">
-                  	<%-- 	<li><a href="gotowork.member?m_id=${LoginUser}">출근하기</a></li>
-                  		<li><a href="getoffwork.member?m_id=${LoginUser}">퇴근하기</a></li>
-                  		<li><a href="test.member?m_id=${LoginUser}">test</a></li> --%>
-                  		<li><a href="comsearch.member?m_id=${LoginUser}">출/퇴근 관리 </a></li>
-                  	</ul>
+       
+                  <li><a href="comsearch.member?m_id=${LoginUser}"> <i class="fa fa-list-alt"></i>출/퇴근 관리</a>
+                
                   </li>
                 </ul>
               </div>
