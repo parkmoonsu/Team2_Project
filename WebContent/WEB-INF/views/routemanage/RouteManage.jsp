@@ -162,7 +162,8 @@ html, body {
          marker = new google.maps.Marker({
             position : latLng,
             map : map,
-            draggable : true
+            draggable : true,
+            icon : '${pageContext.request.contextPath}/images/cccc.png',
          });
          map.panTo(latLng);
          
@@ -185,7 +186,8 @@ html, body {
            marker = new google.maps.Marker({
               position : latLng,
               map : map,
-              draggable : true
+              draggable : true,
+              icon : '${pageContext.request.contextPath}/images/cccc.png',
            });
            map.panTo(latLng);
          
