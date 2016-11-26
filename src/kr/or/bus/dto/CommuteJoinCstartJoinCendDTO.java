@@ -8,14 +8,12 @@
 
 package kr.or.bus.dto;
 
-import java.util.Date;
-
 public class CommuteJoinCstartJoinCendDTO {
 
 	private int rownum;
 	private String m_id;
 	private String m_name;
-	private Date c_date;	
+	private String c_date;	
 	private int cs_code;	//출근코드
 	private int ce_code;	//퇴근코드
 	private String cs_stat;	//출근상태
@@ -44,10 +42,10 @@ public class CommuteJoinCstartJoinCendDTO {
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
-	public Date getC_date() {
+	public String getC_date() {
 		return c_date;
 	}
-	public void setC_date(Date c_date) {
+	public void setC_date(String c_date) {
 		this.c_date = c_date;
 	}
 	public int getCs_code() {
@@ -97,6 +95,13 @@ public class CommuteJoinCstartJoinCendDTO {
 	}
 	public void setCe_pms(String ce_pms) {
 		this.ce_pms = ce_pms;
+	}
+	@Override
+	public String toString() {
+		return "CommuteJoinCstartJoinCendDTO [rownum=" + rownum + ", m_id=" + m_id + ", m_name=" + m_name + ", c_date="
+				+ c_date + ", cs_code=" + cs_code + ", ce_code=" + ce_code + ", cs_stat=" + cs_stat + ", ce_stat="
+				+ ce_stat + ", c_start=" + c_start + ", c_end=" + c_end + ", cs_ams=" + cs_ams + ", ce_pms=" + ce_pms
+				+ "]";
 	}
 	
 	

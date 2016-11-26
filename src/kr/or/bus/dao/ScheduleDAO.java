@@ -1,5 +1,5 @@
 /*
- * @File Name: CalendarDAO.java
+ * @File Name: ScheduleDAO.java
  * @Author: 길한종
  * @Data: 2016. 11. 14
  * @Desc: 일정관리 DAO 공통 인터페이스
@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import kr.or.bus.dto.ScheduleDTO;
+import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
 
 //CRUD
@@ -23,10 +24,14 @@ public interface ScheduleDAO {
 	
 	public List<RegulOffDTO> reguloff_select() throws ClassNotFoundException, SQLException;
 	public int reguloff_insert(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
-	public int reguloff_delete(String id) throws ClassNotFoundException, SQLException;
+	public int reguloff_delete(String m_id) throws ClassNotFoundException, SQLException;
 	public int reguloff_update(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
-	public RegulOffDTO reguloff_selectseq() throws ClassNotFoundException, SQLException;
+	public MemberJoinRegulOffDTO reguloff_selectseq(String m_id) throws ClassNotFoundException, SQLException;
 	
 	//dow count 를 가져와서 3개이상일시
 	public int dowcount(String o_code);
+	//동일 m_id가 존재하는지 검색
+	public int checkmid(String m_id);
+	//로그인아이디와 일정m_id 비교
+	public String returnid(String id);
 }	

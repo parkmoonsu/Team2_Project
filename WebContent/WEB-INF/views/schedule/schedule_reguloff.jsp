@@ -149,6 +149,8 @@
                   		<option value="3">수요일</option>
                   		<option value="4">목요일</option>
                   		<option value="5">금요일</option>
+                  		<option value="6">토요일</option>
+                  		<option value="0">일요일</option>
                   	</select>
                 
                   </div>
@@ -191,6 +193,8 @@
                   		<option value="3">수요일</option>
                   		<option value="4">목요일</option>
                   		<option value="5">금요일</option>
+                  		<option value="6">토요일</option>
+                  		<option value="0">일요일</option>
                   	</select>
                   </div>
                 </div>

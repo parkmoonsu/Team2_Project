@@ -1,3 +1,11 @@
+/*
+ * @File Name: ScheduleController.java
+ * @Author: 길한종
+ * @Data: 2016. 11. 18
+ * @Desc: 일정관리 컨트롤러
+ */
+
+
 package kr.or.bus.controller;
 
 import java.sql.Date;
@@ -17,6 +25,7 @@ import org.springframework.web.servlet.View;
 
 import kr.or.bus.dao.ScheduleDAO;
 import kr.or.bus.dto.ScheduleDTO;
+import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
 
 @Controller
@@ -94,7 +103,7 @@ public class ScheduleController {
 		return "bus";
 	}
 	
-	//추가시작
+	//reguloff(정기휴무)
 	@RequestMapping("/schedule_reguloff.htm")
 	public String schedule_reguloff(){
 		return "schedule/schedule_reguloff";
@@ -111,7 +120,7 @@ public class ScheduleController {
 		
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.reguloff_insert(dto);
-		RegulOffDTO dto2=dao.reguloff_selectseq();
+		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
 		map.addAttribute("data", dto2);
 		return jsonview;//str;
 	}
@@ -127,31 +136,27 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping(value="/reguloff_delete.htm", method=RequestMethod.POST)
-	public String reguloffDelete(String id) throws ClassNotFoundException, SQLException, ParseException{
+	public String reguloffDelete(String m_id) throws ClassNotFoundException, SQLException, ParseException{
 		System.out.println("일정삭제");
 		
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		dao.reguloff_delete(id);
+		dao.reguloff_delete(m_id);
 		
 		return "bus";
 	}
 	
 	@RequestMapping(value="/reguloff_update.htm", method=RequestMethod.POST)
-	public View reguloffUpdate(String id, String m_id, String o_code, ModelMap map) throws ClassNotFoundException, SQLException, ParseException{
+	public View reguloffUpdate(String m_id, String o_code, ModelMap map) throws ClassNotFoundException, SQLException, ParseException{
 		System.out.println("일정수정");
 		RegulOffDTO dto=new RegulOffDTO();
-		dto.setId(id);
 		dto.setM_id(m_id);
 		dto.setO_code(o_code);
-		
-		/*java.sql.Date sqldate=java.sql.Date.valueOf(startdate);
-		dto.setStartdate(sqldate);*/
-		
-		System.out.println(dto);	
+			
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.reguloff_update(dto);
+		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
 		
-		map.addAttribute("data", "성공");
+		map.addAttribute("data", dto2);
 		return jsonview;
 	}
 	
@@ -163,6 +168,33 @@ public class ScheduleController {
 		model.addAttribute("dow", dow);
 		
 		return jsonview;
+	}
+	
+	@RequestMapping(value="/checkmid.member",method=RequestMethod.POST)
+	public View checkmid(String m_id , Model model){
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		int row = dao.checkmid(m_id);
+	
+		model.addAttribute("row", row);
+		
+		return jsonview;
+	}
+		
+	@RequestMapping(value="/mid.member",method=RequestMethod.POST)
+	public View mid(String m_id , Model model){
+		System.out.println("여기는 옵니까");
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		String rid = dao.returnid(m_id);
+	
+		model.addAttribute("rid", rid);
+		
+		return jsonview;
+	}
+	
+	//기록보기
+	@RequestMapping("/schedule_history.htm")
+	public String viewHistory(){
+		return "schedule/schedule_history";
 	}
 	
 }

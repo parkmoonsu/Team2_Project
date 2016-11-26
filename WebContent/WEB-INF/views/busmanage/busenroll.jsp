@@ -1,9 +1,9 @@
 <!-- 
-	@FileName : memberinfo.jsp
+	@FileName : busenroll.jsp
 	@Project	: KosBus
-	@Date	: 2016. 11.17
-	@Author	: 김용현
-	@Discription : (관리자)회원 관리 페이지 View단
+	@Date	: 2016. 11.25
+	@Author	: 박문수
+	@Discription : (관리자)버스 관리 페이지 View단
  -->
 
 
@@ -22,7 +22,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>회원 관리</title>
+<title>버스 관리</title>
 
 <!-- Bootstrap -->
 <link
@@ -77,107 +77,47 @@
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
-
-			<!-- page content -->
-
-			<!-- modal 1  -->
-
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalLabel">
-				<div class="modal-dialog" role="document">
-					<form action="mailsend.htm" method="post"
-						enctype="multipart/form-data">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<h4 class="modal-title" id="exampleModalLabel"></h4>
-							</div>
-							<div class="modal-body">
-								<div class="form-group">
-									<i class="fa fa-male"></i>&nbsp;<label for="people"
-										class="control-label"> 받는 사람</label> <input type="text"
-										class="form-control" id="people" name="to">
-								</div>
-
-								<div class="form-group">
-									<i class="fa fa-pencil-square-o"></i>&nbsp;<label for="subject"
-										class="control-label"> 제목</label> <input type="text"
-										class="form-control" id="subject" name="subject"
-										placeholder="제목을 입력하세요">
-								</div>
-
-								<div class="form-group">
-									<i class="fa fa-folder-open-o"></i>&nbsp;<label for="fattach"
-										class="control-label"> 파일첨부 </label> <input type="file"
-										class="form-control" id="fattach" name="filename">
-								</div>
-
-								<div class="form-group">
-									<label for="message-text" class="control-label"> <span
-										class="glyphicon glyphicon-envelope" aria-hidden="true"
-										style="color: gray"></span> 메세지:
-									</label>
-									<textarea class="form-control" id="message-text" name="content"
-										cols="5"></textarea>
-									<script>
-										CKEDITOR.replace('message-text');
-									</script>
-								</div>
-
-							</div>
-							<div class="modal-footer">
-								<input type="submit" class="btn btn-primary" value="메세지 보내기">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">취소</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-
-			<!-- 모달끝1 -->
-
-			<!--  modal2 -->
-			<div class="modal fade table-responsive" id="exampleModal2" tabindex="-1"
-				role="dialog" aria-labelledby="myLargeModalLabel">
-			</div>
-		
-		
-		<!-- modal2 끝 -->
-			<div class="right_col" role="main">
+			  <!-- page content -->
+        <div class="right_col" role="main">
+          <!-- top tiles -->
+          <div class="row tile_count" style = "text-align: center">
+          	<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          		<span class="count_top"></span>
+          	</div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-bus"></i> 마을버스</span>
+              <div class="count">0</div>          
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-bus"></i> 시내버스</span>
+              <div class="count">0</div>              
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-bus"></i> 시외버스</span>
+              <div class="count">0</div>            
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
+              <div class="count green">0</div>
+            </div>  
+          </div>
+          <!-- /top tiles -->
 				<div class="">
-					<div class="page-title">
+				<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>정보수정</small>
+								<small>버스등록/삭제</small>
 							</h3>
 						</div>
 					</div>
-
 					<div class="clearfix"></div>
 
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<div class="x_panel">
-								<div class="x_title">
-									<nav class="navbar navbar-default">
-										<div class="container-fluid">
-											<ul class="nav navbar-nav">
-												<li><a href="membermanage.admin"><strong>회원정보</strong></a></li>
-												<li><a href="joinapprove.admin">회원가입승인</a></li>
-												<li><a href="#">스케줄관리</a></li>
-											</ul>
-										</div>
-									</nav>
-								</div>
 								<div class="x_content">
-
-
 									<!-- start project list -->
-									<div
+									<!-- <div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
 											<input type="text" class="form-control"
@@ -186,68 +126,97 @@
 												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
 											</span>
 										</div>
-									</div>
-									<div class="table-responsive">
+									</div> -->
 									<table class="table table-hover projects">
 										<thead>
 											<tr>
 												<th>번호</th>
-												<th>ID</th>
-												<th>이름</th>
-												<th>이메일</th>
-												<th>직책</th>
-												<th>연차</th>
-												<th style="width: 20%"></th>
+												<th>차량번호</th>
+												<th>노선번호</th>
+												<th>기사</th>
+												<th>차고지 이름</th>
+												<th>상태</th>
+												<th style="width: 20%; text-align:center;">
+												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form">
+												</th>
 											</tr>
 										</thead>
+										<tbody>
 											<c:set value="${list}" var="d"/>
 										
 											<c:forEach var="i" items="${d}">
 											<tr>
 												<td>${i.r}</td>
-												<td><a href="#"  onClick="smodal('${i.m_id}');">${i.m_id}</a></td>
-												<td><small>${i.m_name}</small></td>
-												<td><a href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="${i.m_name},${i.m_email}">${i.m_email}</a></td>
-												<td><small>${i.j_name}</small></td>
-												<td>${i.m_annual}일</td>
+												<td>${i.b_vehiclenum}</td>
+												<td>${i.r_num}</td>
+												<td>${i.m_name}</td>
+												<td>${i.g_name}</td>
+												<td>${i.s_name}</td>
 												<td style = "text-align:center"> 
-													<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
-                                         			 삭제 </div>
+													<input type = "checkbox">
                                          		</td>
 											</tr>
 											</c:forEach>
 										</tbody>
 									</table>
-									</div>
 									<!-- end project list -->
 									
 									<!-- 요기서부터 페이징처리 -->
-									<c:set var = "mc" value = "${membercount}"/>
+									<c:set var = "count" value = "${count}"/>
 									<c:set var = "pgc" value = "${pgs}"/>
 									<c:choose>
-											<c:when test="${mc % 10 == 0}">
-												<c:set value = "${mc/10}" var = "pagecount"/>
+											<c:when test="${count % 10 == 0}">
+												<c:set value = "${count/10}" var = "pagecount"/>
 											</c:when>
 											<c:otherwise>
-												<c:set value = "${mc/10 + 1}" var = "pagecount"/>
+												<c:set value = "${count/10 + 1}" var = "pagecount"/>
 											</c:otherwise>
 									</c:choose>	
+									
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
-											<li><a href="membermanage.admin?pg=${pgc-1}">Previous</a></li>
+											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 										
+									
 										
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
+											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
+									
 										
-										<c:if test="${pgc < mc/10 }">
-											<li><a href="membermanage.admin?pg=${pgc+1}">Next</a></li>
+										<c:if test="${pgc < count/10 }">
+											<li><a href="busenroll.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
+									
+								
 								</div>
+									<div style = "float: right;">
+									<div class="btn btn-primary btn-xs" id = "ebtn"><i class="fa fa-check"></i>
+                                         			 등록 </div>
+									<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
+                                         			 삭제 </div>
+									</div>
+									
+									
+									
+									
+									
+									
+									
+									
 							</div>
+							
+							<div id = "enroll">
+							
+							<!-- 여기에 ajax 내용 삽입됨(enroll.jsp) -->
+							</div>	
+								
+							</div>
+							
+							
+							
 						</div>
 					</div>
 				</div>
@@ -289,7 +258,7 @@
 							</h4>
 						</div>
 						<div class="modal-body" aria-labelledby="myModalLabel"
-							><div class="table-responsive" id="resrecordtable"></div></div>
+							id="resrecordtable"></div>
 					</div>
 				</div>
 			</div>
@@ -306,7 +275,8 @@
 			</footer>
 			<!-- /footer content -->
 		</div>
-	</div>
+
+
 
 	<!-- Bootstrap -->
 	<script
@@ -368,123 +338,151 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	 $('#search').click( function () {
-	$.ajax({
-		url:"SearchMember.htm",
-		type:"get",
-		success:function(data){
-			console.log(data);
+	<script type="text/javascript">
+	var num = 1;
 	
-		}
-		});
-	 });
-	 
-	 $('#btnsearch').click( function(){
-		console.log($('#search').val());
-		var param = $('#search').val();
-		 $.ajax({
-			url:"searching.htm",
-			type:"post",
-			data: {"param":param},
-			success:function(data){
-				console.log(data);
-			}
-		});
-	 });
-	 
-
-	 
-	$('#exampleModal').on(
-				'show.bs.modal',
-				function(event) {
-					var button = $(event.relatedTarget)
-					var recipient = button.data('whatever').split(',');
-					$('#exampleModalLabel').html(
-							"<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"
-									+ recipient[0] + '</span>님에게 보내기');
-					$('#people').val(recipient[1]);
-				});
-	
-
-	 $('#exampleModal').on('show.bs.modal', function (event) {
-		  var button = $(event.relatedTarget) 
-		  var recipient = button.data('whatever').split(','); 
-		  $('#exampleModalLabel').html("<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"+recipient[0]+'</span>님에게 보내기');
-		  $('#people').val(recipient[1]);
-		});
-	 
-	 
-	 $('#myModal').on('show.bs.modal', function (event) {
-	        var button = $(event.relatedTarget) 
-	        var recipient = button.data('whatever');
-	        console.log(recipient);
-	        var array = recipient.split(',');
-	       
-	        console.log($('#hvalue').val(array[1]));
-	        
-	        $('#myModalLabel2').html("<span class='blue'>&nbsp;"+array[0]+'</span>님을 삭제하시겠습니까?');
-	      });  
-	     
-	      $('#cancelbutton').click(function(){
-	       //console.log($('#search').val()); 
-	       var param = $('#hvalue').val();
-	        
-	       $.ajax({
-	            url:"deleteMember.admin",
-	            type:"post",
-	            data: {"param":param},        
-	            success:function(data){
-	               alert("삭제 완료");
-	               window.location.reload();
-	               
-	            }
-	         });
-	       });
-	     
-	      $('#memberresrecord').on('show.bs.modal', function (event) {
-			  var button = $(event.relatedTarget) 
-			  var recipient = button.data('whatever');
-			  $('#resrecordtitle').html("<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"+recipient+'</span>이력사항');
-			  
+	function plus(){
+		 num++;
+			var gname = "#g_name" + num;
+			var rnum = "#r_num" + num;
+			var mname = "#mname" + num;	
+			var bvehiclenum = "#b_vehiclenum" + num;
+			var tr = "<tr>";
+			tr += "<td width = 300px>";
+			tr += "<input class='form-control' id='b_vehiclenum"+ num +"' name = 'b_vehiclenum' type='text' size = '3'>";
+			tr += "</td>";
+			tr += "<td width = 300px>";
+			tr += "<select class='form-control' id='g_name" + num + "' name = 'g_name'>";
+			tr += "<option>선택</option>";
+			tr += "</select>";
+			tr += "</td>";
+			tr += "<td width = 300px>";
+			tr += "<select class='form-control' id='r_num" + num + "' name = 'r_num'>";
+			tr += "<option>선택</option>";
+			tr += "</select>";
+			tr += "</td>";
+			tr += "<td width = 300px>";
+			tr += "<select class='form-control' id='mname" + num + "' name = 'mname'>";
+			tr += "<option>선택</option>";
+			tr += "</select>";
+			tr += "</td>";
+			tr += "</tr>";
+			
+			$("#tbody").append(tr); 
+			
+			
+			$.ajax({
+				url : "getmember.admin",
+				success:function(data){
+					for(var i = 0 ; i < data.m_id.length ; i++){
+						$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "("+data.m_id[i] +")" + "</option>");
+					}
+				}
+				
 			});
-});
-
-
-
+			
+			$.ajax({
+				url : "getgarage.admin",
+				success:function(data){
+						//console.log(data.gname[0]);
+						
+						for(var i = 0 ; i < data.gname.length; i++){
+							$(gname).append("<option value = " + data.gnum[i] + ">" + data.gname[i] + "</option>");
+						}
+				}
+			});
+			
+			$(gname).change(function(){
+				//console.log($("#g_name").val());
+				$.ajax({
+					url : "getroute.admin",
+					type : "post",
+					data:{g_num : $(gname).val().trim()},
+					success:function(data){
+							$(rnum).empty();
+							$(rnum).append("<option>선택</option>");
+							for(var i = 0 ; i < data.rnum.length; i++){
+								$(rnum).append("<option value = " + data.rnum[i] + ">" + data.rnum[i] + "</option>");
+								
+							}
+					}
+					
+				});
+				
+			});
+	}
 	
-function smodal(m_id) {	
-		console.log(m_id);
-		$.ajax({
-			url:"memberdetail.admin",
-			type:"post",
-			data:{"param":m_id},
-			success:function(data){
-				$('#exampleModal2').empty();
-				$('#exampleModal2').append(data);
-				$('#exampleModal2').modal('show');
-				 $.ajax({
-					url:"memberreguloffr.htm",
-					type:"post",
-					data:{"param":m_id},
-					success:function(data1){
-						$('#reguloffrtable').empty();
-						$('#reguloffrtable').append(data1);
+	$(function(){
+		
+		var count = 1;
+		
+		//console.log(num);
+
+		$("#reg").click(function(){
+			$("#reg").submit();
+		});
+		
+		$("#ebtn").click(function(){
+			var mname = "#mname" + num;
+			$.ajax({
+				url : "enrollpage.admin",
+				success:function(data){
+						if (count % 2 == 0) {
+							$("#enroll").attr("style", "display:none");
+							count++;
+						} else {
+							$("#enroll").attr("style", "display:inline");
+							count++;
+						}
+						$("#enroll").empty();
+						$("#enroll").append(data);
+						
 						$.ajax({
-							url:"memberresrecord.admin",
-							type:"post",
-							data:{"param":m_id},
-							success:function(data2){
-							$('#resrecordtable').empty();
-							$('#resrecordtable').append(data2);
+							url : "getmember.admin",
+							success:function(data){
+								for(var i = 0 ; i < data.m_id.length ; i++){
+									$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "("+data.m_id[i] +")" + "</option>");
+								}
+							}
+							
+						});
+						
+						$.ajax({
+							url : "getgarage.admin",
+							success:function(data){
+									//console.log(data.gname[0]);
+									
+									for(var i = 0 ; i < data.gname.length; i++){
+										$("#g_name1").append("<option value = " + data.gnum[i] + ">" + data.gname[i] + "</option>");
+									}
 							}
 						});
-					}
-				}); 
-			}
+						
+						$("#g_name1").change(function(){
+							//console.log($("#g_name").val());
+							$.ajax({
+								url : "getroute.admin",
+								type : "post",
+								data:{g_num : $("#g_name1").val().trim()},
+								success:function(data){
+										$("#r_num1").empty();
+										$("#r_num1").append("<option>선택</option>");
+										for(var i = 0 ; i < data.rnum.length; i++){
+											$("#r_num1").append("<option value = " + data.rnum[i] + ">" + data.rnum[i] + "</option>");
+											
+										}
+								}
+								
+							});
+							
+						});
+				}
+			});
 		});
-	}
-</script>
+		
+		
+	});
+	
+	</script>
 </body> 	
 </html>

@@ -24,20 +24,7 @@
                   <img
                      src="<%=request.getServletContext().getContextPath()%>/join/upload/${dto.m_photo}"
                      alt="...">
-               <!--    <div class="caption">
-                     <h3></h3>
-                     <p>^_^</p>
-                     <p>
-                        <a href="#" class="btn btn-default btn-sm" role="button">
-                        <i class="fa fa-floppy-o">
-                                       </i>download</a>
-                        <a href="#" class="btn btn-default btn-sm" role="button">
-                           <i class="fa fa-file-text-o"></i>
-                      <br>
-                      <br>
-                      <br>                   경력조회</a>
-                     </p>
-                  </div> -->
+  
                   <a href="download.admin?folder=upload&filename=${mjdrodto.m_photo}">
                   <i class="fa fa-floppy-o">save</i></a>
            
