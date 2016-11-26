@@ -288,7 +288,7 @@
 							</h4>
 						</div>
 						<div class="modal-body" aria-labelledby="myModalLabel"
-							id="resrecordtable"></div>
+							><div class="table-responsive" id="resrecordtable"></div></div>
 					</div>
 				</div>
 			</div>

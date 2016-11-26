@@ -1,85 +1,139 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%
-   request.getCharacterEncoding();
-%>
+    pageEncoding="UTF-8"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="initial-scale=1.0">
-<meta charset="utf-8">
-<style type="text/css">
-html, body {
-   height: 100%;
-   margin: 0;
-   padding: 0;
-}
-
-#map {
-   height: 80%;
-}
-</style>
-</head>
-<!-- Bootstrap -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Font Awesome -->
-<link
-	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<!-- NProgress -->
-<link
-	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
-	rel="stylesheet">
-
-<!-- Custom Theme Style -->
-<link href="${pageContext.request.contextPath}/build/css/custom.min.css"
-	rel="stylesheet">
-
-<!-- Bootstrap core CSS -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/ie10-viewport-bug-workaround.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/carousel/carousel.css"
-	rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script
-	src="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<!-- jQuery -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-		<!-- Bootstrap -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-		<!-- FastClick -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
-		<!-- NProgress -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
-		<!-- jQuery Smart Wizard -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
-		<!-- Custom Theme Scripts -->
-		<script
-			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-<body>
-   <div id="map"></div>
-   <script type="text/javascript">
+    <script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+
+    <title>KOSBUS</title>
+
+    <!-- Bootstrap -->
+    <link href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="${pageContext.request.contextPath}/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="${pageContext.request.contextPath}/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="${pageContext.request.contextPath}/build/css/custom.min.css" rel="stylesheet">
+    <style type="text/css">
+    .element {
+ #map { margin-left:auto; margin-right:auto; width:95%; }
+    
+    </style>
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+        	<c:choose>
+          		<c:when test ="${jobname == '기사'}">
+          			<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
+          		</c:when>
+          		<c:otherwise>
+          			<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+          		</c:otherwise>
+       		</c:choose>
+       		
+        </div>
+			
+			<!--상단 menu -->
+			
+			<div class="top_nav">
+				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
+			</div>
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+     <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
+		</div>
+            </div>
+            	<div class="col-sm-3"></div>
+            	<div class="col-sm-6">
+            <input type="button" id="newsave" value="좌표저장">
+			<input type="button" id="saveReturn" value="저장된 경로 불러오기">
+			<input type="button" id="routeRemove" value="경로 지우기">
+			<input type="button" id="busStopLoad" value="버스 정류장 보기">
+			<input type="button" id="busLoad" value="버스 보기">
+             </div>
+
+          </div>
+          <br />
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+  
+    <!-- Bootstrap -->
+    <script src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="${pageContext.request.contextPath}/vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="${pageContext.request.contextPath}/vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="${pageContext.request.contextPath}/vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="${pageContext.request.contextPath}/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="${pageContext.request.contextPath}/vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="${pageContext.request.contextPath}/vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+    
+ <script type="text/javascript">
    
      //구글 지도 전역변수
       var map;
@@ -509,24 +563,9 @@ html, body {
       });
             
    </script>
-   <!-- 구글 맵 인증키 -->
-   <script
-      async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiviyGXEVDNM2G1FB323aGa4kyKgVouw8&callback=initMap">    
+	<!-- 구글 맵 인증키 -->
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiviyGXEVDNM2G1FB323aGa4kyKgVouw8&callback=initMap">    
       </script>
-   <input type="button" id="routeSave" value="좌표저장">
-   <input type="button" id="routeRead" value="저장된 경로 불러오기">
-   <input type="button" id="routeRemove" value="경로 지우기">
-   <input type="button" id="routeEdit" value="경로 수정">
-   <input type="button" id="routeEditRead" value="수정 경로 불러오기">
-   <div>
-      <input id="address" type="text" placeholder="장소명을 입력해주세요">
-      <input id="submit" type="button" value="Geocode">
-    </div>
-    <div id="map"></div>
-    
-    
-    <footer>
-		<jsp:include page="/sidebar/footer.jsp" />
-	</footer>
-</body>
+  </body>
 </html>
