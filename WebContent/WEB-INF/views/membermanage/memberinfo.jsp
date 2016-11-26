@@ -173,7 +173,7 @@
 										</div>
 									</nav>
 								</div>
-								<div class="x_content">
+								<div class="x_content table-responsive">
 
 
 									<!-- start project list -->
@@ -187,8 +187,8 @@
 											</span>
 										</div>
 									</div>
-									<div class="table-responsive">
-									<table class="table table-hover projects">
+									
+									<table class="table table-hover  projects">
 										<thead>
 											<tr>
 												<th>번호</th>
@@ -218,7 +218,7 @@
 											</c:forEach>
 										</tbody>
 									</table>
-									</div>
+									
 									<!-- end project list -->
 									
 									<!-- 요기서부터 페이징처리 -->
