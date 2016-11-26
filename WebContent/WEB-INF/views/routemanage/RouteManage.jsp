@@ -65,7 +65,7 @@
 
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-     <div class="container" id="map" style="width:800px;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
+     <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
 		</div>
             </div>
             	<div class="col-sm-3"></div>

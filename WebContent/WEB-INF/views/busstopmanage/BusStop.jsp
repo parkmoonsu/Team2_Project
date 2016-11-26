@@ -65,7 +65,7 @@
 
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-     <div class="container" id="map" style="width:800px;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
+     <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
 		</div>
             </div>
             	<div class="col-sm-3"></div>
@@ -132,33 +132,8 @@
 
     <!-- Custom Theme Scripts -->
     <script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-    
     <script type="text/javascript">
-=======
-<!-- jQuery -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-		<!-- Bootstrap -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-		<!-- FastClick -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
-		<!-- NProgress -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
-		<!-- jQuery Smart Wizard -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
-		<!-- Custom Theme Scripts -->
-		<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-		
-		<script src="${pageContext.request.contextPath}/js/jquery.xdomainajax.js"></script>
-			
-<body>
-	<div id="map"></div>
-	<script type="text/javascript">
->>>>>>> 8f5587c9e4774ad1dd1363bf6e0a6ed5e255e3c6
+
 	
    //구글 지도 전역변수
     var map;
