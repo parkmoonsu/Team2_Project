@@ -386,8 +386,27 @@
                    	for(var i=0; i<data.features.length; i++){
                       if(data.features[i].geometry.type == 'LineString'){
                     	  features = map.data.addGeoJson(data.features[i]);
+                    	  console.log(features);	
                       }               
-                    }                                                                                                                                                                                                                                   
+                    }
+                   
+   					var infowindow = new google.maps.InfoWindow();
+                                                      
+                    map.data.addListener('click', function(event) {
+                        infowindow.setContent(
+                        	"명칭:"+event.feature.getProperty('name')
+                        	+"<br>"
+                        	+"도로정보:"+event.feature.getProperty('description')
+                        	+"<br>"
+                        	+"구간거리:"+event.feature.getProperty('distance')+"m"
+                        	+"<br>"
+                        	+"통과시간:"+event.feature.getProperty('time')+"s"
+                        );
+                        console.log(times);
+                        infowindow.setPosition(event.latLng);
+                        infowindow.setOptions({pixelOffset: new google.maps.Size(0,-34)});
+                        infowindow.open(map);
+                    });
                 }
            );           
     }
