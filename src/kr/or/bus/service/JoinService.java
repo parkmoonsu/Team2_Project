@@ -11,6 +11,7 @@ package kr.or.bus.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +72,12 @@ public class JoinService {
 			for (CommonsMultipartFile multipartfile : files) {
 
 				String fname = multipartfile.getOriginalFilename(); // 파일명 얻기
+				System.out.println("한글처리전 파일명"+fname);
+				//fname = new String(fname.getBytes("8859_1"),"EUC-KR");
+				//fname = new String(fname.getBytes("euc-kr"), "8859_1");
+				//fname = new String(fname.getBytes("ISO8859_1"),"UTF-8");
+				//fname = URLEncoder.encode(fname);
+				System.out.println("한글처리 파일명"+fname);
 				String path = request.getServletContext().getRealPath("/join/upload");
 				String fullpath = path + "\\" + fname;
 				
