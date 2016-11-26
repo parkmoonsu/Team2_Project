@@ -365,16 +365,6 @@ html, body {
     };
     
     $(function() {
-    	var jsonarray;
-    	$.ajax({
-    		type:"get",
-    		dataType:"text",
-    		url:"busStopOriginalRead.admin",
-    		success:function(data){
-    			console.log(data);
-    		}
-    	});
-    	
        	//새로운 좌표 저장
         $("#newsave").click(function() {
            /*

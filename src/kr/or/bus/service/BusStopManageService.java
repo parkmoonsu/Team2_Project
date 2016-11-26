@@ -35,13 +35,13 @@ public class BusStopManageService {
                 maps=line;           
             }
             System.out.println("버스정류장 좌표를 파일로 부터  읽어왔습니다.");
-            System.out.println("maps 에 담기냐? "+maps);
-            //object = JSONArray.fromObject(maps.trim());
-            System.out.println(object);
+            System.out.println("maps 에 담기냐? "+ maps);
+            //object = JSONArray.fromObject(maps);
+            //System.out.println(object);
         	response.setCharacterEncoding("UTF-8");
         	out = response.getWriter();
-        	out.print(maps.trim());
-        	System.out.println(maps);
+        	out.print(maps);
+        	//System.out.println(maps);
         }catch(Exception e){
         	System.out.println(e.getMessage());
         }finally{
