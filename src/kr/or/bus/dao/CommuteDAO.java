@@ -1,34 +1,34 @@
 package kr.or.bus.dao;
 
+
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import kr.or.bus.dto.CommuteJoinCstartJoinCendDTO;
-import kr.or.bus.dto.CstandardDTO;
 
 public interface CommuteDAO {
+	
+	//이름 값 가져오기
+	public String getName(String m_id);
+	
+	//회원의 출/퇴근 시간조회
+	public List<CommuteJoinCstartJoinCendDTO> getSelect(int page,String m_id);	
+	
+	//출근insert
+	public int gotowork(String m_id, String m_name, String tdate,String dhour);
 		
-		//회원의 출/퇴근 시간조회
-		public List<CommuteJoinCstartJoinCendDTO> getSelect(int page, String query, String m_id);		
-		
-		//출근하기
-		public void insertCommuteInfo(String m_id, String m_name);
-		
-		//회원의 출근 시간
-		public void csupdate(String m_id);		
-		public List<CommuteJoinCstartJoinCendDTO> csselect(String m_id);
-		
-		public void csudate(String m_id);
-		//퇴근하기
-		public void offinsertCommuteInfo(String m_id, String m_name);
-				
-		//회원의 퇴근 시간
-		public int ceupdate(CommuteJoinCstartJoinCendDTO dto);		
-		public CommuteJoinCstartJoinCendDTO ceselect(CommuteJoinCstartJoinCendDTO dto);
-		
-		//기준시간 가져오기
-		public CstandardDTO getStandardTime();
-		
-		//회원 정보 이름만 가져오기
-		public String getOnlyName(String m_id);
-		
+	//출근코드 update
+	public int updateCommute(@Param("m_id")String m_id,  @Param("tdate")String tdate,@Param("dhour")String dhour);
+	
+	//출근상태보여주기
+	public CommuteJoinCstartJoinCendDTO csselect(String m_id);
+			
+	//퇴근시간 update
+	public int updateendtime(String dhour, String m_id, String tdate);
+	
+	//퇴근코드 update
+	public int updateCommuteoff(@Param("m_id")String m_id,  @Param("tdate")String tdate,@Param("dhour")String dhour);
+	
+	//퇴근상태보여주기
+	public CommuteJoinCstartJoinCendDTO ceselect(String m_id);
 }

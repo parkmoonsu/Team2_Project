@@ -1,5 +1,5 @@
 /*
- * @File Name: CalendarDTO.java
+ * @File Name: ScheduleDTO.java
  * @Author: 길한종
  * @Data: 2016. 11. 14
  * @Desc: 일정관리(일반공용) - 캘린더dto

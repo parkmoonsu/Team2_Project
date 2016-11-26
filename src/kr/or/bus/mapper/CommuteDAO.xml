@@ -1,91 +1,114 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="kr.or.bus.dao.CommuteDAO">
-	<!-- 출/퇴근 표준 시간 -->
-	<select id="getStandardTime" resultType = "kr.or.bus.dto.CstandardDTO">
-		select cs_ams, cs_ame, cs_pms, cs_pme
-		from cstandard
-	</select>
-
+	
 	<!-- 회원의 출/퇴근 정보 조회 -->
  	<select id="getSelect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO" parameterType="String">
-		select * from 
-			(select rownum, N.*
-			 from (
-			 		select c_date, c_start, c_end 
-			 		from commute
-			 		where m_id= #{param3} order by c_date desc
-			 	   )N
-			 )where rownum between 1 + (#{param1}-1) * 5 and 5 + (#{param1}-1)*10
+		
+		select *
+		from (select rownum, N.*
+        	  from (select c_date, c_start, c_end 
+        	  		from commute 
+        	  		where m_id= #{param2} order by c_date desc) N) 
+		where rownum between 1 + (#{param1}-1) * 5 and 5 + (#{param1}-1)*10
 	</select>
 	
-	<insert id="insertCommuteInfo" parameterType = "String">
-		insert into commute(m_id,m_name,c_date,c_start) values (#{param1}, #{param2}, sysdate+9/24, sysdate+9/24)
-	</insert>
-	
-
-
-		
-		<update id="csupdate" parameterType="String">
-		update commute set cs_code='1'	
-		
-		where m_id=#{m_id} and c_time='am'
-		
-		</update>
-		
-	
-	
-	
-	<select id="csselect"  parameterType="String" resultType = "kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
-		select c_start, cs_stat
-		from commute com join cstart cs on com.cs_code=cs.cs_code
-		where m_id=#{m_id}
-	</select>
-	
-	<update id="csudate">
-		update commute set cs_code = '1' where c_time = 'am' and m_id = #{m_id}
-	</update>
-	
-	<!-- 회원의 퇴근시간 -->
-	<!-- offinsertCommuteInfo -->
-	
-	<update id="ceupdate">
-	update commute 
-	<set>
-		<choose>
-			<when test="c_time='am' and c_end &lt; '1800'">
-			ce_code='2'
-			</when>		
-			<when test="c_time='am' and c_end &gt; '1800'">
-			ce_code='1'
-			</when>
-			<when test="c_time='pm' and c_end &gt; '2300'">
-			ce_code='1'
-			</when>
-			<when test="c_time='pm' and c_end &lt; '2300'">
-			ce_code='2'
-			</when>
-		</choose>
-	</set>	
-	where m_id=#{m_id}
-	</update>
- 	
-	<select id="ceselect"  resultType = "kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
-		select c_end, ce_stat
-		from commute com join cend ce on com.ce_code=ce.ce_code
-		where m_id=#{m_id}
-	</select>
-	
-	<select id="getOnlyName" parameterType="String" resultType="String">
+	<!-- 이름 값 가져오기 -->
+	<select id="getName" parameterType="String" resultType="String">
 		select m_name
-		from member 
-		where m_id = #{m_id}
+		from member
+		where m_id=#{m_id}
 	</select>
+	
+	<!-- 출근시간 입력 -->
+	<insert id="gotowork" parameterType="String">
+		insert into commute(m_id, m_name, c_date, c_start, c_time) 
+		values(#{param1}, #{param2}, #{param3}, #{param4},'am')
+	</insert>
+
+	<!-- 출근코드 update -->
+	<update id="updateCommute" parameterType="String">
+		update commute
+		<set>
+	
+		<choose> 
+			<when test="c_time='am'" >
+					<if test='dhour &lt; "0930"'>
+						cs_code = '1'
+					</if>
+					<if test='dhour &gt; "0930"'>
+						cs_code = '2'
+					</if>						
+			</when>
+			<when test="c_time='pm'" >
+					<if test='dhour &gt; "1300"'>
+						cs_code = '1'
+					</if>	
+					<if test='dhour &lt; "1300"'>
+						cs_code = '2'
+					</if>						
+	 		</when>
+			
+		</choose>
+		
+		</set>
+		where m_id=#{m_id} and c_date = #{tdate}
+	</update>
+	
+	<!-- 출근상태  -->
+	<select id="csselect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
+		select c_start, cs_stat
+		from commute com join cstart cs 
+		on com.cs_code=cs.cs_code
+		where m_id=#{m_id}
+	</select> 
+	
+	<!-- 퇴근시간 update -->
+	<update id="updateendtime" parameterType="String"> 
+    	update commute
+    	set c_end=#{param1}
+    	where m_id=#{param2} and c_date = #{param3}
+	</update>
+	
+	<!-- 퇴근코드 update -->
+	<update id="updateCommuteoff" parameterType="String">
+		update commute
+		<set>
+	
+		<choose> 
+			<when test="c_time='am'" >
+					<if test='dhour &gt; "1800"'>
+						ce_code = '1'
+					</if>
+					<if test='dhour &lt; "1800"'>
+						ce_code = '2'
+					</if>						
+			</when>
+			<when test="c_time='pm'" >
+					<if test='dhour &lt; "2300"'>
+						ce_code = '1'
+					</if>	
+					<if test='dhour &gt; "2300"'>
+						ce_code = '2'
+					</if>						
+	 		</when>
+			
+		</choose>
+		
+		</set>
+		where m_id=#{m_id} and c_date = #{tdate}
+	</update>
+	
+	
+	<!-- 퇴근상태  -->
+	<select id="ceselect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
+		select c_end, ce_stat
+		from commute com join cend ce 
+		on com.ce_code=ce.ce_code
+		where m_id=#{m_id}
+	</select> 
 	
 </mapper>
-
-
