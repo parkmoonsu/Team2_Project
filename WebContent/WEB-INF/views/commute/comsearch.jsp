@@ -58,7 +58,6 @@ $(function(){
 	var id="${LoginUser}";
 	var page="${page}";
 		$("#gotowork").click(function(){
-			alert("떠떠떠떠");
 		    $.ajax({
 			url:"gotowork.member",
 			data: {
@@ -87,7 +86,6 @@ $(function(){
 	
 	var id="${LoginUser}";
 		$("#getoffwork").click(function(){
-			alert("떠떠떠떠");
 		    $.ajax({
 			url:"getoffwork.member",
 			data: {
