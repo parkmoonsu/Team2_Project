@@ -410,7 +410,7 @@
 				url : "getmember.admin",
 				success:function(data){
 					for(var i = 0 ; i < data.m_id.length ; i++){
-						$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "("+data.m_id[i] +")" + "</option>");
+						$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] +  "</option>");
 					}
 				}
 				
@@ -450,27 +450,13 @@
 	function update(){
 		$("#update").submit();
 	}
+
 	
 	function reg(){
-		for(var i = 1 ; i <= num ; i++){
-			var vnum = "#b_vehiclenum" + i;
-			
-			$.ajax({
-				url : "alreadyuse.admin",
-				data : {b_vehiclenum : $(vnum).val()},
-				success : function(data){
-					if(data.data == 0){
-						$("#target").submit();
-						
-					}else{
-						alert(data.num + "은 이미 있는 차량번호 입니다.");
-						
-					}
-				}
-			});
-		}
+		//console.log($("#tbody").children().children().children().attr("id"));
+		
+		$("#target").submit();
 	}
-	
 	$(function(){
 		
 		var count = 1;
@@ -555,6 +541,8 @@
 			if($("input[name='chklist']:checked").length >= 2){
 				alert("2개 이상을 수정 할 수 없습니다.");
 			}else{
+				
+				$("#enroll").empty();
 				for(var i = 1 ; i <= ${Count} ; i++){ //엑박 무시할것
 					var checkbox = "#check" + i;
 					
