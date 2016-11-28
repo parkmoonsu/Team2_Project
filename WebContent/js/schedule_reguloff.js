@@ -82,9 +82,17 @@ $(function() {
 		
 		// history에 저장
 		$.ajax({
-			url : '???',
+			url : 'history_insert.htm',
 			type : 'post',
-			data : {},
+			data : {
+				ko_code: "600",
+				m_id : loginid,
+				o_code : o_code,
+				ro_code: $('#select1').val()
+				//ro_reqdate:sysdate,
+				//ro_regdate:null,
+				//ro_object:""
+			},
 			success : function(data) {
 
 			}
@@ -118,6 +126,24 @@ $(function() {
 					};
 					$("#calendar").fullCalendar('renderEvent', event);
 					$("#calendar").fullCalendar('unselect');
+				}
+			});
+			
+			// history에 저장
+			$.ajax({
+				url : 'history_insert.htm',
+				type : 'post',
+				data : {
+					ko_code: "600",
+					m_id : loginid,
+					o_code : o_code,
+					ro_code: $('#select2').val()
+					//ro_reqdate:sysdate,
+					//ro_regdate:null,
+					//ro_object:""
+				},
+				success : function(data) {
+
 				}
 			});
 		}
@@ -263,6 +289,26 @@ function loadCalendar(){
 									$("#calendar").fullCalendar('removeEvents', event.id);
 									$("#calendar").fullCalendar('renderEvent', evt);
 								}
+							});
+							
+							// history에 저장
+							$.ajax({
+								url : 'history_insert.htm',
+								type : 'post',
+								data : {
+									ko_code: "600",
+									m_id : loginid,
+									o_code : dowbefore,
+									ro_code: dowafter
+									//ro_reqdate:sysdate,
+									//ro_regdate:null,
+									//ro_object:""
+								},
+								success : function(data) {
+									console.log(dowbefore);
+									console.log(dowafter);
+								}
+								
 							});
 							
 						} else {

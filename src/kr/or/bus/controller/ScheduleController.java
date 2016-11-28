@@ -27,6 +27,7 @@ import kr.or.bus.dao.ScheduleDAO;
 import kr.or.bus.dto.ScheduleDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
+import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 
 @Controller
@@ -183,7 +184,6 @@ public class ScheduleController {
 		
 	@RequestMapping(value="/mid.member",method=RequestMethod.POST)
 	public View mid(String m_id , Model model){
-		System.out.println("여기는 옵니까");
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		String rid = dao.returnid(m_id);
 	
@@ -194,12 +194,64 @@ public class ScheduleController {
 	
 	//기록보기
 	@RequestMapping("/schedule_history.htm")
-	public String viewHistory(Model model){
-		System.out.println("여긴 타냐?");
+	public String viewHistory(String m_id, Model model) throws ClassNotFoundException, SQLException{
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		List<RegulOffrJoinDTO> list=dao.history_select();
-		model.addAttribute("list", list);
+		List<RegulOffrJoinDTO> list=dao.history_select(m_id);
+		try {
+			model.addAttribute("list", list);
+		} catch (Exception e) {
+
+		}
 		return "schedule/schedule_history";
 	}
+	
+	@RequestMapping(value="/history_insert.htm", method=RequestMethod.POST)
+	public String insertHistory(
+		String ko_code, 
+		String m_id,
+		String o_code,
+		String ro_code,
+		java.sql.Date ro_reqdate,
+		java.sql.Date ro_regdate,
+		String ro_object
+	) throws ClassNotFoundException, SQLException{
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		RegulOffrDTO dto=new RegulOffrDTO();
+		dto.setKo_code(ko_code);
+		dto.setM_id(m_id);
+		dto.setO_code(o_code);
+		dto.setRo_code(ro_code);
+		//dto.setRo_reqdate(ro_reqdate);
+		//dto.setRo_regdate(null);
+		dto.setRo_object("");
+			
+		dao.history_insert(dto);
+		return "bus";
+	}
+	
+	/*@RequestMapping(value="/history_update.htm", method=RequestMethod.POST)
+	public String updateHistory(
+		String ko_code, 
+		String m_id,
+		String o_code,
+		String ro_code,
+		java.sql.Date ro_reqdate,
+		java.sql.Date ro_regdate,
+		String ro_object
+	) throws ClassNotFoundException, SQLException{
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		RegulOffrDTO dto=new RegulOffrDTO();
+		dto.setKo_code(ko_code);
+		dto.setM_id(m_id);
+		dto.setO_code(o_code);
+		dto.setRo_code(ro_code);
+		//dto.setRo_reqdate(ro_reqdate);
+		//dto.setRo_regdate(null);
+		dto.setRo_object("");
+		System.out.println("여긴가");	
+		dao.history_update(dto);
+		System.out.println("거긴가");
+		return "bus";
+	}*/
 	
 }

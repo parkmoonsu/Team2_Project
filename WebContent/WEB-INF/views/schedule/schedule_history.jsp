@@ -106,7 +106,7 @@
 				<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>교대신청</small>
+								<small>교대신청내역</small>
 							</h3>
 						</div>
 					</div>
@@ -137,8 +137,8 @@
 												<th>승인일</th>
 												<th>변경대상</th>
 												<th>상태</th>
-												<th style="width: 20%; text-align:center;">
-												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form">
+												<!-- <th style="width: 20%; text-align:center;">
+												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form"> -->
 												</th>
 											</tr>
 										</thead>
@@ -154,9 +154,9 @@
 												<td>${i.ro_regdate}</td>
 												<td>${i.ro_object}</td>
 												<td>${i.ko_name}</td>
-												<td style = "text-align:center"> 
+												<!-- <td style = "text-align:center"> 
 													<input type = "checkbox">
-                                         		</td>
+                                         		</td> -->
 											</tr>
 											</c:forEach>
 										</tbody>
