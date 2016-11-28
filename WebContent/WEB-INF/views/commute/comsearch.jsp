@@ -92,7 +92,6 @@
 											+ data.dto.cs_stat + '입니다.');
 							$("#gotowork").attr('disabled',true)
 							$.ajax({
-								//url : "comsearchstartinfo.member",
 								  url : "comsearchtestinfo.member",
 								data : {
 									m_id : id,
