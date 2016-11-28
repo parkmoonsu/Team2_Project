@@ -91,4 +91,30 @@ public class BusManageService {
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		dao.insertBStatus(b_vehiclenum, r_num);
 	}
+	
+	public BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO getVehicle(String b_vehiclenum){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO dto = dao.getVehicle(b_vehiclenum);
+		return dto;
+	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getGarageName(String g_num){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> garage = dao.getGarage(g_num);
+		return garage;
+	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRoute(String g_num){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> route = dao.getRoute(g_num);
+		
+		return route;
+	}
+	
+	public List<MemberDTO> getMembers(String mid){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<MemberDTO> member = dao.getMembers(mid);
+		
+		return member;
+	}
 }

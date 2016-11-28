@@ -6,15 +6,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.or.bus.dao.CommuteDAO">
 	
 	<!-- 회원의 출/퇴근 정보 조회 -->
- 	<select id="getSelect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO" parameterType="String">
+ 	<select id="getSelect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO" >
 		
 		select *
 		from (select rownum, N.*
-        	  from (select c_date, c_start, c_end 
-        	  		from commute 
+        	  from (select com.c_date, com.c_start, cs.cs_stat, com.c_end, ce.ce_stat
+        	  		from commute com join cstart cs on com.cs_code=cs.cs_code
+        	  		join cend ce on ce.ce_code=com.ce_code
         	  		where m_id= #{param2} order by c_date desc) N) 
 		where rownum between 1 + (#{param1}-1) * 5 and 5 + (#{param1}-1)*10
 	</select>
+	
+	<!-- test -->
+	 	<select id="getoffSelect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO" >	
+		select *
+		from (select rownum, N.*
+        	  from (select com.c_date, com.c_start, cs.cs_stat, com.c_end
+        	  		from commute com join cstart cs on com.cs_code=cs.cs_code
+        	  		where m_id= #{param2} order by c_date desc) N) 
+		where rownum between 1 + (#{param1}-1) * 5 and 5 + (#{param1}-1)*10
+	</select>
+	
 	
 	<!-- 이름 값 가져오기 -->
 	<select id="getName" parameterType="String" resultType="String">
@@ -44,10 +56,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					</if>						
 			</when>
 			<when test="c_time='pm'" >
-					<if test='dhour &gt; "1300"'>
+					<if test='dhour &lt; "1300"'>
 						cs_code = '1'
 					</if>	
-					<if test='dhour &lt; "1300"'>
+					<if test='dhour &gt; "1300"'>
 						cs_code = '2'
 					</if>						
 	 		</when>
@@ -88,10 +100,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					</if>						
 			</when>
 			<when test="c_time='pm'" >
-					<if test='dhour &lt; "2300"'>
+					<if test='dhour &gt; "2300"'>
 						ce_code = '1'
 					</if>	
-					<if test='dhour &gt; "2300"'>
+					<if test='dhour &lt; "2300"'>
 						ce_code = '2'
 					</if>						
 	 		</when>

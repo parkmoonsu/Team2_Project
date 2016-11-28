@@ -10,7 +10,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -56,12 +56,12 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-	
+
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
 </head>
 
@@ -77,33 +77,33 @@
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
-			  <!-- page content -->
-        <div class="right_col" role="main">
-          <!-- top tiles -->
-          <div class="row tile_count" style = "text-align: center">
-          	<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-          		<span class="count_top"></span>
-          	</div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-bus"></i> 마을버스</span>
-              <div class="count">0</div>          
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-bus"></i> 시내버스</span>
-              <div class="count">0</div>              
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-bus"></i> 시외버스</span>
-              <div class="count">0</div>            
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
-              <div class="count green">0</div>
-            </div>  
-          </div>
-          <!-- /top tiles -->
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<!-- top tiles -->
+				<div class="row tile_count" style="text-align: center">
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"></span>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 마을버스</span>
+						<div class="count">0</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 시내버스</span>
+						<div class="count">0</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 시외버스</span>
+						<div class="count">0</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
+						<div class="count green">0</div>
+					</div>
+				</div>
+				<!-- /top tiles -->
 				<div class="">
-				<div class="page-title">
+					<div class="page-title">
 						<div class="title_left">
 							<h3>
 								<small>버스등록/삭제</small>
@@ -136,15 +136,16 @@
 												<th>기사</th>
 												<th>차고지 이름</th>
 												<th>상태</th>
-												<th style="width: 20%; text-align:center;">
-												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form">
-												</th>
+												<th style="width: 20%; text-align: center;"><i
+													class="fa fa-trash" style="margin-bottom: 2px"></i> <input
+													type="checkbox" class="form"></th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:set value="${list}" var="d"/>
-										
+											<c:set value="${list}" var="d" />
+
 											<c:forEach var="i" items="${d}">
+
 											<tr>
 												<td>${i.r}</td>
 												<td>${i.b_vehiclenum}</td>
@@ -153,128 +154,134 @@
 												<td>${i.g_name}</td>
 												<td>${i.s_name}</td>
 												<td style = "text-align:center"> 
-													<input type = "checkbox">
+													<input type = "checkbox" id = "check${i.r}" value = "${i.b_vehiclenum}" name = "chklist">
                                          		</td>
 											</tr>
+
 											</c:forEach>
 										</tbody>
 									</table>
-									<!-- end project list -->
 									
+									<!-- end project list -->
+
 									<!-- 요기서부터 페이징처리 -->
-									<c:set var = "count" value = "${count}"/>
+
+									<c:set var = "Count" value = "${count}"/>
 									<c:set var = "pgc" value = "${pgs}"/>
 									<c:choose>
-											<c:when test="${count % 10 == 0}">
-												<c:set value = "${count/10}" var = "pagecount"/>
+											<c:when test="${Count % 10 == 0}">
+												<c:set value = "${Count/10}" var = "pagecount"/>
 											</c:when>
 											<c:otherwise>
-												<c:set value = "${count/10 + 1}" var = "pagecount"/>
+												<c:set value = "${Count/10 + 1}" var = "pagecount"/>
 											</c:otherwise>
 									</c:choose>	
 									
+
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
 											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
-										
-									
-										
+
+
+
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
 											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
+
 									
 										
-										<c:if test="${pgc < count/10 }">
+										<c:if test="${pgc < Count/10 }">
+
 											<li><a href="busenroll.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
-									
-								
+
+
 								</div>
+
 									<div style = "float: right;">
 									<div class="btn btn-primary btn-xs" id = "ebtn"><i class="fa fa-check"></i>
                                          			 등록 </div>
+                                    <div class="btn btn-default btn-xs" id = "ubtn"><i class="fa fa-retweet"></i>
+                                         			 수정 </div>
 									<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
                                          			 삭제 </div>
 									</div>
-									
-									
-									
-									
-									
-									
-									
-									
+					
 							</div>
 							
 							<div id = "enroll">
 							
 							<!-- 여기에 ajax 내용 삽입됨(enroll.jsp) -->
 							</div>	
-								
+							
+							<div id = "updateenroll">
+							
 							</div>
 							
-							
-							
+
+							</div>
+
 						</div>
+
+
+
 					</div>
 				</div>
 			</div>
-
-      <!-- 수현:삭제모달    -->
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog modal-sm">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">
-								<i class="fa fa-exclamation-triangle"></i> 회원삭제
-							</h4>
-						</div>
-						<div class="modal-body" aria-labelledby="myModalLabel"
-							id="myModalLabel2"></div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal" id="cancelbutton">삭제</button>
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">취소</button>
-							<input type="hidden" id="hvalue">
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- 수현:삭제모달 끝 -->
-
-			<div class="modal fade" id="memberresrecord" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title" id="resrecordtitle">
-								 
-							</h4>
-						</div>
-						<div class="modal-body" aria-labelledby="myModalLabel"
-							id="resrecordtable"></div>
-					</div>
-				</div>
-			</div>
-
-
-
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
 		</div>
+
+		<!-- 수현:삭제모달    -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">
+							<i class="fa fa-exclamation-triangle"></i> 회원삭제
+						</h4>
+					</div>
+					<div class="modal-body" aria-labelledby="myModalLabel"
+						id="myModalLabel2"></div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="cancelbutton">삭제</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						<input type="hidden" id="hvalue">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 수현:삭제모달 끝 -->
+
+		<div class="modal fade" id="memberresrecord" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" id="resrecordtitle"></h4>
+					</div>
+					<div class="modal-body" aria-labelledby="myModalLabel"
+						id="resrecordtable"></div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- footer content -->
+		<footer>
+			<div class="pull-right">
+				Gentelella - Bootstrap Admin Template by <a
+					href="https://colorlib.com">Colorlib</a>
+			</div>
+			<div class="clearfix"></div>
+		</footer>
+		<!-- /footer content -->
+	</div>
 
 
 
@@ -416,7 +423,70 @@
 		
 		var count = 1;
 		
-		//console.log(num);
+		$("#ubtn").click(function(){
+			if($("input[name='chklist']:checked").length >= 2){
+				alert("2개 이상을 수정 할 수 없습니다.");
+			}else{
+				for(var i = 0 ; i < ${Count} ; i++){
+					var checkbox = "#check" + i;
+					
+					if($(checkbox).is(":checked")){
+						$.ajax({
+							url : "enrollupdate.admin",
+							data : {b_vehiclenum : $(checkbox).val().trim()},
+							success:function(data){
+								$("#updateenroll").empty();
+								$("#updateenroll").append(data);
+								
+								$.ajax({
+									url : "getmember2.admin",
+									data : {mid : $("#mname_u").val()},
+									success:function(data){
+										for(var i = 0 ; i < data.m_id.length ; i++){
+											$("#mname_u").append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "</option>");
+										}
+									}
+									
+								});
+								
+								
+								
+								$.ajax({
+									url : "getgarage2.admin",
+									type : "post",
+									data : {g_num : $("#g_name_u").val()},
+									success : function(data){
+										for(var i = 0 ; i < data.gname.length; i++){
+											$("#g_name_u").append("<option value = " + data.gnum[i] + ">" + data.gname[i] + "</option>");
+										}
+									}
+								});
+								
+								$("#g_name_u").change(function(){
+									$.ajax({
+										url : "getroutenum2.admin",
+										type : "post",
+										data : {g_num : $("#g_name_u").val()},
+										success : function(data){
+											$("#r_num_u").empty();
+											$("#r_num_u").append("<option>선택</option>");
+											$("#r_num_u").append("<option value = '(미정)'>(미정)</option>");
+											for(var i = 0 ; i < data.rnum.length; i++){
+												$("#r_num_u").append("<option value = " + data.rnum[i] + ">" + data.rnum[i] + "</option>");
+												
+											}
+										}
+									});
+								});
+								
+							}
+						});
+					}
+					
+				}
+			}	
+		});
+			
 
 		$("#reg").click(function(){
 			$("#reg").submit();
@@ -441,7 +511,7 @@
 							url : "getmember.admin",
 							success:function(data){
 								for(var i = 0 ; i < data.m_id.length ; i++){
-									$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "("+data.m_id[i] +")" + "</option>");
+									$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "</option>");
 								}
 							}
 							
@@ -484,5 +554,5 @@
 	});
 	
 	</script>
-</body> 	
+</body>
 </html>

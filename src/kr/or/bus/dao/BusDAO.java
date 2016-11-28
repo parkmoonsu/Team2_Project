@@ -37,4 +37,16 @@ public interface BusDAO {
 	public void updateVehicle(String b_vehiclenum , String mname);
 	//버스 상태 테이블 insert
 	public void insertBStatus(String b_vehiclenum ,String r_num);
+	
+	//버스 수정 시 vehiclenum으로 원래 있던 값 뿌려주기
+	public BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO getVehicle(String b_vehiclenum);
+	
+	//버스 수정 - 차고지 이름 가져오기
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getGarage(String g_num);
+	
+	//버스 수정 - 경로 번호 가져오기
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRoute(String g_num);
+	
+	//버스 수정 - 기사 가져오기
+	public List<MemberDTO> getMembers(String mid);
 }

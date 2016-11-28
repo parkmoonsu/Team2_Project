@@ -21,6 +21,7 @@ public class BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO {
 	private String g_name;
 	
 	private String m_name;
+	private String m_id;
 	private String s_name;
 	public int getR() {
 		return r;
@@ -70,12 +71,19 @@ public class BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO {
 	public void setS_name(String s_name) {
 		this.s_name = s_name;
 	}
+	public String getM_id() {
+		return m_id;
+	}
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
 	@Override
 	public String toString() {
 		return "BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO [r=" + r + ", b_vehiclenum=" + b_vehiclenum + ", r_num="
 				+ r_num + ", g_num=" + g_num + ", b_order=" + b_order + ", g_name=" + g_name + ", m_name=" + m_name
-				+ ", s_name=" + s_name + "]";
+				+ ", m_id=" + m_id + ", s_name=" + s_name + "]";
 	}
+	
 	
 	
 	

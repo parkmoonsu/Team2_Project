@@ -21,12 +21,12 @@ public class CommuteController {
 	private View jsonview;
 
 	//출근
-	@RequestMapping(value="/gotowork.member", method=RequestMethod.GET)
+/*	@RequestMapping(value="/gotowork.member", method=RequestMethod.GET)
 	public String gotoworkview() {
 		System.out.println("gotoworkviw get 시작");
 		
 		return "commute/gotowork";
-	}
+	}*/
 	
 	@RequestMapping(value="/gotowork.member", method=RequestMethod.POST)
 	public View gotowork(String m_id, Model model) {
@@ -41,12 +41,12 @@ public class CommuteController {
 	}
 	
 	//퇴근
-	@RequestMapping(value="/getoffwork.member", method=RequestMethod.GET)
+/*	@RequestMapping(value="/getoffwork.member", method=RequestMethod.GET)
 	public String getoffworkview() {
 		System.out.println("getoffworkviw get 시작");
 		
 		return "commute/getoffwork";
-	}
+	}*/
 	
 	@RequestMapping(value="/getoffwork.member", method=RequestMethod.POST)
 	public View getoffwor(String m_id, Model model) {
@@ -80,8 +80,22 @@ public class CommuteController {
 		
 		model.addAttribute("page", page);
 		model.addAttribute("list", list);
-		System.out.println(list.toString()+"asfasd");
+
 		return "commute/commutesearchtable";	
 	}
+
 	
+	
+	//test
+	@RequestMapping("/comsearchtestinfo.member")
+	public String showtestinfolist(String pg , String m_id, Model model) {
+		
+		List<CommuteJoinCstartJoinCendDTO> list = service.getoffSelect(pg, m_id);
+		int page = service.pg(pg);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("list", list);
+
+		return "commute/commutesearchtable";	
+	}
 }
