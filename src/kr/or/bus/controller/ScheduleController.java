@@ -197,6 +197,7 @@ public class ScheduleController {
 	public String viewHistory(String m_id, Model model) throws ClassNotFoundException, SQLException{
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		List<RegulOffrJoinDTO> list=dao.history_select(m_id);
+		System.out.println(list.toString());
 		try {
 			model.addAttribute("list", list);
 		} catch (Exception e) {

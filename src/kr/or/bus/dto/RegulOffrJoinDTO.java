@@ -8,9 +8,25 @@ public class RegulOffrJoinDTO {
 	private java.sql.Date ro_reqdate;
 	private java.sql.Date ro_regdate;
 	private String ro_object;
+	
 	private String ko_name;
 	private String o_date;
+	private String o_date2;
 	private String m_name;
+	private String m_name2;
+	
+	public String getO_date2() {
+		return o_date2;
+	}
+	public void setO_date2(String o_date2) {
+		this.o_date2 = o_date2;
+	}
+	public String getM_name2() {
+		return m_name2;
+	}
+	public void setM_name2(String m_name2) {
+		this.m_name2 = m_name2;
+	}
 	public String getKo_code() {
 		return ko_code;
 	}
