@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.or.bus.dao.BusDAO;
+
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.MemberDTO;
@@ -122,6 +123,17 @@ public class BusManageService {
 		return member;
 	}
 	
+
+	
+	//임시노선별 출결현황
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String r_num){
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getShow(r_num);
+		System.out.println("list값" + list.toString());
+		
+		return list;
+	}
 	public int alreadyUse(String b_vehiclenum){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		int count = dao.alreadyUse(b_vehiclenum);
@@ -184,6 +196,7 @@ public class BusManageService {
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		dao.deleteBus(b_vehiclenum);
 		
+
 	}
 	
 	public int mBus(){

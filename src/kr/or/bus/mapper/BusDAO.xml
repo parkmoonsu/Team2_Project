@@ -106,13 +106,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<select id="getMembers" resultType = "kr.or.bus.dto.MemberDTO">
-	
+	<select id="getMembers" resultType = "kr.or.bus.dto.MemberDTO">	
 		select m_id , m_name
 		from member
 		where b_vehiclenum is null and m_id != #{mid}
 	</select>
 	
+
+	<!-- 임시 노선별 출결현황-->
+	<select id="getShow"  resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select mem.m_name, com.c_date, cs.cs_stat ,bus.r_num      
+	    from member mem left outer join commute com on mem.m_id=com.m_id
+	    left outer join bus on  bus.B_vehiclenum = mem.B_VEHICLENUM
+	    left outer join cstart cs on cs.cs_code=com.cs_code
+	    order by r_num
+	</select>
+
 	<select id = "alreadyUse" resultType = "int" parameterType = "String">
 		select count(*)
 		from bus
@@ -170,6 +179,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from bus
 	where b_vehiclenum = #{b_vehiclenum}
 	</delete>
+
 	
 	<select id="mBus" resultType = "int">
 		select count(*) 
@@ -206,4 +216,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on b.R_NUM = r.R_NUM 
 		where bd_name = '고속버스'
 	</select>
+
 </mapper>

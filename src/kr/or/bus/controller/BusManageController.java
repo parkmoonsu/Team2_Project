@@ -197,6 +197,20 @@ public class BusManageController {
 
 	}
 	
+
+	//임시 노선별 출결현황
+	@RequestMapping("/commutebus.admin")
+	public String showlist(String r_num, Model model){
+		
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.getShow(r_num);
+		
+		model.addAttribute("list", list);
+		
+		return "commute/attendance";
+		
+	}
+	
+
 	@RequestMapping("/update.admin")
 	public String update(String b_vehiclenum_u , String g_name_u , String r_num_u , String mname_u , String hidden){
 		System.out.println("update column : " + b_vehiclenum_u + "/" + g_name_u + "/" + r_num_u + "/" + mname_u + "/" + hidden);
@@ -236,4 +250,5 @@ public class BusManageController {
 		
 		return jsonview;
 	}
+
 }
