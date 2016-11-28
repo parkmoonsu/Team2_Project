@@ -87,10 +87,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		r.ro_object,
 		
 		k.ko_name,
-		o.o_date,
-		mo.o_date,
-		m.m_name,
-		me.m_name
+		o.o_date as bd,
+		mo.o_date as ad,
+		m.m_name as bn,
+		me.m_name as an
 		
 		from reguloffr r
 		join member m on r.m_id=m.m_id
@@ -102,7 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<insert id="history_insert">
 		INSERT INTO reguloffr
-		VALUES('600', #{m_id}, #{o_code}, #{ro_code}, sysdate, sysdate, '선택안됨')
+		VALUES('600', #{m_id}, #{o_code}, #{ro_code}, sysdate, sysdate, #{ro_object})
 	</insert>
 	<!-- <update id="history_update">
 		update reguloffr

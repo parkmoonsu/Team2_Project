@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -197,7 +198,7 @@ public class ScheduleController {
 	public String viewHistory(String m_id, Model model) throws ClassNotFoundException, SQLException{
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		List<RegulOffrJoinDTO> list=dao.history_select(m_id);
-		System.out.println(list.toString());
+				
 		try {
 			model.addAttribute("list", list);
 		} catch (Exception e) {
@@ -224,7 +225,12 @@ public class ScheduleController {
 		dto.setRo_code(ro_code);
 		//dto.setRo_reqdate(ro_reqdate);
 		//dto.setRo_regdate(null);
-		dto.setRo_object("");
+		System.out.println("이건 탑니까???");
+		if (ro_object==null || ro_object.equals("")){
+			ro_object="nouser";
+			System.out.println(ro_object);
+		}
+		dto.setRo_object(ro_object);
 			
 		dao.history_insert(dto);
 		return "bus";

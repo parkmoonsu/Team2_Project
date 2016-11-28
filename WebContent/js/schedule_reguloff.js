@@ -82,17 +82,9 @@ $(function() {
 		
 		// history에 저장
 		$.ajax({
-			url : 'history_insert.htm',
+			url : '???',
 			type : 'post',
-			data : {
-				ko_code: "600",
-				m_id : loginid,
-				o_code : o_code,
-				ro_code: $('#select1').val()
-				//ro_reqdate:sysdate,
-				//ro_regdate:null,
-				//ro_object:""
-			},
+			data : {},
 			success : function(data) {
 
 			}
@@ -126,24 +118,6 @@ $(function() {
 					};
 					$("#calendar").fullCalendar('renderEvent', event);
 					$("#calendar").fullCalendar('unselect');
-				}
-			});
-			
-			// history에 저장
-			$.ajax({
-				url : 'history_insert.htm',
-				type : 'post',
-				data : {
-					ko_code: "600",
-					m_id : loginid,
-					o_code : o_code,
-					ro_code: $('#select2').val()
-					//ro_reqdate:sysdate,
-					//ro_regdate:null,
-					//ro_object:""
-				},
-				success : function(data) {
-
 				}
 			});
 		}
@@ -241,8 +215,18 @@ function loadCalendar(){
 						//데이터 저장
 						$("#title2").val(calEvent.title);
 						$("#select2").val(calEvent.dow[0]);
-					}else{
-						alert("해당 일정은 편집할 수 없습니다.");
+					}else{	
+						if (confirm("해당 사용자와 일정을 바꾸시겠습니까?") == true) {
+							//선택한 사용자
+							
+							//본인
+							
+							
+							
+							$("#calendar").fullCalendar('removeEvents', event.id);
+							$("#calendar").fullCalendar('renderEvent', evt);
+						}
+
 					}	
 				}
 			});		
@@ -289,26 +273,6 @@ function loadCalendar(){
 									$("#calendar").fullCalendar('removeEvents', event.id);
 									$("#calendar").fullCalendar('renderEvent', evt);
 								}
-							});
-							
-							// history에 저장
-							$.ajax({
-								url : 'history_insert.htm',
-								type : 'post',
-								data : {
-									ko_code: "600",
-									m_id : loginid,
-									o_code : dowbefore,
-									ro_code: dowafter
-									//ro_reqdate:sysdate,
-									//ro_regdate:null,
-									//ro_object:""
-								},
-								success : function(data) {
-									console.log(dowbefore);
-									console.log(dowafter);
-								}
-								
 							});
 							
 						} else {

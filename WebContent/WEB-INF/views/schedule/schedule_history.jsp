@@ -148,11 +148,11 @@
 											<c:forEach var="i" items="${d}" varStatus="status">
 											<tr>
 												<td>${status.count}</td>
-												<td>${i.o_date}</td>
-												<td>${i.ro_code}</td>
+												<td>${i.bd}</td>
+												<td>${i.ad}</td>
 												<td>${i.ro_reqdate}</td>
 												<td>${i.ro_regdate}</td>
-												<td>${i.ro_object}</td>
+												<td>${i.an}</td>
 												<td>${i.ko_name}</td>
 												<!-- <td style = "text-align:center"> 
 													<input type = "checkbox">
@@ -428,6 +428,8 @@
 				}
 			});
 		});
+		console.log("dyfo");
+		console.log(${d}[0]);
 		
 		
 	});

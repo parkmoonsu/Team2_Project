@@ -10,22 +10,38 @@ public class RegulOffrJoinDTO {
 	private String ro_object;
 	
 	private String ko_name;
-	private String o_date;
-	private String o_date2;
-	private String m_name;
-	private String m_name2;
+	private String bd;
+	private String ad;
+	private String bn;
+	private String an;
 	
-	public String getO_date2() {
-		return o_date2;
+	
+
+	public String getBd() {
+		return bd;
 	}
-	public void setO_date2(String o_date2) {
-		this.o_date2 = o_date2;
+	public void setBd(String bd) {
+		this.bd = bd;
 	}
-	public String getM_name2() {
-		return m_name2;
+	
+	public String getAd() {
+		return ad;
 	}
-	public void setM_name2(String m_name2) {
-		this.m_name2 = m_name2;
+	public void setAd(String ad) {
+		this.ad = ad;
+	}
+	public String getBn() {
+		return bn;
+	}
+	public void setBn(String bn) {
+		this.bn = bn;
+	}
+
+	public String getAn() {
+		return an;
+	}
+	public void setAn(String an) {
+		this.an = an;
 	}
 	public String getKo_code() {
 		return ko_code;
@@ -75,17 +91,6 @@ public class RegulOffrJoinDTO {
 	public void setKo_name(String ko_name) {
 		this.ko_name = ko_name;
 	}
-	public String getO_date() {
-		return o_date;
-	}
-	public void setO_date(String o_date) {
-		this.o_date = o_date;
-	}
-	public String getM_name() {
-		return m_name;
-	}
-	public void setM_name(String m_name) {
-		this.m_name = m_name;
-	}
+
 
 }
