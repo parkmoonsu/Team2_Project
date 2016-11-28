@@ -181,4 +181,16 @@ public class BusManageController {
 
 	}
 	
+	//임시 노선별 출결현황
+	@RequestMapping("/commutebus.admin")
+	public String showlist(String r_num, Model model){
+		
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.getShow(r_num);
+		
+		model.addAttribute("list", list);
+		
+		return "commute/attendance";
+		
+	}
+	
 }

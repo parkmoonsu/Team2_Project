@@ -55,6 +55,13 @@
                       <li><a href="calendar.html">Calendar</a></li>
                     </ul>
                   </li>
+                  
+                   <!-- 임시페이지 -->
+                  <li>
+                  	<a href="commutebus.admin"><i>노선별 출결관리</i></a>
+                  </li>
+                  
+                  
                   <li><a><i class="fa fa-table"></i>노선 관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="route.admin">노선</a></li>

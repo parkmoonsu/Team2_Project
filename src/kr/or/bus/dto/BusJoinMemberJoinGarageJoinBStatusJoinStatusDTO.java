@@ -23,6 +23,8 @@ public class BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO {
 	private String m_name;
 	private String m_id;
 	private String s_name;
+	
+	
 	public int getR() {
 		return r;
 	}
@@ -77,14 +79,40 @@ public class BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO {
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
-	@Override
+	/*@Override
 	public String toString() {
 		return "BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO [r=" + r + ", b_vehiclenum=" + b_vehiclenum + ", r_num="
 				+ r_num + ", g_num=" + g_num + ", b_order=" + b_order + ", g_name=" + g_name + ", m_name=" + m_name
 				+ ", m_id=" + m_id + ", s_name=" + s_name + "]";
+	}*/
+	
+	
+	///임시 노선별 출결현황
+	private String c_date;
+
+	public String getC_date() {
+		return c_date;
+	}
+	public void setC_date(String c_date) {
+		this.c_date = c_date;
 	}
 	
+	private String cs_stat;
+
+
+	public String getCs_stat() {
+		return cs_stat;
+	}
+	public void setCs_stat(String cs_stat) {
+		this.cs_stat = cs_stat;
+	}
 	
+	@Override
+	public String toString() {
+		return "BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO [r=" + r + ", b_vehiclenum=" + b_vehiclenum + ", r_num="
+				+ r_num + ", g_num=" + g_num + ", b_order=" + b_order + ", g_name=" + g_name + ", m_name=" + m_name
+				+ ", m_id=" + m_id + ", s_name=" + s_name + ", c_date=" + c_date + ", cs_stat=" + cs_stat + "]";
+	}
 	
-	
+		
 }

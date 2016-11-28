@@ -49,4 +49,9 @@ public interface BusDAO {
 	
 	//버스 수정 - 기사 가져오기
 	public List<MemberDTO> getMembers(String mid);
+	
+	
+	//임시 노선별 출결현황
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String r_num);
+	            
 }

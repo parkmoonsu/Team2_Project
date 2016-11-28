@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.bus.dao.BusDAO;
+import kr.or.bus.dao.CommuteMemberDAO;
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.MemberDTO;
@@ -116,5 +117,16 @@ public class BusManageService {
 		List<MemberDTO> member = dao.getMembers(mid);
 		
 		return member;
+	}
+	
+	
+	//임시노선별 출결현황
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String r_num){
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getShow(r_num);
+		System.out.println("list값" + list.toString());
+		
+		return list;
 	}
 }
