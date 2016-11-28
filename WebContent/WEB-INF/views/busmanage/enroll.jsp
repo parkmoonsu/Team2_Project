@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <div class="x_panel">
 	<div class="x_content">
-	<form action="reg.admin">
+	<form action="reg.admin" id = "target">
 		<table class="table table-hover projects">
 		
 										<thead>
@@ -44,8 +44,9 @@
 									</table>
 									
 									
-									<button class = "btn btn-primary btn-xs" id = "reg" style = "float:right">
-									<i class="fa fa-check"></i> 등록</button>
+									<div class = "btn btn-primary btn-xs" id = "reg" style = "float:right" onclick = "reg()">
+									<i class="fa fa-check"></i> 등록
+									</div>
 									
 									<div class="btn btn-default btn-xs" style="float: right" onclick = "plus()">
 										<i class="fa fa-plus"></i> 추가
