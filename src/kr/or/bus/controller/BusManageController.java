@@ -9,6 +9,7 @@
 
 package kr.or.bus.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,15 +104,17 @@ public class BusManageController {
 	public String reg(String[] b_vehiclenum , String[] g_name , String[] r_num , String[] mname){
 		
 		for(int i = 0 ; i < b_vehiclenum.length ; i++){
-			
-				
-				service.insertBus(b_vehiclenum[i], r_num[i], g_name[i]);
-			
-				if(!mname[i].equals("선택")){
-					service.updateVehicle(b_vehiclenum[i], mname[i]);
+				System.out.println(b_vehiclenum[i] + "/" + g_name[i]);
+				if(service.alreadyUse(b_vehiclenum[i]) == 0){
+					
+					service.insertBus(b_vehiclenum[i], r_num[i], g_name[i]);
+					
+					if(!mname[i].equals("선택")){
+						service.updateVehicle(b_vehiclenum[i], mname[i]);
+					}
+					
+					service.insertBStatus(b_vehiclenum[i], r_num[i]);
 				}
-			
-				service.insertBStatus(b_vehiclenum[i], r_num[i]);
 					
 		}
 		
@@ -186,10 +189,10 @@ public class BusManageController {
 	}
 	
 	@RequestMapping("/update.admin")
-	public String update(String b_vehiclenum_u , String g_name_u , String r_num_u , String mname_u){
-		System.out.println("update column : " + b_vehiclenum_u + "/" + g_name_u + "/" + r_num_u + "/" + mname_u);
-		
-		
+	public String update(String b_vehiclenum_u , String g_name_u , String r_num_u , String mname_u , String hidden){
+		System.out.println("update column : " + b_vehiclenum_u + "/" + g_name_u + "/" + r_num_u + "/" + mname_u + "/" + hidden);
+		service.updateBus(b_vehiclenum_u, g_name_u, r_num_u , mname_u , hidden);
+		  
 		
 		return "busmanage/updatesuccess";
 	}
@@ -197,9 +200,31 @@ public class BusManageController {
 	@RequestMapping("/alreadyuse.admin")
 	public View alreadyUse(String b_vehiclenum , Model model){
 		int data = service.alreadyUse(b_vehiclenum);
+		System.out.println("data : " + data );
 		model.addAttribute("data", data);
-		
+		model.addAttribute("num", b_vehiclenum);
 		return jsonview;
 	}
 	
+	@RequestMapping("/matchpass.admin")
+	public View matchPass(Principal principal , String m_pw , Model model){
+		boolean result = service.getPass(principal.getName(), m_pw);
+		String data = "";
+		if(result){
+			data = "true";
+		}else{
+			data = "false";
+		}
+		
+		model.addAttribute("data", data);
+		return jsonview;
+	}
+	
+	@RequestMapping("/deleteBus.admin")
+	public View deleteBus(String b_vehiclenum){
+		System.out.println("삭제할 아이디는  : " + b_vehiclenum);
+		service.deleteBus(b_vehiclenum);
+		
+		return jsonview;
+	}
 }
