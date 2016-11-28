@@ -223,12 +223,9 @@ public class ScheduleController {
 		dto.setM_id(m_id);
 		dto.setO_code(o_code);
 		dto.setRo_code(ro_code);
-		//dto.setRo_reqdate(ro_reqdate);
-		//dto.setRo_regdate(null);
 		System.out.println("이건 탑니까???");
 		if (ro_object==null || ro_object.equals("")){
 			ro_object="nouser";
-			System.out.println(ro_object);
 		}
 		dto.setRo_object(ro_object);
 			

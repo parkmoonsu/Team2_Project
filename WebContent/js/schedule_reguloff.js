@@ -82,9 +82,14 @@ $(function() {
 		
 		// history에 저장
 		$.ajax({
-			url : '???',
+			url : 'history_insert.htm',
 			type : 'post',
-			data : {},
+			data : { 
+				ko_code:'600',
+				o_code:'',
+				m_id:loginid,
+				ro_code:o_code
+			},
 			success : function(data) {
 
 			}
