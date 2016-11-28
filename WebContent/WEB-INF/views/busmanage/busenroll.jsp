@@ -77,28 +77,34 @@
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
+			<br><br><br>
 			<!-- page content -->
 			<div class="right_col" role="main">
 				<!-- top tiles -->
 				<div class="row tile_count" style="text-align: center">
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-						<span class="count_top"></span>
+					<div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
 						<span class="count_top"><i class="fa fa-bus"></i> 마을버스</span>
-						<div class="count">0</div>
+						<div class="count">${m}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
 						<span class="count_top"><i class="fa fa-bus"></i> 시내버스</span>
-						<div class="count">0</div>
+						<div class="count">${n}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
 						<span class="count_top"><i class="fa fa-bus"></i> 시외버스</span>
-						<div class="count">0</div>
+						<div class="count">${w}</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 고속버스</span>
+						<div class="count">${g}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
 						<span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
-						<div class="count green">0</div>
+						<div class="count green">${m+n+w+g}</div>
+					</div>
+					<div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
 					</div>
 				</div>
 				<!-- /top tiles -->
@@ -404,7 +410,7 @@
 				url : "getmember.admin",
 				success:function(data){
 					for(var i = 0 ; i < data.m_id.length ; i++){
-						$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "("+data.m_id[i] +")" + "</option>");
+						$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] +  "</option>");
 					}
 				}
 				
@@ -444,27 +450,13 @@
 	function update(){
 		$("#update").submit();
 	}
+
 	
 	function reg(){
-		for(var i = 1 ; i <= num ; i++){
-			var vnum = "#b_vehiclenum" + i;
-			
-			$.ajax({
-				url : "alreadyuse.admin",
-				data : {b_vehiclenum : $(vnum).val()},
-				success : function(data){
-					if(data.data == 0){
-						$("#target").submit();
-						
-					}else{
-						alert(data.num + "은 이미 있는 차량번호 입니다.");
-						
-					}
-				}
-			});
-		}
+		//console.log($("#tbody").children().children().children().attr("id"));
+		
+		$("#target").submit();
 	}
-	
 	$(function(){
 		
 		var count = 1;
@@ -487,7 +479,7 @@
 		});
 
 		$("#dbtn").click(function(){
-			for(var i = 0 ; i < ${Count} ; i++){ //엑박 뜨는거 무시할것
+			for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
 				var checkbox = "#check" + i;
 				
 				if($(checkbox).is(":checked")){
@@ -509,7 +501,7 @@
 						 $("#myModalLabel2").empty();
 						 $("#myModalLabel2").append("차량 번호<br>");
 						 
-						for(var i = 0 ; i < ${Count} ; i++){ //엑박 뜨는거 무시할것
+						for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
 							var checkbox = "#check" + i;
 							
 							if($(checkbox).is(":checked")){
@@ -528,7 +520,7 @@
 		
 		$("#cancelbutton").click(function(){
 			 
-			for(var i = 0 ; i < ${Count} ; i++){ //엑박 뜨는거 무시할것
+			for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
 				var checkbox = "#check" + i;
 				
 				if($(checkbox).is(":checked")){
@@ -549,7 +541,9 @@
 			if($("input[name='chklist']:checked").length >= 2){
 				alert("2개 이상을 수정 할 수 없습니다.");
 			}else{
-				for(var i = 0 ; i < ${Count} ; i++){ //엑박 무시할것
+				
+				$("#enroll").empty();
+				for(var i = 1 ; i <= ${Count} ; i++){ //엑박 무시할것
 					var checkbox = "#check" + i;
 					
 					if($(checkbox).is(":checked")){

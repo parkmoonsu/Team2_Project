@@ -180,4 +180,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where b_vehiclenum = #{b_vehiclenum}
 	</delete>
 
+	
+	<select id="mBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '마을버스'
+	</select>
+	
+	<select id="nBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '시내버스'
+	</select>
+	
+	<select id="wBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '시외버스'
+	</select>
+	
+	<select id="gBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '고속버스'
+	</select>
+
 </mapper>

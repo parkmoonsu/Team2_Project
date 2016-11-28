@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
@@ -38,7 +39,16 @@ public class BusManageController {
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.busInfo(pg);
 		int page = service.pg(pg);
 		int count = service.busCount();
-		   
+		int mcount = service.mBus();
+		int ncount = service.nBus();
+		int wcount = service.wBus();
+		int gcount = service.gBus();
+		
+		model.addAttribute("m", mcount);
+		model.addAttribute("n", ncount);
+		model.addAttribute("w", wcount);
+		model.addAttribute("g", gcount);
+		
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("count",count);
@@ -103,8 +113,10 @@ public class BusManageController {
 	@RequestMapping("/reg.admin")
 	public String reg(String[] b_vehiclenum , String[] g_name , String[] r_num , String[] mname){
 		
+		System.out.println("b_vehiclenum.length : " + b_vehiclenum.length);
 		for(int i = 0 ; i < b_vehiclenum.length ; i++){
 				System.out.println(b_vehiclenum[i] + "/" + g_name[i]);
+				System.out.println(service.alreadyUse(b_vehiclenum[i]));
 				if(service.alreadyUse(b_vehiclenum[i]) == 0){
 					
 					service.insertBus(b_vehiclenum[i], r_num[i], g_name[i]);
@@ -213,9 +225,16 @@ public class BusManageController {
 	
 	@RequestMapping("/alreadyuse.admin")
 	public View alreadyUse(String b_vehiclenum , Model model){
-		int data = service.alreadyUse(b_vehiclenum);
-		System.out.println("data : " + data );
-		model.addAttribute("data", data);
+		String [] array = b_vehiclenum.split(",");
+		System.out.println("받은것 : " +array.length);
+		int result = 0;
+		for(int i = 0; i < array.length; i++){
+			System.out.println("넘어온 값 : "+array[i]);
+			result = service.alreadyUse(array[i]);
+		}
+		//int data = service.alreadyUse(b_vehiclenum);
+		System.out.println("#####data### : " + result );
+		model.addAttribute("result", result);
 		model.addAttribute("num", b_vehiclenum);
 		return jsonview;
 	}
