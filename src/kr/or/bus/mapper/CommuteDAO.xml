@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m_id=#{m_id}
 	</select>
 	
-	<!-- 출근시간 입력 -->
+<!-- 	출근시간 입력 -->
 	<insert id="gotowork" parameterType="String">
 		insert into commute(m_id, m_name, c_date, c_start, c_time) 
 		values(#{param1}, #{param2}, #{param3}, #{param4},'am')

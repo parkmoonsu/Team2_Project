@@ -28,12 +28,16 @@ public class CommuteService {
         CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
 		String m_name=dao.getName(m_id);
 		System.out.println("m_name :" + m_name);
-		int result = dao.gotowork(m_id, m_name,tdate,dhour);
-		System.out.println("result 값" + result);
 		
-		dao.updateCommute(m_id,tdate,dhour);
-		CommuteJoinCstartJoinCendDTO dto = dao.csselect(m_id);
-		
+		//if(dao.csselect(tdate)==true){
+			
+			int result = dao.gotowork(m_id, m_name,tdate,dhour);
+			System.out.println("result 값" + result);
+			
+			dao.updateCommute(m_id,tdate,dhour);
+			CommuteJoinCstartJoinCendDTO dto = dao.csselect(m_id);
+			
+		//}
 		return dto;
 	}
 	

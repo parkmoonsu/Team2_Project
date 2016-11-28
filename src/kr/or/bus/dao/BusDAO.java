@@ -50,6 +50,12 @@ public interface BusDAO {
 	//버스 수정 - 기사 가져오기
 	public List<MemberDTO> getMembers(String mid);
 	
+
+	
+	//임시 노선별 출결현황
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String r_num);
+	            
+
 	//버스 수정
 	public void updateBus(String b_vehiclenum , String g_name , String r_num , String hidden);
 	
@@ -63,5 +69,14 @@ public interface BusDAO {
 	
 	//차량 번호 삭제
 	public void deleteBus(String b_vehiclenum);
-	
+
+	//마을버스 개수
+	public int mBus();
+	//시내버스 개수
+	public int nBus();
+	//시외버스 개수
+	public int wBus();
+	//고속버스 개수
+	public int gBus();
+
 }
