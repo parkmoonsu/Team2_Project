@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <table class="table">
 		                	<thead>
-		                		<tr>턱boy
+		                		<tr>
 		                			<th style="width: 15%">이력구분</th>
 		                			<th style="width: 20%">근무시작일</th>
 		                			<th style="width: 20%">근무종료일</th>

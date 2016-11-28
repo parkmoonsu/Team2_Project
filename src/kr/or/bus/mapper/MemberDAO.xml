@@ -169,7 +169,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	on mem.m_id = mde.m_id
 	join reguloff reg
 	on reg.m_id = mem.m_id
-	join off o
+	join moff o
 	on o.O_CODE = reg.O_CODE
 	join job j
 	on j.J_CODE = mem.J_CODE
@@ -186,9 +186,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	on mem.M_ID = rofr.M_ID
 	join member memm
 	on memm.M_ID = rofr.RO_OBJECT
-	join off o
+	join moff o
 	on o.O_CODE = rofr.O_CODE
-	join off offo
+	join moff offo
 	on offo.o_code = rofr.ro_code
 	join koff ko
 	on ko.KO_CODE = rofr.KO_CODE
