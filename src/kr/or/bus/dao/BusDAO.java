@@ -49,4 +49,10 @@ public interface BusDAO {
 	
 	//버스 수정 - 기사 가져오기
 	public List<MemberDTO> getMembers(String mid);
+	
+	//버스 수정
+	public void updateBus();
+	
+	//내가 등록하려는 버스의 번호가 이미 있는 버스번호인지 확인(실수로 잘못 입력한 경우까지 처리)
+	public int alreadyUse(String b_vehiclenum);
 }

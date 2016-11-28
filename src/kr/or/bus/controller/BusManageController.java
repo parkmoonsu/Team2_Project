@@ -101,14 +101,18 @@ public class BusManageController {
 	
 	@RequestMapping("/reg.admin")
 	public String reg(String[] b_vehiclenum , String[] g_name , String[] r_num , String[] mname){
+		
 		for(int i = 0 ; i < b_vehiclenum.length ; i++){
-			service.insertBus(b_vehiclenum[i], r_num[i], g_name[i]);
 			
-			if(!mname[i].equals("선택")){
-				service.updateVehicle(b_vehiclenum[i], mname[i]);
-			}
+				
+				service.insertBus(b_vehiclenum[i], r_num[i], g_name[i]);
 			
-			service.insertBStatus(b_vehiclenum[i], r_num[i]);
+				if(!mname[i].equals("선택")){
+					service.updateVehicle(b_vehiclenum[i], mname[i]);
+				}
+			
+				service.insertBStatus(b_vehiclenum[i], r_num[i]);
+					
 		}
 		
 		return "busmanage/insertbussuccess";
@@ -179,6 +183,23 @@ public class BusManageController {
 		
 		return "redirect:chagozi.jsp";
 
+	}
+	
+	@RequestMapping("/update.admin")
+	public String update(String b_vehiclenum_u , String g_name_u , String r_num_u , String mname_u){
+		System.out.println("update column : " + b_vehiclenum_u + "/" + g_name_u + "/" + r_num_u + "/" + mname_u);
+		
+		
+		
+		return "busmanage/updatesuccess";
+	}
+	
+	@RequestMapping("/alreadyuse.admin")
+	public View alreadyUse(String b_vehiclenum , Model model){
+		int data = service.alreadyUse(b_vehiclenum);
+		model.addAttribute("data", data);
+		
+		return jsonview;
 	}
 	
 }

@@ -117,4 +117,12 @@ public class BusManageService {
 		
 		return member;
 	}
+	
+	public int alreadyUse(String b_vehiclenum){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int count = dao.alreadyUse(b_vehiclenum);
+		
+		return count;
+		
+	}
 }
