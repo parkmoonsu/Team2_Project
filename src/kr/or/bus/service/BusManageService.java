@@ -185,4 +185,28 @@ public class BusManageService {
 		dao.deleteBus(b_vehiclenum);
 		
 	}
+	
+	public int mBus(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int mcount = dao.mBus();
+		return mcount;
+	}
+	
+	public int nBus(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int ncount = dao.nBus();
+		return ncount;
+	}
+	
+	public int wBus(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int wcount = dao.wBus();
+		return wcount;
+	}
+	
+	public int gBus(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int gcount = dao.gBus();
+		return gcount;
+	}
 }

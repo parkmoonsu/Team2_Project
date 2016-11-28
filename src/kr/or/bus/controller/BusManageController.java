@@ -38,7 +38,16 @@ public class BusManageController {
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.busInfo(pg);
 		int page = service.pg(pg);
 		int count = service.busCount();
-		   
+		int mcount = service.mBus();
+		int ncount = service.nBus();
+		int wcount = service.wBus();
+		int gcount = service.gBus();
+		
+		model.addAttribute("m", mcount);
+		model.addAttribute("n", ncount);
+		model.addAttribute("w", wcount);
+		model.addAttribute("g", gcount);
+		
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("count",count);
