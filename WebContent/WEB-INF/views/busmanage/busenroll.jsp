@@ -138,7 +138,7 @@
 												<th>상태</th>
 												<th style="width: 20%; text-align: center;"><i
 													class="fa fa-trash" style="margin-bottom: 2px"></i> <input
-													type="checkbox" class="form"></th>
+													type="checkbox" class="form" id = "checkall"></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -205,7 +205,7 @@
                                          			 등록 </div>
                                     <div class="btn btn-default btn-xs" id = "ubtn"><i class="fa fa-retweet"></i>
                                          			 수정 </div>
-									<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
+									<div class="btn btn-danger btn-xs" id = "dbtn"><i class="fa fa-trash-o"></i>
                                          			 삭제 </div>
 									</div>
 					
@@ -217,7 +217,7 @@
 							</div>	
 							
 							<div id = "updateenroll">
-							
+							<!-- 여기에 ajax 내용 삽입됨(updateenroll.jsp) -->
 							</div>
 							
 
@@ -232,47 +232,69 @@
 			</div>
 		</div>
 
-		<!-- 수현:삭제모달    -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">
-							<i class="fa fa-exclamation-triangle"></i> 회원삭제
-						</h4>
+	<!-- BEGIN # MODA4L LOGIN -->
+	<!-- 비밀번호 모달 :match-pass -->
+	<div class="modal fade" id="match-pass" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Begin # DIV Form -->
+				<div id="div-forms">
+					<div class="modal-header" align="center">
+						<h3>비밀번호 입력</h3>
 					</div>
-					<div class="modal-body" aria-labelledby="myModalLabel"
-						id="myModalLabel2"></div>
+					<!-- Begin # Login Form -->
+					<form id="login-form" method="post">
+						<div class="modal-body">
+							<div style="text-align: center">
+								<label for="m_pw">비밀번호 </label> <input type="password"
+									name="m_pw" id="m_pw">
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div>
+								<input type="button" class="btn btn-dark" value="완료"
+									id="passtrue" data-target="myModal">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">닫기</button>
+							</div>
+						</div>
+					</form>
+					<!-- End # Login Form -->
+				</div>
+				<!-- End # DIV Form -->
+			</div>
+		</div>
+	</div>
+	<!-- end modal -->
+	<!-- 수현:삭제모달    -->
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">
+								<i class="fa fa-exclamation-triangle"></i> 차량번호 삭제
+							</h4>
+						</div>
+						<div class="modal-body" aria-labelledby="myModalLabel"
+							id="myModalLabel2"></div>
 
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							id="cancelbutton">삭제</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-						<input type="hidden" id="hvalue">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="cancelbutton">삭제</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">취소</button>
+							<input type="hidden" id="hvalue">
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<!-- 수현:삭제모달 끝 -->
+			<!-- 수현:삭제모달 끝 -->
 
-		<div class="modal fade" id="memberresrecord" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" id="resrecordtitle"></h4>
-					</div>
-					<div class="modal-body" aria-labelledby="myModalLabel"
-						id="resrecordtable"></div>
-				</div>
-			</div>
-		</div>
-
-
-
-		<!-- footer content -->
+	<!-- footer content -->
 		<footer>
 			<div class="pull-right">
 				Gentelella - Bootstrap Admin Template by <a
@@ -423,16 +445,111 @@
 		$("#update").submit();
 	}
 	
+	function reg(){
+		for(var i = 1 ; i <= num ; i++){
+			var vnum = "#b_vehiclenum" + i;
+			
+			$.ajax({
+				url : "alreadyuse.admin",
+				data : {b_vehiclenum : $(vnum).val()},
+				success : function(data){
+					if(data.data == 0){
+						$("#target").submit();
+						
+					}else{
+						alert(data.num + "은 이미 있는 차량번호 입니다.");
+						
+					}
+				}
+			});
+		}
+	}
 	
 	$(function(){
 		
 		var count = 1;
 		
+		$("#checkall").click(function(){
+			if($("#checkall").prop("checked")){
+				$("input[name='chklist']").prop("checked",true);
+			}else{
+				$("input[name='chklist']").prop("checked",false);
+			}
+		});
+		
+		$("input[name='chklist']").change(function(){
+
+			 if($('input:checkbox[name="chklist"]:checked').length < $('input:checkbox[name="chklist"]').length){
+				 $("#checkall").prop("checked",false);
+			 }else{
+				 $("#checkall").prop("checked",true);
+			 }
+		});
+
+		$("#dbtn").click(function(){
+			for(var i = 0 ; i < ${Count} ; i++){ //엑박 뜨는거 무시할것
+				var checkbox = "#check" + i;
+				
+				if($(checkbox).is(":checked")){
+					console.log($(checkbox).val());
+					$("#match-pass").modal("show");	
+				}
+			}
+		});
+		
+		$("#passtrue").click(function(){
+			$.ajax({
+				url:"matchpass.admin",
+				data:{m_pw : $("#m_pw").val()},
+				success : function(data){
+					console.log(data.data);
+					if(data.data == 'true'){
+						$("#match-pass").modal("hide");
+						$("#myModal").modal("show");
+						 $("#myModalLabel2").empty();
+						 $("#myModalLabel2").append("차량 번호<br>");
+						 
+						for(var i = 0 ; i < ${Count} ; i++){ //엑박 뜨는거 무시할것
+							var checkbox = "#check" + i;
+							
+							if($(checkbox).is(":checked")){
+								console.log($(checkbox).val());	
+								 $('#myModalLabel2').append("&nbsp;<span class='blue'>&nbsp;"+$(checkbox).val()+'</span><br>');
+							}
+						}
+						 $('#myModalLabel2').append("삭제 하시겠습니까?");
+
+					}else{
+						alert("비밀번호가 틀렸습니다.");
+					}
+				}
+			});
+		});
+		
+		$("#cancelbutton").click(function(){
+			 
+			for(var i = 0 ; i < ${Count} ; i++){ //엑박 뜨는거 무시할것
+				var checkbox = "#check" + i;
+				
+				if($(checkbox).is(":checked")){
+					$.ajax({
+						url:"deleteBus.admin",
+						data : {b_vehiclenum : $(checkbox).val()},
+						success : function(data){
+							window.location.reload();
+						}
+					});			
+				}
+			}
+		});
+		
+		
+		
 		$("#ubtn").click(function(){
 			if($("input[name='chklist']:checked").length >= 2){
 				alert("2개 이상을 수정 할 수 없습니다.");
 			}else{
-				for(var i = 0 ; i < ${Count} ; i++){
+				for(var i = 0 ; i < ${Count} ; i++){ //엑박 무시할것
 					var checkbox = "#check" + i;
 					
 					if($(checkbox).is(":checked")){
@@ -499,24 +616,6 @@
 					
 				}
 			}	
-		});
-			
-
-		$("#reg").click(function(){
-			
-			for(var i = 1 ; i <= num ; i++){
-				var vnum = "#b_vehiclenum" + i;
-				
-				$.ajax({
-					url : "alreadyuse.admin",
-					data : {b_vehiclenum : $(vnum).val()},
-					success : function(data){
-						console.log(data);					
-					}
-				});
-			}
-			
-			
 		});
 		
 		$("#ebtn").click(function(){
