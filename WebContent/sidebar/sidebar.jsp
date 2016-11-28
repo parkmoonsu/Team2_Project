@@ -39,7 +39,7 @@
                     <ul class="nav child_menu">
                       <li><a href="busenroll.admin">버스 등록/삭제</a></li>
                       <li><a href="form_advanced.html">꺄륵쿠</a></li>
-                      <li><a href="form_validation.html">스투스</a></li>
+                      <li><a href="chagozi.admin">차고지 별 버스 상태</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i>기사 관리 <span class="fa fa-chevron-down"></span></a>

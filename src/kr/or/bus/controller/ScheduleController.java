@@ -27,6 +27,7 @@ import kr.or.bus.dao.ScheduleDAO;
 import kr.or.bus.dto.ScheduleDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
+import kr.or.bus.dto.RegulOffrJoinDTO;
 
 @Controller
 
@@ -193,7 +194,11 @@ public class ScheduleController {
 	
 	//기록보기
 	@RequestMapping("/schedule_history.htm")
-	public String viewHistory(){
+	public String viewHistory(Model model){
+		System.out.println("여긴 타냐?");
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		List<RegulOffrJoinDTO> list=dao.history_select();
+		model.addAttribute("list", list);
 		return "schedule/schedule_history";
 	}
 	

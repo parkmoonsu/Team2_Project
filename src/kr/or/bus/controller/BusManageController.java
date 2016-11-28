@@ -113,4 +113,72 @@ public class BusManageController {
 		
 		return "busmanage/insertbussuccess";
 	}
+	
+	@RequestMapping("/enrollupdate.admin")
+	public String enrollUpdate(String b_vehiclenum , Model model){
+		BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO dto = service.getVehicle(b_vehiclenum);
+		 
+		model.addAttribute("bdto", dto);
+		
+		return "busmanage/enrollupdate"; 
+	}
+	
+	@RequestMapping(value="/getgarage2.admin",method=RequestMethod.POST)
+	public View getGarageName(String g_num , Model model){
+		//System.out.println("g_num : " + g_num);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> g_name = service.getGarageName(g_num);
+		List<String> gname = new ArrayList<String>();
+		List<String> gnum = new ArrayList<String>();
+		
+		for(int i = 0 ; i < g_name.size() ; i++ ){
+			gname.add(g_name.get(i).getG_name());
+			gnum.add(g_name.get(i).getG_num());
+			System.out.println("gname : " + gnum.get(i));
+		}
+		model.addAttribute("gname", gname);
+		model.addAttribute("gnum", gnum);
+		
+		return jsonview;
+	}
+	
+	@RequestMapping(value="/getroutenum2.admin",method=RequestMethod.POST)
+	public View getRouteNum2(String g_num , Model model){
+		
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> r_num = service.getRoute(g_num);
+		List<String> rnum = new ArrayList<String>();
+		
+		for(int i = 0 ; i < r_num.size() ; i++){
+			rnum.add(r_num.get(i).getR_num());
+			System.out.println("rnum : "  + rnum.get(i));
+		}
+		
+		model.addAttribute("rnum", rnum);
+		return jsonview;
+	}
+	
+	@RequestMapping("/getmember2.admin")
+	public View getMember2(Model model ,String mid){
+		List<MemberDTO> member = service.getMembers(mid);
+		List<String> m_id  = new ArrayList<String>();
+		List<String> m_name  = new ArrayList<String>();
+		
+		for(int i = 0 ; i < member.size() ; i++){
+			m_id.add(member.get(i).getM_id());
+			m_name.add(member.get(i).getM_name());
+			
+		}
+		
+		model.addAttribute("m_id", m_id);
+		model.addAttribute("m_name", m_name);
+		
+		return jsonview;
+	}
+	@RequestMapping("/chagozi.admin")
+	public String chagozi(){
+		
+		
+		return "redirect:chagozi.jsp";
+
+	}
+	
 }
