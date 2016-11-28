@@ -52,6 +52,7 @@ public class CommuteService {
 
 		dao.updateendtime(dhour, m_id, tdate);
 		dao.updateCommuteoff(m_id,tdate,dhour);
+		
 		CommuteJoinCstartJoinCendDTO dto = dao.ceselect(m_id);
 		
 		return dto;
@@ -68,6 +69,23 @@ public class CommuteService {
 		
 		CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
 		List<CommuteJoinCstartJoinCendDTO> list = dao.getSelect(page, m_id);
+
+		return list;
+	}
+	
+	
+	//test
+	public List<CommuteJoinCstartJoinCendDTO> getoffSelect(String pg, String m_id){
+		
+		int page = 1;
+		
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		System.out.println("page : " + page);
+		
+		CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
+		List<CommuteJoinCstartJoinCendDTO> list = dao.getoffSelect(page, m_id);
 
 		return list;
 	}

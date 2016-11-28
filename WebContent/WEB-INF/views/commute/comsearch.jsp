@@ -58,7 +58,8 @@
 		var id = "${LoginUser}";
 		var page = "${page}";
 
-		$("#gotowork").click(
+
+		$("#gotowork").one("click",
 				function() {
 					/* $.ajax({
 						url:"gotowork.member",
@@ -83,13 +84,16 @@
 						},
 						type : "post",
 						success : function(data) {
+							console.log(data)
 							$("#commutestartinfo").empty();
 							$("#commutestartinfo").append(
-									'id님의 출근시간은 ' + data.dto.c_start + '입니다'
-											+ "<br>" + 'id님의 출근상태는 '
+									id+'님의 출근시간은 ' + data.dto.c_start + '입니다'
+											+ "<br>" + id+'님의 출근상태는 '
 											+ data.dto.cs_stat + '입니다.');
+							$("#gotowork").attr('disabled',true)
 							$.ajax({
-								url : "comsearchstartinfo.member",
+								//url : "comsearchstartinfo.member",
+								  url : "comsearchtestinfo.member",
 								data : {
 									m_id : id,
 									pg : page
@@ -100,12 +104,12 @@
 									$('#commutesearchstarttableinfo').append(data);
 								}
 							});
+							$("#gotowork").attr('disabled',true)
 						}
 					});
 
 				});
-
-		var id = "${LoginUser}";
+		$("#gotowork").attr('disabled',true)
 		$("#getoffwork").click(
 				function() {
 
@@ -129,7 +133,7 @@
 								},
 								type : "post",
 								success : function(data) {
-									 $('#commutesearchstarttableinfo').empty(); 
+									$('#commutesearchstarttableinfo').empty(); 
 									$('#commutesearchstarttableinfo').append(data);
 								}
 							});
@@ -156,7 +160,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">${LoginUser}님의출근정보</h4>
+					<h4 class="modal-title"><i class="fa fa-user"></i>&nbsp;${LoginUser}님의 출근정보</h4>
 				</div>
 				<div class="modal-body" id="commutestartinfo"
 					style="text-align: center; font-size: 20px; line-height: 200%">
@@ -179,7 +183,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">${LoginUser}님의퇴근정보</h4>
+					<h4 class="modal-title"><i class="fa fa-user"></i>&nbsp;${LoginUser}님의 퇴근정보</h4>
 				</div>
 				<div class="modal-body" id="commuteendinfo"
 					style="text-align: center; font-size: 20px; line-height: 200%">
@@ -237,16 +241,20 @@
 															<td>NO.</td>
 															<td>날짜</td>
 															<td>출근시간</td>
+															<td>출근상태</td>
 															<td>퇴근시간</td>
+															<td>퇴근상태</td>
 														</tr>
 													</thead>
-													<tbody style="text-align: center">
+													<tbody>
 														<c:forEach var="i" items="${list}">
 															<tr>
 																<td>${i.rownum}</td>
 																<td>${i.c_date}</td>
 																<td>${i.c_start}</td>
+																<td>${i.cs_stat}</td>
 																<td>${i.c_end}</td>
+																<td>${i.ce_stat}</td>
 															<tr>
 														</c:forEach>
 													</tbody>
@@ -267,13 +275,13 @@
 
 												<ul class="pager">
 													<c:if test="${pgc > 1}">
-														<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
+														<li><a href="comsearch.member?pg=${pgc-1}">Previous</a></li>
 													</c:if>
 
 
 
 													<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-														<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
+														<li><a href="comsearch.member?pg=${i}">${i}</a></li>
 													</c:forEach>
 
 
@@ -288,6 +296,7 @@
 													data-toggle="modal" data-target="#myModal">
 													<i class="fa fa-sign-in"></i> 출근
 												</div>
+												
 
 												<div class="btn btn-success btn-xs" id="getoffwork"
 													data-toggle="modal" data-target="#myModal2">
