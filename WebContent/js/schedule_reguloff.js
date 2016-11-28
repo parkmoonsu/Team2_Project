@@ -215,8 +215,18 @@ function loadCalendar(){
 						//데이터 저장
 						$("#title2").val(calEvent.title);
 						$("#select2").val(calEvent.dow[0]);
-					}else{
-						alert("해당 일정은 편집할 수 없습니다.");
+					}else{	
+						if (confirm("해당 사용자와 일정을 바꾸시겠습니까?") == true) {
+							//선택한 사용자
+							
+							//본인
+							
+							
+							
+							$("#calendar").fullCalendar('removeEvents', event.id);
+							$("#calendar").fullCalendar('renderEvent', evt);
+						}
+
 					}	
 				}
 			});		

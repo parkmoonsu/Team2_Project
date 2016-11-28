@@ -12,6 +12,7 @@ import java.util.List;
 import kr.or.bus.dto.ScheduleDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
+import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 
 //CRUD
@@ -36,5 +37,7 @@ public interface ScheduleDAO {
 	//로그인아이디와 일정m_id 비교
 	public String returnid(String id);
 	
-	public List<RegulOffrJoinDTO> history_select();
-}	
+	public List<RegulOffrJoinDTO> history_select(String m_id) throws ClassNotFoundException, SQLException;
+	public int history_insert(RegulOffrDTO dto) throws ClassNotFoundException, SQLException;
+	//public int history_update(RegulOffrDTO dto) throws ClassNotFoundException, SQLException;
+}
