@@ -28,17 +28,17 @@ public class CommuteService {
         CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
 		String m_name=dao.getName(m_id);
 		System.out.println("m_name :" + m_name);
-		
-		//if(dao.csselect(tdate)==true){
+		System.out.println("오늘 날짜"+tdate);
 			
 			int result = dao.gotowork(m_id, m_name,tdate,dhour);
 			System.out.println("result 값" + result);
 			
 			dao.updateCommute(m_id,tdate,dhour);
-			CommuteJoinCstartJoinCendDTO dto = dao.csselect(m_id);
+			CommuteJoinCstartJoinCendDTO dto = dao.csselect(m_id, tdate);
 			
-		//}
-		return dto;
+			return dto;			
+		
+		
 	}
 	
 	//////
@@ -57,7 +57,7 @@ public class CommuteService {
 		dao.updateendtime(dhour, m_id, tdate);
 		dao.updateCommuteoff(m_id,tdate,dhour);
 		
-		CommuteJoinCstartJoinCendDTO dto = dao.ceselect(m_id);
+		CommuteJoinCstartJoinCendDTO dto = dao.ceselect(m_id, tdate);
 		
 		return dto;
 	}
@@ -90,7 +90,10 @@ public class CommuteService {
 		
 		CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
 		List<CommuteJoinCstartJoinCendDTO> list = dao.getoffSelect(page, m_id);
-
+		for(int i=0;i<list.size();i++){
+			System.out.println("c_end"+i+":"+list.get(i).getC_end());
+			System.out.println("ce_stat"+i+":"+list.get(i).getCe_stat());
+		}
 		return list;
 	}
 	

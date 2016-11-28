@@ -136,62 +136,9 @@ th, td {
 																</c:forEach>
 															</tr>
 														</c:forEach>
-													</tbody>												
-													<%-- <thead style="font-weight: bold;">
-														<tr>
-															<td>NO.</td>
-															<td>날짜</td>
-															<td>출근시간</td>
-															<td>출근상태</td>
-															<td>퇴근시간</td>
-															<td>퇴근상태</td>
-														</tr>
-													</thead>
-													<tbody>
-														<c:forEach var="i" items="${list}">
-															<tr>
-																<td>${i.rownum}</td>
-																<td>${i.c_date}</td>
-																<td>${i.c_start}</td>
-																<td>${i.cs_stat}</td>
-																<td>${i.c_end}</td>
-																<td>${i.ce_stat}</td>
-															<tr>
-														</c:forEach>
-													</tbody>
-
-													</tbody> --%>
+													</tbody>	
 												</table> 
-												<%-- <!-- 요기서부터 페이징처리 -->
-												<c:set var="count" value="${count}" />
-												<c:set var="pgc" value="${pgs}" />
-												<c:choose>
-													<c:when test="${count % 10 == 0}">
-														<c:set value="${count/10}" var="pagecount" />
-													</c:when>
-													<c:otherwise>
-														<c:set value="${count/10 + 1}" var="pagecount" />
-													</c:otherwise>
-												</c:choose>
-
-												<ul class="pager">
-													<c:if test="${pgc > 1}">
-														<li><a href="comsearch.member?pg=${pgc-1}">Previous</a></li>
-													</c:if>
-
-
-
-													<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-														<li><a href="comsearch.member?pg=${i}">${i}</a></li>
-													</c:forEach>
-
-
-													<c:if test="${pgc < count/10 }">
-														<li><a href="comsearch.member?pg=${pgc+1}">Next</a></li>
-													</c:if>
-												</ul>
-											</div>
-											<div style="text-align: right">--%>
+												
 											</div>
 
 

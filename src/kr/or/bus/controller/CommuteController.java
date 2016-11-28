@@ -71,11 +71,10 @@ public class CommuteController {
 		return "commute/commutesearchtable";	
 	}
 
-	
-	
+
 	//test
 	@RequestMapping("/comsearchtestinfo.member")
-	public String showtestinfolist(String pg , String m_id, Model model) {
+	public String showtestinfolist(String pg , String m_id,  Model model) {
 		
 		List<CommuteJoinCstartJoinCendDTO> list = service.getoffSelect(pg, m_id);
 		int page = service.pg(pg);
