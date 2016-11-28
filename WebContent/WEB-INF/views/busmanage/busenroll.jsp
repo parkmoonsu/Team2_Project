@@ -419,6 +419,11 @@
 			});
 	}
 	
+	function update(){
+		$("#update").submit();
+	}
+	
+	
 	$(function(){
 		
 		var count = 1;
@@ -445,6 +450,10 @@
 										for(var i = 0 ; i < data.m_id.length ; i++){
 											$("#mname_u").append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "</option>");
 										}
+										
+										if($("#mname_u").val() != "(미정)"){	
+											$("#mname_u").append("<option value = '(미정)'>(미정)</option>");
+										}
 									}
 									
 								});
@@ -456,8 +465,13 @@
 									type : "post",
 									data : {g_num : $("#g_name_u").val()},
 									success : function(data){
+									
 										for(var i = 0 ; i < data.gname.length; i++){
 											$("#g_name_u").append("<option value = " + data.gnum[i] + ">" + data.gname[i] + "</option>");
+										}
+										
+										if($("#g_name_u").val() != "(미정)"){	
+											$("#g_name_u").append("<option value = '(미정)'>(미정)</option>");
 										}
 									}
 								});
@@ -489,7 +503,20 @@
 			
 
 		$("#reg").click(function(){
-			$("#reg").submit();
+			
+			for(var i = 1 ; i <= num ; i++){
+				var vnum = "#b_vehiclenum" + i;
+				
+				$.ajax({
+					url : "alreadyuse.admin",
+					data : {b_vehiclenum : $(vnum).val()},
+					success : function(data){
+						console.log(data);					
+					}
+				});
+			}
+			
+			
 		});
 		
 		$("#ebtn").click(function(){

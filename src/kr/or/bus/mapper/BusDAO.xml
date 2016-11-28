@@ -112,4 +112,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member
 		where b_vehiclenum is null and m_id != #{mid}
 	</select>
+	
+	<select id = "alreadyUse" resultType = "int" parameterType = "String">
+		select count(*)
+		from bus
+		where b_vehiclenum = #{b_vehiclenum}
+	</select>
 </mapper>
