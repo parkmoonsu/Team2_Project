@@ -104,16 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO reguloffr
 		VALUES('600', #{m_id}, #{o_code}, #{ro_code}, sysdate, sysdate, #{ro_object})
 	</insert>
-	<!-- <update id="history_update">
-		update reguloffr
-		set ko_code='600',
-		o_code=#{o_code},
-		ro_code=#{ro_code},
-		ro_reqdate=sysdate,
-		ro_regdate=sysdate,
-		ro_object='선택안됨'
-		where m_id=#{m_id}
-	</update> -->
+
 
 	<!-- history DAO -->
 		

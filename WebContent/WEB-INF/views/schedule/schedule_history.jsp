@@ -428,8 +428,7 @@
 				}
 			});
 		});
-		console.log("dyfo");
-		console.log(${d}[0]);
+		
 		
 		
 	});
