@@ -1,4 +1,4 @@
-<!-- 
+<%-- <!-- 
 	@FileName : busenroll.jsp
 	@Project	: KosBus
 	@Date	: 2016. 11.25
@@ -503,7 +503,7 @@
 			 }
 		});
 
-		$("#dbtn").click(function(){
+	$("#dbtn").click(function(){
 			for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
 				var checkbox = "#check" + i;
 				
@@ -512,7 +512,10 @@
 					$("#match-pass").modal("show");	
 				}
 			}
-		});
+		}); 
+		
+		
+
 		
 		$("#passtrue").click(function(){
 			$.ajax({
@@ -701,3 +704,4 @@
 	</script>
 </body>
 </html>
+ --%>

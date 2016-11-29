@@ -45,6 +45,7 @@ public class MemberManageController {
 	
 	@Autowired
 	private MemberManageService service;
+	
 	@Autowired
 	private LoginService service2;
 	
@@ -165,37 +166,18 @@ public class MemberManageController {
    }
 	
 	
-	
-	@RequestMapping("/passcheck.admin")
-	public String passcheck(Model model , Principal principal , String param){
-		System.out.println("세션 ID : " + principal.getName());
-		
-		String encodepass = service.getPass(principal.getName());
-		System.out.println("m_pw : " + param);
-		System.out.println("encodePass : " + encodepass);
-		
-		boolean result = bCryptPasswordEncoder.matches(param, encodepass);
-		System.out.println("제발 출력이 나와랑");
-		System.out.println("result : " + result);
-		
-		String viewpage = "";
-		/*System.out.println(principal.getName());
-		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
-		System.out.println("dto  :  "+dto);
-		model.addAttribute("dto", dto);*/
-		
-	
-	
+	@RequestMapping("/matchpass1.admin")
+	public View matchPass(Principal principal , String m_pw , Model model){
+		boolean result = service.getPass(principal.getName(), m_pw);
+		String data = "";
 		if(result){
-			viewpage = "membermanage/memberinfo";
+			data = "true";
 		}else{
-			viewpage = "membermanage/matchfailpass";
+			data = "false";
 		}
 		
-		return viewpage;
+		model.addAttribute("data", data);
+		return jsonview;
 	}
-	
-	
-
 
 }
