@@ -49,4 +49,34 @@ public interface BusDAO {
 	
 	//버스 수정 - 기사 가져오기
 	public List<MemberDTO> getMembers(String mid);
+	
+
+	
+	//임시 노선별 출결현황
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String r_num);
+	            
+
+	//버스 수정
+	public void updateBus(String b_vehiclenum , String g_name , String r_num , String hidden);
+	
+	//내가 등록하려는 버스의 번호가 이미 있는 버스번호인지 확인(실수로 잘못 입력한 경우까지 처리)
+	public int alreadyUse(String b_vehiclenum);
+	
+	//기사의 버스가 등록되어있는데 다른 기사로 변경 할 경우
+	public void updateMember(String b_vehiclenum , String m_id);
+	public void updateVehicleNull(String m_id);
+	public MemberDTO selectMemberId(String b_vehiclenum);
+	
+	//차량 번호 삭제
+	public void deleteBus(String b_vehiclenum);
+
+	//마을버스 개수
+	public int mBus();
+	//시내버스 개수
+	public int nBus();
+	//시외버스 개수
+	public int wBus();
+	//고속버스 개수
+	public int gBus();
+
 }

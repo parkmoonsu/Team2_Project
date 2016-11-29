@@ -29,6 +29,11 @@ public class MemberJoinRegulOffDTO {
 	public void setM_name(String m_name) {
 		this.m_name = m_name;
 	}
+	@Override
+	public String toString() {
+		return "MemberJoinRegulOffDTO [m_id=" + m_id + ", o_code=" + o_code + ", m_name=" + m_name + "]";
+	}
+	
 	
 
 }

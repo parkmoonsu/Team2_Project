@@ -106,10 +106,115 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<select id="getMembers" resultType = "kr.or.bus.dto.MemberDTO">
-	
+	<select id="getMembers" resultType = "kr.or.bus.dto.MemberDTO">	
 		select m_id , m_name
 		from member
 		where b_vehiclenum is null and m_id != #{mid}
 	</select>
+	
+
+	<!-- 임시 노선별 출결현황-->
+	<select id="getShow"  resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select mem.m_name, com.c_date, cs.cs_stat ,bus.r_num      
+	    from member mem left outer join commute com on mem.m_id=com.m_id
+	    left outer join bus on  bus.B_vehiclenum = mem.B_VEHICLENUM
+	    left outer join cstart cs on cs.cs_code=com.cs_code
+	    order by r_num
+	</select>
+
+	<select id = "alreadyUse" resultType = "int" parameterType = "String">
+		select count(*)
+		from bus
+		where b_vehiclenum = #{b_vehiclenum}
+	</select>
+	
+	<update id = "updateBus">
+		update bus
+		set b_vehiclenum = #{param1} , 
+		g_num = 
+		<choose>
+			<when test="param2 == '선택'">
+			null,
+			</when>
+			<when test="param2 == '(미정)'">
+			null,
+			</when>
+			<otherwise>
+			#{param2},
+			</otherwise>
+		</choose>
+		r_num =
+		<choose>
+			<when test="param3 == '선택'">
+			null
+			</when>
+			<when test="param3 == '(미정)'">
+			null
+			</when>
+			<otherwise>
+			#{param3}
+			</otherwise>
+		</choose>
+		where b_vehiclenum = #{param4}
+	</update>
+	
+	<update id = "updateMember">
+	update member
+	set b_vehiclenum = #{param1}
+	where m_id = #{param2}
+	</update>
+	<update id = "updateVehicleNull" parameterType = "String">
+	update member
+	set b_vehiclenum = null
+	where m_id = #{m_id}
+	</update>
+	<select id = "selectMemberId" resultType = "kr.or.bus.dto.MemberDTO">
+	select m_id
+	from member
+	where b_vehiclenum = #{b_vehiclenum}
+	</select>
+	
+	<delete id="deleteBus" parameterType = "String">
+	delete
+	from bus
+	where b_vehiclenum = #{b_vehiclenum}
+	</delete>
+
+	
+	<select id="mBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '마을버스'
+	</select>
+	
+	<select id="nBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '시내버스'
+	</select>
+	
+	<select id="wBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '시외버스'
+	</select>
+	
+	<select id="gBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '고속버스'
+	</select>
+
 </mapper>
