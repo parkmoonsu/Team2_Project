@@ -24,7 +24,7 @@ public class RouteManageService {
         
         System.out.println("되냐");
         
-        String path = request.getServletContext().getRealPath("/route/route.json");
+        String path = request.getServletContext().getRealPath("/busstop/BusStop.json");
             
         try{
             fw = new FileWriter(path);
@@ -53,7 +53,7 @@ public class RouteManageService {
         BufferedReader br = null;
         PrintWriter out=null;
         String maps = null;
-        String path = request.getServletContext().getRealPath("/route/route.json");
+        String path = request.getServletContext().getRealPath("/busstop/BusStop.json");
         try{
         	fr = new FileReader(path);
         	br = new BufferedReader(fr);	        	
@@ -90,7 +90,7 @@ public class RouteManageService {
         
         System.out.println("되냐");
         
-        String path = request.getServletContext().getRealPath("/route/routeEdit.json");
+        String path = request.getServletContext().getRealPath("/busstop/BusStop.json");
             
         try{
             fw = new FileWriter(path);
@@ -119,7 +119,7 @@ public class RouteManageService {
         BufferedReader br = null;
         PrintWriter out=null;
         String maps = null;
-        String path = request.getServletContext().getRealPath("/route/routeEdit.json");
+        String path = request.getServletContext().getRealPath("/busstop/BusStop.json");
         try{
         	fr = new FileReader(path);
         	br = new BufferedReader(fr);	        	
