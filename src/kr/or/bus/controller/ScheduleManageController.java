@@ -53,5 +53,19 @@ public class ScheduleManageController {
 		model.addAttribute("mrmbrjdto", mrmbrjdto);
 		return jsonview;
 	}
+	//유효성 처리 해줘야 함
+	@RequestMapping("/makingschedule.admin")
+	public View makingSchedule(String m_id, String o_date, Model model){
+		System.out.println(m_id+"/"+o_date);
+		service.decideReguloffMember(m_id, o_date);
+		return jsonview;
+	}
+	//유효성 처리 해줘야 함,reguloffr
+	@RequestMapping("/modifyingschedule.admin")
+	public View modifyingSchedule(String m_id, String o_date, Model model){
+		System.out.println(m_id+"/"+o_date);
+		service.modifyReguloffMember(m_id, o_date);
+		return jsonview;
+	}
 	
 }

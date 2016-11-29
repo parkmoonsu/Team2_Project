@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 정기휴무가 정해진 노선이 배정된 기사님 뽑기 -->
 	<select id="getDecideReguloffMember"
 		resultType="kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO">
-		select rego.M_ID, mem.m_name, mo.O_DATE
+		select rego.M_ID, mem.m_name, mo.O_DATE, mo.o_code
 		from member mem
 		join reguloff rego
 		on rego.M_ID = mem.M_ID
@@ -50,5 +50,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on rou.R_NUM = bu.R_NUM
 		where rou.r_num = #{r_num}
 	</select>
-
+	
+	<select id="getOcode" resultType="String">
+		select o_code from moff where o_date = #{o_date}
+	</select>
+	
+	<insert id="insertReguloff" parameterType="String">
+		insert into reguloff(m_id, o_code, ro_regdate) values(#{param1},#{param2},sysdate)
+	</insert>
+	
+	<update id="updateReguloff">
+		update reguloff set o_code = #{param2} where m_id = #{param1}
+	</update>
 </mapper>

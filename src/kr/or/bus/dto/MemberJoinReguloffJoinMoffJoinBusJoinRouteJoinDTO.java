@@ -12,7 +12,14 @@ public class MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO {
 	private String m_id;
 	private String m_name;
 	private String o_date;
+	private String o_code;
 	
+	public String getO_code() {
+		return o_code;
+	}
+	public void setO_code(String o_code) {
+		this.o_code = o_code;
+	}
 	public String getM_id() {
 		return m_id;
 	}

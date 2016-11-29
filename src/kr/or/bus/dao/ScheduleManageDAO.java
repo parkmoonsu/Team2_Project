@@ -19,4 +19,13 @@ public interface ScheduleManageDAO {
 	
 	//정기휴무가 정해진 노선의 사원들
 	public List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> getDecideReguloffMember(String r_num);
+
+	//휴무가 정해지지 않은 노선의 사원 정규 휴무 코드 가져오기
+	public String getOcode(String o_date);
+	
+	//휴무가 정해지지 않은 노선의 사원 휴무 정하기
+	public int insertReguloff(String m_id, String o_code);
+	
+	//정해진 휴무를 변경해주기
+	public int updateReguloff(String m_id, String o_code);
 }

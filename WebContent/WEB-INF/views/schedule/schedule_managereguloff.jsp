@@ -222,7 +222,6 @@ body {
 	<script>
 
 	$('#selectedroutenumber').change(function(){
-		$('#draggablemember').empty();
 		console.log('선택한 루트: '+$('#selectedroutenumber').val());
 		var param = $('#selectedroutenumber').val();
 		var view = "";
@@ -230,9 +229,86 @@ body {
 			url:"getselectedmember.admin",
 			data:{"r_num":param},
 			success:function(data){
+
+				var m_name = "";
+				var m_id = "";
+				var array = new Array(); //db에 저장된 일정을 담는 배열
+				
+				$.each(data.mrmbrjdto,function(index,obj){
+					console.log("휴무있는m_id: "+obj.m_id);
+					console.log("휴무있는m_name: "+obj.m_name);
+					console.log("휴무있는o_date: "+obj.o_date);
+					console.log("휴무있는o_code: "+obj.o_code);
+					var item = {
+							title : obj.m_name,
+							description : obj.m_id,
+							dow : obj.o_code
+					};
+					array.push(item);
+				}); 
+				
+				var calendar = $('#calendar').fullCalendar({
+
+					header : {
+						left : 'prev,next today',
+						center : 'title',
+						right : 'month,agendaWeek,agendaDay'
+					},
+					editable : true,
+					eventDrop : function(event,dayDelta,minuteDelta,allDay,revertFunc){
+						console.log('변경자'+event.title);
+						console.log('시작일'+event.start.format('YYYY-MM-DD'));
+						console.log('변경자 id:'+event.description);
+						var item = {
+								m_id : event.description,
+								m_name : event.title,
+								o_date : event.start.format('dddd').substr(0,3)
+						}
+						$.ajax({
+							url:"modifyingschedule.admin",
+							data: item,
+							success:function(data){
+								console.log(data);
+							}
+						});
+					},
+					eventDurationEditable : false,
+					droppable : true, // this allows things to be dropped onto the calendar
+					events : array,
+					monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+					monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+					dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+					dayNamesShort: ["일","월","화 ","수 ","목 ","금 ","토 "],
+					titleFormat: "YYYY년 MM월",
+					eventRender : function(event, element) {
+						//console.log("description"+event.description);
+						m_name = event.title;
+						m_id = event.description;
+					},
+					drop : function(date, jsEvent) {
+						console.log(date.format('dddd').substr(0,3));
+						var o_date = date.format('dddd').substr(0,3);
+						var dragitem = $(this);
+						$.ajax({
+							url : "makingschedule.admin",
+							data : 
+							{
+								"m_name":m_name,
+								"m_id":m_id,
+								"o_date":o_date
+							},
+							success : function(data){
+								console.log(date);
+								$(dragitem).remove();
+							}
+						});
+						
+					}
+				});
+				
 				$.each(data.mjrdto,function(index,value){
-					console.log("m_id"+value.m_id);
-					console.log("m_name:"+value.m_name);
+					console.log("휴무없는m_id: "+value.m_id);
+					console.log("휴무없는m_name: "+value.m_name);
 					view += "<div class='fc-event'>";
 					view += value.m_name;
 					view += "<input type='hidden' value='";
@@ -250,7 +326,7 @@ body {
 					
 					$(this).data('event', {
 						title: $.trim($(this).text()), // use the element's text as the event title
-						description: $(this).find('input').val()
+						description: $(this).find('input').val(),
 						stick: true // maintain when user navigates (see docs on the renderEvent method)
 					});
 					
