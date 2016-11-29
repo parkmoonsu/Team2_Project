@@ -420,7 +420,7 @@
     		deleteRoute();
     		if($("#selectBus").val() !=null){
         		$.ajax({
-                    url : "routeRead.admin",
+                    url : "busStopOriginalRead.admin",
                     type : "get",
                     dataType : "json",
                     data : {busNo:$("#selectBus").val()},

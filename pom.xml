@@ -201,8 +201,14 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>4.0.1.RELEASE</version>
-
 		</dependency>
+		
+		<!-- xml 을 json 파싱 -->
+      <dependency>
+    	<groupId>xom</groupId>
+    	<artifactId>xom</artifactId>
+    	<version>1.2.5</version>
+	  </dependency>
 		
   </dependencies>
   
