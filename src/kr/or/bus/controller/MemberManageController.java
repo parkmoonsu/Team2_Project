@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +30,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.dto.MemberJoinMDetailRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrDTO;
 import kr.or.bus.dto.MemberJoinResRecordDTO;
+import kr.or.bus.service.LoginService;
 import kr.or.bus.service.MemberManageService;
 @Controller
 public class MemberManageController {
@@ -41,6 +45,12 @@ public class MemberManageController {
 	
 	@Autowired
 	private MemberManageService service;
+	
+	@Autowired
+	private LoginService service2;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping("/membermanage.admin")
 	public String memberInfo(String pg , Model model) {
@@ -154,6 +164,20 @@ public class MemberManageController {
       
       return jsonview;
    }
-
+	
+	
+	@RequestMapping("/matchpass1.admin")
+	public View matchPass(Principal principal , String m_pw , Model model){
+		boolean result = service.getPass(principal.getName(), m_pw);
+		String data = "";
+		if(result){
+			data = "true";
+		}else{
+			data = "false";
+		}
+		
+		model.addAttribute("data", data);
+		return jsonview;
+	}
 
 }
