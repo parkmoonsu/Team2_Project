@@ -274,12 +274,11 @@ function loadCalendar(){
 								$("#calendar").fullCalendar('renderEvent', event1);
 								$("#calendar").fullCalendar('renderEvent', event2);
 								
-								//event1 = null;
 								event1={
 									m_id : calEvent.id,
 									o_code : o_code1
 								};
-								//event2=null;
+								
 								event2={
 									m_id : loginid,
 									o_code : o_code2
@@ -290,7 +289,7 @@ function loadCalendar(){
 									type : 'post',
 									data : event1,
 									success : function(data) {
-										console.log(data);
+										
 									}
 								});
 								
@@ -303,40 +302,42 @@ function loadCalendar(){
 									}
 								});
 										
-							});
-							
-							//저장
-							/*var event = {
-									m_id : calEventObj.id,
-									o_code : o_code
-								};
-								$("#calendar").fullCalendar('removeEvents', calEventObj.id);*/
-								
-								/*event1={
-										m_id:event1.id,
-										o_code:event1.
-										
-								};
-								event2={
-										
-								};
-								
+								console.log(event1);
+								console.log(event2);
+								//history 저장(클릭한사람)
 								$.ajax({
-									url : 'reguloff_update.htm',
+									url : 'history_insert.htm',
 									type : 'post',
-									data : event,
+									data : { 
+										ko_code:'600',
+										o_code:event2.o_code, //변경전 요일
+										m_id:event1.m_id, //본인id > 클릭된 사람
+										ro_code:event1.o_code, //변경후 요일
+										ro_object:event2.m_id //바꿀사람id
+									},
 									success : function(data) {
-										event = {
-											id : data.data.m_id,
-											title : data.data.m_name,
-											dow : [ data.data.o_code ]
-										};
-										$("#calendar").fullCalendar('renderEvent', event);
-										$("#calendar").fullCalendar('unselect');
+										
 									}
-								});*/
+								});
+								
+								//history 저장(클릭한사람)
+								$.ajax({
+									url : 'history_insert.htm',
+									type : 'post',
+									data : { 
+										ko_code:'600',
+										o_code:event1.o_code, //변경전 요일
+										m_id:event2.m_id, //본인id > 클릭된 사람
+										ro_code:event2.o_code, //변경후 요일
+										ro_object:event1.m_id //바꿀사람id
+									},
+									success : function(data) {
+										
+									}
+								});
+								
+							});
 						}
-
 					}	
 				}
 			});		
