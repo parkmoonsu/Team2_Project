@@ -5,20 +5,14 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
+
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
-
-import net.sf.json.JSONObject;
-import net.sf.json.xml.XMLSerializer;
 
 @Service
 public class RouteManageService {
@@ -59,8 +53,7 @@ public void routelocationRead(HttpServletRequest request, HttpServletResponse re
 		FileReader fr = null;
         BufferedReader br = null;
         PrintWriter out=null;
-        String maps = null;
-        String busno = request.getParameter("busNo");
+        String maps = null;  
         
         String path = request.getServletContext().getRealPath("/route/route.json");
         try{
@@ -127,7 +120,6 @@ public void routelocationRead(HttpServletRequest request, HttpServletResponse re
         BufferedReader br = null;
         PrintWriter out=null;
         String maps = null;
-        String busno = request.getParameter("busNo");
         
         String path = request.getServletContext().getRealPath("/route/routeEdit.json");
         try{

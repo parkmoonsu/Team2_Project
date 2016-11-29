@@ -219,7 +219,7 @@
            		map: map,
            		//label: latLng.title,
            		animation: google.maps.Animation.DROP,
-           		icon : 'cccc.png',
+           		icon : '${pageContext.request.contextPath}/images/cccc.png',
            		zindex : "5"
         	});
      	  	map.panTo(originalMarker.getPosition());
@@ -341,7 +341,7 @@
        		BusMarker = new google.maps.Marker({
           		map: map,
           		position:new google.maps.LatLng(itemList.tmY,itemList.tmX),
-          		icon:"bus.png"
+          		icon:"${pageContext.request.contextPath}/images/bus.png"
        		});
        }else{
     	    console.log("너 마커 새로 생성안함??");
@@ -355,7 +355,7 @@
         		B2usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(itemList.tmY,itemList.tmX),
-           		icon:"bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus.png"
         		});
         }else{
      	    console.log("너 마커 새로 생성안함??");
@@ -369,7 +369,7 @@
         		B3usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(itemList.tmY,itemList.tmX),
-           		icon:"bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus.png"
         		});
         }else{
      	    console.log("너 마커 새로 생성안함??");
@@ -383,7 +383,7 @@
         		B4usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(itemList.tmY,itemList.tmX),
-           		icon:"bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus.png"
         		});
         }else{
      	    console.log("너 마커 새로 생성안함??");
