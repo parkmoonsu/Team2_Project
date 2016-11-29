@@ -240,9 +240,9 @@ function loadCalendar(){
 							var event1={
 								id:calEvent.id,
 								title:calEvent.title,
-								dow:[calEvent.dow[0]]
+								dow:calEvent.dow
 							};
-							$("#calendar").fullCalendar('removeEvents', event.id);
+							$("#calendar").fullCalendar('removeEvents', event1.id);
 							$("#calendar").fullCalendar('unselect');
 							
 							//본인껄 어케 뽑나???
@@ -258,21 +258,26 @@ function loadCalendar(){
 										title:data.dto.m_name,
 										dow:[data.dto.o_code]
 									};
-									$("#calendar").fullCalendar('removeEvents', event.id);
+									$("#calendar").fullCalendar('removeEvents', event2.id);
 									$("#calendar").fullCalendar('unselect');
 								}
 							});
-							
 							//바꾸기
 							$(document).ajaxStop(function() {
-								event1.dow=event2.dow;
-								event2.dow=[calEvent.dow[0]];
-								var o_code1=event1.dow[0];
-								var o_code2=event2.dow[0];
 								
+								event1.dow=event2.dow;
+								event2.dow=calEvent.dow;
+								
+								console.log("이벤트1");
+								console.log(event1.dow);
+								console.log("이벤트2");
+								console.log(event2.dow);
 								
 								$("#calendar").fullCalendar('renderEvent', event1);
 								$("#calendar").fullCalendar('renderEvent', event2);
+								
+								var o_code1=event1.dow[0]; //여기가 문제
+								var o_code2=event2.dow[0];
 								
 								event1={
 									m_id : calEvent.id,
@@ -283,7 +288,12 @@ function loadCalendar(){
 									m_id : loginid,
 									o_code : o_code2
 								};
+								console.log("event1");
+								console.log(event1);
+								console.log("event2");
+								console.log(event2);
 								
+								//일정저장
 								$.ajax({
 									url : 'reguloff_update.htm',
 									type : 'post',
@@ -301,10 +311,8 @@ function loadCalendar(){
 										
 									}
 								});
-										
-								console.log(event1);
-								console.log(event2);
-								//history 저장(클릭한사람)
+
+								//history 저장
 								$.ajax({
 									url : 'history_insert.htm',
 									type : 'post',
@@ -320,7 +328,7 @@ function loadCalendar(){
 									}
 								});
 								
-								//history 저장(클릭한사람)
+								//history 저장
 								$.ajax({
 									url : 'history_insert.htm',
 									type : 'post',
