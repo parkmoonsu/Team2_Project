@@ -276,7 +276,7 @@
               map: map,
               //label: latLng.title,
               animation: google.maps.Animation.DROP,
-              icon : 'cccc.png',
+              icon : "${pageContext.request.contextPath}/images/cccc.png",
               draggable : true,
               zindex : "5"
         });
