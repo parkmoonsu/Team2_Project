@@ -1,16 +1,16 @@
 <!-- 
-	@FileName : memberinfo.jsp
-	@Project	: KosBus
-	@Date	: 2016. 11.17
-	@Author	: 김용현
-	@Discription : (관리자)회원 관리 페이지 View단
+   @FileName : memberinfo.jsp
+   @Project   : KosBus
+   @Date   : 2016. 11.17
+   @Author   : 김용현
+   @Discription : (관리자)회원 관리 페이지 View단
  -->
 
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -56,12 +56,12 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-	
+
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
 </head>
 
@@ -141,12 +141,12 @@
 			<!-- 모달끝1 -->
 
 			<!--  modal2 -->
-			<div class="modal fade table-responsive" id="exampleModal2" tabindex="-1"
-				role="dialog" aria-labelledby="myLargeModalLabel">
+			<div class="modal fade table-responsive" id="exampleModal2"
+				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 			</div>
-		
-		
-		<!-- modal2 끝 -->
+
+
+			<!-- modal2 끝 -->
 			<div class="right_col" role="main">
 				<div class="">
 					<div class="page-title">
@@ -187,7 +187,7 @@
 											</span>
 										</div>
 									</div>
-									
+
 									<table class="table table-hover  projects">
 										<thead>
 											<tr>
@@ -200,48 +200,51 @@
 												<th style="width: 20%"></th>
 											</tr>
 										</thead>
-											<c:set value="${list}" var="d"/>
-										
-											<c:forEach var="i" items="${d}">
+										<c:set value="${list}" var="d" />
+
+										<c:forEach var="i" items="${d}">
 											<tr>
 												<td>${i.r}</td>
-												<td><a href="#"  onClick="smodal('${i.m_id}');">${i.m_id}</a></td>
+												<td><a href="#" onClick="smodal('${i.m_id}');">${i.m_id}</a></td>
 												<td><small>${i.m_name}</small></td>
-												<td><a href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="${i.m_name},${i.m_email}">${i.m_email}</a></td>
+												<td><a href="#" data-toggle="modal"
+													data-target="#exampleModal"
+													data-whatever="${i.m_name},${i.m_email}">${i.m_email}</a></td>
 												<td><small>${i.j_name}</small></td>
 												<td>${i.m_annual}일</td>
-												<td style = "text-align:center"> 
-													<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
-                                         			 삭제 </div>
-                                         		</td>
+												<td style="text-align: center">
+													<div class="btn btn-danger btn-xs"
+														onclick="deleteMember('${i.m_id}','${i.m_name}');">
+														<i class="fa fa-trash-o"></i> 삭제
+													</div>
+												</td>
 											</tr>
-											</c:forEach>
+										</c:forEach>
 										</tbody>
 									</table>
-									
 									<!-- end project list -->
-									
+
 									<!-- 요기서부터 페이징처리 -->
-									<c:set var = "mc" value = "${membercount}"/>
-									<c:set var = "pgc" value = "${pgs}"/>
+									<c:set var="mc" value="${membercount}" />
+									<c:set var="pgc" value="${pgs}" />
 									<c:choose>
-											<c:when test="${mc % 10 == 0}">
-												<c:set value = "${mc/10}" var = "pagecount"/>
-											</c:when>
-											<c:otherwise>
-												<c:set value = "${mc/10 + 1}" var = "pagecount"/>
-											</c:otherwise>
-									</c:choose>	
+										<c:when test="${mc % 10 == 0}">
+											<c:set value="${mc/10}" var="pagecount" />
+										</c:when>
+										<c:otherwise>
+											<c:set value="${mc/10 + 1}" var="pagecount" />
+										</c:otherwise>
+									</c:choose>
 									<ul class="pager">
 										<c:if test="${pgc > 1}">
 											<li><a href="membermanage.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
-										
-										
+
+
 										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
 											<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
 										</c:forEach>
-										
+
 										<c:if test="${pgc < mc/10 }">
 											<li><a href="membermanage.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
@@ -253,7 +256,43 @@
 				</div>
 			</div>
 
-      <!-- 수현:삭제모달    -->
+			<!-- 비밀번호 모달 :match-pass -->
+			<div class="modal fade" id="match-pass" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true"
+				style="display: none;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- Begin # DIV Form -->
+						<div id="div-forms">
+							<div class="modal-header" align="center">
+								<h3>비밀번호 입력</h3>
+							</div>
+							<!-- Begin # Login Form -->
+							<form id="login-form" method="post">
+								<div class="modal-body">
+									<div style="text-align: center">
+										<label for="m_pw">비밀번호 </label> <input type="password"
+											name="m_pw" id="m_pw">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<div>
+										<input type="button" class="btn btn-dark" value="완료"
+											id="passtrue" data-target="myModal">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">닫기</button>
+									</div>
+								</div>
+							</form>
+							<!-- End # Login Form -->
+						</div>
+						<!-- End # DIV Form -->
+					</div>
+				</div>
+			</div>
+			<!-- end modal -->
+
+			<!-- 수현:삭제모달    -->
 			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
@@ -272,6 +311,7 @@
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">취소</button>
 							<input type="hidden" id="hvalue">
+							<input type="hidden" id="hvalue2">
 						</div>
 					</div>
 				</div>
@@ -284,12 +324,11 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title" id="resrecordtitle">
-								 
-							</h4>
+							<h4 class="modal-title" id="resrecordtitle"></h4>
 						</div>
-						<div class="modal-body" aria-labelledby="myModalLabel"
-							><div class="table-responsive" id="resrecordtable"></div></div>
+						<div class="modal-body" aria-labelledby="myModalLabel">
+							<div class="table-responsive" id="resrecordtable"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -368,123 +407,194 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	 $('#search').click( function () {
-	$.ajax({
-		url:"SearchMember.htm",
-		type:"get",
-		success:function(data){
-			console.log(data);
-	
-		}
-		});
-	 });
-	 
-	 $('#btnsearch').click( function(){
-		console.log($('#search').val());
-		var param = $('#search').val();
-		 $.ajax({
-			url:"searching.htm",
-			type:"post",
-			data: {"param":param},
-			success:function(data){
-				console.log(data);
-			}
-		});
-	 });
-	 
+	<script type="text/javascript">
+		$(function() {
+			$('#search').click(function() {
+				$.ajax({
+					url : "SearchMember.htm",
+					type : "get",
+					success : function(data) {
+						console.log(data);
 
-	 
-	$('#exampleModal').on(
-				'show.bs.modal',
-				function(event) {
-					var button = $(event.relatedTarget)
-					var recipient = button.data('whatever').split(',');
-					$('#exampleModalLabel').html(
-							"<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"
-									+ recipient[0] + '</span>님에게 보내기');
-					$('#people').val(recipient[1]);
-				});
-	
-
-	 $('#exampleModal').on('show.bs.modal', function (event) {
-		  var button = $(event.relatedTarget) 
-		  var recipient = button.data('whatever').split(','); 
-		  $('#exampleModalLabel').html("<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"+recipient[0]+'</span>님에게 보내기');
-		  $('#people').val(recipient[1]);
-		});
-	 
-	 
-	 $('#myModal').on('show.bs.modal', function (event) {
-	        var button = $(event.relatedTarget) 
-	        var recipient = button.data('whatever');
-	        console.log(recipient);
-	        var array = recipient.split(',');
-	       
-	        console.log($('#hvalue').val(array[1]));
-	        
-	        $('#myModalLabel2').html("<span class='blue'>&nbsp;"+array[0]+'</span>님을 삭제하시겠습니까?');
-	      });  
-	     
-	      $('#cancelbutton').click(function(){
-	       //console.log($('#search').val()); 
-	       var param = $('#hvalue').val();
-	        
-	       $.ajax({
-	            url:"deleteMember.admin",
-	            type:"post",
-	            data: {"param":param},        
-	            success:function(data){
-	               alert("삭제 완료");
-	               window.location.reload();
-	               
-	            }
-	         });
-	       });
-	     
-	      $('#memberresrecord').on('show.bs.modal', function (event) {
-			  var button = $(event.relatedTarget) 
-			  var recipient = button.data('whatever');
-			  $('#resrecordtitle').html("<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"+recipient+'</span>이력사항');
-			  
-			});
-});
-
-
-
-	
-function smodal(m_id) {	
-		console.log(m_id);
-		$.ajax({
-			url:"memberdetail.admin",
-			type:"post",
-			data:{"param":m_id},
-			success:function(data){
-				$('#exampleModal2').empty();
-				$('#exampleModal2').append(data);
-				$('#exampleModal2').modal('show');
-				 $.ajax({
-					url:"memberreguloffr.htm",
-					type:"post",
-					data:{"param":m_id},
-					success:function(data1){
-						$('#reguloffrtable').empty();
-						$('#reguloffrtable').append(data1);
-						$.ajax({
-							url:"memberresrecord.admin",
-							type:"post",
-							data:{"param":m_id},
-							success:function(data2){
-							$('#resrecordtable').empty();
-							$('#resrecordtable').append(data2);
-							}
-						});
 					}
-				}); 
-			}
+				});
+			});
+
+			$('#btnsearch').click(function() {
+				console.log($('#search').val());
+				var param = $('#search').val();
+				$.ajax({
+					url : "searching.htm",
+					type : "post",
+					data : {
+						"param" : param
+					},
+					success : function(data) {
+						console.log(data);
+					}
+				});
+			});
+
+			$('#exampleModal').on(
+					'show.bs.modal',
+					function(event) {
+						var button = $(event.relatedTarget)
+						var recipient = button.data('whatever').split(',');
+						$('#exampleModalLabel').html(
+								"<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"
+										+ recipient[0] + '</span>님에게 보내기');
+						$('#people').val(recipient[1]);
+					});
+
+			$('#exampleModal').on(
+					'show.bs.modal',
+					function(event) {
+						var button = $(event.relatedTarget)
+						var recipient = button.data('whatever').split(',');
+						$('#exampleModalLabel').html(
+								"<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"
+										+ recipient[0] + '</span>님에게 보내기');
+						$('#people').val(recipient[1]);
+					});
+
+			$("#passtrue").click(function() {
+				$.ajax({
+					url : "matchpass1.admin",
+					data : {
+						m_pw : $("#m_pw").val()
+					},
+					success : function(data) {
+						console.log(data.data);
+						if (data.data == 'true') {
+							$("#match-pass").modal("hide");
+							$("#myModal").modal("show");
+
+						} else {
+							alert("비밀번호가 틀렸습니다.");
+						}
+					}
+				});
+			});
+
+			$('#cancelbutton').click(function() {
+				var param = $('#hvalue').val();
+				console.log(param);
+
+				$.ajax({
+					url : "deleteMember.admin",
+					type : "post",
+					data : {
+						"param" : param
+					},
+					success : function(data) {
+						alert("삭제 완료");
+						window.location.reload();
+
+					}
+				});
+			});
+
+			/*    $('#myModal').on('show.bs.modal', function (event) {
+			       var button = $(event.relatedTarget) 
+			       var recipient = button.data('whatever');
+			       console.log(recipient);
+			       var array = recipient.split(',');
+			      
+			       console.log($('#hvalue').val(array[1]));
+			       
+			       $('#myModalLabel2').html("<span class='blue'>&nbsp;"+array[0]+'</span>님을 삭제하시겠습니까?');
+			     });  
+			    
+			
+			
+			
+			
+			
+			
+			     $('#cancelbutton').click(function(){
+			      //console.log($('#search').val()); 
+			      var param = $('#hvalue').val();
+			       
+			      $.ajax({
+			           url:"deleteMember.admin",
+			           type:"post",
+			           data: {"param":param},        
+			           success:function(data){
+			              alert("삭제 완료");
+			              window.location.reload();
+			              
+			           }
+			        });
+			      }); */
+
+			$('#memberresrecord').on(
+					'show.bs.modal',
+					function(event) {
+						var button = $(event.relatedTarget)
+						var recipient = button.data('whatever');
+						$('#resrecordtitle').html(
+								"<i class='fa fa-envelope-o'></i><span class='blue'>&nbsp;"
+										+ recipient + '</span>이력사항');
+
+					});
 		});
+
+		function smodal(m_id) {
+			console.log(m_id);
+			$.ajax({
+				url : "memberdetail.admin",
+				type : "post",
+				data : {
+					"param" : m_id
+				},
+				success : function(data) {
+					$('#exampleModal2').empty();
+					$('#exampleModal2').append(data);
+					$('#exampleModal2').modal('show');
+					$.ajax({
+						url : "memberreguloffr.htm",
+						type : "post",
+						data : {
+							"param" : m_id
+						},
+						success : function(data1) {
+							$('#reguloffrtable').empty();
+							$('#reguloffrtable').append(data1);
+							$.ajax({
+								url : "memberresrecord.admin",
+								type : "post",
+								data : {
+									"param" : m_id
+								},
+								success : function(data2) {
+									$('#resrecordtable').empty();
+									$('#resrecordtable').append(data2);
+								}
+							});
+						}
+					});
+				}
+			});
+		}
+/*  	function deleteMember(m_id) {
+			console.log("m_id" + m_id);
+			$("#match-pass").modal("show");
+			$('#hvalue').val(m_id); 
+			$("#myModalLabel2").empty();
+			$('#myModalLabel2').html(m_id + '님을 삭제하시겠습니까?');
+		}  */
+		
+	 	function deleteMember(m_id,m_name) {
+			console.log("m_id" + m_id);
+			console.log("m_name" + m_name);
+			$("#match-pass").modal("show");
+			$('#hvalue').val(m_id); 
+			$('#hvalue2').val(m_name); 
+			$("#myModalLabel2").empty();
+			$('#myModalLabel2').html(m_name + '님을 삭제하시겠습니까?'); 
 	}
-</script>
-</body> 	
+	
+		
+	</script>
+</body>
 </html>
