@@ -52,137 +52,35 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+	
 <script type="text/javascript">
 	$(function() {
-
-		var id = "${LoginUser}";
-		var page = "${page}";
-		$("#gotowork").click(
-				function(event) {		
-					$.ajax({
-						url : "gotowork.member",
-						data : {
-							m_id : id
-						},
-						type : "post",
-						success : function(data) {
-							console.log(data)
-							$("#commutestartinfo").empty();
-							$("#commutestartinfo").append(
-									id+'님의 출근시간은 ' + data.dto.c_start + '입니다'
-											+ "<br>" + id+'님의 출근상태는 '
-											+ data.dto.cs_stat + '입니다.');
-							event.stopPropagation();
-							event.preventDefault();
-							
-							$.ajax({
-								url : "comsearchtestinfo.member",
-								data : {
-									m_id : id,
-									pg : page
-								},
-								type : "post",
-								success : function(data) {
-								 	$('#commutesearchstarttableinfo').empty();
-									$('#commutesearchstarttableinfo').append(data);
-								}
-							});
-							$("#gotowork").attr('disabled',true)
-						}
-					});
-
-				});
-
-		$("#getoffwork").click(
-				function() {
-
-					$.ajax({
-						url : "getoffwork.member",
-						data : {
-							m_id : id
-						},
-						type : "post",
-						success : function(data) {
-							$("#commuteendinfo").empty();
-							$("#commuteendinfo").append(
-									id + '님의 퇴근시간은 ' + data.dto.c_end + '입니다'
-											+ "<br>" + id + '님의 퇴근상태는 '
-											+ data.dto.ce_stat + '입니다.');
-							$.ajax({
-								url : "comsearchstartinfo.member",
-								data : {
-									m_id : id,
-									pg : page
-								},
-								type : "post",
-								success : function(data) {
-									$('#commutesearchstarttableinfo').empty(); 
-									$('#commutesearchstarttableinfo').append(data);
-								}
-							});
-
-						}
-					});
-				});
-
+		
 	});
 </script>
 <style type="text/css">
-#gotowork {
-	width: "100px";
+.backslash {
+	background: url('http://cdn.zetawiki.com/png/backslash.png');
+	background-size: 100% 100%;
+	text-align: left;
+}
+.backslash div { text-align: right; }
+table {
+	border-collapse: collapse;
+	border: 1px solid;
+}  
+th, td {
+	border: 1px solid;
+	/* padding: 5px; */
+	text-align: center;
 }
 </style>
 </head>
-<!-- 출근  -->
-<div class="container">
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title"><i class="fa fa-user"></i>&nbsp;${LoginUser}님의 출근정보</h4>
-				</div>
-				<div class="modal-body" id="commutestartinfo"
-					style="text-align: center; font-size: 20px; line-height: 200%">
-					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-</div>
-
-<!-- 퇴근 -->
-<div class="container">
-	<!-- Modal -->
-	<div class="modal fade" id="myModal2" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title"><i class="fa fa-user"></i>&nbsp;${LoginUser}님의 퇴근정보</h4>
-				</div>
-				<div class="modal-body" id="commuteendinfo"
-					style="text-align: center; font-size: 20px; line-height: 200%">
-					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</div>
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-xs-12 col-md-3 left_col">
-				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
+				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
 			</div>
 
 			<!--상단 menu -->
@@ -200,7 +98,7 @@
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>출/퇴근관리</small>
+								<small>노선별 출결현황</small>
 							</h3>
 						</div>
 					</div>
@@ -217,73 +115,30 @@
 
 											<div class="x_content" id="commutesearchstarttableinfo">
 												<table style="text-align: center"
-													class="table table-hover projects">													
-													<thead style="font-weight: bold;">
+													class="table table-hover projects">	
+													<thead>
 														<tr>
-															<td>NO.</td>
-															<td>날짜</td>
-															<td>출근시간</td>
-															<td>출근상태</td>
-															<td>퇴근시간</td>
-															<td>퇴근상태</td>
+															<th class='backslash' style='width:75px'><div>일(日)</div>이름</th>
+															 <c:forEach var="i"  begin="1" end="31" step="1">
+															  <%-- <c:forEach var="i" items="${list}"> --%>	
+															  	<th>${i}</th>
+															  </c:forEach>
 														</tr>
 													</thead>
 													<tbody>
 														<c:forEach var="i" items="${list}">
 															<tr>
-																<td>${i.rownum}</td>
-																<td>${i.c_date}</td>
-																<td>${i.c_start}</td>
+																<td>${i.m_name}</td>
+																
+																<c:forEach var="i" items="${list}" begin="1" end="31">
+									
 																<td>${i.cs_stat}</td>
-																<td>${i.c_end}</td>
-																<td>${i.ce_stat}</td>
-															<tr>
+																</c:forEach>
+															</tr>
 														</c:forEach>
-													</tbody>
-
-													</tbody>
-												</table>
-												<!-- 요기서부터 페이징처리 -->
-												<c:set var="count" value="${count}" />
-												<c:set var="pgc" value="${pgs}" />
-												<c:choose>
-													<c:when test="${count % 10 == 0}">
-														<c:set value="${count/10}" var="pagecount" />
-													</c:when>
-													<c:otherwise>
-														<c:set value="${count/10 + 1}" var="pagecount" />
-													</c:otherwise>
-												</c:choose>
-
-												<ul class="pager">
-													<c:if test="${pgc > 1}">
-														<li><a href="comsearch.member?pg=${pgc-1}">Previous</a></li>
-													</c:if>
-
-
-
-													<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-														<li><a href="comsearch.member?pg=${i}">${i}</a></li>
-													</c:forEach>
-
-
-													<c:if test="${pgc < count/10 }">
-														<li><a href="comsearch.member?pg=${pgc+1}">Next</a></li>
-													</c:if>
-												</ul>
-											</div>
-											<div style="text-align: right">
-
-												<div class="btn btn-primary btn-xs" id="gotowork"
-													data-toggle="modal" data-target="#myModal">
-													<i class="fa fa-sign-in"></i> 출근
-												</div>
+													</tbody>	
+												</table> 
 												
-
-												<div class="btn btn-success btn-xs" id="getoffwork"
-													data-toggle="modal" data-target="#myModal2">
-													<i class="fa fa-sign-out"></i> 퇴근
-												</div>
 											</div>
 
 
@@ -347,7 +202,7 @@
 	<script
 		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.resize.js"></script>
 	<!-- Flot plugins -->
-	<script
+	<scriptF
 		src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>

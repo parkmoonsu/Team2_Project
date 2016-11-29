@@ -9,6 +9,7 @@
 
 package kr.or.bus.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
@@ -37,7 +39,16 @@ public class BusManageController {
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.busInfo(pg);
 		int page = service.pg(pg);
 		int count = service.busCount();
-		   
+		int mcount = service.mBus();
+		int ncount = service.nBus();
+		int wcount = service.wBus();
+		int gcount = service.gBus();
+		
+		model.addAttribute("m", mcount);
+		model.addAttribute("n", ncount);
+		model.addAttribute("w", wcount);
+		model.addAttribute("g", gcount);
+		
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("count",count);
@@ -102,16 +113,20 @@ public class BusManageController {
 	@RequestMapping("/reg.admin")
 	public String reg(String[] b_vehiclenum , String[] g_name , String[] r_num , String[] mname){
 		
+		System.out.println("b_vehiclenum.length : " + b_vehiclenum.length);
 		for(int i = 0 ; i < b_vehiclenum.length ; i++){
-			
-				
-				service.insertBus(b_vehiclenum[i], r_num[i], g_name[i]);
-			
-				if(!mname[i].equals("선택")){
-					service.updateVehicle(b_vehiclenum[i], mname[i]);
+				System.out.println(b_vehiclenum[i] + "/" + g_name[i]);
+				System.out.println(service.alreadyUse(b_vehiclenum[i]));
+				if(service.alreadyUse(b_vehiclenum[i]) == 0){
+					
+					service.insertBus(b_vehiclenum[i], r_num[i], g_name[i]);
+					
+					if(!mname[i].equals("선택")){
+						service.updateVehicle(b_vehiclenum[i], mname[i]);
+					}
+					
+					service.insertBStatus(b_vehiclenum[i], r_num[i]);
 				}
-			
-				service.insertBStatus(b_vehiclenum[i], r_num[i]);
 					
 		}
 		
@@ -185,21 +200,65 @@ public class BusManageController {
 
 	}
 	
+
+	//임시 노선별 출결현황
+	@RequestMapping("/commutebus.admin")
+	public String showlist(String r_num, Model model){
+		
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.getShow(r_num);
+		
+		model.addAttribute("list", list);
+		
+		return "commute/attendance";
+		
+	}
+	
+
 	@RequestMapping("/update.admin")
-	public String update(String b_vehiclenum_u , String g_name_u , String r_num_u , String mname_u){
-		System.out.println("update column : " + b_vehiclenum_u + "/" + g_name_u + "/" + r_num_u + "/" + mname_u);
-		
-		
+	public String update(String b_vehiclenum_u , String g_name_u , String r_num_u , String mname_u , String hidden){
+		System.out.println("update column : " + b_vehiclenum_u + "/" + g_name_u + "/" + r_num_u + "/" + mname_u + "/" + hidden);
+		service.updateBus(b_vehiclenum_u, g_name_u, r_num_u , mname_u , hidden);
+		  
 		
 		return "busmanage/updatesuccess";
 	}
 	
 	@RequestMapping("/alreadyuse.admin")
 	public View alreadyUse(String b_vehiclenum , Model model){
-		int data = service.alreadyUse(b_vehiclenum);
-		model.addAttribute("data", data);
-		
+		String [] array = b_vehiclenum.split(",");
+		System.out.println("받은것 : " +array.length);
+		int result = 0;
+		for(int i = 0; i < array.length; i++){
+			System.out.println("넘어온 값 : "+array[i]);
+			result = service.alreadyUse(array[i]);
+		}
+		//int data = service.alreadyUse(b_vehiclenum);
+		System.out.println("#####data### : " + result );
+		model.addAttribute("result", result);
+		model.addAttribute("num", b_vehiclenum);
 		return jsonview;
 	}
 	
+	@RequestMapping("/matchpass.admin")
+	public View matchPass(Principal principal , String m_pw , Model model){
+		boolean result = service.getPass(principal.getName(), m_pw);
+		String data = "";
+		if(result){
+			data = "true";
+		}else{
+			data = "false";
+		}
+		
+		model.addAttribute("data", data);
+		return jsonview;
+	}
+	
+	@RequestMapping("/deleteBus.admin")
+	public View deleteBus(String b_vehiclenum){
+		System.out.println("삭제할 아이디는  : " + b_vehiclenum);
+		service.deleteBus(b_vehiclenum);
+		
+		return jsonview;
+	}
+
 }

@@ -37,7 +37,7 @@
                   <li><a><i class="fa fa-table"></i>스케줄 관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="schedule_reguloff.htm">정기 휴무</a></li>
-                      <li><a href="schedule_history.htm">교대 신청/조회</a></li>
+                      <li><a href="schedule_history.htm?m_id=${LoginUser}">교대 신청/조회</a></li>
                       <li><a href="tables_dynamic.html">최종 스케줄</a></li>
                     </ul>
                   </li>
@@ -45,6 +45,10 @@
                   <li><a href="comsearch.member?m_id=${LoginUser}"> <i class="fa fa-list-alt"></i>출/퇴근 관리</a>
                 
                   </li>
+                  
+                
+                  
+                  
                 </ul>
               </div>
             </div>

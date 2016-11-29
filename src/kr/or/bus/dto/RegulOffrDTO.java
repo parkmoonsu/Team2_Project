@@ -1,6 +1,6 @@
 package kr.or.bus.dto;
 
-public class RegulOffrJoinDTO {
+public class RegulOffrDTO {
 	private String ko_code;
 	private String m_id;
 	private String o_code;
@@ -8,41 +8,6 @@ public class RegulOffrJoinDTO {
 	private java.sql.Date ro_reqdate;
 	private java.sql.Date ro_regdate;
 	private String ro_object;
-	
-	private String ko_name;
-	private String bd;
-	private String ad;
-	private String bn;
-	private String an;
-	
-	
-
-	public String getBd() {
-		return bd;
-	}
-	public void setBd(String bd) {
-		this.bd = bd;
-	}
-	
-	public String getAd() {
-		return ad;
-	}
-	public void setAd(String ad) {
-		this.ad = ad;
-	}
-	public String getBn() {
-		return bn;
-	}
-	public void setBn(String bn) {
-		this.bn = bn;
-	}
-
-	public String getAn() {
-		return an;
-	}
-	public void setAn(String an) {
-		this.an = an;
-	}
 	public String getKo_code() {
 		return ko_code;
 	}
@@ -85,12 +50,5 @@ public class RegulOffrJoinDTO {
 	public void setRo_object(String ro_object) {
 		this.ro_object = ro_object;
 	}
-	public String getKo_name() {
-		return ko_name;
-	}
-	public void setKo_name(String ko_name) {
-		this.ko_name = ko_name;
-	}
-
-
+	
 }
