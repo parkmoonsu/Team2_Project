@@ -643,7 +643,7 @@
             
            }
            $.ajax({
-                url : "Maplist4.do",
+                url : "busStoplocationEdit.admin",
                 type : "get",                          
                 data : {
                     kml : JSON.stringify(savelocations)
@@ -668,7 +668,7 @@
             copyMarkers=[];
             as=0;
              $.ajax({
-                  url : "Maplist5.do",
+                  url : "busStoplocationEditRead.admin",
                   type : "get",
                   dataType : "json",                
                   success : function(data) {
@@ -708,7 +708,7 @@
       //버스 정류장 원본 파일 불러오기
         $("#busStopLoad").click(function() {
            $.ajax({
-                url : "Maplist.do",
+                url : "busStopOriginalRead.admin",
                 type : "get",
                 data :{busNo : 5623},
                 dataType : "json",                
