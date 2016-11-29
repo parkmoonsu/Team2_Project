@@ -32,6 +32,8 @@ public class BusStopManageController {
 		busStopManageService.busStoplocationEditRead(request, response);
 	}
 		
+	
+	
 	//버스정류장 원본 마커 좌표를 파일에서 읽어온다.
 	@RequestMapping(value="/busStopOriginalRead.admin",method=RequestMethod.GET)
 	public void busStopOriginRead(HttpServletRequest request ,HttpServletResponse response) throws Exception{

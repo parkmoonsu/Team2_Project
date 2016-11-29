@@ -131,7 +131,7 @@ public class BusStopManageService {
 	    System.out.println(map);
 	        
 	    System.out.println("되냐");
-	    String path = request.getServletContext().getRealPath("/busstop/"+busno+".json");        
+	    String path = request.getServletContext().getRealPath("/busstop/Tmap.json");        
 	    try{
 	        fw = new FileWriter(path);
 	        bw = new BufferedWriter(fw);
@@ -159,8 +159,7 @@ public class BusStopManageService {
         BufferedReader br = null;
         PrintWriter out=null;
         String maps = null;
-        String busno = request.getParameter("busNo");
-        String path = request.getServletContext().getRealPath("/busstop/"+busno+".json");
+        String path = request.getServletContext().getRealPath("/busstop/Tmap.json");
         try{
         	fr = new FileReader(path);
         	br = new BufferedReader(fr);	        	
