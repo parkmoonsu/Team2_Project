@@ -58,9 +58,7 @@
 		var id = "${LoginUser}";
 		var page = "${page}";
 		$("#gotowork").click(
-				function(event) {					
-					//event.stopPropagation();
-					//event.preventDefault();
+				function(event) {		
 					$.ajax({
 						url : "gotowork.member",
 						data : {
@@ -74,11 +72,11 @@
 									id+'님의 출근시간은 ' + data.dto.c_start + '입니다'
 											+ "<br>" + id+'님의 출근상태는 '
 											+ data.dto.cs_stat + '입니다.');
-							//event.stopPropagation();
-							//event.preventDefault();
+							event.stopPropagation();
+							event.preventDefault();
 							
 							$.ajax({
-								  url : "comsearchtestinfo.member",
+								url : "comsearchtestinfo.member",
 								data : {
 									m_id : id,
 									pg : page

@@ -163,6 +163,7 @@ public class ScheduleController {
 		return jsonview;
 	}
 	
+	//기타
 	@RequestMapping(value="/dowcount.member",method=RequestMethod.POST)
 	public View dowcount(String o_code , Model model){
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
@@ -192,6 +193,18 @@ public class ScheduleController {
 		
 		return jsonview;
 	}
+	
+	@RequestMapping(value="/selectseq.member",method=RequestMethod.POST)
+	public View selectSeq(String m_id , Model model) throws ClassNotFoundException, SQLException{
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		MemberJoinRegulOffDTO dto= dao.reguloff_selectseq(m_id);
+
+		model.addAttribute("dto", dto);
+		
+		return jsonview;
+	}
+	//기타
+	
 	
 	//기록보기
 	@RequestMapping("/schedule_history.htm")

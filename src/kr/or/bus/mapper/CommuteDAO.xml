@@ -21,13 +21,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	<select id="getoffSelect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO" >	
 		select *
 		from (select rownum, N.*
-        	  from (select com.c_date, com.c_start, cs.cs_stat, com.c_end
-        	  		from commute com join cstart cs on com.cs_code=cs.cs_code
+        	  from (select com.c_date, com.c_start, cs.cs_stat, com.c_end, ce.ce_stat
+        	  		from commute com full outer join cstart cs on com.cs_code=cs.cs_code 
+        	  		full outer join cend ce on ce.ce_code=com.ce_code     	  		
         	  		where m_id= #{param2} order by c_date desc) N) 
 		where rownum between 1 + (#{param1}-1) * 5 and 5 + (#{param1}-1)*10
 	</select>
-	
-	
+
+
 	<!-- 이름 값 가져오기 -->
 	<select id="getName" parameterType="String" resultType="String">
 		select m_name
@@ -71,11 +72,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 출근상태  -->
-	<select id="csselect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
+	<select id="csselect" parameterType="String" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
 		select c_start, cs_stat
 		from commute com join cstart cs 
 		on com.cs_code=cs.cs_code
-		where m_id=#{m_id}
+		where m_id=#{param1} and c_date = #{param2}
 	</select> 
 	
 	<!-- 퇴근시간 update -->
@@ -116,11 +117,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 퇴근상태  -->
-	<select id="ceselect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
+	<select id="ceselect" parameterType="String" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO">
 		select c_end, ce_stat
 		from commute com join cend ce 
 		on com.ce_code=ce.ce_code
-		where m_id=#{m_id}
+		where m_id=#{param1} and c_date = #{param2}
 	</select> 
 	
 </mapper>
