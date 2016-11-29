@@ -22,7 +22,7 @@ public class BusStopManageController {
 	}
 	//수정된 버스정류장 마커 좌표를 저장한다.
 	@RequestMapping(value="/busStoplocationEdit.admin",method=RequestMethod.GET)
-	public void busStopEditSave(HttpServletRequest request, HttpServletResponse response ) throws Exception{
+	public void busStopEditSave(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		busStopManageService.busStoplocationEdit(request, response);
 	}
 		
