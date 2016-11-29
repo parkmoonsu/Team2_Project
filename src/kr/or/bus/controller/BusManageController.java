@@ -275,5 +275,10 @@ public class BusManageController {
 		
 		return jsonview;
 	}
+	
+	@RequestMapping("/realTime.admin")
+	public String realTimeOpen(){
+		return "busmanage/RealTimeLocation";
+	}
 
 }
