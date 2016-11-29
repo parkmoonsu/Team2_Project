@@ -36,9 +36,8 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-table"></i>스케줄 관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="schedule_reguloff.htm">정기 휴무</a></li>
-                      <li><a href="schedule_history.htm?m_id=${LoginUser}">교대 신청/조회</a></li>
-                      <li><a href="tables_dynamic.html">최종 스케줄</a></li>
+                      <li><a href="schedule_reguloff.htm">정기휴무신청/조회</a></li>
+                      <li><a href="schedule_history.htm?m_id=${LoginUser}">최종 스케줄</a></li>
                     </ul>
                   </li>
        
