@@ -18,7 +18,6 @@ $(function() {
 			"m_id" : loginid
 		},
 		success : function(data) {
-
 			// 모달 창에 이름 설정
 			$("#title").val(data.m_name);
 			$("#title2").val(data.m_name);
@@ -31,7 +30,7 @@ $(function() {
 		type : 'post',
 		dataType : 'json',
 		success : function(data) {
-			console.log(data);
+
 			$.each(data.data, function(index, obj) {
 				var item = {
 					id : obj.m_id,
@@ -86,12 +85,13 @@ $(function() {
 			type : 'post',
 			data : { 
 				ko_code:'600',
-				o_code:'',
+				o_code:o_code,
 				m_id:loginid,
-				ro_code:o_code
+				ro_code:o_code,
+				ro_object:loginid
 			},
 			success : function(data) {
-
+				
 			}
 		});
 
@@ -114,8 +114,6 @@ $(function() {
 				type : 'post',
 				data : event,
 				success : function(data) {
-					console.log("없뎃성공");
-					console.log(data);
 					event = {
 						id : data.data.m_id,
 						title : data.data.m_name,
@@ -125,6 +123,23 @@ $(function() {
 					$("#calendar").fullCalendar('unselect');
 				}
 			});
+			
+			//history 저장
+			$.ajax({
+				url : 'history_insert.htm',
+				type : 'post',
+				data : { 
+					ko_code:'600',
+					o_code:calEventObj.dow[0],
+					m_id:loginid,
+					ro_code:o_code,
+					ro_object:loginid
+				},
+				success : function(data) {
+					
+				}
+			});
+			
 		}
 
 		$('.antoclose2').click();
@@ -153,7 +168,6 @@ $(function() {
 		}
 	});
 });
-
 
 // 일정객체 저장 변수
 var calEventObj;
@@ -223,15 +237,107 @@ function loadCalendar(){
 					}else{	
 						if (confirm("해당 사용자와 일정을 바꾸시겠습니까?") == true) {
 							//선택한 사용자
-							
-							//본인
-							
-							
-							
+							var event1={
+								id:calEvent.id,
+								title:calEvent.title,
+								dow:[calEvent.dow[0]]
+							};
 							$("#calendar").fullCalendar('removeEvents', event.id);
-							$("#calendar").fullCalendar('renderEvent', evt);
+							$("#calendar").fullCalendar('unselect');
+							
+							//본인껄 어케 뽑나???
+							var event2;
+							$.ajax({
+								url:"selectseq.member",
+								data:{m_id:loginid},
+								dataType:"json",
+								type:"post",
+								success:function(data){
+									event2={
+										id:data.dto.m_id,
+										title:data.dto.m_name,
+										dow:[data.dto.o_code]
+									};
+									$("#calendar").fullCalendar('removeEvents', event.id);
+									$("#calendar").fullCalendar('unselect');
+								}
+							});
+							
+							//바꾸기
+							$(document).ajaxStop(function() {
+								event1.dow=event2.dow;
+								event2.dow=[calEvent.dow[0]];
+								var o_code1=event1.dow[0];
+								var o_code2=event2.dow[0];
+								
+								
+								$("#calendar").fullCalendar('renderEvent', event1);
+								$("#calendar").fullCalendar('renderEvent', event2);
+								
+								event1={
+									m_id : calEvent.id,
+									o_code : o_code1
+								};
+								
+								event2={
+									m_id : loginid,
+									o_code : o_code2
+								};
+								
+								$.ajax({
+									url : 'reguloff_update.htm',
+									type : 'post',
+									data : event1,
+									success : function(data) {
+										
+									}
+								});
+								
+								$.ajax({
+									url : 'reguloff_update.htm',
+									type : 'post',
+									data : event2,
+									success : function(data) {
+										
+									}
+								});
+										
+								console.log(event1);
+								console.log(event2);
+								//history 저장(클릭한사람)
+								$.ajax({
+									url : 'history_insert.htm',
+									type : 'post',
+									data : { 
+										ko_code:'600',
+										o_code:event2.o_code, //변경전 요일
+										m_id:event1.m_id, //본인id > 클릭된 사람
+										ro_code:event1.o_code, //변경후 요일
+										ro_object:event2.m_id //바꿀사람id
+									},
+									success : function(data) {
+										
+									}
+								});
+								
+								//history 저장(클릭한사람)
+								$.ajax({
+									url : 'history_insert.htm',
+									type : 'post',
+									data : { 
+										ko_code:'600',
+										o_code:event1.o_code, //변경전 요일
+										m_id:event2.m_id, //본인id > 클릭된 사람
+										ro_code:event2.o_code, //변경후 요일
+										ro_object:event1.m_id //바꿀사람id
+									},
+									success : function(data) {
+										
+									}
+								});
+								
+							});
 						}
-
 					}	
 				}
 			});		
@@ -277,6 +383,22 @@ function loadCalendar(){
 									};
 									$("#calendar").fullCalendar('removeEvents', event.id);
 									$("#calendar").fullCalendar('renderEvent', evt);
+								}
+							});
+							
+							//history 저장
+							$.ajax({
+								url : 'history_insert.htm',
+								type : 'post',
+								data : { 
+									ko_code:'600',
+									o_code:dowbefore,
+									m_id:loginid,
+									ro_code:dowafter,
+									ro_object:loginid
+								},
+								success : function(data) {
+									
 								}
 							});
 							

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
@@ -112,8 +113,10 @@ public class BusManageController {
 	@RequestMapping("/reg.admin")
 	public String reg(String[] b_vehiclenum , String[] g_name , String[] r_num , String[] mname){
 		
+		System.out.println("b_vehiclenum.length : " + b_vehiclenum.length);
 		for(int i = 0 ; i < b_vehiclenum.length ; i++){
 				System.out.println(b_vehiclenum[i] + "/" + g_name[i]);
+				System.out.println(service.alreadyUse(b_vehiclenum[i]));
 				if(service.alreadyUse(b_vehiclenum[i]) == 0){
 					
 					service.insertBus(b_vehiclenum[i], r_num[i], g_name[i]);
@@ -222,11 +225,33 @@ public class BusManageController {
 	
 	@RequestMapping("/alreadyuse.admin")
 	public View alreadyUse(String b_vehiclenum , Model model){
-		int data = service.alreadyUse(b_vehiclenum);
-		System.out.println("data : " + data );
+		List<Integer> list = new ArrayList<Integer>();
+		
+		String[] array = b_vehiclenum.split(",");
+		for(int i = 0 ; i< array.length ; i++){
+			System.out.println(array[i] + "의 유무 : " + service.alreadyUse(array[i]));
+			list.add(service.alreadyUse(array[i]));	
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("array", array);
+		
+		/*for(int i = 0 ; i < array.length ; i++){
+			System.out.println(array[i] + "의 유무 : " + service.alreadyUse(array[i]));
+			data[i] = service.alreadyUse(array[i]);
+		}
 		model.addAttribute("data", data);
+		*/
+		//System.out.println("받은것 : " +array.length);
+		/*int result = 0;
+		for(int i = 0; i < array.length; i++){
+			System.out.println("넘어온 값 : "+array[i]);
+			result = service.alreadyUse(array[i]);
+		}
+		//int data = service.alreadyUse(b_vehiclenum);
+		System.out.println("#####data### : " + result );
+		model.addAttribute("result", result);
 		model.addAttribute("num", b_vehiclenum);
-		return jsonview;
+		*/return jsonview;
 	}
 	
 	@RequestMapping("/matchpass.admin")

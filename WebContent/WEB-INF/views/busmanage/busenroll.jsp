@@ -410,7 +410,7 @@
 				url : "getmember.admin",
 				success:function(data){
 					for(var i = 0 ; i < data.m_id.length ; i++){
-						$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "("+data.m_id[i] +")" + "</option>");
+						$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] +  "</option>");
 					}
 				}
 				
@@ -450,27 +450,38 @@
 	function update(){
 		$("#update").submit();
 	}
+
 	
 	function reg(){
+	
+		var array = "";
+		var vnum = ""
 		for(var i = 1 ; i <= num ; i++){
-			var vnum = "#b_vehiclenum" + i;
-			
-			$.ajax({
-				url : "alreadyuse.admin",
-				data : {b_vehiclenum : $(vnum).val()},
-				success : function(data){
-					if(data.data == 0){
+			vnum = "#b_vehiclenum" + i;
+			array += $(vnum).val() + ",";
+		}
+		var a;
+		$.ajax({
+			url:"alreadyuse.admin",
+			data:{b_vehiclenum : array},
+			success : function(data){
+				$.each(data.list,function(index,sd){
+					if(sd == 0){
 						$("#target").submit();
 						
 					}else{
-						alert(data.num + "은 이미 있는 차량번호 입니다.");
-						
+						a = index;
 					}
-				}
-			});
-		}
+				});
+				$.each(data.array,function(index,sd){
+					if(a == index){
+						alert(sd + "는 이미 존재하는 차량 번호입니다.");
+					}
+				});
+			}
+		});
+
 	}
-	
 	$(function(){
 		
 		var count = 1;
@@ -555,6 +566,8 @@
 			if($("input[name='chklist']:checked").length >= 2){
 				alert("2개 이상을 수정 할 수 없습니다.");
 			}else{
+				
+				$("#enroll").empty();
 				for(var i = 1 ; i <= ${Count} ; i++){ //엑박 무시할것
 					var checkbox = "#check" + i;
 					
