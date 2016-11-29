@@ -275,5 +275,11 @@ public class BusManageController {
 		
 		return jsonview;
 	}
+	
+	//실시간 위치추적 페이지
+	@RequestMapping("/realTime.admin")
+	public String realTimeOpen(){
+		return "busmanage/RealTimeLocation";
+	}
 
 }

@@ -30,7 +30,7 @@ public class RouteManageController {
 	//파일에서 마커 원본좌표를 읽어온다
 	@RequestMapping(value="/routeRead.admin",method=RequestMethod.GET)
 	public void routeRead(HttpServletRequest request,HttpServletResponse response) throws Exception{
-		routeManageSerivce.busStopPointRead(request,response);
+		routeManageSerivce.routelocationRead(request,response);
 	}
 	
 	//마커 좌표 수정
@@ -43,11 +43,5 @@ public class RouteManageController {
 	@RequestMapping(value="/routeEditRead.admin",method=RequestMethod.GET)
 	public void routeEditRead(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		routeManageSerivce.routelocationEditRead(request , response);
-	}
-	
-	//실시간 위치추적 30초마다 갱신됨
-	@RequestMapping(value="/RealTimeSearch.admin",method=RequestMethod.GET)
-	public void buslocationLoad(HttpServletRequest request ,HttpServletResponse response) throws Exception{
-		routeManageSerivce.busLocationSearch(request, response);;
 	}
 }

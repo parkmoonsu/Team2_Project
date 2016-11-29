@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.bus.service.BusStopManageService;
 
+import nu.xom.*;
 @Controller
 public class BusStopManageController {
 	@Autowired
@@ -21,7 +22,7 @@ public class BusStopManageController {
 	}
 	//수정된 버스정류장 마커 좌표를 저장한다.
 	@RequestMapping(value="/busStoplocationEdit.admin",method=RequestMethod.GET)
-	public void busStopEditSave(HttpServletRequest request, HttpServletResponse response ) throws Exception{
+	public void busStopEditSave(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		busStopManageService.busStoplocationEdit(request, response);
 	}
 		
@@ -35,5 +36,12 @@ public class BusStopManageController {
 	@RequestMapping(value="/busStopOriginalRead.admin",method=RequestMethod.GET)
 	public void busStopOriginRead(HttpServletRequest request ,HttpServletResponse response) throws Exception{
 		busStopManageService.busStopOriginalRead(request, response);
+	}
+	
+
+	//실시간 위치추적 30초마다 갱신됨
+	@RequestMapping(value="/RealTimeSearch.admin",method=RequestMethod.GET)
+	public void buslocationLoad(HttpServletRequest request ,HttpServletResponse response) throws Exception{
+		busStopManageService.busLocationSearch(request, response);;
 	}
 }

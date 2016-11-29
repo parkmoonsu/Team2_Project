@@ -105,26 +105,30 @@
 				<div class="">
 				<div class="page-title">
 						<div class="title_left">
-							<h3>
+							<!-- <h3>
 								<small>교대신청내역</small>
-							</h3>
+							</h3> -->
 						</div>
 					</div>
 					<div class="clearfix"></div>
 
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
+						<ul class="nav nav-tabs">
+  				<li role="presentation"><a href="schedule_reguloff.htm">정기휴무신청</a></li>
+  				<li role="presentation" class="active"><a href="schedule_history.htm?m_id=${LoginUser}">신청내역조회</a></li>
+			  </ul>
 							<div class="x_panel">
 								<div class="x_content">
 									<!-- start project list -->
 									<div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
-											<input type="text" class="form-control"
+											<!-- <input type="text" class="form-control"
 												placeholder="Search for..." id="search"> <span
 												class="input-group-btn">
 												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
-											</span>
+											</span> -->
 										</div>
 									</div>
 									<table class="table table-hover projects">
