@@ -34,8 +34,8 @@ public class BusStopManageService {
 		        System.out.println(busno);
 		        if(busno.equals("all")){
 		        	JSONObject obs1 = busStopOrgRead(5623 ,request,response);
-		        	JSONObject obs2 = busStopOrgRead(6501 ,request,response);
-		        	JSONObject obs3 = busStopOrgRead(702 ,request,response);
+		        	JSONObject obs2 = busStopOrgRead(702 ,request,response);
+		        	JSONObject obs3 = busStopOrgRead(6501 ,request,response);
 		        	JSONObject obs4 = busStopOrgRead(9000 ,request,response);
 		        	
 		        	ArrayList<JSONObject> obss = new ArrayList<JSONObject>();
@@ -196,18 +196,20 @@ public class BusStopManageService {
 				/*
 				 	route id
 				 	
-					100100279   - 116005219
-					234001163   - 234000043
-					100100573   - 122071130
-					234000002   - 234000329 
+					5623  100100279   - 116005219
+					702   100100573   - 122071125
+					6501  234001163   - 234000043
+					9000  234000002   - 234000145 
+					
+					
 					에 해당하는 차량 id가 아래에 입력되어야함.
 				*/
 				String busno = request.getParameter("busNo");
 				if(busno.equals("all")){
 					JSONObject locations1 = multiLocationSearch(request , response, "116005219");
-					JSONObject locations2 = multiLocationSearch(request , response, "234000043");
-					JSONObject locations3 = multiLocationSearch(request , response, "122071130");
-					JSONObject locations4 = multiLocationSearch(request , response, "234000329");
+					JSONObject locations2 = multiLocationSearch(request , response, "122071125");
+					JSONObject locations3 = multiLocationSearch(request , response, "234000043");
+					JSONObject locations4 = multiLocationSearch(request , response, "234000145");
 					
 					ArrayList<JSONObject> locations = new ArrayList<JSONObject>();
 					locations.add(locations1);
@@ -225,8 +227,7 @@ public class BusStopManageService {
 			}
 			
 			public JSONObject multiLocationSearch(HttpServletRequest request , HttpServletResponse response, String venid) throws IOException{
-				System.out.println("멀티위치추적되냐");
-				
+				System.out.println("멀티위치추적되냐");				
 				JSONObject jsonmaps = null;
 				StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/buspos/getBusPosByVehId"); //URL
 			    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); //Service Key
@@ -237,7 +238,7 @@ public class BusStopManageService {
 			    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			    conn.setRequestMethod("GET");
 			    conn.setRequestProperty("Content-type", "application/xml");
-			    System.out.println("Response code: " + conn.getResponseCode());
+			    //System.out.println("Response code: " + conn.getResponseCode());
 			        
 			    BufferedReader rd;
 			        
@@ -274,12 +275,12 @@ public class BusStopManageService {
 				
 				if(busno.equals("5623")){
 					venid = "116005219";
+				}else if(busno.equals("702")){
+					venid = "122071125";
 				}else if(busno.equals("6501")){
 					venid = "234000043";
-				}else if(busno.equals("702")){
-					venid = "122071130";
 				}else if(busno.equals("9000")){
-					venid = "234000329";
+					venid = "234000145";
 				}
 
 				PrintWriter out=null;
