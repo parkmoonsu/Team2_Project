@@ -36,4 +36,11 @@ public class BusStopManageController {
 	public void busStopOriginRead(HttpServletRequest request ,HttpServletResponse response) throws Exception{
 		busStopManageService.busStopOriginalRead(request, response);
 	}
+	
+
+	//실시간 위치추적 30초마다 갱신됨
+	@RequestMapping(value="/RealTimeSearch.admin",method=RequestMethod.GET)
+	public void buslocationLoad(HttpServletRequest request ,HttpServletResponse response) throws Exception{
+		busStopManageService.busLocationSearch(request, response);;
+	}
 }
