@@ -1,4 +1,4 @@
-<%-- <!-- 
+ <!-- 
 	@FileName : busenroll.jsp
 	@Project	: KosBus
 	@Date	: 2016. 11.25
@@ -704,4 +704,3 @@
 	</script>
 </body>
 </html>
- --%>

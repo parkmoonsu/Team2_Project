@@ -214,7 +214,7 @@
 												<td>${i.m_annual}일</td>
 												<td style="text-align: center">
 													<div class="btn btn-danger btn-xs"
-														onclick="deleteMember('${i.m_id}');">
+														onclick="deleteMember('${i.m_id}','${i.m_name}');">
 														<i class="fa fa-trash-o"></i> 삭제
 													</div>
 												</td>
@@ -311,6 +311,7 @@
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">취소</button>
 							<input type="hidden" id="hvalue">
+							<input type="hidden" id="hvalue2">
 						</div>
 					</div>
 				</div>
@@ -575,13 +576,25 @@
 				}
 			});
 		}
-		function deleteMember(m_id) {
+/*  	function deleteMember(m_id) {
 			console.log("m_id" + m_id);
 			$("#match-pass").modal("show");
 			$('#hvalue').val(m_id); 
 			$("#myModalLabel2").empty();
 			$('#myModalLabel2').html(m_id + '님을 삭제하시겠습니까?');
-		}
+		}  */
+		
+	 	function deleteMember(m_id,m_name) {
+			console.log("m_id" + m_id);
+			console.log("m_name" + m_name);
+			$("#match-pass").modal("show");
+			$('#hvalue').val(m_id); 
+			$('#hvalue2').val(m_name); 
+			$("#myModalLabel2").empty();
+			$('#myModalLabel2').html(m_name + '님을 삭제하시겠습니까?'); 
+	}
+	
+		
 	</script>
 </body>
 </html>
