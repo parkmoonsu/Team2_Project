@@ -1,6 +1,7 @@
 $(document).ready(function() {
-
-
+		
+		var m_name = "";
+		var m_id = "";
 		/* initialize the external events
 		-----------------------------------------------------------------*/
 
@@ -20,15 +21,20 @@ $(document).ready(function() {
 			droppable: true, // this allows things to be dropped onto the calendar
 			eventRender: function(event,element){
 				console.log("description"+event.description);
+				m_name = event.title;
+				m_id = event.description;
 			},
-			drop: function() {
-				console.log($(this).text());
-				
+			drop: function(date,jsEvent) {
+				console.log('dddfdfdf');
+				console.log(date);
+				console.log(jsEvent);
+				console.log(jsEvent.title);
+				console.log(jsEvent.description);
 				// is the "remove after drop" checkbox checked?
-				if ($('#drop-remove').is(':checked')) {
+				
 					// if so, remove the element from the "Draggable Events" list
 					$(this).remove();
-				}
+				
 			}
 		});
 		
