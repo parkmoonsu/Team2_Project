@@ -3,28 +3,52 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.bus.dao.ScheduleManageDAO">
+
 	<!-- 정규 휴무가 정해지지 않은, 노선은 배정된 기사님 뽑기 -->
 	<select id="getUndecideReguloffMember" resultType="kr.or.bus.dto.MemberJoinRegulOffDTO">
 		select
 		mem.M_ID, mem.M_NAME, rou.R_NUM
 		from member mem
 		join bus bu
+		on
+		mem.B_VEHICLENUM = bu.B_VEHICLENUM
+		join route rou
+		on rou.R_NUM =
+		bu.R_NUM
+		where mem.M_ID not in (select m_id from reguloff) and
+		rou.r_num = #{r_num}
+	</select>
+
+	<!-- 노선값 불러오기 -->
+	<select id="getTotalRoute" resultType="kr.or.bus.dto.RouteJoinGarageDTO">
+		select rou.r_num,
+		rou.G_NUM, gar.G_NAME
+		from route rou
+		join garage gar
+		on gar.g_num = rou.g_num
+		where rou.g_num = #{g_num}
+	</select>
+
+	<!-- 차고지 값 불러오기 -->
+	<select id="getTotalGarage" resultType="kr.or.bus.dto.GarageDTO">
+		select g_num, g_name,
+		g_x, g_y, g_addr, g_space, g_currentpark from garage
+	</select>
+
+	<!-- 정기휴무가 정해진 노선이 배정된 기사님 뽑기 -->
+	<select id="getDecideReguloffMember"
+		resultType="kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO">
+		select rego.M_ID, mem.m_name, mo.O_DATE
+		from member mem
+		join reguloff rego
+		on rego.M_ID = mem.M_ID
+		join moff mo
+		on mo.O_CODE = rego.O_CODE
+		join bus bu
 		on mem.B_VEHICLENUM = bu.B_VEHICLENUM
 		join route rou
 		on rou.R_NUM = bu.R_NUM
-		where mem.M_ID not in (select m_id from reguloff) and rou.r_num = #{r_num}
-	</select>
-	<!-- 노선값 불러오기 -->
-	<select id="getTotalRoute" resultType="kr.or.bus.dto.RouteJoinGarageDTO">
-		select rou.r_num, rou.G_NUM, gar.G_NAME 
-     	from route rou
-      	join garage gar
-      	on gar.g_num = rou.g_num
-      	where rou.g_num = #{g_num}
-	</select>
-	<!-- 차고지 값 불러오기 -->
-	<select id="getTotalGarage" resultType="kr.or.bus.dto.GarageDTO">
-		select g_num, g_name, g_x, g_y, g_addr, g_space, g_currentpark from garage
+		where rou.r_num = #{r_num}
 	</select>
 
 </mapper>

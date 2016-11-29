@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
+import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 
 public interface ScheduleManageDAO {
@@ -16,4 +17,6 @@ public interface ScheduleManageDAO {
 	//전체 차고지 불러오기
 	public List<GarageDTO> getTotalGarage();
 	
+	//정기휴무가 정해진 노선의 사원들
+	public List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> getDecideReguloffMember(String r_num);
 }

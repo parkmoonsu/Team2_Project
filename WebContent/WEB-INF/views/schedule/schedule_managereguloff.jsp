@@ -186,7 +186,8 @@ body {
 											</select>
 										</div>
 										<div id='external-events'>
-											<h4 id="draggablemember">Draggable Events</h4>
+											<h4>Draggable Events</h4>
+											<div id="draggablemember"></div>
 										</div>
 
 										<div id='calendar'></div>
@@ -218,10 +219,11 @@ body {
 
 	<!-- calendar modal -->
 	<!-- /calendar modal -->
-<script>
+	<script>
 
 	$('#selectedroutenumber').change(function(){
-		console.log($('#selectedroutenumber').val());
+		$('#draggablemember').empty();
+		console.log('선택한 루트: '+$('#selectedroutenumber').val());
 		var param = $('#selectedroutenumber').val();
 		var view = "";
 		$.ajax({
@@ -240,17 +242,18 @@ body {
 					view += "'>";
 					view += "</div>";
 				});
-				$('#draggablemember').after(view);
+				$('#draggablemember').append(view);
 				
 				$('#external-events .fc-event').each(function() {
-
+					
 					// store data so the calendar knows to render an event upon drop
+					
 					$(this).data('event', {
 						title: $.trim($(this).text()), // use the element's text as the event title
-						description: $(this).find('input').val(),
+						description: $(this).find('input').val()
 						stick: true // maintain when user navigates (see docs on the renderEvent method)
 					});
-
+					
 					// make the event draggable using jQuery UI
 					$(this).draggable({
 						zIndex: 999,

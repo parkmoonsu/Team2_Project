@@ -10,6 +10,7 @@ import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
+import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.service.JoinService;
 import kr.or.bus.service.ScheduleManageService;
@@ -47,7 +48,9 @@ public class ScheduleManageController {
 	public View getSelectedRouteMember(String r_num,Model model){
 		System.out.println("r_num"+r_num);
 		List<MemberJoinRegulOffDTO> mjrdto = service.unScheduledMember(r_num);
+		List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> mrmbrjdto = service.scheduledMember(r_num);
 		model.addAttribute("mjrdto", mjrdto);
+		model.addAttribute("mrmbrjdto", mrmbrjdto);
 		return jsonview;
 	}
 	
