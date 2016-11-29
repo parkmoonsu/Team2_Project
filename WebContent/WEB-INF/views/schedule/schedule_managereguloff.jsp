@@ -187,11 +187,6 @@ body {
 										</div>
 										<div id='external-events'>
 											<h4 id="draggablemember">Draggable Events</h4>
-											
-											<p>
-												<input type='checkbox' id='drop-remove' /> <label
-													for='drop-remove'>remove after drop</label>
-											</p>
 										</div>
 
 										<div id='calendar'></div>
@@ -238,6 +233,11 @@ body {
 					console.log("m_name:"+value.m_name);
 					view += "<div class='fc-event'>";
 					view += value.m_name;
+					view += "<input type='hidden' value='";
+					view += value.m_id;
+					view += "' id='";
+					view += value.m_id;
+					view += "'>";
 					view += "</div>";
 				});
 				$('#draggablemember').after(view);
@@ -247,7 +247,7 @@ body {
 					// store data so the calendar knows to render an event upon drop
 					$(this).data('event', {
 						title: $.trim($(this).text()), // use the element's text as the event title
-						description: "hello",
+						description: $(this).find('input').val(),
 						stick: true // maintain when user navigates (see docs on the renderEvent method)
 					});
 
