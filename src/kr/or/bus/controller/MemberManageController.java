@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +30,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.dto.MemberJoinMDetailRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrDTO;
 import kr.or.bus.dto.MemberJoinResRecordDTO;
+import kr.or.bus.service.LoginService;
 import kr.or.bus.service.MemberManageService;
 @Controller
 public class MemberManageController {
@@ -41,6 +45,11 @@ public class MemberManageController {
 	
 	@Autowired
 	private MemberManageService service;
+	@Autowired
+	private LoginService service2;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping("/membermanage.admin")
 	public String memberInfo(String pg , Model model) {
@@ -154,6 +163,39 @@ public class MemberManageController {
       
       return jsonview;
    }
+	
+	
+	
+	@RequestMapping("/passcheck.admin")
+	public String passcheck(Model model , Principal principal , String param){
+		System.out.println("세션 ID : " + principal.getName());
+		
+		String encodepass = service.getPass(principal.getName());
+		System.out.println("m_pw : " + param);
+		System.out.println("encodePass : " + encodepass);
+		
+		boolean result = bCryptPasswordEncoder.matches(param, encodepass);
+		System.out.println("제발 출력이 나와랑");
+		System.out.println("result : " + result);
+		
+		String viewpage = "";
+		/*System.out.println(principal.getName());
+		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
+		System.out.println("dto  :  "+dto);
+		model.addAttribute("dto", dto);*/
+		
+	
+	
+		if(result){
+			viewpage = "membermanage/memberinfo";
+		}else{
+			viewpage = "membermanage/matchfailpass";
+		}
+		
+		return viewpage;
+	}
+	
+	
 
 
 }

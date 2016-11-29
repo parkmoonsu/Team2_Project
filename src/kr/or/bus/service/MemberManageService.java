@@ -172,5 +172,21 @@ private JavaMailSender mailSender;
 			}
 			return list;
 		}
+	  
+	  
+	  public String getPass(String m_id){
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			String pw = dao.passMatch(m_id).getM_pw();
+			
+			return pw;
+		}
 
+		public MemberJoinMDetailDTO getMemberInfo(String m_id){
+			System.out.println("m_id : " + m_id);
+			MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
+			MemberJoinMDetailDTO dto = dao.getMemberInfo(m_id);
+
+			
+			return dto;
+		}
 }

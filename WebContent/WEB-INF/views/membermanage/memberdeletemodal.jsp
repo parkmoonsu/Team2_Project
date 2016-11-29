@@ -427,6 +427,9 @@ $(function() {
            $('#myModalLabel2').html("<span class='blue'>&nbsp;"+array[0]+'</span>님을 삭제하시겠습니까?');
          });  
         
+    
+    
+    
          $('#cancelbutton').click(function(){
           //console.log($('#search').val()); 
           var param = $('#hvalue').val();
