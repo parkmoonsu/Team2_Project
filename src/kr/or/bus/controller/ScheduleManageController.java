@@ -93,4 +93,15 @@ public class ScheduleManageController {
 		return jsonview;
 	}
 	
+	/*
+	제목 : 기사 휴무 및 스케쥴 관리 
+	작성자 : 길한종
+	목적 : 내용 추가(운행 스케줄)
+	*/
+	
+	@RequestMapping("/gettimetable.admin")
+	public String getTimetable(){	
+		return "schedule/schedule_managertimetable";
+	}
+	
 }

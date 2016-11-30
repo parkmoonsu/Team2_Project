@@ -62,7 +62,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="history_agree" parameterType="map">
 		update reguloffr
-		set ko_code='601'
+		set ko_code='601',
+		o_check='Y'
 		where m_id=#{m_id} and ro_object=#{ro_object}
 	</update>
 	
