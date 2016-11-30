@@ -5,10 +5,10 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <!--
- * @File Name: schedule_history.jsp
+ * @File Name: schedule_managerhistory.jsp
  * @Author: 길한종
- * @Data: 2016. 11. 26
- * @Desc: 일정관리(변경기록)
+ * @Data: 2016. 11. 29
+ * @Desc: 일정관리(매니저 승인)
 -->
 
 <!DOCTYPE html>
@@ -21,12 +21,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>버스 관리</title>
-
-<!-- <style type="text/css">
-.nav-tabs {
-    border-bottom: 0px
-}
-</style> -->
 
 <!-- Bootstrap -->
 <link
@@ -74,7 +68,7 @@
 		<div class="main_container">
 			<div class="col-xs-12  col-md-3 left_col">
 
-				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
+				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
 			</div>
 
 			<!--상단 menu -->
@@ -111,19 +105,16 @@
 				<div class="">
 				<div class="page-title">
 						<div class="title_left">
-							<!-- <h3>
-								<small>교대신청내역</small>
-							</h3> -->
+							<h3>휴무 신청 내역
+								<small>확인 및 승인</small>
+							</h3>
 						</div>
 					</div>
 					<div class="clearfix"></div>
 
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
-						<ul class="nav nav-tabs" style="border-bottom: 0px">
-  				<li role="presentation"><a href="schedule_reguloff.htm">정기휴무신청</a></li>
-  				<li role="presentation" class="active"><a href="schedule_history.htm?m_id=${LoginUser}">신청내역조회</a></li>
-			  </ul>
+						
 							<div class="x_panel">
 								<div class="x_content">
 									<!-- start project list -->
@@ -145,6 +136,7 @@
 												<th>변경휴무일</th>
 												<th>요청일</th>
 												<th>승인일</th>
+												<th>신청자</th>
 												<th>변경대상</th>
 												<th>상태</th>
 												<!-- <th style="width: 20%; text-align:center;">
@@ -162,13 +154,17 @@
 												<td>${i.ad}</td>
 												<td>${i.ro_reqdate}</td>
 												<td>${i.ro_regdate}</td>
+												<td>${i.bn}</td>
 												<td>${i.an}</td>
-												<c:if test="${i.ko_name=='신청중'}">
-													<td><button class="btn btn-info">${i.ko_name}</button></td>
-												</c:if>
 												<c:if test="${i.ko_name=='승인'}">
 													<td><button class="btn btn-success">${i.ko_name}</button></td>
-												</c:if>								
+												</c:if>
+												<c:if test="${i.ko_name=='신청중'}">
+													<td><button class="btn btn-info" id="${i.m_id}n${i.ro_object}" onclick="btnclick('${i.m_id}', '${i.ro_object}')">${i.ko_name}</button></td>
+												</c:if>
+												<!-- <td style = "text-align:center"> 
+													<input type = "checkbox">
+                                         		</td> -->
 											</tr>
 											</c:forEach>
 										</tbody>
@@ -444,6 +440,27 @@
 		
 		
 	});
+	
+	function btnclick(m_id, ro_object){
+		if (confirm("승인 하시겠습니까??") == true){
+			$.ajax({
+				type:"post",
+				data:{
+					m_id:m_id,
+					ro_object:ro_object
+				},
+				url:"agreehistory.admin",
+				success:function(){
+					alert('승인 되었습니다.');
+					
+					$('#'+m_id+'n'+ro_object).attr('class', 'btn btn-success');
+					$('#'+m_id+'n'+ro_object).attr('onclick', '');
+					$('#'+m_id+'n'+ro_object).text('승인');
+				}
+			});
+		}
+		    
+	}
 	
 	</script>
 </body> 	

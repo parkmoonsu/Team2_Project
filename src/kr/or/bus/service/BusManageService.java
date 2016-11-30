@@ -134,6 +134,17 @@ public class BusManageService {
 		
 		return list;
 	}
+	
+	
+	//임시노선별 출결현황에서 이름 가져오기
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getNselect(String r_num){
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getNselect(r_num);
+
+		return list;
+	}
+	
 	public int alreadyUse(String b_vehiclenum){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		int count = dao.alreadyUse(b_vehiclenum);

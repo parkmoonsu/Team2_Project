@@ -5,14 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
+import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
-import kr.or.bus.service.JoinService;
+
 import kr.or.bus.service.ScheduleManageService;
 
 
@@ -66,6 +68,28 @@ public class ScheduleManageController {
 	public View modifyingSchedule(String m_id, String o_date, Model model){
 		System.out.println(m_id+"/"+o_date);
 		service.modifyReguloffMember(m_id, o_date);
+		return jsonview;
+	}
+	
+	/*
+	제목 : 기사 휴무 및 스케쥴 관리 
+	작성자 : 길한종
+	목적 : 내용 추가(일정 승인)
+	*/
+	
+	@RequestMapping("/gethistory.admin")
+	public String getHistory(ModelMap map){
+		
+		List<RegulOffrJoinDTO> list=service.history_select();
+		
+		map.addAttribute("list", list);
+		return "schedule/schedule_managerhistory";
+	}
+	
+	@RequestMapping("/agreehistory.admin")
+	public View agreeHistory(String m_id, String ro_object, ModelMap map){	
+		service.history_agree(m_id, ro_object);
+		map.addAttribute("list", "성공");
 		return jsonview;
 	}
 	

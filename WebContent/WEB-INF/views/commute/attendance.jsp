@@ -126,19 +126,28 @@ th, td {
 														</tr>
 													</thead>
 													<tbody>
-														<c:forEach var="i" items="${list}">
-															<tr>
-																<td>${i.m_name}</td>
-																
-																<c:forEach var="i" items="${list}" begin="1" end="31">
-									
-																<td>${i.cs_stat}</td>
-																</c:forEach>
-															</tr>
-														</c:forEach>
+													<c:forEach var="i" items="${list}">
+		                                             <tr>
+		                                                <td>${i.m_name}</td>
+		                                                
+		                                                <c:forEach var="i" items="${list}" begin="1" end="31">
+		                           
+		                                                <td>${i.cs_stat}</td>
+		                                                </c:forEach>
+		                                             </tr>
+		                                          </c:forEach>
+													<%-- <c:forEach items="${list}" var="excelList">
+													<tr>
+													<td>${excelList.m_name}</td>
+												       </tr>  
+												         
+												         
+												          <td>${excelList.cs_stat}</td>
+												       
+												         
+												       </c:forEach>   --%>
 													</tbody>	
 												</table> 
-												
 											</div>
 
 
