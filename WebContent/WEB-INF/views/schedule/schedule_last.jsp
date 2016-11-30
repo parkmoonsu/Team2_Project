@@ -3,10 +3,10 @@
 <%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
 
 <!--
- * @File Name: calendar_reguloff.jsp
- * @Author: 길한종
- * @Data: 2016. 11. 22
- * @Desc: 일정관리(정기휴무) -  풀캘린더 ui
+ * @File Name: schedule_last.jsp
+ * @Author: 김수현
+ * @Data: 2016. 11. 29
+ * @Desc: 일정관리(최종스케줄) - 테이블
 -->
 <!DOCTYPE html>
 <html>
@@ -76,41 +76,7 @@
 
             <div class="clearfix"></div>
 
-            <div class="row">
-              <div class="col-md-12">
-              <ul class="nav nav-tabs">
-  				<li role="presentation" class="active"><a href="schedule_reguloff.htm">정기휴무신청</a></li>
-  				<li role="presentation"><a href="schedule_history.htm?m_id=${LoginUser}">신청내역조회</a></li>
-			  </ul>
-                <div class="x_panel">
-                
-                  <!-- <div class="x_title">
-                    <h2>Calendar Events <small>Sessions</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div> -->
-                  <div class="x_content">
-
-                    <div id='calendar'></div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
+        
           </div>
         </div>
         <!-- /page content -->

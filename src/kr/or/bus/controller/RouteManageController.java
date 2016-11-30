@@ -27,7 +27,7 @@ public class RouteManageController {
 		routeManageSerivce.routelocationSave(request , response);
 	}
 		
-	//파일에서 마커 좌표를 읽어온다
+	//파일에서 마커 원본좌표를 읽어온다
 	@RequestMapping(value="/routeRead.admin",method=RequestMethod.GET)
 	public void routeRead(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		routeManageSerivce.routelocationRead(request,response);

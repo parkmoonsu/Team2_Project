@@ -237,9 +237,24 @@ public class BusManageController {
 	
 	@RequestMapping("/alreadyuse.admin")
 	public View alreadyUse(String b_vehiclenum , Model model){
-		String [] array = b_vehiclenum.split(",");
-		System.out.println("받은것 : " +array.length);
-		int result = 0;
+		List<Integer> list = new ArrayList<Integer>();
+		
+		String[] array = b_vehiclenum.split(",");
+		for(int i = 0 ; i< array.length ; i++){
+			System.out.println(array[i] + "의 유무 : " + service.alreadyUse(array[i]));
+			list.add(service.alreadyUse(array[i]));	
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("array", array);
+		
+		/*for(int i = 0 ; i < array.length ; i++){
+			System.out.println(array[i] + "의 유무 : " + service.alreadyUse(array[i]));
+			data[i] = service.alreadyUse(array[i]);
+		}
+		model.addAttribute("data", data);
+		*/
+		//System.out.println("받은것 : " +array.length);
+		/*int result = 0;
 		for(int i = 0; i < array.length; i++){
 			System.out.println("넘어온 값 : "+array[i]);
 			result = service.alreadyUse(array[i]);
@@ -248,7 +263,7 @@ public class BusManageController {
 		System.out.println("#####data### : " + result );
 		model.addAttribute("result", result);
 		model.addAttribute("num", b_vehiclenum);
-		return jsonview;
+		*/return jsonview;
 	}
 	
 	@RequestMapping("/matchpass.admin")
@@ -271,6 +286,12 @@ public class BusManageController {
 		service.deleteBus(b_vehiclenum);
 		
 		return jsonview;
+	}
+	
+	//실시간 위치추적 페이지
+	@RequestMapping("/realTime.admin")
+	public String realTimeOpen(){
+		return "busmanage/RealTimeLocation";
 	}
 
 }

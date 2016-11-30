@@ -1,4 +1,4 @@
-<!-- 
+ <!-- 
 	@FileName : busenroll.jsp
 	@Project	: KosBus
 	@Date	: 2016. 11.25
@@ -453,9 +453,34 @@
 
 	
 	function reg(){
-		//console.log($("#tbody").children().children().children().attr("id"));
-		
-		$("#target").submit();
+	
+		var array = "";
+		var vnum = ""
+		for(var i = 1 ; i <= num ; i++){
+			vnum = "#b_vehiclenum" + i;
+			array += $(vnum).val() + ",";
+		}
+		var a;
+		$.ajax({
+			url:"alreadyuse.admin",
+			data:{b_vehiclenum : array},
+			success : function(data){
+				$.each(data.list,function(index,sd){
+					if(sd == 0){
+						$("#target").submit();
+						
+					}else{
+						a = index;
+					}
+				});
+				$.each(data.array,function(index,sd){
+					if(a == index){
+						alert(sd + "는 이미 존재하는 차량 번호입니다.");
+					}
+				});
+			}
+		});
+
 	}
 	$(function(){
 		
@@ -478,7 +503,7 @@
 			 }
 		});
 
-		$("#dbtn").click(function(){
+	$("#dbtn").click(function(){
 			for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
 				var checkbox = "#check" + i;
 				
@@ -487,7 +512,10 @@
 					$("#match-pass").modal("show");	
 				}
 			}
-		});
+		}); 
+		
+		
+
 		
 		$("#passtrue").click(function(){
 			$.ajax({
