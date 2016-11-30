@@ -100,7 +100,9 @@ public class ScheduleManageController {
 	*/
 	
 	@RequestMapping("/gettimetable.admin")
-	public String getTimetable(){	
+	public String getTimetable(ModelMap map){
+		service.timetable_get();
+		//map.addAttribute("list", list);
 		return "schedule/schedule_managertimetable";
 	}
 	

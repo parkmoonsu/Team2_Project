@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<!-- 추가 -->
+	<!-- history -->
 	<select id="history_select" resultType="kr.or.bus.dto.RegulOffrJoinDTO">
 		select 
 		r.ko_code,
@@ -63,9 +63,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="history_agree" parameterType="map">
 		update reguloffr
 		set ko_code='601',
-		o_check='Y'
+		o_check='Y',
+		ro_regdate=sysdate
 		where m_id=#{m_id} and ro_object=#{ro_object}
 	</update>
+	
+	<!-- timetable -->
+	<select id="selectdistinct" resultType="kr.or.bus.dto.SelectDistinctDTO">
+		select distinct m.m_name, o.o_date from member m
+	    join oschedule o on m.b_vehiclenum=o.b_vehiclenum
+	</select>
 	
 
 	<!-- 정기휴무가 정해진 노선이 배정된 기사님 뽑기 -->

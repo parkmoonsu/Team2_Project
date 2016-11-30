@@ -1,5 +1,6 @@
 package kr.or.bus.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,6 +13,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
+import kr.or.bus.dto.SelectDistinctDTO;
 
 @Service
 public class ScheduleManageService {
@@ -65,5 +67,24 @@ public class ScheduleManageService {
 	public void history_agree(String m_id, String ro_object){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.history_agree(m_id, ro_object);
+	}
+	
+	//timetable
+	public List<SelectDistinctDTO> timetable_get(){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		//1 distinct로 해당 사람 뽑기
+		List<SelectDistinctDTO> l1=dao.selectdistinct();
+		//2 배열(dto로 저장)
+		
+		List<java.sql.Time> l2=new ArrayList<java.sql.Time>();
+		//3 select문 돌리면서 시간 뽑아서 배열에 저장
+		for(int index=0; index<l1.size(); index++){
+			String m_name=l1.get(index).getM_name();
+			java.sql.Date o_date=l1.get(index).getO_date();
+			l2.add(dao.??(String m_name, java.sql.Date o_date));
+		}
+		//4 2,3번 배열 합치기
+		
+		return null;
 	}
 }
