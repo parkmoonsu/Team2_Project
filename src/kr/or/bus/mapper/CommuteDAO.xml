@@ -112,4 +112,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m_id=#{param1} and c_date = #{param2}
 	</select> 
 	
+<!--  	<select id="csCheck" resultType = "int">
+		select count(c_start)
+		from commute
+		where m_id = #{m_id} 
+	</select>  -->
+ 	<select id="csCheck" resultType="int" parameterType="String">
+		select count(c_start)
+		from commute
+		where m_id = #{param1} and c_date = #{param2}  
+	</select>
+	
+	<select id="ceCheck" parameterType="String" resultType = "int">
+		select count(c_end)
+		from commute
+		where m_id = #{param1} and c_date = #{param2} 
+	</select>
+	
 </mapper>

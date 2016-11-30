@@ -31,4 +31,10 @@ public interface CommuteDAO {
 	
 	//퇴근상태보여주기
 	public CommuteJoinCstartJoinCendDTO ceselect(String m_id,String tdate);
+	
+	//출근했는지 체크
+	public int csCheck(String m_id, @Param("tdate")String tdate);
+	
+	//퇴근했는지 체크
+	public int ceCheck(String m_id, @Param("tdate")String tdate);
 }

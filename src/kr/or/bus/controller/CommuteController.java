@@ -47,13 +47,18 @@ public class CommuteController {
 	}
 		
 	@RequestMapping("/comsearch.member")
-	public String showlist(String pg , String m_id, Model model) {
+	public String showlist(String pg , String m_id, String tdate, Model model) {
 		
 		List<CommuteJoinCstartJoinCendDTO> list = service.getSelect(pg, m_id);
 		int page = service.pg(pg);
 		
+		int cscheck = service.csCheck(m_id);
+		int cecheck = service.ceCheck(m_id);
+		
 		model.addAttribute("page", page);
 		model.addAttribute("list", list);
+		model.addAttribute("cscheck", cscheck);
+		model.addAttribute("cecheck", cecheck);
 		System.out.println(list.toString()+"asfasd");
 		
 		return "commute/comsearch";	
