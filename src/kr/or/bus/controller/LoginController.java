@@ -14,15 +14,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.MemberJoinJobDTO;
+import kr.or.bus.service.BusManageService;
 import kr.or.bus.service.LoginService;
+import net.sf.json.JSONObject;
 
 @Controller
 public class LoginController {
 	
 	@Autowired
 	private LoginService service;
+	
+	@Autowired
+	private BusManageService service2;
+	
+	@Autowired
+	private View jsonview;
 	
 	@RequestMapping("/login.htm")
 	public String login(){
@@ -37,6 +46,17 @@ public class LoginController {
 		MemberJoinJobDTO dto = service.mainGo(principal.getName());
 		String jobname = dto.getJ_name();
 		model.addAttribute("jobname", jobname);
+		
+		int mcount = service2.mBus();
+		int ncount = service2.nBus();
+		int wcount = service2.wBus();
+		int gcount = service2.gBus();
+		
+		model.addAttribute("m", mcount);
+		model.addAttribute("n", ncount);
+		model.addAttribute("w", wcount);
+		model.addAttribute("g", gcount);
+	
 		return "main/main";
 	}
 	
@@ -69,5 +89,18 @@ public class LoginController {
 		}
 		
 		return viewpage;
+	}
+	
+	//json
+	@RequestMapping("/weather.htm")
+	public View weather(Model model) throws Exception{
+
+		JSONObject temp =  service.temp();
+		JSONObject day6 =  service.day6();
+		
+		model.addAttribute("temp", temp);
+		model.addAttribute("day6", day6);
+		
+		return jsonview;
 	}
 }

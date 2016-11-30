@@ -59,7 +59,8 @@ public class ScheduleManageController {
 	@RequestMapping("/makingschedule.admin")
 	public View makingSchedule(String m_id, String o_date, Model model){
 		System.out.println(m_id+"/"+o_date);
-		service.decideReguloffMember(m_id, o_date);
+		String o_code = service.decideReguloffMember(m_id, o_date);
+		model.addAttribute("o_code", o_code);
 		return jsonview;
 	}
 	//유효성 처리 해줘야 함,reguloffr
@@ -90,6 +91,19 @@ public class ScheduleManageController {
 		service.history_agree(m_id, ro_object);
 		map.addAttribute("list", "성공");
 		return jsonview;
+	}
+	
+	/*
+	제목 : 기사 휴무 및 스케쥴 관리 
+	작성자 : 길한종
+	목적 : 내용 추가(운행 스케줄)
+	*/
+	
+	@RequestMapping("/gettimetable.admin")
+	public String getTimetable(ModelMap map){
+		service.timetable_get();
+		//map.addAttribute("list", list);
+		return "schedule/schedule_managertimetable";
 	}
 	
 }

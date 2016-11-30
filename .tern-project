@@ -15,6 +15,15 @@
     },
     "jquery-extension": {
       
+    },
+    "gas": {
+      
+    },
+    "cordovajs": {
+      
+    },
+    "dojotoolkit1.10": {
+      
     }
   },
   "libs": [

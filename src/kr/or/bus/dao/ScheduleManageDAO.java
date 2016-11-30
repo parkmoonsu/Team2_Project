@@ -10,6 +10,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
+import kr.or.bus.dto.SelectDistinctDTO;
 
 
 public interface ScheduleManageDAO {
@@ -37,5 +38,8 @@ public interface ScheduleManageDAO {
 	//history
 	public List<RegulOffrJoinDTO> history_select();
 	public void history_agree(@Param("m_id") String m_id, @Param("ro_object") String ro_object);
+
+	//timetable
+	public List<SelectDistinctDTO> selectdistinct();
 
 }

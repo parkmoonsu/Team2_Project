@@ -85,4 +85,30 @@ public class CommuteService {
 		}
 		return page;
 	}
+	
+	public int csCheck(String m_id){
+		Calendar calendar = Calendar.getInstance();
+        java.util.Date date = calendar.getTime();
+        
+		String today = (new SimpleDateFormat("yyyy-MM-dd HHmm").format(date));
+        String tdate = today.substring(0, 10).trim();
+        
+		CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
+		int check = dao.csCheck(m_id,tdate);
+		
+		return check;
+	}
+	
+	public int ceCheck(String m_id){
+		Calendar calendar = Calendar.getInstance();
+        java.util.Date date = calendar.getTime();
+        
+		String today = (new SimpleDateFormat("yyyy-MM-dd HHmm").format(date));
+        String tdate = today.substring(0, 10).trim();
+        
+		CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
+		int echeck = dao.ceCheck(m_id, tdate);
+		
+		return echeck;
+	}
 }

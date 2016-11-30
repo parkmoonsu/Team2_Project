@@ -249,7 +249,11 @@ public class ScheduleController {
 	
 	//최종스케줄 -> schedule_last
 	@RequestMapping("/schedule_last.htm")
-	public String schedule_last(){
+	public String schedule_last(Model model){
+		
+		
+	//	List<> list= servi
+		
 		return "schedule/schedule_last";
 	}
 	

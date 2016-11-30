@@ -73,12 +73,78 @@
                 </div>
               </div>
             </div>
-
             <div class="clearfix"></div>
+            
+          <!-- 본문 내용시작 -->
+            	<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>
+								<small>마을버스     시내버스     시외버스</small>
+							</h3>
+						</div>
+					</div>
+					<div class="clearfix"></div>
 
+					<div class="row">
+						<div id="showdiv">
+
+
+							<div class="row">
+								<div class="col-sm-12 col-xs-12">
+									<div class="col-md-12 col-xs-12">
+										<div class="x_panel">
+
+											<div class="x_content" id="commutesearchstarttableinfo">
+												<table style="text-align: center"
+													class="table table-hover projects">	
+													<thead>
+														<tr>
+															<th class='backslash' style='width:75px'><div>일(日)</div>이름</th>
+															 <c:forEach var="i"  begin="1" end="31" step="1">
+															  <%-- <c:forEach var="i" items="${list}"> --%>	
+															  	<th>${i}</th>
+															  </c:forEach>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach var="i" items="${list}">
+															<tr>
+																<td>${i.m_name}</td>
+																
+																<c:forEach var="i" items="${list}" begin="1" end="31">
+									
+																<td>${i.cs_stat}</td>
+																</c:forEach>
+															</tr>
+														</c:forEach>
+													</tbody>	
+												</table> 
+												
+											</div>
+
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            
+            
+						<!-- 본문 내용 끝 -->
         
           </div>
         </div>
+        
+        
+        
+        
+        
+        
+        
         <!-- /page content -->
 
         <!-- footer content -->
@@ -92,100 +158,7 @@
       </div>
     </div>
 
-    <!-- calendar modal -->
-    <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title" id="myModalLabel">일정 추가</h4>
-          </div>
-          <div class="modal-body">
-            <div id="testmodal" style="padding: 5px 20px;">
-              <form id="antoform" class="form-horizontal calender" role="form">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">기사 이름</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="title" name="title" readonly>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">휴무 요일</label>
-                  <div class="col-sm-9">
-                  	<select id="select1" class="form-control">
-                  		<option value="">요일 선택</option>
-                  		<option value="1">월요일</option>
-                  		<option value="2">화요일</option>
-                  		<option value="3">수요일</option>
-                  		<option value="4">목요일</option>
-                  		<option value="5">금요일</option>
-                  		<option value="6">토요일</option>
-                  		<option value="0">일요일</option>
-                  	</select>
-                
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default antoclose" data-dismiss="modal">닫기</button>
-            <button type="button" class="btn btn-primary antosubmit">저장</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title" id="myModalLabel2">일정 수정</h4>
-          </div>
-          <div class="modal-body">
-
-            <div id="testmodal2" style="padding: 5px 20px;">
-              <form id="antoform2" class="form-horizontal calender" role="form">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">기사 이름</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="title2" name="title2" readonly>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">휴무요일</label>
-                  <div class="col-sm-9">
-                    <select id="select2" class="form-control">
-                  		<option value="">요일 선택</option>
-                  		<option value="1">월요일</option>
-                  		<option value="2">화요일</option>
-                  		<option value="3">수요일</option>
-                  		<option value="4">목요일</option>
-                  		<option value="5">금요일</option>
-                  		<option value="6">토요일</option>
-                  		<option value="0">일요일</option>
-                  	</select>
-                  </div>
-                </div>
-
-              </form>
-            </div>
-          </div>
-          <div class="modal-footer">
-          	<button type="button" class="btn btn-default" data-dismiss="modal" id="deleteschedule">삭제</button>
-            <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">닫기</button>
-            <button type="button" class="btn btn-primary antosubmit2">저장</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
-    <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
-    <!-- /calendar modal -->
-        
+   
    
     <!-- Bootstrap -->
     <script src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
