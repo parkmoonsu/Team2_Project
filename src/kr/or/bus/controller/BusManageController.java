@@ -213,6 +213,18 @@ public class BusManageController {
 		
 	}
 	
+	//임시 노선별 출결현황에서 이름 가져오기
+	@RequestMapping("/routename.admin")
+	public String showname(String r_num, Model model){
+		
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.getNselect(r_num);
+	
+		model.addAttribute("list", list);
+		
+		return "commute/attendance";
+		
+	}
+		
 
 	@RequestMapping("/update.admin")
 	public String update(String b_vehiclenum_u , String g_name_u , String r_num_u , String mname_u , String hidden){

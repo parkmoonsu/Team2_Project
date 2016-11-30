@@ -53,79 +53,116 @@
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
 <script type="text/javascript">
+var som;
+
 	$(function() {
 
 		var id = "${LoginUser}";
 		var page = "${page}";
-		$("#gotowork").click(
-				function(event) {		
-					$.ajax({
-						url : "gotowork.member",
-						data : {
-							m_id : id
-						},
-						type : "post",
-						success : function(data) {
-							console.log(data)
-							$("#commutestartinfo").empty();
-							$("#commutestartinfo").append(
-									id+'님의 출근시간은 ' + data.dto.c_start + '입니다'
-											+ "<br>" + id+'님의 출근상태는 '
-											+ data.dto.cs_stat + '입니다.');
-							event.stopPropagation();
-							event.preventDefault();
-							
-							$.ajax({
-								url : "comsearchtestinfo.member",
-								data : {
-									m_id : id,
-									pg : page
-								},
-								type : "post",
-								success : function(data) {
-								 	$('#commutesearchstarttableinfo').empty();
-									$('#commutesearchstarttableinfo').append(data);
-								}
-							});
-							$("#gotowork").attr('disabled',true)
-						}
-					});
-
-				});
-
-		$("#getoffwork").click(
+		var cscheck = "${cscheck}";
+			
+	
+		
+		
+	$("#gotowork").click(
 				function() {
+					if (cscheck == 0) {
+						$("#myModal").modal("show");
+						$.ajax({
+							url : "gotowork.member",
+							data : {
+								m_id : id
+							},
+							type : "post",
+							success : function(data) {
+								console.log(data)
+								$("#commutestartinfo").empty();
+								$("#commutestartinfo").append(
+										id + '님의 출근시간은 ' + data.dto.c_start
+												+ '입니다' + "<br>" + id
+												+ '님의 출근상태는 '
+												+ data.dto.cs_stat + '입니다.<br>');
+								$("#commutestartinfo").append("<button class = 'btn btn-default' id = 'csend'>하이</button>");
+								
+								$("#csend").click(function(){									
+									window.location.reload();
+								});	
 
-					$.ajax({
-						url : "getoffwork.member",
-						data : {
-							m_id : id
-						},
-						type : "post",
-						success : function(data) {
-							$("#commuteendinfo").empty();
-							$("#commuteendinfo").append(
-									id + '님의 퇴근시간은 ' + data.dto.c_end + '입니다'
-											+ "<br>" + id + '님의 퇴근상태는 '
-											+ data.dto.ce_stat + '입니다.');
-							$.ajax({
-								url : "comsearchstartinfo.member",
-								data : {
-									m_id : id,
-									pg : page
-								},
-								type : "post",
-								success : function(data) {
-									$('#commutesearchstarttableinfo').empty(); 
-									$('#commutesearchstarttableinfo').append(data);
-								}
-							});
+								$.ajax({
+									url : "comsearchstartinfo.member",
+									data : {
+										m_id : id,
+										pg : page
+									},
+									type : "post",
+									success : function(data) {
+										$('#commutesearchstarttableinfo')
+												.empty();
+										$('#commutesearchstarttableinfo')
+												.append(data);
+									}
+								});
+								$("#gotowork").attr('disabled', true)
+							},
+						});
 
-						}
-					});
+						
+					} else {
+						alert("이미 출근 하셨습니다.");
+					}
+
+						//window.location.reload();
 				});
+
+		 	
+			$("#getoffwork").click(
+					function() {
+
+						$.ajax({
+							url : "getoffwork.member",
+							data : {
+								m_id : id
+							},
+							type : "post",
+							success : function(data) {
+								$("#commuteendinfo").empty();
+								$("#commuteendinfo").append(
+										id + '님의 퇴근시간은 ' + data.dto.c_end + '입니다<br>'+
+										id + '님의 퇴근상태는 ' + data.dto.ce_stat + '입니다.<br>');
+								$("#commuteendinfo").append("<button class = 'btn btn-default' id = 'ceend'>확인</button>");
+								
+								$("#ceend").click(function(){									
+									window.location.reload();
+								});	
+								$.ajax({
+									url : "comsearchstartinfo.member",
+									data : {
+										m_id : id,
+										pg : page
+									},
+									type : "post",
+									success : function(data) {
+										$('#commutesearchstarttableinfo').empty(); 
+										$('#commutesearchstarttableinfo').append(data);
+									}
+								});
+
+							}
+						});
+					}); 
 
 	});
+	/* 	
+	 function doNotReload(){
+	 if(    (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) //ctrl+N , ctrl+R 
+	 || (event.keyCode == 116) // function F5
+	 {
+	 event.keyCode = 0;
+	 event.cancelBubble = true;
+	 event.returnValue = false;
+	 }
+	 }
+	 document.onkeydown = doNotReload; */
 </script>
 <style type="text/css">
 #gotowork {
@@ -147,7 +184,8 @@
 				</div>
 				<div class="modal-body" id="commutestartinfo"
 					style="text-align: center; font-size: 20px; line-height: 200%">
-					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					로딩중입니다..
+<!-- 					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button> -->
 				</div>
 			</div>
 
@@ -170,7 +208,7 @@
 				</div>
 				<div class="modal-body" id="commuteendinfo"
 					style="text-align: center; font-size: 20px; line-height: 200%">
-					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					로딩중입니다..
 				</div>
 			</div>
 		</div>
@@ -274,12 +312,10 @@
 											</div>
 											<div style="text-align: right">
 
-												<div class="btn btn-primary btn-xs" id="gotowork"
-													data-toggle="modal" data-target="#myModal">
+												<div class="btn btn-primary btn-xs" id="gotowork">
 													<i class="fa fa-sign-in"></i> 출근
 												</div>
 												
-
 												<div class="btn btn-success btn-xs" id="getoffwork"
 													data-toggle="modal" data-target="#myModal2">
 													<i class="fa fa-sign-out"></i> 퇴근

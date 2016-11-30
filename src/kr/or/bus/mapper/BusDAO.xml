@@ -122,6 +122,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    order by r_num
 	</select>
 
+
+<!-- 	<select id="getStat" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select cs_stat 
+		from commute com join cstart cs 
+		on com.cs_code=cs.cs_code 
+	</select> -->
+
 	<select id = "alreadyUse" resultType = "int" parameterType = "String">
 		select count(*)
 		from bus
