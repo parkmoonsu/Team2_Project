@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.bus.dao.ScheduleManageDAO;
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
+import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 
 @Service
@@ -33,5 +34,17 @@ public class ScheduleManageService {
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		List<MemberJoinRegulOffDTO> mjrdto = dao.getUndecideReguloffMember(r_num);
 		return mjrdto;
+	}
+	
+	
+	//추가
+	public List<RegulOffrJoinDTO> history_select(){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		List<RegulOffrJoinDTO> list=dao.history_select();
+		return list;
+	}
+	public void history_agree(String m_id, String ro_object){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		dao.history_agree(m_id, ro_object);
 	}
 }

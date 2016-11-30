@@ -26,5 +26,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTotalGarage" resultType="kr.or.bus.dto.GarageDTO">
 		select g_num, g_name, g_x, g_y, g_addr, g_space, g_currentpark from garage
 	</select>
+	
+	
+	<!-- 추가 -->
+	<select id="history_select" resultType="kr.or.bus.dto.RegulOffrJoinDTO">
+		select 
+		r.ko_code,
+		r.m_id,
+		r.o_code,
+		r.ro_code,
+		r.ro_reqdate,
+		r.ro_regdate,
+		r.ro_object,
+		
+		k.ko_name,
+		o.o_date as bd,
+		mo.o_date as ad,
+		m.m_name as bn,
+		me.m_name as an
+		
+		from reguloffr r
+		join member m on r.m_id=m.m_id
+		join koff k on r.ko_code=k.ko_code
+		join moff o on r.o_code=o.o_code
+	    join moff mo on r.ro_code=mo.o_code
+	    join member me on r.ro_object=me.m_id
+	</select>
+	<update id="history_agree" parameterType="map">
+		update reguloffr
+		set ko_code='601'
+		where m_id=#{m_id} and ro_object=#{ro_object}
+	</update>
+	
 
 </mapper>
