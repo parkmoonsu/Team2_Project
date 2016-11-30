@@ -22,6 +22,12 @@
 
 <title>버스 관리</title>
 
+<!-- <style type="text/css">
+.nav-tabs {
+    border-bottom: 0px
+}
+</style> -->
+
 <!-- Bootstrap -->
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
@@ -114,7 +120,7 @@
 
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
-						<ul class="nav nav-tabs">
+						<ul class="nav nav-tabs" style="border-bottom: 0px">
   				<li role="presentation"><a href="schedule_reguloff.htm">정기휴무신청</a></li>
   				<li role="presentation" class="active"><a href="schedule_history.htm?m_id=${LoginUser}">신청내역조회</a></li>
 			  </ul>
@@ -157,10 +163,12 @@
 												<td>${i.ro_reqdate}</td>
 												<td>${i.ro_regdate}</td>
 												<td>${i.an}</td>
-												<td>${i.ko_name}</td>
-												<!-- <td style = "text-align:center"> 
-													<input type = "checkbox">
-                                         		</td> -->
+												<c:if test="${i.ko_name=='신청중'}">
+													<td><button class="btn btn-info">${i.ko_name}</button></td>
+												</c:if>
+												<c:if test="${i.ko_name=='승인'}">
+													<td><button class="btn btn-success">${i.ko_name}</button></td>
+												</c:if>								
 											</tr>
 											</c:forEach>
 										</tbody>
