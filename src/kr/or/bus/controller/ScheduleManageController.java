@@ -57,7 +57,8 @@ public class ScheduleManageController {
 	@RequestMapping("/makingschedule.admin")
 	public View makingSchedule(String m_id, String o_date, Model model){
 		System.out.println(m_id+"/"+o_date);
-		service.decideReguloffMember(m_id, o_date);
+		String o_code = service.decideReguloffMember(m_id, o_date);
+		model.addAttribute("o_code", o_code);
 		return jsonview;
 	}
 	//유효성 처리 해줘야 함,reguloffr
