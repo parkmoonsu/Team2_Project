@@ -232,13 +232,13 @@
 										<div class="row">
 											<div class="col-sm-4">
 												<div class="weather-icon">
-													<canvas id = 'rain' width='84' height = '84'></canvas>
+													<canvas id = 'todayweath' width='84' height = '84'></canvas>
 												</div>
 											</div>
 											<div class="col-sm-8">
 												<div class="weather-text">
 													<h2 id = "tweath">
-														서울<br>	
+														서울<br><br>&nbsp;
 													</h2>
 												</div>
 											</div>
@@ -257,48 +257,48 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id = "ndate"></h2>
-													<h3 class="degrees">25</h3>
-													<canvas id="clear-day" width="32" height="32"></canvas>
+													<h4 class="degrees" id = "ntemp"></h4>
+													<canvas id="nweath" width="32" height="32"></canvas>
 													
 												</div>
 											</div>
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id ="n2date"></h2>
-													<h3 class="degrees">25</h3>
-													<%-- <canvas height="32" width="32" id="rain"></canvas> --%>
+													<h4 class="degrees" id ="n2temp"></h4>
+													<canvas height="32" width="32" id="n2weath"></canvas>
 													
 												</div>
 											</div>
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id ="n3date"></h2>
-													<h3 class="degrees">27</h3>
-													<canvas height="32" width="32" id="snow"></canvas>
+													<h4 class="degrees" id = "n3temp"></h4>
+													<canvas height="32" width="32" id="n3weath"></canvas>
 													
 												</div>
 											</div>
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id = "n4date"></h2>
-													<h3 class="degrees">28</h3>
-													<canvas height="32" width="32" id="sleet"></canvas>
+													<h4 class="degrees" id = "n4temp"></h4>
+													<canvas height="32" width="32" id="n4weath"></canvas>
 													
 												</div>
 											</div>
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id ="n5date"></h2>
-													<h3 class="degrees">28</h3>
-													<canvas height="32" width="32" id="wind"></canvas>
+													<h4 class="degrees" id = "n5temp"></h4>
+													<canvas height="32" width="32" id="n5weath"></canvas>
 													
 												</div>
 											</div>
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id = "n6date"></h2>
-													<h3 class="degrees">26</h3>
-													<canvas height="32" width="32" id="cloudy"></canvas>
+													<h4 class="degrees" id = "n6temp"></h4>
+													<canvas height="32" width="32" id="n6weath"></canvas>
 													
 												</div>
 											</div>
@@ -579,71 +579,230 @@
 					} ], options);
 					
 			//  flot 종료
-			
-			
-			
-			
-			
-			console.log(tdate.format("yyyy-MM-dd hh:mm:ss (E)"));
-			console.log(next2Date.format("yyyy-MM-dd(E)"));
-			if(tdate.format("a/p") == "오전" && Number(tdate.format("hh")) < 6){
-				var d = Number(tdate.format("dd")) - 1;
-				tmfc = tdate.format("yyyyMM"+d+"1800");
-			}else if(tdate.format("a/p") == "오전" && Number(tdate.format("hh")) >= 6){
-				tmfc = tdate.format("yyyyMMdd"+"0600");		
-			}else if(tdate.format("a/p") == "오후"){
-				t = t+12;
-				if(t < 18){
-					tmfc = tdate.format("yyyyMMdd"+"0600");
-				}else{
-					tmfc = tdate.format("yyyyMMdd"+"1800"); 
-				}
-			}	
-			console.log("#####" + tmfc);
-			
 		
+			var icons = new Skycons({
+				"color" : "#73879C"
+			});
+			
 			//console.log("#####" + Number(tdate.format("hh")) + Number("12"));
 			$.ajax({
 				url : "weather.htm",
-				data : {tmFc : tmfc},
 				success : function(data){
-					//console.log("공공데이터####온도" + data.temp3.body.items.item.taMin3);	
-					console.log("tmap####");
-					console.log(data.temp.weather.summary[0].today.sky.code);
-					//console.log("공공데이터####날씨" + data.weath.body.items.item);
 					
+					console.log("tmap####");
+					console.log(data.day6.weather.forecast6days[0].sky);
+					
+					/// 오늘 날짜 , 날씨 , 온도
 					$("#w_title").append("<b>"+tdate.format("E")+"("+tdate.format("dd일") +")</b>");
-				
-					/* if(data.temp.weather.summary[0].today.sky.code == "SKY_D01"){
-						$("#todayweath").append("<canvas id = 'clear-day' width='84' height = '84'></canvas>");
-					}else  */if(data.temp.weather.summary[0].today.sky.code == "SKY_D05"){
-						$("#rain").attr("id","clear-day");
+					
+					 if(data.temp.weather.summary[0].today.sky.code == "SKY_D01"){
+						 if(tdate.format("a/p") == "오전" && Number(tdate.format("hh")) >= 6
+								 || tdate.format("a/p") == "오후" && (t+12) < 18){
+						 	icons.add("todayweath", Skycons.CLEAR_DAY);
+						 }else{
+							 icons.add("todayweath", Skycons.CLEAR_NIGHT);
+						 }
+						 $("#tweath").append("맑음");
+						 
+					}else if(data.temp.weather.summary[0].today.sky.code == "SKY_D05"){
+						icons.add("todayweath", Skycons.RAIN);
+						 $("#tweath").append("비");
+						 
+					}else if(data.temp.weather.summary[0].today.sky.code == "SKY_D02"){
+						if(tdate.format("a/p") == "오전" && Number(tdate.format("hh")) >= 6
+								 || tdate.format("a/p") == "오후" && (t+12) < 18){
+							icons.add("todayweath", Skycons.PARTLY_CLOUDY_DAY);
+						 }else{
+							 icons.add("todayweath", Skycons.PARTLY_CLOUDY_NIGHT);
+						 }
+						
+						$("#tweath").append("구름 조금");
+						
+					}else if(data.temp.weather.summary[0].today.sky.code == "SKY_D03"){
+						icons.add("todayweath", Skycons.CLOUDY);
+						$("#tweath").append("구름 많음");
+						
+					}else if(data.temp.weather.summary[0].today.sky.code == "SKY_D04"){
+						icons.add("todayweath", Skycons.FOG);
+						$("#tweath").append("흐림");
+						
+					}else if(data.temp.weather.summary[0].today.sky.code == "SKY_D06" ||
+							data.temp.weather.summary[0].today.sky.code == "SKY_D07"){
+						icons.add("todayweath", Skycons.SNOW);
+						$("#tweath").append("눈");
 					}
 					
+			
+					$("#w_title_degree").append("<span><font size = '3'>최고</font>&nbsp;&nbsp;"+data.temp.weather.summary[0].today.temperature.tmax.split(".")[0] + "</span>");
+					$("#w_title_degree2").append("<span><font size = '3'>최저</font>&nbsp;&nbsp;"+data.temp.weather.summary[0].today.temperature.tmin	.split(".")[0] + "</span>");
 					
-						if(data.temp.weather.summary[0].today.temperature.tmax >= 0 && 
-								data.temp.weather.summary[0].today.temperature.tmin >= 0){
-							
-							$("#w_title_degree").append("<span><font size = '3'>최고</font>&nbsp;&nbsp;"+data.temp.weather.summary[0].today.temperature.tmax.substr(0,1) + "</span>");
-							$("#w_title_degree2").append("<span><font size = '3'>최저</font>&nbsp;&nbsp;"+data.temp.weather.summary[0].today.temperature.tmin	.substr(0,1) + "</span>");
 						
-						}else if(data.temp.weather.summary[0].today.temperature.tmax >= 0 &&
-								data.temp.weather.summary[0].today.temperature.tmin < 0){
+					//내일 날짜 / 온도 / 날씨
+					
+					$("#ntemp").append("<span>"+data.temp.weather.summary[0].tomorrow.temperature.tmax.split(".")[0]+
+							"/"+ data.temp.weather.summary[0].tomorrow.temperature.tmin.split(".")[0]+ "</span>");
 							
-							$("#w_title_degree").append("<span><font size = '3'>최고</font>&nbsp;&nbsp;"+data.temp.weather.summary[0].today.temperature.tmax.substr(0,1) + "</span>");
-							$("#w_title_degree2").append("<span><font size = '3'>최저</font>&nbsp;&nbsp;"+data.temp.weather.summary[0].today.temperature.tmin	.substr(0,2) + "</span>");
-						}else if(data.temp.weather.summary[0].today.temperature.tmax < 0 &&
-								data.temp.weather.summary[0].today.temperature.tmin >= 0){
+					
+						 
+					if(data.temp.weather.summary[0].tomorrow.sky.code == "SKY_M01"){	
+						icons.add("nweath", Skycons.CLEAR_DAY);
 							
-							$("#w_title_degree").append("<span><font size = '3'>최고</font>&nbsp;&nbsp;"+data.temp.weather.summary[0].today.temperature.tmax.substr(0,2) + "</span>");
-							$("#w_title_degree2").append("<span><font size = '3'>최저</font>&nbsp;&nbsp;"+data.temp.weather.summary[0].today.temperature.tmin	.substr(0,1) + "</span>");
-						}else if(data.temp.weather.summary[0].today.temperature.tmax < 0 &&
-								data.temp.weather.summary[0].today.temperature.tmin < 0){
+					}else if(data.temp.weather.summary[0].tomorrow.sky.code == "SKY_M05"){
+						icons.add("nweath", Skycons.RAIN);
+						 
+					}else if(data.temp.weather.summary[0].tomorrow.sky.code == "SKY_M02"){
+						icons.add("nweath", Skycons.PARTLY_CLOUDY_DAY);
 							
-							$("#w_title_degree").append("<span><font size = '3'>최고</font>&nbsp;&nbsp;"+data.temp.weather.summary[0].today.temperature.tmax.substr(0,2) + "</span>");
-							$("#w_title_degree2").append("<span><font size = '3'>최저</font>&nbsp;&nbsp;"+data.temp.weather.summary[0].today.temperature.tmin	.substr(0,2) + "</span>");
-						}
+					}else if(data.temp.weather.summary[0].tomorrow.sky.code == "SKY_M03"){
+						icons.add("nweath", Skycons.CLOUDY);
+
+					}else if(data.temp.weather.summary[0].tomorrow.sky.code == "SKY_M04"){
+						icons.add("nweath", Skycons.FOG);
+							
+					}else if(data.temp.weather.summary[0].tomorrow.sky.code == "SKY_M06" ||
+							data.temp.weather.summary[0].tomorrow.sky.code == "SKY_M07"){
+						icons.add("nweath", Skycons.SNOW);
 						
+					}
+						
+					//이틀후 날짜 / 날씨 / 온도
+					
+					$("#n2temp").append("<span>"+data.temp.weather.summary[0].dayAfterTomorrow.temperature.tmax.split(".")[0]+
+							"/"+ data.temp.weather.summary[0].dayAfterTomorrow.temperature.tmin.split(".")[0]+ "</span>");
+								
+					if(data.temp.weather.summary[0].dayAfterTomorrow.sky.code == "SKY_M01"){	
+						icons.add("n2weath", Skycons.CLEAR_DAY);
+								
+					}else if(data.temp.weather.summary[0].dayAfterTomorrow.sky.code == "SKY_M05"){
+						icons.add("n2weath", Skycons.RAIN);
+							 
+					}else if(data.temp.weather.summary[0].dayAfterTomorrow.sky.code == "SKY_M02"){
+						icons.add("n2weath", Skycons.PARTLY_CLOUDY_DAY);
+								
+					}else if(data.temp.weather.summary[0].dayAfterTomorrow.sky.code == "SKY_M03"){
+						icons.add("n2weath", Skycons.CLOUDY);
+
+					}else if(data.temp.weather.summary[0].dayAfterTomorrow.sky.code == "SKY_M04"){
+						icons.add("n2weath", Skycons.FOG);
+								
+					}else if(data.temp.weather.summary[0].dayAfterTomorrow.sky.code == "SKY_M06" ||
+							data.temp.weather.summary[0].dayAfterTomorrow.sky.code == "SKY_M07"){
+						icons.add("n2weath", Skycons.SNOW);
+							
+					}
+						
+					//3일 후 날짜/날씨/온도
+					$("#n3temp").append("<span>"+data.day6.weather.forecast6days[0].temperature.tmax4day+
+							"/"+ data.day6.weather.forecast6days[0].temperature.tmin4day+ "</span>");
+						
+					if(data.day6.weather.forecast6days[0].sky.pmCode4day == "SKY_W01"){	
+						icons.add("n3weath", Skycons.CLEAR_DAY);
+						
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode4day == "SKY_W02"){
+						icons.add("n3weath", Skycons.PARTLY_CLOUDY_DAY);
+								
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode4day == "SKY_W03"){
+						icons.add("n3weath", Skycons.CLOUDY);
+
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode4day == "SKY_W04"){
+						icons.add("n3weath", Skycons.FOG);
+								
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode4day == "SKY_W07" ||
+							data.day6.weather.forecast6days[0].sky.pmCode4day == "SKY_W09" ||
+							data.day6.weather.forecast6days[0].sky.pmCode4day == "SKY_W10"){
+						icons.add("n3weath", Skycons.RAIN);
+							 
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode4day == "SKY_W11" ||
+							data.day6.weather.forecast6days[0].sky.pmCode4day == "SKY_W12" ||
+							data.day6.weather.forecast6days[0].sky.pmCode4day == "SKY_W13"){
+						icons.add("n3weath", Skycons.SNOW);
+							
+					}
+					
+					// 4일 후 날짜 / 날씨 / 온도
+					$("#n4temp").append("<span>"+data.day6.weather.forecast6days[0].temperature.tmax5day+
+							"/"+ data.day6.weather.forecast6days[0].temperature.tmin5day+ "</span>");
+						
+					if(data.day6.weather.forecast6days[0].sky.pmCode5day == "SKY_W01"){	
+						icons.add("n4weath", Skycons.CLEAR_DAY);
+						
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode5day == "SKY_W02"){
+						icons.add("n4weath", Skycons.PARTLY_CLOUDY_DAY);
+								
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode5day == "SKY_W03"){
+						icons.add("n4weath", Skycons.CLOUDY);
+
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode5day == "SKY_W04"){
+						icons.add("n4weath", Skycons.FOG);
+								
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode5day == "SKY_W07" ||
+							data.day6.weather.forecast6days[0].sky.pmCode5day == "SKY_W09" ||
+							data.day6.weather.forecast6days[0].sky.pmCode5day == "SKY_W10"){
+						icons.add("n4weath", Skycons.RAIN);
+							 
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode5day == "SKY_W11" ||
+							data.day6.weather.forecast6days[0].sky.pmCode5day == "SKY_W12" ||
+							data.day6.weather.forecast6days[0].sky.pmCode5day == "SKY_W13"){
+						icons.add("n4weath", Skycons.SNOW);
+							
+					}
+					
+					//5일후 날씨 / 날짜 / 온도
+					$("#n5temp").append("<span>"+data.day6.weather.forecast6days[0].temperature.tmax6day+
+							"/"+ data.day6.weather.forecast6days[0].temperature.tmin6day+ "</span>");
+						
+					if(data.day6.weather.forecast6days[0].sky.pmCode6day == "SKY_W01"){	
+						icons.add("n5weath", Skycons.CLEAR_DAY);
+						
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode6day == "SKY_W02"){
+						icons.add("n5weath", Skycons.PARTLY_CLOUDY_DAY);
+								
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode6day == "SKY_W03"){
+						icons.add("n5weath", Skycons.CLOUDY);
+
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode6day == "SKY_W04"){
+						icons.add("n5weath", Skycons.FOG);
+								
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode6day == "SKY_W07" ||
+							data.day6.weather.forecast6days[0].sky.pmCode6day == "SKY_W09" ||
+							data.day6.weather.forecast6days[0].sky.pmCode6day == "SKY_W10"){
+						icons.add("n5weath", Skycons.RAIN);
+							 
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode6day == "SKY_W11" ||
+							data.day6.weather.forecast6days[0].sky.pmCode6day == "SKY_W12" ||
+							data.day6.weather.forecast6days[0].sky.pmCode6day == "SKY_W13"){
+						icons.add("n5weath", Skycons.SNOW);
+							
+					}
+					
+					//6일후 날씨/ 날짜 /온도
+					$("#n6temp").append("<span>"+data.day6.weather.forecast6days[0].temperature.tmax7day+
+							"/"+ data.day6.weather.forecast6days[0].temperature.tmin7day+ "</span>");
+						
+					if(data.day6.weather.forecast6days[0].sky.pmCode7day == "SKY_W01"){	
+						icons.add("n6weath", Skycons.CLEAR_DAY);
+						
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode7day == "SKY_W02"){
+						icons.add("n6weath", Skycons.PARTLY_CLOUDY_DAY);
+								
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode7day == "SKY_W03"){
+						icons.add("n6weath", Skycons.CLOUDY);
+
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode7day == "SKY_W04"){
+						icons.add("n6weath", Skycons.FOG);
+								
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode7day == "SKY_W07" ||
+							data.day6.weather.forecast6days[0].sky.pmCode7day == "SKY_W09" ||
+							data.day6.weather.forecast6days[0].sky.pmCode7day == "SKY_W10"){
+						icons.add("n6weath", Skycons.RAIN);
+							 
+					}else if(data.day6.weather.forecast6days[0].sky.pmCode7day == "SKY_W11" ||
+							data.day6.weather.forecast6days[0].sky.pmCode7day == "SKY_W12" ||
+							data.day6.weather.forecast6days[0].sky.pmCode7day == "SKY_W13"){
+						icons.add("n6weath", Skycons.SNOW);
+							
+					}
+					
 					
 					
 					$("#ndate").append(nextDate.format("E").trim().substr(0,1));
@@ -652,22 +811,20 @@
 					$("#n4date").append(next4Date.format("E").trim().substr(0,1));
 					$("#n5date").append(next5Date.format("E").trim().substr(0,1));
 					$("#n6date").append(next6Date.format("E").trim().substr(0,1));
-					
+					icons.play();
 				}
 			});
 			
 			//skycon 시작
-			var icons = new Skycons({
-								"color" : "#73879C"
-							}), list = [ "clear-day", "clear-night", //클리어데이 = 맑음  - 클리어나이트 = 맑고흐림
+			/* , list = [ "clear-day", "clear-night", //클리어데이 = 맑음  - 클리어나이트 = 맑고흐림
 									"partly-cloudy-day", "partly-cloudy-night",
 									"cloudy", "rain", "sleet", "snow", "wind",
 									"fog" ], i;
 
 							for (i = list.length; i--;)
 								icons.set(list[i], list[i]);
-
-							icons.play();
+ */
+							
 			//skycon 종료
 		});
 	
