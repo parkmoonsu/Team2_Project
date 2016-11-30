@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <!--
  * @File Name: schedule_managerhistory.jsp
@@ -132,13 +133,12 @@
 										<thead>
 											<tr>
 												<th>번호</th>
-												<th>현재휴무일</th>
-												<th>변경휴무일</th>
-												<th>요청일</th>
-												<th>승인일</th>
-												<th>신청자</th>
-												<th>변경대상</th>
-												<th>상태</th>
+												<th>이름</th>
+												<th>차량번호</th>
+												<th>노선번호</th>
+												<th>운행일</th>
+												<th colspan="3" style="text-align: center">운행시간</th>
+												<%--오졌따리 ${fn:length(boardList)} --%> 
 												<!-- <th style="width: 20%; text-align:center;">
 												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form"> -->
 												</th>
@@ -150,21 +150,13 @@
 											<c:forEach var="i" items="${d}" varStatus="status">
 											<tr>
 												<td>${status.count}</td>
-												<td>${i.bd}</td>
-												<td>${i.ad}</td>
-												<td>${i.ro_reqdate}</td>
-												<td>${i.ro_regdate}</td>
-												<td>${i.bn}</td>
-												<td>${i.an}</td>
-												<c:if test="${i.ko_name=='승인'}">
-													<td><button class="btn btn-success">${i.ko_name}</button></td>
-												</c:if>
-												<c:if test="${i.ko_name=='신청중'}">
-													<td><button class="btn btn-info" id="${i.m_id}n${i.ro_object}" onclick="btnclick('${i.m_id}', '${i.ro_object}')">${i.ko_name}</button></td>
-												</c:if>
-												<!-- <td style = "text-align:center"> 
-													<input type = "checkbox">
-                                         		</td> -->
+												<td>${i.selectdistinctdto.m_name}</td>
+												<td>${i.selectdistinctdto.r_num}</td>
+												<td>${i.selectdistinctdto.b_vehiclenum}</td>
+												<td>${i.selectdistinctdto.o_date}</td>
+												<c:forEach var="j" items="${i.o_time}">
+													<td>${j}</td>
+												</c:forEach>
 											</tr>
 											</c:forEach>
 										</tbody>

@@ -1,5 +1,6 @@
 package kr.or.bus.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -11,6 +12,7 @@ import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.SelectDistinctDTO;
+import kr.or.bus.dto.TimeDTO;
 
 
 public interface ScheduleManageDAO {
@@ -41,5 +43,6 @@ public interface ScheduleManageDAO {
 
 	//timetable
 	public List<SelectDistinctDTO> selectdistinct();
+	public String[] selecttime(SelectDistinctDTO selectdistinctdto);
 
 }
