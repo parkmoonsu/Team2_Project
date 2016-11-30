@@ -44,9 +44,10 @@ public class ScheduleManageService {
 		return mrmbrjdto;
 	}
 	
-	public void decideReguloffMember(String m_id, String o_date){
+	public String decideReguloffMember(String m_id, String o_date){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.insertReguloff(m_id, dao.getOcode(o_date));
+		return dao.getOcode(o_date);
 	}
 	
 	public void modifyReguloffMember(String m_id, String o_date){
