@@ -91,15 +91,16 @@ public class LoginController {
 		return viewpage;
 	}
 	
+	//json
 	@RequestMapping("/weather.htm")
-	public View weather(Model model , String tmFc) throws Exception{
-		JSONObject temp3 = service.temp3(tmFc);
+	public View weather(Model model) throws Exception{
+
 		JSONObject temp =  service.temp();
-		JSONObject weath = service.weather(tmFc);
+		JSONObject day6 =  service.day6();
 		
-		model.addAttribute("temp3", temp3);
 		model.addAttribute("temp", temp);
-		model.addAttribute("weath" , weath);
+		model.addAttribute("day6", day6);
+		
 		return jsonview;
 	}
 }

@@ -123,48 +123,6 @@ public class LoginService {
 		return dto;
 	}
 	
-	public JSONObject temp3(String tmFc) throws Exception {
-		JSONObject jsonweather = null;
-		StringBuilder urlBuilder = new StringBuilder("http://newsky2.kma.go.kr/service/MiddleFrcstInfoService/getMiddleTemperature"); // URL
-		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8")
-				+ "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); // Service
-																														// Key
-		urlBuilder.append("&" + URLEncoder.encode("regId", "UTF-8") + "=" + URLEncoder.encode("11B10101", "UTF-8")); // regId
-		urlBuilder.append("&" + URLEncoder.encode("tmFc","UTF-8") + "=" + URLEncoder.encode(tmFc , "UTF-8")); 
-		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); // 검색건수
-		urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); // 페이지
-																												// 번호
-		URL url = new URL(urlBuilder.toString());
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Content-type", "application/xml");
-		System.out.println("Response code: " + conn.getResponseCode());
-
-		BufferedReader rd;
-		if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-	           rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	       } else {
-	           rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-	       }
-	       
-	       StringBuilder sb = new StringBuilder();
-	       String line;
-	           
-	       while ((line = rd.readLine()) != null) {
-	           sb.append(line);
-	       }
-	           
-	       rd.close();
-	           
-	       conn.disconnect();
-	       
-	       jsonweather = (JSONObject)new XMLSerializer().read(sb.toString());
-	       
-	       System.out.println("#########"+jsonweather);
-		return jsonweather;
-	}
-	
-	
 	public JSONObject temp() throws Exception{
 		JSONObject jsontemp = null;
 		
@@ -206,22 +164,22 @@ public class LoginService {
 		return jsontemp;
 	}
 	
-	public JSONObject weather(String tmFc) throws Exception{
-		JSONObject jsonweather  = null;
+	public JSONObject day6() throws Exception{
+		JSONObject jsonday6 = null;
 		
-		StringBuilder urlBuilder = new StringBuilder("http://newsky2.kma.go.kr/service/MiddleFrcstInfoService/getMiddleLandWeather"); // URL
-		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8")
-				+ "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); // Service
-																														// Key
-		urlBuilder.append("&" + URLEncoder.encode("regId", "UTF-8") + "=" + URLEncoder.encode("11B00000", "UTF-8")); // regId
-		urlBuilder.append("&" + URLEncoder.encode("tmFc","UTF-8") + "=" + URLEncoder.encode(tmFc , "UTF-8")); 
-		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); // 검색건수
-		urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); // 페이지
+		
+		StringBuilder urlBuilder = new StringBuilder("http://apis.skplanetx.com/weather/forecast/6days"); // URL
+		urlBuilder.append("?" + URLEncoder.encode("version", "UTF-8") + "=1"); // version
+																													// Key
+		urlBuilder.append("&" + URLEncoder.encode("lat", "UTF-8") + "=" + URLEncoder.encode("37.518352", "UTF-8")); // regId
+		urlBuilder.append("&" + URLEncoder.encode("lon","UTF-8") + "=" + URLEncoder.encode("126.930239" , "UTF-8")); 
+		urlBuilder.append("&" + URLEncoder.encode("fortxt", "UTF-8") + "=" + URLEncoder.encode("N", "UTF-8")); // 검색건수
+		urlBuilder.append("&" + URLEncoder.encode("appKey", "UTF-8") + "=" + URLEncoder.encode("cc15578e-061d-3387-9d44-a405a43c034e", "UTF-8")); // 페이지
 																												// 번호
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Content-type", "application/xml");
+		conn.setRequestProperty("Content-type", "application/json");
 		System.out.println("Response code: " + conn.getResponseCode());
 
 		BufferedReader rd;
@@ -242,9 +200,8 @@ public class LoginService {
 	           
 	       conn.disconnect();
 	       
-	       jsonweather = (JSONObject)new XMLSerializer().read(sb.toString());
-	       System.out.println("sb.tostring : " + sb.toString());
-	       System.out.println("#########"+jsonweather);
-		return jsonweather;
+	       jsonday6 =  JSONObject.fromObject(sb.toString());
+	       System.out.println("#######" + jsonday6);
+		return jsonday6;
 	}
 }
