@@ -78,7 +78,7 @@
 
             <div class="row">
               <div class="col-md-12">
-              <ul class="nav nav-tabs">
+              <ul class="nav nav-tabs" style="border-bottom:0px">
   				<li role="presentation" class="active"><a href="schedule_reguloff.htm">정기휴무신청</a></li>
   				<li role="presentation"><a href="schedule_history.htm?m_id=${LoginUser}">신청내역조회</a></li>
 			  </ul>

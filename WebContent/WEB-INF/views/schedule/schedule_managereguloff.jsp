@@ -53,25 +53,28 @@
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
 <style>
-body {
-	margin-top: 40px;
-	text-align: center;
-	font-size: 14px;
-	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
-}
+
 
 #wrap {
-	width: 1100px;
+	width: 100%;
 	margin: 0 auto;
 }
+#external-events hr{
+	color:red;
+	border:thin;
 
+}
 #external-events {
-	float: left;
-	width: 150px;
-	padding: 0 10px;
-	border: 1px solid #ccc;
+	margin-left:65%;
+	width: 10%;
+	padding: 0 1%;
+	border: 1% solid #ccc;
 	background: #eee;
 	text-align: left;
+	position: fixed; 
+	font-size:100%;
+    top: 30%; 
+    text-align:center;
 }
 
 #external-events h4 {
@@ -90,15 +93,17 @@ body {
 	font-size: 11px;
 	color: #666;
 }
-
+#external-events select{
+	width : 100%;
+}
 #external-events p input {
 	margin: 0;
 	vertical-align: middle;
 }
 
 #calendar {
-	float: right;
-	width: 900px;
+	float: left;
+	width: 80%;
 }
 </style>
 
@@ -171,26 +176,30 @@ body {
 								<div class="x_content">
 
 									<div id='wrap'>
-										<div>
-											<select id="selectedgaragename">
-												<option value="0">선택없음</option>
-												<c:forEach var="gdtolist" items="${gdto }"
-													varStatus="status">
-													<option value="${gdtolist.g_num }">${gdtolist.g_name }</option>
-												</c:forEach>
-											</select>
-										</div>
-										<div id="showroutename">
-											<select id="selectedroutenumber">
-												<option value="0">선택없음</option>
-											</select>
-										</div>
+										
 										<div id='external-events'>
-											<h4 id="draggablemember">Draggable Events</h4>
+											<div>
+												<select id="selectedgaragename">
+													<option value="0">차고지선택</option>
+													<c:forEach var="gdtolist" items="${gdto }"
+														varStatus="status">
+														<option value="${gdtolist.g_num }">${gdtolist.g_name }</option>
+													</c:forEach>
+												</select>
+											</div>
+											<div id="showroutename">
+											<select id="selectedroutenumber">
+												<option value="0">노선선택</option>
+											</select>
+											</div>
+											<hr>
+											<h5>휴무 미등록 기사</h5>
+											<hr>
+											<div id="draggablemember"></div>
 										</div>
-
+										<div id='calendar2'>
 										<div id='calendar'></div>
-
+										</div>
 										<div style='clear: both'></div>
 
 									</div>
@@ -218,19 +227,112 @@ body {
 
 	<!-- calendar modal -->
 	<!-- /calendar modal -->
-<script>
+	<script>
 
 	$('#selectedroutenumber').change(function(){
-		console.log($('#selectedroutenumber').val());
+		$('#calendar2').empty();
+		$('#calendar2').append("<div id='calendar'></div>");
+		//window.location.reload(true);
+		console.log('선택한 루트: '+$('#selectedroutenumber').val());
 		var param = $('#selectedroutenumber').val();
 		var view = "";
+		
 		$.ajax({
 			url:"getselectedmember.admin",
 			data:{"r_num":param},
 			success:function(data){
+
+				var m_name = "";
+				var m_id = "";
+				var array = new Array(); //db에 저장된 일정을 담는 배열
+				
+				$.each(data.mrmbrjdto,function(index,obj){
+					console.log("휴무있는m_id: "+obj.m_id);
+					console.log("휴무있는m_name: "+obj.m_name);
+					console.log("휴무있는o_date: "+obj.o_date);
+					console.log("휴무있는o_code: "+obj.o_code);
+					var item = {
+							title : obj.m_name,
+							id : obj.m_id,
+							dow : obj.o_code
+					};
+					array.push(item);
+				}); 
+				var eventObject;
+				var calendar = $('#calendar').fullCalendar({
+
+					header : {
+						left : 'prev,next today',
+						center : 'title',
+						right : 'month,agendaWeek,agendaDay'
+					},
+					editable : true,
+					eventDrop : function(event,dayDelta,minuteDelta,allDay,revertFunc){
+						console.log('변경자'+event.title);
+						console.log('시작일'+event.start.format('YYYY-MM-DD'));
+						console.log('변경자 id:'+event.id);
+						var item = {
+								m_id : event.id,
+								m_name : event.title,
+								o_date : event.start.format('dddd').substr(0,3)
+						}
+						$.ajax({
+							url:"modifyingschedule.admin",
+							data: item,
+							success:function(data){
+								console.log(data);
+								
+							}
+						});
+					},
+					eventDurationEditable : false,
+					droppable : true, // this allows things to be dropped onto the calendar
+					events : array,
+					monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+					monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+					dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+					dayNamesShort: ["일","월","화 ","수 ","목 ","금 ","토 "],
+					titleFormat: "YYYY년 MM월",
+					eventRender : function(event, element) {
+						//console.log("description"+event.description);
+						m_name = event.title;
+						m_id = event.id;
+						eventObject=event;
+					},
+					drop : function(date, jsEvent) {
+						console.log(date.format('dddd').substr(0,3));
+						var o_date = date.format('dddd').substr(0,3);
+						var dragitem = $(this);
+						
+						$.ajax({
+							url : "makingschedule.admin",
+							data : 
+							{
+								"m_name":m_name,
+								"m_id":m_id,
+								"o_date":o_date
+							},
+							success : function(data){
+								console.log("야야야야야ㅑㅇ야ㅑ"+data);
+								console.log(eventObject);
+								var eventObject2={
+									id:eventObject.id,
+									title:eventObject.title,
+									dow:[data.o_code]
+								};
+								$('#calendar').fullCalendar('removeEvents', eventObject.id);
+								$('#calendar').fullCalendar('renderEvent', eventObject2);
+								$('#calendar').fullCalendar('unselect');
+								$(dragitem).remove();
+							}
+						});
+						
+					}
+				});
+				
 				$.each(data.mjrdto,function(index,value){
-					console.log("m_id"+value.m_id);
-					console.log("m_name:"+value.m_name);
+					console.log("휴무없는m_id: "+value.m_id);
+					console.log("휴무없는m_name: "+value.m_name);
 					view += "<div class='fc-event'>";
 					view += value.m_name;
 					view += "<input type='hidden' value='";
@@ -240,17 +342,19 @@ body {
 					view += "'>";
 					view += "</div>";
 				});
-				$('#draggablemember').after(view);
+				$('#draggablemember').empty();
+				$('#draggablemember').append(view);
 				
 				$('#external-events .fc-event').each(function() {
-
+					
 					// store data so the calendar knows to render an event upon drop
+					
 					$(this).data('event', {
 						title: $.trim($(this).text()), // use the element's text as the event title
-						description: $(this).find('input').val(),
+						id: $(this).find('input').val(),
 						stick: true // maintain when user navigates (see docs on the renderEvent method)
 					});
-
+					
 					// make the event draggable using jQuery UI
 					$(this).draggable({
 						zIndex: 999,

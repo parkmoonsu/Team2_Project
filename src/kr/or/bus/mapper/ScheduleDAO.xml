@@ -102,7 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<insert id="history_insert">
 		INSERT INTO reguloffr
-		VALUES('600', #{m_id}, #{o_code}, #{ro_code}, sysdate, sysdate, #{ro_object})
+		VALUES('600', #{m_id}, #{o_code}, #{ro_code}, sysdate, null, #{ro_object}, null)
 	</insert>
 
 
