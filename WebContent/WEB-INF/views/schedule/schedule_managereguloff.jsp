@@ -59,14 +59,22 @@
 	width: 100%;
 	margin: 0 auto;
 }
+#external-events hr{
+	color:red;
+	border:thin;
 
+}
 #external-events {
-	float: left;
-	width: 150px;
-	padding: 0 10px;
-	border: 1px solid #ccc;
+	margin-left:65%;
+	width: 10%;
+	padding: 0 1%;
+	border: 1% solid #ccc;
 	background: #eee;
 	text-align: left;
+	position: fixed; 
+	font-size:100%;
+    top: 30%; 
+    text-align:center;
 }
 
 #external-events h4 {
@@ -85,14 +93,16 @@
 	font-size: 11px;
 	color: #666;
 }
-
+#external-events select{
+	width : 100%;
+}
 #external-events p input {
 	margin: 0;
 	vertical-align: middle;
 }
 
 #calendar {
-	float: right;
+	float: left;
 	width: 80%;
 }
 </style>
@@ -170,7 +180,7 @@
 										<div id='external-events'>
 											<div>
 												<select id="selectedgaragename">
-													<option value="0">선택없음</option>
+													<option value="0">차고지선택</option>
 													<c:forEach var="gdtolist" items="${gdto }"
 														varStatus="status">
 														<option value="${gdtolist.g_num }">${gdtolist.g_name }</option>
@@ -179,10 +189,12 @@
 											</div>
 											<div id="showroutename">
 											<select id="selectedroutenumber">
-												<option value="0">선택없음</option>
+												<option value="0">노선선택</option>
 											</select>
 											</div>
-											<h4>Draggable Events</h4>
+											<hr>
+											<h5>휴무 미등록 기사</h5>
+											<hr>
 											<div id="draggablemember"></div>
 										</div>
 										<div id='calendar2'>
