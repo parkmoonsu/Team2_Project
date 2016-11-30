@@ -58,7 +58,7 @@
                   
                    <!-- 임시페이지 -->
                   <li>
-                  	<a href="commutebus.admin"><i>노선별 출결관리</i></a>
+                  	<a href="routename.admin"><i>노선별 출결관리</i></a>
                   </li>
                   
                   

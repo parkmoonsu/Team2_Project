@@ -76,27 +76,8 @@ public class CommuteService {
 
 		return list;
 	}
-	
-	
-	//test
-	public List<CommuteJoinCstartJoinCendDTO> getoffSelect(String pg, String m_id){
-		
-		int page = 1;
-		
-		if(pg != null){
-			page = Integer.parseInt(pg);
-		}
-		System.out.println("page : " + page);
-		
-		CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
-		List<CommuteJoinCstartJoinCendDTO> list = dao.getoffSelect(page, m_id);
-		for(int i=0;i<list.size();i++){
-			System.out.println("c_end"+i+":"+list.get(i).getC_end());
-			System.out.println("ce_stat"+i+":"+list.get(i).getCe_stat());
-		}
-		return list;
-	}
-	
+
+
 	public int pg(String pg){
 		int page = 1;
 		if(pg != null){

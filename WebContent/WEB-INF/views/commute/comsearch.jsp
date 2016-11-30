@@ -53,12 +53,18 @@
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
 <script type="text/javascript">
+	/* var isloaded = false; */
 	$(function() {
 
 		var id = "${LoginUser}";
 		var page = "${page}";
-		$("#gotowork").click(
-				function(event) {		
+		
+		/* if (isloaded) {
+			return;
+		} */
+		
+		$("#gotowork").click(				
+				function(event) {						
 					$.ajax({
 						url : "gotowork.member",
 						data : {
@@ -76,7 +82,7 @@
 							event.preventDefault();
 							
 							$.ajax({
-								url : "comsearchtestinfo.member",
+								url : "comsearchstartinfo.member",
 								data : {
 									m_id : id,
 									pg : page
@@ -90,7 +96,7 @@
 							$("#gotowork").attr('disabled',true)
 						}
 					});
-
+					//isloaded = true;
 				});
 
 		$("#getoffwork").click(
@@ -108,6 +114,8 @@
 									id + '님의 퇴근시간은 ' + data.dto.c_end + '입니다'
 											+ "<br>" + id + '님의 퇴근상태는 '
 											+ data.dto.ce_stat + '입니다.');
+							event.stopPropagation();
+							event.preventDefault();
 							$.ajax({
 								url : "comsearchstartinfo.member",
 								data : {
@@ -124,8 +132,22 @@
 						}
 					});
 				});
+		event.stopPropagation();
+		event.preventDefault();
 
 	});
+/* 	
+	function doNotReload(){
+	    if(    (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) //ctrl+N , ctrl+R 
+	        || (event.keyCode == 116) // function F5
+	    {
+	      event.keyCode = 0;
+	      event.cancelBubble = true;
+	      event.returnValue = false;
+	    }
+	}
+	document.onkeydown = doNotReload; */
+	
 </script>
 <style type="text/css">
 #gotowork {
@@ -147,7 +169,8 @@
 				</div>
 				<div class="modal-body" id="commutestartinfo"
 					style="text-align: center; font-size: 20px; line-height: 200%">
-					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					로딩중입니다..
+<!-- 					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button> -->
 				</div>
 			</div>
 
@@ -170,7 +193,8 @@
 				</div>
 				<div class="modal-body" id="commuteendinfo"
 					style="text-align: center; font-size: 20px; line-height: 200%">
-					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					로딩중입니다..
+<!-- 					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button> -->
 				</div>
 			</div>
 		</div>

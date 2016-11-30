@@ -11,13 +11,9 @@ public interface CommuteDAO {
 	//이름 값 가져오기
 	public String getName(String m_id);
 	
-	//회원의 퇴근 시간조회  
+	//회원의 출/퇴근 시간조회  
 	public List<CommuteJoinCstartJoinCendDTO> getSelect(int page,String m_id);	
 	
-	//test
-	public List<CommuteJoinCstartJoinCendDTO> getoffSelect(int page, String m_id);	
-
-
 	//출근insert
 	public int gotowork(String m_id, String m_name, String tdate,String dhour);
 		

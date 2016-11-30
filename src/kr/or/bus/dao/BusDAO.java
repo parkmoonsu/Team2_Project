@@ -51,11 +51,16 @@ public interface BusDAO {
 	public List<MemberDTO> getMembers(String mid);
 	
 
-	
 	//임시 노선별 출결현황
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String r_num);
 	            
+	//노선별 출결상황에서 이름 가져오기
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getNselect(String r_num);
 
+	//노선별 출결상황에서 데이터 가져오기
+	//public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getStat(String r_num);
+	
+	
 	//버스 수정
 	public void updateBus(String b_vehiclenum , String g_name , String r_num , String hidden);
 	
