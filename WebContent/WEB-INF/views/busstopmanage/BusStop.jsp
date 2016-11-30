@@ -71,9 +71,9 @@
             	<div class="col-sm-3"></div>
             	<div class="col-sm-6">
            <input type="button" id="newsave" value="좌표저장">
-   		   <input type="button" id="saveReturn" value="수정하기">
-  		   <input type="button" id="routeRemove" value="경로 지우기">
-  		   <input type="button" id="busStopLoad" value="버스 정류장 보기">
+   		   <input type="button" id="saveReturn" value="수정본불러오기">
+  		   <input type="button" id="routeRemove" value="경로 초기화">
+  		   <input type="button" id="busStopLoad" value="원본파일보기">
 		   <input type="button" id="busLoad" value="버스 보기">
              </div>
 
@@ -545,7 +545,7 @@
        var BusMarker = new google.maps.Marker({
             position: new google.maps.LatLng(dataArray[0].gpsY,dataArray[0].gpsX),
               map: map,
-              icon:"bus.png"
+              icon:"${pageContext.request.contextPath}/images/bus.png"
         });
        
        moveBus(BusMarker, map);
@@ -569,7 +569,7 @@
        var BusMarker = new google.maps.Marker({
             position: new google.maps.LatLng(dataArray[0].lat,dataArray[0].lng),
               map: map,
-              icon:"bus.png"
+              icon:"${pageContext.request.contextPath}/images/bus.png"
         });
        
        copymoveBus(BusMarker, map);
@@ -688,7 +688,6 @@
       
       //지도 위에 그려저있는 마커, 경로 지우기
         $("#routeRemove").click(function() {                 
-           BusEditSave();
            map.data.forEach(function(features) {
                 //console.log(features);
                map.data.remove(features);
