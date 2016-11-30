@@ -246,6 +246,19 @@ public class ScheduleController {
 		return "bus";
 	}
 	
+	
+	//최종스케줄 -> schedule_last
+	@RequestMapping("/schedule_last.htm")
+	public String schedule_last(){
+		return "schedule/schedule_last";
+	}
+	
+		
+
+	
+	
+	
+	
 	/*@RequestMapping(value="/history_update.htm", method=RequestMethod.POST)
 	public String updateHistory(
 		String ko_code, 

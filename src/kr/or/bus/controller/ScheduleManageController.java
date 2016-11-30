@@ -1,6 +1,5 @@
 package kr.or.bus.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +9,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
-import kr.or.bus.dao.ScheduleDAO;
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
-import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
-import kr.or.bus.service.JoinService;
+
 import kr.or.bus.service.ScheduleManageService;
 
 
@@ -52,14 +50,30 @@ public class ScheduleManageController {
 	public View getSelectedRouteMember(String r_num,Model model){
 		System.out.println("r_num"+r_num);
 		List<MemberJoinRegulOffDTO> mjrdto = service.unScheduledMember(r_num);
+		List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> mrmbrjdto = service.scheduledMember(r_num);
 		model.addAttribute("mjrdto", mjrdto);
+		model.addAttribute("mrmbrjdto", mrmbrjdto);
+		return jsonview;
+	}
+	//유효성 처리 해줘야 함
+	@RequestMapping("/makingschedule.admin")
+	public View makingSchedule(String m_id, String o_date, Model model){
+		System.out.println(m_id+"/"+o_date);
+		service.decideReguloffMember(m_id, o_date);
+		return jsonview;
+	}
+	//유효성 처리 해줘야 함,reguloffr
+	@RequestMapping("/modifyingschedule.admin")
+	public View modifyingSchedule(String m_id, String o_date, Model model){
+		System.out.println(m_id+"/"+o_date);
+		service.modifyReguloffMember(m_id, o_date);
 		return jsonview;
 	}
 	
 	/*
 	제목 : 기사 휴무 및 스케쥴 관리 
 	작성자 : 길한종
-	목적 : 내용 추가
+	목적 : 내용 추가(일정 승인)
 	*/
 	
 	@RequestMapping("/gethistory.admin")

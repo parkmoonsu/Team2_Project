@@ -23,6 +23,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,6 +45,9 @@ private JavaMailSender mailSender;
 	
 	@Autowired
 	private SqlSession sqlsession;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public List<MemberJoinMDetailDTO> memberInfo(String pg){
 		System.out.println("회원 정보 페이지");
@@ -172,5 +176,26 @@ private JavaMailSender mailSender;
 			}
 			return list;
 		}
+	  
+	  
+		public boolean getPass(String m_id , String m_pw){
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			String pw = dao.passMatch(m_id).getM_pw();
+			
+			System.out.println("m_pw : " + m_pw);
+			System.out.println("encodePass : " + pw);
+			
+			boolean result = bCryptPasswordEncoder.matches(m_pw, pw);
+			
+			return result;
+		}
 
+		public MemberJoinMDetailDTO getMemberInfo(String m_id){
+			System.out.println("m_id : " + m_id);
+			MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
+			MemberJoinMDetailDTO dto = dao.getMemberInfo(m_id);
+
+			
+			return dto;
+		}
 }

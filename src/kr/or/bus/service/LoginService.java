@@ -9,7 +9,6 @@
 
 package kr.or.bus.service;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
@@ -21,7 +20,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.or.bus.dao.MemberDAO;
-import kr.or.bus.dto.ApproveDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
 
 @Service
@@ -107,9 +105,12 @@ public class LoginService {
 	}
 	
 	public MemberJoinJobDTO mainGo(String username){
+		System.out.println("username >>>> :" +username);
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		System.out.println("dao 값 :"+dao.toString());
 		MemberJoinJobDTO dto = dao.getJobName(username);
-		
 		return dto;
 	}
+	
+	
 }
