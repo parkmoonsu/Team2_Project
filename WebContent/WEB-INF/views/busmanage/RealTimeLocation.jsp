@@ -145,15 +145,6 @@
   //구글 지도 전역변수
     var map;
     
-    //출발 좌표 변수
-    var locationX;
-    var locationY;
-
-    //도착 좌표 변수
-    var elocationX;
-    var elocationY;                       
-          
-    
     //addgeojason 해서 지도위에 경로를 그리고 , 노선을 수정할때 바로 전에 경로를 지워주기 위해 전역변수로 뺌. 
     var features;
             
@@ -173,9 +164,6 @@
    	
    	//원본 버스 실시간 추적 중지 변수.
    	var stopSearch;
-   	
-   	
-   	
    	
     //지도 기본 위치 , 마커 기본위치 가 됨.  
     //현 기본 좌표 : 판교역
@@ -223,116 +211,10 @@
            		zindex : "5"
         	});
      	  	map.panTo(originalMarker.getPosition());
-    		originalMarkers.push(originalMarker);
-            originalMarkersRead(originalMarkers);
-                     
+    		
             
-            infoContents.push(latLng[i].stationNm);
-            
-           
-            //inforWindowShow(map,originalMarker,infoContents);
+
     	}//for문 끝
-    }
-    
-    /* function inforWindowShow(map,originalMarker,infoContents){
-    	var x=0;
-    	for(var i=0; i<infoContents.length; i++){
-    		x=i;
-    	}
-    	
-    	google.maps.event.addListener(originalMarker, 'click', function() {
-            infowindow.setContent(infoContents[x]);
-            infowindow.open(map, originalMarker);
-        });
-    } */
-    
-  
-    //버스정류장 원본 파일에서 읽어온 버스정류장 좌표 
-    function originalMarkersRead(originalMarkers){
-        var x;
-        
-        for(var i=0; i<originalMarkers.length; i++){
-        	x=i;
-        }
-          
-        //출발마커
-        if(x==0 && originalMarkers.length == 1){
-            locationX = originalMarkers[0].getPosition().lng();
-            locationY = originalMarkers[0].getPosition().lat();
-            console.log("출발마커"+ x);
-            console.log(locationX +","+ locationY);
-                        
-        }
-          
-        //도착 마커
-        if(x==1 && originalMarkers.length == 2){
-            elocationX = originalMarkers[x].getPosition().lng();
-            elocationY = originalMarkers[x].getPosition().lat();
-            console.log("도착마커"+ x);             
-            console.log(elocationX +","+ elocationY); 
-                     
-            //routeDraw(locationX, locationY, elocationX, elocationY);
-              
-        }
-          
-        //도착마커
-        if(x==2 && originalMarkers.length == 3){                                          
-            locationX = originalMarkers[x-1].getPosition().lng();
-            locationY = originalMarkers[x-1].getPosition().lat();                                                                                       
-            
-            console.log("출발마커"+ (x-1));
-            console.log(locationX +","+ locationY);
-              
-            elocationX = originalMarkers[x].getPosition().lng();
-            elocationY = originalMarkers[x].getPosition().lat();
-                                                
-                console.log("도착마커"+x);
-                console.log(elocationX +","+ elocationY);              
-                //routeDraw(locationX, locationY, elocationX, elocationY);
-          	}
-          
-          //마커 4개 이상.
-          if(x>2 && originalMarkers.length > 3){                                                                                                         
-            	locationX = originalMarkers[x-1].getPosition().lng();
-                locationY = originalMarkers[x-1].getPosition().lat();
-                console.log("출발마커"+ (x-1));
-                console.log(locationX +","+ locationY);
-              
-               	elocationX = originalMarkers[x].getPosition().lng();
-                elocationY = originalMarkers[x].getPosition().lat();
-              
-                console.log("도착마커"+x);
-                console.log(elocationX +","+ elocationY);                          
-                
-                //routeDraw(locationX, locationY, elocationX, elocationY);               
-          }          
-       }
-    
-    //경로 그리는 함수
-    function routeDraw(locationX, locationY, elocationX, elocationY) {           
-          //티맵 으로 부터 데이터를 GeoJson 형식으로 가져와서 지도에 그려준다.
-          
-           $.getJSON("https://apis.skplanetx.com/tmap/routes?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=WGS84GEO&startX="
-                   + locationX
-                   + "&startY="
-                   + locationY
-                   + "&endX="
-                   + elocationX
-                   + "&endY="
-                   + elocationY
-                   + "&searchOption=10&appKey=cc15578e-061d-3387-9d44-a405a43c034e",
-                   
-                   
-                function (data) {
-                   //console.log(data);                    
-                   //type:"LineString"
-                   	for(var i=0; i<data.features.length; i++){
-                      if(data.features[i].geometry.type == 'LineString'){
-                    	  features = map.data.addGeoJson(data.features[i]);
-                      }               
-                    }                                                                                                                                                                                                                                   
-                }
-           );           
     }
     
     //원본 움직이는 버스마커(XML -> JSON 파싱용)

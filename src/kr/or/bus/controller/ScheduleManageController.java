@@ -14,7 +14,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
-
+import kr.or.bus.dto.TimetableDTO;
 import kr.or.bus.service.ScheduleManageService;
 
 
@@ -91,6 +91,20 @@ public class ScheduleManageController {
 		service.history_agree(m_id, ro_object);
 		map.addAttribute("list", "성공");
 		return jsonview;
+	}
+	
+	/*
+	제목 : 기사 휴무 및 스케쥴 관리 
+	작성자 : 길한종
+	목적 : 내용 추가(운행 스케줄)
+	*/
+	
+	@RequestMapping("/gettimetable.admin")
+	public String getTimetable(ModelMap map){
+		List<TimetableDTO> list=service.timetable_get();
+		map.addAttribute("list", list);
+		System.out.println(list);
+		return "schedule/schedule_managertimetable";
 	}
 	
 }

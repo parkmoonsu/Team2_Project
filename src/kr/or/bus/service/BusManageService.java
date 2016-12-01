@@ -124,26 +124,31 @@ public class BusManageService {
 	}
 	
 
+
+	//임시노선별 출결현황에서 이름 가져오기
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO>getNdselect(String r_num){
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getNdselect(r_num);
+		
+		return list;
+	}
 	
 	//임시노선별 출결현황
-	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String r_num){
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String m_name, String tdate){
 		
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getShow(r_num);
-		System.out.println("list값" + list.toString());
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list2 = dao.getShow(m_name, tdate);
+		System.out.println("list값" + list2.toString());
 		
-		return list;
+		return list2;
 	}
 	
-	
-	//임시노선별 출결현황에서 이름 가져오기
-	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getNselect(String r_num){
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String[] list) {
 		
-		BusDAO dao = sqlsession.getMapper(BusDAO.class);
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getNselect(r_num);
-
-		return list;
+		return null;
 	}
+	
 	
 	public int alreadyUse(String b_vehiclenum){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
