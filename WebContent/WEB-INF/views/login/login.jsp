@@ -137,7 +137,7 @@
 
 															로그인 실패 <br>
 															<script>
-														alert("노답");
+														alert("강민수는 바람둥이");
 													</script>
 															<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
       												이유 : <c:out

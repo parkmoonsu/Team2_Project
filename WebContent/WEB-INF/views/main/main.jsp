@@ -438,22 +438,14 @@
 	// moris 시작
 	Morris.Bar({ //// 엑박 무시하세요~
 	element : 'graph_bar',
-	data : [ {
-		device : '마을버스',
-		geekbench : ${m}
-	}, {
-		device : '시내버스',
-		geekbench : ${n}
-	}, {
-		device : '시외버스',
-		geekbench : ${w}
-	}, {
-		device : '고속버스',
-		geekbench : ${g}
-	}, {
-		device : '전체버스',
-		geekbench : ${m+n+w+g}
-	} ],
+	data : [ 
+		{device : '미정', geekbench : ${no}},
+		{device : '마을버스',geekbench : ${m}},
+		{device : '시내버스',geekbench : ${n}}, 
+		{device : '시외버스',geekbench : ${w}},
+		{device : '고속버스',geekbench : ${g}},
+		{device : '전체버스',geekbench : ${m+n+w+g+no}} 
+	],
 	xkey : 'device',
 	ykeys : [ 'geekbench' ],
 	labels : [''],
@@ -597,7 +589,7 @@
 					
 					 if(data.temp.weather.summary[0].today.sky.code == "SKY_D01"){
 						 if(tdate.format("a/p") == "오전" && Number(tdate.format("hh")) >= 6
-								 || tdate.format("a/p") == "오후" && (t+12) < 18){
+								 || tdate.format("a/p") == "오후" && t==12 || (t+12) < 18){
 						 	icons.add("todayweath", Skycons.CLEAR_DAY);
 						 }else{
 							 icons.add("todayweath", Skycons.CLEAR_NIGHT);
@@ -610,7 +602,7 @@
 						 
 					}else if(data.temp.weather.summary[0].today.sky.code == "SKY_D02"){
 						if(tdate.format("a/p") == "오전" && Number(tdate.format("hh")) >= 6
-								 || tdate.format("a/p") == "오후" && (t+12) < 18){
+								 || tdate.format("a/p") == "오후" && t==12 || (t+12) < 18){
 							icons.add("todayweath", Skycons.PARTLY_CLOUDY_DAY);
 						 }else{
 							 icons.add("todayweath", Skycons.PARTLY_CLOUDY_NIGHT);
@@ -815,17 +807,6 @@
 				}
 			});
 			
-			//skycon 시작
-			/* , list = [ "clear-day", "clear-night", //클리어데이 = 맑음  - 클리어나이트 = 맑고흐림
-									"partly-cloudy-day", "partly-cloudy-night",
-									"cloudy", "rain", "sleet", "snow", "wind",
-									"fog" ], i;
-
-							for (i = list.length; i--;)
-								icons.set(list[i], list[i]);
- */
-							
-			//skycon 종료
 		});
 	
 	</script>
