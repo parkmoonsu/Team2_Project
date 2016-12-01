@@ -82,7 +82,9 @@
 			<div class="right_col" role="main">
 				<!-- top tiles -->
 				<div class="row tile_count" style="text-align: center">
-					<div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 미정</span>
+						<div class="count">${no}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
 						<span class="count_top"><i class="fa fa-bus"></i> 마을버스</span>
@@ -102,10 +104,9 @@
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
 						<span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
-						<div class="count green">${m+n+w+g}</div>
+						<div class="count green">${m+n+w+g+no}</div>
 					</div>
-					<div class="col-md-1 col-sm-4 col-xs-6 tile_stats_count">
-					</div>
+					
 				</div>
 				<!-- /top tiles -->
 				<div class="">
@@ -302,10 +303,7 @@
 
 	<!-- footer content -->
 		<footer>
-			<div class="pull-right">
-				Gentelella - Bootstrap Admin Template by <a
-					href="https://colorlib.com">Colorlib</a>
-			</div>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
 			<div class="clearfix"></div>
 		</footer>
 		<!-- /footer content -->

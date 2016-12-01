@@ -134,5 +134,11 @@ public class MainService {
 		return dto;
 	}
 	
+	public int approveCount(){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		int appcount = dao.approveCount();
+		
+		return appcount;
+	}
 	
 }

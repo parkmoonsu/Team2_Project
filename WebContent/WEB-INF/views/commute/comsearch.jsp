@@ -60,10 +60,7 @@ var som;
 		var id = "${LoginUser}";
 		var page = "${page}";
 		var cscheck = "${cscheck}";
-			
 	
-		
-		
 	$("#gotowork").click(
 				function() {
 					if (cscheck == 0) {
