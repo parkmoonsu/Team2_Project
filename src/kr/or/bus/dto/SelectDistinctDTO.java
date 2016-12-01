@@ -4,6 +4,7 @@ public class SelectDistinctDTO {
 	private String m_name;
 	private String r_num;
 	private String b_vehiclenum;
+	
 	private java.sql.Date o_date;
 	public String getM_name() {
 		return m_name;
