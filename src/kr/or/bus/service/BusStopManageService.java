@@ -15,8 +15,12 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.bus.dao.RouteDAO;
+import kr.or.bus.dto.RouteDTO;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.xml.XMLSerializer;
@@ -24,6 +28,8 @@ import nu.xom.*;
 
 @Service
 public class BusStopManageService {
+	@Autowired
+	private SqlSession sqlsession;
 	
 	//버스정류장 원본 좌표를 파일로부터 읽어온다.
 	//버스 정류장 원본 좌표를 파일로부터 읽어온다.
@@ -326,11 +332,18 @@ public class BusStopManageService {
 		
 	}
 	
-	public void BusStopSearch(HttpServletRequest request , HttpServletResponse response) throws IOException{
+	public String routeidInfoSearch(RouteDTO r_num){
+		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
+		System.out.println(r_num);
+		
+		return null;
+	}
+	
+	public void busStopSearch(HttpServletRequest request , HttpServletResponse response, String routeid) throws IOException{
 		
 	    StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute"); /*URL*/
 	    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); /*Service Key*/
-	    urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*노선ID*/
+	    urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(routeid, "UTF-8")); /*노선ID*/
 	    urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("999", "UTF-8")); /*검색건수*/
 	    urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
 	    URL url = new URL(urlBuilder.toString());
