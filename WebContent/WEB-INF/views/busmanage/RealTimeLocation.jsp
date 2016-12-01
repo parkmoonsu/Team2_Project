@@ -91,11 +91,9 @@
 
         <!-- footer content -->
         <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
         <!-- /footer content -->
       </div>
     </div>

@@ -257,7 +257,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id = "ndate"></h2>
-													<h4 class="degrees" id = "ntemp"></h4>
+													<h5 class="degrees" id = "ntemp"></h5>
 													<canvas id="nweath" width="32" height="32"></canvas>
 													
 												</div>
@@ -265,7 +265,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id ="n2date"></h2>
-													<h4 class="degrees" id ="n2temp"></h4>
+													<h5 class="degrees" id ="n2temp"></h5>
 													<canvas height="32" width="32" id="n2weath"></canvas>
 													
 												</div>
@@ -273,7 +273,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id ="n3date"></h2>
-													<h4 class="degrees" id = "n3temp"></h4>
+													<h5 class="degrees" id = "n3temp"></h5>
 													<canvas height="32" width="32" id="n3weath"></canvas>
 													
 												</div>
@@ -281,7 +281,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id = "n4date"></h2>
-													<h4 class="degrees" id = "n4temp"></h4>
+													<h5 class="degrees" id = "n4temp"></h5>
 													<canvas height="32" width="32" id="n4weath"></canvas>
 													
 												</div>
@@ -289,7 +289,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id ="n5date"></h2>
-													<h4 class="degrees" id = "n5temp"></h4>
+													<h5 class="degrees" id = "n5temp"></h5>
 													<canvas height="32" width="32" id="n5weath"></canvas>
 													
 												</div>
@@ -297,7 +297,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id = "n6date"></h2>
-													<h4 class="degrees" id = "n6temp"></h4>
+													<h5 class="degrees" id = "n6temp"></h5>
 													<canvas height="32" width="32" id="n6weath"></canvas>
 													
 												</div>
@@ -356,10 +356,7 @@
 
 		<!-- footer content -->
 		<footer>
-			<div class="pull-right">
-				Gentelella - Bootstrap Admin Template by <a
-					href="https://colorlib.com">Colorlib</a>
-			</div>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
 			<div class="clearfix"></div>
 		</footer>
 		<!-- /footer content -->

@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<insert id="reguloff_insert">
 		INSERT INTO reguloff
-		VALUES(#{m_id}, #{o_code}, sysdate)
+		VALUES(#{m_id}, #{o_code}, sysdate, #{temp})
 	</insert>
 	<delete id="reguloff_delete">
 		DELETE reguloff WHERE m_id=#{m_id}

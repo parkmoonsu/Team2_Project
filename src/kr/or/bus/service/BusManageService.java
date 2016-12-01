@@ -10,6 +10,7 @@
 
 package kr.or.bus.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -22,6 +23,8 @@ import kr.or.bus.dao.BusDAO;
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.RnumcommuteDTO;
+import kr.or.bus.dto.TimetableDTO;
 
 @Service
 public class BusManageService {
@@ -126,27 +129,33 @@ public class BusManageService {
 
 
 	//임시노선별 출결현황에서 이름 가져오기
-	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO>getNdselect(String r_num){
+	public List<RnumcommuteDTO> getNdselect(){
 		
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getNdselect(r_num);
 		
-		return list;
-	}
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getNdselect();	
+		List<RnumcommuteDTO> list2 = new ArrayList<RnumcommuteDTO>();
+		for(int i=0; i<list.size(); i++){
+			
+			String m_name = list.get(i).getM_name();
+			String c_date = list.get(i).getC_date();
+			
+			String[] tdate = dao.getStat(m_name);	//날짜
+			String[] stat = dao.getShow(m_name);	//상태
+			//list {이름+ 날짜[] + 상태[]}
+			RnumcommuteDTO dto = 
+					new RnumcommuteDTO();
+			
+			dto.setM_name(list.get(i).getM_name());
+			dto.setC_date(tdate);
+			dto.setCs_stat(stat);
+		
+			
+			list2.add(dto);
+		}
+		
 	
-	//임시노선별 출결현황
-	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String m_name, String tdate){
-		
-		BusDAO dao = sqlsession.getMapper(BusDAO.class);
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list2 = dao.getShow(m_name, tdate);
-		System.out.println("list값" + list2.toString());
-		
 		return list2;
-	}
-	
-	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String[] list) {
-		
-		return null;
 	}
 	
 	

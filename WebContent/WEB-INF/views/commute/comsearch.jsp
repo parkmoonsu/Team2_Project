@@ -60,6 +60,7 @@ var som;
 		var id = "${LoginUser}";
 		var page = "${page}";
 		var cscheck = "${cscheck}";
+		var cecheck = "${cecheck}";
 	
 	$("#gotowork").click(
 				function() {
@@ -114,7 +115,8 @@ var som;
 		 	
 			$("#getoffwork").click(
 					function() {
-
+						if (cecheck == 0) {
+						$("#myModal2").modal("show");
 						$.ajax({
 							url : "getoffwork.member",
 							data : {
@@ -146,6 +148,10 @@ var som;
 
 							}
 						});
+						
+						} else {
+							alert("이미 출근 하셨습니다.");
+						}
 					}); 
 
 	});
@@ -182,7 +188,6 @@ var som;
 				<div class="modal-body" id="commutestartinfo"
 					style="text-align: center; font-size: 20px; line-height: 200%">
 					로딩중입니다..
-<!-- 					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button> -->
 				</div>
 			</div>
 
@@ -313,8 +318,7 @@ var som;
 													<i class="fa fa-sign-in"></i> 출근
 												</div>
 												
-												<div class="btn btn-success btn-xs" id="getoffwork"
-													data-toggle="modal" data-target="#myModal2">
+												<div class="btn btn-success btn-xs" id="getoffwork">
 													<i class="fa fa-sign-out"></i> 퇴근
 												</div>
 											</div>

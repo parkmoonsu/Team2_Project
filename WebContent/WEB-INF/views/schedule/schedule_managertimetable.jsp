@@ -63,7 +63,6 @@
 		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
 </head>
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -138,24 +137,38 @@
 												<th>노선번호</th>
 												<th>운행일</th>
 												<th colspan="3" style="text-align: center">운행시간</th>
-												<%--오졌따리 ${fn:length(boardList)} --%> 
-												<!-- <th style="width: 20%; text-align:center;">
-												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form"> -->
-												</th>
+												
 											</tr>
 										</thead>
 										<tbody>
 											<c:set value="${list}" var="d"/>
 										
 											<c:forEach var="i" items="${d}" varStatus="status">
+											
 											<tr>
 												<td>${status.count}</td>
 												<td>${i.selectdistinctdto.m_name}</td>
 												<td>${i.selectdistinctdto.r_num}</td>
 												<td>${i.selectdistinctdto.b_vehiclenum}</td>
 												<td>${i.selectdistinctdto.o_date}</td>
+											
 												<c:forEach var="j" items="${i.o_time}">
-													<td>${j}</td>
+													<c:if test="${'0' eq j || '' eq j}">
+														<td>없음:!@#!</td>
+													</c:if>
+													<c:if test="${' ' eq j}">
+														<td>없음</td>
+													</c:if>
+													<c:if test="${empty j}">
+														<td>없음</td>
+													</c:if>
+													<c:if test="${null eq j}">
+														<td>없음</td>
+													</c:if>
+													<c:if test="${!empty j}">
+														<td>${j}</td>
+													</c:if>
+													
 												</c:forEach>
 											</tr>
 											</c:forEach>

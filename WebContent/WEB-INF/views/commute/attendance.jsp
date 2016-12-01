@@ -4,6 +4,7 @@
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,38 +109,51 @@ th, td {
 						</div>
 					</div>
 					<div class="clearfix"></div>
-
+					<c:set var="d" value="${list}" />
 					<div class="row">
 						<div id="showdiv">
-
+							
 
 							<div class="row">
 								<div class="col-sm-12 col-xs-12">
 									<div class="col-md-12 col-xs-12">
 										<div class="x_panel">
-
+						
 											<div class="x_content" id="commutesearchstarttableinfo">
+											
 												<table style="text-align: center"
 													class="table table-hover projects">
 													<thead>
 														<tr>
-															<th class='backslash' style='width: 75px'><div>일(日)</div>이름</th>
-															<c:forEach  var="i" items="${list}">
-																<%-- <c:forEach var="i" items="${list}"> --%>
-																<th>${i.c_date}</th>
+															<th class='backslash' style = "height: 10px;"><div>일(日)</div>이름</th>
+															
+															
+															<c:forEach var="i" begin="1" end="30" step="1">
+																<th>${i}</th>
 															</c:forEach>
 														</tr>
 													</thead>
 													<tbody>
-													<c:forEach  var="i" items="${list}">
+														<c:forEach var = "a" begin = "0" end = "${fn:length(d)-1}" step = "1">
+														<tr>
+															<td>${d[a].m_name}</td>
+													 	<c:forEach var="i" begin="0" end="29" step="1">
+																<th>${d[a].cs_stat[i]}</th>
+															</c:forEach>
+		
+														</tr>
+														</c:forEach>
+													</tbody>
+													<%-- <tbody>
+													<c:forEach  var="i" items="${list2}">
 														<tr>
 															<td>${i.m_name}</td>
 															
-															<c:forEach var="i" items="${list}">
+															<c:forEach var="i" items="${list2}">
 																<c:forEach var="i2" items="${list2}">
 																	
 																	<c:if test="${ i2.c_date == i.c_date}">
-																		<td>${ i2.cs_stat }</td>																	
+																		<td>${ i.cs_stat }</td>																	
 																	</c:if> 
 																	
 																</c:forEach> 
@@ -148,7 +162,7 @@ th, td {
 														</tr>
 													</c:forEach>
 														
-														<%-- <c:forEach var="i" items="${list}">
+														<c:forEach var="i" items="${list}">
 															<tr>
 																<td>${i.m_name}</td>
 
@@ -157,17 +171,18 @@ th, td {
 																	<td>${i.cs_stat}</td>
 																</c:forEach>
 															</tr>
-														</c:forEach> --%>
-														<%--  <c:forEach items="${list}" var="excelList">
+														</c:forEach>
+														 <c:forEach items="${list}" var="excelList">
 															<tr>
 															<td>${excelList.m_name}</td>													    
 													         <td>${excelList.cs_stat}</td>	
 								
 								
 													      </tr>  
-													     </c:forEach>  --%> 
-													</tbody>
+													     </c:forEach>  
+													</tbody> --%>
 												</table>
+												
 											</div>
 
 

@@ -260,7 +260,7 @@
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input id="m_license"
 															class="col-md-7 col-xs-12" type="file"
-															name="files[0]">
+															name="files[0]" onchange = "imagecheck(this)">
 													</div>
 												</div>
 												 <div class="form-group">
@@ -270,7 +270,7 @@
 													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input id="m_photo"
 															class="col-md-7 col-xs-12" type="file"
-															name="files[1]">
+															name="files[1]" onchange = "imagecheck(this)" accept="jpg">
 													</div>
 												</div>
 												<div class="form-group">
@@ -359,10 +359,11 @@
 			<!-- /page content -->
 
 			<!-- footer content -->
-			<footer>
-				<jsp:include page="/sidebar/footer.jsp" />
-			</footer>
-			<!-- /footer content -->
+		<footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
+		<!-- /footer content -->
 		</div>
 
 
@@ -460,6 +461,14 @@
 					file.value = "";
 				}
 			}
+			/* 
+			function imagecheck(file){
+				var filelen = file.value.length;
+				if(file.value.substring(filelen-3,filelen) != "PNG"){
+					alert("PNG인 이미지파일을 선택해 주세요,");
+					file.value= "";
+				}
+			} */
 			$(document).ready(function() {
 				var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 	
 				
@@ -526,48 +535,7 @@
 						
 					});
 				});
-				
-			/* 	if($("#m_id").val() != "" && $("#m_pw").val() != "" && $("#m_pw2").val() != ""
-						&& $("#m_name").val() != "" && $("#m_email").val() != "" &&
-						$("#j_code").val() != "" && $("#m_gender").is(":selected") &&
-						$("#m_phone").val() != "" && $("#m_license").val() != "" &&
-						$("#m_photo").val() != "" && $("#m_addr").val() != "" &&
-						$("#m_daddr").val() != "" && $("#res_num").val() != "" &&
-						$("#rr_detail").val() != ""){
-					$("#next").attr('disabled', false);
-				}else{
-					$("#next").attr('disabled', true);
-				} */
-				
-				$("#rr_detail").keyup(function(){
-					if($("#rr_detail") != ""){
-						$("#next").attr('disabled', false);
-					}else{
-						$("#next").attr('disabled', true);
-					}
-				})
-				
-				/* var i = 2;
-				$("#plusbtn").click(function(){
-					var plus = "<div class='form-group'>";
-					plus += "<label for='res_num' class='control-label col-md-3 col-sm-3 col-xs-12'>이력사항" + i++ + "</label>";
-					plus += "<div class = 'col md-3 col-sm-3'>";
-					plus += "<select name = 'res_num' class = 'form-control col-md-3 col-sm-3'>";
-					plus += "<option>선택</option>";
-					plus += "<option value = '01'>마을버스</option>";
-					plus += "<option value = '02'>시내버스</option>";
-					plus += "<option value = '03'>시외버스</option>";
-					plus += "<option value = '04'>고속버스</option>";
-					plus += "</select></div>";
-					plus += "<div class='col-md-3 col-sm-3 col-xs-12'>";
-					plus += "<input class='form-control col-md-7 col-xs-12' type='text' name='rr_detail'>";
-					plus += "</div></div>";
-					$("#plus").append(plus);
-					
-					if(i>4){
-						 $("#plusbtn").unbind("click");
-					}
-				}); */
+		
 				
 				$("#next").click(function(){
 					if($("#m_id").val() == ""){
