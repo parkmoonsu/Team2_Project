@@ -1,5 +1,7 @@
 package kr.or.bus.service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,6 +14,9 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
+import kr.or.bus.dto.SelectDistinctDTO;
+import kr.or.bus.dto.TimeDTO;
+import kr.or.bus.dto.TimetableDTO;
 
 @Service
 public class ScheduleManageService {
@@ -65,5 +70,31 @@ public class ScheduleManageService {
 	public void history_agree(String m_id, String ro_object){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.history_agree(m_id, ro_object);
+	}
+	
+	//timetable
+	public List<TimetableDTO> timetable_get(){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		
+		List<SelectDistinctDTO> list1=dao.selectdistinct();
+		
+		List<TimetableDTO> list2=new ArrayList<TimetableDTO>();
+		
+		//3 select문 돌리면서 시간 뽑아서 배열에 저장
+		for(int index=0; index<list1.size(); index++){
+			
+			TimetableDTO dto=new TimetableDTO();
+			SelectDistinctDTO selectdistinctdto=list1.get(index);
+
+			String[] timelist=dao.selecttime(selectdistinctdto);
+	
+			
+			dto.setSelectdistinctdto(list1.get(index));
+			dto.setO_time(timelist);
+
+			list2.add(dto);
+		}
+
+		return list2;
 	}
 }

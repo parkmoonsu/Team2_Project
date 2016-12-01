@@ -52,10 +52,10 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-	
+
 <script type="text/javascript">
 	$(function() {
-		
+
 	});
 </script>
 <style type="text/css">
@@ -64,11 +64,16 @@
 	background-size: 100% 100%;
 	text-align: left;
 }
-.backslash div { text-align: right; }
+
+.backslash div {
+	text-align: right;
+}
+
 table {
 	border-collapse: collapse;
 	border: 1px solid;
-}  
+}
+
 th, td {
 	border: 1px solid;
 	/* padding: 5px; */
@@ -115,39 +120,54 @@ th, td {
 
 											<div class="x_content" id="commutesearchstarttableinfo">
 												<table style="text-align: center"
-													class="table table-hover projects">	
+													class="table table-hover projects">
 													<thead>
 														<tr>
-															<th class='backslash' style='width:75px'><div>일(日)</div>이름</th>
-															 <c:forEach var="i"  begin="1" end="31" step="1">
-															  <%-- <c:forEach var="i" items="${list}"> --%>	
-															  	<th>${i}</th>
-															  </c:forEach>
+															<th class='backslash' style='width: 75px'><div>일(日)</div>이름</th>
+															<c:forEach  var="i" items="${list}">
+																<%-- <c:forEach var="i" items="${list}"> --%>
+																<th>${i.c_date}</th>
+															</c:forEach>
 														</tr>
 													</thead>
 													<tbody>
-													<c:forEach var="i" items="${list}">
-		                                             <tr>
-		                                                <td>${i.m_name}</td>
-		                                                
-		                                                <c:forEach var="i" items="${list}" begin="1" end="31">
-		                           
-		                                                <td>${i.cs_stat}</td>
-		                                                </c:forEach>
-		                                             </tr>
-		                                          </c:forEach>
-													<%-- <c:forEach items="${list}" var="excelList">
-													<tr>
-													<td>${excelList.m_name}</td>
-												       </tr>  
-												         
-												         
-												          <td>${excelList.cs_stat}</td>
-												       
-												         
-												       </c:forEach>   --%>
-													</tbody>	
-												</table> 
+													<c:forEach  var="i" items="${list}">
+														<tr>
+															<td>${i.m_name}</td>
+															
+															<c:forEach var="i" items="${list}">
+																<c:forEach var="i2" items="${list2}">
+																	
+																	<c:if test="${ i2.c_date == i.c_date}">
+																		<td>${ i2.cs_stat }</td>																	
+																	</c:if> 
+																	
+																</c:forEach> 
+															</c:forEach>
+															
+														</tr>
+													</c:forEach>
+														
+														<%-- <c:forEach var="i" items="${list}">
+															<tr>
+																<td>${i.m_name}</td>
+
+																<c:forEach var="i" items="${list}" begin="1" end="31" step="1">
+
+																	<td>${i.cs_stat}</td>
+																</c:forEach>
+															</tr>
+														</c:forEach> --%>
+														<%--  <c:forEach items="${list}" var="excelList">
+															<tr>
+															<td>${excelList.m_name}</td>													    
+													         <td>${excelList.cs_stat}</td>	
+								
+								
+													      </tr>  
+													     </c:forEach>  --%> 
+													</tbody>
+												</table>
 											</div>
 
 
@@ -212,28 +232,25 @@ th, td {
 		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.resize.js"></script>
 	<!-- Flot plugins -->
 	<scriptF
-		src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-	<script
+		src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js">
+	</script> <script
 		src="${pageContext.request.contextPath}/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/vendors/flot.curvedlines/curvedLines.js"></script>
-	<!-- DateJS -->
-	<script
+	<!-- DateJS --> <script
 		src="${pageContext.request.contextPath}/vendors/DateJS/build/date.js"></script>
-	<!-- JQVMap -->
-	<script
+	<!-- JQVMap --> <script
 		src="${pageContext.request.contextPath}/vendors/jqvmap/dist/jquery.vmap.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-	<!-- bootstrap-daterangepicker -->
-	<script
+	<!-- bootstrap-daterangepicker --> <script
 		src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-	<!-- Custom Theme Scripts -->
-	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+	<!-- Custom Theme Scripts --> <script
+		src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 </body>
 </html>

@@ -234,6 +234,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    delete from member where m_id=#{m_id}
    </delete>
 	
-
+	<select id="approveCount" resultType = "int">
+	select count(*) from mdetail where m_check = 'N'
+	</select>
 	
 </mapper>

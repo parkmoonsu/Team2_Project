@@ -102,7 +102,7 @@ public class BusStopManageService {
 		            for(int i=0; (line = br.readLine())!=null;i++){
 		                maps+=line.replaceAll("\\p{Space}","");           
 		            }
-		       
+		        
 		            System.out.println("버스정류장 좌표를 파일로 부터  읽어왔습니다.");
 		        	response.setCharacterEncoding("UTF-8");
 		        	
@@ -127,11 +127,12 @@ public class BusStopManageService {
 		FileWriter fw = null;
 	    BufferedWriter bw = null;
 	    String map = request.getParameter("kml");
+	    
 	    String busno = request.getParameter("busNo");
 	    System.out.println(map);
-	        
+	    System.out.println(busno);
 	    System.out.println("되냐");
-	    String path = request.getServletContext().getRealPath("/busstop/Tmap.json");        
+	    String path = request.getServletContext().getRealPath("/busstop/"+busno+".json");        
 	    try{
 	        fw = new FileWriter(path);
 	        bw = new BufferedWriter(fw);
@@ -154,12 +155,13 @@ public class BusStopManageService {
 	
 	//수정된 버스정류장 좌표를 파일로 부터 읽어오는 함수.
 	public void busStoplocationEditRead(HttpServletRequest request ,HttpServletResponse response) throws Exception {
-
+		
+		String busno = request.getParameter("busNo");
 		FileReader fr = null;
         BufferedReader br = null;
         PrintWriter out=null;
         String maps = null;
-        String path = request.getServletContext().getRealPath("/busstop/Tmap.json");
+        String path = request.getServletContext().getRealPath("/busstop/"+busno+".json");
         try{
         	fr = new FileReader(path);
         	br = new BufferedReader(fr);	        	

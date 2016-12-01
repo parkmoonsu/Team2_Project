@@ -15,7 +15,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
-
+import kr.or.bus.dto.TimetableDTO;
 import kr.or.bus.service.ScheduleManageService;
 
 
@@ -101,7 +101,10 @@ public class ScheduleManageController {
 	*/
 	
 	@RequestMapping("/gettimetable.admin")
-	public String getTimetable(){	
+	public String getTimetable(ModelMap map){
+		List<TimetableDTO> list=service.timetable_get();
+		map.addAttribute("list", list);
+		System.out.println(list);
 		return "schedule/schedule_managertimetable";
 	}
 	/*

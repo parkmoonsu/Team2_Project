@@ -9,6 +9,13 @@
 
 package kr.or.bus.service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
@@ -21,6 +28,10 @@ import org.springframework.stereotype.Service;
 
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.MemberJoinJobDTO;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
+import net.sf.json.xml.XMLSerializer;
+import nu.xom.*;
 
 @Service
 public class LoginService {
@@ -112,5 +123,85 @@ public class LoginService {
 		return dto;
 	}
 	
+	public JSONObject temp() throws Exception{
+		JSONObject jsontemp = null;
+		
+		
+		StringBuilder urlBuilder = new StringBuilder("http://apis.skplanetx.com/weather/summary"); // URL
+		urlBuilder.append("?" + URLEncoder.encode("version", "UTF-8") + "=1"); // version
+																													// Key
+		urlBuilder.append("&" + URLEncoder.encode("lat", "UTF-8") + "=" + URLEncoder.encode("37.518352", "UTF-8")); // regId
+		urlBuilder.append("&" + URLEncoder.encode("lon","UTF-8") + "=" + URLEncoder.encode("126.930239" , "UTF-8")); 
+		urlBuilder.append("&" + URLEncoder.encode("stnid", "UTF-8") + "=" + URLEncoder.encode("10283", "UTF-8")); // 검색건수
+		urlBuilder.append("&" + URLEncoder.encode("appKey", "UTF-8") + "=" + URLEncoder.encode("cc15578e-061d-3387-9d44-a405a43c034e", "UTF-8")); // 페이지
+																												// 번호
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-type", "application/json");
+		System.out.println("Response code: " + conn.getResponseCode());
+
+		BufferedReader rd;
+		if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+	           rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	       } else {
+	           rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+	       }
+	       
+	       StringBuilder sb = new StringBuilder();
+	       String line;
+	           
+	       while ((line = rd.readLine()) != null) {
+	           sb.append(line);
+	       }
+	           
+	       rd.close();
+	           
+	       conn.disconnect();
+	       
+	       jsontemp =  JSONObject.fromObject(sb.toString());
+	       System.out.println("#######" + jsontemp);
+		return jsontemp;
+	}
 	
+	public JSONObject day6() throws Exception{
+		JSONObject jsonday6 = null;
+		
+		
+		StringBuilder urlBuilder = new StringBuilder("http://apis.skplanetx.com/weather/forecast/6days"); // URL
+		urlBuilder.append("?" + URLEncoder.encode("version", "UTF-8") + "=1"); // version
+																													// Key
+		urlBuilder.append("&" + URLEncoder.encode("lat", "UTF-8") + "=" + URLEncoder.encode("37.518352", "UTF-8")); // regId
+		urlBuilder.append("&" + URLEncoder.encode("lon","UTF-8") + "=" + URLEncoder.encode("126.930239" , "UTF-8")); 
+		urlBuilder.append("&" + URLEncoder.encode("fortxt", "UTF-8") + "=" + URLEncoder.encode("N", "UTF-8")); // 검색건수
+		urlBuilder.append("&" + URLEncoder.encode("appKey", "UTF-8") + "=" + URLEncoder.encode("cc15578e-061d-3387-9d44-a405a43c034e", "UTF-8")); // 페이지
+																												// 번호
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-type", "application/json");
+		System.out.println("Response code: " + conn.getResponseCode());
+
+		BufferedReader rd;
+		if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+	           rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	       } else {
+	           rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+	       }
+	       
+	       StringBuilder sb = new StringBuilder();
+	       String line;
+	           
+	       while ((line = rd.readLine()) != null) {
+	           sb.append(line);
+	       }
+	           
+	       rd.close();
+	           
+	       conn.disconnect();
+	       
+	       jsonday6 =  JSONObject.fromObject(sb.toString());
+	       System.out.println("#######" + jsonday6);
+		return jsonday6;
+	}
 }
