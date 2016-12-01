@@ -1,5 +1,6 @@
 package kr.or.bus.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.SelectDistinctDTO;
+import kr.or.bus.dto.TimeDTO;
 import kr.or.bus.dto.TimetableDTO;
 
 @Service
@@ -71,37 +73,28 @@ public class ScheduleManageService {
 	}
 	
 	//timetable
-	public List<SelectDistinctDTO> timetable_get(){
+	public List<TimetableDTO> timetable_get(){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		//1 distinct로 해당 사람 뽑기
-		List<SelectDistinctDTO> l1=dao.selectdistinct();
-		//2 배열(dto로 저장)
-		/*[
-		 {?,?,?,?,?}, 요 객체를 뭘로?
-		 {?,?,?,?,?},
-		 
-		 ]*/
-		List<TimetableDTO> l3;
-		List<java.sql.Time> l2=new ArrayList<java.sql.Time>();
+		
+		List<SelectDistinctDTO> list1=dao.selectdistinct();
+		
+		List<TimetableDTO> list2=new ArrayList<TimetableDTO>();
+		
 		//3 select문 돌리면서 시간 뽑아서 배열에 저장
-		for(int index=0; index<l1.size(); index++){
-			String m_name=l1.get(index).getM_name();
-			java.sql.Date o_date=l1.get(index).getO_date();
-			//l2=dao.??(String m_name, java.sql.Date o_date));
+		for(int index=0; index<list1.size(); index++){
 			
 			TimetableDTO dto=new TimetableDTO();
-			dto.setM_name(m_name);
-			dto.setR_num(??t);
-			dto.setB_vehiclenum(b_vehiclenum);
-			dto.setO_date(o_date);
-			dto.setO_time(l2);
-			
+			SelectDistinctDTO selectdistinctdto=list1.get(index);
 
-			l3.add(dto);
+			String[] timelist=dao.selecttime(selectdistinctdto);
+	
+			
+			dto.setSelectdistinctdto(list1.get(index));
+			dto.setO_time(timelist);
+
+			list2.add(dto);
 		}
-		//4 2,3번 배열 합치기
-		
-		
-		return null;
+
+		return list2;
 	}
 }

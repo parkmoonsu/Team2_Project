@@ -27,18 +27,6 @@ public class RouteManageController {
 		routeManageSerivce.routelocationSave(request , response);
 	}
 		
-	//파일에서 마커 원본좌표를 읽어온다
-	@RequestMapping(value="/routeRead.admin",method=RequestMethod.GET)
-	public void routeRead(HttpServletRequest request,HttpServletResponse response) throws Exception{
-		routeManageSerivce.routelocationRead(request,response);
-	}
-	
-	//마커 좌표 수정
-	@RequestMapping(value="/routeEdit.admin",method=RequestMethod.GET)
-	public void routeEdit(HttpServletRequest request , HttpServletResponse response) throws Exception{
-		routeManageSerivce.routelocationEdit(request , response);
-	}
-	
 	//수정된 마커 좌표 불러오기
 	@RequestMapping(value="/routeEditRead.admin",method=RequestMethod.GET)
 	public void routeEditRead(HttpServletRequest request , HttpServletResponse response) throws Exception{
