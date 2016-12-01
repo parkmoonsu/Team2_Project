@@ -182,7 +182,7 @@
 		  </div>
 	</header>
 
-	<section id="fh5co-home" data-section="home" style="background-image: url(images/iron.gif);" data-stellar-background-ratio="0.5">
+	<section id="fh5co-home" data-section="home" style="background-image: url(https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRRJzgPTy8oOwamVJ-HZWWhT81XqbUAc-MHRZAwJw2QUV6VbEbTgg);" data-stellar-background-ratio="0.5">
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">
