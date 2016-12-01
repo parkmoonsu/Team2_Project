@@ -138,10 +138,11 @@
 			<!-- /page content -->
 		</div>
 			<!-- footer content -->
-			<footer>
-				<jsp:include page="/sidebar/footer.jsp" />
-			</footer>
-			<!-- /footer content -->
+		<footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
+		<!-- /footer content -->
 		</div>	
 		<!-- jQuery -->
 		<script
