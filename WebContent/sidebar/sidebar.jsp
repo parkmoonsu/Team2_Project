@@ -10,7 +10,10 @@
 <%@ taglib prefix="se" uri ="http://www.springframework.org/security/tags" %>
 <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-           <img src="${pageContext.request.contextPath}/images/logo4.png" style="width:80%;height:60px">
+           <a href = "main.htm">
+           	<img src="" style = "width:100%">
+           	kosbus
+           </a>
             </div>
 
             <div class="clearfix"></div>
@@ -46,6 +49,7 @@
                     <ul class="nav child_menu">
                       <li><a href="managereguloff.admin">기사 휴무 & 스케쥴 관리</a></li>
                       <li><a href="gethistory.admin">휴무 신청내역 확인/승인</a></li>
+                      <li><a href="gettimetable.admin">운행 스케줄</a></li>
                       <li><a href="media_gallery.html">Media Gallery</a></li>
                       <li><a href="typography.html">Typography</a></li>
                       <li><a href="icons.html">Icons</a></li>

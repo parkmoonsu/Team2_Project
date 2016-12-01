@@ -8,7 +8,10 @@
 <%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
 <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-         <!--  <img alt="" src=""> -->
+      		<a href = "main.htm">
+           	<img src="">
+           	kosbus
+           	</a>
             </div>
 
             <div class="clearfix"></div>

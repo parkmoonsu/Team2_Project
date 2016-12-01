@@ -28,8 +28,11 @@
 					<li><a href="ChangeForm.htm">개인정보</a></li>
 					<li><a href="${pageContext.request.contextPath}/logout"><i
 							class="fa fa-sign-out pull-right"></i>로그아웃</a></li>
-				</ul></li>
-
+				</ul>
+			</li>
+			<li>
+				<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+			</li>
 
 		</ul>
 	</nav>
