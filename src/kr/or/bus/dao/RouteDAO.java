@@ -1,5 +1,7 @@
 package kr.or.bus.dao;
 
+import kr.or.bus.dto.RouteDTO;
+
 public interface RouteDAO {
-	public String routeidSearch(String busno);
+	public RouteDTO routeidSearch(String r_num);
 }

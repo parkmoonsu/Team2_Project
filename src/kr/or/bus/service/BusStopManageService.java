@@ -332,20 +332,30 @@ public class BusStopManageService {
 		
 	}
 	
-	public String routeidInfoSearch(RouteDTO r_num){
-		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
+	public RouteDTO routeidInfoSearch(String r_num,RouteDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		System.out.println(r_num);
+		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
+		System.out.println(dao.routeidSearch(r_num));
+		dto = dao.routeidSearch(r_num);
+		System.out.println(dto.getR_id());
 		
+		busStopSearch(dto,request, response);
 		return null;
 	}
 	
-	public void busStopSearch(HttpServletRequest request , HttpServletResponse response, String routeid) throws IOException{
-		
-	    StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute"); /*URL*/
-	    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); /*Service Key*/
-	    urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(routeid, "UTF-8")); /*노선ID*/
-	    urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("999", "UTF-8")); /*검색건수*/
-	    urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
+	public void busStopSearch(RouteDTO dto,HttpServletRequest request ,HttpServletResponse response) throws IOException{
+		System.out.println("r_id");
+		System.out.println(dto.getR_id());
+		PrintWriter out = null;
+		request.setCharacterEncoding("UTF-8");
+		out = response.getWriter();
+		JSONObject jsonmaps = null;
+	    
+		StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute"); //URL
+	    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); //Service Key
+	    urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(dto.getR_id(), "UTF-8")); //노선ID
+	    urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("999", "UTF-8")); //검색건수
+	    urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); //페이지 번호
 	    URL url = new URL(urlBuilder.toString());
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	    conn.setRequestMethod("GET");
@@ -364,7 +374,11 @@ public class BusStopManageService {
 	    }
 	    rd.close();
 	    conn.disconnect();
-	    System.out.println(sb.toString());	    		
+	    System.out.println(sb.toString());    
+	    jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
+	    
+	    
+	    out.print(jsonmaps);
 	}
 
 }
