@@ -18,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
@@ -202,7 +201,7 @@ public class BusManageController {
 	
 
 	//임시 노선별 출결현황
-	@RequestMapping("/commutebus.admin")
+/*	@RequestMapping("/commutebus.admin")
 	public String showlist(String r_num, Model model){
 		
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.getShow(r_num);
@@ -211,15 +210,32 @@ public class BusManageController {
 		
 		return "commute/attendance";
 		
-	}
+	}*/
 	
 	//임시 노선별 출결현황에서 이름 가져오기
 	@RequestMapping("/routename.admin")
-	public String showname(String r_num, Model model){
+	public String showname(String r_num, String m_name, String tdate, Model model){
 		
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.getNselect(r_num);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.getNdselect(r_num);
+		//List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list2;
+		
+		/*for(int i=0; i<list.size(); i++){
+			//이름,시간,상태
+			list.get(i).getM_name();
+			list.get(i).getCs_stat();
+			list.get(i).getC_date();
+			
+			//list2 = service.getShow(list.get(i));
+			
+
+		}
+		*/
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list2 = service.getShow(m_name, tdate);
+		//list2 = service.getShow(list);
 	
+		
 		model.addAttribute("list", list);
+		model.addAttribute("list2", list2);
 		
 		return "commute/attendance";
 		

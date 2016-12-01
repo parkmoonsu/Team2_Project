@@ -113,21 +113,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 
-	<!-- 임시 노선별 출결현황-->
+	<!-- 임시 노선별 출결현황 상태-->
 	<select id="getShow"  resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
-		select mem.m_name, com.c_date, cs.cs_stat ,bus.r_num      
+		<!-- select mem.m_name, com.c_date, cs.cs_stat ,bus.r_num      
 	    from member mem left outer join commute com on mem.m_id=com.m_id
-	    left outer join bus on  bus.B_vehiclenum = mem.B_VEHICLENUM
+	    join bus on  bus.B_vehiclenum = mem.B_VEHICLENUM
 	    left outer join cstart cs on cs.cs_code=com.cs_code
-	    order by r_num
+	    order by r_num -->
+	    
+	    select cs.cs_stat
+		from member mem left outer join commute com on mem.m_id=com.m_id
+		join bus on  bus.B_vehiclenum = mem.B_VEHICLENUM
+		left outer join cstart cs on cs.cs_code=com.cs_code
+		order by r_num 
 	</select>
 
+	<!-- 임시 노선별 출결현황 날짜 -->
+	<!-- <select id="getDate" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select distinct c_date
+		from commute
+		order by c_date
+	</select> -->
 
-<!-- 	<select id="getStat" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+ <!-- 	<select id="getStat" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
 		select cs_stat 
 		from commute com join cstart cs 
 		on com.cs_code=cs.cs_code 
 	</select> -->
+
+		<!-- 노선 별 출결상황에서 이름,날짜 -->
+	<select id="getNdselect" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		 <!--  select mem.m_name, cs.cs_stat
+		  from member mem join bus on mem.B_VEHICLENUM=bus.B_VEHICLENUM
+		  join commute com on com.m_id=mem.m_id
+		  join cstart cs on com.cs_code=cs.cs_code 
+		  order by bus.r_num desc -->
+	  
+	  select mem.m_name, com.c_date
+	  from member mem join bus on mem.b_vehiclenum=bus.b_vehiclenum
+ 	  left outer join commute com on com.m_id=mem.m_id
+	  
+	</select>
 
 	<select id = "alreadyUse" resultType = "int" parameterType = "String">
 		select count(*)

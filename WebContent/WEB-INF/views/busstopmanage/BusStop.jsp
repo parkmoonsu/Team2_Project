@@ -534,7 +534,7 @@
       
       function deleteRoute(){
       	
-      	if(originalMarkers !=null){ 		
+      	if(copyMarkers !=null){ 		
       		originaldelete();   		
       	}
       	    	
@@ -546,11 +546,12 @@
        		map.data.remove(features);
        	});
        
-       	for(var i=0; i<originalMarkers.length; i++){
-       		originalMarkers[i].setMap(null);
+       	for(var i=0; i<copyMarkers.length; i++){
+       		copyMarkers[i].setMap(null);
        	}
-       	originalMarkers=[];
-       	originalMarkers.length = 0;
+       	copyMarkers=[];
+       	copyMarkers.length = 0;
+       	as=0;
       }
       
       

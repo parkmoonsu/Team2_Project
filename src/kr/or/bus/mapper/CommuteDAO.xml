@@ -117,6 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from commute
 		where m_id = #{m_id} 
 	</select>  -->
+	
  	<select id="csCheck" resultType="int" parameterType="String">
 		select count(c_start)
 		from commute
