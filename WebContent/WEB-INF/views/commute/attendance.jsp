@@ -124,22 +124,37 @@ th, td {
 													<thead>
 														<tr>
 															<th class='backslash' style='width: 75px'><div>일(日)</div>이름</th>
-															<c:forEach  var="i" items="${list}">
-																<%-- <c:forEach var="i" items="${list}"> --%>
-																<th>${i.c_date}</th>
-															</c:forEach>
+															<c:set var="d" value="${list}" />
+
+															<c:forEach items="${d}" var="i" varStatus="status">	
+																
+																<th>${i.c_date[status.index]}</th>
+															</c:forEach> 
 														</tr>
 													</thead>
 													<tbody>
-													<c:forEach  var="i" items="${list}">
+													 
+														
+														<%-- <c:forEach var="n" items="${list}">
+															<tr>
+																<td>${n.m_name}</td>
+																<c:forEach var="s" items="${list}" varStatus="status">
+																	<td>${s.cs_stat[status.index]}</td>
+																</c:forEach>
+															</tr>
+														</c:forEach>
+ --%>
+													</tbody>
+													<%-- <tbody>
+													<c:forEach  var="i" items="${list2}">
 														<tr>
 															<td>${i.m_name}</td>
 															
-															<c:forEach var="i" items="${list}">
+															<c:forEach var="i" items="${list2}">
 																<c:forEach var="i2" items="${list2}">
 																	
 																	<c:if test="${ i2.c_date == i.c_date}">
-																		<td>${ i2.cs_stat }</td>																	
+																		<td>${ i.cs_stat }</td>																	
 																	</c:if> 
 																	
 																</c:forEach> 
@@ -148,7 +163,7 @@ th, td {
 														</tr>
 													</c:forEach>
 														
-														<%-- <c:forEach var="i" items="${list}">
+														<c:forEach var="i" items="${list}">
 															<tr>
 																<td>${i.m_name}</td>
 
@@ -157,17 +172,18 @@ th, td {
 																	<td>${i.cs_stat}</td>
 																</c:forEach>
 															</tr>
-														</c:forEach> --%>
-														<%--  <c:forEach items="${list}" var="excelList">
+														</c:forEach>
+														 <c:forEach items="${list}" var="excelList">
 															<tr>
 															<td>${excelList.m_name}</td>													    
 													         <td>${excelList.cs_stat}</td>	
 								
 								
 													      </tr>  
-													     </c:forEach>  --%> 
-													</tbody>
+													     </c:forEach>  
+													</tbody> --%>
 												</table>
+												
 											</div>
 
 
