@@ -40,11 +40,11 @@
 								method="post" name="f" class="login-form" style="margin-bottom: 20px">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">Username</label>
-			                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+			                        	<input type="text" name="username" placeholder="Username..." class="form-username form-control" id="form-username">
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">Password</label>
-			                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+			                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
 			                        </div>
 			                        <a href="search.htm"class="btn btn-primary btn-sm btn-block">아이디/비밀번호찾기</a>
 			                        <a href="join.htm"	class="btn btn-primary btn-sm btn-block">회원가입</a>
@@ -52,10 +52,8 @@
 			                        <button id="callback" class="btn"style="padding:0px">돌아가기</button>
 			                    </form>
 			                    <c:if test="${param.error != null}">
-														<div>
-
-															로그인 실패 <br>
-															<script>
+									<div>로그인 실패 <br>
+											<script>
 														alert("강민수는 바람둥이");
 													</script>
 															<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
