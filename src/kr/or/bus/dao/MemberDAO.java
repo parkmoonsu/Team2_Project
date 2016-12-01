@@ -124,6 +124,7 @@ public interface MemberDAO {
 	// 사원 삭제
 	public void deleteMember(String m_id);
 	/* 김수현추가 끝 */
-
-
+	
+	//상단 nav 알림 카운트
+	public int approveCount();
 }
