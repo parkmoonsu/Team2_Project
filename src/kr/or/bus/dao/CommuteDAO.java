@@ -30,7 +30,7 @@ public interface CommuteDAO {
 	public int updateCommuteoff(@Param("m_id")String m_id,  @Param("tdate")String tdate,@Param("dhour")String dhour);
 	
 	//퇴근상태보여주기
-	public CommuteJoinCstartJoinCendDTO ceselect(String m_id,String tdate);
+	public CommuteJoinCstartJoinCendDTO ceselect(String m_id, String tdate);
 	
 	//출근했는지 체크
 	public int csCheck(String m_id, @Param("tdate")String tdate);
