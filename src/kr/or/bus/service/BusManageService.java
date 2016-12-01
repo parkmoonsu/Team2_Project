@@ -152,8 +152,6 @@ public class BusManageService {
 		
 			
 			list2.add(dto);
-			System.out.println(list2.get(i).toString());
-			     
 		}
 		
 	

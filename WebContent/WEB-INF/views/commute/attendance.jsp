@@ -4,6 +4,7 @@
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,42 +109,40 @@ th, td {
 						</div>
 					</div>
 					<div class="clearfix"></div>
-
+					<c:set var="d" value="${list}" />
 					<div class="row">
 						<div id="showdiv">
-
+							
 
 							<div class="row">
 								<div class="col-sm-12 col-xs-12">
 									<div class="col-md-12 col-xs-12">
 										<div class="x_panel">
-
+						
 											<div class="x_content" id="commutesearchstarttableinfo">
+											
 												<table style="text-align: center"
 													class="table table-hover projects">
 													<thead>
 														<tr>
-															<th class='backslash' style='width: 75px'><div>일(日)</div>이름</th>
-															<c:set var="d" value="${list}" />
-
-															<c:forEach items="${d}" var="i" varStatus="status">	
-																
-																<th>${i.c_date[status.index]}</th>
-															</c:forEach> 
+															<th class='backslash' style = "height: 10px;"><div>일(日)</div>이름</th>
+															
+															
+															<c:forEach var="i" begin="1" end="30" step="1">
+																<th>${i}</th>
+															</c:forEach>
 														</tr>
 													</thead>
 													<tbody>
-													 
-														
-														<%-- <c:forEach var="n" items="${list}">
-															<tr>
-																<td>${n.m_name}</td>
-																<c:forEach var="s" items="${list}" varStatus="status">
-																	<td>${s.cs_stat[status.index]}</td>
-																</c:forEach>
-															</tr>
+														<c:forEach var = "a" begin = "0" end = "${fn:length(d)-1}" step = "1">
+														<tr>
+															<td>${d[a].m_name}</td>
+													 	<c:forEach var="i" begin="0" end="29" step="1">
+																<th>${d[a].cs_stat[i]}</th>
+															</c:forEach>
+		
+														</tr>
 														</c:forEach>
- --%>
 													</tbody>
 													<%-- <tbody>
 													<c:forEach  var="i" items="${list2}">

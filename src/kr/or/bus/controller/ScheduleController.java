@@ -113,13 +113,14 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping(value="/reguloff_insert.htm", method=RequestMethod.POST)
-	public View reguloffInsert(String m_id, String o_code, ModelMap map)
+	public View reguloffInsert(String m_id, String o_code, String temp, ModelMap map)
 			throws ClassNotFoundException, SQLException, ParseException{
 		
 		System.out.println("일정 저장하기");
 		RegulOffDTO dto=new RegulOffDTO();
 		dto.setM_id(m_id);
 		dto.setO_code(o_code);
+		dto.setTemp(temp);
 		
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.reguloff_insert(dto);

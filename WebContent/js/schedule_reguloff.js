@@ -56,7 +56,8 @@ $(function() {
 
 		var event = {
 			m_id : loginid,
-			o_code : o_code
+			o_code : o_code,
+			temp : 'true'
 		};
 		$(".antoclose").click();
 
@@ -88,7 +89,8 @@ $(function() {
 				o_code:o_code,
 				m_id:loginid,
 				ro_code:o_code,
-				ro_object:loginid
+				ro_object:loginid,
+				o_check:'Y'
 			},
 			success : function(data) {
 				

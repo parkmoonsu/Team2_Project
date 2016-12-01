@@ -13,7 +13,7 @@ public class RegulOffDTO {
 	private String m_id;
 	private String o_code;
 	private Date ro_regdate;
-	private String id;
+	private String temp;
 
 	public String getM_id() {
 		return m_id;
@@ -33,16 +33,15 @@ public class RegulOffDTO {
 	public void setRo_regdate(Date ro_regdate) {
 		this.ro_regdate = ro_regdate;
 	}
-	public String getId() {
-		return id;
+	public String getTemp() {
+		return temp;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setTemp(String temp) {
+		this.temp = temp;
 	}
 	@Override
 	public String toString() {
-		return "RegulOffDTO [m_id=" + m_id + ", o_code=" + o_code + ", ro_regdate=" + ro_regdate + ", id=" + id + "]";
+		return "RegulOffDTO [m_id=" + m_id + ", o_code=" + o_code + ", ro_regdate=" + ro_regdate + ", temp=" + temp
+				+ "]";
 	}
-	
-
 }

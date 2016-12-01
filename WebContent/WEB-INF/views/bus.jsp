@@ -170,6 +170,7 @@
 		  </div>
 	</header>
 
+
 	<section id="fh5co-home" data-section="home" style="background-image: url(images/king.gif);" data-stellar-background-ratio="0.5">
 		<div class="gradient"></div>
 		<div class="container">
