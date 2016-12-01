@@ -80,7 +80,7 @@
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>마을버스     시내버스     시외버스</small>
+								<small>마을버스    시내버스     시외버스</small>
 							</h3>
 						</div>
 					</div>
