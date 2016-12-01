@@ -211,7 +211,7 @@
            		zindex : "5"
         	});
      	  	map.panTo(originalMarker.getPosition());
-    		
+     	  	originalMarkers.push(originalMarker);
             
 
     	}//for문 끝
@@ -292,7 +292,6 @@
     	if(originalMarkers !=null){ 		
     		originaldelete();   		
     	}
-    	    	
     	
     }
     $(function() {
