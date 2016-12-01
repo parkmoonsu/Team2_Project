@@ -257,7 +257,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id = "ndate"></h2>
-													<h4 class="degrees" id = "ntemp"></h4>
+													<h5 class="degrees" id = "ntemp"></h5>
 													<canvas id="nweath" width="32" height="32"></canvas>
 													
 												</div>
@@ -265,7 +265,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id ="n2date"></h2>
-													<h4 class="degrees" id ="n2temp"></h4>
+													<h5 class="degrees" id ="n2temp"></h5>
 													<canvas height="32" width="32" id="n2weath"></canvas>
 													
 												</div>
@@ -273,7 +273,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id ="n3date"></h2>
-													<h4 class="degrees" id = "n3temp"></h4>
+													<h5 class="degrees" id = "n3temp"></h5>
 													<canvas height="32" width="32" id="n3weath"></canvas>
 													
 												</div>
@@ -281,7 +281,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id = "n4date"></h2>
-													<h4 class="degrees" id = "n4temp"></h4>
+													<h5 class="degrees" id = "n4temp"></h5>
 													<canvas height="32" width="32" id="n4weath"></canvas>
 													
 												</div>
@@ -289,7 +289,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id ="n5date"></h2>
-													<h4 class="degrees" id = "n5temp"></h4>
+													<h5 class="degrees" id = "n5temp"></h5>
 													<canvas height="32" width="32" id="n5weath"></canvas>
 													
 												</div>
@@ -297,7 +297,7 @@
 											<div class="col-sm-2">
 												<div class="daily-weather">
 													<h2 class="day" id = "n6date"></h2>
-													<h4 class="degrees" id = "n6temp"></h4>
+													<h5 class="degrees" id = "n6temp"></h5>
 													<canvas height="32" width="32" id="n6weath"></canvas>
 													
 												</div>
@@ -356,10 +356,7 @@
 
 		<!-- footer content -->
 		<footer>
-			<div class="pull-right">
-				Gentelella - Bootstrap Admin Template by <a
-					href="https://colorlib.com">Colorlib</a>
-			</div>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
 			<div class="clearfix"></div>
 		</footer>
 		<!-- /footer content -->
@@ -438,22 +435,14 @@
 	// moris 시작
 	Morris.Bar({ //// 엑박 무시하세요~
 	element : 'graph_bar',
-	data : [ {
-		device : '마을버스',
-		geekbench : ${m}
-	}, {
-		device : '시내버스',
-		geekbench : ${n}
-	}, {
-		device : '시외버스',
-		geekbench : ${w}
-	}, {
-		device : '고속버스',
-		geekbench : ${g}
-	}, {
-		device : '전체버스',
-		geekbench : ${m+n+w+g}
-	} ],
+	data : [ 
+		{device : '미정', geekbench : ${no}},
+		{device : '마을버스',geekbench : ${m}},
+		{device : '시내버스',geekbench : ${n}}, 
+		{device : '시외버스',geekbench : ${w}},
+		{device : '고속버스',geekbench : ${g}},
+		{device : '전체버스',geekbench : ${m+n+w+g+no}} 
+	],
 	xkey : 'device',
 	ykeys : [ 'geekbench' ],
 	labels : [''],
@@ -597,7 +586,7 @@
 					
 					 if(data.temp.weather.summary[0].today.sky.code == "SKY_D01"){
 						 if(tdate.format("a/p") == "오전" && Number(tdate.format("hh")) >= 6
-								 || tdate.format("a/p") == "오후" && (t+12) < 18){
+								 || tdate.format("a/p") == "오후" && t==12 || (t+12) < 18){
 						 	icons.add("todayweath", Skycons.CLEAR_DAY);
 						 }else{
 							 icons.add("todayweath", Skycons.CLEAR_NIGHT);
@@ -610,7 +599,7 @@
 						 
 					}else if(data.temp.weather.summary[0].today.sky.code == "SKY_D02"){
 						if(tdate.format("a/p") == "오전" && Number(tdate.format("hh")) >= 6
-								 || tdate.format("a/p") == "오후" && (t+12) < 18){
+								 || tdate.format("a/p") == "오후" && t==12 || (t+12) < 18){
 							icons.add("todayweath", Skycons.PARTLY_CLOUDY_DAY);
 						 }else{
 							 icons.add("todayweath", Skycons.PARTLY_CLOUDY_NIGHT);
@@ -815,17 +804,6 @@
 				}
 			});
 			
-			//skycon 시작
-			/* , list = [ "clear-day", "clear-night", //클리어데이 = 맑음  - 클리어나이트 = 맑고흐림
-									"partly-cloudy-day", "partly-cloudy-night",
-									"cloudy", "rain", "sleet", "snow", "wind",
-									"fog" ], i;
-
-							for (i = list.length; i--;)
-								icons.set(list[i], list[i]);
- */
-							
-			//skycon 종료
 		});
 	
 	</script>

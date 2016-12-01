@@ -51,12 +51,13 @@ public class LoginController {
 		int ncount = service2.nBus();
 		int wcount = service2.wBus();
 		int gcount = service2.gBus();
+		int noroute = service2.noRoute();
 		
 		model.addAttribute("m", mcount);
 		model.addAttribute("n", ncount);
 		model.addAttribute("w", wcount);
 		model.addAttribute("g", gcount);
-	
+		model.addAttribute("no", noroute);
 		return "main/main";
 	}
 	
