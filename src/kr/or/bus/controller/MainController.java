@@ -129,5 +129,13 @@ public class MainController {
 		return jsonview;
 	}
 	
+	@RequestMapping("/bell.htm")
+	public View getApproveCount(Model model){
+		int appcount = service.approveCount();
+		
+		model.addAttribute("appcount", appcount);
+		return jsonview;
+		
+	}
 	
 }

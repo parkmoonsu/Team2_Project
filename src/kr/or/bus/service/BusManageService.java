@@ -249,4 +249,10 @@ public class BusManageService {
 		int gcount = dao.gBus();
 		return gcount;
 	}
+	
+	public int noRoute(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int noroute = dao.noRoute();
+		return noroute;
+	}
 }

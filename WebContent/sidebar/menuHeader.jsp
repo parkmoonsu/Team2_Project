@@ -30,10 +30,17 @@
 							class="fa fa-sign-out pull-right"></i>로그아웃</a></li>
 				</ul>
 			</li>
-			<li>
-				<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-			</li>
-
+			<se:authorize access="hasRole('ROLE_ADMIN')">
+			 <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-green" id = "bell"></span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  	
+                  </ul>
+                </li>
+            </se:authorize>
 		</ul>
 	</nav>
 </div>
@@ -59,5 +66,25 @@
 				$("#m_photo").attr("src", "${pageContext.request.contextPath}/join/upload/"+data.m_photo);
 			}
 		});
+		
+		bell();
+		var Approve = setInterval(function(){ bell() }, 30000);
+		
 	});
+	
+	function bell(){
+		$.ajax({
+			url : "bell.htm",
+			success : function(data){
+				console.log(data.appcount);
+				$("#bell").empty();
+				$("#menu1").empty();
+				if(data.appcount > 0){
+					$("#bell").append(data.appcount);
+					$("#menu1").append("<li><a href = 'joinapprove.admin'><span class = 'message'><i class = 'fa fa-group'></i>&nbsp;&nbsp;가입 승인 요청이 <font color = 'green'>"+data.appcount + "</font>건 있습니다.</span></a></li>");
+				
+				}
+			}
+		});
+	}
 </script>

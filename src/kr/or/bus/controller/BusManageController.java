@@ -44,11 +44,13 @@ public class BusManageController {
 		int ncount = service.nBus();
 		int wcount = service.wBus();
 		int gcount = service.gBus();
+		int noroute = service.noRoute();
 		
 		model.addAttribute("m", mcount);
 		model.addAttribute("n", ncount);
 		model.addAttribute("w", wcount);
 		model.addAttribute("g", gcount);
+		model.addAttribute("no", noroute);
 		
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);

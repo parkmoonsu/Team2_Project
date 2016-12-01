@@ -91,11 +91,9 @@
 
         <!-- footer content -->
         <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
         <!-- /footer content -->
       </div>
     </div>
@@ -211,7 +209,7 @@
            		zindex : "5"
         	});
      	  	map.panTo(originalMarker.getPosition());
-    		
+     	  	originalMarkers.push(originalMarker);
             
 
     	}//for문 끝
@@ -292,7 +290,6 @@
     	if(originalMarkers !=null){ 		
     		originaldelete();   		
     	}
-    	    	
     	
     }
     $(function() {

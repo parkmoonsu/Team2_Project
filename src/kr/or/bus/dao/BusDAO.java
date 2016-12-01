@@ -84,5 +84,6 @@ public interface BusDAO {
 	public int wBus();
 	//고속버스 개수
 	public int gBus();
-
+	//미정
+	public int noRoute();
 }
