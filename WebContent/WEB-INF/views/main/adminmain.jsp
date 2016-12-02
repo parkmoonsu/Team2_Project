@@ -320,14 +320,36 @@
 							<div class="row x_title">
 								<div class="col-md-6">
 									<h3>
-										Network Activities <small>Graph title sub-title</small>
+										노선-정류장 시간대별 승객 수
 									</h3>
 								</div>
-								<div class="col-md-4"></div>
+								
 								<div class="col-md-2">
+
+									<select id ="year">
+										<option>연도</option>
+									</select>
+									
+									&nbsp;
 									<select>
-										<option>노선1</option>
-										<option>노선2</option>
+									<option>월</option>
+									</select>
+								</div>
+								<div class ="col-md-4">
+									&nbsp;
+									<select>
+										<option>
+										노선
+										</option>
+										<option>
+										4311
+										</option>
+									</select>
+									&nbsp;
+								
+									<select>
+										<option>정류장</option>
+										<option>백현동 현대백화점 서편</option>
 									</select>
 								</div>
 							</div>
@@ -521,7 +543,7 @@
 			var d1 = [ [ 0, 1 ], [ 1, 9 ], [ 2, 6 ], [ 3, 10 ],
 							[ 4, 5 ], [ 5, 17 ], [ 6, 6 ], [ 7, 10 ], [ 8, 7 ],
 							[ 9, 11 ], [ 10, 35 ], [ 11, 9 ], [ 12, 12 ],
-							[ 13, 5 ], [ 14, 3 ], [ 15, 4 ], [ 16, 9 ] ];
+							[ 13, 5 ], [ 14, 3 ], [ 15, 4 ], [ 16, 9 ] ]; // 이부분에 데이터 들어갈것~
 
 					//flot options
 					var options = {

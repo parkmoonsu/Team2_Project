@@ -886,7 +886,7 @@
                            	url : "busRouteSearch.admin",
                            	type : "get",
                            	dataType : "json",
-                           	data : {busNo:$("#selectBus").val()},
+                           	data : {r_num:$("#selectBus").val()},
                            	success : function(data2) {
                             	console.log("읽어옴?");
                               	console.log(data2);                              	                                                                  	                       

@@ -207,7 +207,7 @@
 																<div style="float: right; margin: 30px;">
 																	<input type="button" value="이전" class="btn btn-default"
 																		id="prev" onclick="history.back(-1)"> <input
-																		class="btn btn-primary" type="submit" value="수정완료" id = "update">
+																		class="btn btn-dark" type="submit" value="수정완료" id = "update">
 																</div>
 
 															</form>
