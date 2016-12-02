@@ -1,25 +1,16 @@
 package kr.or.bus.service;
-<<<<<<< HEAD
-
-=======
->>>>>>> 49ecdf9ad294c9a3d35e2b3252ee2919d4238806
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import kr.or.bus.dao.ScheduleManageDAO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
-<<<<<<< HEAD
-=======
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
->>>>>>> 49ecdf9ad294c9a3d35e2b3252ee2919d4238806
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
@@ -105,7 +96,7 @@ public class ScheduleManageService {
 
 		return list2;
 	}
-<<<<<<< HEAD
+
 	
 
 	
@@ -129,7 +120,7 @@ public class ScheduleManageService {
 	}
 	
 	
-=======
+
 	//휴무 요청 상태 가져오기
 	public int getRequestState(Model model){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
@@ -142,5 +133,5 @@ public class ScheduleManageService {
 		model.addAttribute("refuse", refuse);
 		return total;
 	}
->>>>>>> 49ecdf9ad294c9a3d35e2b3252ee2919d4238806
+
 }
