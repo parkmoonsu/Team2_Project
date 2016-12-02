@@ -108,16 +108,7 @@ public class ScheduleManageController {
 		System.out.println(list);
 		return "schedule/schedule_managertimetable";
 	}
-	/*
-	제목 : 기사 휴무 및 스케쥴 관리 
-	작성자 : 강민수
-	목적 : cal 구현
-	*/
-	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
-	   public String getHistoryCal(Model model){
-	      service.getRequestState(model);
-	      return "schedule/schedule_managechangeapprove";
-	   }
+	
 
 	/*
 	제목 : 예상 스케쥴 뽑기
@@ -142,10 +133,40 @@ public class ScheduleManageController {
 		return jsonview;
 	}
 	
+	/*
+	제목 : 기사 휴무 변경 요청 승인
+	작성자 : 강민수
+	목적 : cal 구현
+	*/
+	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
+	   public String getHistoryCal(Model model){
+	      service.getRequestState(model);
+	      return "schedule/schedule_managechangeapprove";
+	   }
 	
-
+	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.POST)
+	public View getHistoryCalRequested(String r_num, Model model){
+		service.getRequestInfoCal(r_num,model);
+		return jsonview;
+	}
 	
-
+	//최초 정규휴무 등록 승인
+	@RequestMapping("/approvefirstregister.admin")
+	public View approveFirstRegister(String m_id, String o_code,Model model){
+		System.out.println(m_id + o_code);
+		int result = service.approveFirstRegister(m_id, o_code);
+		int result1 = service.updateFirstRegisterRecord(m_id, o_code);
+		model.addAttribute("result", result);
+		model.addAttribute("result1", result1);
+		return jsonview;
+	}
 	
-
+	//최초 정규휴무 등록 거절
+		@RequestMapping("/refuseFirstRegister.admin")
+		public View refuseFirstRegister(String m_id, String o_code,Model model){
+			System.out.println(m_id + o_code);
+			int result = service.updateRefuseFirstRegister(m_id, o_code);
+			model.addAttribute("result", result);
+			return jsonview;
+		}
 }
