@@ -15,12 +15,15 @@ import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 
 public interface RnumcommuteDAO {
 
-	//임시 노선별 출결현황 날짜
-	public String[] getShow(String m_name);
+	//노선별 출결현황 날짜
+	public String[] getShow(String m_name, String r_num);
 	
-	//임시 노선별 출결현황 상태
+	//노선별 출결현황 상태
 	public String[] getStat(String m_name);
 	
 	//노선별 출결상황에서 이름,날짜 가져오기
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getNdselect();
+	
+	//
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getselect(String r_num);
 }

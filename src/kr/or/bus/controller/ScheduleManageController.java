@@ -109,6 +109,13 @@ public class ScheduleManageController {
 		return "schedule/schedule_managertimetable";
 	}
 	
+/*
+	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
+	   public String getHistoryCal(Model model){
+	      service.getRequestState(model);
+	      return "schedule/schedule_managechangeapprove";
+	   }
+	*/
 
 	/*
 	제목 : 예상 스케쥴 뽑기
@@ -143,8 +150,7 @@ public class ScheduleManageController {
 	
 	
 	
-	
-	
+
 	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
 	   public String getHistoryCal(Model model){
 	      service.getRequestState(model);
@@ -176,4 +182,5 @@ public class ScheduleManageController {
 			model.addAttribute("result", result);
 			return jsonview;
 		}
+
 }

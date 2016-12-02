@@ -181,6 +181,10 @@
 .form_wizard .msgBox {
   display: none; }
 
+label{
+font-size:12px;
+}
+
 </style>
 </head>
 		<meta charset="utf-8">
@@ -273,10 +277,10 @@
 														<input type="text" id="m_id" name = "m_id"
 															class="form-control col-md-7 col-xs-12">
 													</div>
-													<div class = "col-md-1 col-sm-1">
+													<div class = "col-md-1 col-sm-1" align="left" style="padding:0px">
 														<input type = "button" class = "btn btn-default" id = "checkid" value = "중복확인">
 													</div>
-													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
+													<div class = "col-md-2 col-sm-2" style="margin-bottom:1px">
 														<span id = "check"></span>
 													</div>
 												</div>
@@ -315,12 +319,12 @@
 													<label for="m_email"
 														class="control-label col-md-3 col-sm-3 col-xs-12">이메일
 													</label>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input id="m_email"
 															class="form-control col-md-7 col-xs-12" type="email"
 															name="m_email">
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" align="left" style="padding: 0px">
 														<input type = "button" value = "인증번호전송" id = "emailbtn"
 															class = "btn btn-default">
 													</div>
@@ -330,12 +334,12 @@
 														class="control-label col-md-3 col-sm-3 col-xs-12">인증번호
 													</label>
 													<input type = 'hidden' id = 'm_nocheck' value = 'n'>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 15px">
 														<input id="m_echeck"
 															class="form-control col-md-7 col-xs-12" type="text"
 															name="m_echeck">
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" align="left" style="padding: 0px">
 														<input type = "button" value = "인증" id = "echeckbtn"
 															class = "btn btn-default">
 													</div>
@@ -360,7 +364,7 @@
 												
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12">성별</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" align="left">
 														<div id="m_gender" class="btn-group" data-toggle="buttons">
 															<label class="btn btn-default"
 																data-toggle-class="btn-primary"
@@ -431,12 +435,12 @@
 													<label for="m_addr"
 														class="control-label col-md-3 col-sm-3 col-xs-12">우편주소
 													</label>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left:15px">
 														<input id="m_addr"
 															class="form-control col-md-7 col-xs-12" type="text"
-															name="m_addr">
+															name="m_addr" >
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" style="padding:0px" align="left">
 														<input type = "button" value = "주소검색"
 															class = "btn btn-default" onclick = "sample4_execDaumPostcode()">
 													</div>
@@ -541,7 +545,7 @@
 					$("#birth2").empty();
 					
 					if(bir.test($("#m_birth").val().trim())){
-						$('#birth').after("<font color = 'blue' size='1px' id='birth2'>가능합니다</font>");
+						$('#birth').after("<font color = '#52d3aa' size='1px' id='birth2'>가능합니다</font>");
 					}else{
 						$('#birth').after("<font color = 'red' size='1px' id='birth2'>생년월일 예)1992-02-03</font>");
 					}
@@ -555,7 +559,7 @@
 					
 					if(bir2.test($("#m_phone").val().trim())){
 						
-						$('#phone').after("<font color = 'blue' size='1px' id='phone2'>가능합니다</font>");
+						$('#phone').after("<font color = '#52d3aa' size='1px' id='phone2'>가능합니다</font>");
 					}else{
 						$('#phone').after("<font color = 'red' size='1px' id='phone2'align='center'>전화번호 예)010-0000-0000</font>");
 					}
@@ -598,12 +602,12 @@
 							console.log($.trim(rd.check));
 							$("#check").empty();
 							if($.trim(rd.check)=="y"){
-								$('#check').append("<font color = 'red'>이미 있는 ID 입니다!</font>");
+								$('#check').append("<font color = 'red' size='1px' >이미 있는 ID 입니다!</font>");
 								$('#m_id').focus();
 							}else if($.trim(rd.check)=="n" && $("#m_id").val().trim().length >= 8){
-								$('#check').append("<font color = '#369F36'>사용 가능한 ID 입니다!</font>");
+								$('#check').append("<font  color = '#52d3aa' size='1px'>사용 가능한 ID 입니다!</font>");
 							}else{
-								$('#check').append("<font color = 'red'>ID는 8자 이상입니다!</font>");
+								$('#check').append("<font color = 'red' size='1px'>ID는 8자 이상입니다!</font>");
 							}
 						}
 						
@@ -620,7 +624,7 @@
 						alert("비밀번호를 입력하세요.");
 						$("#m_pw").focus();
 				        return false;
-					}else if($("#m_pw2").val() == "" || !($("#m_pw").val() != $("#m_pw2").val())){
+					}else if($("#m_pw2").val() == "" || ($("#m_pw").val() != $("#m_pw2").val())){
 						alert("비밀번호가 일치 하지 않습니다.");
 						$("#m_pw2").focus();
 						return false;

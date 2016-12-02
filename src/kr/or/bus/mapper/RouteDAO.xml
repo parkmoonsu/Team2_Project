@@ -7,4 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="routeidSearch" parameterType="String" resultType="kr.or.bus.dto.RouteDTO">
 		select R_ID from route where R_NUM = #{r_num}
 	</select>
+	
+	<select id="getRouteNum" resultType = "kr.or.bus.dto.RouteDTO">
+		select r_num 
+		from route
+	</select>
 </mapper>
