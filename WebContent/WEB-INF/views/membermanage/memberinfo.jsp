@@ -557,8 +557,8 @@ th{
 
 		function smodal(m_id) {
 			console.log(m_id);
-			//console.log(o_date);
-			//if(o_date!=null){
+			console.log(o_date);
+			if(o_date!=null){
 			$.ajax({
 				url : "memberdetail.admin",
 				type : "post",
@@ -593,7 +593,7 @@ th{
 						});
 					}
 				});
-			//}/* else{
+			}/* else{
 				$.ajax({
 					url : "memberdetailnoreg.admin",
 					type : "post",
