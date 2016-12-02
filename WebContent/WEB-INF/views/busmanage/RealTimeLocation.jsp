@@ -248,7 +248,7 @@
            		map: map,
            		//label: latLng.title,
            		animation: google.maps.Animation.DROP,
-           		icon : '${pageContext.request.contextPath}/images/cccc.png',
+           		icon : '${pageContext.request.contextPath}/images/busstop.png',
            		zindex : "5"
         	});
      	  	map.panTo(originalMarker.getPosition());
@@ -281,7 +281,7 @@
           		map: map,
           		title: latLng[i].stationNm,
           		animation: google.maps.Animation.DROP,
-          		icon : 'busstop.png',
+          		icon : '${pageContext.request.contextPath}/images/busstop.png',
           		zindex : "5"
        		});
     	  	map.panTo(originalMarker5623.getPosition());
@@ -316,7 +316,7 @@
              		map: map,
              		title: latLng[i].stationNm,
              		animation: google.maps.Animation.DROP,
-             		icon : 'busstop.png',
+             		icon : '${pageContext.request.contextPath}/images/busstop.png',
              		zindex : "5"
           		});
        			map.panTo(originalMarker702.getPosition());
@@ -349,7 +349,7 @@
             		map: map,
             		title: latLng[i].stationNm,
             		animation: google.maps.Animation.DROP,
-            		icon : 'busstop.png',
+            		icon : '${pageContext.request.contextPath}/images/busstop.png',
             		zindex : "5"
          		});
       			map.panTo(originalMarker9000.getPosition());
@@ -380,7 +380,7 @@
            		map: map,
            		title: latLng[i].stationNm,
            		animation: google.maps.Animation.DROP,
-           		icon : 'busstop.png',
+           		icon : '${pageContext.request.contextPath}/images/busstop.png',
            		zindex : "5"
         		});
      			map.panTo(originalMarker6501.getPosition());
