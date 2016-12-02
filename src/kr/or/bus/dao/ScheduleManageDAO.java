@@ -66,9 +66,12 @@ public interface ScheduleManageDAO {
 
 	public List<MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2> getMemberTempTrue(String r_num);
 
-	public int updateFirstRegister(String m_id, String o_code); // 승인
+	public int updateFirstRegister(String m_id, String o_code); //승인
+	public int updateFirstRegisterRecord(String m_id); //승인
+	public int refuseFirstRegisterRecord(String m_id); //거절
+	public int updateBtwReqRegr(String m_id, String o_code);//변경 요청자 update reguloffr
+	public int updateBtwReqRego(String m_id, String o_code_1);//변경 요청자 update reguloff
+	public int updateBtwByRegr(String m_id_1,String o_code_1); //변경 대상자 update reguloffr
+	public int updateBtwByRego(String m_id_1,String o_code); //변경 대상자 update reguloff
 
-	public int updateFirstRegisterRecord(String m_id); // 승인
-
-	public int refuseFirstRegisterRecord(String m_id); // 거절
 }

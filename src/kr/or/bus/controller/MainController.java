@@ -149,6 +149,18 @@ public class MainController {
 		return jsonview;
 	}
 	
+
+	@RequestMapping(value="/bell2.htm",method=RequestMethod.POST)
+	public View getReqdate(String m_id, Model model){
+		System.out.println("오셨나요?");
+		int dto=service.getRegul(m_id);
+		System.out.println("dto:"+dto);
+		model.addAttribute("dto",dto);
+		
+		return jsonview;
+		
+	}
+
 	@RequestMapping("/busstop.htm")
 	public View getBusStop(Model model , String flotyear , String flotmonth , String flotroute) throws Exception{
 		System.out.println("flotyear : " + flotyear + "flotmonth : " + flotmonth );
@@ -157,4 +169,5 @@ public class MainController {
 		model.addAttribute("jroute", jsonroute);
 		return jsonview;
 	}
+
 }

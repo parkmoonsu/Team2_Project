@@ -11,6 +11,7 @@ public class MemberJoinRegulOffDTO {
 	private String m_id;
 	private String o_code;
 	private String m_name;
+	private String temp;
 	public String getM_id() {
 		return m_id;
 	}
@@ -29,11 +30,16 @@ public class MemberJoinRegulOffDTO {
 	public void setM_name(String m_name) {
 		this.m_name = m_name;
 	}
+	public String getTemp() {
+		return temp;
+	}
+	public void setTemp(String temp) {
+		this.temp = temp;
+	}
 	@Override
 	public String toString() {
-		return "MemberJoinRegulOffDTO [m_id=" + m_id + ", o_code=" + o_code + ", m_name=" + m_name + "]";
+		return "MemberJoinRegulOffDTO [m_id=" + m_id + ", o_code=" + o_code + ", m_name=" + m_name + ", temp=" + temp
+				+ "]";
 	}
 	
-	
-
 }
