@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.bus.dao.RnumcommuteDAO">
+
+	<!--노선별 출결현황 상태 -->
+	<select id="getShow" resultType="java.lang.String">
+		select cs.cs_stat
+		from member mem left outer join commute com on
+		mem.m_id=com.m_id
+		join bus on bus.B_vehiclenum = mem.B_VEHICLENUM
+		left outer join cstart cs on cs.cs_code=com.cs_code
+		where mem.m_name=#{m_name}
+		order by com.c_date
+	</select>
+
+	<!-- 노선 별 출결상황에서 이름,날짜 -->
+	<select id="getNdselect"
+		resultType="kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select distinct mem.m_name
+		from member mem join bus on mem.b_vehiclenum=bus.b_vehiclenum
+		left outer join commute com on com.m_id=mem.m_id
+
+	</select>
+
+	<!-- 노선별 출결현황 날짜 -->
+	<select id="getStat" resultType="java.lang.String">
+		select com.c_date
+		from member mem left outer join commute com on
+		mem.m_id=com.m_id
+		join bus on bus.B_vehiclenum = mem.B_VEHICLENUM
+		left outer join cstart cs on cs.cs_code=com.cs_code
+		where mem.m_name=#{m_name}
+		order by com.c_date
+	</select>
+
+
+</mapper>
