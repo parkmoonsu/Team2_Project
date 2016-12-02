@@ -24,7 +24,7 @@ $(function() {
 		}
 	});
 
-	// db에 저장된 일정 불러오기-색깔 넣어서
+	// reguloffr에 저장된 신청중인 일정 불러오기
 	$.ajax({
 		url : 'reguloffr_select.htm',
 		type : 'post',
@@ -37,27 +37,49 @@ $(function() {
 				var item = {
 					id : obj.m_id,
 					title : obj.m_name,
-					dow : [ obj.o_code ],
+					dow : [ obj.ro_code ],
 					color:''
 				};
 
 				//승인상태별 색 지정
-				if (obj.m_id==loginid && obj.ko_code=="600"){
+				if (obj.m_id==loginid){
 					item.color="red"; //본인, 신청중
-				} else if (obj.m_id==loginid && obj.ko_code=="601"){
-					item.color="green"; //본인, 승인
-				} else if (obj.ko_code=="600"){
-					item.color="black"; //타인, 신청
-				} else if (obj.ko_code="601"){
-					item.color=""; //타인, 승인
+				} else {
+					item.color=""; //타인, 신청중
 				}
-				console.log(item);
 				array.push(item);
 			});
 		}
 	});
 	
-	/*// db에 저장된 일정 불러오기-색깔 없이
+	// reguloff에 저장된 확정된 일정 불러오기
+	$.ajax({
+		url : 'reguloff_select.htm',
+		type : 'post',
+		data : {m_id:loginid},
+		dataType : 'json',
+		success : function(data) {
+
+			$.each(data.data, function(index, obj) {
+				 
+				var item = {
+					id : obj.m_id,
+					title : obj.m_name,
+					dow : [ obj.o_code ]
+				};
+				
+				//승인상태별 색 지정
+				if (obj.m_id==loginid){
+					item.color="green"; //본인, 승인
+				} else {
+					item.color="black"; //타인, 승인
+				}
+				array.push(item);
+			});
+		}
+	});
+	
+	/*// regul에 저장된 확정된 일정 불러오기
 	$.ajax({
 		url : 'reguloff_select.htm',
 		type : 'post',
@@ -148,7 +170,7 @@ $(function() {
 				data : {
 					m_id : calEventObj.id,
 					o_code : o_code,
-					temp : ''
+					temp : 't'
 				},
 				success : function(data) {
 					console.log('reguloff에 업뎃');

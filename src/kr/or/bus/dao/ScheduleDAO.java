@@ -26,6 +26,7 @@ public interface ScheduleDAO {
 	public ScheduleDTO selectseq() throws ClassNotFoundException, SQLException;
 	
 	public List<RegulOffrJoinMemberJoinBusDTO> reguloffr_select(String m_id) throws ClassNotFoundException, SQLException;
+	public List<MemberJoinRegulOffDTO> reguloff_select(String m_id) throws ClassNotFoundException, SQLException;
 	public int reguloff_insert(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
 	public int reguloff_delete(String m_id) throws ClassNotFoundException, SQLException;
 	public int reguloff_update(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
