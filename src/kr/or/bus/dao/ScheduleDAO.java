@@ -24,7 +24,7 @@ public interface ScheduleDAO {
 	public int insert(ScheduleDTO dto) throws ClassNotFoundException, SQLException;
 	public ScheduleDTO selectseq() throws ClassNotFoundException, SQLException;
 	
-	public List<RegulOffDTO> reguloff_select() throws ClassNotFoundException, SQLException;
+	public List<RegulOffDTO> reguloff_select(String m_id) throws ClassNotFoundException, SQLException;
 	public int reguloff_insert(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
 	public int reguloff_delete(String m_id) throws ClassNotFoundException, SQLException;
 	public int reguloff_update(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
