@@ -53,10 +53,13 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-
 <script type="text/javascript">
 	$(function() {
-
+		$("#rnum").click(function(){
+		    var value = $("#rnum option:selected").val();
+		    var text = $("#rnum option:selected").text();
+		    
+		});
 	});
 </script>
 <style type="text/css">
@@ -80,6 +83,8 @@ th, td {
 	/* padding: 5px; */
 	text-align: center;
 }
+
+
 </style>
 </head>
 <body class="nav-md">
@@ -107,19 +112,44 @@ th, td {
 								<small>노선별 출결현황</small>
 							</h3>
 						</div>
+						
 					</div>
 					<div class="clearfix"></div>
 					<c:set var="d" value="${list}" />
 					<div class="row">
 						<div id="showdiv">
-							
+
 
 							<div class="row">
 								<div class="col-sm-12 col-xs-12">
 									<div class="col-md-12 col-xs-12">
+												<div class="container" style="width:120px; text-align: right">
+													<select id="rnum" class="form-control">	
+													  <option value="">선택</option>										
+													  <option value="9401">9401</option>
+													  <option value="58-1">58-1</option>
+													  <option value="720">720</option>
+													 </select>
+												</div><br> 
+												 <%--<div class="container">
+												  <h2>Dropdowns</h2>
+												  <p>The .divider class is used to separate links inside the dropdown menu with a thin horizontal line:</p>
+												  <div class="dropdown">
+												    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
+												    <span class="caret"></span></button>
+												    <ul class="dropdown-menu">
+												      <li><a href="routename.admin?r_num=${r_num}">9401</a></li>
+												      <li><a href="#">CSS</a></li>
+												      <li><a href="#">JavaScript</a></li>
+												      <li class="divider"></li>
+												      <li><a href="#">About Us</a></li>
+												    </ul>
+												  </div>
+												</div> --%>
 										<div class="x_panel">
 						
 											<div class="x_content" id="commutesearchstarttableinfo">
+											
 											
 												<table style="table-layout:fixed; word-break:break-all; text-align: center
 													class="table table-hover projects">
