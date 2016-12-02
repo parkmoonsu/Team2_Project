@@ -107,4 +107,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateReguloff">
 		update reguloff set o_code = #{param2} where m_id = #{param1}
 	</update>
+	
+	<!-- 최종예상스케줄에 관련된 데이터 불러오기 -->
+
+	<select id="getmemberjoinreg" resultType="kr.or.bus.dto.MemberJoinRegulOffrDTO">
+		select mem.m_id, mem.m_name, reg.o_code
+		from member mem join reguloff reg on mem.m_id=reg.m_id
+	</select>
+	
+	<select id="getrnum" resultType="kr.or.bus.dto.RouteDTO">
+	select r_num from route
+	</select>
 </mapper>

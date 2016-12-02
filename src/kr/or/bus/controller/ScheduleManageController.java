@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
+import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
@@ -106,5 +107,31 @@ public class ScheduleManageController {
 		System.out.println(list);
 		return "schedule/schedule_managertimetable";
 	}
+	
+	/*
+	제목 : 예상 스케쥴 뽑기
+	작성자 : 김수현
+	목적 : 예상 스케쥴 가져오기
+	*/
+	
+	
+	@RequestMapping("/getvirtualschedule.admin")
+	public String getVirtualSchedule(ModelMap map){
+		List<RouteDTO> routelist= service.rnum_get();
+		map.addAttribute("routelist",routelist);
+		System.out.println("routelist : "+routelist);
+		return "schedule/schedule_virtual";
+	}
+	
+	//full calendar
+	@RequestMapping("/lastpredictschedule.admin")
+	public View lastpredictschedule(String m_id,String m_name, String o_date,Model model){
+		service.predictschedule(m_id, m_name, o_date);
+		System.out.println("m_id : "+m_id);
+		return jsonview;
+	}
+	
+	
+
 	
 }
