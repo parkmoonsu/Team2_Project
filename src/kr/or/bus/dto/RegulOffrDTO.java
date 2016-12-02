@@ -8,6 +8,7 @@ public class RegulOffrDTO {
 	private java.sql.Date ro_reqdate;
 	private java.sql.Date ro_regdate;
 	private String ro_object;
+	private String o_check;
 	public String getKo_code() {
 		return ko_code;
 	}
@@ -50,5 +51,18 @@ public class RegulOffrDTO {
 	public void setRo_object(String ro_object) {
 		this.ro_object = ro_object;
 	}
+	public String getO_check() {
+		return o_check;
+	}
+	public void setO_check(String o_check) {
+		this.o_check = o_check;
+	}
+	@Override
+	public String toString() {
+		return "RegulOffrDTO [ko_code=" + ko_code + ", m_id=" + m_id + ", o_code=" + o_code + ", ro_code=" + ro_code
+				+ ", ro_reqdate=" + ro_reqdate + ", ro_regdate=" + ro_regdate + ", ro_object=" + ro_object
+				+ ", o_check=" + o_check + "]";
+	}
+	
 	
 }

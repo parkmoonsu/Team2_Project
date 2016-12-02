@@ -60,16 +60,17 @@ public class MainController {
 		MemberJoinMDetailDTO dto = service.getMemberInfo(principal.getName());
 		
 		List<MemberJoinResRecordDTO> list = service.getResRecordInfo(principal.getName());
-	
-
+		List<Integer> list2 = service.csStatic(principal.getName());
+		
 		MemberJoinJobDTO dto2 = service2.mainGo(principal.getName());
 		String jobname = dto2.getJ_name();
-		 
+		  
 		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
 		model.addAttribute("dto", dto);
 		model.addAttribute("jobname", jobname);
 
-		return "main/ChangeForm";
+		return "main/changform";
 	}
 
 	@RequestMapping("/updateinfo.htm")

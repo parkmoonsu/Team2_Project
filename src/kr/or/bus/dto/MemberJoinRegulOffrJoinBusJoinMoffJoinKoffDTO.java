@@ -7,7 +7,7 @@
 */
 package kr.or.bus.dto;
 
-public class MemberJoinRegulOffrDTO {
+public class MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO {
 	private String m_id;
 	private String m_name;
 	
@@ -23,6 +23,15 @@ public class MemberJoinRegulOffrDTO {
 	
 	private String ko_name;
 	
+	private String r_num;
+
+	public String getR_num() {
+		return r_num;
+	}
+
+	public void setR_num(String r_num) {
+		this.r_num = r_num;
+	}
 
 	public String getM_id() {
 		return m_id;

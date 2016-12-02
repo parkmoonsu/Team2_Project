@@ -184,7 +184,7 @@
 	 	
 	 	savelocation = {
 	 	        lng : locationX,
-	             lat : locationY
+	            lat : locationY
 	         }
 	      savelocations.push(savelocation);
 	 	}
