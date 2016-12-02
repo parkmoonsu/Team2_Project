@@ -108,7 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update reguloff set o_code = #{param2} where m_id = #{param1}
 	</update>
 	
-<<<<<<< HEAD
+
 	<!-- 최종예상스케줄에 관련된 데이터 불러오기 -->
 
 	<select id="getmemberjoinreg" resultType="kr.or.bus.dto.MemberJoinRegulOffrDTO">
@@ -119,7 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getrnum" resultType="kr.or.bus.dto.RouteDTO">
 	select r_num from route
 	</select>
-=======
+
 	<!-- 휴무 요청 상태 관리 -->
 	<select id="getRequestNum" resultType="Integer">
 		select count(*) from reguloffr where ko_code='600' and o_check='Y'
@@ -147,5 +147,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	on mo1.o_code = rego.ro_code
 	</select>
 	<!-- 휴무 요청 상태 관리 끝 -->
->>>>>>> 49ecdf9ad294c9a3d35e2b3252ee2919d4238806
+
 </mapper>

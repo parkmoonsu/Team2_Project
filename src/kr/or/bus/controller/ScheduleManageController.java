@@ -114,7 +114,7 @@ public class ScheduleManageController {
 	목적 : cal 구현
 	*/
 	
-<<<<<<< HEAD
+
 	/*
 	제목 : 예상 스케쥴 뽑기
 	작성자 : 김수현
@@ -141,11 +141,11 @@ public class ScheduleManageController {
 	
 
 	
-=======
+
 	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
 	public String getHistoryCal(Model model){
 		service.getRequestState(model);
 		return "schedule/schedule_managechangeapprove";
 	}
->>>>>>> 49ecdf9ad294c9a3d35e2b3252ee2919d4238806
+
 }
