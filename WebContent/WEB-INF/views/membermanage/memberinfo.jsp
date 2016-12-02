@@ -62,11 +62,21 @@
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
-<style type= "text/css">
-th{
+<style type="text/css">
+th {
 	text-align: center;
 }
+ul.pagination li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
 
+ul.pagination li a {
+    color: #73879C;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
 </style>
 </head>
 
@@ -227,6 +237,10 @@ th{
 											</tr>
 										</c:forEach>
 										</tbody>
+
+
+
+
 									</table>
 									<!-- end project list -->
 
@@ -252,7 +266,7 @@ th{
 
 											<c:forEach begin="1" end="${pagecount}" var="i">
 												<c:if test="${i==pgc}">
-													<li class="active"><a href="#">${i}</a></li>
+													<li><a  class="active" href="#">${i}</a></li>
 												</c:if>
 												<c:if test="${i!=pgc}">
 													<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
@@ -329,8 +343,8 @@ th{
 								data-dismiss="modal" id="cancelbutton">삭제</button>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">취소</button>
-							<input type="hidden" id="hvalue">
-							<input type="hidden" id="hvalue2">
+							<input type="hidden" id="hvalue"> <input type="hidden"
+								id="hvalue2">
 						</div>
 					</div>
 				</div>
@@ -555,82 +569,67 @@ th{
 					});
 		});
 
+		
 		function smodal(m_id) {
-			console.log(m_id);
-			console.log(o_date);
-			if(o_date!=null){
+	         console.log(m_id);
+	       
+	       
+	         $.ajax({
+	            url : "memberdetail.admin",
+	            type : "post",
+	            data : {
+	               "param" : m_id
+	            },
+	            success : function(data) {
+	               $('#exampleModal2').empty();
+	               $('#exampleModal2').append(data);
+	               $('#exampleModal2').modal('show');
+	               $.ajax({
+	                  url : "memberreguloffr.htm",
+	                  type : "post",
+	                  data : {
+	                     "param" : m_id
+	                  },
+	                  success : function(data1) {
+	                     $('#reguloffrtable').empty();
+	                     $('#reguloffrtable').append(data1);
+	                     $.ajax({
+	                        url : "memberresrecord.admin",
+	                        type : "post",
+	                        data : {
+	                           "param" : m_id
+	                        },
+	                        success : function(data2) {
+	                           $('#resrecordtable').empty();
+	                           $('#resrecordtable').append(data2);
+	                           }
+	                        });
+	                     }
+	                  });
+	               }
+	            });
+	         }
+	      
+				
+			
+ 			
+		 function s2modal(m_id){
 			$.ajax({
-				url : "memberdetail.admin",
+				url : "memberresrecord.admin",
 				type : "post",
 				data : {
 					"param" : m_id
 				},
-				success : function(data) {
-					$('#exampleModal2').empty();
-					$('#exampleModal2').append(data);
-					$('#exampleModal2').modal('show');
-					$.ajax({
-						url : "memberreguloffr.htm",
-						type : "post",
-						data : {
-							"param" : m_id
-						},
-						success : function(data1) {
-							$('#reguloffrtable').empty();
-							$('#reguloffrtable').append(data1);
-							$.ajax({
-								url : "memberresrecord.admin",
-								type : "post",
-								data : {
-									"param" : m_id
-								},
-								success : function(data2) {
-									$('#resrecordtable').empty();
-									$('#resrecordtable').append(data2);
-									}
-								});
-							}
-						});
-					}
-				});
-			}/* else{
-				$.ajax({
-					url : "memberdetailnoreg.admin",
-					type : "post",
-					data : {
-						"param" : m_id
-					},
-					success : function(data) {
-						$('#exampleModal2').empty();
-						$('#exampleModal2').append(data);
-						$('#exampleModal2').modal('show');
-						$.ajax({
-							url : "memberreguloffr.htm",
-							type : "post",
-							data : {
-								"param" : m_id
-							},
-							success : function(data1) {
-								$('#reguloffrtable').empty();
-								$('#reguloffrtable').append(data1);
-								$.ajax({
-									url : "memberresrecord.admin",
-									type : "post",
-									data : {
-										"param" : m_id
-									},
-									success : function(data2) {
-										$('#resrecordtable').empty();
-										$('#resrecordtable').append(data2);
-										}
-									});
-								}
-							});
-						}
-					});
-			} */
-		}
-/*  	function deleteMember(m_id) {
+				success : function(data2) {
+					$('#resrecordtable').empty();
+					$('#resrecordtable').appnd(data2);
+				}
+				
+			});
+		}  
+		
+		
+		/* 	function deleteMember(m_id) {
 			console.log("m_id" + m_id);
 			$("#match-pass").modal("show");
 			$('#hvalue').val(m_id); 
@@ -646,7 +645,7 @@ th{
 			$('#hvalue2').val(m_name); 
 			$("#myModalLabel2").empty();
 			$('#myModalLabel2').html(m_name + '님을 삭제하시겠습니까?'); 
-	}
+		}hhhh
 	
 		
 	</script>

@@ -11,7 +11,12 @@
 package kr.or.bus.service;
 
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,11 +33,14 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.bus.dao.CommuteDAO;
 import kr.or.bus.dao.MemberDAO;
+import kr.or.bus.dao.RouteDAO;
 import kr.or.bus.dto.CommuteJoinCstartJoinCendDTO;
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.dto.MemberJoinResRecordDTO;
+import kr.or.bus.dto.RouteDTO;
+import net.sf.json.JSONObject;
 
 @Controller
 public class MainService {
@@ -42,6 +50,7 @@ public class MainService {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	
 	//모든 유저 구하기
 	public List<MemberDTO> selectall(String search){
@@ -238,4 +247,50 @@ public class MainService {
 
 		return list;
 	}
+	public List<RouteDTO> getRouteNum(){
+		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
+		List<RouteDTO> list = dao.getRouteNum();
+		
+		return list;
+	}
+	
+	public JSONObject busStop(String year , String month , String route) throws Exception{
+		
+		
+		JSONObject jsontemp = null;
+		
+		
+		StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088"); // URL
+		urlBuilder.append("/75547649756f6b3237326a46706472/json/CardBusTimeNew/1/60"); // key
+		urlBuilder.append("/" + year + month + "/" + route + "/");
+		
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-type", "application/json");
+		System.out.println("Response code: " + conn.getResponseCode());
+
+		BufferedReader rd;
+		if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+	           rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	       } else {
+	           rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+	       }
+	       
+	       StringBuilder sb = new StringBuilder();
+	       String line;
+	           
+	       while ((line = rd.readLine()) != null) {
+	           sb.append(line);
+	       }
+	           
+	       rd.close();
+	           
+	       conn.disconnect();
+	       
+	       jsontemp =  JSONObject.fromObject(sb.toString());
+	       System.out.println("#######" + jsontemp);
+		return jsontemp;
+	}
+	
 }

@@ -4,11 +4,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.bus.dao.StopDAO">
 	<!-- Stop 테이블 -->
-	<select id="selectS_NUM">
-		select COUNT(*) from stop WHERE S_NUM = {S_NUM}
+	<select id="selectS_NUM" parameterType="kr.or.bus.dto.StopDTO" resultType="Integer">
+		select COUNT(*) from stop WHERE S_NUM = #{s_num}
 	</select>
 	
-	<insert id="insertStopData" parameterType="kr.or.bus.dto.StopDTO">
-		INSERT INTO stop(S_NUM, S_X, S_Y, S_NAME) VALUES(#{S_NUM}, #{S_X}, #{S_X}, #{S_NAME})
+	<!-- <insert id="insertTempStop" parameterType="kr.or.bus.dto.StopDTO">
+		INSERT INTO TEMPSTOP(S_NUM, S_X, S_Y, S_NAME) VALUES(#{s_num}, #{s_x}, #{s_y}, #{s_name})
+	</insert> -->
+	
+	<!-- <select id="overlapNotSearch" resultType="kr.or.bus.dto.StopDTO">
+		SELECT * FROM TEMPSTOP WHERE S_NUM NOT IN(SELECT S_NUM FROM STOP)
+	</select> -->
+	
+	<insert id="insertStopData" parameterType="String">
+		INSERT INTO stop(S_NUM, S_X, S_Y, S_NAME) VALUES(#{s_num}, #{s_x}, #{s_y}, #{s_name})
 	</insert>
+	
+	
 </mapper>

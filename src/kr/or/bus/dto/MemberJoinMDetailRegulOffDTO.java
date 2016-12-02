@@ -155,6 +155,15 @@ public class MemberJoinMDetailRegulOffDTO {
 	public void setO_date(String o_date) {
 		this.o_date = o_date;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberJoinMDetailRegulOffDTO [m_id=" + m_id + ", j_code=" + j_code + ", b_vehiclenum=" + b_vehiclenum
+				+ ", m_name=" + m_name + ", m_addr=" + m_addr + ", m_daddr=" + m_daddr + ", m_phone=" + m_phone
+				+ ", m_email=" + m_email + ", m_license=" + m_license + ", m_photo=" + m_photo + ", m_birth=" + m_birth
+				+ ", m_annual=" + m_annual + ", m_regdate=" + m_regdate + ", m_resume=" + m_resume + ", j_name="
+				+ j_name + ", o_date=" + o_date + "]";
+	}
 	
 	
 }
