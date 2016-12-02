@@ -21,9 +21,30 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/form-elements.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/style.css">
+        <link rel="stylesheet" id="theme-switch" href="${pageContext.request.contextPath}/mainCss/css/style.css">
+        
 
 </head>
 <body>
+<header role="banner" id="fh5co-header">
+			<div class="container">
+				<!-- <div class="row"> -->
+			    <nav class="navbar navbar-default">
+		        <div class="navbar-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		         <a class="navbar-brand" href="bus.htm">KosBus</a> 
+		        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav navbar-right">
+		            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li> 
+		            <li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
+		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
+		          </ul>
+		        </div>
+			    </nav>
+		  </div>
+	</header>
+
 	<div class="top-content">
         	
             <div class="inner-bg">
@@ -80,6 +101,14 @@
         $(function() {
 			$("#callback").click(function() {
 				location.href="bus.htm";
+			});
+			
+			$("#log").click(function() {
+				location.href="login.htm"
+			});
+			
+			$("#gaip").click(function() {
+				location.href="join.htm"
 			});
 		});
         </script>

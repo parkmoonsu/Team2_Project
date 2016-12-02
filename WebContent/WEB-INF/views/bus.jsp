@@ -171,7 +171,7 @@
 	</header>
 
 
-	<section id="fh5co-home" data-section="home" style="background-image: url(images/king.gif);" data-stellar-background-ratio="0.5">
+	<section id="fh5co-home" data-section="home" style="background-image: url(images/si.jpg);" data-stellar-background-ratio="0.5">
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">
@@ -224,8 +224,7 @@
 			</div>
 			<div class="row watch-video text-center to-animate">
 				<span>Watch the video</span>
-
-				<a href="https://vimeo.com/channels/staffpicks/93951774" class="popup-vimeo btn-video"><i class="icon-play2"></i></a>
+				<a href="https://www.youtube.com/watch?v=PiksIbD5sNc" class="popup-vimeo btn-video"><i class="icon-play2"></i></a>
 			</div>
 		</div>
 	</section>

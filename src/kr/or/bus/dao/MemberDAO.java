@@ -11,6 +11,7 @@ package kr.or.bus.dao;
 import java.util.List;
 
 import kr.or.bus.dto.ApproveDTO;
+import kr.or.bus.dto.CommuteJoinCstartJoinCendDTO;
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
@@ -92,8 +93,10 @@ public interface MemberDAO {
 	//승인시 권한 부여
 	public void insertAuth(String m_id);
 
-	//(관리자) 회원 정보 상세 확인
-	public MemberJoinMDetailRegulOffDTO getMemberDetailRegulOff(String m_id);
+	//(관리자) 회원 정보 상세 확인(휴무부여한 사람)
+	public MemberJoinMDetailRegulOffDTO getMemberDetailRegulOff(String m_id,String o_date);
+	//(관리자) 회원 정보 상세확인(휴무부여하지 않은 사람)
+	public MemberJoinMDetailRegulOffDTO getMemberDetail(String m_id);
 	//(관리자) 회원 정보 상세 확인 > 휴무 기록 확인
 	public List<MemberJoinRegulOffrDTO> getRegulOffr(String m_id);
 
@@ -127,4 +130,9 @@ public interface MemberDAO {
 	
 	//상단 nav 알림 카운트
 	public int approveCount();
+	
+	//회원 정보 - 출결상황 보기
+	public int csstatic(String m_name , String c_date);
+	public int csestatic(String m_name , String c_date);
+	
 }

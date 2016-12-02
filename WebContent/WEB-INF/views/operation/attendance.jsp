@@ -121,66 +121,29 @@ th, td {
 						
 											<div class="x_content" id="commutesearchstarttableinfo">
 											
-												<table style="text-align: center"
+												<table style="table-layout:fixed; word-break:break-all; text-align: center
 													class="table table-hover projects">
 													<thead>
 														<tr>
-															<th class='backslash' style = "height: 10px;"><div>일(日)</div>이름</th>
+															<th class='backslash' style = "width:75px; height: 20px;"><div>일(日)&nbsp;</div>&nbsp;이름</th>
 															
 															
 															<c:forEach var="i" begin="1" end="30" step="1">
-																<th>${i}</th>
+																<th style = "width:35px; text-align: center" >${i}</th>
 															</c:forEach>
 														</tr>
 													</thead>
 													<tbody>
 														<c:forEach var = "a" begin = "0" end = "${fn:length(d)-1}" step = "1">
 														<tr>
-															<td>${d[a].m_name}</td>
-													 	<c:forEach var="i" begin="0" end="29" step="1">
-																<th>${d[a].cs_stat[i]}</th>
+															<td style = "height: 40px;">${d[a].m_name}</td>
+													 		<c:forEach var="i" begin="0" end="29" step="1">
+																<td style = "height: 40px;">${d[a].cs_stat[i]}</td>
 															</c:forEach>
-		
 														</tr>
 														</c:forEach>
 													</tbody>
-													<%-- <tbody>
-													<c:forEach  var="i" items="${list2}">
-														<tr>
-															<td>${i.m_name}</td>
-															
-															<c:forEach var="i" items="${list2}">
-																<c:forEach var="i2" items="${list2}">
-																	
-																	<c:if test="${ i2.c_date == i.c_date}">
-																		<td>${ i.cs_stat }</td>																	
-																	</c:if> 
-																	
-																</c:forEach> 
-															</c:forEach>
-															
-														</tr>
-													</c:forEach>
-														
-														<c:forEach var="i" items="${list}">
-															<tr>
-																<td>${i.m_name}</td>
-
-																<c:forEach var="i" items="${list}" begin="1" end="31" step="1">
-
-																	<td>${i.cs_stat}</td>
-																</c:forEach>
-															</tr>
-														</c:forEach>
-														 <c:forEach items="${list}" var="excelList">
-															<tr>
-															<td>${excelList.m_name}</td>													    
-													         <td>${excelList.cs_stat}</td>	
-								
-								
-													      </tr>  
-													     </c:forEach>  
-													</tbody> --%>
+													
 												</table>
 												
 											</div>
@@ -246,7 +209,7 @@ th, td {
 	<script
 		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.resize.js"></script>
 	<!-- Flot plugins -->
-	<scriptF
+	<script
 		src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js">
 	</script> <script
 		src="${pageContext.request.contextPath}/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>

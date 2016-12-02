@@ -173,7 +173,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	on o.O_CODE = reg.O_CODE
 	join job j
 	on j.J_CODE = mem.J_CODE
-	where mem.m_id = #{m_id}
+	where mem.m_id = #{param1}
+	</select>
+	
+	<!-- 휴무 부여받지 않은 사람의 정보 -->
+	<select id="getMemberDetail" parameterType="String" resultType="kr.or.bus.dto.MemberJoinMDetailRegulOffDTO">
+		select mem.M_ID, mem.J_CODE, mem.B_VEHICLENUM , mem.M_NAME, j.J_NAME,
+		mde.M_ADDR, mde.M_DADDR, mde.M_EMAIL, mde.M_BIRTH, mde.M_PHONE,
+		mde.M_ANNUAL, mde.M_REGDATE, mde.M_LICENSE, mde.M_PHOTO, mde.M_RESUME
+		from member mem
+		join mdetail mde
+		on mem.m_id = mde.m_id
+		join job j
+		on j.J_CODE = mem.J_CODE
+		where mem.m_id =#{m_id}
 	</select>
 	
 	<select id="getRegulOffr" parameterType="String"
@@ -237,5 +250,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="approveCount" resultType = "int">
 	select count(*) from mdetail where m_check = 'N'
 	</select>
+	
+	<select id="csstatic" resultType = "int">
+	select count(*)
+	from commute c join cstart cs
+	on c.cs_code = cs.cs_code
+	where m_name = #{param1} and c_date like '%'||#{param2}||'%' and cs_stat = '출근'
+
+	</select>
+
+	<select id="csestatic" resultType = "int">
+	select count(*)
+	from commute c join cstart cs
+	on c.cs_code = cs.cs_code
+	where m_name = #{param1} and c_date like '%'||#{param2}||'%' and cs_stat = '지각'
+
+	</select>
+	
 	
 </mapper>
