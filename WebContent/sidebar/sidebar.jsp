@@ -51,10 +51,8 @@
                       <li><a href="gethistory.admin">휴무 신청내역 확인/승인</a></li>
                       <li><a href="gethistorycal.admin">휴무 신청 내역 확인/승인(cal)</a></li>
                       <li><a href="gettimetable.admin">운행 스케줄</a></li>
-<<<<<<< HEAD
                       <li><a href="getvirtualschedule.admin">예상 스케줄</a></li>
-=======
->>>>>>> 49ecdf9ad294c9a3d35e2b3252ee2919d4238806
+
                     </ul>
                   </li>
                             

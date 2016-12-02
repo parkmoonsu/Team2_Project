@@ -1,95 +1,245 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <style type="text/css">
-.my-box { border:1px solid; padding:10px; }
+.my-box {
+	border: 1px solid;
+	padding: 10px;
+}
+.form_wizard .stepContainer {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0 solid #CCC;
+  overflow-x: hidden; }
+
+.wizard_horizontal ul.wizard_steps {
+  display: table;
+  list-style: none;
+  position: relative;
+  width: 100%;
+  margin: 0 0 20px; }
+
+.wizard_horizontal ul.wizard_steps li {
+  display: table-cell;
+  text-align: center; }
+
+.wizard_horizontal ul.wizard_steps li a, .wizard_horizontal ul.wizard_steps li:hover {
+  display: block;
+  position: relative;
+  -moz-opacity: 1;
+  filter: alpha(opacity=100);
+  opacity: 1;
+  color: #666; }
+
+.wizard_horizontal ul.wizard_steps li a:before {
+  content: "";
+  position: absolute;
+  height: 4px;
+  background: #ccc;
+  top: 20px;
+  width: 100%;
+  z-index: 4;
+  left: 0; }
+
+.wizard_horizontal ul.wizard_steps li a.disabled .step_no {
+  background: #ccc; }
+
+.wizard_horizontal ul.wizard_steps li a .step_no {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 100px;
+  display: block;
+  margin: 0 auto 5px;
+  font-size: 16px;
+  text-align: center;
+  position: relative;
+  z-index: 5; }
+
+.wizard_horizontal ul.wizard_steps li a.selected:before, .step_no {
+  background: #34495E;
+  color: #fff; }
+
+.wizard_horizontal ul.wizard_steps li a.done:before, .wizard_horizontal ul.wizard_steps li a.done .step_no {
+  background: #1ABB9C;
+  color: #fff; }
+
+.wizard_horizontal ul.wizard_steps li:first-child a:before {
+  left: 50%; }
+
+.wizard_horizontal ul.wizard_steps li:last-child a:before {
+  right: 50%;
+  width: 50%;
+  left: auto; }
+
+.wizard_verticle .stepContainer {
+  width: 80%;
+  float: left;
+  padding: 0 10px; }
+
+.actionBar {
+  width: 100%;
+  border-top: 1px solid #ddd;
+  padding: 10px 5px;
+  text-align: right;
+  margin-top: 10px; }
+
+.actionBar .buttonDisabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: .65;
+  filter: alpha(opacity=65);
+  box-shadow: none; }
+
+.actionBar a {
+  margin: 0 3px; }
+
+.wizard_verticle .wizard_content {
+  width: 80%;
+  float: left;
+  padding-left: 20px; }
+
+.wizard_verticle ul.wizard_steps {
+  display: table;
+  list-style: none;
+  position: relative;
+  width: 20%;
+  float: left;
+  margin: 0 0 20px; }
+
+.wizard_verticle ul.wizard_steps li {
+  display: list-item;
+  text-align: center; }
+
+.wizard_verticle ul.wizard_steps li a {
+  height: 80px; }
+
+.wizard_verticle ul.wizard_steps li a:first-child {
+  margin-top: 20px; }
+
+.wizard_verticle ul.wizard_steps li a, .wizard_verticle ul.wizard_steps li:hover {
+  display: block;
+  position: relative;
+  -moz-opacity: 1;
+  filter: alpha(opacity=100);
+  opacity: 1;
+  color: #666; }
+
+.wizard_verticle ul.wizard_steps li a:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  background: #ccc;
+  top: 20px;
+  width: 4px;
+  z-index: 4;
+  left: 49%; }
+
+.wizard_verticle ul.wizard_steps li a.disabled .step_no {
+  background: #ccc; }
+ .small{
+ 	color:white;
+ }
+
+.wizard_verticle ul.wizard_steps li a .step_no {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 100px;
+  display: block;
+  margin: 0 auto 5px;
+  font-size: 16px;
+  text-align: center;
+  position: relative;
+  z-index: 5; }
+ 
+
+.wizard_verticle ul.wizard_steps li a.selected:before, .step_no {
+  background: #34495E;
+  color: #fff; }
+
+.wizard_verticle ul.wizard_steps li a.done:before, .wizard_verticle ul.wizard_steps li a.done .step_no {
+  background: #1ABB9C;
+  color: #fff; }
+
+.wizard_verticle ul.wizard_steps li:first-child a:before {
+  left: 49%; }
+
+.wizard_verticle ul.wizard_steps li:last-child a:before {
+  left: 49%;
+  left: auto;
+  width: 0; }
+
+.form_wizard .loader {
+  display: none; }
+
+.form_wizard .msgBox {
+  display: none; }
+
+label{
+font-size:12px;
+}
+.form-group{
+height: 35px;
+}
 
 </style>
 </head>
-<!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KosBus로그인</title>
 
-<title>회원가입</title>
-
-<!-- Bootstrap -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Font Awesome -->
-<link
-	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<!-- NProgress -->
-<link
-	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
-	rel="stylesheet">
-
-<!-- Custom Theme Style -->
-<link href="${pageContext.request.contextPath}/build/css/custom.min.css"
-	rel="stylesheet">
-
-
-
-
-<!-- Bootstrap core CSS -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/ie10-viewport-bug-workaround.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/carousel/carousel.css"
-	rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script
-	src="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
-
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <!-- CSS -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/form-elements.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/style.css">
+        <link rel="stylesheet" id="theme-switch" href="${pageContext.request.contextPath}/mainCss/css/style.css">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-filestyle.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-filestyle.js"></script>
+      
 
 </head>
 <body>
-
-	<header>
-		<jsp:include page="/sidebar/header.jsp" />
+<header role="banner" id="fh5co-header">
+			<div class="container">
+				<!-- <div class="row"> -->
+			    <nav class="navbar navbar-default">
+		        <div class="navbar-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		         <a class="navbar-brand" href="bus.htm">KosBus</a> 
+		        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav navbar-right">
+		            <li class="active"><a href="bus.htm" data-nav-section="home"><span>Home</span></a></li> 
+		            <li><a href="login.htm" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
+		           	<li><a href="join.htm" id="gaip"><span>회원가입</span></a></li>
+		          </ul>
+		        </div>
+			    </nav>
+		  </div>
 	</header>
 
-
-	<div class="container" style="margin-top: 20px;">
-		<div class="main_container">
-
-			<!-- page content -->
-			<div role="main">
-				<!-- class="right_col" 이거 뺌-->
-				<div class="">
-					<div class="page-title">
-						<div class="title_left">
-							<h3>Form Wizards</h3>
-						</div>
-
-					</div>
-					<div class="clearfix"></div>
-
-					<div class="row">
-
-						<div class="col-md-12 col-sm-12 col-xs-12">
+	<div class="top-content">
+        	
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                 <div class="col-sm-2"></div>
+						<div class="col-md-8 col-sm-8 col-xs-8 form-box">
 							<div class="x_panel">
+							<div class="form-top" align="center" style="color: white">
+								<div class="form-top-center">
 								<div class="x_title">
 									<h2>
-										회원가입 <small>KosBus</small>
+										회원가입 <small style="color: white">KosBus</small>
 									</h2>
 
 									<div class="clearfix"></div>
@@ -101,25 +251,25 @@
 									
 									<div id="wizard" class="form_wizard wizard_horizontal">
 										<ul class="wizard_steps">
-											<li><a href="#step-2"> <span class="step_no">1</span>
-													<span class="step_descr"> Step 1<br /> <small>
+											<li ><a href="#step-2"> <span class="step_no">1</span>
+													<span class="step_descr" style="color: white"> Step 1<br /> <small style="color: white">
 															약관동의</small>
 												</span>
 											</a></li>
-											<li><a href="#step-2"> <span class="step_no">2</span>
-													<span class="step_descr"> Step 2<br /> <small>
+											<li ><a href="#step-2"> <span class="step_no">2</span>
+													<span class="step_descr" style="color: white"> Step 2<br /> <small style="color: white">
 															정보작성</small>
 												</span>
 											</a></li>
 											<li><a href="#step-2"> <span class="step_no">3</span>
-													<span class="step_descr"> Step 3<br /> <small>
+													<span class="step_descr" style="color: white"> Step 3<br /> <small style="color: white">
 															가입완료</small>
 												</span>
 											</a></li>
 
-										</ul>
+										</ul>	
 										
-										<div id="step-2">
+										<div id="step-2" style="text-align: center;" class="my-box">
 											<form id="register" class="form-horizontal form-label-left" method = "post" action = "join3.htm" enctype="multipart/form-data">
 
 												<div class="form-group">
@@ -130,7 +280,7 @@
 														<input type="text" id="m_id" name = "m_id"
 															class="form-control col-md-7 col-xs-12">
 													</div>
-													<div class = "col-md-1 col-sm-1">
+													<div class = "col-md-1 col-sm-1" align="left" style="padding:0px">
 														<input type = "button" class = "btn btn-default" id = "checkid" value = "중복확인">
 													</div>
 													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
@@ -172,12 +322,12 @@
 													<label for="m_email"
 														class="control-label col-md-3 col-sm-3 col-xs-12">이메일
 													</label>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input id="m_email"
 															class="form-control col-md-7 col-xs-12" type="email"
 															name="m_email">
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" align="left" style="padding: 0px">
 														<input type = "button" value = "인증번호전송" id = "emailbtn"
 															class = "btn btn-default">
 													</div>
@@ -187,12 +337,12 @@
 														class="control-label col-md-3 col-sm-3 col-xs-12">인증번호
 													</label>
 													<input type = 'hidden' id = 'm_nocheck' value = 'n'>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 15px">
 														<input id="m_echeck"
 															class="form-control col-md-7 col-xs-12" type="text"
 															name="m_echeck">
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" align="left" style="padding: 0px">
 														<input type = "button" value = "인증" id = "echeckbtn"
 															class = "btn btn-default">
 													</div>
@@ -243,6 +393,9 @@
 															class="form-control col-md-7 col-xs-12"
 															 type="text">
 													</div>
+													<div  class="col-sm-3" >
+													<input id="birth" type="hidden" value="0">
+													</div>
 												</div>
 												<div class="form-group">
 													<label for = "m_phone" 
@@ -253,6 +406,7 @@
 															class="form-control col-md-7 col-xs-12"
 															 type="text">
 													</div>
+													<div class="col-sm-3" id="phone"></div>
 												</div>
 												 <div class="form-group">
 													<label for="m_license"
@@ -268,7 +422,7 @@
 														class="control-label col-md-3 col-sm-3 col-xs-12">사진
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-<input  id="m_photo" onchange = "imagecheck(this)" name="files[1]" type="file" class="filestyle" data-buttonText="Open" data-input="false" data-iconName="glyphicon-plus" data-classButton="btn btn-primary">
+<input  id="m_photo2" onchange = "imagecheck(this)" name="files[1]" type="file" class="filestyle" data-buttonText="Open" data-input="false" data-iconName="glyphicon-plus" data-classButton="btn btn-primary">
 
 													</div>
 												</div>
@@ -284,12 +438,12 @@
 													<label for="m_addr"
 														class="control-label col-md-3 col-sm-3 col-xs-12">우편주소
 													</label>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left:15px">
 														<input id="m_addr"
 															class="form-control col-md-7 col-xs-12" type="text"
-															name="m_addr">
+															name="m_addr" >
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" style="padding:0px" align="left">
 														<input type = "button" value = "주소검색"
 															class = "btn btn-default" onclick = "sample4_execDaumPostcode()">
 													</div>
@@ -332,7 +486,7 @@
 												<div id = "plus">
 												
 												</div> -->
-
+	
 												<div style="float: right; margin: 30px;">
 													<input type="button" value="이전" class="btn btn-primary"
 														id="prev" onclick="history.go(-1)"> 
@@ -347,128 +501,28 @@
 									</div>
 									<!-- End SmartWizard Content -->
 								</div>
+								</div>
+								</div>
+								<font style="letter-spacing:0.5px"></font>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-			<!-- /page content -->
-
-			<!-- footer content -->
-		<footer>
-			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
-			<div class="clearfix"></div>
-		</footer>
-		<!-- /footer content -->
-		</div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
 
 
-	<!-- 다음 우편번호 -->
-
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	<script>
-		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-		function sample4_execDaumPostcode() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-							// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-							var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-							var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
-							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-							if (data.bname !== ''
-									&& /[동|로|가]$/g.test(data.bname)) {
-								extraRoadAddr += data.bname;
-							}
-							// 건물명이 있고, 공동주택일 경우 추가한다.
-							if (data.buildingName !== ''
-									&& data.apartment === 'Y') {
-								extraRoadAddr += (extraRoadAddr !== '' ? ', '
-										+ data.buildingName : data.buildingName);
-							}
-							// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-							if (extraRoadAddr !== '') {
-								extraRoadAddr = ' (' + extraRoadAddr + ')';
-							}
-							// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-							if (fullRoadAddr !== '') {
-								fullRoadAddr += extraRoadAddr;
-							}
-
-							// 우편번호와 주소 정보를 해당 필드에 넣는다.
-							/* document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-							document.getElementById('sample4_roadAddress').value = fullRoadAddr;
-							document.getElementById('sample4_jibunAddress').value = data.jibunAddress; */
-							var str = data.zonecode + " " + fullRoadAddr + " "
-									+ data.jibunAddress;
-							document.getElementById('m_addr').value = str;
-
-							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-							if (data.autoRoadAddress) {
-								//예상되는 도로명 주소에 조합형 주소를 추가한다.
-								var expRoadAddr = data.autoRoadAddress
-										+ extraRoadAddr;
-								document.getElementById('guide').innerHTML = '(예상 도로명 주소 : '
-										+ expRoadAddr + ')';
-
-							} else if (data.autoJibunAddress) {
-								var expJibunAddr = data.autoJibunAddress;
-								document.getElementById('guide').innerHTML = '(예상 지번 주소 : '
-										+ expJibunAddr + ')';
-
-							} else {
-								document.getElementById('guide').innerHTML = '';
-							}
-						}
-					}).open();
-		}
-	</script>
-	<!-- jQuery -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-		<!-- Bootstrap -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-		<!-- FastClick -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
-		<!-- NProgress -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
-		<!-- jQuery Smart Wizard -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
-		<!-- Custom Theme Scripts -->
-		<script
-			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-		<!-- ajax -->
-		<script src="http://malsup.github.io/jquery.form.js"></script>
-		<!-- jQuery Smart Wizard -->
-		<script>
-			function xlscheck(file){
-				var filelen = file.value.length;
-				if(file.value.substring(filelen-3,filelen)!="xls"){
-					alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
-					file.value = "";
-				}
-			}
-			 
-			function imagecheck(file){
-				
-				var filelen = file.value.length;
-				if(file.value.substring(filelen-3,filelen)!="png" && file.value.substring(filelen-3,filelen) != "jpg"){
-										
-					alert("JPG 또는 PNG인 이미지파일을 선택해 주세요,");
-					file.value= "";
-				}
-			} 
-			$(document).ready(function() {
+        <!-- Javascript -->
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery.backstretch.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/scripts.js"></script>
+        <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+        <script type="text/javascript">
+        $(function() {
+     
 				var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 	
 				
 				$("#emailbtn").click(function() {
@@ -483,6 +537,34 @@
 						
 					}else{
 						alert("Email 형식이 잘못 되었습니다.");
+					}
+					
+				});	
+
+				
+					var bir= /[12][0-9]{3}-[01][0-9]-[0-3][0-9]/;
+				$("#m_birth").keyup(function() {
+		
+					$("#birth2").empty();
+					
+					if(bir.test($("#m_birth").val().trim())){
+						$('#birth').after("<font color = 'blue' size='1px' id='birth2'>가능합니다</font>");
+					}else{
+						$('#birth').after("<font color = 'red' size='1px' id='birth2'>생년월일 예)1992-02-03</font>");
+					}
+					
+				});	
+
+					var bir2= /^\d{3}-\d{3,4}-\d{4}$/;
+				$("#m_phone").keyup(function() {
+					
+					$("#phone2").empty();
+					
+					if(bir2.test($("#m_phone").val().trim())){
+						
+						$('#phone').after("<font color = 'blue' size='1px' id='phone2'>가능합니다</font>");
+					}else{
+						$('#phone').after("<font color = 'red' size='1px' id='phone2'align='center'>전화번호 예)010-0000-0000</font>");
 					}
 					
 				});	
@@ -545,7 +627,7 @@
 						alert("비밀번호를 입력하세요.");
 						$("#m_pw").focus();
 				        return false;
-					}else if($("#m_pw2").val() == "" || ($("#m_pw").val() != $("#m_pw2").val())){
+					}else if($("#m_pw2").val() == "" || !($("#m_pw").val() != $("#m_pw2").val())){
 						alert("비밀번호가 일치 하지 않습니다.");
 						$("#m_pw2").focus();
 						return false;
@@ -564,12 +646,12 @@
 					}else if($("#j_code").val() == ""){
 						alert("직책을 선택하세요.");
 						return false;
-					}else if($("#m_birth").val() ==""){
-						alert("생년월일을 입력하세요.");
+					}else if($("#m_birth").val() =="" || !bir.test($("#m_birth").val().trim())){
+						alert("생년월일을 형식에 맞게 입력해주세요.");
 						$("#m_birth").focus();
 						return false;
-					}else if($("#m_phone").val() ==""){
-						alert("연락처를 입력하세요.");
+					}else if($("#m_phone").val() =="" || !bir2.test($("#m_phone").val().trim())){
+						alert("연락처를 형식에맞게 입력해주세요.");
 						$("#m_phone").focus();
 						return false;
 					}else if($("#m_license").val() ==""){
@@ -611,9 +693,87 @@
 					transitionEffect : 'slide'
 				});
 
-			});
+		});
+        function sample4_execDaumPostcode() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+							// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+							var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraRoadAddr += data.bname;
+							}
+							// 건물명이 있고, 공동주택일 경우 추가한다.
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+							if (extraRoadAddr !== '') {
+								extraRoadAddr = ' (' + extraRoadAddr + ')';
+							}
+							// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+							if (fullRoadAddr !== '') {
+								fullRoadAddr += extraRoadAddr;
+							}
+
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							/* document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+							document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+							document.getElementById('sample4_jibunAddress').value = data.jibunAddress; */
+							var str = data.zonecode + " " + fullRoadAddr + " "
+									+ data.jibunAddress;
+							document.getElementById('m_addr').value = str;
+
+							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+							if (data.autoRoadAddress) {
+								//예상되는 도로명 주소에 조합형 주소를 추가한다.
+								var expRoadAddr = data.autoRoadAddress
+										+ extraRoadAddr;
+								document.getElementById('guide').innerHTML = '(예상 도로명 주소 : '
+										+ expRoadAddr + ')';
+
+							} else if (data.autoJibunAddress) {
+								var expJibunAddr = data.autoJibunAddress;
+								document.getElementById('guide').innerHTML = '(예상 지번 주소 : '
+										+ expJibunAddr + ')';
+
+							} else {
+								document.getElementById('guide').innerHTML = '';
+							}
+						}
+					}).open();
+		}
+        
+        function xlscheck(file){
+			var filelen = file.value.length;
+			if(file.value.substring(filelen-3,filelen)!="xls"){
+				alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
+				file.value = "";
+			}
+		}
+		 
+		function imagecheck(file){
 			
-		</script>
-		<!-- /jQuery Smart Wizard -->
+			var filelen = file.value.length;
+			if(file.value.substring(filelen-3,filelen)!="png" && file.value.substring(filelen-3,filelen) != "jpg"){
+									
+				alert("JPG 또는 PNG인 이미지파일을 선택해 주세요,");
+				file.value= "";
+			}
+		} 
+        
+        </script>
+
+
 </body>
 </html>

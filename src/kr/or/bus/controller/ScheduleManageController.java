@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
-import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
-import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.TimetableDTO;
 import kr.or.bus.service.ScheduleManageService;
@@ -108,18 +108,15 @@ public class ScheduleManageController {
 		System.out.println(list);
 		return "schedule/schedule_managertimetable";
 	}
-	/*
-	제목 : 기사 휴무 및 스케쥴 관리 
-	작성자 : 강민수
-	목적 : cal 구현
-	*/
 	
+/*
 	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
 	   public String getHistoryCal(Model model){
 	      service.getRequestState(model);
 	      return "schedule/schedule_managechangeapprove";
 	   }
-	
+	*/
+
 	/*
 	제목 : 예상 스케쥴 뽑기
 	작성자 : 김수현
@@ -127,7 +124,7 @@ public class ScheduleManageController {
 	*/
 	
 	
-	@RequestMapping("/getvirtualschedule.admin")
+	@RequestMapping("/getvirtualschedule.admin")        
 	public String getVirtualSchedule(ModelMap map){
 		List<RouteDTO> routelist= service.rnum_get();
 		map.addAttribute("routelist",routelist);
@@ -136,13 +133,54 @@ public class ScheduleManageController {
 	}
 	
 	//full calendar
+	//content에 내용 뿌리기
 	@RequestMapping("/lastpredictschedule.admin")
 	public View lastpredictschedule(String m_id,String m_name, String o_date,Model model){
-		service.predictschedule(m_id, m_name, o_date);
-		System.out.println("m_id : "+m_id);
+		List<MemberJoinRegulOffDTO> mjrolist=service.schedule_get();
+		model.addAttribute("mjrolist",mjrolist);
+		System.out.println(mjrolist.toString());
 		return jsonview;
 	}
 	
+	/*
+	제목 : 기사 휴무 변경 요청 승인
+	작성자 : 강민수
+	목적 : cal 구현
+	*/
 	
+	
+	
+
+	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
+	   public String getHistoryCal(Model model){
+	      service.getRequestState(model);
+	      return "schedule/schedule_managechangeapprove";
+	   }
+	
+	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.POST)
+	public View getHistoryCalRequested(String r_num, Model model){
+		service.getRequestInfoCal(r_num,model);
+		return jsonview;
+	}
+	
+	//최초 정규휴무 등록 승인
+	@RequestMapping("/approvefirstregister.admin")
+	public View approveFirstRegister(String m_id, String o_code,Model model){
+		System.out.println(m_id + o_code);
+		int result = service.approveFirstRegister(m_id, o_code);
+		int result1 = service.updateFirstRegisterRecord(m_id, o_code);
+		model.addAttribute("result", result);
+		model.addAttribute("result1", result1);
+		return jsonview;
+	}
+	
+	//최초 정규휴무 등록 거절
+		@RequestMapping("/refuseFirstRegister.admin")
+		public View refuseFirstRegister(String m_id, String o_code,Model model){
+			System.out.println(m_id + o_code);
+			int result = service.updateRefuseFirstRegister(m_id, o_code);
+			model.addAttribute("result", result);
+			return jsonview;
+		}
 
 }
