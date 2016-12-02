@@ -9,7 +9,6 @@
 
 package kr.or.bus.dto;
 
-import java.util.Arrays;
 
 public class BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO {
 	//필요한 컬럼만 가져왔으니 이 DTO를 사용하려면 필요한 컬럼 추가할것

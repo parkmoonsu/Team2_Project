@@ -127,6 +127,104 @@ public class BusStopManageService {
         }
 		return jsonmaps;
 	}
+	//버스 원본 경로를 파일로부터 읽어온다.
+	public void busRouteRead(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		PrintWriter out=null;
+        String busno = request.getParameter("busNo");
+        System.out.println(busno);
+        System.out.println("멀티 경로");
+        
+        	if(busno.equals("all")){
+            	JSONObject obs1 = busOrgRouteRead(5623 ,request, response);
+            	JSONObject obs2 = busOrgRouteRead(6501 ,request, response);
+            	JSONObject obs3 = busOrgRouteRead(702 ,request, response);
+            	JSONObject obs4 = busOrgRouteRead(9000 ,request, response);
+            	
+            	ArrayList<JSONObject> obss = new ArrayList<JSONObject>();
+            	obss.add(obs1);
+            	obss.add(obs2);
+            	obss.add(obs3);
+            	obss.add(obs4);
+            	
+            	out = response.getWriter();
+            	out.print(obss);
+            }else if(!busno.equals("all")){
+            	busOrgRouteRead(busno ,request, response);
+            }
+        
+	}
+	
+	//읽은 데이터가 1개일경우
+	public void busOrgRouteRead(String busno ,HttpServletRequest request, HttpServletResponse response){
+		System.out.println("너타냐");
+		FileReader fr = null;
+        BufferedReader br = null;
+        PrintWriter out=null;
+        String maps = null;
+        String path = request.getServletContext().getRealPath("/busstop/"+busno+"route.xml");
+		try{
+        	fr = new FileReader(path);
+        	br = new BufferedReader(fr);	        	
+        	String line = "";
+            for(int i=0; (line = br.readLine())!=null;i++){
+                maps+=line.replaceAll("\\p{Space}","");           
+            }
+       
+            System.out.println("버스정류장 좌표를 파일로 부터  읽어왔습니다.");
+        	response.setCharacterEncoding("UTF-8");
+        	out = response.getWriter();
+        	//System.out.println(maps);        	
+        	JSONObject jsonmaps = (JSONObject)new XMLSerializer().read(maps.replace("null",""));
+        	out.print(jsonmaps);
+        	
+        }catch(Exception e){
+        	System.out.println(e.getMessage());
+        }finally{
+        	try {
+        		br.close();
+        		fr.close();
+        	} catch (IOException e) {
+        		System.out.println(e.getMessage());
+        	}
+        }
+	}
+	
+	//읽을 데이터가 4개일경우
+		public JSONObject busOrgRouteRead(int busno, HttpServletRequest request, HttpServletResponse response){
+			FileReader fr = null;
+			BufferedReader br = null;
+       
+			String maps = null;
+			JSONObject jsonmaps = null;
+			 String path = request.getServletContext().getRealPath("/busstop/"+busno+"route.xml");
+			try{
+	        	fr = new FileReader(path);
+	        	br = new BufferedReader(fr);	        	
+	        	String line = "";
+	            for(int i=0; (line = br.readLine())!=null;i++){
+	                maps+=line.replaceAll("\\p{Space}","");           
+	            }
+	       
+	            System.out.println("버스정류장 좌표를 파일로 부터  읽어왔습니다.");
+	        	response.setCharacterEncoding("UTF-8");
+	        	
+	        	System.out.println(maps);        	
+	        	jsonmaps = (JSONObject)new XMLSerializer().read(maps.replace("null",""));      	
+	        	
+	        }catch(Exception e){
+	        	System.out.println(e.getMessage());
+	        }finally{
+	        	try {
+	        		br.close();
+	        		fr.close();
+	        	} catch (IOException e) {
+	        		System.out.println(e.getMessage());
+	        	}
+	        }
+		return jsonmaps;
+	}
+	
+	
 
 	//수정된 버스정류장 좌표를 저장한다.
 	public void busStoplocationEdit(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -200,6 +298,7 @@ public class BusStopManageService {
 		PrintWriter out=null;
 		response.setCharacterEncoding("UTF-8");
 		out = response.getWriter();
+		ArrayList<JSONObject> locations = null;
 		/*
 		 	route id
 		 	
@@ -218,7 +317,7 @@ public class BusStopManageService {
 			JSONObject locations3 = multiLocationSearch(request , response, "234000043");
 			JSONObject locations4 = multiLocationSearch(request , response, "234000145");
 			
-			ArrayList<JSONObject> locations = new ArrayList<JSONObject>();
+			locations = new ArrayList<JSONObject>();
 			locations.add(locations1);
 			locations.add(locations2);
 			locations.add(locations3);
@@ -234,6 +333,8 @@ public class BusStopManageService {
 	}
 	
 	public JSONObject multiLocationSearch(HttpServletRequest request , HttpServletResponse response, String venid) throws IOException{
+		
+		
 		System.out.println("멀티위치추적되냐");				
 		JSONObject jsonmaps = null;
 		StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/buspos/getBusPosByVehId"); //URL
