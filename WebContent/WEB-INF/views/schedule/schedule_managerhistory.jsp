@@ -141,7 +141,7 @@
 												<th>상태</th>
 												<!-- <th style="width: 20%; text-align:center;">
 												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form"> -->
-												</th>
+											
 											</tr>
 										</thead>
 										<tbody>

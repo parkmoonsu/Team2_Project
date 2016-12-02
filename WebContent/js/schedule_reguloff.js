@@ -24,7 +24,7 @@ $(function() {
 		}
 	});
 
-	// reguloff에 저장된 확정된 일정 불러오기
+	// reguloff에 저장된 승인 일정 불러오기
 	$.ajax({
 		url : 'reguloff_select.htm',
 		type : 'post',
@@ -33,20 +33,27 @@ $(function() {
 		success : function(data) {
 
 			$.each(data.data, function(index, obj) {
-				 
-				var item = {
-					id : obj.m_id,
-					title : obj.m_name,
-					dow : [ obj.o_code ]
-				};
 				
-				//승인상태601
-				if (obj.m_id==loginid){
-					item.color="green"; //본인, 승인
+
+				if(obj.temp=='t'){
+
 				} else {
-					item.color="black"; //타인, 승인
+					
+					var item = {
+						id : obj.m_id,
+						title : obj.m_name,
+						dow : [ obj.o_code ]
+					};
+					
+					//승인된 일정에 대해
+					if (obj.m_id==loginid){
+						item.color="green"; //본인
+					} else {
+						item.color="black"; //타인
+					}
+					array.push(item);
 				}
-				array.push(item);
+				
 			});
 		}
 	});
@@ -68,9 +75,9 @@ $(function() {
 					color:''
 				};
 				
-				//승인상태600
+				//reguloffr에 저장된 신청중인 일정 불러오기
 				if (obj.m_id==loginid){
-					item.color="red"; //본인, 신청중
+					item.color="red"; //본인
 				} else {
 				
 					$.each(data.data, function(index, obj2) {
@@ -78,15 +85,10 @@ $(function() {
 							item.color="red";
 						}
 						else {
-							item.color=""; //타인, 신청중
+							item.color=""; //타인
 						}
 					});
-				
-					/*if(true){
-						
-					} else {						
-						item.color=""; //타인, 신청중
-					}	*/					
+								
 				}
 				array.push(item);
 			});
@@ -105,33 +107,24 @@ $(function() {
 
 		var o_code = $('#select1').val();
 
-		var event = {
-			m_id : loginid,
-			o_code : o_code,
-			temp : 't'
-		};
 		$(".antoclose").click();
 
-		// 입력된 일정 db에 저장
+		// 입력된 일정 reguloff에 저장
 		$.ajax({
 			url : 'reguloff_insert.htm',
 			type : 'post',
-			data : event,
+			data : {
+				m_id : loginid,
+				o_code : o_code,
+				temp : 't'
+			},
 			dataType : "json",
-			success : function(data) {
-				event = {
-					id : data.data.m_id,
-					title : data.data.m_name,
-					dow : [ data.data.o_code ]
-				};
-
-				$("#calendar").fullCalendar('renderEvent', event);
-				$("#calendar").fullCalendar('unselect');
+			success : function(data) {	
 
 			}
 		});
 		
-		// history에 저장
+		// reguloffr에 저장
 		$.ajax({
 			url : 'history_insert.htm',
 			type : 'post',
@@ -145,12 +138,21 @@ $(function() {
 			},
 			success : function(data) {
 				
+				var event = {
+					id : data.data.m_id,
+					title : data.data.m_name,
+					dow : [ data.data.o_code ],
+					color:"red"
+				};
+				
+				$("#calendar").fullCalendar('renderEvent', event);
+				$("#calendar").fullCalendar('unselect');
 			}
 		});
 
 	});
 
-	// 업뎃버튼
+	// 업데이트 버튼
 	$(".antosubmit2").on("click", function() {
 
 		if (confirm("정말 일정을 변경하시겠습니까??") == true) {
@@ -167,7 +169,7 @@ $(function() {
 					temp : 't'
 				},
 				success : function(data) {
-					console.log('reguloff에 업뎃');
+					
 					event = {
 						id : data.data.m_id,
 						title : data.data.m_name,
@@ -215,7 +217,7 @@ $(function() {
 					m_id : calEventObj.id
 				},
 				success : function(data) {
-					// 여기 이상
+					
 				}
 			});
 			$("#calendar").fullCalendar('removeEvents', calEventObj.id);
@@ -288,74 +290,127 @@ function loadCalendar(){
 						$("#select2").val(calEvent.dow[0]);
 					}else{	
 						if (confirm("해당 사용자와 일정을 바꾸시겠습니까?") == true) {
-							//선택한 사용자
+							
+							
+							//대상자
 							var event1={
 								id:calEvent.id,
 								title:calEvent.title,
-								dow:calEvent.dow
+								dow:calEvent.dow,
+								color:"black"
 							};
-							$("#calendar").fullCalendar('removeEvents', event1.id);
-							$("#calendar").fullCalendar('unselect');
 							
-							//본인껄 어케 뽑나???
+							//신청자
 							var event2;
+							
 							$.ajax({
 								url:"selectseq.member",
 								data:{m_id:loginid},
 								dataType:"json",
 								type:"post",
 								success:function(data){
+									console.log(data);
 									event2={
 										id:data.dto.m_id,
 										title:data.dto.m_name,
-										dow:[data.dto.o_code]
+										dow:[data.dto.o_code],
+										color:"green"
 									};
-									$("#calendar").fullCalendar('removeEvents', event2.id);
+									
+									//바꾸기		
+									var event3={
+										id : event1.id,
+										title : event1.title,
+										dow:event2.dow,
+										color:'red'
+										
+									};
+									
+									var event4={
+										id: event2.id,
+										title : event2.title,
+										dow:event1.dow,
+										color:'red'
+									};
+									
+									$("#calendar").fullCalendar('renderEvent', event3);
 									$("#calendar").fullCalendar('unselect');
-								}
-							});
-							//바꾸기
-							$(document).ajaxStop(function() {
-								
-								event1.dow=event2.dow;
-								event2.dow=calEvent.dow;
-
-								
-								$("#calendar").fullCalendar('renderEvent', event1);
-								$("#calendar").fullCalendar('renderEvent', event2);
-								
-								var o_code1=event1.dow[0]; //여기가 문제
-								var o_code2=event2.dow[0];
-								
-								event1={
-									m_id : calEvent.id,
-									o_code : o_code1
-								};
-								
-								event2={
-									m_id : loginid,
-									o_code : o_code2
-								};
-								
-								//일정저장
-								$.ajax({
-									url : 'reguloff_update.htm',
-									type : 'post',
-									data : event1,
-									success : function(data) {
+									$("#calendar").fullCalendar('renderEvent', event4);
+									$("#calendar").fullCalendar('unselect');
+									
+									//reguloff 업데이트
+									$.ajax({
+										url : 'reguloff_update.htm',
+										type : 'post',
+										data : {
+											m_id:event1.id,
+											o_code:event1.dow[0],
+											temp:'s'
+										},
+										success : function(data) {
+											
+										}
+									});
+									
+									$.ajax({
+										url : 'reguloff_update.htm',
+										type : 'post',
+										data : {
+											m_id:event2.id,
+											o_code:event2.dow[0],
+											temp:'s'
+										},
+										success : function(data) {
+											
+										}
+									});
+									
+									//history 저장
+									$.ajax({
+										url : 'history_insert.htm',
+										type : 'post',
+										data : { 
+											ko_code:'600',
+											o_code:event1.dow[0], //변경전 요일
+											m_id:event1.id, //본인id > 클릭된 사람
+											ro_code:event2.dow[0], //변경후 요일
+											ro_object:event2.id, //바꿀사람id
+											o_check:""
+										},
+										success : function(data) {
+											
+											console.log('대상자는 o_check 없음');
+										}
+									});
+									
+									$.ajax({
+										url : 'history_insert.htm',
+										type : 'post',
+										data : { 
+											ko_code:'600',
+											o_code:event2.dow[0], //변경전 요일
+											m_id:event2.id, //본인id > 클릭된 사람
+											ro_code:event1.dow[0], //변경후 요일
+											ro_object:event1.id, //바꿀사람id
+											o_check:'y'
+										},
+										success : function(data) {
+											console.log('신청자는 o_check=y');
+										}
+									});
+									
 										
-									}
-								});
-								
-								$.ajax({
-									url : 'reguloff_update.htm',
-									type : 'post',
-									data : event2,
-									success : function(data) {
-										
-									}
-								});
+								} //success
+							}); //ajax
 
+						} //if
+					} //else
+				} //success
+			}); //ajax
+		}, //eventclick
+							
+							
+								/*
 								//history 저장
 								$.ajax({
 									url : 'history_insert.htm',
@@ -369,7 +424,7 @@ function loadCalendar(){
 										o_check:''
 									},
 									success : function(data) {
-										'대상자는 y없이 변경되었다'
+										console.log('대상자는 o_check 없음');
 									}
 								});
 								
@@ -386,20 +441,14 @@ function loadCalendar(){
 										o_check:'y'
 									},
 									success : function(data) {
-										'요청자는 y있게 변경되었다'
+										console.log('신청자는 o_check=y');
 									}
 								});
 								
-							});
-						}
-					}	
-				}
-			});		
-		},
+							});*/	
 		
 		//일정 드래그시 이벤트
 		eventDrop : function(event, delta, revertFunc, jsEvent) {
-			
 			var dowbefore=event.dow[0];
 			var dowafter= Number(event.dow[0])+delta.days();
 			var evt;
@@ -420,22 +469,36 @@ function loadCalendar(){
 								dowafter=dowafter%7+7;
 							} else {
 							}
-				
+							
+							$("#calendar").fullCalendar('removeEvents', event.id);
+							
+							/*evt={
+									id:event.id,
+									title:event.title,
+									dow:[dowbefore],
+									color:'green'
+							};
+							
+							$("#calendar").fullCalendar('renderEvent', evt);*/
+							
 							$.ajax({
 								url:"reguloff_update.htm",
 								data:{
 									m_id : event.id,
-									o_code : dowafter
+									o_code : dowbefore,
+									temp:'s'
 								},
 								type:"post",
 								dataType:"json",
 								success:function(data){
+									console.log(data.data);
 									evt={
-											id:data.data.m_id,
-											title:data.data.m_name,
-											dow:[data.data.o_code]
+											id:event.id,
+											title:event.title,
+											dow:[dowbefore],
+											color:'green'
 									};
-									$("#calendar").fullCalendar('removeEvents', event.id);
+									
 									$("#calendar").fullCalendar('renderEvent', evt);
 								}
 							});
@@ -453,7 +516,16 @@ function loadCalendar(){
 									o_check:'y'
 								},
 								success : function(data) {
-									console.log
+									
+									var event = {
+											id : data.data.m_id,
+											title : data.data.m_name,
+											dow : [ dowafter ],
+											color:"red"
+										};
+										
+										$("#calendar").fullCalendar('renderEvent', event);
+										$("#calendar").fullCalendar('unselect');
 								}
 							});
 							
@@ -488,6 +560,3 @@ function loadCalendar(){
 		}
 	});
 }
-		
-
-

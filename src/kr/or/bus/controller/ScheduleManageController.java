@@ -109,6 +109,13 @@ public class ScheduleManageController {
 		return "schedule/schedule_managertimetable";
 	}
 	
+/*
+	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
+	   public String getHistoryCal(Model model){
+	      service.getRequestState(model);
+	      return "schedule/schedule_managechangeapprove";
+	   }
+	*/
 
 	/*
 	제목 : 예상 스케쥴 뽑기
@@ -172,8 +179,7 @@ public class ScheduleManageController {
 	
 	
 	
-	
-	
+
 	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
 	   public String getHistoryCal(Model model){
 	      service.getRequestState(model);
@@ -198,11 +204,22 @@ public class ScheduleManageController {
 	}
 	
 	//최초 정규휴무 등록 거절
-		@RequestMapping("/refuseFirstRegister.admin")
-		public View refuseFirstRegister(String m_id, String o_code,Model model){
-			System.out.println(m_id + o_code);
-			int result = service.updateRefuseFirstRegister(m_id, o_code);
-			model.addAttribute("result", result);
-			return jsonview;
-		}
+	@RequestMapping("/refuseFirstRegister.admin")
+	public View refuseFirstRegister(String m_id, String o_code,Model model){
+		System.out.println(m_id + o_code);
+		int result = service.updateRefuseFirstRegister(m_id, o_code);
+		model.addAttribute("result", result);
+		return jsonview;
+	}
+	
+	//정규 휴무 교환 정보 업데이트
+	@RequestMapping("/updatebtwinfo.admin")
+	public View updatebtwinfo(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
+		System.out.println("updatebtwinfo.admin");
+		System.out.println(m_id + o_code);
+		System.out.println(m_id_1 + o_code_1);
+		service.updatebtwinfoall(m_id, o_code, m_id_1, o_code_1, model);
+		return jsonview;
+	}
+
 }

@@ -178,5 +178,14 @@ public class ScheduleManageService {
 		int result = dao.refuseFirstRegisterRecord(m_id);
 		return result;
 	}
+	
+	//정규 휴무 교환 정보 업데이트
+	public void updatebtwinfoall(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		dao.updateBtwReqRego(m_id, o_code_1);
+		dao.updateBtwReqRegr(m_id, o_code);
+		dao.updateBtwByRego(m_id_1, o_code);
+		dao.updateBtwByRegr(m_id_1, o_code_1);
+	}
 
 }

@@ -181,6 +181,10 @@
 .form_wizard .msgBox {
   display: none; }
 
+label{
+font-size:12px;
+}
+
 </style>
 </head>
 		<meta charset="utf-8">
@@ -211,9 +215,9 @@
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		          <ul class="nav navbar-nav navbar-right">
-		            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li> 
-		            <li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
-		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
+		            <li class="active"><a href="bus.htm" data-nav-section="home"><span>Home</span></a></li> 
+		            <li><a href="login.htm" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
+		           	<li><a href="join.htm" id="gaip"><span>회원가입</span></a></li>
 		          </ul>
 		        </div>
 			    </nav>
@@ -273,10 +277,10 @@
 														<input type="text" id="m_id" name = "m_id"
 															class="form-control col-md-7 col-xs-12">
 													</div>
-													<div class = "col-md-1 col-sm-1">
+													<div class = "col-md-1 col-sm-1" align="left" style="padding:0px">
 														<input type = "button" class = "btn btn-default" id = "checkid" value = "중복확인">
 													</div>
-													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
+													<div class = "col-md-2 col-sm-2" style="margin-bottom:1px">
 														<span id = "check"></span>
 													</div>
 												</div>
@@ -315,12 +319,12 @@
 													<label for="m_email"
 														class="control-label col-md-3 col-sm-3 col-xs-12">이메일
 													</label>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input id="m_email"
 															class="form-control col-md-7 col-xs-12" type="email"
 															name="m_email">
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" align="left" style="padding: 0px">
 														<input type = "button" value = "인증번호전송" id = "emailbtn"
 															class = "btn btn-default">
 													</div>
@@ -330,12 +334,12 @@
 														class="control-label col-md-3 col-sm-3 col-xs-12">인증번호
 													</label>
 													<input type = 'hidden' id = 'm_nocheck' value = 'n'>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 15px">
 														<input id="m_echeck"
 															class="form-control col-md-7 col-xs-12" type="text"
 															name="m_echeck">
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" align="left" style="padding: 0px">
 														<input type = "button" value = "인증" id = "echeckbtn"
 															class = "btn btn-default">
 													</div>
@@ -360,7 +364,7 @@
 												
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12">성별</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" align="left">
 														<div id="m_gender" class="btn-group" data-toggle="buttons">
 															<label class="btn btn-default"
 																data-toggle-class="btn-primary"
@@ -386,6 +390,9 @@
 															class="form-control col-md-7 col-xs-12"
 															 type="text">
 													</div>
+													<div  class="col-sm-3" >
+													<input id="birth" type="hidden" value="0">
+													</div>
 												</div>
 												<div class="form-group">
 													<label for = "m_phone" 
@@ -396,6 +403,7 @@
 															class="form-control col-md-7 col-xs-12"
 															 type="text">
 													</div>
+													<div class="col-sm-3" id="phone"></div>
 												</div>
 												 <div class="form-group">
 													<label for="m_license"
@@ -427,12 +435,12 @@
 													<label for="m_addr"
 														class="control-label col-md-3 col-sm-3 col-xs-12">우편주소
 													</label>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left:15px">
 														<input id="m_addr"
 															class="form-control col-md-7 col-xs-12" type="text"
-															name="m_addr">
+															name="m_addr" >
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" style="padding:0px" align="left">
 														<input type = "button" value = "주소검색"
 															class = "btn btn-default" onclick = "sample4_execDaumPostcode()">
 													</div>
@@ -475,7 +483,7 @@
 												<div id = "plus">
 												
 												</div> -->
-
+	
 												<div style="float: right; margin: 30px;">
 													<input type="button" value="이전" class="btn btn-primary"
 														id="prev" onclick="history.go(-1)"> 
@@ -492,6 +500,7 @@
 								</div>
 								</div>
 								</div>
+								<font style="letter-spacing:0.5px"></font>
 							</div>
 						</div>
                         
@@ -507,22 +516,10 @@
         <script src="${pageContext.request.contextPath}/loginassets/assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery.backstretch.min.js"></script>
         <script src="${pageContext.request.contextPath}/loginassets/assets/js/scripts.js"></script>
-               
+        <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
         <script type="text/javascript">
         $(function() {
-        	$("#callback").click(function() {
-				location.href="bus.htm";
-			});
-			
-			$("#log").click(function() {
-				location.href="login.htm"
-			});
-			
-			$("#gaip").click(function() {
-				location.href="join.htm"
-			});
-			
-
+     
 				var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 	
 				
 				$("#emailbtn").click(function() {
@@ -537,6 +534,34 @@
 						
 					}else{
 						alert("Email 형식이 잘못 되었습니다.");
+					}
+					
+				});	
+
+				
+					var bir= /[12][0-9]{3}-[01][0-9]-[0-3][0-9]/;
+				$("#m_birth").keyup(function() {
+		
+					$("#birth2").empty();
+					
+					if(bir.test($("#m_birth").val().trim())){
+						$('#birth').after("<font color = '#52d3aa' size='1px' id='birth2'>가능합니다</font>");
+					}else{
+						$('#birth').after("<font color = 'red' size='1px' id='birth2'>생년월일 예)1992-02-03</font>");
+					}
+					
+				});	
+
+					var bir2= /^\d{3}-\d{3,4}-\d{4}$/;
+				$("#m_phone").keyup(function() {
+					
+					$("#phone2").empty();
+					
+					if(bir2.test($("#m_phone").val().trim())){
+						
+						$('#phone').after("<font color = '#52d3aa' size='1px' id='phone2'>가능합니다</font>");
+					}else{
+						$('#phone').after("<font color = 'red' size='1px' id='phone2'align='center'>전화번호 예)010-0000-0000</font>");
 					}
 					
 				});	
@@ -577,12 +602,12 @@
 							console.log($.trim(rd.check));
 							$("#check").empty();
 							if($.trim(rd.check)=="y"){
-								$('#check').append("<font color = 'red'>이미 있는 ID 입니다!</font>");
+								$('#check').append("<font color = 'red' size='1px' >이미 있는 ID 입니다!</font>");
 								$('#m_id').focus();
 							}else if($.trim(rd.check)=="n" && $("#m_id").val().trim().length >= 8){
-								$('#check').append("<font color = '#369F36'>사용 가능한 ID 입니다!</font>");
+								$('#check').append("<font  color = '#52d3aa' size='1px'>사용 가능한 ID 입니다!</font>");
 							}else{
-								$('#check').append("<font color = 'red'>ID는 8자 이상입니다!</font>");
+								$('#check').append("<font color = 'red' size='1px'>ID는 8자 이상입니다!</font>");
 							}
 						}
 						
@@ -618,12 +643,12 @@
 					}else if($("#j_code").val() == ""){
 						alert("직책을 선택하세요.");
 						return false;
-					}else if($("#m_birth").val() ==""){
-						alert("생년월일을 입력하세요.");
+					}else if($("#m_birth").val() =="" || !bir.test($("#m_birth").val().trim())){
+						alert("생년월일을 형식에 맞게 입력해주세요.");
 						$("#m_birth").focus();
 						return false;
-					}else if($("#m_phone").val() ==""){
-						alert("연락처를 입력하세요.");
+					}else if($("#m_phone").val() =="" || !bir2.test($("#m_phone").val().trim())){
+						alert("연락처를 형식에맞게 입력해주세요.");
 						$("#m_phone").focus();
 						return false;
 					}else if($("#m_license").val() ==""){
