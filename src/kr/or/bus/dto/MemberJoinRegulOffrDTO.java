@@ -22,6 +22,7 @@ public class MemberJoinRegulOffrDTO {
 	private String ro_regdate;
 	
 	private String ko_name;
+	
 
 	public String getM_id() {
 		return m_id;

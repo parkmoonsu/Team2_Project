@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,100 +11,61 @@
 }
 </style>
 </head>
-<!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>아이디 비밀번호 찾기</title>
 
-<title>아이디/비밀번호 찾기</title>
-
-<!-- Bootstrap -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Font Awesome -->
-<link
-	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<!-- NProgress -->
-<link
-	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
-	rel="stylesheet">
-
-<!-- Custom Theme Style -->
-<link href="${pageContext.request.contextPath}/build/css/custom.min.css"
-	rel="stylesheet">
-
-
-
-
-<!-- Bootstrap core CSS -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/ie10-viewport-bug-workaround.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/carousel/carousel.css"
-	rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script
-	src="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
-
-
-
+        <!-- CSS -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/form-elements.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/style.css">
+        <link rel="stylesheet" id="theme-switch" href="${pageContext.request.contextPath}/mainCss/css/style.css">
+        
 
 </head>
 <body>
-	<header>
-		<jsp:include page="/sidebar/header.jsp" />
+<header role="banner" id="fh5co-header">
+			<div class="container">
+				<!-- <div class="row"> -->
+			    <nav class="navbar navbar-default">
+		        <div class="navbar-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		         <a class="navbar-brand" href="bus.htm">KosBus</a> 
+		        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav navbar-right">
+		            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li> 
+		            <li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
+		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
+		          </ul>
+		        </div>
+			    </nav>
+		  </div>
 	</header>
 
+	<div class="top-content">
+        	
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <ul class="nav nav-tabs">	
+								<li class="active">
+								<a data-toggle="tab" href="#findId">
+								아이디 찾기 
+								</a>						
+								</li>
 
-	<div class="container" style="margin-top: 20px;">
-		<div class="main_container">
-
-			<!-- page content -->
-			<div role="main">
-				<!-- class="right_col" 이거 뺌-->
-				<div class="">
-					<div class="page-title">
-						<div class="title_left">
-							<h3>Form Wizards</h3>
-						</div>
-
-					</div>
-					<div class="clearfix"></div>
-
-					<div class="row">
-
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<div class="x_panel">
-								<div class="x_title">
-									<h2>
-										아이디/비밀번호 찾기 <small>KosBus</small>
-									</h2>
-
-									<div class="clearfix"></div>
-								</div>
-								<div class="x_content">
-									
-
-									<!-- Smart Wizard -->
-
-									<div id="wizard" class="form_wizard wizard_horizontal">
-								<div id="step-1" style="text-align: center;" class="my-box">
-										<div>
-										아이디와 비밀번호는 이메일로 전송됩니다.
-										<div class="my-box" style="margin:30px" >
-
+								 <li>
+								 <a data-toggle="tab" href="#findPw">
+								 비밀번호 찾기 </a>
+								 </li>
+								</ul>
+								 <div class="tab-content">
+								 
+								 <div id="findId" class="tab-pane fade in active">
+										<div class="my-box" style="margin:30px" >				
 												<h2 class="StepTitle">아이디 찾기</h2>
 												<div class="form-group" style="padding: 25px">
 													<div id="step-2">
@@ -132,13 +94,14 @@
 													<input type ="submit" class ="btn btn-default" id= "emailbtn1" value = "전송">
 													</div>
 												</div>
-												
-											
-															</form>
+												</form>
 													</div>															
 													</div>
+												</div>
+											
 											</div>
-											<br>
+
+												<div id="findPw" class="tab-pane fade">
 												<div class="my-box" style="margin:30px" >
 												<h2 class="StepTitle" align="center">비밀번호 찾기</h2>
 												<div class="form-group" style="padding: 25px">
@@ -161,58 +124,46 @@
 														for="m_email">이메일
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="email" id="m_email" name = "m_email"
+														<input type="text" id="m_email" name = "m_email"
 															class="form-control col-md-5 col-xs-12">
 													</div>
 													<div class = "col-md-1 col-sm-1 col-xs-12">
-														<input type = "submit" class ="btn btn-default" id= "emailbtn2" value = "전송">
-													</div>
-													
-												</div>
-															</form>
-													</div>															
+													<input type ="submit" class ="btn btn-default" id= "emailbtn2" value = "전송">
 													</div>
 												</div>
-												</div>
-											</div>
-											<!-- End SmartWizard Content -->
-										</div>
-										<!-- End SmartWizard Content -->
+								            	</form>
+										   </div>															
 									</div>
 								</div>
-							</div>
+						   </div>
 						</div>
-					</div>
-				</div>
-				</div>
-				</div>
-				<!-- /page content -->
+                    </div>
+                </div>
+            </div>
+            
+        </div>
 
-				<!-- footer content -->
-				<footer>
-					<jsp:include page="/sidebar/footer.jsp" />
-				</footer>
-				<!-- /footer content -->
+
+        <!-- Javascript -->
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery.backstretch.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/scripts.js"></script>
+        <script type="text/javascript">
+        $(function() {
+			$("#callback").click(function() {
+				location.href="bus.htm";
+			});
 			
-			<!-- jQuery -->
-			<script
-				src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-			<!-- Bootstrap -->
-			<script
-				src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-			<!-- FastClick -->
-			<script
-				src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
-			<!-- NProgress -->
-			<script
-				src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
-			<!-- jQuery Smart Wizard -->
-			<script
-				src="${pageContext.request.contextPath}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
-			<!-- Custom Theme Scripts -->
-			<script
-				src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-			<!-- ajax -->
+			$("#log").click(function() {
+				location.href="login.htm"
+			});
+			
+			$("#gaip").click(function() {
+				location.href="join.htm"
+			});
+		});
+        </script>
 
 </body>
 </html>
