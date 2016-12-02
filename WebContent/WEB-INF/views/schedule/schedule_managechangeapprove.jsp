@@ -140,7 +140,51 @@ $(document).ready(function() {
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
-
+			
+			<!-- modal 수정 승인 모달 -->
+			<div class="modal fade" id="approvebtw" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">
+								<i class="fa fa-exclamation-triangle"></i> 차량번호 삭제
+							</h4>
+						</div>
+						<div class="modal-body" aria-labelledby="myModalLabel"
+							id="approvebtwcon">
+							 <table class="table table-striped"> 
+							 <thead> 
+							 <tr> 
+							 <th>변경 요청자</th> 
+							 <th>변경 대상자</th> 
+							 </tr> 
+							 </thead> 
+							 <tbody> 
+							 <tr>
+							 <td id="1"></td> 
+							 <td id="2"></td> 
+							 </tr> 
+							 </tbody> 
+							 </table> 
+						</div>
+						<div class="modal-footer">
+						updatebtwinfo.admin
+						<input type="hidden" id="m_id" name="m_id">
+						<input type="hidden" id="o_code" name="o_code">
+						<input type="hidden" id="m_id_1" name="m_id_1">
+						<input type="hidden" id="o_code_1" name="o_code_1">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="approvebtn">변경</button>
+						
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- modal 수정 승인 모달 끝 -->
+			
 			<!-- page content -->
 			<div class="right_col" role="main">
 
@@ -228,6 +272,8 @@ $(document).ready(function() {
 	</div>
 	
 	<script>
+	var array = new Array();
+	var dropObject;
 	function showCalInfo(r_num){
 		alert(r_num);
 		$.ajax({
@@ -235,19 +281,20 @@ $(document).ready(function() {
 			data:{"r_num":r_num},
 			type:"post",
 			success:function(data){
-				var array = new Array();
 				var array1 = new Array();
 				var item;
 				var color = ["green", "black", "red", "purple","orange","yellow","silver"];
-				$.each(data.mrmbrdto,function(index,obj){ //정규 휴무 전체
-					$.each(data.mbrdto,function(index1,obj1){ //변경 신청자
-						
-						if(obj.m_id==obj1.m_id){
-							if(obj1.m_id != obj1.m_id_1){
+				$.each(data.mrmbrdto,function(index,obj){ //정규 휴무 같은 노선
+					$.each(data.mbrdto,function(index1,obj1){ //변경 신청자 reguloff temp ='t'
+					    console.log(obj.m_id + "/" + obj1.m_id + "/" + obj1.m_id_1);
+						if(obj.m_id==obj1.m_id){ //변경 중인 애들은 따로 뺀당
+							if(obj1.m_id != obj1.m_id_1){//변경 신청자, 변경 대상자
 							array1.push(obj1.m_id);
 							array1.push(obj1.m_id_1);
 							item = {
 									id : obj1.m_id,
+									afterid : obj1.m_id_1,
+									aftername : obj1.m_name_1,
 									title : obj1.m_name,
 									dow : obj1.o_code,
 									afterdow : obj1.o_code_1,
@@ -256,23 +303,44 @@ $(document).ready(function() {
 							array.push(item);
 							item = {
 									id : obj1.m_id_1,
+									afterid : obj1.m_id,
+									aftername : obj1.m_name,
 									title : obj1.m_name_1,
 									dow : obj1.o_code_1,
 									afterdow : obj1.o_code,
 									color : color[index]
 							}
 							array.push(item);
-							}else{
-								array1.push(obj1.m_id);
-								item = {
-										id : obj1.m_id,
-										title : obj1.m_name,
-										dow : obj1.o_code,
-										afterdow : obj1.o_code_1,
-										color : color[index]
+							}else{//변경 대상자 = 변경 요청자
+								if(obj1.o_code == obj1.o_code_1){ //변경 대상자 휴무 = 변경 요청자 휴무
+									array1.push(obj1.m_id);
+									alert('변경 요청자 휴무'+obj1.o_code+'변경 대상자 휴무'+obj1.o_code_1);
+									item = {
+											id : obj1.m_id,
+											title : obj1.m_name,
+											afterid : obj1.m_id_1,
+											aftername : obj1.m_name_1,
+											dow : obj1.o_code,
+											afterdow : obj1.o_code_1,
+											color : color[index]
+									}
+									array.push(item);
+								}else{ //변경 대상자 휴무 != 변경 요청자 휴무
+									array1.push(obj1.m_id);
+									alert('변경 요청자 휴무'+obj1.o_code+'변경 대상자 휴무'+obj1.o_code_1);
+									item = {
+											id : obj1.m_id,
+											title : obj1.m_name,
+											afterid : obj1.m_id_1,
+											aftername : obj1.m_name_1,
+											dow : obj1.o_code_1, //신청자 = 대상자, 휴무 != 휴무1 => dow = 휴무1
+											afterdow : obj1.o_code,
+											color : color[index]
+									}
+									array.push(item);
 								}
-								array.push(item);
-							}
+								
+							}//else
 						}//if
 					});//2each
 				});//1each
@@ -281,10 +349,10 @@ $(document).ready(function() {
 					console.log(i+"번째 값"+array1[i]);
 				}
 				var count = 0;
-				$.each(data.mrmbrdto,function(index,obj){
+				$.each(data.mrmbrdto,function(index,obj){//변경 신청중인 애들 제외하고 전부 뿌리는거
 					console.log(obj.m_name + "/" + obj.m_id);
 					for(var i=0;i<array1.length;i++){
-						if(obj.m_id == array1[i]){
+						if(obj.m_id == array1[i]){ //변경 신청자, 변경 대상자
 							count++;
 						};
 					};
@@ -301,6 +369,11 @@ $(document).ready(function() {
 						array.push(item);
 					}
 				});
+			}
+		});
+	}
+	
+			$(document).ajaxStop(function(){
 				$('#calendar2').empty();
 				$('#calendar2').append("<div id='calendar'></div>");
 				$('#calendar').fullCalendar({
@@ -315,29 +388,64 @@ $(document).ready(function() {
 					events: array,
 					eventDrop : function(event, delta, revertFunc, jsEvent) {
 						alert(event.afterdow);
+						//변경 요청자 이외에 수정 하는 경우 막기
 						if(event.afterdow == null){
 							alert('변경 요청 데이터만 처리 할 수 있습니다.');
 							revertFunc();
+						}else{
+							//변경 요청자 - 변경 대상자 매칭
+							if(event.afterdow != Number(event.dow)+delta.days()){
+								alert('변경 요청자의 휴무 변경은 변경 대상자로 해야 합니다.')
+								revertFunc();
+							}else{
+								alert(event.title + "/" + event.aftername);
+								$('#1').append(event.title);
+								$('#2').append(event.aftername);
+								$('#m_id').val(event.id);
+								$('#o_code').val(event.dow);
+								$('#m_id_1').val(event.afterid);
+								$('#o_code_1').val(event.afterdow);
+								$('#approvebtw').modal('show');
+							}
 						}
 					},
 					eventClick : function(calEvent, jsEvent, view) {
-						if(calEvent.afterdow == calEvent.dow){
-							alert(calEvent.title+'님은 휴무 신규 등록자입니다.'+calEvent.id+calEvent.afterdow);
-							//reguloff, reguloffr
+						//최초 휴무 신청자 처리 내용
+						if(calEvent.id == calEvent.afterid){
+							//alert(calEvent.title+'님은 휴무 신규 등록자입니다.'+calEvent.id+calEvent.afterdow);
+							var o_code;
+							
 							$.ajax({
 								url:"approvefirstregister.admin",
-								data:{"m_id":calEvent.id,"o_code":calEvent.afterdow},
+								data:{"m_id":calEvent.id,"o_code":calEvent.dow},
 								type:"post",
 								success:function(data){
-									
+									alert('등록완료');
 								}
 							});
 						}
 					}
 				});
-			}
+			});
+		
+	$(function(){
+		$('#approvebtw').modal('hide');
+		$('#approvebtn').click(function(){
+			var m_id = $('#m_id').val();
+			var o_code = $('#o_code').val();
+			var m_id_1 = $('#m_id_1').val();
+			var o_code_1 = $('#o_code_1').val();
+			$.ajax({
+				url:"updatebtwinfo.admin",
+				type:"post",
+				data:{"m_id":m_id,"o_code":o_code,"m_id_1":m_id_1,"o_code_1":o_code_1},
+				success:function(){
+					alert('등록성공');
+				}
+			});
 		});
-	}
+	});
+		
 	</script>
 	<!-- Bootstrap -->
 	<script

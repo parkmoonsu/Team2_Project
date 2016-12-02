@@ -383,7 +383,6 @@ function loadCalendar(){
 		
 		//일정 드래그시 이벤트
 		eventDrop : function(event, delta, revertFunc, jsEvent) {
-			
 			var dowbefore=event.dow[0];
 			var dowafter= Number(event.dow[0])+delta.days();
 			var evt;
