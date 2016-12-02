@@ -122,9 +122,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    join member me on r.ro_object=me.m_id
 	    where r.m_id=#{m_id}			
 	</select>
-	<insert id="history_insert">
+	<insert id="history_insert"  parameterType = "kr.or.bus.dto.RegulOffrDTO">
 		INSERT INTO reguloffr
-		VALUES('600', #{m_id}, #{o_code}, #{ro_code}, sysdate, null, #{ro_object}, #{o_check})
+		VALUES(#{ko_code}, #{m_id}, #{o_code}, #{ro_code}, sysdate, null, #{ro_object}, #{o_check}, null)
 	</insert>
 
 

@@ -257,16 +257,22 @@ public class ScheduleController {
 		Model model
 	) throws ClassNotFoundException, SQLException{
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		System.out.println("m_id값 체크"+m_id);
+		System.out.println("ro_object값 체크"+ro_object);
 		RegulOffrDTO dto=new RegulOffrDTO();
 		dto.setKo_code(ko_code);
 		dto.setM_id(m_id);
 		dto.setO_code(o_code);
 		dto.setRo_code(ro_code);
-		dto.setO_check(o_check);
 		dto.setRo_object(ro_object);
-			
+		dto.setO_check(o_check);
+		System.out.println("한번도 꼬리를");	
+		System.out.println("dto 확인"+dto.toString());
 		dao.history_insert(dto);
+		
+		System.out.println("처본적이");
 		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
+		System.out.println("읍스요");
 		model.addAttribute("data", dto2);
 		return jsonview;
 	}
