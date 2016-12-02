@@ -24,34 +24,6 @@ $(function() {
 		}
 	});
 
-	// reguloffr에 저장된 신청중인 일정 불러오기
-	$.ajax({
-		url : 'reguloffr_select.htm',
-		type : 'post',
-		data : {m_id:loginid},
-		dataType : 'json',
-		success : function(data) {
-	
-			$.each(data.data, function(index, obj) {
-
-				var item = {
-					id : obj.m_id,
-					title : obj.m_name,
-					dow : [ obj.ro_code ],
-					color:''
-				};
-
-				//승인상태별 색 지정
-				if (obj.m_id==loginid){
-					item.color="red"; //본인, 신청중
-				} else {
-					item.color=""; //타인, 신청중
-				}
-				array.push(item);
-			});
-		}
-	});
-	
 	// reguloff에 저장된 확정된 일정 불러오기
 	$.ajax({
 		url : 'reguloff_select.htm',
@@ -68,7 +40,7 @@ $(function() {
 					dow : [ obj.o_code ]
 				};
 				
-				//승인상태별 색 지정
+				//승인상태601
 				if (obj.m_id==loginid){
 					item.color="green"; //본인, 승인
 				} else {
@@ -79,25 +51,47 @@ $(function() {
 		}
 	});
 	
-	/*// regul에 저장된 확정된 일정 불러오기
+	// reguloffr에 저장된 신청중인 일정 불러오기
 	$.ajax({
-		url : 'reguloff_select.htm',
+		url : 'reguloffr_select.htm',
 		type : 'post',
 		data : {m_id:loginid},
 		dataType : 'json',
 		success : function(data) {
-
+	
 			$.each(data.data, function(index, obj) {
-				 
+
 				var item = {
 					id : obj.m_id,
 					title : obj.m_name,
-					dow : [ obj.o_code ]
+					dow : [ obj.ro_code ],
+					color:''
 				};
+				
+				//승인상태600
+				if (obj.m_id==loginid){
+					item.color="red"; //본인, 신청중
+				} else {
+				
+					$.each(data.data, function(index, obj2) {
+						if(obj.ro_object==obj2.m_id){
+							item.color="red";
+						}
+						else {
+							item.color=""; //타인, 신청중
+						}
+					});
+				
+					/*if(true){
+						
+					} else {						
+						item.color=""; //타인, 신청중
+					}	*/					
+				}
 				array.push(item);
 			});
 		}
-	});*/
+	});
 
 	// 캘린더 불러오기
 	$(document).ajaxStop(function() {
@@ -459,7 +453,7 @@ function loadCalendar(){
 									o_check:'y'
 								},
 								success : function(data) {
-									
+									console.log
 								}
 							});
 							
