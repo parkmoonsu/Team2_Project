@@ -46,7 +46,7 @@ public class LoginController {
 		MemberJoinJobDTO dto = service.mainGo(principal.getName());
 		String jobname = dto.getJ_name();
 		model.addAttribute("jobname", jobname);
-
+ 
 		return "main/main";
 	}
 	@RequestMapping("/adminmain.admin")
