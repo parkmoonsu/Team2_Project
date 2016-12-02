@@ -114,10 +114,12 @@ public class ScheduleManageController {
 	목적 : cal 구현
 	*/
 	
-<<<<<<< HEAD
-=======
-
->>>>>>> 26439b6e1150d97fc1c785e218bad5d908d9a1ab
+	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
+	   public String getHistoryCal(Model model){
+	      service.getRequestState(model);
+	      return "schedule/schedule_managechangeapprove";
+	   }
+	
 	/*
 	제목 : 예상 스케쥴 뽑기
 	작성자 : 김수현
@@ -142,16 +144,5 @@ public class ScheduleManageController {
 	}
 	
 	
-
-<<<<<<< HEAD
-=======
-	
->>>>>>> 26439b6e1150d97fc1c785e218bad5d908d9a1ab
-
-	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
-	public String getHistoryCal(Model model){
-		service.getRequestState(model);
-		return "schedule/schedule_managechangeapprove";
-	}
 
 }

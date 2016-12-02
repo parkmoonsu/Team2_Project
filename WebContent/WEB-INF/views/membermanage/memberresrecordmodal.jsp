@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<table class="table">
+<table class="table" style="text-align: center">
 		                	<thead>
 		                		<tr>
 		                			<th style="width: 15%">이력구분</th>

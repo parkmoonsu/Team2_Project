@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<table class="table">
-	<caption>&nbsp &nbsp &nbsp  </caption>
+<table class="table" style="text-align: center">
+	<caption>&nbsp; &nbsp; &nbsp;  </caption>
 	<thead>
 		<tr>
 			<th>요청자</th>
