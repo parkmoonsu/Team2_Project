@@ -224,8 +224,7 @@
 			</div>
 			<div class="row watch-video text-center to-animate">
 				<span>Watch the video</span>
-
-				<a href="https://vimeo.com/channels/staffpicks/93951774" class="popup-vimeo btn-video"><i class="icon-play2"></i></a>
+				<a href="https://www.youtube.com/watch?v=PiksIbD5sNc" class="popup-vimeo btn-video"><i class="icon-play2"></i></a>
 			</div>
 		</div>
 	</section>

@@ -24,7 +24,40 @@ $(function() {
 		}
 	});
 
-	// db에 저장된 일정 불러오기
+	// db에 저장된 일정 불러오기-색깔 넣어서
+	$.ajax({
+		url : 'reguloffr_select.htm',
+		type : 'post',
+		data : {m_id:loginid},
+		dataType : 'json',
+		success : function(data) {
+	
+			$.each(data.data, function(index, obj) {
+
+				var item = {
+					id : obj.m_id,
+					title : obj.m_name,
+					dow : [ obj.o_code ],
+					color:''
+				};
+
+				//승인상태별 색 지정
+				if (obj.m_id==loginid && obj.ko_code=="600"){
+					item.color="red"; //본인, 신청중
+				} else if (obj.m_id==loginid && obj.ko_code=="601"){
+					item.color="green"; //본인, 승인
+				} else if (obj.ko_code=="600"){
+					item.color="black"; //타인, 신청
+				} else if (obj.ko_code="601"){
+					item.color=""; //타인, 승인
+				}
+				console.log(item);
+				array.push(item);
+			});
+		}
+	});
+	
+	/*// db에 저장된 일정 불러오기-색깔 없이
 	$.ajax({
 		url : 'reguloff_select.htm',
 		type : 'post',
@@ -33,6 +66,7 @@ $(function() {
 		success : function(data) {
 
 			$.each(data.data, function(index, obj) {
+				 
 				var item = {
 					id : obj.m_id,
 					title : obj.m_name,
@@ -41,7 +75,7 @@ $(function() {
 				array.push(item);
 			});
 		}
-	});
+	});*/
 
 	// 캘린더 불러오기
 	$(document).ajaxStop(function() {
@@ -58,7 +92,7 @@ $(function() {
 		var event = {
 			m_id : loginid,
 			o_code : o_code,
-			temp : 'true'
+			temp : 't'
 		};
 		$(".antoclose").click();
 
@@ -91,7 +125,7 @@ $(function() {
 				m_id:loginid,
 				ro_code:o_code,
 				ro_object:loginid,
-				o_check:'Y'
+				o_check:'y'
 			},
 			success : function(data) {
 				
@@ -114,7 +148,7 @@ $(function() {
 				data : {
 					m_id : calEventObj.id,
 					o_code : o_code,
-					temp : 'true'
+					temp : ''
 				},
 				success : function(data) {
 					console.log('reguloff에 업뎃');
@@ -138,7 +172,7 @@ $(function() {
 					m_id:loginid,
 					ro_code:o_code,
 					ro_object:loginid,
-					o_check:'Y'
+					o_check:'y'
 				},
 				success : function(data) {
 					
@@ -333,7 +367,7 @@ function loadCalendar(){
 										m_id:event2.m_id, //본인id > 클릭된 사람
 										ro_code:event2.o_code, //변경후 요일
 										ro_object:event1.m_id, //바꿀사람id
-										o_check:'Y'
+										o_check:'y'
 									},
 									success : function(data) {
 										'요청자는 y있게 변경되었다'
@@ -400,7 +434,7 @@ function loadCalendar(){
 									m_id:loginid,
 									ro_code:dowafter,
 									ro_object:loginid,
-									o_check:'Y'
+									o_check:'y'
 								},
 								success : function(data) {
 									

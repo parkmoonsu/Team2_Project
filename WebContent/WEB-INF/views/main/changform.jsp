@@ -186,7 +186,7 @@
 				     	</div>
         		    	<div class="modal-footer">
                             <div>
-                                <a href="redirect:/ChangeForm.htm"><button type="submit" class="btn btn-primary btn-lg btn-block">완료</button></a>
+                                <a href="redirect:/ChangeForm.htm"><button type="submit" class="btn btn-success" data-dismiss = "modal">완료</button></a>
                             </div>
         		    	</div>
                     </form>
@@ -217,7 +217,9 @@
 				     	</div>
         		    	<div class="modal-footer">
                             <div>
-                                <input type="submit" class="btn btn-primary btn-lg btn-block" value = "완료">
+                                <input type="submit" class="btn btn-success" value = "완료">
+                                <button type="button" class="btn btn-default"
+											data-dismiss="modal">닫기</button>
                             </div>
         		    	</div>
                     </form>

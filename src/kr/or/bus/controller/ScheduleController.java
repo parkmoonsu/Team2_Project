@@ -30,6 +30,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.RegulOffrJoinMemberJoinBusDTO;
 
 @Controller
 
@@ -129,11 +130,21 @@ public class ScheduleController {
 		return jsonview;//str;
 	}
 	
-	@RequestMapping(value="/reguloff_select.htm", method=RequestMethod.POST)
+	/*@RequestMapping(value="/reguloff_select.htm", method=RequestMethod.POST)
 	public View reguloffSelect(String m_id, ModelMap map) throws ClassNotFoundException, SQLException{
 		System.out.println("해당노선 일정 불러오기");
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		List<RegulOffDTO> dtolist=dao.reguloff_select(m_id);
+		System.out.println(dtolist);
+		map.addAttribute("data", dtolist);
+		return jsonview;
+	}*/
+	
+	@RequestMapping(value="/reguloffr_select.htm", method=RequestMethod.POST)
+	public View reguloffSelect(String m_id, ModelMap map) throws ClassNotFoundException, SQLException{
+		System.out.println("해당노선 일정 불러오기");
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		List<RegulOffrJoinMemberJoinBusDTO> dtolist=dao.reguloffr_select(m_id);
 		System.out.println(dtolist);
 		map.addAttribute("data", dtolist);
 		return jsonview;

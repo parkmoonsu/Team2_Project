@@ -14,6 +14,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.RegulOffrJoinMemberJoinBusDTO;
 
 //CRUD
 public interface ScheduleDAO {
@@ -24,7 +25,7 @@ public interface ScheduleDAO {
 	public int insert(ScheduleDTO dto) throws ClassNotFoundException, SQLException;
 	public ScheduleDTO selectseq() throws ClassNotFoundException, SQLException;
 	
-	public List<RegulOffDTO> reguloff_select(String m_id) throws ClassNotFoundException, SQLException;
+	public List<RegulOffrJoinMemberJoinBusDTO> reguloffr_select(String m_id) throws ClassNotFoundException, SQLException;
 	public int reguloff_insert(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
 	public int reguloff_delete(String m_id) throws ClassNotFoundException, SQLException;
 	public int reguloff_update(RegulOffDTO dto) throws ClassNotFoundException, SQLException;
