@@ -44,7 +44,7 @@
 									</table>
 									
 									
-									<div class = "btn btn-primary btn-xs" id = "reg" style = "float:right" onclick = "reg()">
+									<div class = "btn btn-success btn-xs" id = "reg" style = "float:right" onclick = "reg()">
 									<i class="fa fa-check"></i> 등록
 									</div>
 									

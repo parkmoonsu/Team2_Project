@@ -208,7 +208,7 @@
 								</div>
 
 									<div style = "float: right;">
-									<div class="btn btn-primary btn-xs" id = "ebtn"><i class="fa fa-check"></i>
+									<div class="btn btn-success btn-xs" id = "ebtn"><i class="fa fa-check"></i>
                                          			 등록 </div>
                                     <div class="btn btn-default btn-xs" id = "ubtn"><i class="fa fa-retweet"></i>
                                          			 수정 </div>
@@ -569,6 +569,7 @@
 			}else{
 				
 				$("#enroll").empty();
+				count = 1;
 				for(var i = 1 ; i <= ${Count} ; i++){ //엑박 무시할것
 					var checkbox = "#check" + i;
 					
@@ -650,6 +651,7 @@
 							$("#enroll").attr("style", "display:inline");
 							count++;
 						}
+						$("#updateenroll").empty();
 						$("#enroll").empty();
 						$("#enroll").append(data);
 						

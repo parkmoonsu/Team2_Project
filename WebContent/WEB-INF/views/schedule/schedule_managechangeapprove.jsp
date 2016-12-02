@@ -193,7 +193,10 @@ $(document).ready(function() {
 										</li>
 										<li >
 										<c:forEach var="mrordto" items="${mrordto }">
-										<div id="${mrordto.r_num }" style="float:left; margin-left:10%">${mrordto.m_name }</div>
+										<div style="float:left; margin-left:3%">
+											<button id="${mrordto.r_num }" class="btn btn-round btn-info" onclick="showCalInfo('${mrordto.r_num }');">
+											${mrordto.m_name }</button>
+										</div>
 										</c:forEach>	
 										</li>
 									</ul>
@@ -223,7 +226,118 @@ $(document).ready(function() {
 			<!-- /footer content -->
 		</div>
 	</div>
-
+	
+	<script>
+	function showCalInfo(r_num){
+		alert(r_num);
+		$.ajax({
+			url:"gethistorycal.admin",
+			data:{"r_num":r_num},
+			type:"post",
+			success:function(data){
+				var array = new Array();
+				var array1 = new Array();
+				var item;
+				var color = ["green", "black", "cyan", "purple","red","orange","yellow","silver"];
+				$.each(data.mrmbrdto,function(index,obj){ //정규 휴무 전체
+					$.each(data.mbrdto,function(index1,obj1){ //변경 신청자
+						
+						if(obj.m_id==obj1.m_id){
+							if(obj1.m_id != obj1.m_id_1){
+							array1.push(obj1.m_id);
+							array1.push(obj1.m_id_1);
+							item = {
+									id : obj1.m_id,
+									title : obj1.m_name,
+									dow : obj1.o_code,
+									afterdow : obj1.o_code_1,
+									color : color[index]
+							}
+							array.push(item);
+							item = {
+									id : obj1.m_id_1,
+									title : obj1.m_name_1,
+									dow : obj1.o_code_1,
+									afterdow : obj1.o_code,
+									color : color[index]
+							}
+							array.push(item);
+							}else{
+								array1.push(obj1.m_id);
+								item = {
+										id : obj1.m_id,
+										title : obj1.m_name,
+										dow : obj1.o_code,
+										afterdow : obj1.o_code_1,
+										color : color[index]
+								}
+								array.push(item);
+							}
+						}//if
+					});//2each
+				});//1each
+				
+				for(var i=0;i<array1.length;i++){
+					console.log(i+"번째 값"+array1[i]);
+				}
+				var count = 0;
+				$.each(data.mrmbrdto,function(index,obj){
+					console.log(obj.m_name + "/" + obj.m_id);
+					for(var i=0;i<array1.length;i++){
+						if(obj.m_id == array1[i]){
+							count++;
+						};
+					};
+					if(count>0){
+						count = 0;
+					}else{
+						item = {
+							id : obj.m_id,
+							title : obj.m_name,
+							dow : obj.o_code,
+							afterdow : null,
+							resourceEditable: false
+						}
+						array.push(item);
+					}
+				});
+				$('#calendar2').empty();
+				$('#calendar2').append("<div id='calendar'></div>");
+				$('#calendar').fullCalendar({
+					header: {
+						left: 'prev,next today',
+						center: 'title',
+						right: 'month,basicWeek,basicDay'
+					},
+					navLinks: true, // can click day/week names to navigate views
+					editable: true,
+					eventLimit: true, // allow "more" link when too many events
+					events: array,
+					eventDrop : function(event, delta, revertFunc, jsEvent) {
+						alert(event.afterdow);
+						if(event.afterdow == null){
+							alert('변경 요청 데이터만 처리 할 수 있습니다.');
+							revertFunc();
+						}
+					},
+					eventClick : function(calEvent, jsEvent, view) {
+						if(calEvent.afterdow == calEvent.dow){
+							alert(calEvent.title+'님은 휴무 신규 등록자입니다.'+calEvent.id+calEvent.afterdow);
+							//reguloff, reguloffr
+							$.ajax({
+								url:"approvefirstregister.admin",
+								data:{"m_id":calEvent.id,"o_code":calEvent.afterdow},
+								success:function(data){
+									
+								}
+							});
+						}
+					}
+				});
+			}
+		});
+	}
+	</script>
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
