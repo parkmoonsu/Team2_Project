@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
+import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
@@ -107,17 +108,41 @@ public class ScheduleManageController {
 		System.out.println(list);
 		return "schedule/schedule_managertimetable";
 	}
+	
+
+	/*
+	제목 : 예상 스케쥴 뽑기
+	작성자 : 김수현
+	목적 : 예상 스케쥴 가져오기
+	*/
+	
+	
+	@RequestMapping("/getvirtualschedule.admin")        
+	public String getVirtualSchedule(ModelMap map){
+		List<RouteDTO> routelist= service.rnum_get();
+		map.addAttribute("routelist",routelist);
+		System.out.println("routelist : "+routelist);
+		return "schedule/schedule_virtual";
+	}
+	
+	//full calendar
+	@RequestMapping("/lastpredictschedule.admin")
+	public View lastpredictschedule(String m_id,String m_name, String o_date,Model model){
+		service.predictschedule(m_id, m_name, o_date);
+		System.out.println("m_id : "+m_id);
+		return jsonview;
+	}
+	
 	/*
 	제목 : 기사 휴무 변경 요청 승인
 	작성자 : 강민수
 	목적 : cal 구현
 	*/
-	
 	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
-	public String getHistoryCal(Model model){
-		service.getRequestState(model);
-		return "schedule/schedule_managechangeapprove";
-	}
+	   public String getHistoryCal(Model model){
+	      service.getRequestState(model);
+	      return "schedule/schedule_managechangeapprove";
+	   }
 	
 	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.POST)
 	public View getHistoryCalRequested(String r_num, Model model){

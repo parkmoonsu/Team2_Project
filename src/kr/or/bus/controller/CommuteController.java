@@ -1,3 +1,12 @@
+/*
+*	@FileName : CommuteController.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.19
+*	@Author	: 조한솔
+*	@Discription : 출/퇴근 관리 페이지 컨트롤러
+*/
+
+
 package kr.or.bus.controller;
 
 import java.util.List;

@@ -46,20 +46,26 @@ public class LoginController {
 		MemberJoinJobDTO dto = service.mainGo(principal.getName());
 		String jobname = dto.getJ_name();
 		model.addAttribute("jobname", jobname);
-		
+ 
+		return "main/main";
+	}
+	@RequestMapping("/adminmain.admin")
+	public String adminmain(Model model){
 		int mcount = service2.mBus();
 		int ncount = service2.nBus();
 		int wcount = service2.wBus();
 		int gcount = service2.gBus();
 		int noroute = service2.noRoute();
-		
+		 
 		model.addAttribute("m", mcount);
 		model.addAttribute("n", ncount);
 		model.addAttribute("w", wcount);
 		model.addAttribute("g", gcount);
 		model.addAttribute("no", noroute);
-		return "main/main";
+		
+		return "main/adminmain";
 	}
+	
 	
 	@RequestMapping("/search.htm")
 	public String search(){

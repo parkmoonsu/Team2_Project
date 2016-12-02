@@ -24,14 +24,49 @@ $(function() {
 		}
 	});
 
-	// db에 저장된 일정 불러오기
+	// db에 저장된 일정 불러오기-색깔 넣어서
+	$.ajax({
+		url : 'reguloffr_select.htm',
+		type : 'post',
+		data : {m_id:loginid},
+		dataType : 'json',
+		success : function(data) {
+	
+			$.each(data.data, function(index, obj) {
+
+				var item = {
+					id : obj.m_id,
+					title : obj.m_name,
+					dow : [ obj.o_code ],
+					color:''
+				};
+
+				//승인상태별 색 지정
+				if (obj.m_id==loginid && obj.ko_code=="600"){
+					item.color="red"; //본인, 신청중
+				} else if (obj.m_id==loginid && obj.ko_code=="601"){
+					item.color="green"; //본인, 승인
+				} else if (obj.ko_code=="600"){
+					item.color="black"; //타인, 신청
+				} else if (obj.ko_code="601"){
+					item.color=""; //타인, 승인
+				}
+				console.log(item);
+				array.push(item);
+			});
+		}
+	});
+	
+	/*// db에 저장된 일정 불러오기-색깔 없이
 	$.ajax({
 		url : 'reguloff_select.htm',
 		type : 'post',
+		data : {m_id:loginid},
 		dataType : 'json',
 		success : function(data) {
 
 			$.each(data.data, function(index, obj) {
+				 
 				var item = {
 					id : obj.m_id,
 					title : obj.m_name,
@@ -40,7 +75,7 @@ $(function() {
 				array.push(item);
 			});
 		}
-	});
+	});*/
 
 	// 캘린더 불러오기
 	$(document).ajaxStop(function() {
@@ -57,7 +92,7 @@ $(function() {
 		var event = {
 			m_id : loginid,
 			o_code : o_code,
-			temp : 'true'
+			temp : 't'
 		};
 		$(".antoclose").click();
 
@@ -90,7 +125,7 @@ $(function() {
 				m_id:loginid,
 				ro_code:o_code,
 				ro_object:loginid,
-				o_check:'Y'
+				o_check:'y'
 			},
 			success : function(data) {
 				
@@ -104,18 +139,19 @@ $(function() {
 
 		if (confirm("정말 일정을 변경하시겠습니까??") == true) {
 			var o_code = $("#select2").val();
-
-			var event = {
-				m_id : calEventObj.id,
-				o_code : o_code
-			};
+			
 			$("#calendar").fullCalendar('removeEvents', calEventObj.id);
 
 			$.ajax({
 				url : 'reguloff_update.htm',
 				type : 'post',
-				data : event,
+				data : {
+					m_id : calEventObj.id,
+					o_code : o_code,
+					temp : ''
+				},
 				success : function(data) {
+					console.log('reguloff에 업뎃');
 					event = {
 						id : data.data.m_id,
 						title : data.data.m_name,
@@ -135,7 +171,8 @@ $(function() {
 					o_code:calEventObj.dow[0],
 					m_id:loginid,
 					ro_code:o_code,
-					ro_object:loginid
+					ro_object:loginid,
+					o_check:'y'
 				},
 				success : function(data) {
 					
@@ -196,9 +233,6 @@ function loadCalendar(){
 
 		//날짜 선택시 이벤트
 		select : function(start, end, jsEvent) {
-			//console.log($(jsEvent.target).hasClass("disabled"));
-			//console.log(jsEvent);
-			//if($(jsEvent.target).hasClass("disabled")){
 			
 			//중복일정 체크
 			$.ajax({
@@ -269,11 +303,7 @@ function loadCalendar(){
 								
 								event1.dow=event2.dow;
 								event2.dow=calEvent.dow;
-								
-								console.log("이벤트1");
-								console.log(event1.dow);
-								console.log("이벤트2");
-								console.log(event2.dow);
+
 								
 								$("#calendar").fullCalendar('renderEvent', event1);
 								$("#calendar").fullCalendar('renderEvent', event2);
@@ -290,10 +320,6 @@ function loadCalendar(){
 									m_id : loginid,
 									o_code : o_code2
 								};
-								console.log("event1");
-								console.log(event1);
-								console.log("event2");
-								console.log(event2);
 								
 								//일정저장
 								$.ajax({
@@ -323,10 +349,11 @@ function loadCalendar(){
 										o_code:event2.o_code, //변경전 요일
 										m_id:event1.m_id, //본인id > 클릭된 사람
 										ro_code:event1.o_code, //변경후 요일
-										ro_object:event2.m_id //바꿀사람id
+										ro_object:event2.m_id, //바꿀사람id
+										o_check:''
 									},
 									success : function(data) {
-										
+										'대상자는 y없이 변경되었다'
 									}
 								});
 								
@@ -339,10 +366,11 @@ function loadCalendar(){
 										o_code:event1.o_code, //변경전 요일
 										m_id:event2.m_id, //본인id > 클릭된 사람
 										ro_code:event2.o_code, //변경후 요일
-										ro_object:event1.m_id //바꿀사람id
+										ro_object:event1.m_id, //바꿀사람id
+										o_check:'y'
 									},
 									success : function(data) {
-										
+										'요청자는 y있게 변경되었다'
 									}
 								});
 								
@@ -405,7 +433,8 @@ function loadCalendar(){
 									o_code:dowbefore,
 									m_id:loginid,
 									ro_code:dowafter,
-									ro_object:loginid
+									ro_object:loginid,
+									o_check:'y'
 								},
 								success : function(data) {
 									
@@ -414,7 +443,6 @@ function loadCalendar(){
 							
 						} else {
 							//원위치
-							console.log("취소");
 							evt={
 									id:event.id,
 									title:event.title,
@@ -430,13 +458,11 @@ function loadCalendar(){
 					}else{
 						alert("해당 일정은 편집할 수 없습니다.");
 						//원위치
-						console.log("취소");
 						evt={
 								id:event.id,
 								title:event.title,
 								dow:[dowbefore]
 						};
-						console.log(evt);
 						$("#calendar").fullCalendar('removeEvents', event.id);
 						$("#calendar").fullCalendar('renderEvent', evt);
 					}	
@@ -446,68 +472,6 @@ function loadCalendar(){
 		}
 	});
 }
-
-								
-						/*	});
-						} else {
-							//원위치로 돌리기
-							event = {
-								id:id,
-								title:event.title,
-								dow:[dow2]
-							};
-							
-							//$("#calendar").fullCalendar('refetchEvents');
-							$("#calendar").fullCalendar('removeEvents', id);
-							$("#calendar").fullCalendar('renderEvent', event);
-							$("#calendar").fullCalendar('unselect');
-						}	
-					}else{
-						alert("해당 일정은 편집할 수 없습니다.");
-						console.log("편집할수엄슴");
-						console.log(event);
-						$("#calendar").fullCalendar('refetchEvents');
-						$("#calendar").fullCalendar('unselect');
-					}	
-				}
-			});			
-		}*/
-/*	});
-}
-		*/
-		/*dayRender: function( date, cell ) {
-		     // It's an example, do your own test here
-			
-		    if(cell.hasClass("fc-other-month")) {
-		          cell.addClass("disabled");
-		          alert(cell);
-		     } 
-
-		},
-		dayClick: function(date, jsEvent, view) {
-			console.log(jsEvent.target.hasClass("disabled"));
-			console.log(jsEvent.target);
-		    if($(jsEvent.target).hasClass("disabled")){
-		        alert('여긴 안됨');
-		    }
-		    // Your code
-		    // ....
-		}*/
-		
-		/*dayRender: function(date, cell){
-			console.log(date.format("YYYY-MM-DD") > "2016-11-23");
-	        if (date.format("YYYY-MM-DD") > "2016-11-23"){
-	        	console.log(cell);
-	            //$(cell).addClass('fc-future-disabled');
-	            $(cell).addClass('fc-status-disabled');
-	        }
-		}*/
-
-		/*eventDragStop: function( event, jsEvent) {
-			console.log("eventdragstop");
-			console.log(jsEvent);			
-		}*/
-		
 		
 
 

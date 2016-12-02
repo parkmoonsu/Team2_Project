@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
     /*
         Fullscreen background
     */
-    $.backstretch("http://neueg.net/files/attach/images/756124/584/697/001/07d335aa748578468baedcb19b1f37d2.gif");
+    $.backstretch("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRNvekx_Vqvwj44QYkCMbRufTpWKg5YtXx8FQv2PWrBH9-0m8me");
     
     /*
         Form validation

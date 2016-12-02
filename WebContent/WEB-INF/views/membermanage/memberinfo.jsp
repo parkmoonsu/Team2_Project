@@ -21,7 +21,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>회원 관리</title>
 
 <!-- Bootstrap -->
@@ -56,13 +55,19 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-
+<link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
 <script
-	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
+</script>
+<style type= "text/css">
+th{
+	text-align: center;
+}
 
+</style>
 </head>
 
 <body class="nav-md">
@@ -188,16 +193,17 @@
 										</div>
 									</div>
 
-									<table class="table table-hover  projects">
+									<table class="table table-hover  projects"
+										style="text-align: center;">
 										<thead>
 											<tr>
-												<th>번호</th>
-												<th>ID</th>
-												<th>이름</th>
-												<th>이메일</th>
-												<th>직책</th>
-												<th>연차</th>
-												<th style="width: 20%"></th>
+												<th style="width: 50px">번호</th>
+												<th style="width: 100px">ID</th>
+												<th style="width: 90px">이름</th>
+												<th style="width: 200px">이메일</th>
+												<th style="width: 80px">직책</th>
+												<th style="width: 50px">연차</th>
+												<th style="width: 100px"></th>
 											</tr>
 										</thead>
 										<c:set value="${list}" var="d" />
@@ -235,20 +241,33 @@
 											<c:set value="${mc/10 + 1}" var="pagecount" />
 										</c:otherwise>
 									</c:choose>
-									<ul class="pager">
-										<c:if test="${pgc > 1}">
-											<li><a href="membermanage.admin?pg=${pgc-1}">Previous</a></li>
-										</c:if>
+
+									<div style="text-align: center">
+										<ul class="pagination">
+
+											<c:if test="${pgc > 1}">
+												<li><a href="membermanage.admin?pg=${pgc-1}">Previous</a></li>
+											</c:if>
 
 
-										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
-										</c:forEach>
+											<c:forEach begin="1" end="${pagecount}" var="i">
+												<c:if test="${i==pgc}">
+													<li class="active"><a href="#">${i}</a></li>
+												</c:if>
+												<c:if test="${i!=pgc}">
+													<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
+												</c:if>
+											</c:forEach>
 
-										<c:if test="${pgc < mc/10 }">
-											<li><a href="membermanage.admin?pg=${pgc+1}">Next</a></li>
-										</c:if>
-									</ul>
+											<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
+											<li class="active"><a href="membermanage.admin?pg=${i}">${i}</a></li>
+										</c:forEach> --%>
+
+											<c:if test="${pgc < mc/10 }">
+												<li><a href="membermanage.admin?pg=${pgc+1}">Next</a></li>
+											</c:if>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -538,6 +557,8 @@
 
 		function smodal(m_id) {
 			console.log(m_id);
+			console.log(o_date);
+			if(o_date!=null){
 			$.ajax({
 				url : "memberdetail.admin",
 				type : "post",
@@ -566,12 +587,48 @@
 								success : function(data2) {
 									$('#resrecordtable').empty();
 									$('#resrecordtable').append(data2);
+									}
+								});
+							}
+						});
+					}
+				});
+			}/* else{
+				$.ajax({
+					url : "memberdetailnoreg.admin",
+					type : "post",
+					data : {
+						"param" : m_id
+					},
+					success : function(data) {
+						$('#exampleModal2').empty();
+						$('#exampleModal2').append(data);
+						$('#exampleModal2').modal('show');
+						$.ajax({
+							url : "memberreguloffr.htm",
+							type : "post",
+							data : {
+								"param" : m_id
+							},
+							success : function(data1) {
+								$('#reguloffrtable').empty();
+								$('#reguloffrtable').append(data1);
+								$.ajax({
+									url : "memberresrecord.admin",
+									type : "post",
+									data : {
+										"param" : m_id
+									},
+									success : function(data2) {
+										$('#resrecordtable').empty();
+										$('#resrecordtable').append(data2);
+										}
+									});
 								}
 							});
 						}
 					});
-				}
-			});
+			} */
 		}
 /*  	function deleteMember(m_id) {
 			console.log("m_id" + m_id);

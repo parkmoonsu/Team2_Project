@@ -15,7 +15,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="list" items="${offrlist }">
+		<c:forEach var="list" items="${offrlist}">
 		<tr>
 			<th scope="row">${list.m_name }(${list.m_id })</th>
 			<td>${list.o_date }</td>

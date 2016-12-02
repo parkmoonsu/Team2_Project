@@ -38,10 +38,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 기본 캘린더 DAO -->
 	
 	<!-- reguloff DAO -->
-	<select id="reguloff_select" resultType="kr.or.bus.dto.MemberJoinRegulOffDTO">
-		select r.m_id, r.o_code, m.m_name
-		from reguloff r join member m
-		on r.m_id=m.m_id
+	<!-- 변경! reguloff에서 reguloffr로 -->
+	<select id="reguloffr_select" parameterType="java.lang.String" resultType="kr.or.bus.dto.RegulOffrJoinMemberJoinBusDTO">
+		select r.ko_code, r.m_id, r.o_code, r.ro_code, r.ro_object, m.m_name
+		from reguloffr r
+	    join member m on r.m_id=m.m_id
+	    join bus b on m.b_vehiclenum=b.b_vehiclenum
+		where b.r_num=
+    	(select b.r_num
+    	from bus b
+    	join member m on b.B_VEHICLENUM=m.B_VEHICLENUM
+    	where m.m_id=#{m_id})
 	</select>
 	<insert id="reguloff_insert">
 		INSERT INTO reguloff
@@ -52,7 +59,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	<update id="reguloff_update">		
 		UPDATE reguloff
-		SET o_code=#{o_code}		
+		SET o_code=#{o_code},
+		temp=#{temp}		
 		WHERE m_id=#{m_id}
 	</update>
 	<select id="reguloff_selectseq" parameterType = "String" resultType="kr.or.bus.dto.MemberJoinRegulOffDTO">
@@ -102,7 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<insert id="history_insert">
 		INSERT INTO reguloffr
-		VALUES('600', #{m_id}, #{o_code}, #{ro_code}, sysdate, null, #{ro_object}, null)
+		VALUES('600', #{m_id}, #{o_code}, #{ro_code}, sysdate, null, #{ro_object}, #{o_check})
 	</insert>
 
 

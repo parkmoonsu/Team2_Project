@@ -13,7 +13,8 @@ import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.SelectDistinctDTO;
-
+import kr.or.bus.dto.TimeDTO;
+import kr.or.bus.dto.RouteDTO;
 
 
 public interface ScheduleManageDAO {
@@ -45,7 +46,12 @@ public interface ScheduleManageDAO {
 	//timetable
 	public List<SelectDistinctDTO> selectdistinct();
 	public String[] selecttime(SelectDistinctDTO selectdistinctdto);
-	 
+
+	//최증스케줄
+	public List<MemberJoinRegulOffDTO> getmemberjoinreg();
+	public List<MemberJoinRegulOffDTO> getmemberjoinreg(String m_id,String m_name,String o_date);
+	public List<RouteDTO>getrnum();
+
 	//휴무 상태 정보 가져오기
 	public int getRequestNum();
 	public int getRequestRefuseNum();
