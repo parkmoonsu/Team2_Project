@@ -13,6 +13,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.bus.dao.RouteDAO;
+import kr.or.bus.dao.RouteStopDAO;
+import kr.or.bus.dao.StopDAO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteStopDTO;
 import kr.or.bus.dto.StopDTO;
@@ -576,22 +579,32 @@ public class BusStopManageService {
 	    conn.disconnect();
 	    //System.out.println(sb.toString());    
 	    jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
+	    out.print(jsonmaps);
 	    
 	    JSONArray jsonarray = JSONArray.fromObject(jsonmaps.get("msgBody"));
 	    
-	    for(int i=0; i<jsonarray.size();i++){
-	    	//route 테이블에 insert 할것
+	    int stopcheck = 0;
+	    int stopinsertcheck = 0;
+	    
+	    int routestopinsertcheck =0;
+	    int routestopcheck = 0;
+	    
+	    int jsons =  jsonarray.size();
+	    
+	    int j=0;
+	    while(j<jsons){
+	    	
+	    	//stop 테이블에 insert 할것
 	    	//System.out.println(jsonarray.getJSONObject(i).get("stationNm")); //정류장 이름
 	    	//System.out.println(jsonarray.getJSONObject(i).get("stationNo")); //정류장 고유번호
 	    	//System.out.println(jsonarray.getJSONObject(i).get("gpsX")); //x좌표
 	    	//System.out.println(jsonarray.getJSONObject(i).get("gpsY")); //y좌표
 	    	
-	    	stopdto.setS_name(jsonarray.getJSONObject(i).get("stationNm").toString());
-	    	stopdto.setS_num(jsonarray.getJSONObject(i).get("stationNo").toString());
-	    	stopdto.setS_x(jsonarray.getJSONObject(i).get("gpsX").toString());
-	    	stopdto.setS_y(jsonarray.getJSONObject(i).get("gpsY").toString());
+	    	stopdto.setS_name(jsonarray.getJSONObject(j).get("stationNm").toString());
+	    	stopdto.setS_num(jsonarray.getJSONObject(j).get("stationNo").toString());
+	    	stopdto.setS_x(jsonarray.getJSONObject(j).get("gpsX").toString());
+	    	stopdto.setS_y(jsonarray.getJSONObject(j).get("gpsY").toString());
 	    	
-	    	System.out.println(stopdto);
 	    	
 	    	//routestop테이블에 insert할것
 	    	//System.out.println(jsonarray.getJSONObject(i).get("busRouteNm")); //노선번호(5623)
@@ -601,17 +614,44 @@ public class BusStopManageService {
 	    	//System.out.println(jsonarray.getJSONObject(i).get("beginTm")); //첫차
 	    	//System.out.println(jsonarray.getJSONObject(i).get("lastTm")); //막차
 	    	
-	    	routestopdto.setR_num(jsonarray.getJSONObject(i).get("busRouteNm").toString());
-	    	routestopdto.setR_id(jsonarray.getJSONObject(i).get("busRouteId").toString());
-	    	routestopdto.setS_num(jsonarray.getJSONObject(i).get("stationNo").toString());
-	    	routestopdto.setRs_order(jsonarray.getJSONObject(i).get("seq").toString());
-	    	routestopdto.setRs_start(jsonarray.getJSONObject(i).get("beginTm").toString());
-	    	routestopdto.setRs_end(jsonarray.getJSONObject(i).get("lastTm").toString());
+	    	routestopdto.setR_num(jsonarray.getJSONObject(j).get("busRouteNm").toString());
+	    	routestopdto.setR_id(jsonarray.getJSONObject(j).get("busRouteId").toString());
+	    	routestopdto.setS_num(jsonarray.getJSONObject(j).get("stationNo").toString());
+	    	routestopdto.setRs_order(jsonarray.getJSONObject(j).get("seq").toString());
+	    	routestopdto.setRs_start(jsonarray.getJSONObject(j).get("beginTm").toString());
+	    	routestopdto.setRs_end(jsonarray.getJSONObject(j).get("lastTm").toString());
 	    	
-	    	System.out.println(routestopdto);
+	    	//중복체크작업
+	    	StopDAO stopdao = sqlsession.getMapper(StopDAO.class);
+	    	stopcheck = stopdao.selectS_NUM(stopdto);
+	    	
+	    	//중복체크 작업
+	    	RouteStopDAO routestopdao = sqlsession.getMapper(RouteStopDAO.class);
+	    	routestopcheck =  routestopdao.insertRouteStopCheck(routestopdto);
+	    	
+	    	if(stopcheck == 0){
+	    		stopinsertcheck = stopdao.insertStopData(stopdto);	    		
+	    	}
+	    	
+	    	if(routestopcheck == 0){	    		
+	    		routestopinsertcheck = routestopdao.insertRouteStopData(routestopdto);
+	    	}
+	    	j++;
+	    	
 	    }
-	   
-	    out.print(jsonmaps);
+	    
+	    
+	    if(stopinsertcheck ==1){
+    		System.out.println("Stop 입력성공");
+    	}else{
+    		System.out.println("Stop 입력실패");
+    	}	
+	    
+	    if(routestopinsertcheck ==1){
+    		System.out.println("RouteStop 입력성공");
+    	}else{
+    		System.out.println("RouteStop입력실패");
+    	}
 	}
 
 }
