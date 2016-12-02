@@ -298,6 +298,7 @@ public class BusStopManageService {
 		PrintWriter out=null;
 		response.setCharacterEncoding("UTF-8");
 		out = response.getWriter();
+		ArrayList<JSONObject> locations = null;
 		/*
 		 	route id
 		 	
@@ -316,7 +317,7 @@ public class BusStopManageService {
 			JSONObject locations3 = multiLocationSearch(request , response, "234000043");
 			JSONObject locations4 = multiLocationSearch(request , response, "234000145");
 			
-			ArrayList<JSONObject> locations = new ArrayList<JSONObject>();
+			locations = new ArrayList<JSONObject>();
 			locations.add(locations1);
 			locations.add(locations2);
 			locations.add(locations3);
@@ -332,6 +333,8 @@ public class BusStopManageService {
 	}
 	
 	public JSONObject multiLocationSearch(HttpServletRequest request , HttpServletResponse response, String venid) throws IOException{
+		
+		
 		System.out.println("멀티위치추적되냐");				
 		JSONObject jsonmaps = null;
 		StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/buspos/getBusPosByVehId"); //URL

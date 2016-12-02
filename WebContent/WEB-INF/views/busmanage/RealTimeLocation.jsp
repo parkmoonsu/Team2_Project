@@ -691,7 +691,7 @@
     	//비동기로 노선 전체 버스를 위치추적한다.
     	stopSearch = setInterval(function(){
     		$.ajax({
-                url : "Search.do",
+                url : "RealTimeSearch.admin",
                 type : "get",
                 dataType : "json",
                 data : {busNo:"all"},
