@@ -133,6 +133,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	on mo.o_code = rego.o_code
 	join moff mo1
 	on mo1.o_code = rego.ro_code
+	where ko.ko_code = '600' and rego.o_check='Y'
 	</select>
+	
+	<select id="getRequestInfoCal" resultType="kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO">
+	select bu.R_NUM, mem.M_NAME, rego.M_ID, mo.O_DATE, rego.o_code, rego.TEMP
+	from member mem
+	join bus bu
+	on mem.b_vehiclenum = bu.b_vehiclenum
+	join reguloff rego
+	on mem.m_id = rego.m_id
+	join moff mo
+	on mo.O_CODE = rego.O_CODE
+	where bu.r_num = #{r_num}
+	</select>
+	
+	<select id="getMemberTempTrue" resultType="kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2">
+	select ko.KO_NAME, rego.M_ID,mem.M_NAME, mo.O_DATE,mo.O_CODE, mo1.O_DATE as o_date_1, mo1.O_CODE as o_code_1,
+	rego.RO_REQDATE , rego.RO_REGDATE,mem1.M_ID as m_id_1, mem1.M_NAME as m_name_1,bu.R_NUM
+	from
+	reguloffr rego
+	join member mem
+	on mem.m_id = rego.m_id
+	join bus bu
+	on
+	bu.B_VEHICLENUM = mem.B_VEHICLENUM
+	join member mem1
+	on mem1.m_id =
+	rego.ro_object
+	join koff ko
+	on ko.ko_code = rego.ko_code
+	join moff mo
+	on
+	mo.o_code = rego.o_code
+	join moff mo1
+	on mo1.o_code = rego.ro_code
+	where
+	rego.M_ID in (select mem.M_ID
+	from member mem
+	join bus bu
+	on bu.B_VEHICLENUM = mem.B_VEHICLENUM
+	join reguloff reg
+	on reg.M_ID = mem.M_ID
+	where reg.TEMP = 'true' and bu.R_NUM = #{r_num}) and ko.ko_code = '600' and
+	rego.o_check='Y'
+	</select>
+	
+	<update id="updateFirstRegister" parameterType="String">
+		update reguloff set o_code = #{param2}, ro_regdate = sysdate, temp = null where m_id = #{param1}
+	</update>
+	
+	<update id="updateFirstRegisterRecord" parameterType="String">
+		update reguloffr set ko_code = '601', ro_regdate = sysdate where m_id = #{m_id} and ko_code = '600'
+	</update>
+	
+	<update id="refuseFirstRegisterRecord" parameterType="String">
+		update reguloffr set ko_code = '602' where m_id = #{m_id} and ko_code = '600'
+	</update>
+	
 	<!-- 휴무 요청 상태 관리 끝 -->
 </mapper>
