@@ -1,5 +1,8 @@
 package kr.or.bus.dao;
 
-public interface StopDAO {
+import kr.or.bus.dto.StopDTO;
 
+public interface StopDAO {
+	public int selectS_NUM(StopDTO dto);
+	public void insertStopData(StopDTO dto);
 }

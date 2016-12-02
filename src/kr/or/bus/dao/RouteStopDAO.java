@@ -1,5 +1,7 @@
 package kr.or.bus.dao;
 
-public interface RouteStopDAO {
+import kr.or.bus.dto.RouteStopDTO;
 
+public interface RouteStopDAO {
+	public void insertRouteStopDato(RouteStopDTO dto);
 }

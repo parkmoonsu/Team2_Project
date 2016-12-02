@@ -4,4 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.bus.dao.StopDAO">
 	<!-- Stop 테이블 -->
+	<select id="selectS_NUM">
+		select COUNT(*) from stop WHERE S_NUM = {S_NUM}
+	</select>
+	
+	<insert id="insertStopData" parameterType="kr.or.bus.dto.StopDTO">
+		INSERT INTO stop(S_NUM, S_X, S_Y, S_NAME) VALUES(#{S_NUM}, #{S_X}, #{S_X}, #{S_NAME})
+	</insert>
 </mapper>
