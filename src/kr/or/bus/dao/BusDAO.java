@@ -50,14 +50,17 @@ public interface BusDAO {
 	//버스 수정 - 기사 가져오기
 	public List<MemberDTO> getMembers(String mid);
 	
-	//임시 노선별 출결현황 상태
-	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String m_name, String tdate);
-	            
-	//노선별 출결상황에서 이름,날짜 가져오기
-	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getNdselect(String r_num);
 	
-	//노설별 출결상황에서 날짜
-	//public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getDate();
+	
+	//임시 노선별 출결현황 상태
+ // public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getShow(String m_name, String tdate);
+	public String[] getShow(String m_name);
+	
+	public String[] getStat(String m_name);
+	
+	//노선별 출결상황에서 이름,날짜 가져오기
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getNdselect();
+	
 	
 	//버스 수정
 	public void updateBus(String b_vehiclenum , String g_name , String r_num , String hidden);
@@ -81,5 +84,6 @@ public interface BusDAO {
 	public int wBus();
 	//고속버스 개수
 	public int gBus();
-
+	//미정
+	public int noRoute();
 }

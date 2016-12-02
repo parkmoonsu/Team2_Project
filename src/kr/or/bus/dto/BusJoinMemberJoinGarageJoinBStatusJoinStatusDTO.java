@@ -9,6 +9,7 @@
 
 package kr.or.bus.dto;
 
+
 public class BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO {
 	//필요한 컬럼만 가져왔으니 이 DTO를 사용하려면 필요한 컬럼 추가할것
 	private int r; // ROWNUM
@@ -82,18 +83,11 @@ public class BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO {
 	
 	
 	
-	@Override
-	public String toString() {
-		return "BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO [r=" + r + ", b_vehiclenum=" + b_vehiclenum + ", r_num="
-				+ r_num + ", g_num=" + g_num + ", b_order=" + b_order + ", g_name=" + g_name + ", m_name=" + m_name
-				+ ", m_id=" + m_id + ", s_name=" + s_name + "]";
-	}
-
-
 
 	///임시 노선별 출결현황
 	private String c_date;
-
+	private BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO dto;
+	
 	public String getC_date() {
 		return c_date;
 	}
@@ -110,6 +104,21 @@ public class BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO {
 	public void setCs_stat(String cs_stat) {
 		this.cs_stat = cs_stat;
 	}
+	public BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO getDto() {
+		return dto;
+	}
+	public void setDto(BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO dto) {
+		this.dto = dto;
+	}
+	@Override
+	public String toString() {
+		return "BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO [r=" + r + ", b_vehiclenum=" + b_vehiclenum + ", r_num="
+				+ r_num + ", g_num=" + g_num + ", b_order=" + b_order + ", g_name=" + g_name + ", m_name=" + m_name
+				+ ", m_id=" + m_id + ", s_name=" + s_name + ", c_date=" + c_date + ", dto=" + dto + ", cs_stat="
+				+ cs_stat + "]";
+	}
+
+
 	
 
 		

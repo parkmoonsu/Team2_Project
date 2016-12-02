@@ -1,312 +1,297 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="se"
+	uri="http://www.springframework.org/security/tags"%>
+
+
 <!DOCTYPE html>
-<html lang="utf-8">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
-  	<!-- Bootstrap core CSS -->
-  	<link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bootstrap-3.3.7/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <script src="bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
-    <script src="http://www.w3schools.com/lib/w3data.js"></script>
-  	<script src="bootstrap-3.3.7/assets/css/carousel/jssor.slider-21.1.6.mini.js" type="text/javascript"></script>
-  	<script src="bootstrap-3.3.7/assets/css/carousel/docs.min.js" type="text/javascript"></script>
-  	<script src="bootstrap-3.3.7/assets/css/carousel/bootstrap.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="bootstrap-3.3.7/assets/css/carousel/ie10-viewport-bug-workaround.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
-    <script src="bootstrap-3.3.7/assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="bootstrap-3.3.7/assets/js/vendor/holder.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <title>버스 운영 관리 시스템.</title>
+<html lang="UTF-8">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-        /* jssor slider bullet navigator skin 05 css */
-        /*
-        .jssorb05 div           (normal)
-        .jssorb05 div:hover     (normal mouseover)
-        .jssorb05 .av           (active)
-        .jssorb05 .av:hover     (active mouseover)
-        .jssorb05 .dn           (mousedown)
-        */
-        .jssorb05 {
-            position: absolute;
-        }
-        .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
-            position: absolute;
-            /* size of bullet elment */
-            width: 16px;
-            height: 16px;
-            background: url('bootstrap-3.3.7/assets/css/img/b05.png') no-repeat;
-            overflow: hidden;
-            cursor: pointer;
-            
-        }
-        .jssorb05 div { background-position: -7px -7px; }
-        .jssorb05 div:hover, .jssorb05 .av:hover { background-position: -37px -7px; }
-        .jssorb05 .av { background-position: -67px -7px; }
-        .jssorb05 .dn, .jssorb05 .dn:hover { background-position: -97px -7px; }
-
-        /* jssor slider arrow navigator skin 22 css */
-        /*
-        .jssora22l                  (normal)
-        .jssora22r                  (normal)
-        .jssora22l:hover            (normal mouseover)
-        .jssora22r:hover            (normal mouseover)
-        .jssora22l.jssora22ldn      (mousedown)
-        .jssora22r.jssora22rdn      (mousedown)
-        .jssora22l.jssora22lds      (disabled)
-        .jssora22r.jssora22rds      (disabled)
-        */
-        .jssora22l, .jssora22r {
-            display: block;
-            position: absolute;
-            /* size of arrow element */
-            width: 40px;
-            height: 58px;
-            cursor: pointer;
-            background: url('bootstrap-3.3.7/assets/css/img/a22.png') center center no-repeat;
-            overflow: hidden;
-        }
-        .jssora22l { background-position: -10px -31px; }
-        .jssora22r { background-position: -70px -31px; }
-        .jssora22l:hover { background-position: -130px -31px; }
-        .jssora22r:hover { background-position: -190px -31px; }
-        .jssora22l.jssora22ldn { background-position: -250px -31px; }
-        .jssora22r.jssora22rdn { background-position: -310px -31px; }
-        .jssora22l.jssora22lds { background-position: -10px -31px; opacity: .3; pointer-events: none; }
-        .jssora22r.jssora22rds { background-position: -70px -31px; opacity: .3; pointer-events: none; }
-    </style>
-   
-  </head>
-<body>
-	<div class="container">
-  	<header>
-  		<div w3-include-html="sidebar/header.jsp"></div>
-  	</header>
-  	<script>
-
-	w3IncludeHTML();
-	</script>
+<title>KOSBUS</title>
 	
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/mainCss/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<!-- Simple Line Icons -->
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/mainCss/css/magnific-popup.css">
+	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/mainCss/css/icomoon.css">
+	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/mainCss/css/simple-line-icons.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/mainCss/css/bootstrap.css">
 
-            var jssor_1_SlideoTransitions = [
-              [{b:-1,d:1,o:-1},{b:0,d:1000,o:1}],
-              [{b:1900,d:2000,x:-379,e:{x:7}}],
-              [{b:1900,d:2000,x:-379,e:{x:7}}],
-              [{b:-1,d:1,o:-1,r:288,sX:9,sY:9},{b:1000,d:900,x:-1400,y:-660,o:1,r:-288,sX:-9,sY:-9,e:{r:6}},{b:1900,d:1600,x:-200,o:-1,e:{x:16}}]
-            ];
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/mainCss/css/style.css">
 
-            var jssor_1_options = {
-              $AutoPlay: true,
-              $SlideDuration: 800,
-              $SlideEasing: $Jease$.$OutQuint,
-              $CaptionSliderOptions: {
-                $Class: $JssorCaptionSlideo$,
-                $Transitions: jssor_1_SlideoTransitions
-              },
-              $ArrowNavigatorOptions: {
-                $Class: $JssorArrowNavigator$
-              },
-              $BulletNavigatorOptions: {
-                $Class: $JssorBulletNavigator$
-              }
-            };
+	<!-- Styleswitcher ( This style is for demo purposes only, you may delete this anytime. ) -->
+	<link rel="stylesheet" id="theme-switch" href="${pageContext.request.contextPath}/mainCss/css/style.css">
+	<!-- End demo purposes only -->
 
-            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
 
-            /*responsive code begin*/
-            /*you can remove responsive code if you don't want the slider scales while window resizing*/
-            function ScaleSlider() {
-                var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
-                if (refSize) {
-                    refSize = Math.min(refSize, 1920);
-                    jssor_1_slider.$ScaleWidth(refSize);
-                }
-                else {
-                    window.setTimeout(ScaleSlider, 30);
-                }
-            }
-            ScaleSlider();
-            $(window).bind("load", ScaleSlider);
-            $(window).bind("resize", ScaleSlider);
-            $(window).bind("orientationchange", ScaleSlider);
-            /*responsive code end*/
-        });
-    </script>
-    
- 	<div class="container-fluid" style="margin-top: 80px;padding:0px">
- 	
-    <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden; visibility: hidden;">
-        <!-- Loading Screen -->
-        <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-            <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-            <div style="position:absolute;display:block;background:url('bootstrap-3.3.7/assets/css/img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
-        </div>
-        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
-            <div data-p="225.00">
-                <img data-u="image" src="bootstrap-3.3.7/assets/css/img/red.jpg" />
-                <div style="position: absolute; top: 30px; left: 30px; width: 480px; height: 120px; font-size: 50px; color: #ffffff; line-height: 60px;">TOUCH SWIPE SLIDER</div>
-                <div style="position: absolute; top: 300px; left: 30px; width: 480px; height: 120px; font-size: 30px; color: #ffffff; line-height: 38px;">우리가 어떤 민족입니까..?</div>
-                <div data-u="caption" data-t="0" style="position: absolute; top: 120px; left: 650px; width: 470px; height: 220px;">
-                    <img style="position: absolute; top: 0px; left: 0px; width: 470px; height: 220px;" src="bootstrap-3.3.7/assets/css/img/c-phone-horizontal.png" />
-                    <div style="position: absolute; top: 4px; left: 45px; width: 379px; height: 213px; overflow: hidden;">
-                        <img data-u="caption" data-t="1" style="position: absolute; top: 0px; left: 0px; width: 379px; height: 213px;" src="/Team2_Project/images/bono.jpg" />
-                        <img data-u="caption" data-t="2" style="position: absolute; top: 0px; left: 379px; width: 379px; height: 213px;" src="bootstrap-3.3.7/assets/css/img/c-slide-3.jpg" />
-                    </div>
-                    <img style="position: absolute; top: 4px; left: 45px; width: 379px; height: 213px;" src="bootstrap-3.3.7/assets/css/img/c-navigator-horizontal.png" />
-                    <img data-u="caption" data-t="3" style="position: absolute; top: 740px; left: 1600px; width: 257px; height: 300px;" src="bootstrap-3.3.7/assets/css/img/c-finger-pointing.png" />
-                </div>
-            </div>
-            <div data-p="225.00" style="display: none;">
-                <img data-u="image" src="bootstrap-3.3.7/assets/css/img/purple.jpg" />
-                 <div style="position: absolute; top: 300px; left: 30px; width: 480px; height: 120px; font-size: 30px; color: #ffffff; line-height: 38px;">배다른 민족입니다..</div>
-               
-            </div>
-            <a data-u="any" href="http://www.jssor.com" style="display:none">Full Width Slider</a>
-            <div data-p="225.00" data-po="80% 55%" style="display: none;">
-                <img data-u="image" src="/Team2_Project/images/bono.jpg" />
-            </div>
-        </div>
-        <!-- Bullet Navigator -->
-        <div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
-            <!-- bullet navigator item prototype -->
-            <div data-u="prototype" style="width:16px;height:16px;"></div>
-        </div>
-        <!-- Arrow Navigator -->
-        <span data-u="arrowleft" class="jssora22l" style="top:0px;left:8px;width:40px;height:58px;" data-autocenter="2"></span>
-        <span data-u="arrowright" class="jssora22r" style="top:0px;right:8px;width:40px;height:58px;" data-autocenter="2"></span>
-    </div>
-    
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-      </div>
-    </div> <!-- /container -->
-</div>
-	<div class="container footer">
-        <hr class="featurette-divider">
- 		<jsp:include page="/sidebar/footer.jsp"></jsp:include>
- 		        </div>
- 		        </div>
-    <!-- /container -->
+	<style>
+	/* For demo purpose only */
+	
+	/* For Demo Purposes Only ( You can delete this anytime :-) */
+	#colour-variations {
+		padding: 10px;
+		-webkit-transition: 0.5s;
+	  	-o-transition: 0.5s;
+	  	transition: 0.5s;
+		width: 140px;
+		position: fixed;
+		left: 0;
+		top: 100px;
+		z-index: 999999;
+		background: #fff;
+		/*border-radius: 4px;*/
+		border-top-right-radius: 4px;
+		border-bottom-right-radius: 4px;
+		-webkit-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
+		-moz-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
+		-ms-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
+		box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
+	}
+	#colour-variations.sleep {
+		margin-left: -140px;
+	}
+	#colour-variations h3 {
+		text-align: center;;
+		font-size: 11px;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: #777;
+		margin: 0 0 10px 0;
+		padding: 0;;
+	}
+	#colour-variations ul,
+	#colour-variations ul li {
+		padding: 0;
+		margin: 0;
+	}
+	#colour-variations li {
+		list-style: none;
+		display: block;
+		margin-bottom: 5px!important;
+		float: left;
+		width: 100%;
+	}
+	#colour-variations li a {
+		width: 100%;
+		position: relative;
+		display: block;
+		overflow: hidden;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		-ms-border-radius: 4px;
+		border-radius: 4px;
+		-webkit-transition: 0.4s;
+		-o-transition: 0.4s;
+		transition: 0.4s;
+	}
+	#colour-variations li a:hover {
+	  	opacity: .9;
+	}
+	#colour-variations li a > span {
+		width: 33.33%;
+		height: 20px;
+		float: left;
+		display: -moz-inline-stack;
+		display: inline-block;
+		zoom: 1;
+		*display: inline;
+	}
+	
 
-    <script>
-    
-    $(function() {
-        
-        var $formLogin = $('#login-form');
-        var $formLost = $('#lost-form');
-        var $formRegister = $('#register-form');
-        var $divForms = $('#div-forms');
-        var $modalAnimateTime = 300;
-        var $msgAnimateTime = 150;
-        var $msgShowTime = 2000;
+	.option-toggle {
+		position: absolute;
+		right: 0;
+		top: 0;
+		margin-top: 5px;
+		margin-right: -30px;
+		width: 30px;
+		height: 30px;
+		background: #f64662;
+		text-align: center;
+		border-top-right-radius: 4px;
+		border-bottom-right-radius: 4px;
+		color: #fff;
+		cursor: pointer;
+		-webkit-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
+		-moz-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
+		-ms-box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
+		box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
+	}
+	.option-toggle i {
+		top: 2px;
+		position: relative;
+	}
+	.option-toggle:hover, .option-toggle:focus, .option-toggle:active {
+		color:  #fff;
+		text-decoration: none;
+		outline: none;
+	}
+	</style>
+	<!-- End demo purposes only -->
 
-        $("form").submit(function () {
-            switch(this.id) {
-                case "login-form":
-                    var $lg_username=$('#login_username').val();
-                    var $lg_password=$('#login_password').val();
-                    if ($lg_username == "ERROR") {
-                        msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login error");
-                    } else {
-                        msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
-                    }
-                    return false;
-                    break;
-                case "lost-form":
-                    var $ls_email=$('#lost_email').val();
-                    if ($ls_email == "ERROR") {
-                        msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Send error");
-                    } else {
-                        msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send OK");
-                    }
-                    return false;
-                    break;
-                case "register-form":
-                    var $rg_username=$('#register_username').val();
-                    var $rg_email=$('#register_email').val();
-                    var $rg_password=$('#register_password').val();
-                    if ($rg_username == "ERROR") {
-                        msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
-                    } else {
-                        msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
-                    }
-                    return false;
-                    break;
-                default:
-                    return false;
-            }
-            return false;
-        });
-        
-        $('#login_register_btn').click( function () { modalAnimate($formLogin, $formRegister) });
-        $('#register_login_btn').click( function () { modalAnimate($formRegister, $formLogin); });
-        $('#login_lost_btn').click( function () { modalAnimate($formLogin, $formLost); });
-        $('#lost_login_btn').click( function () { modalAnimate($formLost, $formLogin); });
-        $('#lost_register_btn').click( function () { modalAnimate($formLost, $formRegister); });
-        $('#register_lost_btn').click( function () { modalAnimate($formRegister, $formLost); });
-        
-        function modalAnimate ($oldForm, $newForm) {
-            var $oldH = $oldForm.height();
-            var $newH = $newForm.height();
-            $divForms.css("height",$oldH);
-            $oldForm.fadeToggle($modalAnimateTime, function(){
-                $divForms.animate({height: $newH}, $modalAnimateTime, function(){
-                    $newForm.fadeToggle($modalAnimateTime);
-                });
-            });
-        }
-        
-        function msgFade ($msgId, $msgText) {
-            $msgId.fadeOut($msgAnimateTime, function() {
-                $(this).text($msgText).fadeIn($msgAnimateTime);
-            });
-        }
-        
-        function msgChange($divTag, $iconTag, $textTag, $divClass, $iconClass, $msgText) {
-            var $msgOld = $divTag.text();
-            msgFade($textTag, $msgText);
-            $divTag.addClass($divClass);
-            $iconTag.removeClass("glyphicon-chevron-right");
-            $iconTag.addClass($iconClass + " " + $divClass);
-            setTimeout(function() {
-                msgFade($textTag, $msgOld);
-                $divTag.removeClass($divClass);
-                $iconTag.addClass("glyphicon-chevron-right");
-                $iconTag.removeClass($iconClass + " " + $divClass);
-      		}, $msgShowTime);
-        }
-    });
-    
-    </script>
-    
-    
-  </body>
+
+	<!-- Modernizr JS -->
+	<script src="${pageContext.request.contextPath}/mainCss/js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+	<header role="banner" id="fh5co-header">
+			<div class="container">
+				<!-- <div class="row"> -->
+			    <nav class="navbar navbar-default">
+		        <div class="navbar-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		         <a class="navbar-brand" href="bus.htm">KosBus</a> 
+		        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav navbar-right">
+		            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
+		            <li><a href="#" data-nav-section="work"><span>Work</span></a></li> 
+		            <li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
+		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
+		          </ul>
+		        </div>
+			    </nav>
+		  </div>
+	</header>
+
+
+	<section id="fh5co-home" data-section="home" style="background-image: url(images/si.jpg);" data-stellar-background-ratio="0.5">
+		<div class="gradient"></div>
+		<div class="container">
+			<div class="text-wrap">
+				<div class="text-inner">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+							<h1 class="to-animate">북유럽사람들이 책을 사랑하는 이유는..?</h1>
+							<h2 class="to-animate">Book you love.....</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slant"></div>
+	</section>
+
+	<section id="fh5co-intro" data-section="work">
+		<div class="container">
+			<div class="row row-bottom-padded-lg">
+				<div class="fh5co-block to-animate" style="background-image: url(images/img_7.jpg);">
+					<div class="overlay-darker"></div>
+					<div class="overlay"></div>
+					<div class="fh5co-text">
+						<i class="fh5co-intro-icon icon-bulb"></i>
+						<h2>Plan</h2>
+						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+						<p><a href="#" class="btn btn-primary">Get In Touch</a></p>
+					</div>
+				</div>
+				<div class="fh5co-block to-animate" style="background-image: url(images/img_8.jpg);">
+					<div class="overlay-darker"></div>
+					<div class="overlay"></div>
+					<div class="fh5co-text">
+						<i class="fh5co-intro-icon icon-wrench"></i>
+						<h2>Develop</h2>
+						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+						<p><a href="#" class="btn btn-primary">Click Me</a></p>
+					</div>
+				</div>
+				<div class="fh5co-block to-animate" style="background-image: url(images/img_10.jpg);">
+					<div class="overlay-darker"></div>
+					<div class="overlay"></div>
+					<div class="fh5co-text">
+						<i class="fh5co-intro-icon icon-rocket"></i>
+						<h2>Launch</h2>
+						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+						<p><a href="#" class="btn btn-primary">Why Us?</a></p>
+					</div>
+				</div>
+			</div>
+			<div class="row watch-video text-center to-animate">
+				<span>Watch the video</span>
+
+				<a href="https://vimeo.com/channels/staffpicks/93951774" class="popup-vimeo btn-video"><i class="icon-play2"></i></a>
+			</div>
+		</div>
+	</section>
+
+	
+	
+	<footer id="footer" role="contentinfo">
+		<!-- <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a> -->
+		<div class="container">
+			<div class="">
+				<div class="col-md-12 text-center">
+					<p>씨바아아아앙아아아알 혀어어어어어어어ㅓ업ㅓ사아아아아앙아아아앙</p>
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<ul class="social social-circle">
+						<li><a href="#"><i class="icon-twitter"></i></a></li>
+						<li><a href="#"><i class="icon-facebook"></i></a></li>
+						<li><a href="#"><i class="icon-youtube"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+	
+	<!-- jQuery -->
+	<script src="${pageContext.request.contextPath}/mainCss/js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="${pageContext.request.contextPath}/mainCss/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="${pageContext.request.contextPath}/mainCss/js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="${pageContext.request.contextPath}/mainCss/js/jquery.waypoints.min.js"></script>
+	<!-- Stellar Parallax -->
+	<script src="${pageContext.request.contextPath}/mainCss/js/jquery.stellar.min.js"></script>
+	<!-- Counter -->
+	<script src="${pageContext.request.contextPath}/mainCss/js/jquery.countTo.js"></script>
+	<!-- Magnific Popup -->
+	<script src="${pageContext.request.contextPath}/mainCss/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/mainCss/js/magnific-popup-options.js"></script>
+
+
+	<!-- Main JS (Do not remove) -->
+	<script src="${pageContext.request.contextPath}/mainCss/js/main.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#log").click(function() {
+		location.href="login.htm"
+	});
+	
+	$("#gaip").click(function() {
+		location.href="join.htm"
+	});
+	
+	
+});
+
+</script>
+
+
+
+
+	</body>
 </html>
+

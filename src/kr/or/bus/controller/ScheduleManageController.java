@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.RouteDTO;
@@ -107,7 +108,13 @@ public class ScheduleManageController {
 		System.out.println(list);
 		return "schedule/schedule_managertimetable";
 	}
+	/*
+	제목 : 기사 휴무 및 스케쥴 관리 
+	작성자 : 강민수
+	목적 : cal 구현
+	*/
 	
+<<<<<<< HEAD
 	/*
 	제목 : 예상 스케쥴 뽑기
 	작성자 : 김수현
@@ -134,4 +141,11 @@ public class ScheduleManageController {
 	
 
 	
+=======
+	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
+	public String getHistoryCal(Model model){
+		service.getRequestState(model);
+		return "schedule/schedule_managechangeapprove";
+	}
+>>>>>>> 49ecdf9ad294c9a3d35e2b3252ee2919d4238806
 }

@@ -16,12 +16,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.RnumcommuteDTO;
 import kr.or.bus.service.BusManageService;
 
 @Controller
@@ -42,11 +44,13 @@ public class BusManageController {
 		int ncount = service.nBus();
 		int wcount = service.wBus();
 		int gcount = service.gBus();
+		int noroute = service.noRoute();
 		
 		model.addAttribute("m", mcount);
 		model.addAttribute("n", ncount);
 		model.addAttribute("w", wcount);
 		model.addAttribute("g", gcount);
+		model.addAttribute("no", noroute);
 		
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
@@ -214,12 +218,19 @@ public class BusManageController {
 	
 	//임시 노선별 출결현황에서 이름 가져오기
 	@RequestMapping("/routename.admin")
-	public String showname(String r_num, String m_name, String tdate, Model model){
+	public String showlist(ModelMap map){
+		List<RnumcommuteDTO> list = service.getNdselect();
+
+		map.addAttribute("list",list);
+		return "commute/attendance";
+		
+	}
+	/*public String showname(String r_num, String m_name, String tdate, Model model){
 		
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.getNdselect(r_num);
 		//List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list2;
 		
-		/*for(int i=0; i<list.size(); i++){
+		for(int i=0; i<list.size(); i++){
 			//이름,시간,상태
 			list.get(i).getM_name();
 			list.get(i).getCs_stat();
@@ -229,17 +240,15 @@ public class BusManageController {
 			
 
 		}
-		*/
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list2 = service.getShow(m_name, tdate);
-		//list2 = service.getShow(list);
-	
 		
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list2 = service.getShow(m_name, tdate);
+			
 		model.addAttribute("list", list);
 		model.addAttribute("list2", list2);
 		
 		return "commute/attendance";
 		
-	}
+	}*/
 		
 
 	@RequestMapping("/update.admin")

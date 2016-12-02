@@ -108,6 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update reguloff set o_code = #{param2} where m_id = #{param1}
 	</update>
 	
+<<<<<<< HEAD
 	<!-- 최종예상스케줄에 관련된 데이터 불러오기 -->
 
 	<select id="getmemberjoinreg" resultType="kr.or.bus.dto.MemberJoinRegulOffrDTO">
@@ -118,4 +119,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getrnum" resultType="kr.or.bus.dto.RouteDTO">
 	select r_num from route
 	</select>
+=======
+	<!-- 휴무 요청 상태 관리 -->
+	<select id="getRequestNum" resultType="Integer">
+		select count(*) from reguloffr where ko_code='600' and o_check='Y'
+	</select>
+	
+	<select id="getRequestRefuseNum" resultType="Integer">
+		select count(*) from reguloffr where ko_code='602' and o_check='Y'
+	</select>
+	
+	<select id="getRequestMember" resultType="kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO">
+	select ko.KO_NAME, rego.M_ID,mem.M_NAME, mo.O_DATE, mo1.O_DATE,
+	rego.RO_REQDATE , rego.RO_REGDATE,mem1.M_ID, mem1.M_NAME,bu.R_NUM
+	from reguloffr rego
+	join member mem
+	on mem.m_id = rego.m_id
+	join bus bu
+	on bu.B_VEHICLENUM = mem.B_VEHICLENUM
+	join member mem1
+	on mem1.m_id = rego.ro_object
+	join koff ko
+	on ko.ko_code = rego.ko_code
+	join moff mo
+	on mo.o_code = rego.o_code
+	join moff mo1
+	on mo1.o_code = rego.ro_code
+	</select>
+	<!-- 휴무 요청 상태 관리 끝 -->
+>>>>>>> 49ecdf9ad294c9a3d35e2b3252ee2919d4238806
 </mapper>
