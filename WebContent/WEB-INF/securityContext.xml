@@ -33,7 +33,8 @@
 			access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/updateinfo.htm"
 			access="hasRole('ROLE_USER')"/>
-	
+		<security:intercept-url pattern="/ChangeForm.htm"
+			access="hasRole('ROLE_USER')"/>
 </security:http>
 <security:authentication-manager>
 		<security:authentication-provider>

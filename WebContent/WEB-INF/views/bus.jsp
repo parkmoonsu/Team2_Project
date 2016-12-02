@@ -171,7 +171,7 @@
 	</header>
 
 
-	<section id="fh5co-home" data-section="home" style="background-image: url(images/king.gif);" data-stellar-background-ratio="0.5">
+	<section id="fh5co-home" data-section="home" style="background-image: url(http://blogfiles5.naver.net/20150202_51/star20_10_1422861826191bq8Qi_GIF/tumblr_m2ppfrgwKx1r3bteso1_500.gif);" data-stellar-background-ratio="0.5">
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">

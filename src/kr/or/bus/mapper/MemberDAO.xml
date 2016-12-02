@@ -238,4 +238,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select count(*) from mdetail where m_check = 'N'
 	</select>
 	
+	<select id="csstatic" resultType = "int">
+	select count(*)
+	from commute c join cstart cs
+	on c.cs_code = cs.cs_code
+	where m_name = #{param1} and c_date like '%'||#{param2}||'%' and cs_stat = '출근'
+
+	</select>
+
+	<select id="csestatic" resultType = "int">
+	select count(*)
+	from commute c join cstart cs
+	on c.cs_code = cs.cs_code
+	where m_name = #{param1} and c_date like '%'||#{param2}||'%' and cs_stat = '지각'
+
+	</select>
+	
+	
 </mapper>

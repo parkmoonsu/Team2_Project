@@ -11,6 +11,7 @@ package kr.or.bus.dao;
 import java.util.List;
 
 import kr.or.bus.dto.ApproveDTO;
+import kr.or.bus.dto.CommuteJoinCstartJoinCendDTO;
 import kr.or.bus.dto.MDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
@@ -127,4 +128,9 @@ public interface MemberDAO {
 	
 	//상단 nav 알림 카운트
 	public int approveCount();
+	
+	//회원 정보 - 출결상황 보기
+	public int csstatic(String m_name , String c_date);
+	public int csestatic(String m_name , String c_date);
+	
 }
