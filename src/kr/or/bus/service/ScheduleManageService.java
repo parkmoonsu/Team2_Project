@@ -10,6 +10,7 @@ import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
+import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
@@ -132,6 +133,39 @@ public class ScheduleManageService {
 		model.addAttribute("total", total);
 		model.addAttribute("refuse", refuse);
 		return total;
+	}
+
+	
+	//휴무 요청 노선에 따른 정보 가져오기
+	public List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> getRequestInfoCal(String r_num, Model model){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> mrmbrdto = dao.getRequestInfoCal(r_num);
+		List<MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2> mbrdto = dao.getMemberTempTrue(r_num);
+		System.out.println(mbrdto.toString());
+		model.addAttribute("mrmbrdto", mrmbrdto); //정규 휴무 인원
+		model.addAttribute("mbrdto", mbrdto); //정규 휴무 temp = true 인원
+		return mrmbrdto;
+	}
+	
+	//최초 휴무 등록자 요청 update 하기
+	public int approveFirstRegister(String m_id, String o_code){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		int result = dao.updateFirstRegister(m_id, o_code);
+		return result;
+	}
+	
+	//최초 휴무 등록자 휴무 기록 update 하기
+	public int updateFirstRegisterRecord(String m_id, String o_code){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		int result = dao.updateFirstRegisterRecord(m_id);
+		return result;
+	}
+	
+	//최초 휴무 등록자 거절 하기
+	public int updateRefuseFirstRegister(String m_id, String o_code){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		int result = dao.refuseFirstRegisterRecord(m_id);
+		return result;
 	}
 
 }

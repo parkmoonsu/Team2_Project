@@ -7,7 +7,7 @@
 */
 package kr.or.bus.dto;
 
-public class MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO {
+public class MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2 {
 	private String m_id;
 	private String m_name;
 	
@@ -125,7 +125,7 @@ public class MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO {
 
 	@Override
 	public String toString() {
-		return "MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO [m_id=" + m_id + ", m_name=" + m_name + ", o_date="
+		return "MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2 [m_id=" + m_id + ", m_name=" + m_name + ", o_date="
 				+ o_date + ", o_code=" + o_code + ", m_id_1=" + m_id_1 + ", m_name_1=" + m_name_1 + ", o_date_1="
 				+ o_date_1 + ", o_code_1=" + o_code_1 + ", ro_reqdate=" + ro_reqdate + ", ro_regdate=" + ro_regdate
 				+ ", ko_name=" + ko_name + ", r_num=" + r_num + "]";

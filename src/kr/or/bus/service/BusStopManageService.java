@@ -7,10 +7,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -224,6 +226,101 @@ public class BusStopManageService {
 		return jsonmaps;
 	}
 	
+		//버스 원본 경로를 디비 로부터  route id select 해서 공공데이터에서 버스 경로를 가져온다.	
+		public void busRouteCall(String r_num,RouteDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException{						
+			PrintWriter out=null;
+			String busno = request.getParameter("busNo");
+			RouteDAO dao = null;
+			
+			if(busno.equals("all")){
+				dao = sqlsession.getMapper(RouteDAO.class);
+				dto = dao.routeidSearch(r_num);
+            	JSONObject obs1 = busMultiRouteRead(dto ,request, response);
+            	JSONObject obs2 = busMultiRouteRead(dto ,request, response);
+            	JSONObject obs3 = busMultiRouteRead(dto ,request, response);
+            	JSONObject obs4 = busMultiRouteRead(dto ,request, response);
+            	
+            	ArrayList<JSONObject> obss = new ArrayList<JSONObject>();
+            	obss.add(obs1);
+            	obss.add(obs2);
+            	obss.add(obs3);
+            	obss.add(obs4);
+            	
+            	out = response.getWriter();
+            	out.print(obss);
+            	
+            }else if(!busno.equals("all")){
+            	dao = sqlsession.getMapper(RouteDAO.class);
+            	dto = dao.routeidSearch(r_num);
+            	busSingleRouteRead(dto ,request, response);
+            }																
+		}
+		
+		//읽은 데이터가 1개일경우
+		public void busSingleRouteRead(RouteDTO dto ,HttpServletRequest request, HttpServletResponse response) throws IOException{
+			PrintWriter out = response.getWriter();
+			JSONObject jsonmaps = null;
+			StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/busRouteInfo/getRoutePath"); /*URL*/
+	        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); /*Service Key*/
+	        urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(dto.getR_id(), "UTF-8")); /*노선ID*/
+	        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("999", "UTF-8")); /*검색건수*/
+	        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
+	        URL url = new URL(urlBuilder.toString());
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("GET");
+	        conn.setRequestProperty("Content-type", "application/json");
+	        //System.out.println("Response code: " + conn.getResponseCode());
+	        BufferedReader rd;
+	        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+	            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        } else {
+	            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+	        }
+	        StringBuilder sb = new StringBuilder();
+	        String line;
+	        while ((line = rd.readLine()) != null) {
+	            sb.append(line);
+	        }
+	        rd.close();
+	        conn.disconnect();
+	        
+	        jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
+	        out.print(jsonmaps);
+	        //System.out.println(sb.toString());
+		}
+		
+		//읽을 데이터가 4개일경우
+		public JSONObject busMultiRouteRead(RouteDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException{
+			
+			JSONObject jsonmaps = null;
+			StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/busRouteInfo/getRoutePath"); /*URL*/
+	        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); /*Service Key*/
+	        urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(dto.getR_id(), "UTF-8")); /*노선ID*/
+	        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("999", "UTF-8")); /*검색건수*/
+	        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
+	        URL url = new URL(urlBuilder.toString());
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("GET");
+	        conn.setRequestProperty("Content-type", "application/json");
+	        //System.out.println("Response code: " + conn.getResponseCode());
+	        BufferedReader rd;
+	        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+	            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        } else {
+	            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+	        }
+	        StringBuilder sb = new StringBuilder();
+	        String line;
+	        while ((line = rd.readLine()) != null) {
+	            sb.append(line);
+	        }
+	        rd.close();
+	        conn.disconnect();
+	        //System.out.println(sb.toString());
+	        jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
+	        
+			return jsonmaps;
+		}	
 	
 
 	//수정된 버스정류장 좌표를 저장한다.
@@ -461,7 +558,7 @@ public class BusStopManageService {
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	    conn.setRequestMethod("GET");
 	    conn.setRequestProperty("Content-type", "application/xml");
-	    System.out.println("Response code: " + conn.getResponseCode());
+	    //System.out.println("Response code: " + conn.getResponseCode());
 	    BufferedReader rd;
 	    if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
 	        rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -475,10 +572,27 @@ public class BusStopManageService {
 	    }
 	    rd.close();
 	    conn.disconnect();
-	    System.out.println(sb.toString());    
+	    //System.out.println(sb.toString());    
 	    jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
 	    
+	    JSONArray jsonarray = JSONArray.fromObject(jsonmaps.get("msgBody"));
 	    
+	    for(int i=0; i<jsonarray.size();i++){
+	    	//route 테이블에 insert 할것
+	    	System.out.println(jsonarray.getJSONObject(i).get("stationNm")); //정류장 이름
+	    	System.out.println(jsonarray.getJSONObject(i).get("stationNo")); //정류장 고유번호
+	    	System.out.println(jsonarray.getJSONObject(i).get("gpsX")); //x좌표
+	    	System.out.println(jsonarray.getJSONObject(i).get("gpsY")); //y좌표
+	    	
+	    	//routestop테이블에 insert할것
+	    	System.out.println(jsonarray.getJSONObject(i).get("busRouteNm")); //노선번호(5623)
+	    	System.out.println(jsonarray.getJSONObject(i).get("busRouteId")); //노선id
+	    	System.out.println(jsonarray.getJSONObject(i).get("stationNo")); //정류장 고유번호
+	    	System.out.println(jsonarray.getJSONObject(i).get("seq")); //정차순서
+	    	System.out.println(jsonarray.getJSONObject(i).get("beginTm")); //첫차
+	    	System.out.println(jsonarray.getJSONObject(i).get("lastTm")); //막차	    		    	
+	    }
+	   
 	    out.print(jsonmaps);
 	}
 

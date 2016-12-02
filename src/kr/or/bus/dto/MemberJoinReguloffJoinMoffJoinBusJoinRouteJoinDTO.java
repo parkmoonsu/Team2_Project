@@ -11,9 +11,26 @@ public class MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO {
 	
 	private String m_id;
 	private String m_name;
+	
 	private String o_date;
 	private String o_code;
 	
+	private String r_num;
+	
+	private String temp;
+	
+	public String getR_num() {
+		return r_num;
+	}
+	public void setR_num(String r_num) {
+		this.r_num = r_num;
+	}
+	public String getTemp() {
+		return temp;
+	}
+	public void setTemp(String temp) {
+		this.temp = temp;
+	}
 	public String getO_code() {
 		return o_code;
 	}
