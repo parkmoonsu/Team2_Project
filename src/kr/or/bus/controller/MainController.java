@@ -28,8 +28,10 @@ import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.dto.MemberJoinResRecordDTO;
+import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.service.LoginService;
 import kr.or.bus.service.MainService;
+import net.sf.json.JSONObject;
 
 @Controller
 public class MainController {
@@ -138,5 +140,21 @@ public class MainController {
 		return jsonview;
 		
 	}
+	@RequestMapping("/route.htm")
+	public View getRoute(Model model){
+		List<RouteDTO> rlist = service.getRouteNum();
+		
+		model.addAttribute("rlist", rlist);
+		
+		return jsonview;
+	}
 	
+	@RequestMapping("/busstop.htm")
+	public View getBusStop(Model model , String flotyear , String flotmonth , String flotroute) throws Exception{
+		System.out.println("flotyear : " + flotyear + "flotmonth : " + flotmonth );
+		JSONObject jsonroute = service.busStop(flotyear, flotmonth, flotroute);
+		
+		model.addAttribute("jroute", jsonroute);
+		return jsonview;
+	}
 }
