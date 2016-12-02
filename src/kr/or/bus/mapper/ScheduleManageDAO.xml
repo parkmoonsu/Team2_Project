@@ -122,11 +122,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 휴무 요청 상태 관리 -->
 	<select id="getRequestNum" resultType="Integer">
-		select count(*) from reguloffr where ko_code='600' and o_check='Y'
+		select count(*) from reguloffr where ko_code='600' and o_check='y'
 	</select>
 	
 	<select id="getRequestRefuseNum" resultType="Integer">
-		select count(*) from reguloffr where ko_code='602' and o_check='Y'
+		select count(*) from reguloffr where ko_code='602' and o_check='y'
 	</select>
 	
 	<select id="getRequestMember" resultType="kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO">
@@ -145,7 +145,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	on mo.o_code = rego.o_code
 	join moff mo1
 	on mo1.o_code = rego.ro_code
-	where ko.ko_code = '600' and rego.o_check='Y'
+	where ko.ko_code = '600' and rego.o_check='y'
 	</select>
 	
 	<select id="getRequestInfoCal" resultType="kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO">
@@ -163,32 +163,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMemberTempTrue" resultType="kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2">
 	select ko.KO_NAME, rego.M_ID,mem.M_NAME, mo.O_DATE,mo.O_CODE, mo1.O_DATE as o_date_1, mo1.O_CODE as o_code_1,
 	rego.RO_REQDATE , rego.RO_REGDATE,mem1.M_ID as m_id_1, mem1.M_NAME as m_name_1,bu.R_NUM
-	from
-	reguloffr rego
-	join member mem
-	on mem.m_id = rego.m_id
-	join bus bu
-	on
-	bu.B_VEHICLENUM = mem.B_VEHICLENUM
-	join member mem1
-	on mem1.m_id =
-	rego.ro_object
-	join koff ko
-	on ko.ko_code = rego.ko_code
-	join moff mo
-	on
-	mo.o_code = rego.o_code
-	join moff mo1
-	on mo1.o_code = rego.ro_code
-	where
-	rego.M_ID in (select mem.M_ID
-	from member mem
-	join bus bu
-	on bu.B_VEHICLENUM = mem.B_VEHICLENUM
-	join reguloff reg
-	on reg.M_ID = mem.M_ID
-	where reg.TEMP = 'true' and bu.R_NUM = #{r_num}) and ko.ko_code = '600' and
-	rego.o_check='Y'
+	from reguloffr rego 
+	join member mem on mem.m_id = rego.m_id
+	join bus bu on bu.B_VEHICLENUM = mem.B_VEHICLENUM
+	join member mem1 on mem1.m_id = rego.ro_object
+	join koff ko on ko.ko_code = rego.ko_code
+	join moff mo on mo.o_code = rego.o_code
+	join moff mo1 on mo1.o_code = rego.ro_code
+	where rego.M_ID in 
+	(select mem.M_ID 
+	from member mem join bus bu on bu.B_VEHICLENUM = mem.B_VEHICLENUM
+	join reguloff reg on reg.M_ID = mem.M_ID
+	where reg.TEMP = 't' and bu.R_NUM = #{r_num}) and ko.ko_code = '600' and
+	rego.o_check='y'
 	</select>
 	
 	<update id="updateFirstRegister" parameterType="String">

@@ -238,7 +238,7 @@ $(document).ready(function() {
 				var array = new Array();
 				var array1 = new Array();
 				var item;
-				var color = ["green", "black", "cyan", "purple","red","orange","yellow","silver"];
+				var color = ["green", "black", "red", "purple","orange","yellow","silver"];
 				$.each(data.mrmbrdto,function(index,obj){ //정규 휴무 전체
 					$.each(data.mbrdto,function(index1,obj1){ //변경 신청자
 						
@@ -327,6 +327,7 @@ $(document).ready(function() {
 							$.ajax({
 								url:"approvefirstregister.admin",
 								data:{"m_id":calEvent.id,"o_code":calEvent.afterdow},
+								type:"post",
 								success:function(data){
 									
 								}
