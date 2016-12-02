@@ -779,7 +779,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-counters .fh5co-counter .fh5co-counter-label {
   color: rgba(255, 255, 255, 0.5);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 400;
 }
 
@@ -1009,8 +1009,8 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: none;
   background: transparent;
   border: 2px solid rgba(0, 0, 0, 0.1);
-  height: 54px;
-  font-size: 18px;
+  height: 35px;
+  font-size: 10px;
   font-weight: 400;
 }
 .form-control:active, .form-control:focus {

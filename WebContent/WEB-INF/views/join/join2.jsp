@@ -181,6 +181,13 @@
 .form_wizard .msgBox {
   display: none; }
 
+label{
+font-size:12px;
+}
+.form-group{
+height: 35px;
+}
+
 </style>
 </head>
 		<meta charset="utf-8">
@@ -225,8 +232,8 @@
             <div class="inner-bg">
                 <div class="container">
                     <div class="row">
-                 <div class="col-sm-1"></div>
-						<div class="col-md-10 col-sm-10 col-xs-10 form-box">
+                 <div class="col-sm-2"></div>
+						<div class="col-md-8 col-sm-8 col-xs-8 form-box">
 							<div class="x_panel">
 							<div class="form-top" align="center" style="color: white">
 								<div class="form-top-center">
@@ -273,7 +280,7 @@
 														<input type="text" id="m_id" name = "m_id"
 															class="form-control col-md-7 col-xs-12">
 													</div>
-													<div class = "col-md-1 col-sm-1">
+													<div class = "col-md-1 col-sm-1" align="left" style="padding:0px">
 														<input type = "button" class = "btn btn-default" id = "checkid" value = "중복확인">
 													</div>
 													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
@@ -315,12 +322,12 @@
 													<label for="m_email"
 														class="control-label col-md-3 col-sm-3 col-xs-12">이메일
 													</label>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input id="m_email"
 															class="form-control col-md-7 col-xs-12" type="email"
 															name="m_email">
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" align="left" style="padding: 0px">
 														<input type = "button" value = "인증번호전송" id = "emailbtn"
 															class = "btn btn-default">
 													</div>
@@ -330,12 +337,12 @@
 														class="control-label col-md-3 col-sm-3 col-xs-12">인증번호
 													</label>
 													<input type = 'hidden' id = 'm_nocheck' value = 'n'>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 15px">
 														<input id="m_echeck"
 															class="form-control col-md-7 col-xs-12" type="text"
 															name="m_echeck">
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" align="left" style="padding: 0px">
 														<input type = "button" value = "인증" id = "echeckbtn"
 															class = "btn btn-default">
 													</div>
@@ -431,12 +438,12 @@
 													<label for="m_addr"
 														class="control-label col-md-3 col-sm-3 col-xs-12">우편주소
 													</label>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left:15px">
 														<input id="m_addr"
 															class="form-control col-md-7 col-xs-12" type="text"
-															name="m_addr">
+															name="m_addr" >
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" style="padding:0px" align="left">
 														<input type = "button" value = "주소검색"
 															class = "btn btn-default" onclick = "sample4_execDaumPostcode()">
 													</div>
