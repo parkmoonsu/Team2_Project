@@ -103,23 +103,38 @@ public class MemberManageController {
 	}
 
 	@RequestMapping("/memberdetail.admin")
-	public String memberDetail(String param, String param2, Model model){
+	public String memberDetail(String param, Model model){
 		System.out.println("memberdetail.admin시작");
 		System.out.println("param"+param);
-		MemberJoinMDetailRegulOffDTO dto = service.memberDetail(param, param2);
+		
+		MemberJoinMDetailRegulOffDTO dto = service.memberDetail(param);
+		MemberJoinMDetailDTO dto2 = service.memberDetailnoReg(param);
+			
+		System.out.println("dto확인"+dto);
+		
 		model.addAttribute("mjdrodto", dto);
-		return "membermanage/memberdetailmodal";
+		model.addAttribute("dto2", dto2);
+		
+		
+		
+		if(dto!=null){
+			return "membermanage/memberdetailmodal";
+		}else {
+			return "membermanage/memberdetailmodal2";
+		}
+	
 	}
 	
+	
 	//휴무 부여받지 않은 사람의 정보
-	@RequestMapping("/memberdetailnoreg.admin")
+	/*@RequestMapping("/memberdetailnoreg.admin")
 	public String memberDetailnoReg(String param, Model model){
-		System.out.println("memberdetail.admin시작");
+		System.out.println("memberdetail.admin시작2");
 		System.out.println("param"+param);
 		MemberJoinMDetailRegulOffDTO dto = service.memberDetailnoReg(param);
 		model.addAttribute("mjdrodto", dto);
 		return "membermanage/memberdetailmodal";
-	}
+	}*/
 	
 	
 	@RequestMapping("/download.admin")

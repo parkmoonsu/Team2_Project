@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		mem.m_id=com.m_id
 		join bus on bus.B_vehiclenum = mem.B_VEHICLENUM
 		left outer join cstart cs on cs.cs_code=com.cs_code
-		where mem.m_name=#{m_name}
+		where mem.m_name=#{param1} and r_num=#{param2}
 		order by com.c_date
 	</select>
 
@@ -36,5 +36,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by com.c_date
 	</select>
 
+	<select id="getselect" resultType="kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select cs.cs_stat
+		from member mem left outer join commute com on
+		mem.m_id=com.m_id
+		join bus on bus.B_vehiclenum = mem.B_VEHICLENUM
+		left outer join cstart cs on cs.cs_code=com.cs_code
+		where r_num=#{r_num}
+		order by com.c_date
+	</select>
 
 </mapper>

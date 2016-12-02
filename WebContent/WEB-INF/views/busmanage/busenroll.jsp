@@ -61,8 +61,21 @@
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
 <script
-	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
+</script>
+<style>
+ul.pagination li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
 
+ul.pagination li a {
+    color: #73879C;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}	
+</style>
 </head>
 
 <body class="nav-md">
@@ -185,25 +198,31 @@
 									</c:choose>	
 									
 
-									<ul class="pager">
+									<div style="text-align: center">
+										<ul class="pagination">
 										<c:if test="${pgc > 1}">
 											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
 
+										<c:forEach begin="1" end="${pagecount}" var="i">
+												<c:if test="${i==pgc}">
+													<li><a  class="active" href="#">${i}</a></li>
+												</c:if>
+												<c:if test="${i!=pgc}">
+													<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
+												</c:if>
+											</c:forEach>
 
-
-										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
+										<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
 											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
-										</c:forEach>
-
-									
+										</c:forEach> --%>
 										
 										<c:if test="${pgc < Count/10 }">
 
 											<li><a href="busenroll.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
-
+								</div>
 
 								</div>
 

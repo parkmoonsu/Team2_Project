@@ -35,8 +35,26 @@ public class MemberJoinMDetailDTO {
 	
 	private int r;
 	
+	private String o_date;
+	private String temp;
 	
 	
+
+	public String getTemp() {
+		return temp;
+	}
+
+	public void setTemp(String temp) {
+		this.temp = temp;
+	}
+
+	public String getO_date() {
+		return o_date;
+	}
+
+	public void setO_date(String o_date) {
+		this.o_date = o_date;
+	}
 
 	public int getR() {
 		return r;
