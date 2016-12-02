@@ -22,9 +22,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.bus.dao.BusStopDAO;
 import kr.or.bus.dao.RouteDAO;
 import kr.or.bus.dao.RouteStopDAO;
 import kr.or.bus.dao.StopDAO;
+import kr.or.bus.dto.BusStopDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteStopDTO;
 import kr.or.bus.dto.StopDTO;
@@ -545,13 +547,32 @@ public class BusStopManageService {
 		busStopSearch(dto, stopdto, routestopdto, request, response);
 	}
 	
-	//버스 정류장 을 공공데이터에서 조회하고 데이터를 디비에 저장하는함수.
+	//버스 정류장 좌표를 찍어주기 위해  route id검색
+	public void busStopRoadSearch(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		PrintWriter out=null;
+		response.setCharacterEncoding("UTF-8");
+		out = response.getWriter();
+		JSONArray jsonmaps = null;
+		System.out.println(r_num);
+		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
+		System.out.println(dao.routeidSearch(r_num));
+		dto = dao.routeidSearch(r_num);
+		System.out.println(dto.getR_id());
+		
+		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
+		
+		List<BusStopDTO> busstoplist =  busstopdao.makeBusStop(dto.getR_id());
+		
+		jsonmaps = JSONArray.fromObject(busstoplist);
+		out.print(jsonmaps);
+		
+	}
+	
+	//공공데이터에서 받아온 정류장 정보들을 디비에 저장하는 함수
 	public void busStopSearch(RouteDTO dto, StopDTO stopdto, RouteStopDTO routestopdto, HttpServletRequest request ,HttpServletResponse response) throws IOException{
 		System.out.println("r_id");
-		System.out.println(dto.getR_id());
-		PrintWriter out = null;
-		request.setCharacterEncoding("UTF-8");
-		out = response.getWriter();
+		System.out.println(dto.getR_id());		
+		request.setCharacterEncoding("UTF-8");	
 		JSONObject jsonmaps = null;
 	    
 		StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute"); //URL
@@ -578,8 +599,7 @@ public class BusStopManageService {
 	    rd.close();
 	    conn.disconnect();
 	    //System.out.println(sb.toString());    
-	    jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
-	    out.print(jsonmaps);
+	    jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());	  
 	    
 	    JSONArray jsonarray = JSONArray.fromObject(jsonmaps.get("msgBody"));
 	    
@@ -590,7 +610,7 @@ public class BusStopManageService {
 	    int routestopcheck = 0;
 	    
 	    int jsons =  jsonarray.size();
-	    
+	        
 	    int j=0;
 	    while(j<jsons){
 	    	
@@ -652,6 +672,7 @@ public class BusStopManageService {
     	}else{
     		System.out.println("RouteStop입력실패");
     	}
+	   
 	}
 
 }

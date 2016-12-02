@@ -12,4 +12,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertRouteStopData" parameterType="kr.or.bus.dto.RouteStopDTO">
 		INSERT INTO routestop(R_NUM, S_NUM, RS_ORDER, R_ID, RS_START, RS_END) VALUES(#{r_num}, #{s_num}, #{rs_order}, #{r_id}, #{rs_start}, #{rs_end})
 	</insert>
+	
+	
 </mapper>
