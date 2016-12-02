@@ -124,16 +124,45 @@ public class ScheduleManageController {
 		System.out.println("routelist : "+routelist);
 		return "schedule/schedule_virtual";
 	}
+
+
 	
 	//full calendar
 	//content에 내용 뿌리기
 	@RequestMapping("/lastpredictschedule.admin")
-	public View lastpredictschedule(String m_id,String m_name, String o_date,Model model){
-		List<MemberJoinRegulOffDTO> mjrolist=service.schedule_get();
+	public View lastpredictschedule(String r_num,Model model){
+		System.out.println("lastpredictschedule.admin 타나여?");
+		System.out.println("r_num :  "+r_num);
+		List<MemberJoinRegulOffDTO> mjrolist=service.schedule_get(r_num);
 		model.addAttribute("mjrolist",mjrolist);
-		System.out.println(mjrolist.toString());
+		System.out.println("mjrolist.toString() :"+mjrolist.toString());
 		return jsonview;
 	}
+	
+	
+	/*
+	 	@RequestMapping("/getselectedmember.admin")
+		public View getSelectedRouteMember(String r_num,Model model){
+		System.out.println("r_num"+r_num);
+		List<MemberJoinRegulOffDTO> mjrdto = service.unScheduledMember(r_num);
+		List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> mrmbrjdto = service.scheduledMember(r_num);
+		model.addAttribute("mjrdto", mjrdto); mrmbrjdto
+		model.addAttribute("mrmbrjdto", mrmbrjdto);
+		return jsonview;
+	}
+	 
+	 
+	 
+	  */
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	제목 : 기사 휴무 변경 요청 승인

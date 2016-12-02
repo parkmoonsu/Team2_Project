@@ -48,8 +48,7 @@ public interface ScheduleManageDAO {
 	public String[] selecttime(SelectDistinctDTO selectdistinctdto);
 
 	//최증스케줄
-	public List<MemberJoinRegulOffDTO> getmemberjoinreg();
-	public List<MemberJoinRegulOffDTO> getmemberjoinreg(String m_id,String m_name,String o_date);
+	public List<MemberJoinRegulOffDTO> getmemberjoinreg(String r_num); 
 	public List<RouteDTO>getrnum();
 
 	//휴무 상태 정보 가져오기
