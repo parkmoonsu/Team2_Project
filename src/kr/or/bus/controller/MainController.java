@@ -139,4 +139,15 @@ public class MainController {
 		
 	}
 	
+	@RequestMapping(value="/bell2.htm",method=RequestMethod.POST)
+	public View getReqdate(String m_id, Model model){
+		System.out.println("오셨나요?");
+		int dto=service.getRegul(m_id);
+		System.out.println("dto:"+dto);
+		model.addAttribute("dto",dto);
+		
+		return jsonview;
+		
+	}
+	
 }

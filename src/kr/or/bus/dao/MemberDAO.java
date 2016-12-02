@@ -131,6 +131,8 @@ public interface MemberDAO {
 	//상단 nav 알림 카운트
 	public int approveCount();
 	
+	public int getregul(String m_id);
+	
 	//회원 정보 - 출결상황 보기
 	public int csstatic(String m_name , String c_date);
 	public int csestatic(String m_name , String c_date);

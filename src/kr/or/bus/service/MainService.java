@@ -141,6 +141,13 @@ public class MainService {
 		
 		return appcount;
 	}
+	public int getRegul(String m_id){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		System.out.println("여긴옴?");
+		int dto=dao.getregul(m_id);
+		System.out.println("디티오"+dto);
+		return  dto;
+	}
 	
 	@SuppressWarnings("null")
 	public List<Integer> csStatic(String m_id){
