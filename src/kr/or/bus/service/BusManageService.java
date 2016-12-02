@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import kr.or.bus.dao.BusDAO;
 
 import kr.or.bus.dao.MemberDAO;
+import kr.or.bus.dao.RnumcommuteDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
@@ -126,38 +127,6 @@ public class BusManageService {
 		return member;
 	}
 	
-
-
-	//임시노선별 출결현황에서 이름 가져오기
-	public List<RnumcommuteDTO> getNdselect(){
-		
-		BusDAO dao = sqlsession.getMapper(BusDAO.class);
-		
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getNdselect();	
-		List<RnumcommuteDTO> list2 = new ArrayList<RnumcommuteDTO>();
-		for(int i=0; i<list.size(); i++){
-			
-			String m_name = list.get(i).getM_name();
-			String c_date = list.get(i).getC_date();
-			
-			String[] tdate = dao.getStat(m_name);	//날짜
-			String[] stat = dao.getShow(m_name);	//상태
-			//list {이름+ 날짜[] + 상태[]}
-			RnumcommuteDTO dto = 
-					new RnumcommuteDTO();
-			
-			dto.setM_name(list.get(i).getM_name());
-			dto.setC_date(tdate);
-			dto.setCs_stat(stat);
-		
-			
-			list2.add(dto);
-		}
-		
-	
-		return list2;
-	}
-	
 	
 	public int alreadyUse(String b_vehiclenum){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
@@ -253,4 +222,6 @@ public class BusManageService {
 		int noroute = dao.noRoute();
 		return noroute;
 	}
+
+	
 }
