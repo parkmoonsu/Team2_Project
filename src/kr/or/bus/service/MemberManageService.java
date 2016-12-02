@@ -137,10 +137,19 @@ private JavaMailSender mailSender;
 		dao.insertAuth(m_id);
 	}
 	
-	public MemberJoinMDetailRegulOffDTO memberDetail(String m_id){
+	public MemberJoinMDetailRegulOffDTO memberDetail(String m_id, String o_date){
 		System.out.println("service 탓니?");
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
-		MemberJoinMDetailRegulOffDTO dto = dao.getMemberDetailRegulOff(m_id);
+		MemberJoinMDetailRegulOffDTO dto = dao.getMemberDetailRegulOff(m_id, o_date);
+		System.out.println("dto"+dto);
+		return dto;
+	}
+	
+	//휴무 부여받지 않은 사람의 정보
+	public MemberJoinMDetailRegulOffDTO memberDetailnoReg(String m_id){
+		System.out.println("service 탓니?");
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		MemberJoinMDetailRegulOffDTO dto = dao.getMemberDetail(m_id);
 		System.out.println("dto"+dto);
 		return dto;
 	}

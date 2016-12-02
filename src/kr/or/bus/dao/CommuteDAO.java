@@ -1,3 +1,11 @@
+/*
+*	@FileName : CommuteDAO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.19
+*	@Author	: 조한솔
+*	@Discription : Cstart, Cend, Commute join table DAO interface
+*/
+
 package kr.or.bus.dao;
 
 

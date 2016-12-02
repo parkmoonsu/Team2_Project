@@ -110,6 +110,11 @@
 																		src="${pageContext.request.contextPath}/join/upload/${dto.m_photo}"
 																		style="width: 200px; height: 200px;" class = "img img-thumbnail">
 																</div>
+															<br><br>
+															
+															<a class="btn btn-primary" id="pass" style = "margin-top: 10px">정보수정</a> 
+															<a class="btn btn-primary" id="watch" style = "margin-top: 10px" >이력보기</a>
+														
 																<!-- <a style = "display:none"><input type = "file" id = "photo"></a>
 																<button class="btn btn-primary" style="margin-top:10px;margin-right: 10px" id = "photo_swipe">사진변경</button>
 																 -->
@@ -120,7 +125,7 @@
 															<table class="table table-user-information">
 																<tbody>
 																	<tr>
-																		<td>이름</td>
+																		<td width = "100px">이름</td>
 																		<td>${dto.m_name}</td>
 																	</tr>
 																	<tr>
@@ -180,10 +185,7 @@
 																	</tr>
 																</tbody>
 															</table>
-															<div class="col-xs-12">
-															<a class="btn btn-primary" id="pass">정보수정</a> 
-															<a class="btn btn-primary" id="watch">이력보기</a>
-															</div>
+																
 														</div>
 													</div>
 												</div>

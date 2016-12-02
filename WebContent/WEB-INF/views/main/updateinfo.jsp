@@ -56,14 +56,9 @@
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-xs-12 col-md-3 left_col">
-				<c:choose>
-          		<c:when test ="${jobname == '기사'}">
-          			<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
-          		</c:when>
-          		<c:otherwise>
-          			<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
-          		</c:otherwise>
-       		</c:choose>
+				
+          		<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
+          		
 			</div>
 
 			<!--상단 menu -->
@@ -210,8 +205,8 @@
 																</table>
 
 																<div style="float: right; margin: 30px;">
-																	<input type="button" value="이전" class="btn btn-primary"
-																		id="prev" onclick="history.go(-1)"> <input
+																	<input type="button" value="이전" class="btn btn-default"
+																		id="prev" onclick="history.back(-1)"> <input
 																		class="btn btn-primary" type="submit" value="수정완료" id = "update">
 																</div>
 

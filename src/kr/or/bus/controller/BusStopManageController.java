@@ -41,6 +41,11 @@ public class BusStopManageController {
 		busStopManageService.busStopOriginalRead(request, response);
 	}
 	
+	//버스 원본 경로 를 파일에서 읽어온다.
+	@RequestMapping(value="/busRoute.admin",method=RequestMethod.GET)	
+	public void busStopRouteLoad(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		busStopManageService.busRouteRead(request, response);
+	}
 
 	//실시간 위치추적 30초마다 갱신됨
 	@RequestMapping(value="/RealTimeSearch.admin",method=RequestMethod.GET)
@@ -48,9 +53,15 @@ public class BusStopManageController {
 		busStopManageService.busLocationSearch(request, response);;
 	}
 	
-	//버스정류장 원본 마커 좌표를 파일에서 읽어온다.
+	//버스정류장 원본 마커 좌표를 디비를 참조해서 읽어온다.
 	@RequestMapping(value="/routeidSearch.admin",method=RequestMethod.GET)
 	public void busStopOriginRead(String r_num,RouteDTO dto,HttpServletRequest request, HttpServletResponse response) throws Exception{
 		busStopManageService.routeidInfoSearch(r_num,dto, request,response);
+	}
+	
+	//버스 원본 노선경로 를 디비를 이용해 공공데이터에 접근
+	@RequestMapping(value="/busRouteSearch.admin",method=RequestMethod.GET)	
+	public void busRouteSearch(String r_num, RouteDTO dto, HttpServletRequest request , HttpServletResponse response) throws Exception{
+			busStopManageService.busRouteCall(r_num, dto, request, response);
 	}
 }

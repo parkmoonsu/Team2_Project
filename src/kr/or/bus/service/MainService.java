@@ -12,6 +12,7 @@ package kr.or.bus.service;
 
 
 import java.io.FileOutputStream;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -141,4 +142,93 @@ public class MainService {
 		return appcount;
 	}
 	
+	@SuppressWarnings("null")
+	public List<Integer> csStatic(String m_id){
+		Calendar cal = java.util.Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+		
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		
+		String date_12 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		MemberDTO dto = dao.getName(m_id);
+		String m_name = dto.getM_name();
+		
+		
+		String date_11 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		String date_10 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		String date_9 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		String date_8 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		String date_7 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		String date_6 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		String date_5 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		String date_4 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		String date_3 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		String date_2 = format.format(cal.getTime());
+		cal.add(Calendar.MONTH, -1);
+		String date_1 = format.format(cal.getTime());
+		System.out.println("1월" + date_1);
+		int dec = dao.csstatic(m_name, date_12);
+		int nov = dao.csstatic(m_name, date_11);
+		int oct = dao.csstatic(m_name, date_10);
+		int sep = dao.csstatic(m_name, date_9);
+		int aug = dao.csstatic(m_name, date_8);
+		int jul = dao.csstatic(m_name, date_7);
+		int jun = dao.csstatic(m_name, date_6);
+		int may = dao.csstatic(m_name, date_5);
+		int apr = dao.csstatic(m_name, date_4);
+		int mar = dao.csstatic(m_name, date_3);
+		int feb = dao.csstatic(m_name, date_2);
+		int jan = dao.csstatic(m_name, date_1);
+		
+		int dec2 = dao.csestatic(m_name, date_12);
+		int nov2 = dao.csestatic(m_name, date_11);
+		int oct2 = dao.csestatic(m_name, date_10);
+		int sep2 = dao.csestatic(m_name, date_9);
+		int aug2 = dao.csestatic(m_name, date_8);
+		int jul2 = dao.csestatic(m_name, date_7);
+		int jun2 = dao.csestatic(m_name, date_6);
+		int may2 = dao.csestatic(m_name, date_5);
+		int apr2 = dao.csestatic(m_name, date_4);
+		int mar2 = dao.csestatic(m_name, date_3);
+		int feb2 = dao.csestatic(m_name, date_2);
+		int jan2 = dao.csestatic(m_name, date_1);
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(jan);
+		list.add(feb);
+		list.add(mar);
+		list.add(apr);
+		list.add(may);
+		list.add(jun);
+		list.add(jul);
+		list.add(aug);
+		list.add(sep);
+		list.add(oct);
+		list.add(nov);
+		list.add(dec);
+		   
+		list.add(jan2);
+		list.add(feb2);
+		list.add(mar2);
+		list.add(apr2);
+		list.add(may2);
+		list.add(jun2);
+		list.add(jul2);
+		list.add(aug2);
+		list.add(sep2);
+		list.add(oct2);
+		list.add(nov2);
+		list.add(dec2);
+
+		return list;
+	}
 }
