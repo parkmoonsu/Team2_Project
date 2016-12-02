@@ -36,7 +36,7 @@
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		          <ul class="nav navbar-nav navbar-right">
-		            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li> 
+		            <li class="active"><a href="bus.htm" data-nav-section="home"><span>Home</span></a></li> 
 		            <li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
 		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
 		          </ul>
@@ -67,11 +67,16 @@
 			                        	<label class="sr-only" for="form-password">Password</label>
 			                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
 			                        </div>
-			                        <a href="search.htm"class="btn btn-primary btn-sm btn-block">아이디/비밀번호찾기</a>
-			                        <a href="join.htm"	class="btn btn-primary btn-sm btn-block">회원가입</a>
-			                        <button type="submit" class="btn" style="padding:0px">LogIN</button>
-			                        <button id="callback" class="btn"style="padding:0px">돌아가기</button>
-			                    </form>
+			                        <div class="col-sm-6 col-xs-12" style=":padding-right:5px">
+			                        <a href="search.htm"class="btn btn-primary btn-sm btn-block" style="height:30px">아이디/비밀번호찾기</a>
+			                        </div>
+			                        <div class="col-sm-6 col-xs-12" style="padding-left: 3px">
+			                        <a href="join.htm"	class="btn btn-primary btn-sm btn-block" style="height:30px">회원가입</a>
+			                        </div>
+			                        <br>
+			                        <br>
+			                        <button type="submit" class="btn">LogIN</button>
+			                      </form>
 			                    <c:if test="${param.error != null}">
 									<div>로그인 실패 <br>
 											<script>
@@ -99,10 +104,7 @@
         <script src="${pageContext.request.contextPath}/loginassets/assets/js/scripts.js"></script>
         <script type="text/javascript">
         $(function() {
-			$("#callback").click(function() {
-				location.href="bus.htm";
-			});
-			
+
 			$("#log").click(function() {
 				location.href="login.htm"
 			});

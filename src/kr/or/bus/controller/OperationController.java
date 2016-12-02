@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
 import kr.or.bus.service.OperationService;
 
@@ -32,6 +33,13 @@ public class OperationController {
 
 		map.addAttribute("list",list);
 		return "operation/attendance";
-		
 	}
+	
+/*	@RequestMapping("/optionselect.admin")
+	public String selectlist(ModelMap map){
+		List<RnumcommuteDTO> list = service.getNdselect();
+
+		map.addAttribute("list",list);
+		return "operation/attendance";
+	}*/
 }

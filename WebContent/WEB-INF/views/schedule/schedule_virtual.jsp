@@ -144,7 +144,7 @@
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								Calendar <small>Click to add/edit events</small>
+								Calendar 
 							</h3>
 						</div>
 
@@ -233,7 +233,9 @@
 						var item = {
 								title: obj.m_name,
 							    id:obj.m_id,
-							    dow:obj.o_code
+							    dow:obj.o_code,
+							    start:'23:00:00'
+							    
 						};
 						array.push(item);
 					});
@@ -247,16 +249,17 @@
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,agendaWeek,agendaDay,listMonth'
+			    right: 'month,agendaWeek,agendaDay' 
 			},
+
 			slotDuration: '00:10:00',
-			defaultDate: '2016-09-12',
+			defaultDate: '2016-09-17',
 			buttonIcons: false, // show the prev/next text
 			weekNumbers: true,
 			navLinks: true, // can click day/week names to navigate views
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
-			events: array/* [
+			events:  [
 				{
 					title: 'All Day Event',
 					start: '2016-09-01'
@@ -337,7 +340,7 @@
 					url: 'http://google.com/',
 					start: '2016-09-28'
 				}
-			] */
+			]  
 		});
 
 		 $('table.fc-agenda-slots tbody tr:not(.fc-minor)').each(function(){

@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
-import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
-import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.TimetableDTO;
 import kr.or.bus.service.ScheduleManageService;
@@ -109,6 +109,13 @@ public class ScheduleManageController {
 		return "schedule/schedule_managertimetable";
 	}
 	
+/*
+	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
+	   public String getHistoryCal(Model model){
+	      service.getRequestState(model);
+	      return "schedule/schedule_managechangeapprove";
+	   }
+	*/
 
 	/*
 	제목 : 예상 스케쥴 뽑기
@@ -126,10 +133,12 @@ public class ScheduleManageController {
 	}
 	
 	//full calendar
+	//content에 내용 뿌리기
 	@RequestMapping("/lastpredictschedule.admin")
 	public View lastpredictschedule(String m_id,String m_name, String o_date,Model model){
-		service.predictschedule(m_id, m_name, o_date);
-		System.out.println("m_id : "+m_id);
+		List<MemberJoinRegulOffDTO> mjrolist=service.schedule_get();
+		model.addAttribute("mjrolist",mjrolist);
+		System.out.println(mjrolist.toString());
 		return jsonview;
 	}
 	
@@ -138,6 +147,10 @@ public class ScheduleManageController {
 	작성자 : 강민수
 	목적 : cal 구현
 	*/
+	
+	
+	
+
 	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
 	   public String getHistoryCal(Model model){
 	      service.getRequestState(model);
@@ -179,4 +192,5 @@ public class ScheduleManageController {
 		service.updatebtwinfoall(m_id, o_code, m_id_1, o_code_1, model);
 		return jsonview;
 	}
+
 }

@@ -141,9 +141,7 @@
 												<th>승인일</th>
 												<th>변경대상</th>
 												<th>상태</th>
-												<!-- <th style="width: 20%; text-align:center;">
-												<i class ="fa fa-trash" style = "margin-bottom: 2px"></i> <input type = "checkbox" class = "form"> -->
-												</th>
+												
 											</tr>
 										</thead>
 										<tbody>
@@ -162,7 +160,10 @@
 												</c:if>
 												<c:if test="${i.ko_name=='승인'}">
 													<td><button class="btn btn-success">${i.ko_name}</button></td>
-												</c:if>								
+												</c:if>
+												<c:if test="${i.ko_name=='거절'}">
+													<td><button class="btn btn-danger">${i.ko_name}</button></td>
+												</c:if>									
 											</tr>
 											</c:forEach>
 										</tbody>

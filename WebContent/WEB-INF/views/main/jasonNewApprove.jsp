@@ -64,17 +64,7 @@
 table, th{
 	text-align: center;
 }
-ul.pagination li a.active {
-    background-color: #4CAF50;
-    color: white;
-}
 
-ul.pagination li a {
-    color: #73879C;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-}
 </style>
 </head>
 
@@ -192,7 +182,7 @@ ul.pagination li a {
 
 											<c:forEach begin="1" end="${pagecount}" var="i">
 												<c:if test="${i==pgc}">
-													<li><a class="active" href="#">${i}</a></li>
+													<li class="active"><a href="#">${i}</a></li>
 												</c:if>
 												<c:if test="${i!=pgc}">
 													<li><a href="membermanage.admin?pg=${i}">${i}</a></li>

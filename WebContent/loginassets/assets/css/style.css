@@ -151,12 +151,12 @@ img { max-width: 100%; }
 }
 
 .form-bottom form button.btn {
-	width: 49%;
+	width: 100%;
 }
 
 
 .form-bottom form .input-error {
-	border-color: #52d3aa;
+	border-color:  ;
 }
 
 .social-login {

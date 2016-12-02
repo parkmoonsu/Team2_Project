@@ -8,7 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.bus.dto.BusStopDTO;
 import kr.or.bus.dto.RouteDTO;
+import kr.or.bus.dto.RouteStopDTO;
+import kr.or.bus.dto.StopDTO;
 import kr.or.bus.service.BusStopManageService;
 
 import nu.xom.*;
@@ -53,15 +56,20 @@ public class BusStopManageController {
 		busStopManageService.busLocationSearch(request, response);;
 	}
 	
-	//버스정류장 원본 마커 좌표를 디비를 참조해서 읽어온다.
+	//버스번호 를 가져와 해당 버스가 다니는 정류장 정보를 디비에 저장한다.
 	@RequestMapping(value="/routeidSearch.admin",method=RequestMethod.GET)
-	public void busStopOriginRead(String r_num,RouteDTO dto,HttpServletRequest request, HttpServletResponse response) throws Exception{
-		busStopManageService.routeidInfoSearch(r_num,dto, request,response);
+	public void busStopOriginRead(String r_num,RouteDTO dto, StopDTO stopdto, RouteStopDTO routestopdto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		busStopManageService.routeidInfoSearch(r_num, dto, stopdto, routestopdto, request, response);
 	}
 	
 	//버스 원본 노선경로 를 디비를 이용해 공공데이터에 접근
 	@RequestMapping(value="/busRouteSearch.admin",method=RequestMethod.GET)	
-	public void busRouteSearch(String r_num, RouteDTO dto, HttpServletRequest request , HttpServletResponse response) throws Exception{
-			busStopManageService.busRouteCall(r_num, dto, request, response);
+	public void busRouteSearch(String r_num, RouteDTO dto ,HttpServletRequest request , HttpServletResponse response) throws Exception{
+		busStopManageService.busRouteCall(r_num, dto, request, response);
+	}
+	
+	@RequestMapping(value="/busStopRoad.admin",method=RequestMethod.GET)
+	public void busStopRoad(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		busStopManageService.busStopRoadSearch(r_num, dto, busstopdto, request, response);
 	}
 }

@@ -102,18 +102,21 @@ public class ScheduleManageService {
 
 	
 	//수행할 최종스케줄 _김수현
+	
+	//캘린더에 content 뿌리기
 	public List<MemberJoinRegulOffDTO> schedule_get(){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		List<MemberJoinRegulOffDTO> list=dao.getmemberjoinreg();
 		  return list;
 	}
 	
-	public void predictschedule(String m_id,String m_name,String o_date){
+	/*public void predictschedule(String m_id,String m_name,String o_date){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		dao.getmemberjoinreg(m_id,m_name,dao.getOcode(o_date));
+		dao.getmemberjoinreg();
 	
-	}
+	}*/
 	
+	//select box에 뿌리는 노선
 	public List<RouteDTO> rnum_get(){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		List<RouteDTO> list=dao.getrnum();

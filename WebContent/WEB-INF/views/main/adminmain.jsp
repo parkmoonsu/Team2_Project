@@ -315,30 +315,59 @@
 				
 				<!-- flot -->
 				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<div class="dashboard_graph x_panel">
-							<div class="row x_title">
-								<div class="col-md-6">
-									<h3>
-										Network Activities <small>Graph title sub-title</small>
-									</h3>
-								</div>
-								<div class="col-md-4"></div>
-								<div class="col-md-2">
-									<select>
-										<option>노선1</option>
-										<option>노선2</option>
-									</select>
-								</div>
-							</div>
-							<div class="x_content">
-								<div class="demo-container" style="height: 250px">
-									<div id="placeholder3xx3" class="demo-placeholder"
-										style="width: 100%; height: 250px;"></div>
-								</div>
-							</div>
-						</div>
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                  	<div class ="col-sm-8">
+                  	  <h2>노선-정류장 시간대별 승객 수</h2>
+                   	</div>
+					<div>
+						<select id ="flotyear">
+							<option>연도</option>
+							<option>2015</option>
+							<option>2016</option>
+						</select>
+										
+						&nbsp;
+						<select id = "flotmonth">
+							<option>월</option>
+							<option>01</option>
+							<option>02</option>
+							<option>03</option>
+							<option>04</option>
+							<option>05</option>
+							<option>06</option>
+							<option>07</option>
+							<option>08</option>
+							<option>09</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>								
+						</select>
+									
+									
+						&nbsp;
+						<select id = "flotroute">
+							<option>노선</option>
+						</select>
+						&nbsp;
+									
+						<select id =flotstop style = "width : 100px">
+							<option>정류장</option>
+								
+						</select>
+									
 					</div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div id="echart_line" style="height:400px;"></div>
+
+                  </div>
+                </div>
+              </div>
+			
 				</div>
 			</div>
 		</div>
@@ -411,7 +440,9 @@
 		src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
+	<!-- ECharts -->
+    <script src="${pageContext.request.contextPath}/vendors/echarts/dist/echarts.min.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/echarts/map/js/world.js"></script>
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
@@ -491,74 +522,376 @@
 	
 	var t = Number(tdate.format("hh"));
 	
+	
+	/// Echart 테마 시작
+	 var theme = {
+          color: [
+              '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+              '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+          ],
+
+          title: {
+              itemGap: 8,
+              textStyle: {
+                  fontWeight: 'normal',
+                  color: '#408829'
+              }
+          },
+
+          dataRange: {
+              color: ['#1f610a', '#97b58d']
+          },
+
+          
+
+          tooltip: {
+              backgroundColor: 'rgba(0,0,0,0.5)',
+              axisPointer: {
+                  type: 'line',
+                  lineStyle: {
+                      color: '#408829',
+                      type: 'dashed'
+                  },
+                  crossStyle: {
+                      color: '#408829'
+                  },
+                  shadowStyle: {
+                      color: 'rgba(200,200,200,0.3)'
+                  }
+              }
+          },
+
+          dataZoom: {
+              dataBackgroundColor: '#eee',
+              fillerColor: 'rgba(64,136,41,0.2)',
+              handleColor: '#408829'
+          },
+          grid: {
+              borderWidth: 0
+          },
+
+          categoryAxis: {
+              axisLine: {
+                  lineStyle: {
+                      color: '#408829'
+                  }
+              },
+              splitLine: {
+                  lineStyle: {
+                      color: ['#eee']
+                  }
+              }
+          },
+
+          valueAxis: {
+              axisLine: {
+                  lineStyle: {
+                      color: '#408829'
+                  }
+              },
+              splitArea: {
+                  show: true,
+                  areaStyle: {
+                      color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+                  }
+              },
+              splitLine: {
+                  lineStyle: {
+                      color: ['#eee']
+                  }
+              }
+          },
+          timeline: {
+              lineStyle: {
+                  color: '#408829'
+              },
+              controlStyle: {
+                  normal: {color: '#408829'},
+                  emphasis: {color: '#408829'}
+              }
+          },
+
+          k: {
+              itemStyle: {
+                  normal: {
+                      color: '#68a54a',
+                      color0: '#a9cba2',
+                      lineStyle: {
+                          width: 1,
+                          color: '#408829',
+                          color0: '#86b379'
+                      }
+                  }
+              }
+          },
+         
+          force: {
+              itemStyle: {
+                  normal: {
+                      linkStyle: {
+                          strokeColor: '#408829'
+                      }
+                  }
+              }
+          },
+          chord: {
+              padding: 4,
+              itemStyle: {
+                  normal: {
+                      lineStyle: {
+                          width: 1,
+                          color: 'rgba(128, 128, 128, 0.5)'
+                      },
+                      chordStyle: {
+                          lineStyle: {
+                              width: 1,
+                              color: 'rgba(128, 128, 128, 0.5)'
+                          }
+                      }
+                  },
+                  emphasis: {
+                      lineStyle: {
+                          width: 1,
+                          color: 'rgba(128, 128, 128, 0.5)'
+                      },
+                      chordStyle: {
+                          lineStyle: {
+                              width: 1,
+                              color: 'rgba(128, 128, 128, 0.5)'
+                          }
+                      }
+                  }
+              }
+          },
+         
+          textStyle: {
+              fontFamily: 'Arial, Verdana, sans-serif'
+          }
+      };
+	
+	// echart 테마 끝
+	 var echartLine = echarts.init(document.getElementById('echart_line'), theme);
+
+		      echartLine.setOption({
+		        title: {
+		          text: '',
+		          subtext: ''
+		        },
+		        tooltip: {
+		          trigger: 'axis'
+		        },
+		        legend: {
+		          x: 220,
+		          y: 40,
+		          data: ['승차', '하차']
+		        },
+		        calculable: true,
+		        xAxis: [{
+		          type: 'category',
+		          boundaryGap: false,
+		          data: ['0','1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
+		        }],
+		        yAxis: [{
+		          type: 'value'
+		        }],
+		        series: [
+		         {
+		          name: '승차',
+		          type: 'line',
+		          smooth: true,
+		          itemStyle: {
+		            normal: {
+		              areaStyle: {
+		                type: 'default'
+		              }
+		            }
+		          },
+		          data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+		        }, {
+		          name: '하차',
+		          type: 'line',
+		          smooth: true,
+		          itemStyle: {
+		            normal: {
+		              areaStyle: {
+		                type: 'default'
+		              }
+		            }
+		          },
+		          data:  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+		        }]
+		      });
+		      
+		    // echart 끝  
+	
+	
 		$(function(){
-			
-			//도넛 시작
-			var options = {
-					legend : false,
-					responsive : false
-				};
-
-				new Chart(document.getElementById("canvas1"), {
-					type : 'doughnut',
-					tooltipFillColor : "rgba(51, 51, 51, 0.55)",
-					data : {
-						labels : [ "Symbian", "Blackberry", "Other",
-								"Android", "IOS" ],
-						datasets : [ {
-							data : [ 15, 20, 30, 10, 30 ],
-							backgroundColor : [ "#BDC3C7", "#9B59B6",
-									"#E74C3C", "#26B99A", "#3498DB" ],
-							hoverBackgroundColor : [ "#CFD4D8", "#B370CF",
-									"#E95E4F", "#36CAAB", "#49A9EA" ]
-						} ]
-					},
-					options : options
-				});
-			//도넛 종료
-			
-			// flot 시작
-			var d1 = [ [ 0, 1 ], [ 1, 9 ], [ 2, 6 ], [ 3, 10 ],
-							[ 4, 5 ], [ 5, 17 ], [ 6, 6 ], [ 7, 10 ], [ 8, 7 ],
-							[ 9, 11 ], [ 10, 35 ], [ 11, 9 ], [ 12, 12 ],
-							[ 13, 5 ], [ 14, 3 ], [ 15, 4 ], [ 16, 9 ] ];
-
-					//flot options
-					var options = {
-						series : {
-							curvedLines : {
-								apply : true,
-								active : true,
-								monotonicFit : true
-							}
-						},
-						colors : [ "#26B99A" ],
-						grid : {
-							borderWidth : {
-								top : 0,
-								right : 0,
-								bottom : 1,
-								left : 1
-							},
-							borderColor : {
-								bottom : "#7F8790",
-								left : "#7F8790"
-							}
+			$.ajax({
+				url : "route.htm",
+				success : function(data){
+					console.log("r_num" + data.rlist.length);
+					for(var i = 0 ; i < data.rlist.length ; i++){
+						$("#flotroute").append("<option>" + data.rlist[i].r_num + "</option>");
+					}
+				}
+			});				
+							
+			$("#flotroute").change(function(){
+				$.ajax({
+					url : "busstop.htm",
+					data : {flotyear : $("#flotyear").val() , flotmonth : $("#flotmonth").val() , flotroute : $("#flotroute").val()},
+					success : function(data){
+						for(var i = 0 ; i < data.jroute.CardBusTimeNew.row.length ; i++){
+							$("#flotstop").append("<option>" + data.jroute.CardBusTimeNew.row[i].BUS_STA_NM + "</option>");
 						}
-					};
-					var plot = $.plot($("#placeholder3xx3"), [ {
-						label : "Registrations",
-						data : d1,
-						lines : {
-							fillColor : "rgba(150, 202, 89, 0.12)"
-						}, //#96CA59 rgba(150, 202, 89, 0.42)
-						points : {
-							fillColor : "#fff"
-						}
-					} ], options);
+					}
 					
-			//  flot 종료
-		
+				});
+				
+			});	
+			
+			$("#flotstop").change(function(){
+				$.ajax({
+					url : "busstop.htm",
+					data : {flotyear : $("#flotyear").val() , flotmonth : $("#flotmonth").val() , flotroute : $("#flotroute").val()},
+					success : function(data){
+						d1 = [];
+						for(var i = 0 ; i < data.jroute.CardBusTimeNew.row.length ; i++){
+							
+							if($("#flotstop").val() == data.jroute.CardBusTimeNew.row[i].BUS_STA_NM){
+								console.log("1시에 탄사람 : " + data.jroute.CardBusTimeNew.row[i].ONE_RIDE_NUM);
+								
+								/* d1.push(['0',data.jroute.CardBusTimeNew.row[i].MIDNIGHT_RIDE_NUM]);
+								d1.push(['1',data.jroute.CardBusTimeNew.row[i].ONE_RIDE_NUM]);
+								d1.push(['2',data.jroute.CardBusTimeNew.row[i].TWO_RIDE_NUM]);
+								d1.push(['3',data.jroute.CardBusTimeNew.row[i].THREE_RIDE_NUM]);
+								d1.push(['4',data.jroute.CardBusTimeNew.row[i].FOUR_RIDE_NUM]);
+								d1.push(['5',data.jroute.CardBusTimeNew.row[i].FIVE_RIDE_NUM]);
+								d1.push(['6',data.jroute.CardBusTimeNew.row[i].SIX_RIDE_NUM]);
+								d1.push(['7',data.jroute.CardBusTimeNew.row[i].SEVEN_RIDE_NUM]);
+								d1.push(['8',data.jroute.CardBusTimeNew.row[i].EIGHT_RIDE_NUM]);
+								d1.push(['9',data.jroute.CardBusTimeNew.row[i].NINE_RIDE_NUM]);
+								d1.push(['10',data.jroute.CardBusTimeNew.row[i].TEN_RIDE_NUM]);
+								d1.push(['11',data.jroute.CardBusTimeNew.row[i].ELEVEN_RIDE_NUM]);
+								d1.push(['12',data.jroute.CardBusTimeNew.row[i].TWELVE_RIDE_NUM]);
+								d1.push(['13',data.jroute.CardBusTimeNew.row[i].THIRTEEN_RIDE_NUM]);
+								d1.push(['14',data.jroute.CardBusTimeNew.row[i].FOURTEEN_RIDE_NUM]);
+								d1.push(['15',data.jroute.CardBusTimeNew.row[i].FIFTEEN_RIDE_NUM]);
+								d1.push(['16',data.jroute.CardBusTimeNew.row[i].SIXTEEN_RIDE_NUM]);
+								d1.push(['17',data.jroute.CardBusTimeNew.row[i].SEVENTEEN_RIDE_NUM]);
+								d1.push(['18',data.jroute.CardBusTimeNew.row[i].EIGHTEEN_RIDE_NUM]);
+								d1.push(['19',data.jroute.CardBusTimeNew.row[i].NINETEEN_RIDE_NUM]);
+								d1.push(['20',data.jroute.CardBusTimeNew.row[i].TWENTY_RIDE_NUM]);
+								d1.push(['21',data.jroute.CardBusTimeNew.row[i].TWENTY_ONE_RIDE_NUM]);
+								d1.push(['22',data.jroute.CardBusTimeNew.row[i].TWENTY_TWO_RIDE_NUM]);
+								d1.push(['23',data.jroute.CardBusTimeNew.row[i].TWENTY_THREE_RIDE_NUM]); */
+								
+								 echartLine.setOption({
+								        title: {
+								          text: $("#flotroute").val() + "번",
+								          subtext: data.jroute.CardBusTimeNew.row[i].BUS_STA_NM
+								        },
+								        tooltip: {
+								          trigger: 'axis'
+								        },
+								        legend: {
+								          x: 220,
+								          y: 40,
+								          data: ['승차', '하차']
+								        },
+								        calculable: true,
+								        xAxis: [{
+								          type: 'category',
+								          boundaryGap: false,
+								          data: ['0시','1시', '2시', '3시', '4시', '5시', '6시', '7시', '8시', '9시', '10시', '11시', '12시', '13시', '14시', '15시', '16시', '17시', '18시', '19시', '20시', '21시', '22시', '23시']
+								        }],
+								        yAxis: [{
+								          type: 'value'
+								        }],
+								        series: [
+								         {
+								          name: '승차',
+								          type: 'line',
+								          smooth: true,
+								          itemStyle: {
+								            normal: {
+								              areaStyle: {
+								                type: 'default'
+								              }
+								            }
+								          },
+								          data: [data.jroute.CardBusTimeNew.row[i].MIDNIGHT_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].ONE_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWO_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].THREE_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].FOUR_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].FIVE_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].SIX_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].SEVEN_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].EIGHT_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].NINE_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TEN_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].ELEVEN_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWELVE_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].THIRTEEN_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].FOURTEEN_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].FIFTEEN_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].SIXTEEN_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].SEVENTEEN_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].EIGHTEEN_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].NINETEEN_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWENTY_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWENTY_ONE_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWENTY_TWO_RIDE_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWENTY_THREE_RIDE_NUM]
+								        }, {
+								          name: '하차',
+								          type: 'line',
+								          smooth: true,
+								          itemStyle: {
+								            normal: {
+								              areaStyle: {
+								                type: 'default'
+								              }
+								            }
+								          },
+								          data: [data.jroute.CardBusTimeNew.row[i].MIDNIGHT_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].ONE_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWO_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].THREE_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].FOUR_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].FIVE_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].SIX_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].SEVEN_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].EIGHT_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].NINE_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TEN_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].ELEVEN_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWELVE_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].THIRTEEN_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].FOURTEEN_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].FIFTEEN_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].SIXTEEN_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].SEVENTEEN_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].EIGHTEEN_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].NINETEEN_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWENTY_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWENTY_ONE_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWENTY_TWO_ALIGHT_NUM,
+								        	  data.jroute.CardBusTimeNew.row[i].TWENTY_THREE_ALIGHT_NUM]
+								        }]
+								      });
+							}
+						}
+					
+					
+					}
+				});
+			});
+			
+			
+		     
+	
 			var icons = new Skycons({
 				"color" : "#73879C"
 			});
@@ -793,6 +1126,31 @@
 					icons.play();
 				}
 			});
+			
+			
+			//도넛 시작
+			var options = {
+					legend : false,
+					responsive : false
+				};
+
+				new Chart(document.getElementById("canvas1"), {
+					type : 'doughnut',
+					tooltipFillColor : "rgba(51, 51, 51, 0.55)",
+					data : {
+						labels : [ "Symbian", "Blackberry", "Other",
+								"Android", "IOS" ],
+						datasets : [ {
+							data : [ 15, 20, 30, 10, 30 ],
+							backgroundColor : [ "#BDC3C7", "#9B59B6",
+									"#E74C3C", "#26B99A", "#3498DB" ],
+							hoverBackgroundColor : [ "#CFD4D8", "#B370CF",
+									"#E95E4F", "#36CAAB", "#49A9EA" ]
+						} ]
+					},
+					options : options
+				});
+			//도넛 종료
 			
 		});
 	

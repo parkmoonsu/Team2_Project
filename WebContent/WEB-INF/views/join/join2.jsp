@@ -1,95 +1,242 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <style type="text/css">
-.my-box { border:1px solid; padding:10px; }
+.my-box {
+	border: 1px solid;
+	padding: 10px;
+}
+.form_wizard .stepContainer {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0 solid #CCC;
+  overflow-x: hidden; }
+
+.wizard_horizontal ul.wizard_steps {
+  display: table;
+  list-style: none;
+  position: relative;
+  width: 100%;
+  margin: 0 0 20px; }
+
+.wizard_horizontal ul.wizard_steps li {
+  display: table-cell;
+  text-align: center; }
+
+.wizard_horizontal ul.wizard_steps li a, .wizard_horizontal ul.wizard_steps li:hover {
+  display: block;
+  position: relative;
+  -moz-opacity: 1;
+  filter: alpha(opacity=100);
+  opacity: 1;
+  color: #666; }
+
+.wizard_horizontal ul.wizard_steps li a:before {
+  content: "";
+  position: absolute;
+  height: 4px;
+  background: #ccc;
+  top: 20px;
+  width: 100%;
+  z-index: 4;
+  left: 0; }
+
+.wizard_horizontal ul.wizard_steps li a.disabled .step_no {
+  background: #ccc; }
+
+.wizard_horizontal ul.wizard_steps li a .step_no {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 100px;
+  display: block;
+  margin: 0 auto 5px;
+  font-size: 16px;
+  text-align: center;
+  position: relative;
+  z-index: 5; }
+
+.wizard_horizontal ul.wizard_steps li a.selected:before, .step_no {
+  background: #34495E;
+  color: #fff; }
+
+.wizard_horizontal ul.wizard_steps li a.done:before, .wizard_horizontal ul.wizard_steps li a.done .step_no {
+  background: #1ABB9C;
+  color: #fff; }
+
+.wizard_horizontal ul.wizard_steps li:first-child a:before {
+  left: 50%; }
+
+.wizard_horizontal ul.wizard_steps li:last-child a:before {
+  right: 50%;
+  width: 50%;
+  left: auto; }
+
+.wizard_verticle .stepContainer {
+  width: 80%;
+  float: left;
+  padding: 0 10px; }
+
+.actionBar {
+  width: 100%;
+  border-top: 1px solid #ddd;
+  padding: 10px 5px;
+  text-align: right;
+  margin-top: 10px; }
+
+.actionBar .buttonDisabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: .65;
+  filter: alpha(opacity=65);
+  box-shadow: none; }
+
+.actionBar a {
+  margin: 0 3px; }
+
+.wizard_verticle .wizard_content {
+  width: 80%;
+  float: left;
+  padding-left: 20px; }
+
+.wizard_verticle ul.wizard_steps {
+  display: table;
+  list-style: none;
+  position: relative;
+  width: 20%;
+  float: left;
+  margin: 0 0 20px; }
+
+.wizard_verticle ul.wizard_steps li {
+  display: list-item;
+  text-align: center; }
+
+.wizard_verticle ul.wizard_steps li a {
+  height: 80px; }
+
+.wizard_verticle ul.wizard_steps li a:first-child {
+  margin-top: 20px; }
+
+.wizard_verticle ul.wizard_steps li a, .wizard_verticle ul.wizard_steps li:hover {
+  display: block;
+  position: relative;
+  -moz-opacity: 1;
+  filter: alpha(opacity=100);
+  opacity: 1;
+  color: #666; }
+
+.wizard_verticle ul.wizard_steps li a:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  background: #ccc;
+  top: 20px;
+  width: 4px;
+  z-index: 4;
+  left: 49%; }
+
+.wizard_verticle ul.wizard_steps li a.disabled .step_no {
+  background: #ccc; }
+ .small{
+ 	color:white;
+ }
+
+.wizard_verticle ul.wizard_steps li a .step_no {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 100px;
+  display: block;
+  margin: 0 auto 5px;
+  font-size: 16px;
+  text-align: center;
+  position: relative;
+  z-index: 5; }
+ 
+
+.wizard_verticle ul.wizard_steps li a.selected:before, .step_no {
+  background: #34495E;
+  color: #fff; }
+
+.wizard_verticle ul.wizard_steps li a.done:before, .wizard_verticle ul.wizard_steps li a.done .step_no {
+  background: #1ABB9C;
+  color: #fff; }
+
+.wizard_verticle ul.wizard_steps li:first-child a:before {
+  left: 49%; }
+
+.wizard_verticle ul.wizard_steps li:last-child a:before {
+  left: 49%;
+  left: auto;
+  width: 0; }
+
+.form_wizard .loader {
+  display: none; }
+
+.form_wizard .msgBox {
+  display: none; }
+
+label{
+font-size:12px;
+}
 
 </style>
 </head>
-<!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>KosBus로그인</title>
 
-<title>회원가입</title>
-
-<!-- Bootstrap -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Font Awesome -->
-<link
-	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<!-- NProgress -->
-<link
-	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
-	rel="stylesheet">
-
-<!-- Custom Theme Style -->
-<link href="${pageContext.request.contextPath}/build/css/custom.min.css"
-	rel="stylesheet">
-
-
-
-
-<!-- Bootstrap core CSS -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/ie10-viewport-bug-workaround.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/css/carousel/carousel.css"
-	rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script
-	src="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
-
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <!-- CSS -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/form-elements.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/style.css">
+        <link rel="stylesheet" id="theme-switch" href="${pageContext.request.contextPath}/mainCss/css/style.css">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-filestyle.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-filestyle.js"></script>
+      
 
 </head>
 <body>
-
-	<header>
-		<jsp:include page="/sidebar/header.jsp" />
+<header role="banner" id="fh5co-header">
+			<div class="container">
+				<!-- <div class="row"> -->
+			    <nav class="navbar navbar-default">
+		        <div class="navbar-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		         <a class="navbar-brand" href="bus.htm">KosBus</a> 
+		        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav navbar-right">
+		            <li class="active"><a href="bus.htm" data-nav-section="home"><span>Home</span></a></li> 
+		            <li><a href="login.htm" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
+		           	<li><a href="join.htm" id="gaip"><span>회원가입</span></a></li>
+		          </ul>
+		        </div>
+			    </nav>
+		  </div>
 	</header>
 
-
-	<div class="container" style="margin-top: 20px;">
-		<div class="main_container">
-
-			<!-- page content -->
-			<div role="main">
-				<!-- class="right_col" 이거 뺌-->
-				<div class="">
-					<div class="page-title">
-						<div class="title_left">
-							<h3>Form Wizards</h3>
-						</div>
-
-					</div>
-					<div class="clearfix"></div>
-
-					<div class="row">
-
-						<div class="col-md-12 col-sm-12 col-xs-12">
+	<div class="top-content">
+        	
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                 <div class="col-sm-1"></div>
+						<div class="col-md-10 col-sm-10 col-xs-10 form-box">
 							<div class="x_panel">
+							<div class="form-top" align="center" style="color: white">
+								<div class="form-top-center">
 								<div class="x_title">
 									<h2>
-										회원가입 <small>KosBus</small>
+										회원가입 <small style="color: white">KosBus</small>
 									</h2>
 
 									<div class="clearfix"></div>
@@ -101,25 +248,25 @@
 									
 									<div id="wizard" class="form_wizard wizard_horizontal">
 										<ul class="wizard_steps">
-											<li><a href="#step-2"> <span class="step_no">1</span>
-													<span class="step_descr"> Step 1<br /> <small>
+											<li ><a href="#step-2"> <span class="step_no">1</span>
+													<span class="step_descr" style="color: white"> Step 1<br /> <small style="color: white">
 															약관동의</small>
 												</span>
 											</a></li>
-											<li><a href="#step-2"> <span class="step_no">2</span>
-													<span class="step_descr"> Step 2<br /> <small>
+											<li ><a href="#step-2"> <span class="step_no">2</span>
+													<span class="step_descr" style="color: white"> Step 2<br /> <small style="color: white">
 															정보작성</small>
 												</span>
 											</a></li>
 											<li><a href="#step-2"> <span class="step_no">3</span>
-													<span class="step_descr"> Step 3<br /> <small>
+													<span class="step_descr" style="color: white"> Step 3<br /> <small style="color: white">
 															가입완료</small>
 												</span>
 											</a></li>
 
-										</ul>
+										</ul>	
 										
-										<div id="step-2">
+										<div id="step-2" style="text-align: center;" class="my-box">
 											<form id="register" class="form-horizontal form-label-left" method = "post" action = "join3.htm" enctype="multipart/form-data">
 
 												<div class="form-group">
@@ -130,10 +277,10 @@
 														<input type="text" id="m_id" name = "m_id"
 															class="form-control col-md-7 col-xs-12">
 													</div>
-													<div class = "col-md-1 col-sm-1">
+													<div class = "col-md-1 col-sm-1" align="left" style="padding:0px">
 														<input type = "button" class = "btn btn-default" id = "checkid" value = "중복확인">
 													</div>
-													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
+													<div class = "col-md-2 col-sm-2" style="margin-bottom:1px">
 														<span id = "check"></span>
 													</div>
 												</div>
@@ -172,12 +319,12 @@
 													<label for="m_email"
 														class="control-label col-md-3 col-sm-3 col-xs-12">이메일
 													</label>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12">
 														<input id="m_email"
 															class="form-control col-md-7 col-xs-12" type="email"
 															name="m_email">
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" align="left" style="padding: 0px">
 														<input type = "button" value = "인증번호전송" id = "emailbtn"
 															class = "btn btn-default">
 													</div>
@@ -187,12 +334,12 @@
 														class="control-label col-md-3 col-sm-3 col-xs-12">인증번호
 													</label>
 													<input type = 'hidden' id = 'm_nocheck' value = 'n'>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 15px">
 														<input id="m_echeck"
 															class="form-control col-md-7 col-xs-12" type="text"
 															name="m_echeck">
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" align="left" style="padding: 0px">
 														<input type = "button" value = "인증" id = "echeckbtn"
 															class = "btn btn-default">
 													</div>
@@ -217,7 +364,7 @@
 												
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12">성별</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" align="left">
 														<div id="m_gender" class="btn-group" data-toggle="buttons">
 															<label class="btn btn-default"
 																data-toggle-class="btn-primary"
@@ -243,6 +390,9 @@
 															class="form-control col-md-7 col-xs-12"
 															 type="text">
 													</div>
+													<div  class="col-sm-3" >
+													<input id="birth" type="hidden" value="0">
+													</div>
 												</div>
 												<div class="form-group">
 													<label for = "m_phone" 
@@ -253,6 +403,7 @@
 															class="form-control col-md-7 col-xs-12"
 															 type="text">
 													</div>
+													<div class="col-sm-3" id="phone"></div>
 												</div>
 												 <div class="form-group">
 													<label for="m_license"
@@ -268,7 +419,7 @@
 														class="control-label col-md-3 col-sm-3 col-xs-12">사진
 													</label>
 													<div class="col-md-6 col-sm-6 col-xs-12">
-<input  id="m_photo" onchange = "imagecheck(this)" name="files[1]" type="file" class="filestyle" data-buttonText="Open" data-input="false" data-iconName="glyphicon-plus" data-classButton="btn btn-primary">
+<input  id="m_photo2" onchange = "imagecheck(this)" name="files[1]" type="file" class="filestyle" data-buttonText="Open" data-input="false" data-iconName="glyphicon-plus" data-classButton="btn btn-primary">
 
 													</div>
 												</div>
@@ -284,12 +435,12 @@
 													<label for="m_addr"
 														class="control-label col-md-3 col-sm-3 col-xs-12">우편주소
 													</label>
-													<div class="col-md-3 col-sm-6 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left:15px">
 														<input id="m_addr"
 															class="form-control col-md-7 col-xs-12" type="text"
-															name="m_addr">
+															name="m_addr" >
 													</div>
-													<div class = "col-md-4 col-sm-4">
+													<div class = "col-md-3 col-sm-3" style="padding:0px" align="left">
 														<input type = "button" value = "주소검색"
 															class = "btn btn-default" onclick = "sample4_execDaumPostcode()">
 													</div>
@@ -332,7 +483,7 @@
 												<div id = "plus">
 												
 												</div> -->
-
+	
 												<div style="float: right; margin: 30px;">
 													<input type="button" value="이전" class="btn btn-primary"
 														id="prev" onclick="history.go(-1)"> 
@@ -347,29 +498,200 @@
 									</div>
 									<!-- End SmartWizard Content -->
 								</div>
+								</div>
+								</div>
+								<font style="letter-spacing:0.5px"></font>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-			<!-- /page content -->
-
-			<!-- footer content -->
-		<footer>
-			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
-			<div class="clearfix"></div>
-		</footer>
-		<!-- /footer content -->
-		</div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
 
 
-	<!-- 다음 우편번호 -->
+        <!-- Javascript -->
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery.backstretch.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/scripts.js"></script>
+        <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+        <script type="text/javascript">
+        $(function() {
+     
+				var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 	
+				
+				$("#emailbtn").click(function() {
+					if(regExp.test($("#m_email").val().trim())){
+						
+						alert("인증번호 전송 완료");
+						$.ajax({
+							url : "popup.htm",
+							type : "post",
+							data:{m_email:$("#m_email").val().trim()}
+						});
+						
+					}else{
+						alert("Email 형식이 잘못 되었습니다.");
+					}
+					
+				});	
 
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	<script>
-		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-		function sample4_execDaumPostcode() {
+				
+					var bir= /[12][0-9]{3}-[01][0-9]-[0-3][0-9]/;
+				$("#m_birth").keyup(function() {
+		
+					$("#birth2").empty();
+					
+					if(bir.test($("#m_birth").val().trim())){
+						$('#birth').after("<font color = '#52d3aa' size='1px' id='birth2'>가능합니다</font>");
+					}else{
+						$('#birth').after("<font color = 'red' size='1px' id='birth2'>생년월일 예)1992-02-03</font>");
+					}
+					
+				});	
+
+					var bir2= /^\d{3}-\d{3,4}-\d{4}$/;
+				$("#m_phone").keyup(function() {
+					
+					$("#phone2").empty();
+					
+					if(bir2.test($("#m_phone").val().trim())){
+						
+						$('#phone').after("<font color = '#52d3aa' size='1px' id='phone2'>가능합니다</font>");
+					}else{
+						$('#phone').after("<font color = 'red' size='1px' id='phone2'align='center'>전화번호 예)010-0000-0000</font>");
+					}
+					
+				});	
+				
+				$("#echeckbtn").click(function(){
+					$.ajax({
+						url:"echeck.htm",
+						type:"post",
+						data:{m_echeck:$("#m_echeck").val().trim()},
+						success:function(rd){
+							console.log(rd.echeck);
+							if($.trim(rd.echeck) == "y"){
+								alert("인증 되었습니다.");
+								$("#change").empty();
+								$("#change").append("<input type = 'hidden' name = 'm_echeck' value = 'y'>");
+								
+								$.ajax({
+									url:"updateapp.htm",
+									type:"post"
+								});
+							}else{
+								alert("인증번호를 잘못 입력하셨습니다.");
+								$("#m_echeck").focus();
+							}
+							
+							
+						}
+					});
+				});
+				
+				$("#checkid").click(function(){
+					
+					$.ajax({
+						url:"checkid.htm",
+						type:"post",
+						data:{m_id:$("#m_id").val().trim()},
+						success:function(rd){
+							console.log($.trim(rd.check));
+							$("#check").empty();
+							if($.trim(rd.check)=="y"){
+								$('#check').append("<font color = 'red' size='1px' >이미 있는 ID 입니다!</font>");
+								$('#m_id').focus();
+							}else if($.trim(rd.check)=="n" && $("#m_id").val().trim().length >= 8){
+								$('#check').append("<font  color = '#52d3aa' size='1px'>사용 가능한 ID 입니다!</font>");
+							}else{
+								$('#check').append("<font color = 'red' size='1px'>ID는 8자 이상입니다!</font>");
+							}
+						}
+						
+					});
+				});
+		
+				
+				$("#next").click(function(){
+					if($("#m_id").val() == ""){
+						alert("ID를 입력하세요.");
+						$("#m_id").focus();
+				        return false;
+					}else if($("#m_pw").val() == ""){
+						alert("비밀번호를 입력하세요.");
+						$("#m_pw").focus();
+				        return false;
+					}else if($("#m_pw2").val() == "" || ($("#m_pw").val() != $("#m_pw2").val())){
+						alert("비밀번호가 일치 하지 않습니다.");
+						$("#m_pw2").focus();
+						return false;
+					}else if($("#m_name").val() == ""){
+						alert("이름을 입력하세요.");
+						$("#m_name").focus();
+						return false;
+					}else if($("#m_email").val() == ""){
+						alert("이메일을 입력하세요.");
+						$("#m_email").focus();
+						return false;
+					}else if($("#m_nocheck").val() == "n"){
+						alert("이메일을 통해 인증하세요.");
+						$("#m_email").focus();
+						return false;
+					}else if($("#j_code").val() == ""){
+						alert("직책을 선택하세요.");
+						return false;
+					}else if($("#m_birth").val() =="" || !bir.test($("#m_birth").val().trim())){
+						alert("생년월일을 형식에 맞게 입력해주세요.");
+						$("#m_birth").focus();
+						return false;
+					}else if($("#m_phone").val() =="" || !bir2.test($("#m_phone").val().trim())){
+						alert("연락처를 형식에맞게 입력해주세요.");
+						$("#m_phone").focus();
+						return false;
+					}else if($("#m_license").val() ==""){
+						alert("운전면허증 사본을 첨부하세요.");
+						$("#m_license").focus();
+						return false;
+					}else if($("#m_photo").val() ==""){
+						alert("사진을 첨부하세요.");
+						$("#m_photo").focus();
+						return false;
+					}else if($('#m_resume').val()==""){
+						alert("이력서를 첨부하세요.");
+						$('#m_resume').focus();
+						return false;
+					}else if($("#m_addr").val() ==""){
+						alert("우편주소를 입력하세요.");
+						$("#m_addr").focus();
+						return false;
+					}else if($("#m_daddr").val() ==""){
+						alert("상세주소를 입력하세요.");
+						$("#m_daddr").focus();
+						return false;
+					}else if($("#res_num").val() ==""){
+						alert("이력사항을 선택하세요.");
+						return false;
+					}else if($("#rr_detail").val() ==""){
+						alert("이력사항을 입력하세요.");
+						$("#rr_detail").focus();
+						return false;
+					}else{
+						return true;
+					}
+				});
+				
+				
+				$('#wizard').smartWizard();
+
+				$('#wizard_verticle').smartWizard({
+					transitionEffect : 'slide'
+				});
+
+		});
+        function sample4_execDaumPostcode() {
 			new daum.Postcode(
 					{
 						oncomplete : function(data) {
@@ -428,192 +750,27 @@
 						}
 					}).open();
 		}
-	</script>
-	<!-- jQuery -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-		<!-- Bootstrap -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-		<!-- FastClick -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
-		<!-- NProgress -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
-		<!-- jQuery Smart Wizard -->
-		<script
-			src="${pageContext.request.contextPath}/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
-		<!-- Custom Theme Scripts -->
-		<script
-			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-		<!-- ajax -->
-		<script src="http://malsup.github.io/jquery.form.js"></script>
-		<!-- jQuery Smart Wizard -->
-		<script>
-			function xlscheck(file){
-				var filelen = file.value.length;
-				if(file.value.substring(filelen-3,filelen)!="xls"){
-					alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
-					file.value = "";
-				}
+        
+        function xlscheck(file){
+			var filelen = file.value.length;
+			if(file.value.substring(filelen-3,filelen)!="xls"){
+				alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
+				file.value = "";
 			}
-			 
-			function imagecheck(file){
-				
-				var filelen = file.value.length;
-				if(file.value.substring(filelen-3,filelen)!="png" && file.value.substring(filelen-3,filelen) != "jpg"){
-										
-					alert("JPG 또는 PNG인 이미지파일을 선택해 주세요,");
-					file.value= "";
-				}
-			} 
-			$(document).ready(function() {
-				var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 	
-				
-				$("#emailbtn").click(function() {
-					if(regExp.test($("#m_email").val().trim())){
-						
-						alert("인증번호 전송 완료");
-						$.ajax({
-							url : "popup.htm",
-							type : "post",
-							data:{m_email:$("#m_email").val().trim()}
-						});
-						
-					}else{
-						alert("Email 형식이 잘못 되었습니다.");
-					}
-					
-				});	
-				
-				$("#echeckbtn").click(function(){
-					$.ajax({
-						url:"echeck.htm",
-						type:"post",
-						data:{m_echeck:$("#m_echeck").val().trim()},
-						success:function(rd){
-							console.log(rd.echeck);
-							if($.trim(rd.echeck) == "y"){
-								alert("인증 되었습니다.");
-								$("#change").empty();
-								$("#change").append("<input type = 'hidden' name = 'm_echeck' value = 'y'>");
-								
-								$.ajax({
-									url:"updateapp.htm",
-									type:"post"
-								});
-							}else{
-								alert("인증번호를 잘못 입력하셨습니다.");
-								$("#m_echeck").focus();
-							}
-							
-							
-						}
-					});
-				});
-				
-				$("#checkid").click(function(){
-					
-					$.ajax({
-						url:"checkid.htm",
-						type:"post",
-						data:{m_id:$("#m_id").val().trim()},
-						success:function(rd){
-							console.log($.trim(rd.check));
-							$("#check").empty();
-							if($.trim(rd.check)=="y"){
-								$('#check').append("<font color = 'red'>이미 있는 ID 입니다!</font>");
-								$('#m_id').focus();
-							}else if($.trim(rd.check)=="n" && $("#m_id").val().trim().length >= 8){
-								$('#check').append("<font color = '#369F36'>사용 가능한 ID 입니다!</font>");
-							}else{
-								$('#check').append("<font color = 'red'>ID는 8자 이상입니다!</font>");
-							}
-						}
-						
-					});
-				});
-		
-				
-				$("#next").click(function(){
-					if($("#m_id").val() == ""){
-						alert("ID를 입력하세요.");
-						$("#m_id").focus();
-				        return false;
-					}else if($("#m_pw").val() == ""){
-						alert("비밀번호를 입력하세요.");
-						$("#m_pw").focus();
-				        return false;
-					}else if($("#m_pw2").val() == "" || ($("#m_pw").val() != $("#m_pw2").val())){
-						alert("비밀번호가 일치 하지 않습니다.");
-						$("#m_pw2").focus();
-						return false;
-					}else if($("#m_name").val() == ""){
-						alert("이름을 입력하세요.");
-						$("#m_name").focus();
-						return false;
-					}else if($("#m_email").val() == ""){
-						alert("이메일을 입력하세요.");
-						$("#m_email").focus();
-						return false;
-					}else if($("#m_nocheck").val() == "n"){
-						alert("이메일을 통해 인증하세요.");
-						$("#m_email").focus();
-						return false;
-					}else if($("#j_code").val() == ""){
-						alert("직책을 선택하세요.");
-						return false;
-					}else if($("#m_birth").val() ==""){
-						alert("생년월일을 입력하세요.");
-						$("#m_birth").focus();
-						return false;
-					}else if($("#m_phone").val() ==""){
-						alert("연락처를 입력하세요.");
-						$("#m_phone").focus();
-						return false;
-					}else if($("#m_license").val() ==""){
-						alert("운전면허증 사본을 첨부하세요.");
-						$("#m_license").focus();
-						return false;
-					}else if($("#m_photo").val() ==""){
-						alert("사진을 첨부하세요.");
-						$("#m_photo").focus();
-						return false;
-					}else if($('#m_resume').val()==""){
-						alert("이력서를 첨부하세요.");
-						$('#m_resume').focus();
-						return false;
-					}else if($("#m_addr").val() ==""){
-						alert("우편주소를 입력하세요.");
-						$("#m_addr").focus();
-						return false;
-					}else if($("#m_daddr").val() ==""){
-						alert("상세주소를 입력하세요.");
-						$("#m_daddr").focus();
-						return false;
-					}else if($("#res_num").val() ==""){
-						alert("이력사항을 선택하세요.");
-						return false;
-					}else if($("#rr_detail").val() ==""){
-						alert("이력사항을 입력하세요.");
-						$("#rr_detail").focus();
-						return false;
-					}else{
-						return true;
-					}
-				});
-				
-				
-				$('#wizard').smartWizard();
-
-				$('#wizard_verticle').smartWizard({
-					transitionEffect : 'slide'
-				});
-
-			});
+		}
+		 
+		function imagecheck(file){
 			
-		</script>
-		<!-- /jQuery Smart Wizard -->
+			var filelen = file.value.length;
+			if(file.value.substring(filelen-3,filelen)!="png" && file.value.substring(filelen-3,filelen) != "jpg"){
+									
+				alert("JPG 또는 PNG인 이미지파일을 선택해 주세요,");
+				file.value= "";
+			}
+		} 
+        
+        </script>
+
+
 </body>
 </html>

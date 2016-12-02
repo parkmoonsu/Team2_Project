@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.bus.dao.RouteStopDAO">
+	<!-- routeStop 테이블 -->
+	
+	<select id="insertRouteStopCheck" parameterType="kr.or.bus.dto.RouteStopDTO" resultType="Integer">
+		select COUNT(*) from routestop WHERE S_NUM = #{s_num}
+	</select>
+	
+	<insert id="insertRouteStopData" parameterType="kr.or.bus.dto.RouteStopDTO">
+		INSERT INTO routestop(R_NUM, S_NUM, RS_ORDER, R_ID, RS_START, RS_END) VALUES(#{r_num}, #{s_num}, #{rs_order}, #{r_id}, #{rs_start}, #{rs_end})
+	</insert>
+	
+	
+</mapper>
