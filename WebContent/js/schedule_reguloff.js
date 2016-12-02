@@ -107,7 +107,8 @@ $(function() {
 
 			var event = {
 				m_id : calEventObj.id,
-				o_code : o_code
+				o_code : o_code,
+				temp : 'true'
 			};
 			$("#calendar").fullCalendar('removeEvents', calEventObj.id);
 
@@ -135,7 +136,8 @@ $(function() {
 					o_code:calEventObj.dow[0],
 					m_id:loginid,
 					ro_code:o_code,
-					ro_object:loginid
+					ro_object:loginid,
+					o_check:'Y'
 				},
 				success : function(data) {
 					
@@ -324,6 +326,7 @@ function loadCalendar(){
 										m_id:event1.m_id, //본인id > 클릭된 사람
 										ro_code:event1.o_code, //변경후 요일
 										ro_object:event2.m_id //바꿀사람id
+										
 									},
 									success : function(data) {
 										
@@ -339,7 +342,8 @@ function loadCalendar(){
 										o_code:event1.o_code, //변경전 요일
 										m_id:event2.m_id, //본인id > 클릭된 사람
 										ro_code:event2.o_code, //변경후 요일
-										ro_object:event1.m_id //바꿀사람id
+										ro_object:event1.m_id, //바꿀사람id
+										o_check:'Y'
 									},
 									success : function(data) {
 										

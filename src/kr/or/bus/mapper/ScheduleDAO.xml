@@ -52,7 +52,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	<update id="reguloff_update">		
 		UPDATE reguloff
-		SET o_code=#{o_code}		
+		SET o_code=#{o_code},
+		temp=#{temp}		
 		WHERE m_id=#{m_id}
 	</update>
 	<select id="reguloff_selectseq" parameterType = "String" resultType="kr.or.bus.dto.MemberJoinRegulOffDTO">
@@ -102,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<insert id="history_insert">
 		INSERT INTO reguloffr
-		VALUES('600', #{m_id}, #{o_code}, #{ro_code}, sysdate, null, #{ro_object}, null)
+		VALUES('600', #{m_id}, #{o_code}, #{ro_code}, sysdate, null, #{ro_object}, #{o_check})
 	</insert>
 
 

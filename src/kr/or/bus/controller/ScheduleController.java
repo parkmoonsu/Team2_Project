@@ -150,11 +150,12 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping(value="/reguloff_update.htm", method=RequestMethod.POST)
-	public View reguloffUpdate(String m_id, String o_code, ModelMap map) throws ClassNotFoundException, SQLException, ParseException{
+	public View reguloffUpdate(String m_id, String o_code, String temp, ModelMap map) throws ClassNotFoundException, SQLException, ParseException{
 		System.out.println("일정수정");
 		RegulOffDTO dto=new RegulOffDTO();
 		dto.setM_id(m_id);
 		dto.setO_code(o_code);
+		dto.setTemp(temp);
 			
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.reguloff_update(dto);
@@ -229,7 +230,8 @@ public class ScheduleController {
 		String ro_code,
 		java.sql.Date ro_reqdate,
 		java.sql.Date ro_regdate,
-		String ro_object
+		String ro_object,
+		String o_check
 	) throws ClassNotFoundException, SQLException{
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		RegulOffrDTO dto=new RegulOffrDTO();
@@ -237,6 +239,7 @@ public class ScheduleController {
 		dto.setM_id(m_id);
 		dto.setO_code(o_code);
 		dto.setRo_code(ro_code);
+		dto.setO_check(o_check);
 		System.out.println("이건 탑니까???");
 		if (ro_object==null || ro_object.equals("")){
 			ro_object="nouser";
