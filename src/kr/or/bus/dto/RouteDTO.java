@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+/*
+*	@FileName : RouteDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 12.2
+*	@Author	: 김수현
+*	@Discription : 버스 DTO
+*/
+
+
+package kr.or.bus.dto;
+
+public class RouteDTO {
+
+	private String r_num;
+
+=======
 package kr.or.bus.dto;
 
 public class RouteDTO {
@@ -8,10 +25,23 @@ public class RouteDTO {
 	String r_interval; //배차간격(분)
 	String r_id; //노선 id
 	String bd_num; //버스타입
+>>>>>>> 49ecdf9ad294c9a3d35e2b3252ee2919d4238806
 	
 	public String getR_num() {
 		return r_num;
 	}
+<<<<<<< HEAD
+
+	public void setR_num(String r_num) {
+		this.r_num = r_num;
+	}
+	
+	@Override
+	public String toString() {
+		return "RouteDTO [r_num=" + r_num + "]";
+	}
+		
+=======
 	public void setR_num(String r_num) {
 		this.r_num = r_num;
 	}
@@ -51,4 +81,5 @@ public class RouteDTO {
 	public void setBd_num(String bd_num) {
 		this.bd_num = bd_num;
 	}
+>>>>>>> 49ecdf9ad294c9a3d35e2b3252ee2919d4238806
 }
