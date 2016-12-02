@@ -33,20 +33,26 @@ $(function() {
 		success : function(data) {
 
 			$.each(data.data, function(index, obj) {
-				 
-				var item = {
-					id : obj.m_id,
-					title : obj.m_name,
-					dow : [ obj.o_code ]
-				};
-				
-				//승인상태601
-				if (obj.m_id==loginid){
-					item.color="green"; //본인, 승인
+
+				if(obj.temp=='t'){
+
 				} else {
-					item.color="black"; //타인, 승인
+					
+					var item = {
+							id : obj.m_id,
+							title : obj.m_name,
+							dow : [ obj.o_code ]
+					};
+					
+					//승인상태601
+					if (obj.m_id==loginid){
+						item.color="green"; //본인, 승인
+					} else {
+						item.color="black"; //타인, 승인
+					}
+					array.push(item);
 				}
-				array.push(item);
+				
 			});
 		}
 	});
@@ -81,12 +87,7 @@ $(function() {
 							item.color=""; //타인, 신청중
 						}
 					});
-				
-					/*if(true){
-						
-					} else {						
-						item.color=""; //타인, 신청중
-					}	*/					
+								
 				}
 				array.push(item);
 			});
@@ -105,33 +106,24 @@ $(function() {
 
 		var o_code = $('#select1').val();
 
-		var event = {
-			m_id : loginid,
-			o_code : o_code,
-			temp : 't'
-		};
 		$(".antoclose").click();
 
-		// 입력된 일정 db에 저장
+		// 입력된 일정 reguloff에 저장
 		$.ajax({
 			url : 'reguloff_insert.htm',
 			type : 'post',
-			data : event,
+			data : {
+				m_id : loginid,
+				o_code : o_code,
+				temp : 't'
+			},
 			dataType : "json",
-			success : function(data) {
-				event = {
-					id : data.data.m_id,
-					title : data.data.m_name,
-					dow : [ data.data.o_code ]
-				};
-
-				$("#calendar").fullCalendar('renderEvent', event);
-				$("#calendar").fullCalendar('unselect');
+			success : function(data) {	
 
 			}
 		});
 		
-		// history에 저장
+		// reguloffr에 저장
 		$.ajax({
 			url : 'history_insert.htm',
 			type : 'post',
@@ -144,7 +136,16 @@ $(function() {
 				o_check:'y'
 			},
 			success : function(data) {
+				console.log(data.data);
+				var event = {
+					id : data.data.m_id,
+					title : data.data.m_name,
+					dow : [ data.data.o_code ],
+					color:"red"
+				};
 				
+				$("#calendar").fullCalendar('renderEvent', event);
+				$("#calendar").fullCalendar('unselect');
 			}
 		});
 
@@ -329,12 +330,14 @@ function loadCalendar(){
 								
 								event1={
 									m_id : calEvent.id,
-									o_code : o_code1
+									o_code : o_code1,
+									temp:'t'
 								};
 								
 								event2={
 									m_id : loginid,
-									o_code : o_code2
+									o_code : o_code2,
+									temp:'t'
 								};
 								
 								//일정저장
@@ -420,22 +423,26 @@ function loadCalendar(){
 								dowafter=dowafter%7+7;
 							} else {
 							}
-				
+							
+							$("#calendar").fullCalendar('removeEvents', event.id);
 							$.ajax({
 								url:"reguloff_update.htm",
 								data:{
 									m_id : event.id,
-									o_code : dowafter
+									o_code : dowafter,
+									temp:'t'
 								},
 								type:"post",
 								dataType:"json",
 								success:function(data){
+									console.log(data.data);
 									evt={
-											id:data.data.m_id,
-											title:data.data.m_name,
-											dow:[data.data.o_code]
+											id:event.id,
+											title:event.title,
+											dow:[dowbefore],
+											color:'green'
 									};
-									$("#calendar").fullCalendar('removeEvents', event.id);
+									
 									$("#calendar").fullCalendar('renderEvent', evt);
 								}
 							});
@@ -453,7 +460,16 @@ function loadCalendar(){
 									o_check:'y'
 								},
 								success : function(data) {
-									console.log
+									console.log(data);
+									var event = {
+											id : data.data.m_id,
+											title : data.data.m_name,
+											dow : [ data.data.o_code ],
+											color:"red"
+										};
+										
+										$("#calendar").fullCalendar('renderEvent', event);
+										$("#calendar").fullCalendar('unselect');
 								}
 							});
 							

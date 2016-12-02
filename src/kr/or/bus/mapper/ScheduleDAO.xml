@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	where m.m_id=#{m_id})
 	</select>
 	<select id="reguloff_select" parameterType="java.lang.String" resultType="kr.or.bus.dto.MemberJoinRegulOffDTO">
-		select r.m_id, r.o_code, m.m_name
+		select r.m_id, r.o_code, m.m_name, r.temp
 		from reguloff r
 	    join member m on r.m_id=m.m_id
 	    join bus b on m.b_vehiclenum=b.b_vehiclenum

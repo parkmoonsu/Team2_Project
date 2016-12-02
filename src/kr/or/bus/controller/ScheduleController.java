@@ -180,6 +180,7 @@ public class ScheduleController {
 			
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		dao.reguloff_update(dto);
+
 		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
 		
 		map.addAttribute("data", dto2);
@@ -244,7 +245,7 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping(value="/history_insert.htm", method=RequestMethod.POST)
-	public String insertHistory(
+	public View insertHistory(
 		String ko_code, 
 		String m_id,
 		String o_code,
@@ -252,7 +253,8 @@ public class ScheduleController {
 		java.sql.Date ro_reqdate,
 		java.sql.Date ro_regdate,
 		String ro_object,
-		String o_check
+		String o_check,
+		Model model
 	) throws ClassNotFoundException, SQLException{
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		RegulOffrDTO dto=new RegulOffrDTO();
@@ -264,8 +266,9 @@ public class ScheduleController {
 		dto.setRo_object(ro_object);
 			
 		dao.history_insert(dto);
-//		System.out.println("무사히 history 저장?");
-		return "bus";
+		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
+		model.addAttribute("data", dto2);
+		return jsonview;
 	}
 	
 	
