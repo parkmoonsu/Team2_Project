@@ -176,17 +176,18 @@
     var poly3;
     var poly4;
     
+    var now = new Date();
     //지도 기본 위치 , 마커 기본위치 가 됨.  
     //현 기본 좌표 : 판교역
     var myLatLng = {
-    	lat : 37.39489285215817,
-     	lng : 127.11115658283234
+    	lat : 37.48085213924345,
+     	lng : 126.91500663757324
     };
     
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
            center : myLatLng,
-           zoom : 15
+           zoom : 13
         });                                                  
        
        	//교통 지도
@@ -222,6 +223,10 @@
 		    strokeWeight: 2,
 	  	});
 		poly4.setMap(map);
+		
+		map.addListener('click', function(e) {
+			console.log(e.latLng);
+		});
     }
     
      //버스 정류장 원본 파일로 좌표 읽어와서 마커 생성
@@ -251,7 +256,7 @@
            		icon : '${pageContext.request.contextPath}/images/busstop.png',
            		zindex : "5"
         	});
-     	  	map.panTo(originalMarker.getPosition());
+     	  	//map.panTo(originalMarker.getPosition());
      	  	originalMarkers.push(originalMarker);
             
 
@@ -284,7 +289,7 @@
           		icon : '${pageContext.request.contextPath}/images/busstop.png',
           		zindex : "5"
        		});
-    	  	map.panTo(originalMarker5623.getPosition());
+    	  	//map.panTo(originalMarker5623.getPosition());
    			originalMarkers5623.push(originalMarker5623);   		
    		
    		
@@ -319,7 +324,7 @@
              		icon : '${pageContext.request.contextPath}/images/busstop.png',
              		zindex : "5"
           		});
-       			map.panTo(originalMarker702.getPosition());
+       			//map.panTo(originalMarker702.getPosition());
       			originalMarkers702.push(originalMarker702);   		
       		
       		
@@ -352,7 +357,7 @@
             		icon : '${pageContext.request.contextPath}/images/busstop.png',
             		zindex : "5"
          		});
-      			map.panTo(originalMarker9000.getPosition());
+      			//map.panTo(originalMarker9000.getPosition());
      			originalMarkers9000.push(originalMarker9000);   		      		    		
      	}//for문 끝      	 	      		
    	}
@@ -383,7 +388,7 @@
            		icon : '${pageContext.request.contextPath}/images/busstop.png',
            		zindex : "5"
         		});
-     			map.panTo(originalMarker6501.getPosition());
+     			//map.panTo(originalMarker6501.getPosition());
     			originalMarkers6501.push(originalMarker6501);   		      		    		
     	}//for문 끝      	 	      		
   	}
@@ -755,7 +760,7 @@
                     url : "busStopOriginalRead.admin",
                     type : "get",
                     dataType : "json",
-                    data : {r_num:$("#selectBus").val()},
+                    data : {busNo:$("#selectBus").val()},
                     success : function(data) {
                        console.log("읽어옴?");
                        console.log(data);
