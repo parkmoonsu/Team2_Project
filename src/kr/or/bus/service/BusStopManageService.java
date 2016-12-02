@@ -228,11 +228,10 @@ public class BusStopManageService {
 	
 		//버스 원본 경로를 디비 로부터  route id select 해서 공공데이터에서 버스 경로를 가져온다.	
 		public void busRouteCall(String r_num,RouteDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException{						
-			PrintWriter out=null;
-			String busno = request.getParameter("busNo");
+			PrintWriter out=null;			
 			RouteDAO dao = null;
 			
-			if(busno.equals("all")){
+			if(r_num.equals("all")){
 				dao = sqlsession.getMapper(RouteDAO.class);
 				dto = dao.routeidSearch(r_num);
             	JSONObject obs1 = busMultiRouteRead(dto ,request, response);
@@ -249,7 +248,7 @@ public class BusStopManageService {
             	out = response.getWriter();
             	out.print(obss);
             	
-            }else if(!busno.equals("all")){
+            }else if(!r_num.equals("all")){
             	dao = sqlsession.getMapper(RouteDAO.class);
             	dto = dao.routeidSearch(r_num);
             	busSingleRouteRead(dto ,request, response);
@@ -530,6 +529,7 @@ public class BusStopManageService {
 		
 	}
 	
+	//디비에서 route id를 검색해오는 함수.
 	public RouteDTO routeidInfoSearch(String r_num,RouteDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		System.out.println(r_num);
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
