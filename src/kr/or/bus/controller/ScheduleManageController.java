@@ -114,7 +114,8 @@ public class ScheduleManageController {
 	*/
 	
 	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
-	public String getHistoryCal(){
+	public String getHistoryCal(Model model){
+		service.getRequestState(model);
 		return "schedule/schedule_managechangeapprove";
 	}
 }

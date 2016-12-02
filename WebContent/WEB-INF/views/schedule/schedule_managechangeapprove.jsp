@@ -127,6 +127,8 @@ $(document).ready(function() {
 });
 
 </script>
+<c:set var="total" value="${total }"/>
+<c:set var="refuse" value="${refuse }"/>
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -141,6 +143,7 @@ $(document).ready(function() {
 
 			<!-- page content -->
 			<div class="right_col" role="main">
+
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
@@ -149,19 +152,7 @@ $(document).ready(function() {
 							</h3>
 						</div>
 
-						<div class="title_right">
-							<div
-								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-								<div class="input-group">
-									<select>
-										<option>차고지 선택</option>
-									</select>
-									<select>
-										<option>노선 선택</option>
-									</select>
-								</div>
-							</div>
-						</div>
+						<div class="title_right"></div>
 					</div>
 
 					<div class="clearfix"></div>
@@ -169,6 +160,7 @@ $(document).ready(function() {
 					<div class="row">
 						<div class="col-md-12">
 							<div class="x_panel">
+
 								<div class="x_title">
 									<h2>
 										Calendar Events <small>Sessions</small>
@@ -188,7 +180,24 @@ $(document).ready(function() {
 									</ul>
 									<div class="clearfix"></div>
 								</div>
+
 								<div class="x_content">
+									<ul class="stats-overview">
+										<li >
+										<span class="name"> 변경 요청 </span> 
+										<span class="value text-success"> ${total }건 </span>
+										</li>
+										<li >
+										<span class="name"> 변경 거절 </span> 
+										<span class="value text-danger"> ${refuse }건 </span>
+										</li>
+										<li >
+										<c:forEach var="mrordto" items="${mrordto }">
+										<div id="${mrordto.r_num }" style="float:left; margin-left:10%">${mrordto.m_name }</div>
+										</c:forEach>	
+										</li>
+									</ul>
+
 									<div id='wrap'>
 										<div id='calendar2'>
 											<div id='calendar'></div>

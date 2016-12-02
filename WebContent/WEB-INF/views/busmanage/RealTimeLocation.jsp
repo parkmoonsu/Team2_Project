@@ -299,16 +299,16 @@
     		deleteRoute();
     		if($("#selectBus").val() !=null){
         		$.ajax({
-                    url : "busStopOriginalRead.admin",
+                    url : "routeidSearch.admin",
                     type : "get",
                     dataType : "json",
-                    data : {busNo:$("#selectBus").val()},
+                    data : {r_num:$("#selectBus").val()},
                     success : function(data) {
                        console.log("읽어옴?");
                        console.log(data);
-                       console.log(data.length);                                                                   	                       
+                       //console.log(data.length);                                                                   	                       
                        
-                       if(data.length == 4){
+                      if(data.length == 4){
                     	console.log("4개 노선");
                     	console.log(data.length);
                        	originalMarkerMake(data[0].msgBody, map);
