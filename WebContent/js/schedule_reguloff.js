@@ -24,7 +24,7 @@ $(function() {
 		}
 	});
 
-	// db에 저장된 일정 불러오기
+	// reguloff에 저장된 확정된 일정 불러오기
 	$.ajax({
 		url : 'reguloff_select.htm',
 		type : 'post',
@@ -33,11 +33,61 @@ $(function() {
 		success : function(data) {
 
 			$.each(data.data, function(index, obj) {
+				 
 				var item = {
 					id : obj.m_id,
 					title : obj.m_name,
 					dow : [ obj.o_code ]
 				};
+				
+				//승인상태601
+				if (obj.m_id==loginid){
+					item.color="green"; //본인, 승인
+				} else {
+					item.color="black"; //타인, 승인
+				}
+				array.push(item);
+			});
+		}
+	});
+	
+	// reguloffr에 저장된 신청중인 일정 불러오기
+	$.ajax({
+		url : 'reguloffr_select.htm',
+		type : 'post',
+		data : {m_id:loginid},
+		dataType : 'json',
+		success : function(data) {
+	
+			$.each(data.data, function(index, obj) {
+
+				var item = {
+					id : obj.m_id,
+					title : obj.m_name,
+					dow : [ obj.ro_code ],
+					color:''
+				};
+				
+				//승인상태600
+				if (obj.m_id==loginid){
+					item.color="red"; //본인, 신청중
+				} else {
+				
+					$.each(data.data, function(index, obj2) {
+						if(obj.ro_object==obj2.m_id){
+							item.color="red";
+						}
+						else {
+							item.color=""; //타인, 신청중
+						}
+					});
+				
+					/*if(true){
+						
+					} else {						
+						item.color=""; //타인, 신청중
+					}	*/					
+				}
 				array.push(item);
 			});
 		}
@@ -58,7 +108,7 @@ $(function() {
 		var event = {
 			m_id : loginid,
 			o_code : o_code,
-			temp : 'true'
+			temp : 't'
 		};
 		$(".antoclose").click();
 
@@ -91,7 +141,7 @@ $(function() {
 				m_id:loginid,
 				ro_code:o_code,
 				ro_object:loginid,
-				o_check:'Y'
+				o_check:'y'
 			},
 			success : function(data) {
 				
@@ -114,7 +164,7 @@ $(function() {
 				data : {
 					m_id : calEventObj.id,
 					o_code : o_code,
-					temp : 'true'
+					temp : 't'
 				},
 				success : function(data) {
 					console.log('reguloff에 업뎃');
@@ -138,7 +188,7 @@ $(function() {
 					m_id:loginid,
 					ro_code:o_code,
 					ro_object:loginid,
-					o_check:'Y'
+					o_check:'y'
 				},
 				success : function(data) {
 					
@@ -333,7 +383,7 @@ function loadCalendar(){
 										m_id:event2.m_id, //본인id > 클릭된 사람
 										ro_code:event2.o_code, //변경후 요일
 										ro_object:event1.m_id, //바꿀사람id
-										o_check:'Y'
+										o_check:'y'
 									},
 									success : function(data) {
 										'요청자는 y있게 변경되었다'
@@ -400,10 +450,10 @@ function loadCalendar(){
 									m_id:loginid,
 									ro_code:dowafter,
 									ro_object:loginid,
-									o_check:'Y'
+									o_check:'y'
 								},
 								success : function(data) {
-									
+									console.log
 								}
 							});
 							
