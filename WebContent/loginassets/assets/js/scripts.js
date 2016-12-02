@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
     /*
         Fullscreen background
     */
-    $.backstretch("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRNvekx_Vqvwj44QYkCMbRufTpWKg5YtXx8FQv2PWrBH9-0m8me");
+    $.backstretch("bono.jpg");
     
     /*
         Form validation
