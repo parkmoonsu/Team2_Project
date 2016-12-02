@@ -130,6 +130,15 @@ public class ScheduleController {
 		return jsonview;//str;
 	}
 	
+	@RequestMapping(value="/reguloff_select.htm", method=RequestMethod.POST)
+	public View reguloffSelect(String m_id, ModelMap map) throws ClassNotFoundException, SQLException{
+		System.out.println("해당노선 일정 불러오기");
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		List<MemberJoinRegulOffDTO> dtolist=dao.reguloff_select(m_id);
+		map.addAttribute("data", dtolist);
+		return jsonview;
+	}
+	
 	/*@RequestMapping(value="/reguloff_select.htm", method=RequestMethod.POST)
 	public View reguloffSelect(String m_id, ModelMap map) throws ClassNotFoundException, SQLException{
 		System.out.println("해당노선 일정 불러오기");
@@ -141,7 +150,7 @@ public class ScheduleController {
 	}*/
 	
 	@RequestMapping(value="/reguloffr_select.htm", method=RequestMethod.POST)
-	public View reguloffSelect(String m_id, ModelMap map) throws ClassNotFoundException, SQLException{
+	public View reguloffrSelect(String m_id, ModelMap map) throws ClassNotFoundException, SQLException{
 		System.out.println("해당노선 일정 불러오기");
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		List<RegulOffrJoinMemberJoinBusDTO> dtolist=dao.reguloffr_select(m_id);

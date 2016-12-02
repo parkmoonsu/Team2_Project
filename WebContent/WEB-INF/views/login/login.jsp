@@ -36,7 +36,7 @@
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		          <ul class="nav navbar-nav navbar-right">
-		            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li> 
+		            <li class="active"><a href="bus.htm" data-nav-section="home"><span>Home</span></a></li> 
 		            <li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
 		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
 		          </ul>

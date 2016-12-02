@@ -261,6 +261,8 @@
 			// Getting input file value
 			_self.$element.change(function() {
 				var files = _self.pushNameFiles();
+				
+				
 
 				if (_self.options.input == false && _self.options.badge) {
 					if (_self.$elementFilestyle.find('.badge').length == 0) {
@@ -347,5 +349,7 @@
 
 			$this.filestyle(options);
 		});
+		
+
 	});
 })(window.jQuery);
