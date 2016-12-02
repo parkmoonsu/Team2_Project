@@ -1,4 +1,10 @@
-//노선별 출근 현황
+/*
+*	@FileName : RnumcommuteDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 12. 01
+*	@Author	: 조한솔
+*	@Discription : 운영관리 메뉴 노선별 출근현황 DTO
+*/
 
 package kr.or.bus.dto;
 

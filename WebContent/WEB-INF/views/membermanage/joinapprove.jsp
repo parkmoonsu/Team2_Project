@@ -57,8 +57,15 @@
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
 <!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+<script
+		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
+</script>
+<style type= "text/css">
+table, th{
+	text-align: center;
+}
+
+</style>
 </head>
 
 <body class="nav-md">
@@ -104,25 +111,25 @@
 
 
 									<!-- start project list -->
-									<div
+									 <div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
-											<input type="text" class="form-control"
+											<!-- <input type="text" class="form-control"
 												placeholder="Search for..." id="search"> <span
 												class="input-group-btn">
 												<button class="btn btn-default" type="button">Go!</button>
-											</span>
+											</span> -->
 										</div>
 									</div>
 									<table class="table table-hover projects">
 										<thead>
 											<tr>
-												<th>번호</th>
-												<th>ID</th>
-												<th>이름</th>
-												<th>직책</th>
-												<th>승인요청일</th>
-												<th style="width: 20%"></th>
+												<th style="width:60px">번호</th>
+												<th style="width:110px">ID</th>
+												<th style="width:90px">이름</th>
+												<th style="width:90px">직책</th>
+												<th style="width:120px">승인요청일</th>
+												<th style="width: 90px"></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -165,21 +172,33 @@
 											<c:otherwise>
 												<c:set value = "${mc/10 + 1}" var = "pagecount"/>
 											</c:otherwise>
-									</c:choose>	
-									<ul class="pager">
-										<c:if test="${pgc > 1}">
-											<li><a href="joinapprove.admin?pg=${pgc-1}">Previous</a></li>
-										</c:if>
-										
-										
-										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="joinapprove.admin?pg=${i}">${i}</a></li>
-										</c:forEach>
-										
-										<c:if test="${pgc < mc/10 }">
-											<li><a href="joinapprove.admin?pg=${pgc+1}">Next</a></li>
-										</c:if>
-									</ul>
+									</c:choose>
+
+									<div style="text-align: center">
+										<ul class="pagination">
+											<c:if test="${pgc > 1}">
+												<li><a href="joinapprove.admin?pg=${pgc-1}">Previous</a></li>
+											</c:if>
+
+											<c:forEach begin="1" end="${pagecount}" var="i">
+												<c:if test="${i==pgc}">
+													<li class="active"><a href="#">${i}</a></li>
+												</c:if>
+												<c:if test="${i!=pgc}">
+													<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
+												</c:if>
+											</c:forEach>
+											
+											
+											<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
+												<li class="active"><a href="joinapprove.admin?pg=${i}">${i}</a></li>
+											</c:forEach> --%>
+
+											<c:if test="${pgc < mc/10 }">
+												<li><a href="joinapprove.admin?pg=${pgc+1}">Next</a></li>
+											</c:if>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>

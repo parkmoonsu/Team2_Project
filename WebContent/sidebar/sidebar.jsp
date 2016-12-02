@@ -53,14 +53,7 @@
                       <li><a href="gettimetable.admin">운행 스케줄</a></li>
                     </ul>
                   </li>
-                  
-                   <!-- 임시페이지 -->
-                  <li>
-                  <!-- <a href="commutebus.admin"><i>노선별 출결관리</i></a> -->
-                  <a href="routename.admin"><i>노선별 출결관리</i></a> 
-                  </li>
-                  
-                  
+                            
                   <li><a><i class="fa fa-table"></i>노선 관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="route.admin">노선</a></li>
@@ -69,6 +62,7 @@
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i>운영 관리<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                      <li><a href="routename.admin">노선별 출결관리</a></li>
                       <li><a href="chartjs.html">Chart JS</a></li>
                       <li><a href="chartjs2.html">Chart JS2</a></li>
                       <li><a href="morisjs.html">Moris JS</a></li>

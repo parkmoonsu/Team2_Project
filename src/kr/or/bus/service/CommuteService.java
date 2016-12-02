@@ -1,3 +1,11 @@
+/*
+*	@FileName : CommuteService.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.26
+*	@Author	: 조한솔
+*	@Discription : 회원메뉴 출/퇴근 관리 Service
+*/
+
 package kr.or.bus.service;
 
 import java.text.SimpleDateFormat;
