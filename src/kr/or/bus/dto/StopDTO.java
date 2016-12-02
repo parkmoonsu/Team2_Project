@@ -30,4 +30,8 @@ public class StopDTO {
 	public void setS_name(String s_name) {
 		this.s_name = s_name;
 	}
+	@Override
+	public String toString() {
+		return "StopDTO [s_num=" + s_num + ", s_x=" + s_x + ", s_y=" + s_y + ", s_name=" + s_name + "]";
+	}
 }

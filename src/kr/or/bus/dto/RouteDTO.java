@@ -1,6 +1,7 @@
 package kr.or.bus.dto;
 
 public class RouteDTO {
+   
    String r_num; //노선번호
    String g_num; //차고지 번호
    String r_start; //차고지 기준 첫차시간
