@@ -144,7 +144,7 @@
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								Calendar <small>Click to add/edit events</small>
+								Calendar 
 							</h3>
 						</div>
 
@@ -247,10 +247,10 @@
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,agendaWeek,agendaDay,listMonth'
+			    right: 'month,agendaWeek,agendaDay,listMonth' 
 			},
 			slotDuration: '00:10:00',
-			defaultDate: '2016-09-12',
+			defaultDate: '2016-09-17',
 			buttonIcons: false, // show the prev/next text
 			weekNumbers: true,
 			navLinks: true, // can click day/week names to navigate views
