@@ -227,6 +227,16 @@ public class ScheduleController {
 		
 		return jsonview;
 	}
+	
+	@RequestMapping(value="/checkstatus.member",method=RequestMethod.POST)
+	public View checkStatus(String m_id , Model model) throws ClassNotFoundException, SQLException{
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		int row= dao.reguloffr_checkstatus(m_id);
+
+		model.addAttribute("row", row);
+		
+		return jsonview;
+	}
 	//기타
 	
 	
