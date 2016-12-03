@@ -20,6 +20,7 @@ import kr.or.bus.dto.MemberJoinMDetailRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrDTO;
 import kr.or.bus.dto.MemberJoinResRecordDTO;
 import kr.or.bus.dto.ResRecordDTO;
+import kr.or.bus.dto.reguloffrDTO2;
 
 public interface MemberDAO {
 	//아이디 중복 체크
@@ -85,9 +86,13 @@ public interface MemberDAO {
 	//(관리자) 회원 가입 승인 - 승인 여부 N인 사람만 가져오기
 	public List<MemberJoinMDetailDTO> memberNList(int page);
 	
+	//Alarm null만 가져오기
+	public List<reguloffrDTO2> alarm(int page,String m_id);
 	//(관리자) 승인이 안된 회원 총 인원 수
 	public int memberNCount();
 	
+	//Alarm null 총수
+	public int regulCount(String m_id);
 	//(관리자) 승인 클릭시 m_check -> y로 업데이트
 	public void updateCheck(String m_id);
 	//승인시 권한 부여
@@ -100,6 +105,8 @@ public interface MemberDAO {
 	//(관리자) 회원 정보 상세 확인 > 휴무 기록 확인
 	public List<MemberJoinRegulOffrDTO> getRegulOffr(String m_id);
 
+	//쪽지확인 지우기
+	public void Okay(String m_id);
 	
 	//회원 사진 가져오기
 	public MDetailDTO getPhoto(String m_id);
