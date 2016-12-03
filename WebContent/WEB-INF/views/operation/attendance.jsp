@@ -55,10 +55,24 @@
 	rel="stylesheet">
 <script type="text/javascript">
 	$(function() {
-		$("#rnum").click(function(){
+		/* $("#rnum").click(function(){
 		    var value = $("#rnum option:selected").val();
 		    var text = $("#rnum option:selected").text();
-		    
+		    console.log(test);
+		}); */
+	});
+	
+	$('#selectroute').change(function(){
+		$.ajax({
+			url:"routelist.admin",
+			dataType:"json",
+			type:"post",
+			data:$('#selectroute').val(),
+			success:function(data){
+				$('#commutesearchstarttableinfo').empty();
+				$('#commutesearchstarttableinfo').append(data);
+				
+			}
 		});
 	});
 </script>
@@ -83,8 +97,30 @@ th, td {
 	/* padding: 5px; */
 	text-align: center;
 }
+select#selectroute {
+   -webkit-appearance: button;
+   -webkit-border-radius: 2px;
+   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+   -webkit-padding-end: 20px;
+   -webkit-padding-start: 2px;
+   -webkit-user-select: none;
+   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+   background-position: 97% center;
+   background-repeat: no-repeat;
+   border: 1px solid #AAA;
+   color: #555;
+   font-size: inherit;
+   margin: 20px;
+   overflow: hidden;
+   padding: 5px 10px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 300px;
+}
 
-
+.select-style select:focus {
+    outline: none;
+}
 </style>
 </head>
 <body class="nav-md">
@@ -122,32 +158,18 @@ th, td {
 
 							<div class="row">
 								<div class="col-sm-12 col-xs-12">
-									<div class="col-md-12 col-xs-12">
-												<div class="container" style="width:120px; text-align: right">
-													<select id="rnum" class="form-control">	
-													  <option value="">선택</option>										
-													  <option value="9401">9401</option>
-													  <option value="58-1">58-1</option>
-													  <option value="720">720</option>
-													 </select>
+									<div class="col-md-12 col-xs-12"><br>
+												<div class="container" style="text-align: right ">
+													<select id="selectroute" >
+													<option value="0">노선선택</option>
+													<c:forEach var="routelist" items="${rlist}"
+														varStatus="status">
+														<option value="${routelist.r_num}">${routelist.r_num}</option>
+													</c:forEach> 
+												</select>
 												</div><br> 
-												 <%--<div class="container">
-												  <h2>Dropdowns</h2>
-												  <p>The .divider class is used to separate links inside the dropdown menu with a thin horizontal line:</p>
-												  <div class="dropdown">
-												    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
-												    <span class="caret"></span></button>
-												    <ul class="dropdown-menu">
-												      <li><a href="routename.admin?r_num=${r_num}">9401</a></li>
-												      <li><a href="#">CSS</a></li>
-												      <li><a href="#">JavaScript</a></li>
-												      <li class="divider"></li>
-												      <li><a href="#">About Us</a></li>
-												    </ul>
-												  </div>
-												</div> --%>
 										<div class="x_panel">
-						
+						                         
 											<div class="x_content" id="commutesearchstarttableinfo">
 											
 											
