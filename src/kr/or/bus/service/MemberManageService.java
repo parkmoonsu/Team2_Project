@@ -165,9 +165,7 @@ private JavaMailSender mailSender;
 		System.out.println("service 탓니?");
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		MemberJoinMDetailRegulOffDTO dto = dao.getMemberDetailRegulOff(m_id);
-		System.out.println(dto+"확인확인");
-		//System.out.println("값 확인" +dto.getO_date().toString() );
-		
+				
 		return dto;
 	}
 	

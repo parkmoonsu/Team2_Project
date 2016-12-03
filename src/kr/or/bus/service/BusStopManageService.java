@@ -275,7 +275,7 @@ public class BusStopManageService {
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("GET");
 	        conn.setRequestProperty("Content-type", "application/json");
-	        //System.out.println("Response code: " + conn.getResponseCode());
+	        System.out.println("Response code: " + conn.getResponseCode());
 	        BufferedReader rd;
 	        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
 	            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -290,9 +290,9 @@ public class BusStopManageService {
 	        rd.close();
 	        conn.disconnect();
 	        
+	        System.out.println(sb.toString());
 	        jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
 	        out.print(jsonmaps);
-	        //System.out.println(sb.toString());
 		}
 		
 		//읽을 데이터가 4개일경우
@@ -406,7 +406,7 @@ public class BusStopManageService {
 		 	route id
 		 	
 			5623  100100279   - 116005219
-			702   100100573   - 122071125
+			6702   100100573   - 122071125
 			6501  234001163   - 234000043
 			9000  234000002   - 234000145 
 			
@@ -549,9 +549,35 @@ public class BusStopManageService {
 	
 	//버스 정류장 좌표를 찍어주기 위해  route id검색
 	public void busStopRoadSearch(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		System.out.println(r_num);
 		PrintWriter out=null;
-		response.setCharacterEncoding("UTF-8");
-		out = response.getWriter();
+		response.setCharacterEncoding("UTF-8");		
+		out = response.getWriter();		
+		JSONArray jsonmaps = null;		
+		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
+		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
+
+		if(r_num.equals("all")){
+			//List<BusStopDTO> busstoplist = new ArrayList<>();
+			//busStopRoadAllSearch("5623", dto, busstopdto, request, response);
+			//busStopRoadAllSearch("6702", dto, busstopdto, request, response);
+			//busStopRoadAllSearch("9000", dto, busstopdto, request, response);
+			//busStopRoadAllSearch("6501", dto, busstopdto, request, response);
+			//jsonmaps = JSONArray.fromObject(busstoplist);
+			//out.print(jsonmaps);
+			
+		}else if(!r_num.equals("all")){
+			dto = dao.routeidSearch(r_num);
+			System.out.println(dto.getR_id());
+						
+			List<BusStopDTO> busstoplist =  busstopdao.makeBusStop(dto.getR_id());
+			
+			jsonmaps = JSONArray.fromObject(busstoplist);
+			out.print(jsonmaps);
+		}
+	}
+	
+	public List<BusStopDTO> busStopRoadAllSearch(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{				
 		JSONArray jsonmaps = null;
 		System.out.println(r_num);
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
@@ -563,9 +589,9 @@ public class BusStopManageService {
 		
 		List<BusStopDTO> busstoplist =  busstopdao.makeBusStop(dto.getR_id());
 		
-		jsonmaps = JSONArray.fromObject(busstoplist);
-		out.print(jsonmaps);
+		//jsonmaps = JSONArray.fromObject(busstoplist);		
 		
+		return busstoplist;
 	}
 	
 	//공공데이터에서 받아온 정류장 정보들을 디비에 저장하는 함수

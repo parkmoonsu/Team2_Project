@@ -10,7 +10,8 @@ public class RouteDTO {
    String r_id; //노선 id
    String bd_num; //버스타입
    
-   public String getR_num() {
+ 
+public String getR_num() {
       return r_num;
    }
    public void setR_num(String r_num) {
@@ -51,5 +52,12 @@ public class RouteDTO {
    }
    public void setBd_num(String bd_num) {
       this.bd_num = bd_num;
+   }
+   
+   
+   @Override
+   public String toString() {
+   	return "RouteDTO [r_num=" + r_num + ", g_num=" + g_num + ", r_start=" + r_start + ", r_last=" + r_last
+   			+ ", r_interval=" + r_interval + ", r_id=" + r_id + ", bd_num=" + bd_num + "]";
    }
 }

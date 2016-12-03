@@ -66,22 +66,22 @@
 
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-     <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
-		</div>
-            </div>
-            	<div class="col-sm-3"></div>
-            	<div class="col-sm-6">
-            	<input type="button" id="Search" value="버스위치추적 ">
+            <input type="button" id="Search" value="버스위치추적 ">
 				<input type="button" id="SearchStop" value="버스위치추적 중지">
 	
 				<select id="selectBus">
 					<option></option>
 					<option>all</option>
 					<option>5623</option>
-					<option>702</option>
+					<option>6702</option>
 					<option>9000</option>
 					<option>6501</option>
 				</select>
+     <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
+		</div>
+            </div>
+            	<div class="col-sm-3"></div>
+            	<div class="col-sm-6">            	
 				<div id="map"></div>
              </div>
 
@@ -754,7 +754,7 @@
     	
     	$("#selectBus").change(function() {
     		deleteRoute();
-    		//polyRemove();
+    		polyRemove();
     		busMarkerRemove();
     		/* if($("#selectBus").val() !=null){
         		$.ajax({
@@ -862,7 +862,7 @@
         	
         	if($("#selectBus").val() !=null){
         		
-        		$.ajax({
+        		/* $.ajax({
                     url : "routeidSearch.admin",
                     type : "get",
                     dataType : "json",
@@ -870,7 +870,7 @@
                     success : function(data) {
                        console.log("DB저장잘됨?");               	                     	
                     }        		
-        		});
+        		}); */
         		
         		$.ajax({
                    	url : "busRouteSearch.admin",
@@ -956,12 +956,13 @@
                     data : {r_num:$("#selectBus").val()},
                     success : function(data) {
                        console.log("읽어옴?");
-                       console.log(data);
+                       //console.log(data);
                        //console.log(data.length);                                                                   	                       
                        
-                      	if(data.length == 4){
-                    		console.log("4개 노선");
-                    		//console.log(data.length);
+                      	if(data.length == 2){
+                      		console.log(data);
+                      		console.log("2개 노선");
+                    		console.log(data.length);
                        		//originalMarkerMake(data[0].msgBody, map);
                        		//originalMarkerMake(data[1].msgBody, map);
                        		//originalMarkerMake(data[2].msgBody, map);

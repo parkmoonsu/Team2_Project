@@ -104,22 +104,30 @@ public class ScheduleManageService {
 	//수행할 최종스케줄 _김수현
 	
 	//캘린더에 content 뿌리기
-	public List<MemberJoinRegulOffDTO> schedule_get(){
+	public List<MemberJoinRegulOffDTO> schedule_get(String r_num){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		List<MemberJoinRegulOffDTO> list=dao.getmemberjoinreg();
-		  return list;
+		List<MemberJoinRegulOffDTO> mjrolist=dao.getmemberjoinreg(r_num);
+		  return mjrolist;
 	}
 	
-	/*public void predictschedule(String m_id,String m_name,String o_date){
+	
+	
+	/*
+	 public List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> scheduledMember(String r_num){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		dao.getmemberjoinreg();
-	
-	}*/
-	
+		List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> mrmbrjdto = dao.getDecideReguloffMember(r_num);
+		System.out.println("mrmbrjdto"+mrmbrjdto.toString());mrmbrjdto
+		return mrmbrjdto;
+	}
+	 
+
+	  */
+
 	//select box에 뿌리는 노선
 	public List<RouteDTO> rnum_get(){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		List<RouteDTO> list=dao.getrnum();
+		System.out.println("RouteDTO를 타나여?");
 		return list;
 	}
 	
@@ -169,6 +177,15 @@ public class ScheduleManageService {
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		int result = dao.refuseFirstRegisterRecord(m_id);
 		return result;
+	}
+	
+	//정규 휴무 교환 정보 업데이트
+	public void updatebtwinfoall(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		dao.updateBtwReqRego(m_id, o_code_1);
+		dao.updateBtwReqRegr(m_id, o_code);
+		dao.updateBtwByRego(m_id_1, o_code);
+		dao.updateBtwByRegr(m_id_1, o_code_1);
 	}
 
 }

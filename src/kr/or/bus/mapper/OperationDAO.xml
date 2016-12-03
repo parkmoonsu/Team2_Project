@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		mem.m_id=com.m_id
 		join bus on bus.B_vehiclenum = mem.B_VEHICLENUM
 		left outer join cstart cs on cs.cs_code=com.cs_code
-		where mem.m_name=#{param1} and r_num=#{param2}
+		where mem.m_name=#{m_name}
 		order by com.c_date
 	</select>
 
