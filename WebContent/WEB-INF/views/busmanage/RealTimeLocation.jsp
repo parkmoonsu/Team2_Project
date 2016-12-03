@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
+<%request.getParameter("UTF-8");%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -65,22 +66,22 @@
 
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-     <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
-		</div>
-            </div>
-            	<div class="col-sm-3"></div>
-            	<div class="col-sm-6">
-            	<input type="button" id="Search" value="버스위치추적 ">
+            <input type="button" id="Search" value="버스위치추적 ">
 				<input type="button" id="SearchStop" value="버스위치추적 중지">
 	
 				<select id="selectBus">
 					<option></option>
 					<option>all</option>
 					<option>5623</option>
-					<option>702</option>
+					<option>6702</option>
 					<option>9000</option>
 					<option>6501</option>
 				</select>
+     <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
+		</div>
+            </div>
+            	<div class="col-sm-3"></div>
+            	<div class="col-sm-6">            	
 				<div id="map"></div>
              </div>
 
@@ -249,7 +250,7 @@
      	                                       
         
     		var originalMarker = new google.maps.Marker({
-            	position: new google.maps.LatLng(latLng[i].gpsY, latLng[i].gpsX),         
+            	position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
            		map: map,
            		//label: latLng.title,
            		animation: google.maps.Animation.DROP,
@@ -753,7 +754,7 @@
     	
     	$("#selectBus").change(function() {
     		deleteRoute();
-    		//polyRemove();
+    		polyRemove();
     		busMarkerRemove();
     		/* if($("#selectBus").val() !=null){
         		$.ajax({
@@ -860,104 +861,116 @@
         	} */
         	
         	if($("#selectBus").val() !=null){
-        		$.ajax({
+        		
+        		/* $.ajax({
                     url : "routeidSearch.admin",
                     type : "get",
                     dataType : "json",
                     data : {r_num:$("#selectBus").val()},
                     success : function(data) {
+                       console.log("DB저장잘됨?");               	                     	
+                    }        		
+        		}); */
+        		
+        		$.ajax({
+                   	url : "busRouteSearch.admin",
+                   	type : "get",
+                   	dataType : "json",
+                   	data : {r_num:$("#selectBus").val()},
+                   	success : function(data2) {
+                    	console.log("읽어옴?");
+                      	console.log(data2);                              	                                                                  	                       
+                      	//노선 전체로드 현재 안됨...
+                      	if(data2.length == 4){
+                     	   
+                      		var hell =new Array();
+                 			var route5623;
+                 			var route702;
+                 			var route9000;
+                 			var route6501
+                 			
+                     		console.log("4개 노선");
+                     		console.log(data2.length);
+                     		
+                     		for(var j=0;j<data2.length;j++){
+                     			route5623 = data2[0].msgBody;
+                     			route702 = data2[1].msgBody;
+                     			route9000 = data2[2].msgBody;
+                     			route6501 = data2[3].msgBody;
+                     		}
+                     		console.log(route5623);
+                     		
+                     		for(var j=0;j<route5623.length;j+=3){
+                     			var f=route5623[j].gpsY;
+                         		var d=route5623[j].gpsX;
+                         		hell.push(new google.maps.LatLng(f,d));
+                         		console.log(hell);
+                     		}
+                     		loadVector5623(hell);
+                     		
+                     		hell=[];
+                  			for(var j=0;j<route702.length;j+=3){
+                     			var f=route702[j].gpsY;
+                         		var d=route702[j].gpsX;
+                         		hell.push(new google.maps.LatLng(f,d));
+                     		}
+                  			loadVector702(hell);
+                  			
+                  			
+                  			hell=[];
+                  			for(var j=0;j<route9000.length;j+=3){                          		
+                     			var f=route9000[j].gpsY;
+                         		var d=route9000[j].gpsX;
+                         		hell.push(new google.maps.LatLng(f,d));
+                     		}
+                  			loadVector9000(hell);
+                  			
+                  			
+                  			hell=[];
+                  			for(var j=0;j<route6501.length;j+=20){
+                     			var f=route6501[j].gpsY;
+                         		var d=route6501[j].gpsX;
+                         		hell.push(new google.maps.LatLng(f,d));
+                     		}
+                  			loadVector6501(hell);
+                  			hell=[];
+                  			
+                        }else{
+                   	   		console.log("1개 노선");
+                   			console.log(data2.length);                          	
+                   			var hell =new Array();
+                   			for(var j=0;j<data2.msgBody.length;j+=3){
+                   				var f=parseFloat(data2.msgBody[j].gpsY);
+                       			var d=parseFloat(data2.msgBody[j].gpsX);
+           		      			hell.push(new google.maps.LatLng(f,d));
+                   			}    							
+                        	loadVector(hell);
+                   	  	}
+                	}
+           		});
+        		
+        		$.ajax({
+                    url : "busStopRoad.admin",
+                    type : "get",
+                    dataType : "json",
+                    data : {r_num:$("#selectBus").val()},
+                    success : function(data) {
                        console.log("읽어옴?");
-                       console.log(data);
+                       //console.log(data);
                        //console.log(data.length);                                                                   	                       
                        
-                      	if(data.length == 4){
-                    		console.log("4개 노선");
+                      	if(data.length == 2){
+                      		console.log(data);
+                      		console.log("2개 노선");
                     		console.log(data.length);
-                       		originalMarkerMake(data[0].msgBody, map);
-                       		originalMarkerMake(data[1].msgBody, map);
-                       		originalMarkerMake(data[2].msgBody, map);
-                       		originalMarkerMake(data[3].msgBody, map);
+                       		//originalMarkerMake(data[0].msgBody, map);
+                       		//originalMarkerMake(data[1].msgBody, map);
+                       		//originalMarkerMake(data[2].msgBody, map);
+                       		//originalMarkerMake(data[3].msgBody, map);
                        	}else{
                     	   console.log("1개 노선");
-                    	   originalMarkerMake(data.msgBody, map);
-                       	}
-                      	
-                      	$.ajax({
-                           	url : "busRouteSearch.admin",
-                           	type : "get",
-                           	dataType : "json",
-                           	data : {r_num:$("#selectBus").val()},
-                           	success : function(data2) {
-                            	console.log("읽어옴?");
-                              	console.log(data2);                              	                                                                  	                       
-                              	//노선 전체로드 현재 안됨...
-                              	if(data2.length == 4){
-                             	   
-                              		var hell =new Array();
-                         			var route5623;
-                         			var route702;
-                         			var route9000;
-                         			var route6501
-                         			
-                             		console.log("4개 노선");
-                             		console.log(data2.length);
-                             		
-                             		for(var j=0;j<data2.length;j++){
-                             			route5623 = data2[0].msgBody;
-                             			route702 = data2[1].msgBody;
-                             			route9000 = data2[2].msgBody;
-                             			route6501 = data2[3].msgBody;
-                             		}
-                             		console.log(route5623);
-                             		
-                             		for(var j=0;j<route5623.length;j+=3){
-                             			var f=route5623[j].gpsY;
-                                 		var d=route5623[j].gpsX;
-                                 		hell.push(new google.maps.LatLng(f,d));
-                                 		console.log(hell);
-                             		}
-                             		loadVector5623(hell);
-                             		
-                             		hell=[];
-                          			for(var j=0;j<route702.length;j+=3){
-                             			var f=route702[j].gpsY;
-                                 		var d=route702[j].gpsX;
-                                 		hell.push(new google.maps.LatLng(f,d));
-                             		}
-                          			loadVector702(hell);
-                          			
-                          			
-                          			hell=[];
-                          			for(var j=0;j<route9000.length;j+=3){                          		
-                             			var f=route9000[j].gpsY;
-                                 		var d=route9000[j].gpsX;
-                                 		hell.push(new google.maps.LatLng(f,d));
-                             		}
-                          			loadVector9000(hell);
-                          			
-                          			
-                          			hell=[];
-                          			for(var j=0;j<route6501.length;j+=20){
-                             			var f=route6501[j].gpsY;
-                                 		var d=route6501[j].gpsX;
-                                 		hell.push(new google.maps.LatLng(f,d));
-                             		}
-                          			loadVector6501(hell);
-                          			hell=[];
-                          			
-                                }else{
-                           	   		console.log("1개 노선");
-                           			console.log(data2.length);                          	
-                           			var hell =new Array();
-                           			for(var j=0;j<data2.msgBody.length;j+=3){
-                           				var f=parseFloat(data2.msgBody[j].gpsY);
-                               			var d=parseFloat(data2.msgBody[j].gpsX);
-                   		      			hell.push(new google.maps.LatLng(f,d));
-                           			}    							
-                                	loadVector(hell);
-                           	  	}
-                        	}
-                   		}); 
+                    	   originalMarkerMake(data, map);
+                       	}                 	                     	
                     }        		
         		});
         	}

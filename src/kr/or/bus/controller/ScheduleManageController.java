@@ -131,16 +131,45 @@ public class ScheduleManageController {
 		System.out.println("routelist : "+routelist);
 		return "schedule/schedule_virtual";
 	}
+
+
 	
 	//full calendar
 	//content에 내용 뿌리기
 	@RequestMapping("/lastpredictschedule.admin")
-	public View lastpredictschedule(String m_id,String m_name, String o_date,Model model){
-		List<MemberJoinRegulOffDTO> mjrolist=service.schedule_get();
+	public View lastpredictschedule(String r_num,Model model){
+		System.out.println("lastpredictschedule.admin 타나여?");
+		System.out.println("r_num :  "+r_num);
+		List<MemberJoinRegulOffDTO> mjrolist=service.schedule_get(r_num);
 		model.addAttribute("mjrolist",mjrolist);
-		System.out.println(mjrolist.toString());
+		System.out.println("mjrolist.toString() :"+mjrolist.toString());
 		return jsonview;
 	}
+	
+	
+	/*
+	 	@RequestMapping("/getselectedmember.admin")
+		public View getSelectedRouteMember(String r_num,Model model){
+		System.out.println("r_num"+r_num);
+		List<MemberJoinRegulOffDTO> mjrdto = service.unScheduledMember(r_num);
+		List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> mrmbrjdto = service.scheduledMember(r_num);
+		model.addAttribute("mjrdto", mjrdto); mrmbrjdto
+		model.addAttribute("mrmbrjdto", mrmbrjdto);
+		return jsonview;
+	}
+	 
+	 
+	 
+	  */
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	제목 : 기사 휴무 변경 요청 승인
@@ -175,12 +204,22 @@ public class ScheduleManageController {
 	}
 	
 	//최초 정규휴무 등록 거절
-		@RequestMapping("/refuseFirstRegister.admin")
-		public View refuseFirstRegister(String m_id, String o_code,Model model){
-			System.out.println(m_id + o_code);
-			int result = service.updateRefuseFirstRegister(m_id, o_code);
-			model.addAttribute("result", result);
-			return jsonview;
-		}
+	@RequestMapping("/refuseFirstRegister.admin")
+	public View refuseFirstRegister(String m_id, String o_code,Model model){
+		System.out.println(m_id + o_code);
+		int result = service.updateRefuseFirstRegister(m_id, o_code);
+		model.addAttribute("result", result);
+		return jsonview;
+	}
+	
+	//정규 휴무 교환 정보 업데이트
+	@RequestMapping("/updatebtwinfo.admin")
+	public View updatebtwinfo(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
+		System.out.println("updatebtwinfo.admin");
+		System.out.println(m_id + o_code);
+		System.out.println(m_id_1 + o_code_1);
+		service.updatebtwinfoall(m_id, o_code, m_id_1, o_code_1, model);
+		return jsonview;
+	}
 
 }

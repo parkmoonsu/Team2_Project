@@ -214,10 +214,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m_id = #{m_id}
 	</select>
 	
+	<select id="getregul" resultType="int" parameterType= "String">
+	select count(*) 
+	from reguloffr 
+	where ko_code='601' and m_id=#{m_id}
+	
+	</select>
 	
 	
 	
 	<!-- 회원 정보 삭제 -->
+   
    
    <delete id="deleteAuthority" parameterType="String">
    delete from authority where m_id=#{m_id}

@@ -44,6 +44,17 @@
                   </ul>
                 </li>
             </se:authorize>
+            <se:authorize access="hasRole('ROLE_USER')">
+			 <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-green" id = "bell2"></span>
+                  </a>
+                  <ul id="menu2" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  	
+                  </ul>
+                </li>
+            </se:authorize>
 		</ul>
 	</nav>
 </div>
@@ -71,6 +82,7 @@
 		});
 		
 		bell();
+		bell2();
 		var Approve = setInterval(function(){ bell() }, 30000);
 		
 	});
@@ -90,4 +102,23 @@
 			}
 		});
 	}
+	
+	 function bell2(){
+		$.ajax({
+			url : "bell2.htm",
+			type:"post",
+			data:{"m_id":"${LoginUser}"},
+			success : function(data){
+				console.log(data);
+				console.log(data.dto);
+				$("#bell2").empty();
+				$("#menu2").empty();
+				if(data.dto > 0){
+					$("#bell2").append(data.dto);
+					$("#menu2").append("<li><a href = 'joinapprove.member'><span class = 'message'><i class = 'fa fa-group'></i>&nbsp;&nbsp;휴무 변경 승인 이 <font color = 'green'>"+data.dto + "</font>건 있습니다.</span></a></li>");
+				
+				}
+			}
+		});
+	} 
 </script>
