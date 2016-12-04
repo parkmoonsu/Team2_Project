@@ -17,8 +17,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RouteManageService {
    
-   //노선좌표를 파일에 저장하는 함수
-   public void routelocationSave(HttpServletRequest request , HttpServletResponse response){
+	//노선좌표를 파일에 저장하는 함수
+	public void routelocationSave(HttpServletRequest request , HttpServletResponse response){
       FileWriter fw = null;
         BufferedWriter bw = null;
         String map = request.getParameter("kml");
@@ -45,10 +45,10 @@ public class RouteManageService {
             }
         }              
         System.out.println("지도 좌표가 저장되었습니다.");
-   }
+	}
 
-   //수정한 경로 좌표를 파일에서 읽어온다.
-   public void routelocationEditRead(HttpServletRequest request, HttpServletResponse response){
+   	//수정한 경로 좌표를 파일에서 읽어온다.
+   	public void routelocationEditRead(HttpServletRequest request, HttpServletResponse response){
       
       FileReader fr = null;
         BufferedReader br = null;
@@ -81,5 +81,5 @@ public class RouteManageService {
               System.out.println(e.getMessage());
            }
         }
-   }
+   	}
 }
