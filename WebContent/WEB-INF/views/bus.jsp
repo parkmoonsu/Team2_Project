@@ -274,6 +274,7 @@
 	<!-- Main JS (Do not remove) -->
 	<script src="${pageContext.request.contextPath}/mainCss/js/main.js"></script>
 <script type="text/javascript">
+
 $(function() {
 	$("#log").click(function() {
 		location.href="login.htm"
