@@ -72,6 +72,16 @@ public interface BusDAO {
 	public int wBus();
 	//고속버스 개수
 	public int gBus();
+	//공항버스 개수
+	public int aBus();
+	//인천버스 개수
+	public int iBus();
+	//경기버스 개수
+	public int kBus();
+	//폐지버스 개수
+	public int dBus();
+	//공용버스 개수
+	public int pBus();
 	//미정
 	public int noRoute();
 }

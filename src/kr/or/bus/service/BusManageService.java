@@ -218,7 +218,36 @@ public class BusManageService {
 		int gcount = dao.gBus();
 		return gcount;
 	}
-	
+	//공항
+	public int aBus(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int acount = dao.aBus();
+		return acount;
+	}
+	//인천
+	public int iBus(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int icount = dao.iBus();
+		return icount;
+	}
+	//경기
+	public int kBus(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int kcount = dao.kBus();
+		return kcount;
+	}
+	//폐지
+	public int dBus(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int dcount = dao.dBus();
+		return dcount;
+	}
+	//공용
+	public int pBus(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int pcount = dao.pBus();
+		return pcount;
+	}
 	public int noRoute(){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		int noroute = dao.noRoute();

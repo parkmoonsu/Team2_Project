@@ -236,7 +236,7 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 						$.each(data.mjrolist, function(index, obj) {
 							
 							/* 
-							$.each(data.mjrolist,funvtion(index1,obj1){
+							$.each(data.mjrolist,function(index1,obj1){
 								String array = new Array();
 								for(int i=0;i<7;i++){
 								if(ocode==i){
@@ -266,16 +266,21 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 							
 							var time2=date+" "+obj.r_start;
 							var time3=new Date(time2);
+							var time4=new Date(time2);
 							
 							//time3.setMinutes(time3.getMinutes()+10);
 							time3.setMinutes(time3.getMinutes()+test);
 							var starttime=time3.getHours().toString()+":"+time3.getMinutes().toString(); //time2.time();
 							
-					
+							time4.setMinutes(time3.getMinutes()+10);
+						    var endtime=time4.getHours().toString()+":"+time4.getMinutes().toString();
+							console.log('endtime : '+endtime);
+							
 							var item = {
 								title : obj.m_name,
 								id : obj.m_id,
 								start :starttime,
+								end:endtime,
 								dow :obj.o_code
 							};
 							console.log(item);
