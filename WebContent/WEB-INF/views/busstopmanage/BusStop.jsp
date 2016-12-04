@@ -128,6 +128,7 @@ select#selectBus, select#selectBus2 {
 						<input type="button" id="newsave2" value="수정좌표저장" class="btn btn-default">
 						<input type="button" id="busLoad" value="버스 보기" class="btn btn-default" style="margin-right: 17px;">
 					
+					
 					<select id="selectBus" style="margin:5px" >
 						<option>원본</option>
 						<option>all</option>
@@ -136,6 +137,7 @@ select#selectBus, select#selectBus2 {
 						<option>9000</option>
 						<option>6501</option>
 					</select>
+					
 					<select id="selectBus2" >
 						<option>수정</option>
 						<option>all</option>
@@ -143,7 +145,13 @@ select#selectBus, select#selectBus2 {
 						<option>702</option>
 						<option>9000</option>
 						<option>6501</option>
-					</select>
+					</select>				
+					
+					<span>
+					<input type="text" id="inputBusStop" placeholder="노선번호를 입력해주세요">
+					<input type="button" id="sendBusStop" value="정류장저장"></span>
+					
+					
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
@@ -442,8 +450,9 @@ select#selectBus, select#selectBus2 {
     $(function() {
       
        $("#selectBus").change(function(){
-   				deleteRoute();
+   		deleteRoute();
    		if($("#selectBus").val() !=null){
+       		/* 
        		$.ajax({
                    url : "busStopOriginalRead.admin",
                    type : "get",
@@ -494,9 +503,60 @@ select#selectBus, select#selectBus2 {
                       }         
                    }
                 }
-   			});   	    	         
-   		}
-       });
+   			});
+       		*/
+       		
+       		$.ajax({
+                url : "busStopOriginalRead.admin",
+                type : "get",
+                dataType : "json",
+                data : {busNo:$("#selectBus").val()},
+                success : function(data) {
+                   console.log("읽어옴?");
+                   console.log(data);
+                   console.log(data.length);                                                                   	                       
+                   
+                   if(data.length == 4){
+                	console.log("4개 노선");
+                	console.log(data.length);
+                	for(var j=0;j<data.length;j++){
+                		var f=data[0].msgBody.latLng[j].gpsY;
+                    	var d=data[0].msgBody.latLng[j].gpsX;
+                	var what=f+","+d;
+                	copyMarkerMakes(new google.maps.LatLng(f,d),map);
+                	}
+                	
+             	for(var j=0;j<data.length;j++){
+                		var f=data[1].msgBody.latLng[j].gpsY;
+                    	var d=data[1].msgBody.latLng[j].gpsX;
+                	var what=f+","+d;
+                	copyMarkerMakes(new google.maps.LatLng(f,d),map);
+                	}
+             	for(var j=0;j<data.length;j++){
+                		var f=data[2].msgBody.latLng[j].gpsY;
+                    	var d=data[2].msgBody.latLng[j].gpsX;
+                	var what=f+","+d;
+                	copyMarkerMakes(new google.maps.LatLng(f,d),map);
+                	}
+             	for(var j=0;j<data.length;j++){
+                		var f=data[3].msgBody.latLng[j].gpsY;
+                    	var d=data[3].msgBody.latLng[j].gpsX;
+                	var what=f+","+d;
+                	copyMarkerMakes(new google.maps.LatLng(f,d),map);
+                	}
+                   }else{
+                	   console.log("1개 노선");
+                	console.log(data.length);
+                	for(var j=0;j<data.msgBody.length;j++){
+                		var f=parseFloat(data.msgBody[j].gpsY);
+                    	var d=parseFloat(data.msgBody[j].gpsX);
+                	var what=f+","+d;
+                	console.log(what);    
+                	copyMarkerMakes(new google.maps.LatLng(f,d),map);
+                   }         
+                }
+             }
+			});
        
        $("#selectBus2").change(function(){
 				deleteRoute();
@@ -644,6 +704,21 @@ select#selectBus, select#selectBus2 {
        	as=0;
       }
       
+      $("#sendBusStop").click(function(){    	
+      	if($("#inputBusStop").val() !=null){		
+      		$.ajax({
+                  url : "routeidSearch.admin",
+                  type : "get",
+                  dataType : "text",
+                  data : {r_num:$("#inputBusStop").val()},
+                  success : function(data) {
+                     console.log("DB저장잘됨?");
+                     console.log(data);
+                     alert(data);
+                  }        		
+      		});       		     		
+      	}
+  	});   	  
       
       
     });//ready 함수 끝

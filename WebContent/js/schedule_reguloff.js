@@ -65,7 +65,9 @@ $(function() {
 		data : {m_id:loginid},
 		dataType : 'json',
 		success : function(data) {
-	
+			
+			var temp;
+			
 			$.each(data.data, function(index, obj) {
 
 				var item = {
@@ -75,23 +77,22 @@ $(function() {
 					color:''
 				};
 				
-				//reguloffr에 저장된 신청중인 일정 불러오기
+				//본인/타인 판별
 				if (obj.m_id==loginid){
-					item.color="red"; //본인
+					item.color="red"; //본인				
+					temp=obj.ro_object;
 				} else {
-				
-					$.each(data.data, function(index, obj2) {
-						if(obj.ro_object==obj2.m_id){
-							item.color="red";
-						}
-						else {
-							item.color=""; //타인
-						}
-					});
-								
+					item.color="";	 //타인			
 				}
 				array.push(item);
 			});
+
+			for (var i=0; i<array.length; i++){
+				if (array[i].id==temp){
+					array[i].color="red";
+				}
+			}
+
 		}
 	});
 
