@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select distinct mem.m_name
 		from member mem join bus on mem.b_vehiclenum=bus.b_vehiclenum
 		left outer join commute com on com.m_id=mem.m_id
+	
 
 	</select>
 
