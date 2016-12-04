@@ -211,7 +211,7 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 			//rlist.r_num
 			
 			$('#selectedrnum').change(function() {
-
+				array = [];
 				console.log('선택한 노선번호(r_num): ' + $('#selectedrnum').val());
 				var param = $('#selectedrnum').val();
 				var view = "";
