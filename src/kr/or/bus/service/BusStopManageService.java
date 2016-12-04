@@ -306,8 +306,8 @@ public class BusStopManageService {
 			}else if(r_num.equals("6501")){
 				dto = dao.routeidSearch("6501");
 				id = dto.getR_id();
-			}else if(r_num.equals("3500포천")){
-				dto = dao.routeidSearch("3500포천");
+			}else if(r_num.equals("9000광주")){
+				dto = dao.routeidSearch("9000광주");
 				id = dto.getR_id();		
 			}
 			
@@ -579,7 +579,7 @@ public class BusStopManageService {
 			//busStopRoadAllSearch("6702", dto, busstopdto, request, response);
 			busstoplist.addAll(1, busStopRoadAllSearch("6702", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("3500포천", dto, busstopdto, request, response);
-			busstoplist.addAll(2, busStopRoadAllSearch("3500포천", dto, busstopdto, request, response));
+			busstoplist.addAll(2, busStopRoadAllSearch("9000광주", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("6501", dto, busstopdto, request, response);
 			jsonmaps = JSONArray.fromObject(busstoplist);
 			out.print(jsonmaps);
@@ -595,8 +595,7 @@ public class BusStopManageService {
 		}
 	}
 	
-	public List<BusStopDTO> busStopRoadAllSearch(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{				
-		JSONArray jsonmaps = null;
+	public List<BusStopDTO> busStopRoadAllSearch(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{						
 		System.out.println(r_num);
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
 		System.out.println(dao.routeidSearch(r_num));
@@ -605,9 +604,7 @@ public class BusStopManageService {
 		
 		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
 		
-		List<BusStopDTO> busstoplist =  busstopdao.makeBusStop(dto.getR_id());
-		
-		jsonmaps = JSONArray.fromObject(busstoplist);		
+		List<BusStopDTO> busstoplist =  busstopdao.makeBusStop(dto.getR_id());					
 		
 		return busstoplist;
 	}
@@ -655,8 +652,8 @@ public class BusStopManageService {
 	    
 	    int jsons =  jsonarray.size();
 	        
-	    
-	    for(int j=0; j<jsons; j++){
+	    int j=0;
+	    while(j<jsons){
 	    	
 	    	//stop 테이블에 insert 할것
 	    	//System.out.println(jsonarray.getJSONObject(i).get("stationNm")); //정류장 이름
@@ -675,10 +672,11 @@ public class BusStopManageService {
 	    	
 	    	if(stopcheck == 0){
 	    		stopinsertcheck = stopdao.insertStopData(stopdto);	    		
-	    	}	    		    	
+	    	}
+	    	j++;
 	    }
-	    
-	    for(int j=0; j<jsons; j++){
+	    int k=0;
+	    while(k<jsons){
 	    	//routestop테이블에 insert할것
 	    	//System.out.println(jsonarray.getJSONObject(i).get("busRouteNm")); //노선번호(5623)
 	    	//System.out.println(jsonarray.getJSONObject(i).get("busRouteId")); //노선id
@@ -687,12 +685,12 @@ public class BusStopManageService {
 	    	//System.out.println(jsonarray.getJSONObject(i).get("beginTm")); //첫차
 	    	//System.out.println(jsonarray.getJSONObject(i).get("lastTm")); //막차
 	    	
-	    	routestopdto.setR_num(jsonarray.getJSONObject(j).get("busRouteNm").toString());
-	    	routestopdto.setR_id(jsonarray.getJSONObject(j).get("busRouteId").toString());
-	    	routestopdto.setS_num(jsonarray.getJSONObject(j).get("stationNo").toString());
-	    	routestopdto.setRs_order(jsonarray.getJSONObject(j).get("seq").toString());
-	    	routestopdto.setRs_start(jsonarray.getJSONObject(j).get("beginTm").toString());
-	    	routestopdto.setRs_end(jsonarray.getJSONObject(j).get("lastTm").toString());  
+	    	routestopdto.setR_num(jsonarray.getJSONObject(k).get("busRouteNm").toString());
+	    	routestopdto.setR_id(jsonarray.getJSONObject(k).get("busRouteId").toString());
+	    	routestopdto.setS_num(jsonarray.getJSONObject(k).get("stationNo").toString());
+	    	routestopdto.setRs_order(jsonarray.getJSONObject(k).get("seq").toString());
+	    	routestopdto.setRs_start(jsonarray.getJSONObject(k).get("beginTm").toString());
+	    	routestopdto.setRs_end(jsonarray.getJSONObject(k).get("lastTm").toString());  
 	    	
 	    	System.out.println("r_num"+routestopdto.getR_num());
 	    	System.out.println(routestopdto.getR_id());
@@ -712,6 +710,7 @@ public class BusStopManageService {
 	    		System.out.println("되냐2");
 	    	}
 	    	System.out.println("되냐3");
+	    	k++;
 	    }
 	    
 	    

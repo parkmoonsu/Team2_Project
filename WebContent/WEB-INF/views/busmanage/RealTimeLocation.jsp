@@ -74,16 +74,16 @@
 					<option>all</option>
 					<option>5623</option>
 					<option>6702</option>
-					<option>3500포천</option>
-					<option>6501</option>
+					<option>9000광주</option>
+					<option>6501광주</option>
 				</select>
 				
 				<select id="saveBusStop">
 					<option>저장</option>
 					<option>5623</option>
 					<option>6702</option>
-					<option>3500포천</option>
-					<option>6501</option>
+					<option>9000광주</option>
+					<option>6501광주</option>
 				</select>
      <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
 		</div>
