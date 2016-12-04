@@ -1,19 +1,21 @@
 package kr.or.bus.service;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
 import kr.or.bus.dao.ScheduleManageDAO;
-import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
-import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.RouteDTO;
+import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.SelectDistinctDTO;
 import kr.or.bus.dto.TimetableDTO;
@@ -111,17 +113,13 @@ public class ScheduleManageService {
 	}
 	
 	
-	
-	/*
-	 public List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> scheduledMember(String r_num){
-		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> mrmbrjdto = dao.getDecideReguloffMember(r_num);
-		System.out.println("mrmbrjdto"+mrmbrjdto.toString());mrmbrjdto
-		return mrmbrjdto;
-	}
-	 
 
-	  */
+	//배차간격, 첫차, 막차 시간 가져오기
+	public List<RouteDTO2> intervalstartlast(String r_num){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+	    List<RouteDTO2> rdto123=dao.getintervalSL(r_num);
+	   	return rdto123;
+	}
 
 	//select box에 뿌리는 노선
 	public List<RouteDTO> rnum_get(){

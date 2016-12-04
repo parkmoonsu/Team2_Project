@@ -15,6 +15,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.RouteDTO;
+import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.TimetableDTO;
 import kr.or.bus.service.ScheduleManageService;
@@ -132,7 +133,6 @@ public class ScheduleManageController {
 		return "schedule/schedule_virtual";
 	}
 
-
 	
 	//full calendar
 	//content에 내용 뿌리기
@@ -146,6 +146,16 @@ public class ScheduleManageController {
 		return jsonview;
 	}
 	
+	//배차간격, 첫차 ,막차 시간 가져오기
+		//	@RequestMapping("/lastpredictschedule.admin")
+		public View getinterbvalstartlast(Model model,String r_num){
+				System.out.println("첫차,막차 시간 가져올규야");
+				List<RouteDTO2> rdto123= service.intervalstartlast(r_num);
+				model.addAttribute("rdto123",rdto123);
+				System.out.println("rdto123.toString : "+rdto123.toString());
+				return jsonview;
+			}
+			
 	
 	/*
 	 	@RequestMapping("/getselectedmember.admin")

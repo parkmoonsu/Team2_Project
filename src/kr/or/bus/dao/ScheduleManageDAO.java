@@ -9,12 +9,12 @@ import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
-import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.RouteDTO;
+import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.SelectDistinctDTO;
-import kr.or.bus.dto.TimeDTO;
-import kr.or.bus.dto.RouteDTO;
 
 public interface ScheduleManageDAO {
 	// 정기휴무가 정해지지 않은 노선의 사원들
@@ -52,6 +52,7 @@ public interface ScheduleManageDAO {
 	//최증스케줄
 	public List<MemberJoinRegulOffDTO> getmemberjoinreg(String r_num); 
 	public List<RouteDTO>getrnum();
+	public List<RouteDTO2> getintervalSL(String r_num);
 
 
 	// 휴무 상태 정보 가져오기
