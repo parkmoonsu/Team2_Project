@@ -654,6 +654,10 @@ public class BusStopManageService {
 	    int jsons =  jsonarray.size();
 	        
 	    int j=0;
+	    
+	    long start = System.currentTimeMillis(); // 시작시간 
+		System.out.println("저장 시작시간:"+start);
+		
 	    while(j<jsons){
 	    	
 	    	//stop 테이블에 insert 할것
@@ -714,6 +718,10 @@ public class BusStopManageService {
 	    	k++;
 	    }
 	    
+	    	long end = System.currentTimeMillis();  //종료시간
+	    	System.out.println("종료시간:"+end);
+	    	//종료-시작=실행시간		
+	  		System.out.println("실행시간? "+(end-start)+" milliseconds");
 	    
 	    if(stopinsertcheck ==1){
     		System.out.println("Stop 입력성공");
@@ -727,6 +735,14 @@ public class BusStopManageService {
     		System.out.println("RouteStop입력실패");
     	}
 	   
+	}
+	
+	public List<RouteDTO> routeList(){
+		RouteDAO routedao = sqlsession.getMapper(RouteDAO.class);
+		
+		List<RouteDTO> list = routedao.getRouteNum();
+		return list;
+		
 	}
 
 }
