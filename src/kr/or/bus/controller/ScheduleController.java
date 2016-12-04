@@ -26,6 +26,7 @@ import org.springframework.web.servlet.View;
 
 import kr.or.bus.dao.ScheduleDAO;
 import kr.or.bus.dto.ScheduleDTO;
+import kr.or.bus.service.ScheduleManageService;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
@@ -40,9 +41,12 @@ public class ScheduleController {
 	private SqlSession sqlsession;
 	
 	@Autowired
+	private ScheduleManageService service;
+	
+	@Autowired
 	private View jsonview;
 	
-	@RequestMapping(value="/production/insertSchedule.htm", method=RequestMethod.POST)
+/*	@RequestMapping(value="/production/insertSchedule.htm", method=RequestMethod.POST)
 	public View insertSchedule(String title, String sstart, String eend, String allDay, String url, ModelMap map)
 			throws ClassNotFoundException, SQLException, ParseException{
 		
@@ -105,7 +109,7 @@ public class ScheduleController {
 		dao.delete(id);
 		
 		return "bus";
-	}
+	}*/
 	
 	//reguloff(정기휴무)
 	@RequestMapping("/schedule_reguloff.htm")
@@ -117,81 +121,52 @@ public class ScheduleController {
 	public View reguloffInsert(String m_id, String o_code, String temp, ModelMap map)
 			throws ClassNotFoundException, SQLException, ParseException{
 		
-		System.out.println("일정 저장하기");
-		RegulOffDTO dto=new RegulOffDTO();
-		dto.setM_id(m_id);
-		dto.setO_code(o_code);
-		dto.setTemp(temp);
+		MemberJoinRegulOffDTO dto=service.reguloffInsert(m_id, o_code, temp);
 		
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		dao.reguloff_insert(dto);
-		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
-		map.addAttribute("data", dto2);
-		return jsonview;//str;
+		map.addAttribute("data", dto);
+		return jsonview;
 	}
 	
 	@RequestMapping(value="/reguloff_select.htm", method=RequestMethod.POST)
 	public View reguloffSelect(String m_id, ModelMap map) throws ClassNotFoundException, SQLException{
-		System.out.println("해당노선 일정 불러오기");
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		List<MemberJoinRegulOffDTO> dtolist=dao.reguloff_select(m_id);
+		
+		List<MemberJoinRegulOffDTO> dtolist=service.reguloffSelect(m_id);
+		
 		map.addAttribute("data", dtolist);
 		return jsonview;
 	}
-	
-	/*@RequestMapping(value="/reguloff_select.htm", method=RequestMethod.POST)
-	public View reguloffSelect(String m_id, ModelMap map) throws ClassNotFoundException, SQLException{
-		System.out.println("해당노선 일정 불러오기");
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		List<RegulOffDTO> dtolist=dao.reguloff_select(m_id);
-		System.out.println(dtolist);
-		map.addAttribute("data", dtolist);
-		return jsonview;
-	}*/
-	
+		
 	@RequestMapping(value="/reguloffr_select.htm", method=RequestMethod.POST)
 	public View reguloffrSelect(String m_id, ModelMap map) throws ClassNotFoundException, SQLException{
-		System.out.println("해당노선 일정 불러오기");
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		List<RegulOffrJoinMemberJoinBusDTO> dtolist=dao.reguloffr_select(m_id);
-		System.out.println(dtolist);
+		
+		List<RegulOffrJoinMemberJoinBusDTO> dtolist=service.reguloffrSelect(m_id);
+
 		map.addAttribute("data", dtolist);
 		return jsonview;
 	}
 	
 	@RequestMapping(value="/reguloff_delete.htm", method=RequestMethod.POST)
 	public String reguloffDelete(String m_id) throws ClassNotFoundException, SQLException, ParseException{
-		System.out.println("일정삭제");
 		
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		dao.reguloff_delete(m_id);
+		service.reguloffDelete(m_id);
 		
 		return "bus";
 	}
 	
 	@RequestMapping(value="/reguloff_update.htm", method=RequestMethod.POST)
 	public View reguloffUpdate(String m_id, String o_code, String temp, ModelMap map) throws ClassNotFoundException, SQLException, ParseException{
-		System.out.println("reguloff_update일정수정");
-		RegulOffDTO dto=new RegulOffDTO();
-		dto.setM_id(m_id);
-		dto.setO_code(o_code);
-		dto.setTemp(temp);
-		System.out.println(dto.toString());
-			
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		dao.reguloff_update(dto);
-
-		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
 		
-		map.addAttribute("data", dto2);
+		MemberJoinRegulOffDTO dto=service.reguloffUpdate(m_id, o_code, temp);
+		
+		map.addAttribute("data", dto);
 		return jsonview;
 	}
 	
-	//기타
+	//기타-----------------------------
 	@RequestMapping(value="/dowcount.member",method=RequestMethod.POST)
 	public View dowcount(String o_code , Model model){
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		int dow = dao.dowcount(o_code);
+	
+		int dow = service.dowcount(o_code);
 	
 		model.addAttribute("dow", dow);
 		
@@ -200,8 +175,8 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/checkmid.member",method=RequestMethod.POST)
 	public View checkmid(String m_id , Model model){
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		int row = dao.checkmid(m_id);
+
+		int row = service.checkmid(m_id);
 	
 		model.addAttribute("row", row);
 		
@@ -210,8 +185,8 @@ public class ScheduleController {
 		
 	@RequestMapping(value="/mid.member",method=RequestMethod.POST)
 	public View mid(String m_id , Model model){
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		String rid = dao.returnid(m_id);
+
+		String rid = service.mid(m_id);
 	
 		model.addAttribute("rid", rid);
 		
@@ -220,8 +195,8 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/selectseq.member",method=RequestMethod.POST)
 	public View selectSeq(String m_id , Model model) throws ClassNotFoundException, SQLException{
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		MemberJoinRegulOffDTO dto= dao.reguloff_selectseq(m_id);
+
+		MemberJoinRegulOffDTO dto= service.selectSeq(m_id);
 
 		model.addAttribute("dto", dto);
 		
@@ -230,27 +205,22 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/checkstatus.member",method=RequestMethod.POST)
 	public View checkStatus(String m_id , Model model) throws ClassNotFoundException, SQLException{
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		int row= dao.reguloffr_checkstatus(m_id);
+
+		int row= service.checkStatus(m_id);
 
 		model.addAttribute("row", row);
 		
 		return jsonview;
-	}
-	//기타
-	
+	}	
 	
 	//기록보기
 	@RequestMapping("/schedule_history.htm")
 	public String viewHistory(String m_id, Model model) throws ClassNotFoundException, SQLException{
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		List<RegulOffrJoinDTO> list=dao.history_select(m_id);
-				
-		try {
-			model.addAttribute("list", list);
-		} catch (Exception e) {
 
-		}
+		List<RegulOffrJoinDTO> list=service.viewHistory(m_id);
+				
+		model.addAttribute("list", list);
+
 		return "schedule/schedule_history";
 	}
 	
@@ -266,67 +236,26 @@ public class ScheduleController {
 		String o_check,
 		Model model
 	) throws ClassNotFoundException, SQLException{
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		System.out.println("m_id값 체크"+m_id);
-		System.out.println("ro_object값 체크"+ro_object);
-		RegulOffrDTO dto=new RegulOffrDTO();
-		dto.setKo_code(ko_code);
-		dto.setM_id(m_id);
-		dto.setO_code(o_code);
-		dto.setRo_code(ro_code);
-		dto.setRo_object(ro_object);
-		dto.setO_check(o_check);
-		System.out.println("한번도 꼬리를");	
-		System.out.println("dto 확인"+dto.toString());
-		dao.history_insert(dto);
-		
-		System.out.println("처본적이");
-		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
-		System.out.println("읍스요");
+	
+		service.insertHistory(ko_code,
+				m_id, o_code, ro_code,
+				ro_reqdate,
+				ro_regdate,
+				ro_object,
+				o_check
+		);	
+
+		MemberJoinRegulOffDTO dto2=service.selectSeq(m_id);
+
 		model.addAttribute("data", dto2);
 		return jsonview;
 	}
-	
 	
 	//최종스케줄 -> schedule_last
 	@RequestMapping("/schedule_last.htm")
 	public String schedule_last(Model model){
 		
-		
-	//	List<> list= servi
-		
 		return "schedule/schedule_last";
 	}
-	
-		
 
-	
-	
-	
-	
-	/*@RequestMapping(value="/history_update.htm", method=RequestMethod.POST)
-	public String updateHistory(
-		String ko_code, 
-		String m_id,
-		String o_code,
-		String ro_code,
-		java.sql.Date ro_reqdate,
-		java.sql.Date ro_regdate,
-		String ro_object
-	) throws ClassNotFoundException, SQLException{
-		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		RegulOffrDTO dto=new RegulOffrDTO();
-		dto.setKo_code(ko_code);
-		dto.setM_id(m_id);
-		dto.setO_code(o_code);
-		dto.setRo_code(ro_code);
-		//dto.setRo_reqdate(ro_reqdate);
-		//dto.setRo_regdate(null);
-		dto.setRo_object("");
-		System.out.println("여긴가");	
-		dao.history_update(dto);
-		System.out.println("거긴가");
-		return "bus";
-	}*/
-	
 }

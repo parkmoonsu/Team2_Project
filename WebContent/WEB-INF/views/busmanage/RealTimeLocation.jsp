@@ -363,7 +363,7 @@
    	}
     
     function originalMarkerMake6501(latLng, map) {
-    	 for(var i=0; i<latLng.length; i++){
+    	for(var i=0; i<latLng.length; i++){
      	   /* console.log("---------------------------------");
      	   console.log("진행방향 "+latLng[i].direction);
      	   console.log("정류장명 "+latLng[i].stationNm);
@@ -847,10 +847,10 @@
                       		console.log(data);
                       		console.log("2개 노선");
                     		//console.log(data.length);
-                       		originalMarkerMake(data[0].msgBody, map);
-                       		originalMarkerMake(data[1].msgBody, map);
-                       		originalMarkerMake(data[2].msgBody, map);
-                       		originalMarkerMake(data[3].msgBody, map);
+                       		originalMarkerMake5623(data[0].msgBody, map);
+                       		originalMarkerMake6702(data[1].msgBody, map);
+                       		originalMarkerMake9000(data[2].msgBody, map);
+                       		originalMarkerMake6501(data[3].msgBody, map);
                        	}else{
                     	   console.log("1개 노선");
                     	   console.log(data);
