@@ -162,7 +162,7 @@
    	
     var originalMarkers = new Array();
     var originalMarkers5623 = new Array();
-    var originalMarkers702 = new Array();
+    var originalMarkers6702 = new Array();
     var originalMarkers9000 = new Array();
     var originalMarkers6501 = new Array();
    	
@@ -298,7 +298,7 @@
    		
    	}
     
-    function originalMarkerMake702(latLng, map) {
+    function originalMarkerMake6702(latLng, map) {
       	for(var i=0; i<latLng.length; i++){
        	   /* console.log("---------------------------------");
        	   console.log("진행방향 "+latLng[i].direction);
@@ -316,7 +316,7 @@
        	   console.log("---------------------------------"); */    	  
        	                                       
           
-      			var originalMarker702 = new google.maps.Marker({
+      			var originalMarker6702 = new google.maps.Marker({
               		position: new google.maps.LatLng(latLng[i].gpsY, latLng[i].gpsX),         
              		map: map,
              		title: latLng[i].stationNm,
@@ -325,7 +325,7 @@
              		zindex : "5"
           		});
        			//map.panTo(originalMarker702.getPosition());
-      			originalMarkers702.push(originalMarker702);   		
+      			originalMarkers6702.push(originalMarker6702);   		
       		
       		
       	}//for문 끝 	 	     		
@@ -363,7 +363,7 @@
    	}
     
     function originalMarkerMake6501(latLng, map) {
-    	 for(var i=0; i<latLng.length; i++){
+    	for(var i=0; i<latLng.length; i++){
      	   /* console.log("---------------------------------");
      	   console.log("진행방향 "+latLng[i].direction);
      	   console.log("정류장명 "+latLng[i].stationNm);
@@ -474,11 +474,11 @@
      	originalMarkers5623=[];
      	originalMarkers5623.length = 0;
      	
-     	for(var i=0; i<originalMarkers702.length; i++){
-     		originalMarkers702[i].setMap(null);
+     	for(var i=0; i<originalMarkers6702.length; i++){
+     		originalMarkers6702[i].setMap(null);
      	}
-     	originalMarkers702=[];
-     	originalMarkers702.length = 0;
+     	originalMarkers6702=[];
+     	originalMarkers6702.length = 0;
      	
      	for(var i=0; i<originalMarkers9000.length; i++){
      		originalMarkers9000[i].setMap(null);
@@ -498,7 +498,7 @@
     	if(originalMarkers !=null){ 		
     		originaldelete();   		
     	}
-    	if(originalMarkers5623 !=null && originalMarkers702 !=null && originalMarkers9000 !=null && originalMarkers6501 !=null){
+    	if(originalMarkers5623 !=null && originalMarkers6702 !=null && originalMarkers9000 !=null && originalMarkers6501 !=null){
     		originaldeleteAll();
     	}
     }
@@ -553,8 +553,8 @@
      	poly1.setMap(map);
     }
     
-    function loadVector702(data){
-     	console.log("702옴?");
+    function loadVector6702(data){
+     	console.log("6702옴?");
      	//console.log(data);
      	poly2 = new google.maps.Polyline({
      		path: data,
@@ -769,7 +769,7 @@
                      	   
                       		var hell =new Array();
                  			var route5623;
-                 			var route702;
+                 			var route6702;
                  			var route9000;
                  			var route6501
                  			
@@ -778,7 +778,7 @@
                      		
                      		for(var j=0;j<data2.length;j++){
                      			route5623 = data2[0].msgBody;
-                     			route702 = data2[1].msgBody;
+                     			route6702 = data2[1].msgBody;
                      			route9000 = data2[2].msgBody;
                      			route6501 = data2[3].msgBody;
                      		}
@@ -793,12 +793,12 @@
                      		loadVector5623(hell);
                      		
                      		hell=[];
-                  			for(var j=0;j<route702.length;j+=3){
-                     			var f=route702[j].gpsY;
-                         		var d=route702[j].gpsX;
+                  			for(var j=0;j<route6702.length;j+=3){
+                     			var f=route6702[j].gpsY;
+                         		var d=route6702[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
                      		}
-                  			loadVector702(hell);
+                  			loadVector6702(hell);
                   			
                   			
                   			hell=[];
@@ -847,10 +847,10 @@
                       		console.log(data);
                       		console.log("2개 노선");
                     		//console.log(data.length);
-                       		originalMarkerMake(data[0].msgBody, map);
-                       		originalMarkerMake(data[1].msgBody, map);
-                       		originalMarkerMake(data[2].msgBody, map);
-                       		originalMarkerMake(data[3].msgBody, map);
+                       		originalMarkerMake5623(data[0].msgBody, map);
+                       		originalMarkerMake6702(data[1].msgBody, map);
+                       		originalMarkerMake9000(data[2].msgBody, map);
+                       		originalMarkerMake6501(data[3].msgBody, map);
                        	}else{
                     	   console.log("1개 노선");
                     	   console.log(data);

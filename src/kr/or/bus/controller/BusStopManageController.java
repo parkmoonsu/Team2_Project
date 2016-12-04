@@ -70,6 +70,7 @@ public class BusStopManageController {
 		busStopManageService.busRouteCall(r_num, dto, request, response);
 	}
 	
+	//디비에서 조회해 버스정류장 마커를 생성하는 함수.
 	@RequestMapping(value="/busStopRoad.admin",method=RequestMethod.GET)
 	public void busStopRoad(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		busStopManageService.busStopRoadSearch(r_num, dto, busstopdto, request, response);

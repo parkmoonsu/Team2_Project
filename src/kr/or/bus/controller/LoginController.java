@@ -51,17 +51,29 @@ public class LoginController {
 	}
 	@RequestMapping("/adminmain.admin")
 	public String adminmain(Model model){
-		int mcount = service2.mBus();
-		int ncount = service2.nBus();
-		int wcount = service2.wBus();
-		int gcount = service2.gBus();
+		int count = service2.busCount();
+		int acount = service2.aBus(); //공항
+		int mcount = service2.mBus(); //간선
+		int ncount = service2.nBus(); //지선
+		int wcount = service2.wBus(); //순환
+		int gcount = service2.gBus(); //광역
+		int icount = service2.iBus(); //인천
+		int kcount = service2.kBus(); //경기
+		int dcount = service2.dBus(); //폐지
+		int pcount = service2.pBus(); //공용
 		int noroute = service2.noRoute();
-		 
+		//1:공항, 3:간선, 4:지선, 5:순환, 6:광역, 7:인천, 8:경기, 9:폐지, 0:공용
+		model.addAttribute("a", acount);
 		model.addAttribute("m", mcount);
 		model.addAttribute("n", ncount);
 		model.addAttribute("w", wcount);
 		model.addAttribute("g", gcount);
+		model.addAttribute("i", icount);
+		model.addAttribute("k", kcount);
+		model.addAttribute("d", dcount);
+		model.addAttribute("p", pcount);
 		model.addAttribute("no", noroute);
+		model.addAttribute("count", count);
 		
 		return "main/adminmain";
 	}

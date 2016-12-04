@@ -1,4 +1,6 @@
 package kr.or.bus.service;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,14 +8,23 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.View;
 
+import kr.or.bus.dao.ScheduleDAO;
 import kr.or.bus.dao.ScheduleManageDAO;
 import kr.or.bus.dto.GarageDTO;
+import kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+import kr.or.bus.dto.RegulOffDTO;
+import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.RegulOffrJoinMemberJoinBusDTO;
+import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
@@ -99,27 +110,174 @@ public class ScheduleManageService {
 
 		return list2;
 	}
+	
+	/*
+	제목 : 가상스케줄 생성
+	작성자 : 길한종
+	목적 : VSCHEDULE에서 이용할 차량번호(B_VEHICLENUM), 노선변호(R_NUM), 휴무코드(O_CODE) 가져오기 
+	*/
+	
+	public List<ReguloffJoinMemberJoinBusJoinRouteDTO> get_ocode(){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		List<ReguloffJoinMemberJoinBusJoinRouteDTO> list=dao.ocode_select();
+		return list;
+	}
+	
+	/*
+	제목 : 
+	작성자 : 길한종
+	목적 : reguloff 테이블에 CRUD
+	*/
+	
+	public MemberJoinRegulOffDTO reguloffInsert(String m_id, String o_code, String temp) throws ClassNotFoundException, SQLException{
+		System.out.println("일정 저장하기");
 
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		RegulOffDTO dto=new RegulOffDTO();
+		dto.setM_id(m_id);
+		dto.setO_code(o_code);
+		dto.setTemp(temp);
+		
+		dao.reguloff_insert(dto);
+		
+		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
+		return dto2;
+	}
+	
+	public List<MemberJoinRegulOffDTO> reguloffSelect(String m_id) throws ClassNotFoundException, SQLException{
+		System.out.println("해당노선 일정 불러오기");
+		
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		List<MemberJoinRegulOffDTO> dtolist=dao.reguloff_select(m_id);
+		
+		return dtolist;
+	}
+	
+	public List<RegulOffrJoinMemberJoinBusDTO> reguloffrSelect(String m_id) throws ClassNotFoundException, SQLException{
+		System.out.println("해당노선 일정 불러오기");
+		
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		List<RegulOffrJoinMemberJoinBusDTO> dtolist=dao.reguloffr_select(m_id);
+		
+		return dtolist;
+	}
+	
+	public void reguloffDelete(String m_id) throws ClassNotFoundException, SQLException, ParseException{
+		System.out.println("일정삭제");
+		
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		dao.reguloff_delete(m_id);
+
+	}
+	
+	public MemberJoinRegulOffDTO reguloffUpdate(String m_id, String o_code, String temp) throws ClassNotFoundException, SQLException, ParseException{
+		System.out.println("reguloff_update일정수정");
+		
+		RegulOffDTO dto=new RegulOffDTO();
+		dto.setM_id(m_id);
+		dto.setO_code(o_code);
+		dto.setTemp(temp);
+			
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		dao.reguloff_update(dto);
+
+		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
+		
+		
+		return dto2;
+	}
+	
+	/*
+	제목 : 기타 필요한 로직
+	작성자 : 길한종
+	목적 : 페이지 내에서 ajax로 간단한 정보 조회를 하기 위해
+	*/
+	
+	public int dowcount(String o_code){
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		int dow = dao.dowcount(o_code);	
+		return dow;
+	}
+
+	public int checkmid(String m_id){
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		int row = dao.checkmid(m_id);
+		
+		return row;
+	}
+		
+	public String mid(String m_id){
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		String rid = dao.returnid(m_id);
+		
+		return rid;
+	}
+	
+	public MemberJoinRegulOffDTO selectSeq(String m_id) throws ClassNotFoundException, SQLException{
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		MemberJoinRegulOffDTO dto= dao.reguloff_selectseq(m_id);
+		
+		return dto;
+	}
+	
+	public int checkStatus(String m_id) throws ClassNotFoundException, SQLException{
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		int row= dao.reguloffr_checkstatus(m_id);
+		
+		return row;
+	}
+	
+	/*
+	제목 : 
+	작성자 : 길한종
+	목적 : reguloffr CRUD
+	*/
+	
+	public List<RegulOffrJoinDTO> viewHistory(String m_id) throws ClassNotFoundException, SQLException{
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		List<RegulOffrJoinDTO> list=dao.history_select(m_id);
+				
+		return list;
+	}
+
+	public MemberJoinRegulOffDTO insertHistory(
+		String ko_code, 
+		String m_id,
+		String o_code,
+		String ro_code,
+		java.sql.Date ro_reqdate,
+		java.sql.Date ro_regdate,
+		String ro_object,
+		String o_check
+	) throws ClassNotFoundException, SQLException{
+		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
+		RegulOffrDTO dto=new RegulOffrDTO();
+		dto.setKo_code(ko_code);
+		dto.setM_id(m_id);
+		dto.setO_code(o_code);
+		dto.setRo_code(ro_code);
+		dto.setRo_object(ro_object);
+		dto.setO_check(o_check);
+	
+		dao.history_insert(dto);		
+
+		MemberJoinRegulOffDTO dto2=dao.reguloff_selectseq(m_id);
+
+		return dto2;
+	}
+	
 	
 
-	
 	//수행할 최종스케줄 _김수현
 	
 	//캘린더에 content 뿌리기
-	public List<MemberJoinRegulOffDTO> schedule_get(String r_num){
+	public List<MemberJoinBusJoinRouteJoinReguloffDTO> schedule_get(String r_num){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		List<MemberJoinRegulOffDTO> mjrolist=dao.getmemberjoinreg(r_num);
+		List<MemberJoinBusJoinRouteJoinReguloffDTO> mjrolist=dao.getmemberjoinreg(r_num);
 		  return mjrolist;
 	}
 	
 	
-
-	//배차간격, 첫차, 막차 시간 가져오기
-	public List<RouteDTO2> intervalstartlast(String r_num){
-		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-	    List<RouteDTO2> rdto123=dao.getintervalSL(r_num);
-	   	return rdto123;
-	}
 
 	//select box에 뿌리는 노선
 	public List<RouteDTO> rnum_get(){
@@ -129,6 +287,14 @@ public class ScheduleManageService {
 		return list;
 	}
 	
+	//배차간격,첫차,막차 시간 가져오기
+	public List<RouteDTO2> getintervalstartlast(Model model){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		List<RouteDTO2> routedto =dao.getIntervalStartLast();
+		model.addAttribute("routedto",routedto);
+		return routedto;
+	}
+
 	
 
 	//휴무 요청 상태 가져오기

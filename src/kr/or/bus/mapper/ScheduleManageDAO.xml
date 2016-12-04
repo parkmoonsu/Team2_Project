@@ -79,7 +79,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where o_date=#{o_date} and b_vehiclenum=#{b_vehiclenum}
 	</select>
 	
-
+	<!-- vschedule -->
+	<select id="ocode_select" resultType="kr.or.bus.dto.ReguloffJoinMemberJoinBusDTO">
+		select m.B_VEHICLENUM, b.R_NUM, r.O_CODE, ??? 
+		from reguloff r
+		join member m on r.M_ID=m.M_ID
+		join bus b on m.B_VEHICLENUM=b.B_VEHICLENUM
+		join route rt on b.r_num=rt.r_num
+		where r.TEMP is null
+	</select>
+	
 	<!-- 정기휴무가 정해진 노선이 배정된 기사님 뽑기 -->
 	<select id="getDecideReguloffMember"
 		resultType="kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO">
@@ -111,12 +120,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 최종예상스케줄에 관련된 데이터 불러오기 -->
 
-	<select id="getmemberjoinreg" resultType="kr.or.bus.dto.MemberJoinRegulOffDTO">
+	<select id="getmemberjoinreg" parameterType="String" resultType="kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO">
 
-		select mem.m_id, mem.m_name, reg.o_code,bus.r_num
-		from member mem join reguloff reg on mem.m_id=reg.m_id
-    	join bus bus on bus.b_vehiclenum=mem.b_vehiclenum
-    	where bus.r_num = #{r_num}
+    	  select  mem.m_id, mem.m_name, reg.o_code, bus.b_vehiclenum, bus.r_num, rou.r_start,rou.r_last,rou.r_interval ,bus.b_order
+      	 from member mem join reguloff reg on mem.m_id=reg.m_id
+    	 join bus bus on bus.b_vehiclenum=mem.b_vehiclenum
+      	 join route rou on rou.r_num= bus.r_num
+         where bus.r_num= #{r_num}
+          order by bus.b_order
 	</select>
 
 	
@@ -124,11 +135,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select r_num from route 
 	</select>
 	
-	<select id="getintervalSL" resultType="kr.or.bus.dto.RouteDTO">
-	select r_start, r_last, r_interval
-	from route 
-	where r_num = #{r_num}
+	<select id="" resultType="kr.or.bus.dto.RouteDTO2">
+	select ro.r_start, ro.r_last, ro.r_interval, ro.r_num
+	from route ro join bus bu on ro.r_num= bu.r_num
 	</select>
+	
 
 	<!-- 휴무 요청 상태 관리 -->
 	<select id="getRequestNum" resultType="Integer">

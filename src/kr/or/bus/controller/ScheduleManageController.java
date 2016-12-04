@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.GarageDTO;
+
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
@@ -110,16 +112,22 @@ public class ScheduleManageController {
 		return "schedule/schedule_managertimetable";
 	}
 	
-/*
-	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
-	   public String getHistoryCal(Model model){
-	      service.getRequestState(model);
-	      return "schedule/schedule_managechangeapprove";
-	   }
-	*/
-
 	/*
-	제목 : 예상 스케쥴 뽑기
+	제목 : 가상 스케줄 생성
+	작성자 : 길한종
+	목적 : VSCHEDULE에서 이용할 차량번호(B_VEHICLENUM), 노선변호(R_NUM), 휴무코드(O_CODE) 가져오기 
+	*/
+	
+	@RequestMapping("/getocode.admin")
+	public View getOcode(ModelMap map){
+		List<ReguloffJoinMemberJoinBusJoinRouteDTO> list=service.get_ocode();
+		map.addAttribute("list", list);
+		return jsonview;
+	}
+	
+	/*
+	제목 : 
+	예상 스케쥴 뽑기
 	작성자 : 김수현
 	목적 : 예상 스케쥴 가져오기
 	*/
@@ -136,45 +144,32 @@ public class ScheduleManageController {
 	
 	//full calendar
 	//content에 내용 뿌리기
-	@RequestMapping("/lastpredictschedule.admin")
+	@RequestMapping(value = "/lastpredictschedule.admin", method = RequestMethod.POST)
 	public View lastpredictschedule(String r_num,Model model){
 		System.out.println("lastpredictschedule.admin 타나여?");
 		System.out.println("r_num :  "+r_num);
-		List<MemberJoinRegulOffDTO> mjrolist=service.schedule_get(r_num);
+		List<MemberJo> mjrolist=service.schedule_get(r_num);
 		model.addAttribute("mjrolist",mjrolist);
 		System.out.println("mjrolist.toString() :"+mjrolist.toString());
 		return jsonview;
 	}
 	
 	//배차간격, 첫차 ,막차 시간 가져오기
-		//	@RequestMapping("/lastpredictschedule.admin")
-		public View getinterbvalstartlast(Model model,String r_num){
-				System.out.println("첫차,막차 시간 가져올규야");
-				List<RouteDTO2> rdto123= service.intervalstartlast(r_num);
-				model.addAttribute("rdto123",rdto123);
-				System.out.println("rdto123.toString : "+rdto123.toString());
-				return jsonview;
-			}
-			
+	@RequestMapping(value = "/lastpredictschedule.admin", method = RequestMethod.GET)
+	public String getSelecttime(Model model){
+		service.getintervalstartlast(model);
+		return "schedule/schedule_virtual";
+	}
+	
 	
 	/*
-	 	@RequestMapping("/getselectedmember.admin")
-		public View getSelectedRouteMember(String r_num,Model model){
-		System.out.println("r_num"+r_num);
-		List<MemberJoinRegulOffDTO> mjrdto = service.unScheduledMember(r_num);
-		List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> mrmbrjdto = service.scheduledMember(r_num);
-		model.addAttribute("mjrdto", mjrdto); mrmbrjdto
-		model.addAttribute("mrmbrjdto", mrmbrjdto);
-		return jsonview;
-	}
-	 
-	 
-	 
-	  */
-	
-	
-	
-	
+	 @RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
+	   public String getHistoryCal(Model model){
+	      service.getRequestState(model);
+	      return "schedule/schedule_managechangeapprove";
+	   }
+ 
+	 */
 	
 	
 	
