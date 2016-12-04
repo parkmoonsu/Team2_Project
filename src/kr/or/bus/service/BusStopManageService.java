@@ -238,19 +238,17 @@ public class BusStopManageService {
 			PrintWriter out=null;			
 			RouteDAO dao = null;
 			
-			if(r_num.equals("all")){
-				dao = sqlsession.getMapper(RouteDAO.class);
-				dto = dao.routeidSearch(r_num);
-            	JSONObject obs1 = busMultiRouteRead(dto ,request, response);
-            	JSONObject obs2 = busMultiRouteRead(dto ,request, response);
-            	JSONObject obs3 = busMultiRouteRead(dto ,request, response);
-            	JSONObject obs4 = busMultiRouteRead(dto ,request, response);
+			if(r_num.equals("all")){				
+            	JSONObject obs1 = busMultiRouteRead("5623" ,dto, request, response);
+            	JSONObject obs2 = busMultiRouteRead("6702" ,dto, request, response);
+            	//JSONObject obs3 = busMultiRouteRead("9000" ,request, response);
+            	//JSONObject obs4 = busMultiRouteRead("6501",request, response);
             	
             	ArrayList<JSONObject> obss = new ArrayList<JSONObject>();
             	obss.add(obs1);
             	obss.add(obs2);
-            	obss.add(obs3);
-            	obss.add(obs4);
+            	//obss.add(obs3);
+            	//obss.add(obs4);
             	
             	out = response.getWriter();
             	out.print(obss);
@@ -296,12 +294,29 @@ public class BusStopManageService {
 		}
 		
 		//읽을 데이터가 4개일경우
-		public JSONObject busMultiRouteRead(RouteDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		public JSONObject busMultiRouteRead(String r_num, RouteDTO dto,HttpServletRequest request, HttpServletResponse response) throws IOException{
+			RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
+			String id = null;
+			if(r_num.equals("5623")){
+				dto = dao.routeidSearch("5623");
+				id = dto.getR_id();
+			}else if(r_num.equals("6702")){
+				dto = dao.routeidSearch("6702");
+				id = dto.getR_id();				
+			}else if(r_num.equals("6501")){
+				dto = dao.routeidSearch("6501");
+				id = dto.getR_id();
+			}else if(r_num.equals("9000")){
+				dto = dao.routeidSearch("9000");
+				id = dto.getR_id();		
+			}
+			
+			System.out.println("id?????" + id);
 			
 			JSONObject jsonmaps = null;
 			StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/busRouteInfo/getRoutePath"); /*URL*/
 	        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); /*Service Key*/
-	        urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(dto.getR_id(), "UTF-8")); /*노선ID*/
+	        urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(id, "UTF-8")); /*노선ID*/
 	        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("999", "UTF-8")); /*검색건수*/
 	        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
 	        URL url = new URL(urlBuilder.toString());
@@ -558,13 +573,15 @@ public class BusStopManageService {
 		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
 
 		if(r_num.equals("all")){
-			//List<BusStopDTO> busstoplist = new ArrayList<>();
+			List<BusStopDTO> busstoplist = new ArrayList<>();
 			//busStopRoadAllSearch("5623", dto, busstopdto, request, response);
+			busstoplist.addAll(0, busStopRoadAllSearch("5623", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("6702", dto, busstopdto, request, response);
+			busstoplist.addAll(1, busStopRoadAllSearch("6702", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("9000", dto, busstopdto, request, response);
 			//busStopRoadAllSearch("6501", dto, busstopdto, request, response);
-			//jsonmaps = JSONArray.fromObject(busstoplist);
-			//out.print(jsonmaps);
+			jsonmaps = JSONArray.fromObject(busstoplist);
+			out.print(jsonmaps);
 			
 		}else if(!r_num.equals("all")){
 			dto = dao.routeidSearch(r_num);
@@ -589,7 +606,7 @@ public class BusStopManageService {
 		
 		List<BusStopDTO> busstoplist =  busstopdao.makeBusStop(dto.getR_id());
 		
-		//jsonmaps = JSONArray.fromObject(busstoplist);		
+		jsonmaps = JSONArray.fromObject(busstoplist);		
 		
 		return busstoplist;
 	}
