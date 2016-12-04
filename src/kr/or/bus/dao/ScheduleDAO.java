@@ -38,6 +38,8 @@ public interface ScheduleDAO {
 	public int checkmid(String m_id);
 	//로그인아이디와 일정m_id 비교
 	public String returnid(String id);
+	//ko_code=600인 것 중 m_id가 있는지 찾음
+	public int reguloffr_checkstatus(String m_id);
 	
 	public List<RegulOffrJoinDTO> history_select(String m_id) throws ClassNotFoundException, SQLException;
 	public int history_insert(RegulOffrDTO dto) throws ClassNotFoundException, SQLException;

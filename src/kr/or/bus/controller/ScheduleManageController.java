@@ -15,6 +15,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.RouteDTO;
+import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.TimetableDTO;
 import kr.or.bus.service.ScheduleManageService;
@@ -132,7 +133,6 @@ public class ScheduleManageController {
 		return "schedule/schedule_virtual";
 	}
 
-
 	
 	//full calendar
 	//content에 내용 뿌리기
@@ -146,6 +146,16 @@ public class ScheduleManageController {
 		return jsonview;
 	}
 	
+	//배차간격, 첫차 ,막차 시간 가져오기
+		//	@RequestMapping("/lastpredictschedule.admin")
+		public View getinterbvalstartlast(Model model,String r_num){
+				System.out.println("첫차,막차 시간 가져올규야");
+				List<RouteDTO2> rdto123= service.intervalstartlast(r_num);
+				model.addAttribute("rdto123",rdto123);
+				System.out.println("rdto123.toString : "+rdto123.toString());
+				return jsonview;
+			}
+			
 	
 	/*
 	 	@RequestMapping("/getselectedmember.admin")
@@ -204,15 +214,15 @@ public class ScheduleManageController {
 	}
 	
 	//최초 정규휴무 등록 거절
-	@RequestMapping("/refuseFirstRegister.admin")
-	public View refuseFirstRegister(String m_id, String o_code,Model model){
-		System.out.println(m_id + o_code);
-		int result = service.updateRefuseFirstRegister(m_id, o_code);
+	@RequestMapping("/refusefirstregister.admin")
+	public View refuseFirstRegister(String m_id, String o_code, String o_code_1,Model model){
+		System.out.println(m_id + o_code + o_code_1);
+		int result = service.updateRefuseFirstRegister(m_id, o_code, o_code_1);
 		model.addAttribute("result", result);
 		return jsonview;
 	}
 	
-	//정규 휴무 교환 정보 업데이트
+	//정규 휴무 교환 정보 업데이트 승인
 	@RequestMapping("/updatebtwinfo.admin")
 	public View updatebtwinfo(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
 		System.out.println("updatebtwinfo.admin");
@@ -221,5 +231,12 @@ public class ScheduleManageController {
 		service.updatebtwinfoall(m_id, o_code, m_id_1, o_code_1, model);
 		return jsonview;
 	}
-
+	
+	//정규 휴무 교환 정보 업데이트 거절
+	@RequestMapping("/updatebtwinfore.admin")
+	public View updatebtwinfore(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
+		System.out.println("updatebtwinfore.admin");
+		service.updatebtwinforefuse(m_id, o_code, m_id_1, o_code_1, model);
+		return jsonview;
+	}
 }

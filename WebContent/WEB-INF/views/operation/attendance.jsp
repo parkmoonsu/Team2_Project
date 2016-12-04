@@ -70,7 +70,8 @@
 			data:$('#selectroute').val(),
 			success:function(data){
 				$('#commutesearchstarttableinfo').empty();
-				$('#commutesearchstarttableinfo').append(data);
+				var str="<table>"+
+				$('#commutesearchstarttableinfo').append();
 				
 			}
 		});
@@ -115,7 +116,7 @@ select#selectroute {
    padding: 5px 10px;
    text-overflow: ellipsis;
    white-space: nowrap;
-   width: 300px;
+   width: 150px;
 }
 
 .select-style select:focus {
@@ -167,7 +168,7 @@ select#selectroute {
 														<option value="${routelist.r_num}">${routelist.r_num}</option>
 													</c:forEach> 
 												</select>
-												</div><br> 
+												</div>
 										<div class="x_panel">
 						                         
 											<div class="x_content" id="commutesearchstarttableinfo">
@@ -180,7 +181,7 @@ select#selectroute {
 															<th class='backslash' style = "width:75px; height: 20px;"><div>일(日)&nbsp;</div>&nbsp;이름</th>
 															
 															
-															<c:forEach var="i" begin="1" end="30" step="1">
+															<c:forEach var="i" begin="1" end="31" step="1">
 																<th style = "width:35px; text-align: center" >${i}</th>
 															</c:forEach>
 														</tr>

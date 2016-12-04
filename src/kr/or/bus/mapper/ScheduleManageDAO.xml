@@ -121,7 +121,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	
 	<select id="getrnum" resultType="kr.or.bus.dto.RouteDTO">
-	select r_num from route
+	select r_num from route 
+	</select>
+	
+	<select id="getintervalSL" resultType="kr.or.bus.dto.RouteDTO">
+	select r_start, r_last, r_interval
+	from route 
+	where r_num = #{r_num}
 	</select>
 
 	<!-- 휴무 요청 상태 관리 -->
@@ -187,9 +193,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update reguloffr set ko_code = '601', ro_regdate = sysdate, alarm = 'o' where m_id = #{m_id} and ko_code = '600'
 	</update>
 	
-	<update id="refuseFirstRegisterRecord" parameterType="String">
-		update reguloffr set ko_code = '602', alarm = 'x' where m_id = #{m_id} and ko_code = '600'
+	<update id="refuseFirstRegister" parameterType="String">
+		update reguloff set o_code = #{param2}, ro_regdate = sysdate, temp = null where m_id = #{param1}
 	</update>
+	
+	<update id="refuseFirstRegisterRecord" parameterType="String">
+		update reguloffr set ko_code = '602', ro_regdate = sysdate, alarm = 'x' where m_id = #{m_id} and ko_code = '600'
+	</update>
+	
+	<delete id="refuseSameDelete">
+		delete from reguloff where m_id = #{m_id}
+	</delete>
 	
 	<update id="updateBtwReqRegr">
 		update reguloffr set ko_code = '601', ro_regdate = sysdate, alarm = 'o' where m_id = #{param1} and ko_code = '600'
@@ -207,7 +221,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update reguloff set o_code = #{param2}, ro_regdate = sysdate, temp = null where m_id = #{param1}
 	</update>
 	
+	<update id="updateBtwReqRegrre">
+		update reguloffr set ko_code = '602', ro_regdate = sysdate, alarm = 'o' where m_id = #{param1} and ko_code = '600'
+	</update>
 	
+	<update id="updateBtwReqRegore">
+		update reguloff set o_code = #{param2}, ro_regdate = sysdate, temp = null where m_id = #{param1}
+	</update>
+	
+	<update id="updateBtwByRegrre">
+		update reguloffr set ko_code = '602', ro_regdate= sysdate, alarm = 'x' where m_id = #{param1} and ko_code = '600'
+	</update>
+	
+	<update id="updateBtwByRegore">
+		update reguloff set o_code = #{param2}, ro_regdate = sysdate, temp = null where m_id = #{param1}
+	</update>
 	
 	<!-- 휴무 요청 상태 관리 끝 -->
 

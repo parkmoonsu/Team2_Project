@@ -95,6 +95,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select m_id from reguloff 
 		where m_id = #{m_id}
 	</select>
+	
+
+	<select id="reguloffr_checkstatus" resultType="int" parameterType = "String">
+		select count(m_id)
+		from reguloffr
+		where m_id=#{m_id} and ko_code=600
+	</select>
 	<!-- reguloff DAO -->
 	
 	<!-- history DAO -->

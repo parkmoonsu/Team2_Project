@@ -141,7 +141,7 @@ $(document).ready(function() {
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
 			
-			<!-- modal 수정 승인 모달 -->
+			<!-- 변경 요청자 != 변경 대상자 modal 수정 승인 모달 -->
 			<div class="modal fade" id="approvebtw" role="dialog">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
@@ -153,37 +153,79 @@ $(document).ready(function() {
 						</div>
 						<div class="modal-body" aria-labelledby="myModalLabel"
 							id="approvebtwcon">
-							 <table class="table table-striped"> 
-							 <thead> 
-							 <tr> 
-							 <th>변경 요청자</th> 
-							 <th>변경 대상자</th> 
-							 </tr> 
-							 </thead> 
-							 <tbody> 
-							 <tr>
-							 <td id="1"></td> 
-							 <td id="2"></td> 
-							 </tr> 
-							 </tbody> 
-							 </table> 
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>변경 요청자</th>
+										<th>변경 대상자</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td id="1"></td>
+										<td id="2"></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 						<div class="modal-footer">
-						updatebtwinfo.admin
-						<input type="hidden" id="m_id" name="m_id">
-						<input type="hidden" id="o_code" name="o_code">
-						<input type="hidden" id="m_id_1" name="m_id_1">
-						<input type="hidden" id="o_code_1" name="o_code_1">
+							<input type="hidden" id="m_id" name="m_id"> <input
+								type="hidden" id="o_code" name="o_code"> <input
+								type="hidden" id="m_id_1" name="m_id_1"> <input
+								type="hidden" id="o_code_1" name="o_code_1">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal" id="approvebtn">변경</button>
-						
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal">취소</button>
+								data-dismiss="modal" id="refusebtn">거절</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- modal 수정 승인 모달 끝 -->
+			
+			<!-- 변경 요청자 == 변경 대상자 modal 수정 모달 시작 -->
+			<div class="modal fade" id="approverefusebtw" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">
+								<i class="fa fa-exclamation-triangle"></i> 
+							</h4>
+						</div>
+						<div class="modal-body" aria-labelledby="myModalLabel"
+							id="approverefusebtwcon">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>변경 요청자</th>
+										<th>기존 휴무</th>
+										<th>변경 휴무</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td id="3"></td>
+										<td id="4"></td>
+										<td id="5"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<input type="hidden" id="sm_id"> <input
+								type="hidden" id="so_code"> <input
+								type="hidden" id="sm_id_1"> <input
+								type="hidden" id="so_code_1">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="approvesamebtn">변경</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="refusesamebtn">거절</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- modal 수정 거절 모달 시작 -->
 			
 			<!-- page content -->
 			<div class="right_col" role="main">
@@ -275,6 +317,7 @@ $(document).ready(function() {
 	var array = new Array();
 	var dropObject;
 	function showCalInfo(r_num){
+		array = []; //아무 동작도 처리 하지 않고 눌렀을때 array에 들어있던 값을 비워야한다.
 		alert(r_num);
 		$.ajax({
 			url:"gethistorycal.admin",
@@ -287,7 +330,7 @@ $(document).ready(function() {
 				$.each(data.mrmbrdto,function(index,obj){ //정규 휴무 같은 노선
 					$.each(data.mbrdto,function(index1,obj1){ //변경 신청자 reguloff temp ='t'
 					    console.log(obj.m_id + "/" + obj1.m_id + "/" + obj1.m_id_1);
-						if(obj.m_id==obj1.m_id){ //변경 중인 애들은 따로 뺀당
+						if(obj.m_id==obj1.m_id){ //변경 신청자
 							if(obj1.m_id != obj1.m_id_1){//변경 신청자, 변경 대상자
 							array1.push(obj1.m_id);
 							array1.push(obj1.m_id_1);
@@ -321,6 +364,8 @@ $(document).ready(function() {
 											afterid : obj1.m_id_1,
 											aftername : obj1.m_name_1,
 											dow : obj1.o_code,
+											downame : obj1.o_date,
+											afterdowname : obj1.o_date_1,
 											afterdow : obj1.o_code_1,
 											color : color[index]
 									}
@@ -334,6 +379,8 @@ $(document).ready(function() {
 											afterid : obj1.m_id_1,
 											aftername : obj1.m_name_1,
 											dow : obj1.o_code_1, //신청자 = 대상자, 휴무 != 휴무1 => dow = 휴무1
+											downame : obj1.o_date,
+											afterdowname : obj1.o_date_1,
 											afterdow : obj1.o_code,
 											color : color[index]
 									}
@@ -373,63 +420,68 @@ $(document).ready(function() {
 		});
 	}
 	
-			$(document).ajaxStop(function(){
-				$('#calendar2').empty();
-				$('#calendar2').append("<div id='calendar'></div>");
-				$('#calendar').fullCalendar({
-					header: {
-						left: 'prev,next today',
-						center: 'title',
-						right: 'month,basicWeek,basicDay'
-					},
-					navLinks: true, // can click day/week names to navigate views
-					editable: true,
-					eventLimit: true, // allow "more" link when too many events
-					events: array,
-					eventDrop : function(event, delta, revertFunc, jsEvent) {
-						alert(event.afterdow);
-						//변경 요청자 이외에 수정 하는 경우 막기
-						if(event.afterdow == null){
-							alert('변경 요청 데이터만 처리 할 수 있습니다.');
+		$(document).ajaxStop(function(){
+			$('#calendar2').empty();
+			$('#calendar2').append("<div id='calendar'></div>");
+			$('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,basicWeek,basicDay'
+				},
+				navLinks: true, // can click day/week names to navigate views
+				editable: true,
+				eventLimit: true, // allow "more" link when too many events
+				events: array,
+				eventDrop : function(event, delta, revertFunc, jsEvent) {
+					alert(event.afterdow);
+					//변경 요청자 이외에 수정 하는 경우 막기
+					if(event.afterdow == null){
+						alert('변경 요청 데이터만 처리 할 수 있습니다.');
+						revertFunc();
+					}else{
+						//변경 요청자 - 변경 대상자 매칭
+						if(event.afterdow != Number(event.dow)+delta.days()){
+							alert('변경 요청자의 휴무 변경은 변경 대상자로 해야 합니다.')
 							revertFunc();
 						}else{
-							//변경 요청자 - 변경 대상자 매칭
-							if(event.afterdow != Number(event.dow)+delta.days()){
-								alert('변경 요청자의 휴무 변경은 변경 대상자로 해야 합니다.')
-								revertFunc();
-							}else{
-								alert(event.title + "/" + event.aftername);
-								$('#1').append(event.title);
-								$('#2').append(event.aftername);
-								$('#m_id').val(event.id);
-								$('#o_code').val(event.dow);
-								$('#m_id_1').val(event.afterid);
-								$('#o_code_1').val(event.afterdow);
-								$('#approvebtw').modal('show');
-							}
-						}
-					},
-					eventClick : function(calEvent, jsEvent, view) {
-						//최초 휴무 신청자 처리 내용
-						if(calEvent.id == calEvent.afterid){
-							//alert(calEvent.title+'님은 휴무 신규 등록자입니다.'+calEvent.id+calEvent.afterdow);
-							var o_code;
-							
-							$.ajax({
-								url:"approvefirstregister.admin",
-								data:{"m_id":calEvent.id,"o_code":calEvent.dow},
-								type:"post",
-								success:function(data){
-									alert('등록완료');
-								}
-							});
+							alert(event.title + "/" + event.aftername);
+							$('#1').append(event.title);
+							$('#2').append(event.aftername);
+							$('#m_id').val(event.id);
+							$('#o_code').val(event.dow);
+							$('#m_id_1').val(event.afterid);
+							$('#o_code_1').val(event.afterdow);
+							$('#approvebtw').modal('show');
 						}
 					}
-				});
+				},
+				eventClick : function(calEvent, jsEvent, view) {
+					//최초 휴무 신청자 처리 내용
+					if(calEvent.id == calEvent.afterid){
+						$('#approverefusebtw').modal('show');
+						$('#3').append(calEvent.title);
+						$('#4').append(calEvent.downame);
+						$('#5').append(calEvent.afterdowname);
+						$('#sm_id').val(calEvent.id);
+						$('#so_code').val(calEvent.afterdow); //afterdow = o_code
+						$('#so_code_1').val(calEvent.dow); //dow = o_code_1
+					}else{
+						if(calEvent.afterdow == null){
+							alert(calEvent.title + '님은 휴무 변경 신청자가 아닙니다.');
+						}else{
+							alert(calEvent.title + '님의 변경 대상자는' + calEvent.aftername + '입니다');
+						}
+					}//else
+					
+				}//eventclick
 			});
+		});
 		
 	$(function(){
 		$('#approvebtw').modal('hide');
+		$('#approverefusebtw').modal('hide');
+		//일정 승인 처리
 		$('#approvebtn').click(function(){
 			var m_id = $('#m_id').val();
 			var o_code = $('#o_code').val();
@@ -441,6 +493,48 @@ $(document).ready(function() {
 				data:{"m_id":m_id,"o_code":o_code,"m_id_1":m_id_1,"o_code_1":o_code_1},
 				success:function(){
 					alert('등록성공');
+				}
+			});
+		});//approvebtn ajax
+		//일정 거절 처리
+		$('#refusebtn').click(function(){
+			var m_id = $('#m_id').val();
+			var o_code = $('#o_code').val();
+			var m_id_1 = $('#m_id_1').val();
+			var o_code_1 = $('#o_code_1').val();
+			
+			$.ajax({
+				url:"updatebtwinfore.admin",
+				type:"post",
+				data:{"m_id":m_id,"o_code":o_code,"m_id_1":m_id_1,"o_code_1":o_code_1},
+				success:function(){
+					alert('거절 처리 되었습니다.');
+				}
+			})	
+		});
+		$('#approvesamebtn').click(function(){
+			var m_id = $('#sm_id').val();
+			var o_code = $('#so_code').val();
+			var o_code_1 = $('#so_code_1').val();
+			$.ajax({
+				url:"approvefirstregister.admin",
+				data:{"m_id":m_id,"o_code":o_code_1}, //변경 휴무로 reguloff에 등록되어야 한다.
+				type:"post",
+				success:function(data){
+					alert('등록완료');
+				}
+			});
+		});
+		$('#refusesamebtn').click(function(){
+			var m_id = $('#sm_id').val();
+			var o_code = $('#so_code').val();
+			var o_code_1 = $('#so_code_1').val();
+			$.ajax({
+				url:"refusefirstregister.admin",
+				data:{"m_id":m_id,"o_code":o_code,"o_code_1":o_code_1},
+				type:"post",
+				success:function(data){
+					alert('변경 거절');
 				}
 			});
 		});

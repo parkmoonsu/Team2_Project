@@ -70,12 +70,20 @@
 				<input type="button" id="SearchStop" value="버스위치추적 중지">
 	
 				<select id="selectBus">
-					<option></option>
+					<option>보기</option>
 					<option>all</option>
 					<option>5623</option>
 					<option>6702</option>
-					<option>9000</option>
-					<option>6501</option>
+					<option>9000광주</option>
+					<option>6501광주</option>
+				</select>
+				
+				<select id="saveBusStop">
+					<option>저장</option>
+					<option>5623</option>
+					<option>6702</option>
+					<option>9000광주</option>
+					<option>6501광주</option>
 				</select>
      <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
 		</div>
@@ -543,8 +551,8 @@
     }
     
     function loadVector5623(data){
-     	console.log("옴?");
-     	console.log(data);
+     	console.log("5623옴?");
+     	//console.log(data);
      	poly1 = new google.maps.Polyline({
      		path: data,
      	    strokeColor: 'red',
@@ -555,8 +563,8 @@
     }
     
     function loadVector702(data){
-     	console.log("옴?");
-     	console.log(data);
+     	console.log("702옴?");
+     	//console.log(data);
      	poly2 = new google.maps.Polyline({
      		path: data,
      	    strokeColor: 'navy',
@@ -860,18 +868,7 @@
                 });	
         	} */
         	
-        	if($("#selectBus").val() !=null){
-        		
-        		/* $.ajax({
-                    url : "routeidSearch.admin",
-                    type : "get",
-                    dataType : "json",
-                    data : {r_num:$("#selectBus").val()},
-                    success : function(data) {
-                       console.log("DB저장잘됨?");               	                     	
-                    }        		
-        		}); */
-        		
+        	if($("#selectBus").val() !=null){       		             		
         		$.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
@@ -879,7 +876,7 @@
                    	data : {r_num:$("#selectBus").val()},
                    	success : function(data2) {
                     	console.log("읽어옴?");
-                      	console.log(data2);                              	                                                                  	                       
+                      	//console.log(data2);                              	                                                                  	                       
                       	//노선 전체로드 현재 안됨...
                       	if(data2.length == 4){
                      	   
@@ -898,13 +895,13 @@
                      			route9000 = data2[2].msgBody;
                      			route6501 = data2[3].msgBody;
                      		}
-                     		console.log(route5623);
+                     		//console.log(route5623);
                      		
                      		for(var j=0;j<route5623.length;j+=3){
                      			var f=route5623[j].gpsY;
                          		var d=route5623[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
-                         		console.log(hell);
+                         		//console.log(hell);
                      		}
                      		loadVector5623(hell);
                      		
@@ -939,7 +936,7 @@
                    	   		console.log("1개 노선");
                    			console.log(data2.length);                          	
                    			var hell =new Array();
-                   			for(var j=0;j<data2.msgBody.length;j+=3){
+                   			for(var j=0;j<data2.msgBody.length;j++){
                    				var f=parseFloat(data2.msgBody[j].gpsY);
                        			var d=parseFloat(data2.msgBody[j].gpsX);
            		      			hell.push(new google.maps.LatLng(f,d));
@@ -959,22 +956,37 @@
                        //console.log(data);
                        //console.log(data.length);                                                                   	                       
                        
-                      	if(data.length == 2){
+                      	if(data.length == 4){
                       		console.log(data);
                       		console.log("2개 노선");
-                    		console.log(data.length);
-                       		//originalMarkerMake(data[0].msgBody, map);
-                       		//originalMarkerMake(data[1].msgBody, map);
-                       		//originalMarkerMake(data[2].msgBody, map);
-                       		//originalMarkerMake(data[3].msgBody, map);
+                    		//console.log(data.length);
+                       		originalMarkerMake(data[0].msgBody, map);
+                       		originalMarkerMake(data[1].msgBody, map);
+                       		originalMarkerMake(data[2].msgBody, map);
+                       		originalMarkerMake(data[3].msgBody, map);
                        	}else{
                     	   console.log("1개 노선");
+                    	   console.log(data);
                     	   originalMarkerMake(data, map);
                        	}                 	                     	
                     }        		
         		});
         	}
-    	});   	    	         
+    	});
+    	
+    	$("#saveBusStop").change(function() {    	
+        	if($("#saveBusStop").val() !=null){       		
+        		$.ajax({
+                    url : "routeidSearch.admin",
+                    type : "get",
+                    dataType : "json",
+                    data : {r_num:$("#saveBusStop").val()},
+                    success : function(data) {
+                       console.log("DB저장잘됨?");               	                     	
+                    }        		
+        		});       		     		
+        	}
+    	});   	    	    
        
              
         //실시간 위치추적 중지
