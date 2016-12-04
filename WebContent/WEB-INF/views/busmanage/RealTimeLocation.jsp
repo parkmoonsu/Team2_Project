@@ -282,7 +282,7 @@
     	                                       
        
    			var originalMarker5623 = new google.maps.Marker({
-           	position: new google.maps.LatLng(latLng[i].gpsY, latLng[i].gpsX),         
+           	position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
           		map: map,
           		title: latLng[i].stationNm,
           		animation: google.maps.Animation.DROP,
@@ -317,7 +317,7 @@
        	                                       
           
       			var originalMarker6702 = new google.maps.Marker({
-              		position: new google.maps.LatLng(latLng[i].gpsY, latLng[i].gpsX),         
+              		position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
              		map: map,
              		title: latLng[i].stationNm,
              		animation: google.maps.Animation.DROP,
@@ -350,7 +350,7 @@
       	                                       
          
      			var originalMarker9000 = new google.maps.Marker({
-             		position: new google.maps.LatLng(latLng[i].gpsY, latLng[i].gpsX),         
+             		position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
             		map: map,
             		title: latLng[i].stationNm,
             		animation: google.maps.Animation.DROP,
@@ -381,7 +381,7 @@
      	                                       
         
     			var originalMarker6501 = new google.maps.Marker({
-            		position: new google.maps.LatLng(latLng[i].gpsY, latLng[i].gpsX),         
+            		position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
            		map: map,
            		title: latLng[i].stationNm,
            		animation: google.maps.Animation.DROP,
@@ -773,7 +773,7 @@
                  			var route9000;
                  			var route6501
                  			
-                     		console.log("4개 노선");
+                     		console.log("4개 경로노선");
                      		console.log(data2.length);
                      		
                      		for(var j=0;j<data2.length;j++){
@@ -820,7 +820,7 @@
                   			hell=[];
                   			
                         }else{
-                   	   		console.log("1개 노선");
+                   	   		console.log("1개 경로 노선");
                    			console.log(data2.length);                          	
                    			var hell =new Array();
                    			for(var j=0;j<data2.msgBody.length;j++){
@@ -840,22 +840,9 @@
                     data : {r_num:$("#selectBus").val()},
                     success : function(data) {
                        console.log("읽어옴?");
-                       //console.log(data);
-                       //console.log(data.length);                                                                   	                       
-                       
-                      	if(data.length == 4){
-                      		console.log(data);
-                      		console.log("2개 노선");
-                    		//console.log(data.length);
-                       		originalMarkerMake5623(data[0].msgBody, map);
-                       		originalMarkerMake6702(data[1].msgBody, map);
-                       		originalMarkerMake9000(data[2].msgBody, map);
-                       		originalMarkerMake6501(data[3].msgBody, map);
-                       	}else{
-                    	   console.log("1개 노선");
-                    	   console.log(data);
+                       console.log(data);                                                                                                               	                                                                  	                       	   
                     	   originalMarkerMake(data, map);
-                       	}                 	                     	
+                       	                 	                     	
                     }        		
         		});
         	}
