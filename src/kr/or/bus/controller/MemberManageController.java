@@ -89,6 +89,7 @@ public class MemberManageController {
 	@RequestMapping("/searching.htm")
 	public View searching(String param){
 		System.out.println("param"+param);
+		
 		return jsonview;
 	}
 	

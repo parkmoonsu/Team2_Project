@@ -48,14 +48,17 @@ public class MainController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@RequestMapping("/SearchMember.htm")
-	public View select(String search, Model model) {
-
-		List<MemberDTO> dto = service.selectall(search);
+	public View select(String search,String search2, Model model) {
+			System.out.println("search1 :"+search);
+			System.out.println("search2 :"+search2);
+		List<MemberDTO> dto = service.selectall(search,search2);
 		model.addAttribute("dto", dto);
 
 		return jsonview;
 	}
 
+	
+	
 	@RequestMapping("/ChangeForm.htm")
 	public String ChangeForm(Model model, Principal principal) {
 		System.out.println("세션 ID : " + principal.getName());
