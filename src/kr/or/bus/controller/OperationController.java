@@ -13,16 +13,24 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
+import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.service.OperationService;
 
 @Controller
 public class OperationController {
 
+	@Autowired
+	private View jsonview;
+	
+	
 	@Autowired
 	private OperationService service;
 	
@@ -30,11 +38,20 @@ public class OperationController {
 	@RequestMapping("/routename.admin")
 	public String showlist(ModelMap map){
 		List<RnumcommuteDTO> list = service.getNdselect();
+		List<RouteDTO> rlist = service.getRout();	
 
 		map.addAttribute("list",list);
+		map.addAttribute("rlist",rlist);
+		
 		return "operation/attendance";
 	}
 	
+	//전체 노선
+	/*@RequestMapping("/routelist.admin")
+	public View route(Model model){
+		return jsonview;
+	}*/
+
 /*	@RequestMapping("/optionselect.admin")
 	public String selectlist(ModelMap map){
 		List<RnumcommuteDTO> list = service.getNdselect();

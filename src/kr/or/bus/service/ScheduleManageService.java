@@ -171,19 +171,30 @@ public class ScheduleManageService {
 	}
 	
 	//최초 휴무 등록자 거절 하기
-	public int updateRefuseFirstRegister(String m_id, String o_code){
+	public int updateRefuseFirstRegister(String m_id, String o_code, String o_code_1){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		int result = dao.refuseFirstRegisterRecord(m_id);
+		int result = 0;
+		int result1 = 0;
+		if(o_code.equals(o_code_1)){
+		result = dao.refuseSameDelete(m_id);
+		}else{
+		result = dao.refuseFirstRegisterRecord(m_id);
+		}
+		result1 = dao.refuseFirstRegister(m_id, o_code);
 		return result;
 	}
 	
-	//정규 휴무 교환 정보 업데이트
+	//정규 휴무 교환 정보 승인 업데이트
 	public void updatebtwinfoall(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.updateBtwReqRego(m_id, o_code_1);
 		dao.updateBtwReqRegr(m_id, o_code);
 		dao.updateBtwByRego(m_id_1, o_code);
 		dao.updateBtwByRegr(m_id_1, o_code_1);
+	}
+	//정보 휴무 교환 정보 거절 업데이트
+	public void updatebtwinforefuse(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 	}
 
 }

@@ -214,15 +214,15 @@ public class ScheduleManageController {
 	}
 	
 	//최초 정규휴무 등록 거절
-	@RequestMapping("/refuseFirstRegister.admin")
-	public View refuseFirstRegister(String m_id, String o_code,Model model){
-		System.out.println(m_id + o_code);
-		int result = service.updateRefuseFirstRegister(m_id, o_code);
+	@RequestMapping("/refusefirstregister.admin")
+	public View refuseFirstRegister(String m_id, String o_code, String o_code_1,Model model){
+		System.out.println(m_id + o_code + o_code_1);
+		int result = service.updateRefuseFirstRegister(m_id, o_code, o_code_1);
 		model.addAttribute("result", result);
 		return jsonview;
 	}
 	
-	//정규 휴무 교환 정보 업데이트
+	//정규 휴무 교환 정보 업데이트 승인
 	@RequestMapping("/updatebtwinfo.admin")
 	public View updatebtwinfo(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
 		System.out.println("updatebtwinfo.admin");
@@ -231,5 +231,12 @@ public class ScheduleManageController {
 		service.updatebtwinfoall(m_id, o_code, m_id_1, o_code_1, model);
 		return jsonview;
 	}
-
+	
+	//정규 휴무 교환 정보 업데이트 거절
+	@RequestMapping("/updatebtwinfore.admin")
+	public View updatebtwinfore(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
+		System.out.println("updatebtwinfore.admin");
+		service.updatebtwinforefuse(m_id, o_code, m_id_1, o_code_1, model);
+		return jsonview;
+	}
 }
