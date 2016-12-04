@@ -62,7 +62,6 @@
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
-
 <style type="text/css">
 th {
 	text-align: center;
@@ -197,14 +196,14 @@ ul.pagination li a {
 									<select id="sel">
 										<option></option>
 									<c:forEach var="f" items="${d}">
-										<option>${f.r_num}</option>
+										<option value="${f.r_num}">${f.r_num}</option>
 									</c:forEach>
 									</select>
 									<div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
 											<input type="text" class="form-control"
-												placeholder="Search for..." id="search"><span
+												placeholder="Search for..." id="search"> <span
 												class="input-group-btn">
 												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
 											</span>
@@ -261,7 +260,7 @@ ul.pagination li a {
 										</c:otherwise>
 									</c:choose>
 
-									<div style="text-align: center">
+									<div style="text-align: center" id="coco">
 										<ul class="pagination">
 
 											<c:if test="${pgc > 1}">
@@ -486,8 +485,9 @@ ul.pagination li a {
 				});
 			});
 
-				$('#btnsearch').click(function() {
+		$('#btnsearch').click(function() {
 			$("#another").empty();
+			$("#coco").empty();
 			var param = $('#search').val();
 			
 			if($('#sel').val()!=""){
@@ -495,29 +495,33 @@ ul.pagination li a {
 			$.ajax({
 				data : {
 					"search" : param,
-					"search2": parma2
+					"search2": param2
 				},
 				url : "SearchMember.htm",
 				type : "get",
 				success : function(data) {
-					console.log("날보고있다면")
+					if(data ==null){
+						$("#another").append("<label>검색결과가 없습니다.</label>")
+					}else{
+					console.log("날보고있다면");
 					console.log(data);
-					$("#another").load("${pageContext.request.contextPath}/membermanage/SearchMemberInfo.jsp",data);
-
+					$("#another").append(data);
+					}
 				}
 			});
 			}else{
 				$.ajax({
-					data : {
-						"search" : param
-					},
+					data : {"search" : param},
 					url : "SearchMember.htm",
 					type : "get",
 					success : function(data) {
-						console.log("정답을알려줘");
-						console.log(data.dto);
-						$("#another").load("${pageContext.request.contextPath}/membermanage/SearchMemberInfo.jsp",{"data.dto" :data.dto.m_id});
-
+						if(data ==null){
+							$("#another").append("<label>검색결과가 없습니다.</label>")
+						}else{
+						console.log("날보고있다면");
+						console.log(data);
+						$("#another").append(data);
+						}
 					}
 				});
 			}

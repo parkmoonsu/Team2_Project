@@ -25,6 +25,7 @@ import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
 import kr.or.bus.service.BusManageService;
+import kr.or.bus.service.BusStopManageService;
 
 @Controller
 public class BusManageController {
@@ -34,6 +35,9 @@ public class BusManageController {
 	
 	@Autowired
 	private BusManageService service;
+
+	@Autowired
+	BusStopManageService busStopManageService;
 	
 	@RequestMapping("/busenroll.admin")
 	public String menu(String pg , Model model){
@@ -277,7 +281,8 @@ public class BusManageController {
 	
 	//실시간 위치추적 페이지
 	@RequestMapping("/realTime.admin")
-	public String realTimeOpen(){
+	public String realTimeOpen(ModelMap map){
+		map.addAttribute("list", busStopManageService.routeList());
 		return "busmanage/RealTimeLocation";
 	}
 

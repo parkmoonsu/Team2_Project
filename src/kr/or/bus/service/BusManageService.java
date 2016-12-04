@@ -35,6 +35,8 @@ public class BusManageService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	
+	
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> busInfo(String pg){
 		int page = 1;
 		

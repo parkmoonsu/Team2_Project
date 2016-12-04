@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 
 import kr.or.bus.dao.ScheduleManageDAO;
 import kr.or.bus.dto.GarageDTO;
+import kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
@@ -106,20 +107,13 @@ public class ScheduleManageService {
 	//수행할 최종스케줄 _김수현
 	
 	//캘린더에 content 뿌리기
-	public List<MemberJoinRegulOffDTO> schedule_get(String r_num){
+	public List<MemberJoinBusJoinRouteJoinReguloffDTO> schedule_get(String r_num){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		List<MemberJoinRegulOffDTO> mjrolist=dao.getmemberjoinreg(r_num);
+		List<MemberJoinBusJoinRouteJoinReguloffDTO> mjrolist=dao.getmemberjoinreg(r_num);
 		  return mjrolist;
 	}
 	
 	
-
-	//배차간격, 첫차, 막차 시간 가져오기
-	public List<RouteDTO2> intervalstartlast(String r_num){
-		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-	    List<RouteDTO2> rdto123=dao.getintervalSL(r_num);
-	   	return rdto123;
-	}
 
 	//select box에 뿌리는 노선
 	public List<RouteDTO> rnum_get(){
@@ -129,6 +123,14 @@ public class ScheduleManageService {
 		return list;
 	}
 	
+	//배차간격,첫차,막차 시간 가져오기
+	public List<RouteDTO2> getintervalstartlast(Model model){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		List<RouteDTO2> routedto =dao.getIntervalStartLast();
+		model.addAttribute("routedto",routedto);
+		return routedto;
+	}
+
 	
 
 	//휴무 요청 상태 가져오기

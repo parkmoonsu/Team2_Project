@@ -92,7 +92,7 @@ public class CommuteController {
 		model.addAttribute("page", page);
 		model.addAttribute("list", list);
 
-		return "commute/commutesearchtable";	
+		return "commute/commutesearchtable";	 
 	}
 	
 	@RequestMapping("/joinapprove.member")

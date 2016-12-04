@@ -53,28 +53,66 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-<script type="text/javascript">
+<script>
 	$(function() {
 		/* $("#rnum").click(function(){
 		    var value = $("#rnum option:selected").val();
 		    var text = $("#rnum option:selected").text();
 		    console.log(test);
 		}); */
-	});
 	
-	$('#selectroute').change(function(){
+	
+/* 	$('#selectroute').change(function(){
 		$.ajax({
 			url:"routelist.admin",
-			dataType:"json",
 			type:"post",
-			data:$('#selectroute').val(),
+			data:$('#selectroute').val(),		
 			success:function(data){
-				$('#commutesearchstarttableinfo').empty();
-				var str="<table>"+
-				$('#commutesearchstarttableinfo').append();
+				$('#commutesearchstarttableinfo').empty();				
+				var str="<table>";
+				
+				var rnum = $('#selectroute').val();
+				 $.ajax({
+					 url:"routename.admin",
+					 data:{
+						 r_num : rnum
+					 },
+					 type:"post",
+					 dataType:"json",
+					 success:function(data2){
+						 console.log(data2.data);
+						 str+="<tr>";
+						 $.each(function(31,e)){
+							 
+						 }
+						 str+"</tr>";
+						 $.each(data2.data, function(index, obj){
+							str+="<td>"+obj.name+"/td>";
+						 });
+						str+="</tr><th>";	
+						 str+="</table>";
+						$('#commutesearchstarttableinfo').append(str);
+					 }
+				 });
 				
 			}
 		});
+	}); */
+
+	$('#selectroute').change(function(){
+		console.log($('#selectroute').val());
+		$.ajax({
+			url:"routelist.admin",
+			
+			type:"post",
+			data:{"r_num":$('#selectroute').val()},		
+			success:function(data){
+				console.log("체인지 : " + data + "#####");
+				$('#commutesearchstarttableinfo').empty();				
+				$('#commutesearchstarttableinfo').append(data);				
+			}
+		});
+	});
 	});
 </script>
 <style type="text/css">
@@ -98,7 +136,7 @@ th, td {
 	/* padding: 5px; */
 	text-align: center;
 }
-select#selectroute {
+select#selectroute{
    -webkit-appearance: button;
    -webkit-border-radius: 2px;
    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -159,7 +197,7 @@ select#selectroute {
 
 							<div class="row">
 								<div class="col-sm-12 col-xs-12">
-									<div class="col-md-12 col-xs-12"><br>
+									<div class="col-md-12 col-xs-12"><br>												
 												<div class="container" style="text-align: right ">
 													<select id="selectroute" >
 													<option value="0">노선선택</option>
@@ -174,7 +212,7 @@ select#selectroute {
 											<div class="x_content" id="commutesearchstarttableinfo">
 											
 											
-												<table style="table-layout:fixed; word-break:break-all; text-align: center
+												<table id="table" style="table-layout:fixed; word-break:break-all; text-align: center
 													class="table table-hover projects">
 													<thead>
 														<tr>
@@ -183,7 +221,8 @@ select#selectroute {
 															
 															<c:forEach var="i" begin="1" end="31" step="1">
 																<th style = "width:35px; text-align: center" >${i}</th>
-															</c:forEach>
+															</c:forEach> 
+															
 														</tr>
 													</thead>
 													<tbody>
