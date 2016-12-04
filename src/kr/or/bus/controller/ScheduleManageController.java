@@ -14,6 +14,7 @@ import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
@@ -110,14 +111,19 @@ public class ScheduleManageController {
 		return "schedule/schedule_managertimetable";
 	}
 	
-/*
-	@RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
-	   public String getHistoryCal(Model model){
-	      service.getRequestState(model);
-	      return "schedule/schedule_managechangeapprove";
-	   }
+	/*
+	제목 : 가상 스케줄 생성
+	작성자 : 길한종
+	목적 : VSCHEDULE에서 이용할 차량번호(B_VEHICLENUM), 노선변호(R_NUM), 휴무코드(O_CODE) 가져오기 
 	*/
-
+	
+	@RequestMapping("/getocode.admin")
+	public View getOcode(ModelMap map){
+		List<ReguloffJoinMemberJoinBusJoinRouteDTO> list=service.get_ocode();
+		map.addAttribute("list", list);
+		return jsonview;
+	}
+	
 	/*
 	제목 : 예상 스케쥴 뽑기
 	작성자 : 김수현
@@ -166,10 +172,7 @@ public class ScheduleManageController {
 		model.addAttribute("mjrdto", mjrdto); mrmbrjdto
 		model.addAttribute("mrmbrjdto", mrmbrjdto);
 		return jsonview;
-	}
-	 
-	 
-	 
+	}	 
 	  */
 	
 	
