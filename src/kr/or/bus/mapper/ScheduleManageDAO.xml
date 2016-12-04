@@ -80,14 +80,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- vschedule -->
-	<select id="ocode_select" resultType="kr.or.bus.dto.ReguloffJoinMemberJoinBusDTO">
+<!-- 	<select id="ocode_select" resultType="kr.or.bus.dto.ReguloffJoinMemberJoinBusDTO">
 		select m.B_VEHICLENUM, b.R_NUM, r.O_CODE, ??? 
 		from reguloff r
 		join member m on r.M_ID=m.M_ID
 		join bus b on m.B_VEHICLENUM=b.B_VEHICLENUM
 		join route rt on b.r_num=rt.r_num
 		where r.TEMP is null
-	</select>
+	</select> -->
+	<insert id="copy_vschedule">
+		INSERT INTO oschedule SELECT * FROM vschedule
+	</insert>
+	<!-- SELECT * FROM vschedule
+	as of timestamp (systimestamp)
+	between (sysdate-1) and sysdate -->
 	
 	<!-- 정기휴무가 정해진 노선이 배정된 기사님 뽑기 -->
 	<select id="getDecideReguloffMember"
