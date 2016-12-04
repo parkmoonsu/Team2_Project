@@ -222,23 +222,68 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 						"r_num" : param
 					},
 					success : function(data) {
-									
-						var m_name = "";
-						var m_id = "";
-						//data.rdto.r_start 첫차
-						//data.rdto.r_end 막차
-						//data.rdto.r_peroid 배차
-						console.log(data);
+						
+						var year=new Date().getFullYear();
+						var month=new Date().getMonth()+1;
+						var day=new Date().getDate();
+						var date=year.toString()
+							+"-"+month.toString()
+							+"-"+day.toString();
+						
+						var test=0;
+						var ocode="";
+						var ocode2="";
 						$.each(data.mjrolist, function(index, obj) {
+							
+							/* 
+							$.each(data.mjrolist,funvtion(index1,obj1){
+								String array = new Array();
+								for(int i=0;i<7;i++){
+								if(ocode==i){
+									
+								}else{
+									array+=i;
+								}
+								
+								}
+								dow:array
+							});
+							
+							*/
+							
+							
+					         ocode2=obj.o_code;
+							if(ocode==ocode2){
+								
+							}else{
+								test=0;
+								ocode=ocode2;
+							}
+							//	setHours(dt.getHours() + 6);  
+							console.log(index);
+							console.log('ocode : '+ocode);
+							console.log('ocode2 : '+ocode2);
+							
+							var time2=date+" "+obj.r_start;
+							var time3=new Date(time2);
+							
+							//time3.setMinutes(time3.getMinutes()+10);
+							time3.setMinutes(time3.getMinutes()+test);
+							var starttime=time3.getHours().toString()+":"+time3.getMinutes().toString(); //time2.time();
+							
+					
 							var item = {
 								title : obj.m_name,
 								id : obj.m_id,
-								//start : obj1.r_start,
+								start :starttime,
 								dow :obj.o_code
 							};
+							console.log(item);
+							
 							array.push(item);
+							test+=Number(obj.r_interval);
 						});
-					
+					 console.log(array);
 					}
 				});
 			});//change
