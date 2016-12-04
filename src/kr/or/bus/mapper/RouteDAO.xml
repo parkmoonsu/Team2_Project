@@ -16,6 +16,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getRouteNum" resultType = "kr.or.bus.dto.RouteDTO">
 		select r_num 
 		from route
-
 	</select>
+	
 </mapper>

@@ -128,6 +128,7 @@ select#selectBus, select#selectBus2 {
 						<input type="button" id="newsave2" value="수정좌표저장" class="btn btn-default">
 						<input type="button" id="busLoad" value="버스 보기" class="btn btn-default" style="margin-right: 17px;">
 					
+					
 					<select id="selectBus" style="margin:5px" >
 						<option>원본</option>
 						<option>all</option>
@@ -136,6 +137,7 @@ select#selectBus, select#selectBus2 {
 						<option>9000</option>
 						<option>6501</option>
 					</select>
+					
 					<select id="selectBus2" >
 						<option>수정</option>
 						<option>all</option>
@@ -143,7 +145,13 @@ select#selectBus, select#selectBus2 {
 						<option>702</option>
 						<option>9000</option>
 						<option>6501</option>
-					</select>
+					</select>				
+					
+					<span>
+					<input type="text" id="inputBusStop" placeholder="노선번호를 입력해주세요">
+					<input type="button" id="sendBusStop" value="정류장저장"></span>
+					
+					
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
@@ -644,6 +652,19 @@ select#selectBus, select#selectBus2 {
        	as=0;
       }
       
+      $("#sendBusStop").click(function(){    	
+      	if($("#inputBusStop").val() !=null){		
+      		$.ajax({
+                  url : "routeidSearch.admin",
+                  type : "get",
+                  dataType : "json",
+                  data : {r_num:$("#inputBusStop").val()},
+                  success : function(data) {
+                     console.log("DB저장잘됨?");               	                     	
+                  }        		
+      		});       		     		
+      	}
+  	});   	  
       
       
     });//ready 함수 끝
