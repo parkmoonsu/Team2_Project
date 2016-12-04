@@ -427,7 +427,7 @@ select#selectBus, select#selectBus2 {
        			var copyMarker = new google.maps.Marker({
              		position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),        
                 	map: map,
-                	label : as.toString(),
+                	label : latLng[i].rs_order,
                 	animation: google.maps.Animation.DROP,
                 	draggable : true
           		});    
