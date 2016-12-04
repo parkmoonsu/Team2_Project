@@ -16,6 +16,7 @@
  	1.DB작업 (연결 , Template , Dao 설정)
  	2.UI 구성 (ViewResolver)
  	3.jsonview 추가
+ 	4.스케줄러 추가
  -->                          
 	<bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
@@ -56,7 +57,10 @@
 		<!-- <constructor-arg name="strength" value="20"></constructor-arg> -->
 	</bean>
 
-	
+	<!-- scheduler -->
+	<context:component-scan base-package="ko.or.bus.controller" />
+	<task:scheduler id="jobScheduler" pool-size="10" />
+	<task:annotation-driven scheduler="jobScheduler" />
 	
 </beans>
 
