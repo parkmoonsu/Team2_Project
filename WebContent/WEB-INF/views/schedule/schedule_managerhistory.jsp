@@ -60,7 +60,11 @@
 <!-- jQuery -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-
+<style>
+table, th{
+	text-align: center;
+}
+</style>
 </head>
 
 <body class="nav-md">
@@ -157,7 +161,7 @@
 												<td>${i.bn}</td>
 												<td>${i.an}</td>
 												<c:if test="${i.ko_name=='승인'}">
-													<td><button class="btn btn-success">${i.ko_name}</button></td>
+													<td><button class="btn btn-success" style="width:69px">${i.ko_name}</button></td>
 												</c:if>
 												<c:if test="${i.ko_name=='신청중'}">
 													<td><button class="btn btn-info" id="${i.m_id}n${i.ro_object}" onclick="btnclick('${i.m_id}', '${i.ro_object}')">${i.ko_name}</button></td>

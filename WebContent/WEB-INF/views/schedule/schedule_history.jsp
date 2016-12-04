@@ -60,7 +60,11 @@
 <!-- jQuery -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-
+<style>
+th{
+	text-align: center
+}
+</style>
 </head>
 
 <body class="nav-md">
@@ -131,7 +135,7 @@
 											</span> -->
 										</div>
 									</div>
-									<table class="table table-hover projects">
+									<table class="table table-hover projects" style="text-align: center">
 										<thead>
 											<tr>
 												<th>번호</th>

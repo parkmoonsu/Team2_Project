@@ -65,7 +65,7 @@ table, th{
 	text-align: center;
 }
 ul.pagination li a.active {
-    background-color: #4CAF50;
+    background-color: #1ABB9C;
     color: white;
 }
 
@@ -159,7 +159,7 @@ ul.pagination li a {
 												<td><small>${i.m_name}</small></td>
 												<td><small>${i.j_name}</small></td>
 												<td><small>${i.m_regdate}</small></td>
-												<td style = "text-align:center"> <a href="approveMember.admin?m_id=${i.m_id}"
+												<td style = "text-align:center;"> <a href="approveMember.admin?m_id=${i.m_id}"
 													class="btn btn-success btn-xs"><i class="fa fa-check"></i>
 														승인 </a>
 														
