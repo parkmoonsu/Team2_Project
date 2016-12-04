@@ -44,16 +44,26 @@ public class BusManageController {
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.busInfo(pg);
 		int page = service.pg(pg);
 		int count = service.busCount();
-		int mcount = service.mBus();
-		int ncount = service.nBus();
-		int wcount = service.wBus();
-		int gcount = service.gBus();
+		int acount = service.aBus(); //공항
+		int mcount = service.mBus(); //간선
+		int ncount = service.nBus(); //지선
+		int wcount = service.wBus(); //순환
+		int gcount = service.gBus(); //광역
+		int icount = service.iBus(); //인천
+		int kcount = service.kBus(); //경기
+		int dcount = service.dBus(); //폐지
+		int pcount = service.pBus(); //공용
 		int noroute = service.noRoute();
-		
+		//1:공항, 3:간선, 4:지선, 5:순환, 6:광역, 7:인천, 8:경기, 9:폐지, 0:공용
+		model.addAttribute("a", acount);
 		model.addAttribute("m", mcount);
 		model.addAttribute("n", ncount);
 		model.addAttribute("w", wcount);
 		model.addAttribute("g", gcount);
+		model.addAttribute("i", icount);
+		model.addAttribute("k", kcount);
+		model.addAttribute("d", dcount);
+		model.addAttribute("p", pcount);
 		model.addAttribute("no", noroute);
 		
 		model.addAttribute("pgs", page);

@@ -6,11 +6,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.or.bus.dto.GarageDTO;
+import kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
@@ -40,20 +42,21 @@ public interface ScheduleManageDAO {
 
 	// history
 	public List<RegulOffrJoinDTO> history_select();
-
 	public void history_agree(@Param("m_id") String m_id, @Param("ro_object") String ro_object);
 
 	// timetable
 	public List<SelectDistinctDTO> selectdistinct();
-
 	public String[] selecttime(SelectDistinctDTO selectdistinctdto);
+	
+	//가상스케줄
+	public List<ReguloffJoinMemberJoinBusJoinRouteDTO> ocode_select();
 
 
 	//최증스케줄
-	public List<MemberJoinRegulOffDTO> getmemberjoinreg(String r_num); 
+	public List<MemberJoinBusJoinRouteJoinReguloffDTO> getmemberjoinreg(String r_num); 
 	public List<RouteDTO>getrnum();
-	public List<RouteDTO2> getintervalSL(String r_num);
-
+	public List<RouteDTO2> getIntervalStartLast();
+	
 
 	// 휴무 상태 정보 가져오기
 	public int getRequestNum();
