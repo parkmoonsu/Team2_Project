@@ -9,12 +9,12 @@ import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
-import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+import kr.or.bus.dto.RegulOffrJoinDTO;
+import kr.or.bus.dto.RouteDTO;
+import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.SelectDistinctDTO;
-import kr.or.bus.dto.TimeDTO;
-import kr.or.bus.dto.RouteDTO;
 
 public interface ScheduleManageDAO {
 	// 정기휴무가 정해지지 않은 노선의 사원들
@@ -52,6 +52,7 @@ public interface ScheduleManageDAO {
 	//최증스케줄
 	public List<MemberJoinRegulOffDTO> getmemberjoinreg(String r_num); 
 	public List<RouteDTO>getrnum();
+	public List<RouteDTO2> getintervalSL(String r_num);
 
 
 	// 휴무 상태 정보 가져오기
@@ -68,9 +69,14 @@ public interface ScheduleManageDAO {
 	public int updateFirstRegister(String m_id, String o_code); //승인
 	public int updateFirstRegisterRecord(String m_id); //승인
 	public int refuseFirstRegisterRecord(String m_id); //거절
-	public int updateBtwReqRegr(String m_id, String o_code);//변경 요청자 update reguloffr
-	public int updateBtwReqRego(String m_id, String o_code_1);//변경 요청자 update reguloff
-	public int updateBtwByRegr(String m_id_1,String o_code_1); //변경 대상자 update reguloffr
-	public int updateBtwByRego(String m_id_1,String o_code); //변경 대상자 update reguloff
-
+	public int refuseFirstRegister(String m_id, String o_code); //거절
+	public int refuseSameDelete(String m_id);//거절 if 휴무가 같을때 삭제
+	public int updateBtwReqRegr(String m_id, String o_code);//승인 변경 요청자 update reguloffr
+	public int updateBtwReqRego(String m_id, String o_code_1);//승인 변경 요청자 update reguloff
+	public int updateBtwByRegr(String m_id_1,String o_code_1); //승인 변경 대상자 update reguloffr
+	public int updateBtwByRego(String m_id_1,String o_code); //승인 변경 대상자 update reguloff
+	public int updateBtwReqRegrre(String m_id, String o_code);//거절 변경 요청자 update reguloffr
+	public int updateBtwReqRegore(String m_id, String o_code);//거절 변경 요청자 update reguloff
+	public int updateBtwByRegrre(String m_id_1,String o_code_1); //거절 변경 대상자 update reguloffr
+	public int updateBtwByRegore(String m_id_1,String o_code_1); //거절 변경 대상자 update reguloff
 }
