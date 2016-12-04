@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +34,8 @@ import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.SelectDistinctDTO;
 import kr.or.bus.dto.TimetableDTO;
 
+@Configuration
+@EnableScheduling
 @Service
 public class ScheduleManageService {
 	
@@ -117,11 +122,11 @@ public class ScheduleManageService {
 	목적 : VSCHEDULE에서 이용할 차량번호(B_VEHICLENUM), 노선변호(R_NUM), 휴무코드(O_CODE) 가져오기 
 	*/
 	
-	public List<ReguloffJoinMemberJoinBusJoinRouteDTO> get_ocode(){
+	/*public List<ReguloffJoinMemberJoinBusJoinRouteDTO> get_ocode(){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		List<ReguloffJoinMemberJoinBusJoinRouteDTO> list=dao.ocode_select();
 		return list;
-	}
+	}*/
 	
 	/*
 	제목 : 
@@ -266,7 +271,17 @@ public class ScheduleManageService {
 		return dto2;
 	}
 	
-	
+	/*
+	제목 : 스케줄러 
+	작성자 : 길한종
+	목적 : vschedule의 정보를 매일 0:00:00에 oschedule로 복사하는 스케줄
+	*/
+
+	@Scheduled(cron="0 0 0 * * *")
+	public void copyScheduler(){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		dao.copy_vschedule();
+	}
 
 	//수행할 최종스케줄 _김수현
 	
