@@ -14,7 +14,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>KOSBUS</title>
-	
+
+		    <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/mainCss/css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -137,6 +139,18 @@
 		text-decoration: none;
 		outline: none;
 	}
+	#loading {
+ width: 100%;   
+ height: 100%;   
+ top: 0px;
+ left: 0px;
+ position: fixed;   
+ display: block;   
+ opacity: 0.7;   
+ background-color: #fff;   
+ z-index: 99;   
+ text-align: center; }  
+ 
 	</style>
 	<!-- End demo purposes only -->
 
@@ -149,7 +163,7 @@
 	<![endif]-->
 
 	</head>
-	<body>
+	<body>	
 	<header role="banner" id="fh5co-header">
 			<div class="container">
 				<!-- <div class="row"> -->
@@ -255,7 +269,7 @@
 
 	
 	<!-- jQuery -->
-	<script src="${pageContext.request.contextPath}/mainCss/js/jquery.min.js"></script>
+
 	<!-- jQuery Easing -->
 	<script src="${pageContext.request.contextPath}/mainCss/js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
@@ -276,6 +290,8 @@
 <script type="text/javascript">
 
 $(function() {
+
+	
 	$("#log").click(function() {
 		location.href="login.htm"
 	});
@@ -288,9 +304,6 @@ $(function() {
 });
 
 </script>
-
-
-
 
 	</body>
 </html>

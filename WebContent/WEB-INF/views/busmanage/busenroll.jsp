@@ -22,6 +22,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
+<script>
+
+
+
+</script>
 <title>버스 관리</title>
 
 <!-- Bootstrap -->
@@ -83,6 +90,7 @@ ul.pagination li a {
 </head>
 
 <body class="nav-md">
+
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-xs-12  col-md-3 left_col">

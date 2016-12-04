@@ -12,7 +12,10 @@
 
     <title>KOSBUS</title>
 	    <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+	    
+	    <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
+   
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -271,6 +274,9 @@
 
     <script>
       $(function() {
+    			  $.oPageLoader(); 
+
+    	  
         Morris.Bar({
           element: 'graph_bar',
           data: [

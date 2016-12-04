@@ -21,7 +21,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>버스 관리</title>
-
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 <!-- Bootstrap -->
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"

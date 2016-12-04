@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8">
@@ -12,13 +13,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<script
-	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-
 <title>KOSBUS</title>
 
 
-
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 
 <!-- Bootstrap -->
 <link
@@ -52,11 +51,13 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-
+	
 
 </head>
 
+   
 <body class="nav-md">
+	<img  src="${pageContext.request.contextPath}/images/loading.gif">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -452,7 +453,10 @@
 	<script
 		src="${pageContext.request.contextPath}/vendors/morris.js/morris.min.js"></script>
 
+
 	<script type="text/javascript">
+	
+	
 	// moris 시작
 	Morris.Bar({ //// 엑박 무시하세요~
 	element : 'graph_bar',
@@ -725,7 +729,8 @@
 		    // echart 끝  
 	
 	
-		$(function(){
+		$(function() {	
+			  $.oPageLoader();
 			$.ajax({
 				url : "route.htm",
 				success : function(data){
