@@ -111,10 +111,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 최종예상스케줄에 관련된 데이터 불러오기 -->
 
-	<select id="getmemberjoinreg" resultType="kr.or.bus.dto.MemberJoinRegulOffrDTO">
-		select mem.m_id, mem.m_name, reg.o_code
+	<select id="getmemberjoinreg" resultType="kr.or.bus.dto.MemberJoinRegulOffDTO">
+
+		select mem.m_id, mem.m_name, reg.o_code,bus.r_num
 		from member mem join reguloff reg on mem.m_id=reg.m_id
+    	join bus bus on bus.b_vehiclenum=mem.b_vehiclenum
+    	where bus.r_num = #{r_num}
 	</select>
+
 	
 	<select id="getrnum" resultType="kr.or.bus.dto.RouteDTO">
 	select r_num from route

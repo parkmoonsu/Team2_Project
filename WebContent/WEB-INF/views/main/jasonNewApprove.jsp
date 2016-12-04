@@ -1,10 +1,4 @@
-<!-- 
-	@FileName : joinapprove.jsp
-	@Project	: KosBus
-	@Date	: 2016. 11.21
-	@Author	: 박문수
-	@Discription : (관리자)회원가입승인 페이지 View단
- -->
+
 
 
 
@@ -72,7 +66,7 @@ table, th{
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-xs-3 col-md-3 left_col">
-				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+				<jsp:include page="/sidebar/sidebar2.jsp"></jsp:include>
 			</div>
 
 			<!--상단 menu -->
@@ -86,9 +80,17 @@ table, th{
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>회원가입승인</small>
+								<small>내게온 쪽지</small>
 							</h3>
 						</div>
+						<div class="title-right" align="right">
+					<c:set value="${list}" var="d"/>
+					<c:if test="${d != '[]'}">
+						<a href="Okay.member?m_id=${d[0].m_id}"
+					    	class="btn btn-success btn-xs"><i class="fa fa-check"></i>
+						        전체 삭제 </a>
+					</c:if>
+					</div>
 					</div>
 
 					<div class="clearfix"></div>
@@ -96,17 +98,7 @@ table, th{
 					<div class="row">
 						<div class="col-xs-12 col-md-12">
 							<div class="x_panel">
-								<div class="x_title">
-									<nav class="navbar navbar-default">
-										<div class="container-fluid">
-											<ul class="nav navbar-nav">
-												<li><a href="membermanage.admin">회원정보</a></li>
-												<li><a href="joinapprove.admin"><strong>회원가입승인</strong></a></li>
-												<li><a href="#">스케줄관리</a></li>
-											</ul>
-										</div>
-									</nav>
-								</div>
+								
 								<div class="x_content">
 
 
@@ -124,36 +116,22 @@ table, th{
 									<table class="table table-hover projects">
 										<thead>
 											<tr>
-												<th style="width:60px">번호</th>
-												<th style="width:110px">ID</th>
-												<th style="width:90px">이름</th>
-												<th style="width:90px">직책</th>
-												<th style="width:120px">승인요청일</th>
-												<th style="width: 90px"></th>
+												<th width="20%">아이디</th>
+												<th>내용</th>
 											</tr>
 										</thead>
-										<tbody>
-											<c:set value="${list}" var="d"/>
+										<tbody>								
 											<c:if test ="${d == '[]' }">
 											<tr>
-												<td colspan = '6' align = "center">가입신청 회원 없음</td>
+												<td colspan = '6' align = "center">쪽지없음</td>
 											</tr>
 											</c:if>
 											<c:forEach var="i" items="${d}">
 											<c:choose>
 											<c:when test="${i != null}">
-											
 											<tr>
-												<td>${i.r}</td>
-												<td><a>${i.m_id}</a></td>
-												<td><small>${i.m_name}</small></td>
-												<td><small>${i.j_name}</small></td>
-												<td><small>${i.m_regdate}</small></td>
-												<td style = "text-align:center"> <a href="approveMember.admin?m_id=${i.m_id}"
-													class="btn btn-success btn-xs"><i class="fa fa-check"></i>
-														승인 </a>
-														
-												</td>
+												<td><small>${i.m_id}</small></td>
+												<td><small>${i.ro_reqdate}날 신청하신 변경이 완료되었습니다.</small></td>
 											</tr>
 											</c:when>
 											</c:choose>
@@ -177,7 +155,7 @@ table, th{
 									<div style="text-align: center">
 										<ul class="pagination">
 											<c:if test="${pgc > 1}">
-												<li><a href="joinapprove.admin?pg=${pgc-1}">Previous</a></li>
+												<li><a href="joinapprove.member?m_id=${LoginUser}&pg=${pgc-1}">Previous</a></li>
 											</c:if>
 
 											<c:forEach begin="1" end="${pagecount}" var="i">
@@ -185,7 +163,7 @@ table, th{
 													<li class="active"><a href="#">${i}</a></li>
 												</c:if>
 												<c:if test="${i!=pgc}">
-													<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
+													<li><a href="joinapprove.member?m_id=${LoginUser}&pg=${i}">${i}</a></li>
 												</c:if>
 											</c:forEach>
 											
@@ -195,7 +173,7 @@ table, th{
 											</c:forEach> --%>
 
 											<c:if test="${pgc < mc/10 }">
-												<li><a href="joinapprove.admin?pg=${pgc+1}">Next</a></li>
+												<li><a href="joinapprove.member?m_id=${LoginUser}&pg=${pgc+1}">Next</a></li>
 											</c:if>
 										</ul>
 									</div>

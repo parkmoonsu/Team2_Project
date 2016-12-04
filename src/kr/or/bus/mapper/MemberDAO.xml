@@ -105,6 +105,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	  srow = 1 + (page - 1) * 10;
  		  erow = 10 + (page - 1) * 10;  
 -->
+	<update id="Okay">
+		update REGULOFFR set alarm='o' where m_id=#{param1}
+	</update>
+
+
 	<select id="memberList" resultType = "kr.or.bus.dto.MemberJoinMDetailDTO" parameterType = "int">
 		select *
 		from (select ROWNUM r , N.*
@@ -142,10 +147,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
+	<select id="alarm" resultType="kr.or.bus.dto.reguloffrDTO2">
+		  select *
+		from (select ROWNUM r , N.*
+        	  from (select * 
+        	  		from reguloffr 
+        	  		where m_id = #{param2}
+                and alarm is null) N) 
+		where r between 1 + (#{param1} - 1) * 10  and 10 + (#{param1} - 1) * 10
+	
+	</select>
+	
 	<select id="memberNCount" resultType = "int">
 		select count(*)
 		from member me natural join mdetail md natural join job
 		where m_check = 'N'
+	</select>
+	
+	<select id="regulCount" resultType = "int" parameterType="String">
+		select count(*) 
+		from reguloffr 
+		where alarm is null and m_id=#{m_id}
 	</select>
 	
 	<update id="updateCheck" parameterType = "String">
@@ -214,10 +236,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m_id = #{m_id}
 	</select>
 	
-	<select id="getregul" resultType="int" parameterType= "String">
-	select count(*) 
+	<select id="getregul" resultType="int">
+	select count(m_id) 
 	from reguloffr 
-	where ko_code='601' and m_id=#{m_id}
+	where alarm is null and m_id=#{m_id}
 	
 	</select>
 	

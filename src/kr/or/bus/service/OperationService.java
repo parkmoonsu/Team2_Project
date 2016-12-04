@@ -18,8 +18,10 @@ import org.springframework.stereotype.Service;
 
 import kr.or.bus.dao.BusDAO;
 import kr.or.bus.dao.RnumcommuteDAO;
+import kr.or.bus.dao.RouteDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
+import kr.or.bus.dto.RouteDTO;
 
 @Service
 public class OperationService {
@@ -42,7 +44,7 @@ public class OperationService {
 			String r_num = list.get(i).getR_num();
 
 			String[] tdate = dao.getStat(m_name); // 날짜
-			String[] stat = dao.getShow(m_name, r_num); // 상태
+			String[] stat = dao.getShow(m_name); // 상태
 
 			RnumcommuteDTO dto = new RnumcommuteDTO();
 
@@ -55,8 +57,16 @@ public class OperationService {
 
 		return list2;
 	}
+	//전체 노선
+	public List<RouteDTO> getRout(){
+		
+		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
+		List<RouteDTO> rdto = dao.route();
+		return rdto;
+		
+	}
 	
-	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getselect(String r_num){
+/*	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getselect(String r_num){
 		
 		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);
 		
@@ -64,6 +74,6 @@ public class OperationService {
 		
 		return list;
 		
-	}
+	}*/
 
 }

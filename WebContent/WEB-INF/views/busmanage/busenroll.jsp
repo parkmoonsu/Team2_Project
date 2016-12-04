@@ -64,6 +64,10 @@
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
 <style>
+th{
+	text-align: center;
+}
+
 ul.pagination li a.active {
     background-color: #4CAF50;
     color: white;
@@ -147,16 +151,16 @@ ul.pagination li a {
 											</span>
 										</div>
 									</div> -->
-									<table class="table table-hover projects">
+									<table class="table table-hover projects" style="text-align: center">
 										<thead>
 											<tr>
-												<th>번호</th>
-												<th>차량번호</th>
-												<th>노선번호</th>
-												<th>기사</th>
-												<th>차고지 이름</th>
-												<th>상태</th>
-												<th style="width: 20%; text-align: center;"><i
+												<th style="width: 50px">번호</th>
+												<th style="width: 100px">차량번호</th>
+												<th style="width: 110px">노선번호</th>
+												<th style="width: 90px">기사</th>
+												<th style="width: 180px">차고지 이름</th>
+												<th style="width: 60px">상태</th>
+												<th style="width: 100px; text-align: center;"><i
 													class="fa fa-trash" style="margin-bottom: 2px"></i> <input
 													type="checkbox" class="form" id = "checkall"></th>
 											</tr>

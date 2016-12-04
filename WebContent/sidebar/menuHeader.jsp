@@ -115,7 +115,7 @@
 				$("#menu2").empty();
 				if(data.dto > 0){
 					$("#bell2").append(data.dto);
-					$("#menu2").append("<li><a href = 'joinapprove.member'><span class = 'message'><i class = 'fa fa-group'></i>&nbsp;&nbsp;휴무 변경 승인 이 <font color = 'green'>"+data.dto + "</font>건 있습니다.</span></a></li>");
+					$("#menu2").append("<li><a href = 'joinapprove.member?m_id=${LoginUser}'><span class = 'message'><i class = 'fa fa-group'></i>&nbsp;&nbsp;휴무 변경 승인 이 <font color = 'green'>"+data.dto + "</font>건 있습니다.</span></a></li>");
 				
 				}
 			}

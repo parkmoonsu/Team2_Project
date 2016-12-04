@@ -32,6 +32,7 @@ import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.dto.MemberJoinMDetailRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrDTO;
 import kr.or.bus.dto.MemberJoinResRecordDTO;
+import kr.or.bus.dto.reguloffrDTO2;
 
 @Service
 public class MemberManageService {
@@ -123,9 +124,32 @@ private JavaMailSender mailSender;
 		System.out.println(list);
 		return list;
 	}
+	
+	public List<reguloffrDTO2> regul(String pg,String m_id){
+		System.out.println("회원가입승인 페이지");
+		System.out.println("파라미터로 넘어오는 pg : " + pg);
+		int page = 1;
+		
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		System.out.println("page : " + page);
+		
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		List<reguloffrDTO2> list = dao.alarm(page,m_id);
+		System.out.println(list);
+		return list;
+	}
 	public int memberNCount(){
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		int size = dao.memberNCount();
+		
+		return size;
+	}
+	
+	public int regulCount(String m_id){
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		int size = dao.regulCount(m_id);
 		
 		return size;
 	}
@@ -141,9 +165,7 @@ private JavaMailSender mailSender;
 		System.out.println("service 탓니?");
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		MemberJoinMDetailRegulOffDTO dto = dao.getMemberDetailRegulOff(m_id);
-		System.out.println(dto+"확인확인");
-		//System.out.println("값 확인" +dto.getO_date().toString() );
-		
+				
 		return dto;
 	}
 	
@@ -210,5 +232,11 @@ private JavaMailSender mailSender;
 
 			
 			return dto;
+		}
+		public void Okay(String m_id){
+			System.out.println("oaky");
+			MemberDAO dao=sqlsession.getMapper(MemberDAO.class);
+			dao.Okay(m_id);
+			System.out.println("아노료?");
 		}
 }
