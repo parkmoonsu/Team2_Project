@@ -73,59 +73,61 @@
                         </div>
                       </div>
                       <h3>${dto.m_name}</h3>
-
+						<br>
                       <ul class="list-unstyled user_data">
                       	<li>
-                      		<i class="fa fa-openid user-profile-icon"></i> ${dto.m_id}
+                      		<i class="fa fa-openid user-profile-icon"></i>&nbsp;&nbsp;${dto.m_id}
                       	</li>
                         <li>
-                          <i class="fa fa-briefcase user-profile-icon"></i> ${dto.j_name}
+                          <i class="fa fa-briefcase user-profile-icon"></i>&nbsp;&nbsp;${dto.j_name}
                         </li>
 						<li>
 							<c:choose>
 								<c:when test="${dto.m_gender == 'male'}">
-									 <i class="fa fa-male user-profile-icon"></i> 남성
+									 <i class="fa fa-male user-profile-icon"></i>&nbsp;남성
 								</c:when>
 								<c:otherwise>
-									<i class="fa fa-female user-profile-icon"></i> 여성
+									<i class="fa fa-female user-profile-icon"></i>&nbsp;&nbsp;&nbsp;여성
 								</c:otherwise>
 							</c:choose>
 						</li>
                         <li class="m-top-xs">
-                          <i class="fa fa-external-link user-profile-icon"></i> ${dto.m_email}
+                          <i class="fa fa-external-link user-profile-icon"></i>&nbsp;&nbsp;${dto.m_email}
                         </li>
                         <li>
-                        	<i class="fa fa-phone user-profile-icon"></i> ${dto.m_phone}
+                        	<i class="fa fa-phone user-profile-icon"></i>&nbsp;&nbsp;&nbsp;${dto.m_phone}
                         </li> 
                         <li>
-                        	<i class="fa fa-birthday-cake user-profile-icon"></i> ${dto.m_birth}
+                        	<i class="fa fa-birthday-cake user-profile-icon"></i>&nbsp;&nbsp;${dto.m_birth}
                         </li>
                         <li>
-                        	<i class="fa fa-map-marker user-profile-icon"></i> ${dto.m_addr} ${dto.m_daddr}
+                        	<i class="fa fa-map-marker user-profile-icon"></i>&nbsp;&nbsp;&nbsp;&nbsp;${dto.m_addr}
+                        	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.m_daddr}
                         </li>
                         <li>
-                        	<i class="fa fa-calendar user-profile-icon"></i> 연차 ${dto.m_annual}일
+                        	<i class="fa fa-calendar user-profile-icon"></i>&nbsp;&nbsp;연차 ${dto.m_annual}일
                         </li>
                       </ul>
 					
-					<a class="btn btn-success" id="pass" style = "margin-top: 10px"><i class="fa fa-edit m-right-xs"></i>정보수정</a> 
-					<a class="btn btn-success" id="watch" style = "margin-top: 10px"><i class = "fa fa-book m_right-xs"></i>이력보기</a>
+					<a class="btn btn-success" id="pass" style = "margin-top: 10px;border: 0"><i class="fa fa-edit m-right-xs"></i>&nbsp;정보수정</a> 
+					<a class="btn btn-success" id="watch" style = "margin-top: 10px;background: #286090; border: 0"><i class = "fa fa-book m_right-xs"></i>&nbsp;이력보기</a>
                       
                       <br />
 
                       
 
                     </div>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-
-                      <div class="profile_title">
-                        <div class="col-md-6">
-                          <h2>출결 현황</h2>
+                    <div class="col-md-1 col-sm-1 col-xs-1"></div>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+					<br>
+<!--                       <div class="profile_title" style="text-align: right"> -->
+                        <div>
+                          <h3 style="text-align: center">출결 현황</h3>
                         </div>
-                       
-                      </div>
+           				<!-- </div>  -->           
+                      
                       <!-- start of user-activity-graph -->
-                      <div id="graph_bar" style="width:100%; height:280px;"></div>
+                      <div id="graph_bar" style="width:100%; height:290px;"></div>
                       <!-- end of user-activity-graph -->
 						
                      

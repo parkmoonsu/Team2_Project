@@ -71,7 +71,9 @@ public class CommuteService {
 	}
 		
 	public List<CommuteJoinCstartJoinCendDTO> getSelect(String pg, String m_id){
-	
+		System.out.println("회원 정보 페이지");
+		System.out.println("파라미터로 넘어오는 pg : " + pg);
+
 		int page = 1;
 		
 		if(pg != null){
@@ -93,6 +95,16 @@ public class CommuteService {
 		}
 		return page;
 	}
+	
+	public int count(String m_id){
+		
+		CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
+		int size = dao.count(m_id);
+		
+		return size;
+	}
+	
+	
 	
 	public int csCheck(String m_id){
 		Calendar calendar = Calendar.getInstance();
