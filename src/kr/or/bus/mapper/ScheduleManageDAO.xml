@@ -121,7 +121,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	
 	<select id="getrnum" resultType="kr.or.bus.dto.RouteDTO">
-	select r_num from route
+	select r_num from route 
+	</select>
+	
+	<select id="getintervalSL" resultType="kr.or.bus.dto.RouteDTO">
+	select r_start, r_last, r_interval
+	from route 
+	where r_num = #{r_num}
 	</select>
 
 	<!-- 휴무 요청 상태 관리 -->
