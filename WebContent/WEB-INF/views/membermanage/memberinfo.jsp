@@ -62,6 +62,7 @@
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
+
 <style type="text/css">
 th {
 	text-align: center;
@@ -196,7 +197,7 @@ ul.pagination li a {
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
 											<input type="text" class="form-control"
-												placeholder="Search for..." id="search"> <span
+												placeholder="Search for..." id="search"><span
 												class="input-group-btn">
 												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
 											</span>

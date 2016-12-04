@@ -25,5 +25,4 @@ public interface RnumcommuteDAO {
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getNdselect();
 	
 	//
-	//public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getselect(String r_num);
 }
