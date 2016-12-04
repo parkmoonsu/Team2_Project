@@ -878,7 +878,7 @@
                     	console.log("읽어옴?");
                       	//console.log(data2);                              	                                                                  	                       
                       	//노선 전체로드 현재 안됨...
-                      	if(data2.length == 2){
+                      	if(data2.length == 4){
                      	   
                       		var hell =new Array();
                  			var route5623;
@@ -892,8 +892,8 @@
                      		for(var j=0;j<data2.length;j++){
                      			route5623 = data2[0].msgBody;
                      			route702 = data2[1].msgBody;
-                     			///route9000 = data2[2].msgBody;
-                     			//route6501 = data2[3].msgBody;
+                     			route9000 = data2[2].msgBody;
+                     			route6501 = data2[3].msgBody;
                      		}
                      		//console.log(route5623);
                      		
@@ -914,22 +914,22 @@
                   			loadVector702(hell);
                   			
                   			
-                  			//hell=[];
-                  			/* for(var j=0;j<route9000.length;j+=3){                          		
+                  			hell=[];
+                  			for(var j=0;j<route9000.length;j+=3){                          		
                      			var f=route9000[j].gpsY;
                          		var d=route9000[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
                      		}
-                  			loadVector9000(hell); */
+                  			loadVector9000(hell);
                   			
                   			
-                  			//hell=[];
-                  			/* for(var j=0;j<route6501.length;j+=20){
+                  			hell=[];
+                  			for(var j=0;j<route6501.length;j+=20){
                      			var f=route6501[j].gpsY;
                          		var d=route6501[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
                      		}
-                  			loadVector6501(hell); */
+                  			loadVector6501(hell);
                   			hell=[];
                   			
                         }else{
@@ -956,14 +956,14 @@
                        //console.log(data);
                        //console.log(data.length);                                                                   	                       
                        
-                      	if(data.length == 2){
+                      	if(data.length == 4){
                       		console.log(data);
                       		console.log("2개 노선");
                     		//console.log(data.length);
                        		originalMarkerMake(data[0].msgBody, map);
                        		originalMarkerMake(data[1].msgBody, map);
-                       		//originalMarkerMake(data[2].msgBody, map);
-                       		//originalMarkerMake(data[3].msgBody, map);
+                       		originalMarkerMake(data[2].msgBody, map);
+                       		originalMarkerMake(data[3].msgBody, map);
                        	}else{
                     	   console.log("1개 노선");
                     	   console.log(data);
