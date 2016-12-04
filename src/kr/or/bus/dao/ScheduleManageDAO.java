@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.or.bus.dto.GarageDTO;
+import kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
@@ -50,10 +51,10 @@ public interface ScheduleManageDAO {
 
 
 	//최증스케줄
-	public List<MemberJoinRegulOffDTO> getmemberjoinreg(String r_num); 
+	public List<MemberJoinBusJoinRouteJoinReguloffDTO> getmemberjoinreg(String r_num); 
 	public List<RouteDTO>getrnum();
-	public List<RouteDTO2> getintervalSL(String r_num);
-
+	public List<RouteDTO2> getIntervalStartLast();
+	
 
 	// 휴무 상태 정보 가져오기
 	public int getRequestNum();
