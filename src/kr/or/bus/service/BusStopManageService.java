@@ -555,7 +555,9 @@ public class BusStopManageService {
 	public void routeidInfoSearch(String r_num,RouteDTO dto, StopDTO stopdto, RouteStopDTO routestopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		System.out.println(r_num);
 		JSONObject jsonmaps = null;
-		
+		PrintWriter out = null;
+		response.setCharacterEncoding("UTF-8");
+		out = response.getWriter();
 		//RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
 		//System.out.println(dao.routeidSearch(r_num));		
 		//dto = dao.routeidSearch(r_num);		
@@ -621,10 +623,12 @@ public class BusStopManageService {
         }
         
         if(result == 1){
-        	System.out.println("route 입력성공");
-        	//busStopSearch(dto, stopdto, routestopdto, request, response);
+        	System.out.println("route 입력성공");        	
+        	busStopSearch(dto, stopdto, routestopdto, request, response);
+        	out.print("저장 성공!");
         }else{
         	System.out.println("route 입력 실패");
+        	out.print("중복 노선번호 입니다!");
         }
 	}
 	

@@ -657,10 +657,12 @@ select#selectBus, select#selectBus2 {
       		$.ajax({
                   url : "routeidSearch.admin",
                   type : "get",
-                  dataType : "json",
+                  dataType : "text",
                   data : {r_num:$("#inputBusStop").val()},
                   success : function(data) {
-                     console.log("DB저장잘됨?");               	                     	
+                     console.log("DB저장잘됨?");
+                     console.log(data);
+                     alert(data);
                   }        		
       		});       		     		
       	}
