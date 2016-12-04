@@ -53,10 +53,10 @@ public class MainService {
 	
 	
 	//모든 유저 구하기
-	public List<MemberDTO> selectall(String search){
+	public List<MemberDTO> selectall(String search,String search2){
 		MemberDAO dao =sqlsession.getMapper(MemberDAO.class);
 		
-		List<MemberDTO> dto=dao.SelectAll(search);
+		List<MemberDTO> dto=dao.SelectAll(search,search2);
 		
 		return dto;
 	}

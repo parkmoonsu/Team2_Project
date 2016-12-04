@@ -62,7 +62,6 @@
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
-
 <style type="text/css">
 th {
 	text-align: center;
@@ -190,20 +189,27 @@ ul.pagination li a {
 									</nav>
 								</div>
 								<div class="x_content table-responsive">
-
+					
+							<c:set value="${list}" var="d" />
 
 									<!-- start project list -->
+									<select id="sel">
+										<option></option>
+									<c:forEach var="f" items="${d}">
+										<option value="${f.r_num}">${f.r_num}</option>
+									</c:forEach>
+									</select>
 									<div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
 											<input type="text" class="form-control"
-												placeholder="Search for..." id="search"><span
+												placeholder="Search for..." id="search"> <span
 												class="input-group-btn">
 												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
 											</span>
 										</div>
 									</div>
-
+									<div id="another">
 									<table class="table table-hover  projects"
 										style="text-align: center;">
 										<thead>
@@ -217,7 +223,7 @@ ul.pagination li a {
 												<th style="width: 100px"></th>
 											</tr>
 										</thead>
-										<c:set value="${list}" var="d" />
+									
 
 										<c:forEach var="i" items="${d}">
 											<tr>
@@ -238,11 +244,8 @@ ul.pagination li a {
 											</tr>
 										</c:forEach>
 										</tbody>
-
-
-
-
 									</table>
+									</div>
 									<!-- end project list -->
 
 									<!-- 요기서부터 페이징처리 -->
@@ -257,7 +260,7 @@ ul.pagination li a {
 										</c:otherwise>
 									</c:choose>
 
-									<div style="text-align: center">
+									<div style="text-align: center" id="coco">
 										<ul class="pagination">
 
 											<c:if test="${pgc > 1}">
@@ -440,31 +443,6 @@ ul.pagination li a {
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$('#search').click(function() {
-				$.ajax({
-					url : "SearchMember.htm",
-					type : "get",
-					success : function(data) {
-						console.log(data);
-
-					}
-				});
-			});
-
-			$('#btnsearch').click(function() {
-				console.log($('#search').val());
-				var param = $('#search').val();
-				$.ajax({
-					url : "searching.htm",
-					type : "post",
-					data : {
-						"param" : param
-					},
-					success : function(data) {
-						console.log(data);
-					}
-				});
-			});
 
 			$('#exampleModal').on(
 					'show.bs.modal',
@@ -507,6 +485,49 @@ ul.pagination li a {
 				});
 			});
 
+		$('#btnsearch').click(function() {
+			$("#another").empty();
+			$("#coco").empty();
+			var param = $('#search').val();
+			
+			if($('#sel').val()!=""){
+			var param2=$('#sel').val();
+			$.ajax({
+				data : {
+					"search" : param,
+					"search2": param2
+				},
+				url : "SearchMember.htm",
+				type : "get",
+				success : function(data) {
+					if(data ==null){
+						$("#another").append("<label>검색결과가 없습니다.</label>")
+					}else{
+					console.log("날보고있다면");
+					console.log(data);
+					$("#another").append(data);
+					}
+				}
+			});
+			}else{
+				$.ajax({
+					data : {"search" : param},
+					url : "SearchMember.htm",
+					type : "get",
+					success : function(data) {
+						if(data ==null){
+							$("#another").append("<label>검색결과가 없습니다.</label>")
+						}else{
+						console.log("날보고있다면");
+						console.log(data);
+						$("#another").append(data);
+						}
+					}
+				});
+			}
+		}); 
+			
+			
 			$('#cancelbutton').click(function() {
 				var param = $('#hvalue').val();
 				console.log(param);
@@ -646,7 +667,7 @@ ul.pagination li a {
 			$('#hvalue2').val(m_name); 
 			$("#myModalLabel2").empty();
 			$('#myModalLabel2').html(m_name + '님을 삭제하시겠습니까?'); 
-		}hhhh
+		}
 	
 		
 	</script>

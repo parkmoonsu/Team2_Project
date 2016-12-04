@@ -16,14 +16,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by com.c_date
 	</select>
 
+
+	<!-- 노선 선택시 출결현황 상태 -->
+	<select id="getShow2" resultType="kr.or.bus.dto.RnumcommuteDTO2">
+		select nvl(cs.cs_stat,' ')
+		from member mem left outer join commute com on
+		mem.m_id=com.m_id
+		join bus on bus.B_vehiclenum = mem.B_VEHICLENUM
+		left outer join cstart cs on cs.cs_code=com.cs_code
+		where mem.m_name=#{param1} and bus.r_num=#{param2}
+		order by com.c_date
+	</select>
+	
 	<!-- 노선 별 출결상황에서 이름,날짜 -->
 	<select id="getNdselect"
 		resultType="kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
 		select distinct mem.m_name
 		from member mem join bus on mem.b_vehiclenum=bus.b_vehiclenum
 		left outer join commute com on com.m_id=mem.m_id
+		
+	</select>
 	
-
+	<select id="getMember" resultType="kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select distinct mem.m_name
+		from member mem join bus on mem.b_vehiclenum=bus.b_vehiclenum
+		left outer join commute com on com.m_id=mem.m_id
+		where r_num=#{r_num}
 	</select>
 
 	<!-- 노선별 출결현황 날짜 -->
@@ -37,14 +55,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by com.c_date
 	</select>
 
-	<select id="getselect" resultType="kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+
+	<!-- 노선별 출결현황 날짜 -->
+	<select id="getStat2" resultType="kr.or.bus.dto.RnumcommuteDTO2">
+		select nvl(com.c_date,' ')
+		from member mem left outer join commute com on
+		mem.m_id=com.m_id
+		join bus on bus.B_vehiclenum = mem.B_VEHICLENUM
+		left outer join cstart cs on cs.cs_code=com.cs_code
+		where mem.m_name=#{param1} and bus.r_num=#{param2}
+		order by com.c_date
+	</select>
+	
+<!-- 	<select id="getselect" resultType="kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
 		select cs.cs_stat
 		from member mem left outer join commute com on
 		mem.m_id=com.m_id
 		join bus on bus.B_vehiclenum = mem.B_VEHICLENUM
 		left outer join cstart cs on cs.cs_code=com.cs_code
 		where r_num=#{r_num}
-		order by com.c_date
-	</select>
+		order by com.c_date 
+	</select>-->
 
 </mapper>

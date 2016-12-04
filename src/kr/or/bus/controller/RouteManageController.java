@@ -32,4 +32,5 @@ public class RouteManageController {
 	public void routeEditRead(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		routeManageSerivce.routelocationEditRead(request , response);
 	}
+	
 }
