@@ -17,6 +17,15 @@ public class MemberJoinMDetailDTO {
 	private String m_pw;
 	private String m_name;
 	
+	private String r_num;
+	public String getR_num() {
+		return r_num;
+	}
+
+	public void setR_num(String r_num) {
+		this.r_num = r_num;
+	}
+
 	private String m_addr;
 	private String m_daddr;
 	private String m_phone;

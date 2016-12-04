@@ -189,9 +189,16 @@ ul.pagination li a {
 									</nav>
 								</div>
 								<div class="x_content table-responsive">
-
+					
+							<c:set value="${list}" var="d" />
 
 									<!-- start project list -->
+									<select id="sel">
+										<option></option>
+									<c:forEach var="f" items="${d}">
+										<option>${f.r_num}</option>
+									</c:forEach>
+									</select>
 									<div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
@@ -202,7 +209,7 @@ ul.pagination li a {
 											</span>
 										</div>
 									</div>
-
+									<div id="another">
 									<table class="table table-hover  projects"
 										style="text-align: center;">
 										<thead>
@@ -216,7 +223,7 @@ ul.pagination li a {
 												<th style="width: 100px"></th>
 											</tr>
 										</thead>
-										<c:set value="${list}" var="d" />
+									
 
 										<c:forEach var="i" items="${d}">
 											<tr>
@@ -237,11 +244,8 @@ ul.pagination li a {
 											</tr>
 										</c:forEach>
 										</tbody>
-
-
-
-
 									</table>
+									</div>
 									<!-- end project list -->
 
 									<!-- 요기서부터 페이징처리 -->
@@ -439,31 +443,6 @@ ul.pagination li a {
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$('#search').click(function() {
-				$.ajax({
-					url : "SearchMember.htm",
-					type : "get",
-					success : function(data) {
-						console.log(data);
-
-					}
-				});
-			});
-
-			$('#btnsearch').click(function() {
-				console.log($('#search').val());
-				var param = $('#search').val();
-				$.ajax({
-					url : "searching.htm",
-					type : "post",
-					data : {
-						"param" : param
-					},
-					success : function(data) {
-						console.log(data);
-					}
-				});
-			});
 
 			$('#exampleModal').on(
 					'show.bs.modal',
@@ -506,6 +485,44 @@ ul.pagination li a {
 				});
 			});
 
+				$('#btnsearch').click(function() {
+			$("#another").empty();
+			var param = $('#search').val();
+			
+			if($('#sel').val()!=""){
+			var param2=$('#sel').val();
+			$.ajax({
+				data : {
+					"search" : param,
+					"search2": parma2
+				},
+				url : "SearchMember.htm",
+				type : "get",
+				success : function(data) {
+					console.log("날보고있다면")
+					console.log(data);
+					$("#another").load("${pageContext.request.contextPath}/membermanage/SearchMemberInfo.jsp",data);
+
+				}
+			});
+			}else{
+				$.ajax({
+					data : {
+						"search" : param
+					},
+					url : "SearchMember.htm",
+					type : "get",
+					success : function(data) {
+						console.log("정답을알려줘");
+						console.log(data.dto);
+						$("#another").load("${pageContext.request.contextPath}/membermanage/SearchMemberInfo.jsp",{"data.dto" :data.dto.m_id});
+
+					}
+				});
+			}
+		}); 
+			
+			
 			$('#cancelbutton').click(function() {
 				var param = $('#hvalue').val();
 				console.log(param);
@@ -645,7 +662,7 @@ ul.pagination li a {
 			$('#hvalue2').val(m_name); 
 			$("#myModalLabel2").empty();
 			$('#myModalLabel2').html(m_name + '님을 삭제하시겠습니까?'); 
-		}hhhh
+		}
 	
 		
 	</script>
