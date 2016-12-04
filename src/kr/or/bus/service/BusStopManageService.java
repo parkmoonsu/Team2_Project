@@ -239,9 +239,9 @@ public class BusStopManageService {
 			RouteDAO dao = null;
 			
 			if(r_num.equals("all")){				
-            	JSONObject obs1 = busMultiRouteRead("5623" ,dto, request, response);
-            	JSONObject obs2 = busMultiRouteRead("6702" ,dto, request, response);
-            	//JSONObject obs3 = busMultiRouteRead("9000" ,request, response);
+            	JSONObject obs1 = busMultiRouteRead("5623" , dto, request, response);
+            	JSONObject obs2 = busMultiRouteRead("6702" , dto, request, response);
+            	JSONObject obs3 = busMultiRouteRead("3500포천", dto, request, response);
             	//JSONObject obs4 = busMultiRouteRead("6501",request, response);
             	
             	ArrayList<JSONObject> obss = new ArrayList<JSONObject>();
@@ -306,8 +306,8 @@ public class BusStopManageService {
 			}else if(r_num.equals("6501")){
 				dto = dao.routeidSearch("6501");
 				id = dto.getR_id();
-			}else if(r_num.equals("9000")){
-				dto = dao.routeidSearch("9000");
+			}else if(r_num.equals("3500포천")){
+				dto = dao.routeidSearch("3500포천");
 				id = dto.getR_id();		
 			}
 			
@@ -578,7 +578,8 @@ public class BusStopManageService {
 			busstoplist.addAll(0, busStopRoadAllSearch("5623", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("6702", dto, busstopdto, request, response);
 			busstoplist.addAll(1, busStopRoadAllSearch("6702", dto, busstopdto, request, response));
-			//busStopRoadAllSearch("9000", dto, busstopdto, request, response);
+			//busStopRoadAllSearch("3500포천", dto, busstopdto, request, response);
+			busstoplist.addAll(2, busStopRoadAllSearch("3500포천", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("6501", dto, busstopdto, request, response);
 			jsonmaps = JSONArray.fromObject(busstoplist);
 			out.print(jsonmaps);
@@ -654,8 +655,8 @@ public class BusStopManageService {
 	    
 	    int jsons =  jsonarray.size();
 	        
-	    int j=0;
-	    while(j<jsons){
+	    
+	    for(int j=0; j<jsons; j++){
 	    	
 	    	//stop 테이블에 insert 할것
 	    	//System.out.println(jsonarray.getJSONObject(i).get("stationNm")); //정류장 이름
@@ -668,7 +669,16 @@ public class BusStopManageService {
 	    	stopdto.setS_x(jsonarray.getJSONObject(j).get("gpsX").toString());
 	    	stopdto.setS_y(jsonarray.getJSONObject(j).get("gpsY").toString());
 	    	
+	    	//중복체크작업
+	    	StopDAO stopdao = sqlsession.getMapper(StopDAO.class);
+	    	stopcheck = stopdao.selectS_NUM(stopdto);
 	    	
+	    	if(stopcheck == 0){
+	    		stopinsertcheck = stopdao.insertStopData(stopdto);	    		
+	    	}	    		    	
+	    }
+	    
+	    for(int j=0; j<jsons; j++){
 	    	//routestop테이블에 insert할것
 	    	//System.out.println(jsonarray.getJSONObject(i).get("busRouteNm")); //노선번호(5623)
 	    	//System.out.println(jsonarray.getJSONObject(i).get("busRouteId")); //노선id
@@ -682,25 +692,26 @@ public class BusStopManageService {
 	    	routestopdto.setS_num(jsonarray.getJSONObject(j).get("stationNo").toString());
 	    	routestopdto.setRs_order(jsonarray.getJSONObject(j).get("seq").toString());
 	    	routestopdto.setRs_start(jsonarray.getJSONObject(j).get("beginTm").toString());
-	    	routestopdto.setRs_end(jsonarray.getJSONObject(j).get("lastTm").toString());
+	    	routestopdto.setRs_end(jsonarray.getJSONObject(j).get("lastTm").toString());  
 	    	
-	    	//중복체크작업
-	    	StopDAO stopdao = sqlsession.getMapper(StopDAO.class);
-	    	stopcheck = stopdao.selectS_NUM(stopdto);
+	    	System.out.println("r_num"+routestopdto.getR_num());
+	    	System.out.println(routestopdto.getR_id());
+	    	System.out.println(routestopdto.getS_num());
+	    	System.out.println(routestopdto.getRs_order());
+	    	System.out.println(routestopdto.getRs_start());
+	    	System.out.println(routestopdto.getRs_end());
 	    	
 	    	//중복체크 작업
 	    	RouteStopDAO routestopdao = sqlsession.getMapper(RouteStopDAO.class);
 	    	routestopcheck =  routestopdao.insertRouteStopCheck(routestopdto);
+	    		
 	    	
-	    	if(stopcheck == 0){
-	    		stopinsertcheck = stopdao.insertStopData(stopdto);	    		
-	    	}
-	    	
+	    	System.out.println("되냐1");
 	    	if(routestopcheck == 0){	    		
 	    		routestopinsertcheck = routestopdao.insertRouteStopData(routestopdto);
+	    		System.out.println("되냐2");
 	    	}
-	    	j++;
-	    	
+	    	System.out.println("되냐3");
 	    }
 	    
 	    

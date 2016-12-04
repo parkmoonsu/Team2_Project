@@ -74,7 +74,7 @@
 					<option>all</option>
 					<option>5623</option>
 					<option>6702</option>
-					<option>9000</option>
+					<option>3500포천</option>
 					<option>6501</option>
 				</select>
 				
@@ -82,7 +82,7 @@
 					<option>저장</option>
 					<option>5623</option>
 					<option>6702</option>
-					<option>9000</option>
+					<option>3500포천</option>
 					<option>6501</option>
 				</select>
      <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
@@ -936,7 +936,7 @@
                    	   		console.log("1개 노선");
                    			console.log(data2.length);                          	
                    			var hell =new Array();
-                   			for(var j=0;j<data2.msgBody.length;j+=3){
+                   			for(var j=0;j<data2.msgBody.length;j++){
                    				var f=parseFloat(data2.msgBody[j].gpsY);
                        			var d=parseFloat(data2.msgBody[j].gpsX);
            		      			hell.push(new google.maps.LatLng(f,d));
