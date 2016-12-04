@@ -8,13 +8,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(m_id) from member where m_id = #{m_id}
 	</select>
 	
-	<select id="SelectAll" resultType = "kr.or.bus.dto.MemberDTO">	
-		select *
-		from member me natural join mdetail md natural join job NATURAL join bus 
-		where m_id like '%${param1}%'
-		<if test="param2 !=null">
-		 and r_num='%${param2}%'		
+	<select id="SelectAll" resultType = "kr.or.bus.dto.MemberDTO">		    
+    select  * from 
+    (select rownum r,n.*
+		from (select * from member me natural join mdetail md natural join job NATURAL join bus 
+		<if test="param1 !=null">
+		where m_name like '%${param1}%'
 		</if>
+		<if test="param2 !=null">
+		 and r_num='${param2}'		
+		</if>
+		)n)
 	</select>
 	
 	<select id="emailApp" resultType = "kr.or.bus.dto.ApproveDTO">
