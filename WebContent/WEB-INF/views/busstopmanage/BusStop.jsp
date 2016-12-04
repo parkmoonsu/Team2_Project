@@ -450,8 +450,9 @@ select#selectBus, select#selectBus2 {
     $(function() {
       
        $("#selectBus").change(function(){
-   				deleteRoute();
+   		deleteRoute();
    		if($("#selectBus").val() !=null){
+       		/* 
        		$.ajax({
                    url : "busStopOriginalRead.admin",
                    type : "get",
@@ -502,9 +503,60 @@ select#selectBus, select#selectBus2 {
                       }         
                    }
                 }
-   			});   	    	         
-   		}
-       });
+   			});
+       		*/
+       		
+       		$.ajax({
+                url : "busStopOriginalRead.admin",
+                type : "get",
+                dataType : "json",
+                data : {busNo:$("#selectBus").val()},
+                success : function(data) {
+                   console.log("읽어옴?");
+                   console.log(data);
+                   console.log(data.length);                                                                   	                       
+                   
+                   if(data.length == 4){
+                	console.log("4개 노선");
+                	console.log(data.length);
+                	for(var j=0;j<data.length;j++){
+                		var f=data[0].msgBody.latLng[j].gpsY;
+                    	var d=data[0].msgBody.latLng[j].gpsX;
+                	var what=f+","+d;
+                	copyMarkerMakes(new google.maps.LatLng(f,d),map);
+                	}
+                	
+             	for(var j=0;j<data.length;j++){
+                		var f=data[1].msgBody.latLng[j].gpsY;
+                    	var d=data[1].msgBody.latLng[j].gpsX;
+                	var what=f+","+d;
+                	copyMarkerMakes(new google.maps.LatLng(f,d),map);
+                	}
+             	for(var j=0;j<data.length;j++){
+                		var f=data[2].msgBody.latLng[j].gpsY;
+                    	var d=data[2].msgBody.latLng[j].gpsX;
+                	var what=f+","+d;
+                	copyMarkerMakes(new google.maps.LatLng(f,d),map);
+                	}
+             	for(var j=0;j<data.length;j++){
+                		var f=data[3].msgBody.latLng[j].gpsY;
+                    	var d=data[3].msgBody.latLng[j].gpsX;
+                	var what=f+","+d;
+                	copyMarkerMakes(new google.maps.LatLng(f,d),map);
+                	}
+                   }else{
+                	   console.log("1개 노선");
+                	console.log(data.length);
+                	for(var j=0;j<data.msgBody.length;j++){
+                		var f=parseFloat(data.msgBody[j].gpsY);
+                    	var d=parseFloat(data.msgBody[j].gpsX);
+                	var what=f+","+d;
+                	console.log(what);    
+                	copyMarkerMakes(new google.maps.LatLng(f,d),map);
+                   }         
+                }
+             }
+			});
        
        $("#selectBus2").change(function(){
 				deleteRoute();
