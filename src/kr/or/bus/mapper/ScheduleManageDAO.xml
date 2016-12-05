@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- timetable -->
-	<select id="selectdistinct" resultType="kr.or.bus.dto.SelectDistinctDTO">
+	<!-- <select id="selectdistinct" resultType="kr.or.bus.dto.SelectDistinctDTO">
 		select distinct m.m_name, b.r_num, m.b_vehiclenum, o.o_date from member m
 		join bus b on m.b_vehiclenum=b.b_vehiclenum
 		join oschedule o on m.b_vehiclenum=o.b_vehiclenum
@@ -77,6 +77,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selecttime" resultType="String">
 		select o_time from oschedule
 		where o_date=#{o_date} and b_vehiclenum=#{b_vehiclenum}
+	</select> -->
+	<select id="timetable_get" resultType="kr.or.bus.dto.OscheduleJoinMemberDTO">
+		select * from oschedule o
+		join member m on o.b_vehiclenum=m.b_vehiclenum
 	</select>
 	
 	<!-- vschedule -->
