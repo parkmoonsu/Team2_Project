@@ -458,10 +458,10 @@
 	element : 'graph_bar',
 	data : [ 
 		{device : '미정', geekbench : ${no}},
-		{device : '마을버스',geekbench : ${m}},
-		{device : '시내버스',geekbench : ${n}}, 
-		{device : '시외버스',geekbench : ${w}},
-		{device : '고속버스',geekbench : ${g}},
+		{device : '간서버스',geekbench : ${m}},
+		{device : '지선버스',geekbench : ${n}}, 
+		{device : '순환버스',geekbench : ${w}},
+		{device : '광역버스',geekbench : ${g}},
 		{device : '전체버스',geekbench : ${m+n+w+g+no}} 
 	],
 	xkey : 'device',

@@ -104,19 +104,19 @@ ul.pagination li a {
 						<div class="count">${no}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-						<span class="count_top"><i class="fa fa-bus"></i> 마을버스</span>
+						<span class="count_top"><i class="fa fa-bus"></i> 간선버스</span>
 						<div class="count">${m}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-						<span class="count_top"><i class="fa fa-bus"></i> 시내버스</span>
+						<span class="count_top"><i class="fa fa-bus"></i> 지선버스</span>
 						<div class="count">${n}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-						<span class="count_top"><i class="fa fa-bus"></i> 시외버스</span>
+						<span class="count_top"><i class="fa fa-bus"></i> 순환버스</span>
 						<div class="count">${w}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-						<span class="count_top"><i class="fa fa-bus"></i> 고속버스</span>
+						<span class="count_top"><i class="fa fa-bus"></i> 광역버스</span>
 						<div class="count">${g}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">

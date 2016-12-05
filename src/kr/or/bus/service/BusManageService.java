@@ -113,7 +113,7 @@ public class BusManageService {
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> garage = dao.getGarage(g_num);
 		return garage;
-	}
+	} 
 	
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRoute(String g_num){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);

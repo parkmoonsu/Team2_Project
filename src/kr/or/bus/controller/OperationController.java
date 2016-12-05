@@ -9,6 +9,7 @@
 
 package kr.or.bus.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
+import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.service.OperationService;
@@ -36,7 +38,16 @@ public class OperationController {
 	public String showlist(ModelMap map){
 		List<RnumcommuteDTO> list = service.getNdselect();
 		List<RouteDTO> rlist = service.getRout();	
-
+		
+		Calendar cal = Calendar.getInstance();
+		 
+		int year = cal.get(cal.YEAR);
+		int month = cal.get(cal.MONTH) +1;
+		int date = cal.get(cal.DATE);
+		System.out.println("year : " + year + "/month : " + month);
+		map.addAttribute("year", year);
+		map.addAttribute("month", month);
+		map.addAttribute("date", date);
 		map.addAttribute("list",list);
 		map.addAttribute("rlist",rlist);
 		
@@ -51,7 +62,7 @@ public class OperationController {
 		
 		System.out.println(r_num+"ddd");
 		
-		List<RnumcommuteDTO> mlist=service.getMember(r_num);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> mlist=service.getMember(r_num);
 		List<String> nlist = service.getStat2(r_num);
 		
 		List<String> slist = service.getShow2(r_num);

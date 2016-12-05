@@ -179,7 +179,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on bd.BD_NUM = r.BD_NUM 
 		join bus b  
 		on b.R_NUM = r.R_NUM 
-		where bd_name = '마을버스'
+		where bd_name = '간선버스'
 	</select>
 	
 	<select id="nBus" resultType = "int">
@@ -188,7 +188,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on bd.BD_NUM = r.BD_NUM 
 		join bus b  
 		on b.R_NUM = r.R_NUM 
-		where bd_name = '시내버스'
+		where bd_name = '지선버스'
 	</select>
 	
 	<select id="wBus" resultType = "int">
@@ -197,7 +197,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on bd.BD_NUM = r.BD_NUM 
 		join bus b  
 		on b.R_NUM = r.R_NUM 
-		where bd_name = '시외버스'
+		where bd_name = '순환버스'
 	</select>
 	
 	<select id="gBus" resultType = "int">
@@ -206,7 +206,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on bd.BD_NUM = r.BD_NUM 
 		join bus b  
 		on b.R_NUM = r.R_NUM 
-		where bd_name = '고속버스'
+		where bd_name = '광역버스'
 	</select>
 	
 	<select id="noRoute" resultType = "int">
