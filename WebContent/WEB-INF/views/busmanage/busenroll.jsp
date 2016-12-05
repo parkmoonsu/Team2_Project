@@ -69,7 +69,7 @@ th{
 }
 
 ul.pagination li a.active {
-    background-color: #4CAF50;
+    background-color: #1ABB9C;
     color: white;
 }
 

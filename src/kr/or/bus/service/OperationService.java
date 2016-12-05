@@ -63,7 +63,37 @@ public class OperationService {
 		return list2;
 	}
 	
-	public List<RnumcommuteDTO> getMember(String r_num){
+	public List<RnumcommuteDTO> getMember() {
+
+		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);
+
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getNdselect();
+		List<RnumcommuteDTO> list2 = new ArrayList<RnumcommuteDTO>();
+		for (int i = 0; i < list.size(); i++) {
+
+			// list {이름+ 날짜[] + 상태[]}
+			String m_name = list.get(i).getM_name();
+			//String c_date = list.get(i).getC_date();
+			
+			//String r_num = list.get(i).getR_num();
+
+			String[] tdate = dao.getStat(m_name); // 날짜
+			String[] stat = dao.getShow(m_name); // 상태
+			
+			RnumcommuteDTO dto = new RnumcommuteDTO();
+
+			dto.setM_name(list.get(i).getM_name());
+			dto.setC_date(tdate);
+			dto.setCs_stat(stat);
+
+			list2.add(dto);
+		}
+
+		return list2;
+	}
+	
+	
+	/*public List<RnumcommuteDTO> getMember(String r_num){
 		System.out.println("여기능??");
 		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);
 
@@ -80,10 +110,10 @@ public class OperationService {
 			//ArrayList<String> tdate = dao.getStat2(r_num, m_name);
 			//String[] tdate = dao.getStat2(r_num, m_name); // 날짜
 			//String[] stat = dao.getShow2(r_num, m_name); // 상태
-			System.out.println("#####" +dao.getStat2(r_num, m_name));
+			//System.out.println("#####" +dao.getStat2(r_num, m_name));
 			dto = new RnumcommuteDTO();
 			
-			dto.setM_name(list.get(i).getM_name());
+			//dto.setM_name(list.get(i).getM_name());
 			//dto.setC_date(tdate);
 			//dto.setCs_stat(stat);
 		
@@ -91,7 +121,7 @@ public class OperationService {
 		}
 	
 		return list2;		
-	}
+	}*/
 	
 	public List<String> getStat2(String r_num){
 		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);
@@ -137,8 +167,6 @@ public class OperationService {
 		return rdto;
 		
 	}
-	
-	
 /*	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getselect(String r_num){
 		
 		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);

@@ -61,7 +61,12 @@
 <!-- jQuery -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+<style>
+th, table{
+ text-align: center;
+}
 
+</style>
 </head>
 <body class="nav-md">
 	<div class="container body">
@@ -128,10 +133,10 @@
 											</span> -->
 										</div>
 									</div>
-									<table class="table table-hover projects">
+									<table class="table table-hover projects" id="table">
 										<thead>
 											<tr>
-												<th>번호</th>
+												<th  style="text-align: center;">번호</th>
 												<th>이름</th>
 												<th>차량번호</th>
 												<th>노선번호</th>
@@ -146,7 +151,7 @@
 											<c:forEach var="i" items="${d}" varStatus="status">
 											
 											<tr>
-												<td>${status.count}</td>
+												<td style="text-align: center;">${status.count}</td>
 												<td>${i.selectdistinctdto.m_name}</td>
 												<td>${i.selectdistinctdto.r_num}</td>
 												<td>${i.selectdistinctdto.b_vehiclenum}</td>

@@ -40,7 +40,7 @@ public class OperationController {
 		map.addAttribute("list",list);
 		map.addAttribute("rlist",rlist);
 		
-		//System.out.println(list);
+		System.out.println(list);
 		return "operation/attendance";
 	}
 	

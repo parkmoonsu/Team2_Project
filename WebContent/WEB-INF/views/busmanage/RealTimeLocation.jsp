@@ -36,9 +36,31 @@
     <link href="${pageContext.request.contextPath}/build/css/custom.min.css" rel="stylesheet">
     <style type="text/css">
     .element {
- #map { margin-left:auto; margin-right:auto; width:95%; }
-    
-    </style>
+ #map { margin-left:auto; margin-right:auto; width:95%; }}
+ select#selectBus {
+	-webkit-appearance: button;
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+	-webkit-padding-end: 20px;
+	-webkit-padding-start: 2px;
+	-webkit-user-select: none;
+	background-image: url(http://i62.tinypic.com/15xvbd5.png),
+		-webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+	background-position: 97% center;
+	background-repeat: no-repeat;
+	border: 1px solid #AAA;
+	color: #555;
+	font-size: inherit;
+	overflow: hidden;
+	padding: 5px 10px; 
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 150px;
+	border-radius: 8px;
+	margin-bottom:15px;
+}
+.btn{border-radius: 8px};
+</style>
   </head>
 
   <body class="nav-md">
@@ -64,10 +86,10 @@
         <!-- page content -->
         <div class="right_col" role="main">
 
-          <div class="row">
+          <div class="row" style="text-align: right">
             <div class="col-md-12 col-sm-12 col-xs-12">
-            <input type="button" id="Search" value="버스위치추적 ">
-				<input type="button" id="SearchStop" value="버스위치추적 중지">
+            <input type="button" id="Search" class="btn btn-default" value="버스위치추적 ">
+				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
 	
 				<select id="selectBus">
 					<option>보기</option>
@@ -282,7 +304,7 @@
     	                                       
        
    			var originalMarker5623 = new google.maps.Marker({
-           	position: new google.maps.LatLng(latLng[i].gpsY, latLng[i].gpsX),         
+           	position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
           		map: map,
           		title: latLng[i].stationNm,
           		animation: google.maps.Animation.DROP,
@@ -317,7 +339,7 @@
        	                                       
           
       			var originalMarker6702 = new google.maps.Marker({
-              		position: new google.maps.LatLng(latLng[i].gpsY, latLng[i].gpsX),         
+              		position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
              		map: map,
              		title: latLng[i].stationNm,
              		animation: google.maps.Animation.DROP,
@@ -350,7 +372,7 @@
       	                                       
          
      			var originalMarker9000 = new google.maps.Marker({
-             		position: new google.maps.LatLng(latLng[i].gpsY, latLng[i].gpsX),         
+             		position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
             		map: map,
             		title: latLng[i].stationNm,
             		animation: google.maps.Animation.DROP,
@@ -381,7 +403,7 @@
      	                                       
         
     			var originalMarker6501 = new google.maps.Marker({
-            		position: new google.maps.LatLng(latLng[i].gpsY, latLng[i].gpsX),         
+            		position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
            		map: map,
            		title: latLng[i].stationNm,
            		animation: google.maps.Animation.DROP,
@@ -773,7 +795,7 @@
                  			var route9000;
                  			var route6501
                  			
-                     		console.log("4개 노선");
+                     		console.log("4개 경로노선");
                      		console.log(data2.length);
                      		
                      		for(var j=0;j<data2.length;j++){
@@ -820,7 +842,7 @@
                   			hell=[];
                   			
                         }else{
-                   	   		console.log("1개 노선");
+                   	   		console.log("1개 경로 노선");
                    			console.log(data2.length);                          	
                    			var hell =new Array();
                    			for(var j=0;j<data2.msgBody.length;j++){
@@ -840,22 +862,9 @@
                     data : {r_num:$("#selectBus").val()},
                     success : function(data) {
                        console.log("읽어옴?");
-                       //console.log(data);
-                       //console.log(data.length);                                                                   	                       
-                       
-                      	if(data.length == 4){
-                      		console.log(data);
-                      		console.log("2개 노선");
-                    		//console.log(data.length);
-                       		originalMarkerMake5623(data[0].msgBody, map);
-                       		originalMarkerMake6702(data[1].msgBody, map);
-                       		originalMarkerMake9000(data[2].msgBody, map);
-                       		originalMarkerMake6501(data[3].msgBody, map);
-                       	}else{
-                    	   console.log("1개 노선");
-                    	   console.log(data);
+                       console.log(data);                                                                                                               	                                                                  	                       	   
                     	   originalMarkerMake(data, map);
-                       	}                 	                     	
+                       	                 	                     	
                     }        		
         		});
         	}

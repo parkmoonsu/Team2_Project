@@ -17,6 +17,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rownum between 1 + (#{param1}-1) * 5 and 5 + (#{param1}-1)*10
 	</select>
 	
+	<select id="count" resultType="int" parameterType="String">
+		select count(*)
+		from commute com full outer join cstart cs on com.cs_code=cs.cs_code
+        	  		full outer join cend ce on ce.ce_code=com.ce_code
+        	  		where m_id= #{m_id}
+	</select>
+	
 	<!-- 이름 값 가져오기 -->
 	<select id="getName" parameterType="String" resultType="String">
 		select m_name
@@ -111,13 +118,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on com.ce_code=ce.ce_code
 		where m_id=#{param1} and c_date = #{param2}
 	</select> 
-	
-<!--  	<select id="csCheck" resultType = "int">
-		select count(c_start)
-		from commute
-		where m_id = #{m_id} 
-	</select>  -->
-	
+		
  	<select id="csCheck" resultType="int" parameterType="String">
 		select count(c_start)
 		from commute
