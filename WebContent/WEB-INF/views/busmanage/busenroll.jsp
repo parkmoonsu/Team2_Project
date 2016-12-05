@@ -211,30 +211,36 @@ cursor: pointer;
 
 									<c:set var = "Count" value = "${count}"/>
 									<c:set var = "pgc" value = "${pgs}"/>
-									<c:choose>
-											<c:when test="${Count % 10 == 0}">
-												<c:set value = "${Count/10}" var = "pagecount"/>
-											</c:when>
-											<c:otherwise>
-												<c:set value = "${Count/10 + 1}" var = "pagecount"/>
-											</c:otherwise>
-									</c:choose>	
+									<c:set var = "pagecount" value = "${pagecount}" />
 									
-
+									
 									<div style="text-align: center">
 										<ul class="pagination">
 										<c:if test="${pgc > 1}">
-											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
+											<li><a href="busenroll.admin?pg=${pgc-1}">Prev</a></li>
 										</c:if>
 
-										<c:forEach begin="1" end="${pagecount}" var="i">
-												<c:if test="${i==pgc}">
-													<li><a  class="active" href="#">${i}</a></li>
+										<c:forEach begin="1" end="${pagecount}" var="i" step = "5">
+											<c:forEach begin = "${i}" end = "${i+4}" step = "1" var = "x">
+												<c:if test="${x <= pagecount}">
+													<c:choose>
+														<c:when test="${pgc == x}">
+															<li><a  class="active" href="#">${x}</a></li>
+														</c:when>
+														<c:when test="${pgc > i-1 && pgc < i+5 }">
+															<li><a href="busenroll.admin?pg=${x}">${x}</a></li>
+														</c:when>
+														<c:when test ="${x == i+5}">
+															<c:forEach begin = "${x}" end = "${x+4}" step = "1" var = "y">
+																<li><a href="busenroll.admin?pg=${y}">${y}</a></li>
+															</c:forEach>
+														</c:when>
+													</c:choose>
 												</c:if>
-												<c:if test="${i!=pgc}">
-													<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
-												</c:if>
+												
 											</c:forEach>
+										</c:forEach>
+											
 
 										<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
 											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>

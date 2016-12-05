@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
-<%request.getParameter("UTF-8");%>
+<%request.getCharacterEncoding();
+  String test = request.getParameter("busNo");%>
+  <%=test %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -90,9 +92,9 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
             <input type="button" id="Search" class="btn btn-default" value="버스위치추적 ">
 				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
-	
+				<c:set var="d" value="${busNo}"></c:set>
 				<select id="selectBus">
-					<option>보기</option>
+					<option value="${d}"></option>
 					<option>all</option>
 					<c:forEach var="i" items="${list}">
 					<option>${i.r_num}</option>					
@@ -429,7 +431,7 @@
     function movingBusMarker(itemList,map){
        if(BusMarker == null){
        		BusMarker = new google.maps.Marker({
-          		map: map,
+          		map: map,        		
           		position:new google.maps.LatLng(itemList.tmY,itemList.tmX),
           		icon:"${pageContext.request.contextPath}/images/bus.png"
        		});
@@ -855,14 +857,14 @@
                
         
         $("#Search").click(function() {
-        	stopSearch = setInterval(function(){
+        	//stopSearch = setInterval(function(){
         		$.ajax({
                     url : "RealTimeSearch.admin",
                     type : "get",
                     dataType : "json",
                     data : {r_num:$("#selectBus").val()},
                     success : function(data) {                   	
-                    	 
+                    	console.log(data);
                     	if(data.length == 4){
                     		console.log("멀티위치추적");
                     		console.log(data.length);
@@ -886,7 +888,7 @@
                     	           		  	
                     }
                 });  		
-        	},30000);
+        	//},30000);
         });
         
     });//ready 함수 끝
