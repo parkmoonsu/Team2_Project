@@ -278,11 +278,11 @@
            		zindex : "5"
         	});
      	   
-     	  	var infowindow = new google.maps.InfoWindow;
+     	  	var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
      	  	
      	  	(function (originalMarker, latLng, infowindow) {
      	        google.maps.event.addListener(originalMarker, "click", function (e) {
-     	            infowindow.setContent("<br>" + latLng.s_name + "<br>" + latLng.rs_order);
+     	            infowindow.setContent("<div align='left'>"+"정류장 명:"+ latLng.s_name + "<br>" + "정차순서:"+latLng.rs_order+"<br>" + "정류장번호:"+ latLng.s_num + "<br></div>");
      	            infowindow.open(map, originalMarker);
      	        });
      	    })(originalMarker, latLng[i], infowindow);
