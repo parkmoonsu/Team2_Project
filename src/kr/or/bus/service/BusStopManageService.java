@@ -23,10 +23,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.bus.dao.BusDataDAO;
 import kr.or.bus.dao.BusStopDAO;
 import kr.or.bus.dao.RouteDAO;
 import kr.or.bus.dao.RouteStopDAO;
 import kr.or.bus.dao.StopDAO;
+import kr.or.bus.dto.BusDTO;
 import kr.or.bus.dto.BusStopDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteStopDTO;
@@ -452,9 +454,10 @@ public class BusStopManageService {
 			RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
 			System.out.println(dao.routeidSearch(r_num));		
 			dto = dao.routeidSearch(r_num);		
-			System.out.println(dto.getR_id());
 			
-			String venid = venidSearch(dto);		
+			
+			String venid = venidSearch(dto,r_num);		
+			
 			
 			
 			LocationSearch(request , response, venid);
@@ -466,16 +469,16 @@ public class BusStopManageService {
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
 		if(r_num.equals("5623")){
 			dto = dao.routeidSearch(r_num);
-			venid = venidSearch(dto);
+			venid = venidSearch(dto, r_num);
 		}else if(r_num.equals("6702")){
 			dto = dao.routeidSearch(r_num);
-			venid = venidSearch(dto);
+			venid = venidSearch(dto, r_num);
 		}else if(r_num.equals("9000광주")){
 			dto = dao.routeidSearch(r_num);
-			venid = venidSearch(dto);
+			venid = venidSearch(dto, r_num);
 		}else if(r_num.equals("6501광주")){
 			dto = dao.routeidSearch(r_num);
-			venid = venidSearch(dto);
+			venid = venidSearch(dto, r_num);
 		}
 		
 		
@@ -560,6 +563,16 @@ public class BusStopManageService {
 		System.out.println("실시간 위치추적");
 		System.out.println(sb.toString());
 		jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
+		
+		JSONObject jsonno = jsonmaps;
+		System.out.println("시발"+jsonno);
+		System.out.println(jsonno.get("msgBody"));
+		jsonno = (JSONObject) jsonno.get("msgBody");
+		jsonno = (JSONObject) jsonno.get("itemList");
+		System.out.println("차량번호 가져왔냐???"+jsonno.get("plainNo"));
+		BusDataDAO busdatadao = sqlsession.getMapper(BusDataDAO.class);
+		String busNo = busdatadao.SearchRider(jsonno.get("plainNo").toString());
+		System.out.println(busNo);
 		out.print(jsonmaps);
 		
 	}
@@ -867,7 +880,7 @@ public class BusStopManageService {
 		
 	}
 	
-	public String venidSearch(RouteDTO dto) throws IOException{
+	public String venidSearch(RouteDTO dto, String r_num) throws IOException{
 		System.out.println("노선id???"+dto.getR_id());
 		JSONObject jsonmaps = null;
 		StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid"); /*URL*/
@@ -903,7 +916,29 @@ public class BusStopManageService {
         System.out.println("차량 id 뽑았다"+jsonlist.getJSONObject(0).get("vehId"));
         
         String venid = (String) jsonlist.getJSONObject(0).get("vehId");
+        String busno = (String) jsonlist.getJSONObject(0).get("plainNo");
         System.out.println("차량id string 에 담았고"+venid);
+        
+        BusDTO busdto = new BusDTO();
+        busdto.setB_vehiclenum(busno);
+        busdto.setR_num(r_num);
+        
+        BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
+        int check = busdao.busnoCheck(busdto);
+        int insertcheck = 0;
+        if(check == 0){
+        	System.out.println("차량번호 중복없음");
+        	insertcheck = busdao.insertBusno(busdto);
+        }else{
+        	System.out.println("차량번호 중복데이터임");
+        }
+        
+        if(insertcheck ==1){
+        	System.out.println("입력완료");
+        }else{
+        	System.out.println("입력실패");
+        }
+        
 		return venid;
 	}
 
