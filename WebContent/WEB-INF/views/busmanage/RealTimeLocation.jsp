@@ -46,7 +46,7 @@
 	-webkit-user-select: none;
 	background-image: url(http://i62.tinypic.com/15xvbd5.png),
 		-webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
-	background-position: 97% center;
+	background-position: 97% center;                                                      
 	background-repeat: no-repeat;
 	border: 1px solid #AAA;
 	color: #555;

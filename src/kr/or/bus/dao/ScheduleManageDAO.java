@@ -51,6 +51,7 @@ public interface ScheduleManageDAO {
 	//가상스케줄 복사
 	//public List<ReguloffJoinMemberJoinBusJoinRouteDTO> ocode_select();
 	public void copy_vschedule();
+	public void delete_vschedule();
 
 	//최증스케줄
 	public List<MemberJoinBusJoinRouteJoinReguloffDTO> getmemberjoinreg(String r_num); 

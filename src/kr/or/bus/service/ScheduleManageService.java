@@ -117,18 +117,6 @@ public class ScheduleManageService {
 	}
 	
 	/*
-	제목 : 가상스케줄 생성
-	작성자 : 길한종
-	목적 : VSCHEDULE에서 이용할 차량번호(B_VEHICLENUM), 노선변호(R_NUM), 휴무코드(O_CODE) 가져오기 
-	*/
-	
-	/*public List<ReguloffJoinMemberJoinBusJoinRouteDTO> get_ocode(){
-		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		List<ReguloffJoinMemberJoinBusJoinRouteDTO> list=dao.ocode_select();
-		return list;
-	}*/
-	
-	/*
 	제목 : 
 	작성자 : 길한종
 	목적 : reguloff 테이블에 CRUD
@@ -274,13 +262,15 @@ public class ScheduleManageService {
 	/*
 	제목 : 스케줄러 
 	작성자 : 길한종
-	목적 : vschedule의 정보를 매일 0:00:00에 oschedule로 복사하는 스케줄
+	목적 : vschedule의 정보를 매일 0:00:00에 oschedule로 복사, vschedule 삭제
+		
 	*/
 
 	@Scheduled(cron="0 0 0 * * *")
 	public void copyScheduler(){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.copy_vschedule();
+		dao.delete_vschedule();
 	}
 
 	//수행할 최종스케줄 _김수현

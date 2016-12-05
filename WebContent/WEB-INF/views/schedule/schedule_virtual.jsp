@@ -260,7 +260,7 @@ select#selectedrnum {
 						
 								String array = new Array();
 								for(int i=0;i<7;i++){
-								if(ocode==i){
+								if(ocode==i ||index>7){
 									
 								}else{
 									array+=i;
@@ -318,10 +318,11 @@ select#selectedrnum {
 			$('#calendar2').empty();
 			$('#calendar2').append('<div id="calendar"></div>');
 			$('#calendar').fullCalendar({
+				defaultView: 'agendaWeek',
 				header : {
 					left : 'prev,next today',
 					center : 'title',
-					right : 'month,agendaWeek,agendaDay'
+					right : 'agendaWeek,agendaDay'
 				},
 
 				slotDuration : '00:10:00',
