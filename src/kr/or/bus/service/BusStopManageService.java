@@ -457,6 +457,7 @@ public class BusStopManageService {
 			String venid = venidSearch(dto);		
 			
 			
+			
 			LocationSearch(request , response, venid);
 		}
 	}
