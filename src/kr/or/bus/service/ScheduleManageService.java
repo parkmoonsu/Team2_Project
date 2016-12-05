@@ -23,7 +23,10 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+
 import kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO;
+
+import kr.or.bus.dto.OscheduleJoinMemberDTO;
 import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
@@ -97,10 +100,13 @@ public class ScheduleManageService {
 	}
 	
 	//timetable
-	public List<TimetableDTO> timetable_get(){
+	public List<OscheduleJoinMemberDTO> timetable_get(){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		List<OscheduleJoinMemberDTO> list=dao.timetable_get();
 		
-		List<SelectDistinctDTO> list1=dao.selectdistinct();
+		return list;
+		
+		/*List<SelectDistinctDTO> list1=dao.selectdistinct();
 		
 		List<TimetableDTO> list2=new ArrayList<TimetableDTO>();
 		
@@ -119,7 +125,7 @@ public class ScheduleManageService {
 			list2.add(dto);
 		}
 
-		return list2;
+		return list2;*/
 	}
 	
 	/*

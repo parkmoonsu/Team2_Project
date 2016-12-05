@@ -10,7 +10,7 @@ package kr.or.bus.dto;
 
 public class CommuteJoinCstartJoinCendDTO {
 
-	private int rownum;
+	private int ro;
 	private String m_id;
 	private String m_name;
 	private String c_date;	
@@ -30,11 +30,11 @@ public class CommuteJoinCstartJoinCendDTO {
 	public void setM_name(String m_name) {
 		this.m_name = m_name;
 	}
-	public int getRownum() {
-		return rownum;
+	public int getRo() {
+		return ro;
 	}
-	public void setRownum(int rownum) {
-		this.rownum = rownum;
+	public void setRo(int ro) {
+		this.ro = ro;
 	}
 	public String getM_id() {
 		return m_id;
@@ -98,7 +98,7 @@ public class CommuteJoinCstartJoinCendDTO {
 	}
 	@Override
 	public String toString() {
-		return "CommuteJoinCstartJoinCendDTO [rownum=" + rownum + ", m_id=" + m_id + ", m_name=" + m_name + ", c_date="
+		return "CommuteJoinCstartJoinCendDTO [ro=" + ro + ", m_id=" + m_id + ", m_name=" + m_name + ", c_date="
 				+ c_date + ", cs_code=" + cs_code + ", ce_code=" + ce_code + ", cs_stat=" + cs_stat + ", ce_stat="
 				+ ce_stat + ", c_start=" + c_start + ", c_end=" + c_end + ", cs_ams=" + cs_ams + ", ce_pms=" + ce_pms
 				+ "]";

@@ -78,7 +78,11 @@ ul.pagination li a {
     float: left;
     padding: 8px 16px;
     text-decoration: none;
-}	
+}
+
+#no,#m,#n,#w,#g{
+cursor: pointer; 
+}
 </style>
 </head>
 
@@ -99,32 +103,36 @@ ul.pagination li a {
 			<div class="right_col" role="main">
 				<!-- top tiles -->
 				<div class="row tile_count" style="text-align: center">
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "no">
+						
 						<span class="count_top"><i class="fa fa-bus"></i> 미정</span>
 						<div class="count red">${no}</div>
+					
 					</div>
 					
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "m">
 
 						<span class="count_top"><i class="fa fa-bus"></i> 간선버스</span>
 						<div class="count">${m}</div>
 					</div>
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "n">
 						<span class="count_top"><i class="fa fa-bus"></i> 지선버스</span>
 						<div class="count">${n}</div>
 					</div>
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "w">
 						<span class="count_top"><i class="fa fa-bus"></i> 순환버스</span>
 						<div class="count">${w}</div>
 					</div>
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "g">
 						<span class="count_top"><i class="fa fa-bus"></i> 광역버스</span>
 						<div class="count">${g}</div>
 					</div>
 					
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-						<span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
-						<div class="count green">${m+n+w+g+no}</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "allbus">
+						<a href ="busenroll.admin">
+							<span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
+							<div class="count green">${m+n+w+g+no}</div>
+						</a>
 					</div>
 					
 				</div>
@@ -142,7 +150,7 @@ ul.pagination li a {
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<div class="x_panel">
-								<div class="x_content">
+								<div class="x_content" id = "xbody">
 									<!-- start project list -->
 									<!-- <div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -195,30 +203,36 @@ ul.pagination li a {
 
 									<c:set var = "Count" value = "${count}"/>
 									<c:set var = "pgc" value = "${pgs}"/>
-									<c:choose>
-											<c:when test="${Count % 10 == 0}">
-												<c:set value = "${Count/10}" var = "pagecount"/>
-											</c:when>
-											<c:otherwise>
-												<c:set value = "${Count/10 + 1}" var = "pagecount"/>
-											</c:otherwise>
-									</c:choose>	
+									<c:set var = "pagecount" value = "${pagecount}" />
 									
-
+									
 									<div style="text-align: center">
 										<ul class="pagination">
 										<c:if test="${pgc > 1}">
-											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
+											<li><a href="busenroll.admin?pg=${pgc-1}">Prev</a></li>
 										</c:if>
 
-										<c:forEach begin="1" end="${pagecount}" var="i">
-												<c:if test="${i==pgc}">
-													<li><a  class="active" href="#">${i}</a></li>
+										<c:forEach begin="1" end="${pagecount}" var="i" step = "5">
+											<c:forEach begin = "${i}" end = "${i+4}" step = "1" var = "x">
+												<c:if test="${x <= pagecount}">
+													<c:choose>
+														<c:when test="${pgc == x}">
+															<li><a  class="active" href="#">${x}</a></li>
+														</c:when>
+														<c:when test="${pgc > i-1 && pgc < i+5 }">
+															<li><a href="busenroll.admin?pg=${x}">${x}</a></li>
+														</c:when>
+														<c:when test ="${x == i+5}">
+															<c:forEach begin = "${x}" end = "${x+4}" step = "1" var = "y">
+																<li><a href="busenroll.admin?pg=${y}">${y}</a></li>
+															</c:forEach>
+														</c:when>
+													</c:choose>
 												</c:if>
-												<c:if test="${i!=pgc}">
-													<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
-												</c:if>
+												
 											</c:forEach>
+										</c:forEach>
+											
 
 										<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
 											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
@@ -526,9 +540,9 @@ ul.pagination li a {
 				 $("#checkall").prop("checked",true);
 			 }
 		});
-
+ 
 	$("#dbtn").click(function(){
-			for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
+		for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
 				var checkbox = "#check" + i;
 				
 				if($(checkbox).is(":checked")){
@@ -723,9 +737,60 @@ ul.pagination li a {
 				}
 			});
 		});
+	
+		$("#no").click(function(){
+			$.ajax({
+				url: "noroute.admin",
+				success:function(data){
+					$("#xbody").empty();
+					$("#xbody").append(data);
+				}
+			});
+			
+		});
+		
+		$("#m").click(function(){
+			$.ajax({
+				url: "mbusinfo.admin",
+				success:function(data){
+					$("#xbody").empty();
+					$("#xbody").append(data);
+				}
+			});
+		});
 		
 		
+		$("#n").click(function(){
+			$.ajax({
+				url: "nbusinfo.admin",
+				success:function(data){
+					$("#xbody").empty();
+					$("#xbody").append(data);
+				}
+			});
+		});
+		
+		$("#w").click(function(){
+			$.ajax({
+				url: "wbusinfo.admin",
+				success:function(data){
+					$("#xbody").empty();
+					$("#xbody").append(data);
+				}
+			});
+		});
+		
+		$("#g").click(function(){
+			$.ajax({
+				url: "gbusinfo.admin",
+				success:function(data){
+					$("#xbody").empty();
+					$("#xbody").append(data);
+				}
+			});
+		});
 	});
+
 	
 	</script>
 </body>
