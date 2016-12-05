@@ -150,7 +150,7 @@ cursor: pointer;
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<div class="x_panel">
-								<div class="x_content" id = "tbody">
+								<div class="x_content" id = "xbody">
 									<!-- start project list -->
 									<!-- <div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -407,7 +407,7 @@ cursor: pointer;
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 	<script type="text/javascript">
 	var num = 1;
-	var Count = "${Count}";
+	
 	function plus(){
 		 num++;
 			var gname = "#g_name" + num;
@@ -536,7 +536,7 @@ cursor: pointer;
 		});
  
 	$("#dbtn").click(function(){
-		for(var i = 1 ; i <= Count ; i++){ //엑박 뜨는거 무시할것
+		for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
 				var checkbox = "#check" + i;
 				
 				if($(checkbox).is(":checked")){
@@ -561,7 +561,7 @@ cursor: pointer;
 						 $("#myModalLabel2").empty();
 						 $("#myModalLabel2").append("차량 번호<br>");
 						 
-						for(var i = 1 ; i <= Count ; i++){ //엑박 뜨는거 무시할것
+						for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
 							var checkbox = "#check" + i;
 							
 							if($(checkbox).is(":checked")){
@@ -580,7 +580,7 @@ cursor: pointer;
 		
 		$("#cancelbutton").click(function(){
 			 
-			for(var i = 1 ; i <= Count ; i++){ //엑박 뜨는거 무시할것
+			for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
 				var checkbox = "#check" + i;
 				
 				if($(checkbox).is(":checked")){
@@ -604,7 +604,7 @@ cursor: pointer;
 				
 				$("#enroll").empty();
 				count = 1;
-				for(var i = 1 ; i <= Count ; i++){ //엑박 무시할것
+				for(var i = 1 ; i <= ${Count} ; i++){ //엑박 무시할것
 					var checkbox = "#check" + i;
 					
 					if($(checkbox).is(":checked")){
@@ -736,8 +736,8 @@ cursor: pointer;
 			$.ajax({
 				url: "noroute.admin",
 				success:function(data){
-					$("#tbody").empty();
-					$("#tbody").append(data);
+					$("#xbody").empty();
+					$("#xbody").append(data);
 				}
 			});
 			
@@ -747,8 +747,8 @@ cursor: pointer;
 			$.ajax({
 				url: "mbusinfo.admin",
 				success:function(data){
-					$("#tbody").empty();
-					$("#tbody").append(data);
+					$("#xbody").empty();
+					$("#xbody").append(data);
 				}
 			});
 		});
@@ -758,8 +758,8 @@ cursor: pointer;
 			$.ajax({
 				url: "nbusinfo.admin",
 				success:function(data){
-					$("#tbody").empty();
-					$("#tbody").append(data);
+					$("#xbody").empty();
+					$("#xbody").append(data);
 				}
 			});
 		});
@@ -768,8 +768,8 @@ cursor: pointer;
 			$.ajax({
 				url: "wbusinfo.admin",
 				success:function(data){
-					$("#tbody").empty();
-					$("#tbody").append(data);
+					$("#xbody").empty();
+					$("#xbody").append(data);
 				}
 			});
 		});
@@ -778,8 +778,8 @@ cursor: pointer;
 			$.ajax({
 				url: "gbusinfo.admin",
 				success:function(data){
-					$("#tbody").empty();
-					$("#tbody").append(data);
+					$("#xbody").empty();
+					$("#xbody").append(data);
 				}
 			});
 		});
