@@ -70,13 +70,15 @@ public class CommuteController {
 	public String showlist(String pg , String m_id, String tdate, Model model) {
 		
 		List<CommuteJoinCstartJoinCendDTO> list = service.getSelect(pg, m_id);
+		int count=service.count(m_id);
 		int page = service.pg(pg);
 		
 		int cscheck = service.csCheck(m_id);
 		int cecheck = service.ceCheck(m_id);
 		
-		model.addAttribute("page", page);
+		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
+		model.addAttribute("count",count);
 		model.addAttribute("cscheck", cscheck);
 		model.addAttribute("cecheck", cecheck);
 		System.out.println(list.toString()+"asfasd");

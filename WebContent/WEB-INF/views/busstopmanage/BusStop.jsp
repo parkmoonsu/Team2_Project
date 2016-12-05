@@ -74,7 +74,7 @@ select#selectBus, select#selectBus2 {
 	border: 1px solid #AAA;
 	color: #555;
 	font-size: inherit;
-	margin: 20px; 
+	margin: 7px; 
 	overflow: hidden;
 	padding: 5px 10px; 
 	text-overflow: ellipsis;
@@ -82,6 +82,13 @@ select#selectBus, select#selectBus2 {
 	width: 150px;
 }
 .btn{border-radius: 8px};
+
+#inputBusStop {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
 </style>
 </head>
 
@@ -126,7 +133,7 @@ select#selectBus, select#selectBus2 {
 					<div class="row" style="text-align: right">
 						<input type="button" id="newsave" value="원본좌표저장" class="btn btn-default">
 						<input type="button" id="newsave2" value="수정좌표저장" class="btn btn-default">
-						<input type="button" id="busLoad" value="버스 보기" class="btn btn-default" style="margin-right: 17px;">
+						<input type="button" id="busLoad" value="버스 보기" class="btn btn-default"zdddd>
 					
 					
 					<select id="selectBus" style="margin:5px" >
@@ -144,15 +151,16 @@ select#selectBus, select#selectBus2 {
 					</select>				
 					
 					<span>
-					<input type="text" id="inputBusStop" placeholder="노선번호를 입력해주세요">
-					<input type="button" id="sendBusStop" value="정류장저장"></span>
+					<input type="text" style="width:210px; height:34px; padding: 12px 20px; 
+    					   border-radius: 8px;" id="inputBusStop" placeholder="&nbsp;노선번호를 입력해주세요">
+					<input type="button" class="btn btn-default" id="sendBusStop" value="정류장저장"></span>
 					
 					
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="container" id="map"
-								style="width: auto; height: 500px; border: solid black 1px; margin-left: auto; margin-right: auto;">
+								style="width: auto; height: 500px; border: solid black 1px; ">
 							</div>
 						</div>
 
@@ -312,10 +320,11 @@ select#selectBus, select#selectBus2 {
     
     var dataArray = new Array();
    
-    
+    var stopSearch;
     //원본 정류장 좌표 로 부터 새로 저장한후 불러올떄 좌표들을 저장할 배열변수\
     var copyMarker;
     
+    var BusMarker;
     
     var copyMarkers= new Array();
    
@@ -451,44 +460,43 @@ select#selectBus, select#selectBus2 {
       		}
    			
         }
-      	//마커 드래그 끝났을떄
-        copyMarker.addListener('dragend', function() {
+      		//마커 드래그 끝났을떄
+        	/* copyMarker.addListener('dragend', function() {
             
-        	//마커 라벨을 얻어와 담을 변수
-        	var markerLabel = copyMarker.getLabel();
+        		//마커 라벨을 얻어와 담을 변수
+        		var markerLabel = copyMarker.getLabel();
             
-        	//마커를 드래그후 마커의 좌표를 담기위한 변수
-        	var dragendX= copyMarker.getPosition().lat;
-        	var dragendY= copyMarker.getPosition().lng;
+        		//마커를 드래그후 마커의 좌표를 담기위한 변수
+        		var dragendX= copyMarker.getPosition().lat;
+        		var dragendY= copyMarker.getPosition().lng;
               
            
-        	for(var i=0; i<copyMarkers.length;i++){
-            	console.log(copyMarkers.length);
-            	console.log("bmarker ? "+copyMarkers[i]);
-                
-            	if(copyMarkers[i].getLabel() == markerLabel){
-                	copyMarkers[i].getPosition().lat = dragendX;
-                	copyMarkers[i].getPosition().lng = dragendY;
+        		for(var i=0; i<copyMarkers.length;i++){
+            		console.log(copyMarkers.length);
+            		console.log("bmarker ? "+copyMarkers[i]);                
+            		if(copyMarkers[i].getLabel() == markerLabel){
+                		copyMarkers[i].getPosition().lat = dragendX;
+                		copyMarkers[i].getPosition().lng = dragendY;
                       
-            	}
-        	}     
-    	});
+            		}
+        		}     
+    		}); */
       
         //마커의 라벨 이름을 알기위해 적용. 추후삭제 할것
-        copyMarker.addListener('click', function() {         
+        /* copyMarker.addListener('click', function() {         
            	console.log(copyMarker.getLabel());
             fr=copyMarker.getLabel();
             $("#new-modal").modal(); 
             
-        });
+        }); */
         dataArray.push(latLng);
-        copymovingBusMarker(latLng, map);
+        //copymovingBusMarker(latLng, map);
                
     }
            
     function copymovingBusMarker(latLng, map){
        	console.log(latLng);    
-       	var BusMarker = new google.maps.Marker({
+       	BusMarker = new google.maps.Marker({
             position: new google.maps.LatLng(latLng[0].s_y, latLng[0].s_x),
             map: map,
             icon:"${pageContext.request.contextPath}/images/bus.png"
@@ -499,22 +507,29 @@ select#selectBus, select#selectBus2 {
     
     function copymoveBus(BusMarker, map, latLng) {
        	var i=0;
-       	setInterval(function(){
-        if(i == latLng.length){
-            return false;
-        }else{
-            console.log(latLng[i]);
-            BusMarker.setPosition(new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x));
-        }
-        i++;
-       },1000);    
+       	stopSearch = setInterval(function(){
+        	if(i == latLng.length){
+            	return false;
+        	}else{
+            	console.log(latLng[i]);
+            	BusMarker.setPosition(new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x));
+        	}
+        	i++;
+       	},1000);    
     };
     
+    function deleteBusMarker(){
+    	clearInterval(stopSearch);
+    	if(BusMarker !=null){
+			BusMarker.setMap(null);
+		}
+    }
     
     $(function() {
       
        	$("#selectBus").change(function(){
    			deleteRoute();
+   			deleteBusMarker();
    			if($("#selectBus").val() !=null){     		
        			/* $.ajax({
                    	url : "busStopOriginalRead.admin",
@@ -705,9 +720,9 @@ select#selectBus, select#selectBus2 {
           
        	});
                  
-      	$("#busLoad").click(function() {
+      	/* $("#busLoad").click(function() {
          	copymovingBusMarker(dataArray, map);
-      	});
+      	}); */
       
       	function deleteRoute(){      	
       		if(copyMarkers !=null){ 		
@@ -725,7 +740,9 @@ select#selectBus, select#selectBus2 {
        		}
        		copyMarkers=[];
        		copyMarkers.length = 0;
-       		as=0;
+       		//as=0;
+       		
+       		
       	}
       
       	$("#sendBusStop").click(function(){    	
