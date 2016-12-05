@@ -106,6 +106,27 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 	float: left;
 	width: 80%;
 }
+
+select#selectedrnum {
+	-webkit-appearance: button;
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+	-webkit-padding-end: 10px;
+	-webkit-padding-start: 2px;
+	-webkit-user-select: none;
+	background-image: url(http://i62.tinypic.com/15xvbd5.png),
+		-webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+	background-position: 97% center;
+	background-repeat: no-repeat;
+	border: 1px solid #AAA;
+	color: #555;
+	font-size: inherit;
+	overflow: hidden;
+	padding: 5px 10px; 
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 150px;
+}
 </style>
 
 </head>
@@ -236,7 +257,7 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 						$.each(data.mjrolist, function(index, obj) {
 							
 							/* 
-							$.each(data.mjrolist,funvtion(index1,obj1){
+							$.each(data.mjrolist,function(index1,obj1){
 								String array = new Array();
 								for(int i=0;i<7;i++){
 								if(ocode==i){
@@ -266,16 +287,21 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 							
 							var time2=date+" "+obj.r_start;
 							var time3=new Date(time2);
+							var time4=new Date(time2);
 							
 							//time3.setMinutes(time3.getMinutes()+10);
 							time3.setMinutes(time3.getMinutes()+test);
 							var starttime=time3.getHours().toString()+":"+time3.getMinutes().toString(); //time2.time();
 							
-					
+							time4.setMinutes(time3.getMinutes()+10);
+						    var endtime=time4.getHours().toString()+":"+time4.getMinutes().toString();
+							console.log('endtime : '+endtime);
+							
 							var item = {
 								title : obj.m_name,
 								id : obj.m_id,
 								start :starttime,
+								end:endtime,
 								dow :obj.o_code
 							};
 							console.log(item);

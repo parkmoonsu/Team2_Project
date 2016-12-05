@@ -209,6 +209,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where bd_name = '광역버스'
 	</select>
 	
+	<select id="aBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '공항버스'
+	</select>
+	
+	<select id="iBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '인천버스'
+	</select>
+	
+	<select id="kBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '경기버스'
+	</select>
+	
+	<select id="dBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '폐지버스'
+	</select>
+	
+	<select id="pBus" resultType = "int">
+		select count(*) 
+		from busdis bd join route r 
+		on bd.BD_NUM = r.BD_NUM 
+		join bus b  
+		on b.R_NUM = r.R_NUM 
+		where bd_name = '공용버스'
+	</select>
 	<select id="noRoute" resultType = "int">
 		select count(*) 
 		from bus b left outer join route r

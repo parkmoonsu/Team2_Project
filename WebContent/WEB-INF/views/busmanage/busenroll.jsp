@@ -69,7 +69,7 @@ th{
 }
 
 ul.pagination li a.active {
-    background-color: #4CAF50;
+    background-color: #1ABB9C;
     color: white;
 }
 
@@ -101,9 +101,15 @@ ul.pagination li a {
 				<div class="row tile_count" style="text-align: center">
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
 						<span class="count_top"><i class="fa fa-bus"></i> 미정</span>
-						<div class="count">${no}</div>
+						<div class="count red">${no}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+
+						<span class="count_top"><i class="fa fa-bus"></i> 공항버스</span>
+						<div class="count">${a}</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+
 						<span class="count_top"><i class="fa fa-bus"></i> 간선버스</span>
 						<div class="count">${m}</div>
 					</div>
@@ -120,8 +126,24 @@ ul.pagination li a {
 						<div class="count">${g}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 인천버스</span>
+						<div class="count">${i}</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 경기버스</span>
+						<div class="count">${k}</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 폐지버스</span>
+						<div class="count">${d}</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+						<span class="count_top"><i class="fa fa-bus"></i> 공용버스</span>
+						<div class="count">${p}</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
 						<span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
-						<div class="count green">${m+n+w+g+no}</div>
+						<div class="count green">${a+m+n+w+g+i+k+d+p+no}</div>
 					</div>
 					
 				</div>

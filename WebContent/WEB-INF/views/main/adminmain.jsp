@@ -458,11 +458,18 @@
 	element : 'graph_bar',
 	data : [ 
 		{device : '미정', geekbench : ${no}},
-		{device : '간서버스',geekbench : ${m}},
+
+		{device : '공항버스',geekbench : ${a}},
+		{device : '간선버스',geekbench : ${m}},
 		{device : '지선버스',geekbench : ${n}}, 
 		{device : '순환버스',geekbench : ${w}},
 		{device : '광역버스',geekbench : ${g}},
-		{device : '전체버스',geekbench : ${m+n+w+g+no}} 
+		{device : '인천버스',geekbench : ${i}},
+		{device : '경기버스',geekbench : ${k}},
+		{device : '폐지버스',geekbench : ${d}},
+		{device : '공용버스',geekbench : ${p}},
+		{device : '전체버스',geekbench : ${a+m+n+w+g+i+k+d+p+no}} 
+
 	],
 	xkey : 'device',
 	ykeys : [ 'geekbench' ],
