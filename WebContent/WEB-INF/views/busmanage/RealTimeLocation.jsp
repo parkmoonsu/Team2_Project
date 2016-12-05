@@ -862,7 +862,7 @@
                     data : {r_num:$("#selectBus").val()},
                     success : function(data) {
                        console.log("읽어옴?");
-                       console.log(data);                                                                                                               	                                                                  	                       	   
+                       console.log(data);s                                                                                                               	                                                                  	                       	   
                     	   originalMarkerMake(data, map);
                        	                 	                     	
                     }        		

@@ -30,6 +30,7 @@ import kr.or.bus.dto.BusStopDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteStopDTO;
 import kr.or.bus.dto.StopDTO;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.xml.XMLSerializer;
@@ -555,6 +556,8 @@ public class BusStopManageService {
 	public void routeidInfoSearch(String r_num,RouteDTO dto, StopDTO stopdto, RouteStopDTO routestopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		System.out.println(r_num);
 		JSONObject jsonmaps = null;
+		JSONArray jsonlist= null;
+		JSON se = null;
 		PrintWriter out = null;
 		response.setCharacterEncoding("UTF-8");
 		out = response.getWriter();
@@ -587,27 +590,64 @@ public class BusStopManageService {
         rd.close();
         conn.disconnect();
         //System.out.println(sb.toString());
-        jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
+        jsonmaps = JSONObject.fromObject(new XMLSerializer().read(sb.toString()));
+		System.out.println("시발 되냐" + jsonmaps.get("msgBody"));
+        
+		//jsonmaps.getJSONArray("itemList");
 		
-        System.out.println(jsonmaps.get("msgBody"));
-        jsonmaps = (JSONObject) jsonmaps.get("msgBody");
-        System.out.println(jsonmaps.get("itemList"));
-        jsonmaps = (JSONObject) jsonmaps.get("itemList");
-        System.out.println(jsonmaps.get("busRouteId"));
-        System.out.println(jsonmaps.get("busRouteNm"));
-        System.out.println(jsonmaps.get("firstBusTm"));
-        System.out.println(jsonmaps.get("lastBusTm"));
-        System.out.println(jsonmaps.get("term"));
-        System.out.println(jsonmaps.get("routeType"));
+		/*시발 되냐{"comMsgHeader":[],"msgHeader":{"headerCd":"0","headerMsg":"정상적으로 처리되었습니다.","itemCount":"0"},
+		 * "msgBody":[
+		 * {"busRouteId":"100100022","busRouteNm":"143","corpNm":"대진여객  02-916-2678","edStationNm":"개포동","firstBusTm":"20161205040000","firstLowTm":"","lastBusTm":"20161205221000","lastBusYn":" ","lastLowTm":"20150717215600","length":"62.32","routeType":"3","stStationNm":"정릉","term":"7"},
+		 * {"busRouteId":"100100158","busRouteNm":"1143","corpNm":"삼화상운  02-936-5569","edStationNm":"서울의료원","firstBusTm":"20161205050000","firstLowTm":"","lastBusTm":"20161205233000","lastBusYn":" ","lastLowTm":"","length":"25.056","routeType":"4","stStationNm":"중계본동","term":"13"}
+		 * ]}*/
+		
+		se= (JSON) jsonmaps.get("msgBody");
+		
+		
+		if(se.isArray()){
+			System.out.println("배열이다 시발");
+			jsonlist = (JSONArray) se;
+			System.out.println(jsonlist);
+			System.out.println(jsonlist.getJSONObject(0).get("busRouteNm").toString());
+			System.out.println(jsonlist.getJSONObject(0).get("busRouteId").toString());
+	        System.out.println(jsonlist.getJSONObject(0).get("firstBusTm").toString());
+	        System.out.println(jsonlist.getJSONObject(0).get("lastBusTm").toString());
+	        System.out.println(jsonlist.getJSONObject(0).get("term").toString());
+	        System.out.println(jsonlist.getJSONObject(0).get("routeType").toString());
+	        
+	        dto.setR_num(jsonlist.getJSONObject(0).get("busRouteNm").toString());
+	        dto.setR_id(jsonlist.getJSONObject(0).get("busRouteId").toString());
+	        dto.setR_start(jsonlist.getJSONObject(0).get("firstBusTm").toString());
+	        dto.setR_last(jsonlist.getJSONObject(0).get("lastBusTm").toString());
+	        dto.setR_interval(jsonlist.getJSONObject(0).get("term").toString());
+	        dto.setBd_num(jsonlist.getJSONObject(0).get("routeType").toString());
+	        
+	        System.out.println(dto);
+	        
+		}else{
+			System.out.println("그냥 객체야 시발");
+			jsonmaps = (JSONObject) se;
+			System.out.println(se);
+			jsonmaps = (JSONObject) jsonmaps.get("itemList");
+			System.out.println(jsonmaps.get("busRouteNm").toString());
+			System.out.println(jsonmaps.get("firstBusTm").toString());
+			System.out.println(jsonmaps.get("lastBusTm").toString());
+			System.out.println(jsonmaps.get("term").toString());
+			System.out.println(jsonmaps.get("busRouteId").toString());
+			System.out.println(jsonmaps.get("routeType").toString());
+			
+			dto.setR_num(jsonmaps.get("busRouteNm").toString());
+	        dto.setR_start(jsonmaps.get("firstBusTm").toString());
+	        dto.setR_last(jsonmaps.get("lastBusTm").toString());
+	        dto.setR_interval(jsonmaps.get("term").toString());
+	        dto.setR_id(jsonmaps.get("busRouteId").toString());
+	        dto.setBd_num(jsonmaps.get("routeType").toString());
+	        System.out.println(dto);
+		}		    
+        
         
        /*3:간선, 4:지선, 5:순환, 6:광역*/
-        
-        dto.setR_num(jsonmaps.get("busRouteNm").toString());
-        dto.setR_start(jsonmaps.get("firstBusTm").toString());
-        dto.setR_last(jsonmaps.get("lastBusTm").toString());
-        dto.setR_interval(jsonmaps.get("term").toString());
-        dto.setR_id(jsonmaps.get("busRouteId").toString());
-        dto.setBd_num(jsonmaps.get("routeType").toString());
+               
         int routecheck = 0;
         RouteDAO routedao = sqlsession.getMapper(RouteDAO.class);
         
@@ -628,7 +668,7 @@ public class BusStopManageService {
         	out.print("저장 성공!");
         }else{
         	System.out.println("route 입력 실패");
-        	out.print("중복 노선번호 입니다!");
+        	out.print("중복 노선번호 또는 지원하지 않는 노선번호입니다. 서울시 버스를 참고해주세요");
         }
 	}
 	
