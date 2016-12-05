@@ -272,12 +272,21 @@
         
     		var originalMarker = new google.maps.Marker({
             	position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
-           		map: map,
-           		//label: latLng.title,
+           		map: map,           		
            		animation: google.maps.Animation.DROP,
            		icon : '${pageContext.request.contextPath}/images/busstop.png',
            		zindex : "5"
         	});
+     	   
+     	  	var infowindow = new google.maps.InfoWindow;
+     	  	
+     	  	(function (originalMarker, latLng, infowindow) {
+     	        google.maps.event.addListener(originalMarker, "click", function (e) {
+     	            infowindow.setContent("<br>" + latLng.s_name + "<br>" + latLng.rs_order);
+     	            infowindow.open(map, originalMarker);
+     	        });
+     	    })(originalMarker, latLng[i], infowindow);
+
      	  	//map.panTo(originalMarker.getPosition());
      	  	originalMarkers.push(originalMarker);
             
@@ -613,7 +622,7 @@
     
     $(function() {
     			//비동기 버스 경로 을 뿌린다.
-    			/* $.ajax({
+    			$.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
                    	dataType : "json",
@@ -688,10 +697,10 @@
                         	loadVector(hell);
                    	  	}
                 	}
-           		}); */
+           		});
     	
     	//비동기로 정류장 생성
-    	/* $.ajax({
+    	$.ajax({
             url : "busStopRoad.admin",
             type : "get",
             dataType : "json",
@@ -701,10 +710,10 @@
                 console.log(data);                                                                                                               	                                                                  	                       	   
                 originalMarkerMake(data, map);                     	                 	                     	
             }        		
-        }); */
+        });
     	
     	//비동기로 노선 전체 버스를 위치추적한다.
-    	/* stopSearch = setInterval(function(){
+    	stopSearch = setInterval(function(){
     		$.ajax({
                 url : "RealTimeSearch.admin",
                 type : "get",
@@ -735,13 +744,13 @@
                 	           		  	
                 }
             });  		
-    	},30000); */
+    	},30000);
     
     	
     	$("#selectBus").change(function() {
-    		//deleteRoute();
-    		//polyRemove();
-    		//busMarkerRemove();          	
+    		deleteRoute();
+    		polyRemove();
+    		busMarkerRemove();          	
         	if($("#selectBus").val() !=null){       		             		
         		$.ajax({
                    	url : "busRouteSearch.admin",
