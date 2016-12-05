@@ -407,7 +407,7 @@ cursor: pointer;
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 	<script type="text/javascript">
 	var num = 1;
-	
+	var Count = "${Count}";
 	function plus(){
 		 num++;
 			var gname = "#g_name" + num;
@@ -534,9 +534,9 @@ cursor: pointer;
 				 $("#checkall").prop("checked",true);
 			 }
 		});
-
+ 
 	$("#dbtn").click(function(){
-			for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
+		for(var i = 1 ; i <= Count ; i++){ //엑박 뜨는거 무시할것
 				var checkbox = "#check" + i;
 				
 				if($(checkbox).is(":checked")){
@@ -561,7 +561,7 @@ cursor: pointer;
 						 $("#myModalLabel2").empty();
 						 $("#myModalLabel2").append("차량 번호<br>");
 						 
-						for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
+						for(var i = 1 ; i <= Count ; i++){ //엑박 뜨는거 무시할것
 							var checkbox = "#check" + i;
 							
 							if($(checkbox).is(":checked")){
@@ -580,7 +580,7 @@ cursor: pointer;
 		
 		$("#cancelbutton").click(function(){
 			 
-			for(var i = 1 ; i <= ${Count} ; i++){ //엑박 뜨는거 무시할것
+			for(var i = 1 ; i <= Count ; i++){ //엑박 뜨는거 무시할것
 				var checkbox = "#check" + i;
 				
 				if($(checkbox).is(":checked")){
@@ -604,7 +604,7 @@ cursor: pointer;
 				
 				$("#enroll").empty();
 				count = 1;
-				for(var i = 1 ; i <= ${Count} ; i++){ //엑박 무시할것
+				for(var i = 1 ; i <= Count ; i++){ //엑박 무시할것
 					var checkbox = "#check" + i;
 					
 					if($(checkbox).is(":checked")){
