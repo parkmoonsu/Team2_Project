@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.GarageDTO;
-
+import kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
@@ -148,7 +148,7 @@ public class ScheduleManageController {
 	public View lastpredictschedule(String r_num,Model model){
 		System.out.println("lastpredictschedule.admin 타나여?");
 		System.out.println("r_num :  "+r_num);
-		List<MemberJo> mjrolist=service.schedule_get(r_num);
+		List<MemberJoinBusJoinRouteJoinReguloffDTO> mjrolist=service.schedule_get(r_num);
 		model.addAttribute("mjrolist",mjrolist);
 		System.out.println("mjrolist.toString() :"+mjrolist.toString());
 		return jsonview;
