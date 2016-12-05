@@ -44,6 +44,13 @@ public class BusManageController {
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.busInfo(pg);
 		int page = service.pg(pg);
 		int count = service.busCount();
+		int pagecount = 0;
+		if(count % 10 == 0){
+			pagecount = count/10;
+		}else{
+			pagecount = count/10 + 1;
+		}
+		
 		int acount = service.aBus(); //공항
 		int mcount = service.mBus(); //간선
 		int ncount = service.nBus(); //지선
@@ -66,6 +73,7 @@ public class BusManageController {
 		model.addAttribute("p", pcount);
 		model.addAttribute("no", noroute);
 		
+		model.addAttribute("pagecount", pagecount);
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("count",count);
