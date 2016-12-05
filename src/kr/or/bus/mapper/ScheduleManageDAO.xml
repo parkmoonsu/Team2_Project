@@ -103,6 +103,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rou.r_num = #{r_num}
 	</select>
 	
+	<select id="getReqRescheduled" resultType="kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO">
+	  select regr.KO_CODE, mem.M_ID, mem.M_NAME, mo.O_CODE, mo.O_DATE, mem1.M_ID as m_id_1, mem1.M_NAME as m_name_1, mo1.O_CODE as o_code_1, mo1.O_DATE as o_date_1, regr.O_CHECK
+	  from reguloffr regr
+	  join member mem
+	  on regr.M_ID = mem.M_ID
+	  join moff mo
+	  on mo.O_CODE = regr.O_CODE
+	  join member mem1
+	  on mem1.M_ID = regr.RO_OBJECT
+	  join moff mo1
+	  on mo1.O_CODE = regr.RO_CODE
+	  where regr.KO_CODE = '600' and regr.O_CHECK = 'y' and regr.M_ID in ( select rego.M_ID
+	  from reguloff rego
+	  join member mem
+	  on rego.m_id = mem.m_id
+	  join bus bu
+	  on bu.b_vehiclenum = mem.b_vehiclenum
+	  where bu.r_num = #{r_num} and rego.TEMP = 't' or rego.TEMP = 's')
+	</select>
+	
 	<select id="getOcode" resultType="String">
 		select o_code from moff where o_date = #{o_date}
 	</select>
@@ -112,7 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="updateReguloff">
-		update reguloff set o_code = #{param2} where m_id = #{param1}
+		update reguloff set o_code = #{param2}, ro_regdate = sysdate where m_id = #{param1}
 	</update>
 	
 

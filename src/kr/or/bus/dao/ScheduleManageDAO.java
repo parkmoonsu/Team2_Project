@@ -11,6 +11,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+import kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
 import kr.or.bus.dto.RouteDTO;
@@ -65,11 +66,10 @@ public interface ScheduleManageDAO {
 	public int getRequestRefuseNum();
 
 	public List<MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO> getRequestMember();
-
 	public List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> getRequestInfoCal(String r_num);
-
 	public List<MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2> getMemberTempTrue(String r_num);
-
+	public List<MemberJoinReguloffrJoinMoffDTO> getReqRescheduled(String r_num);
+	
 	public int updateFirstRegister(String m_id, String o_code); //승인
 	public int updateFirstRegisterRecord(String m_id); //승인
 	public int refuseFirstRegisterRecord(String m_id); //거절

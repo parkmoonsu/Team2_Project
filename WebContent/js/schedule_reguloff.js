@@ -376,7 +376,7 @@ function loadCalendar(){
 																			data : {
 																				m_id:event1.id,
 																				o_code:event1.dow[0],
-																				temp:'s'
+																				temp:''
 																			},
 																			success : function(data) {
 																				

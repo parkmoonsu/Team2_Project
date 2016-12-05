@@ -4,7 +4,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--
- * @File Name: calendar_reguloff.jsp
+ * @File Name: schedule_managereguloff.jsp
  * @Author: 길한종
  * @Data: 2016. 11. 22
  * @Desc: 일정관리(정기휴무) -  풀캘린더 ui
@@ -263,12 +263,74 @@ select#selectedgaragename, select#selectedroutenumber {
 			url:"getselectedmember.admin",
 			data:{"r_num":param},
 			success:function(data){
-
+				var item = "";
 				var m_name = "";
 				var m_id = "";
 				var array = new Array(); //db에 저장된 일정을 담는 배열
-				
-				$.each(data.mrmbrjdto,function(index,obj){
+				$.each(data.mjrjmdto,function(index,obj){
+					console.log('변경중 m_id'+obj.m_id);
+					console.log('변경중 m_id_1'+obj.m_id_1);
+					console.log('변경중 m_name'+obj.m_name);
+					console.log('변경중 m_name_1'+obj.m_name_1);
+					console.log('변경중 o_code'+obj.o_code);
+					console.log('변경중 o_code_1'+obj.o_code_1);
+					console.log('변경중 o_check'+obj.o_check);
+				});
+				$.each(data.mrmbrjdto,function(index,obj1){ //reguloff 전체 
+					$.each(data.mjrjmdto,function(index,obj2){ //변경중인 
+						if(obj1.m_id == obj2.m_id){ //변경중인 기사 찾기
+							if(obj2.m_id == obj2.m_id_1){ // 변경 요청 == 변경 대상
+								if(obj2.o_code == obj2.o_code_1){ //변경 요청 == 변경 대상 and 요청자 휴무 == 대상자 휴무
+									    item = {
+										title : obj2.m_name,
+										aftername : obj2.m_name_1,
+										id : obj2.m_id,
+										afterid : obj2.m_id_1,
+										dow : obj2.o_code,
+										afterdow : obj2.o_code_1, //어차피 o_code = o_code_1
+										color : "red"
+									}
+								//array.push(item);
+								}else{ //변경 요청 == 변경 대상 and 요청자 휴무 != 대상자 휴무
+									    item = {
+										title : obj2.m_name,
+										aftername : obj2.m_name_1,
+										id : obj2.m_id,
+										afterid : obj2.m_id_1,
+										dow : obj2.o_code,
+										afterdow : obj2.o_code_1, // o_code != o_code_1
+										color : "red"//red로 바꿔야함
+									}
+								//array.push(item);
+								}//else 끝
+							}else{ //변경 요청 != 변경 대상
+								        item = {
+										title : obj2.m_name,
+										aftername : obj2.m_name_1,
+										id : obj2.m_id,
+										afterid : obj2.m_id_1,
+										dow : obj2.o_code,
+										afterdow : obj2.o_code_1, // o_code != o_code_1
+										color : "green"
+								}
+							//array.push(item);
+							}
+						}else{ //변경중 아닌 기사
+							        item = {
+									title : obj1.m_name,
+									aftername : obj1.m_name_1,
+									id : obj1.m_id,
+									afterid : obj1.m_id_1,
+									dow : obj1.o_code,
+									afterdow : obj1.o_code_1, // o_code != o_code_1
+									color : "black"
+							}
+						
+						}//else
+					});//each
+					array.push(item);
+				});//each
+				/* $.each(data.mrmbrjdto,function(index,obj){
 					console.log("휴무있는m_id: "+obj.m_id);
 					console.log("휴무있는m_name: "+obj.m_name);
 					console.log("휴무있는o_date: "+obj.o_date);
@@ -279,9 +341,9 @@ select#selectedgaragename, select#selectedroutenumber {
 							dow : obj.o_code
 					};
 					array.push(item);
-				}); 
+				}); //each */
 				var eventObject;
-				var calendar = $('#calendar').fullCalendar({
+				    calendar = $('#calendar').fullCalendar({
 
 					header : {
 						left : 'prev,next today',
@@ -293,6 +355,10 @@ select#selectedgaragename, select#selectedroutenumber {
 						console.log('변경자'+event.title);
 						console.log('시작일'+event.start.format('YYYY-MM-DD'));
 						console.log('변경자 id:'+event.id);
+						if(event.color=="red" || event.color=="skyblue"){
+							alert(event.title + '님은 현재 휴무 변경 승인 대기 중입니다.');
+							revertFunc();
+						}else{
 						var item = {
 								m_id : event.id,
 								m_name : event.title,
@@ -302,10 +368,10 @@ select#selectedgaragename, select#selectedroutenumber {
 							url:"modifyingschedule.admin",
 							data: item,
 							success:function(data){
-								console.log(data);
 								
 							}
 						});
+						}
 					},
 					eventDurationEditable : false,
 					droppable : true, // this allows things to be dropped onto the calendar
