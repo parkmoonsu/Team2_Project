@@ -1,4 +1,4 @@
-m9<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
@@ -236,7 +236,7 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 						$.each(data.mjrolist, function(index, obj) {
 							
 							/* 
-							$.each(data.mjrolist,function(index1,obj1){
+						
 								String array = new Array();
 								for(int i=0;i<7;i++){
 								if(ocode==i){
