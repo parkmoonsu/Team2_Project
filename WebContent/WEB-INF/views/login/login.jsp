@@ -53,7 +53,7 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-center" align="center" style="color: white">
-                        			<h2>Log IN</h2>
+                        			<h2>Login</h2>
                         		</div>
                             </div>
                             <div class="form-bottom">
@@ -80,7 +80,7 @@
 			                    <c:if test="${param.error != null}">
 									<div>로그인 실패 <br>
 											<script>
-														alert("강민수는 바람둥이");
+														alert("극혐");
 													</script>
 															<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
       												이유 : <c:out
