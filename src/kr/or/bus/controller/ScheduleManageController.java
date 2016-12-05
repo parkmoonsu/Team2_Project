@@ -144,7 +144,7 @@ public class ScheduleManageController {
 	
 	//full calendar
 	//content에 내용 뿌리기
-	/*@RequestMapping(value = "/lastpredictschedule.admin", method = RequestMethod.POST)
+	@RequestMapping(value = "/lastpredictschedule.admin", method = RequestMethod.POST)
 	public View lastpredictschedule(String r_num,Model model){
 		System.out.println("lastpredictschedule.admin 타나여?");
 		System.out.println("r_num :  "+r_num);
@@ -152,15 +152,15 @@ public class ScheduleManageController {
 		model.addAttribute("mjrolist",mjrolist);
 		System.out.println("mjrolist.toString() :"+mjrolist.toString());
 		return jsonview;
-	}*/
-	
-	//배차간격, 첫차 ,막차 시간 가져오기
-	@RequestMapping(value = "/lastpredictschedule.admin", method = RequestMethod.GET)
+	}
+
+/*	//배차간격, 첫차 ,막차 시간 가져오기
+	@RequestMapping("/lastpredictschedule.admin")
 	public String getSelecttime(Model model){
 		service.getintervalstartlast(model);
 		return "schedule/schedule_virtual";
 	}
-	
+	*/
 	
 	/*
 	 @RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)

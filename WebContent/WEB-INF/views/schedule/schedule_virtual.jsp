@@ -254,7 +254,6 @@ select#selectedrnum {
 						var test=0;
 						var ocode="";
 						var ocode2="";
-						String dowarray = new Array();
 						$.each(data.mjrolist, function(index, obj) {
 							
 							/* 
@@ -272,6 +271,7 @@ select#selectedrnum {
 							});
 							
 							*/
+							
 							
 					         ocode2=obj.o_code;
 							if(ocode==ocode2){
@@ -332,7 +332,7 @@ select#selectedrnum {
 				eventLimit : true, // allow "more" link when too many events
 				events : array
 
-	/* 		[
+			/* [
 			   {
 			      title: 'All Day Event',
 			      start: '2016-09-01'
@@ -346,7 +346,7 @@ select#selectedrnum {
 			   
 			      title: '김수현',
 			      start: '17:10:00',
-			      dow : [4,5,6]
+			      dow : [0]
 			   },
 			   {
 			      
