@@ -318,10 +318,11 @@ select#selectedrnum {
 			$('#calendar2').empty();
 			$('#calendar2').append('<div id="calendar"></div>');
 			$('#calendar').fullCalendar({
+				defaultView: 'agendaWeek',
 				header : {
 					left : 'prev,next today',
 					center : 'title',
-					right : 'month,agendaWeek,agendaDay'
+					right : 'agendaWeek,agendaDay'
 				},
 
 				slotDuration : '00:10:00',
