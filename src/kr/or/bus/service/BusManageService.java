@@ -24,8 +24,6 @@ import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dao.RnumcommuteDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.MemberDTO;
-import kr.or.bus.dto.RnumcommuteDTO;
-import kr.or.bus.dto.TimetableDTO;
 
 @Service
 public class BusManageService {

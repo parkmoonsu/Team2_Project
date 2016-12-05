@@ -28,12 +28,10 @@ import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinMemberJoinBusDTO;
-import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
-import kr.or.bus.dto.SelectDistinctDTO;
-import kr.or.bus.dto.TimetableDTO;
+
 
 @Configuration
 @EnableScheduling

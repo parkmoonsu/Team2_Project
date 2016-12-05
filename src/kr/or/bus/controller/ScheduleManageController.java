@@ -16,11 +16,8 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.OscheduleJoinMemberDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
-import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
 import kr.or.bus.dto.RouteDTO;
-import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
-import kr.or.bus.dto.TimetableDTO;
 import kr.or.bus.service.ScheduleManageService;
 
 
