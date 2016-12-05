@@ -456,20 +456,19 @@
 
 	<script type="text/javascript">
 	
-	
 	// moris 시작
 	Morris.Bar({ //// 엑박 무시하세요~
 	element : 'graph_bar',
 	data : [ 
-		{device : '미정', geekbench : ${no}},
+		{device : '미정', geekbench : ${no }},
 
 	
-		{device : '간선버스',geekbench : ${m}},
-		{device : '지선버스',geekbench : ${n}}, 
-		{device : '순환버스',geekbench : ${w}},
-		{device : '광역버스',geekbench : ${g}},
+		{device : '간선버스',geekbench : ${m }},
+		{device : '지선버스',geekbench : ${n }}, 
+		{device : '순환버스',geekbench : ${w }},
+		{device : '광역버스',geekbench : ${g }},
 		
-		{device : '전체버스',geekbench : ${m+n+w+g+no}} 
+		{device : '전체버스',geekbench : ${m+n+w+g+no } } 
 
 	],
 	xkey : 'device',
@@ -1162,7 +1161,6 @@
 			//도넛 종료
 			
 		});
-	
 	</script>
 </body>
 </html>

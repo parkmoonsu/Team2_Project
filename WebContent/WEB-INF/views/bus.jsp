@@ -21,8 +21,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/mainCss/css/animate.css">
 	<!-- Icomoon Icon Fonts-->
 	<!-- Simple Line Icons -->
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/mainCss/css/magnific-popup.css">
 	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/mainCss/css/icomoon.css">
 	
