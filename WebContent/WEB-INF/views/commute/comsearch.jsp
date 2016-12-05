@@ -182,6 +182,9 @@ th{
 	text-align: center;
 }
 
+table, th{
+	text-align: center;
+}
 ul.pagination li a.active {
     background-color: #1ABB9C;
     color: white;
@@ -192,7 +195,7 @@ ul.pagination li a {
     float: left;
     padding: 8px 16px;
     text-decoration: none;
-}	
+}
 </style>
 </head>
 <!-- 출근  -->
@@ -323,11 +326,19 @@ ul.pagination li a {
 														<li><a href="comsearch.member?pg=${pgc-1}">Previous</a></li>
 													</c:if>
 
-
-
-													<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-														<li><a href="comsearch.member?pg=${i}">${i}</a></li>
+													<c:forEach begin="1" end="${pagecount}" var="i">
+														<c:if test="${i==pgc}">
+															<li><a class="active" href="#">${i}</a></li>
+														</c:if>
+														<c:if test="${i!=pgc}">
+															<li><a href="comsearch.member?pg=${i}">${i}</a></li>
+														</c:if>
 													</c:forEach>
+
+
+														<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
+														<li><a href="comsearch.member?pg=${i}">${i}</a></li>
+													</c:forEach> --%>
 
 
 													<c:if test="${pgc < count/10 }">

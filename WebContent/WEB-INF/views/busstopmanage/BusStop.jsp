@@ -74,7 +74,7 @@ select#selectBus, select#selectBus2 {
 	border: 1px solid #AAA;
 	color: #555;
 	font-size: inherit;
-	margin: 20px; 
+	margin: 7px; 
 	overflow: hidden;
 	padding: 5px 10px; 
 	text-overflow: ellipsis;
@@ -82,6 +82,13 @@ select#selectBus, select#selectBus2 {
 	width: 150px;
 }
 .btn{border-radius: 8px};
+
+#inputBusStop {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
 </style>
 </head>
 
@@ -126,7 +133,7 @@ select#selectBus, select#selectBus2 {
 					<div class="row" style="text-align: right">
 						<input type="button" id="newsave" value="원본좌표저장" class="btn btn-default">
 						<input type="button" id="newsave2" value="수정좌표저장" class="btn btn-default">
-						<input type="button" id="busLoad" value="버스 보기" class="btn btn-default" style="margin-right: 17px;">
+						<input type="button" id="busLoad" value="버스 보기" class="btn btn-default"zdddd>
 					
 					
 					<select id="selectBus" style="margin:5px" >
@@ -144,15 +151,16 @@ select#selectBus, select#selectBus2 {
 					</select>				
 					
 					<span>
-					<input type="text" id="inputBusStop" placeholder="노선번호를 입력해주세요">
-					<input type="button" id="sendBusStop" value="정류장저장"></span>
+					<input type="text" style="width:210px; height:34px; padding: 12px 20px; 
+    					   border-radius: 8px;" id="inputBusStop" placeholder="&nbsp;노선번호를 입력해주세요">
+					<input type="button" class="btn btn-default" id="sendBusStop" value="정류장저장"></span>
 					
 					
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="container" id="map"
-								style="width: auto; height: 500px; border: solid black 1px; margin-left: auto; margin-right: auto;">
+								style="width: auto; height: 500px; border: solid black 1px; ">
 							</div>
 						</div>
 

@@ -89,6 +89,7 @@ public class CommuteService {
 
 
 	public int pg(String pg){
+		System.out.println("pg함수 들어왔어여");
 		int page = 1;
 		if(pg != null){
 			page = Integer.parseInt(pg);
@@ -97,7 +98,7 @@ public class CommuteService {
 	}
 	
 	public int count(String m_id){
-		
+		System.out.println("count함수 들어왔어여");
 		CommuteDAO dao = sqlsession.getMapper(CommuteDAO.class);
 		int size = dao.count(m_id);
 		
