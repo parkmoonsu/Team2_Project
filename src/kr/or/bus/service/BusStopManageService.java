@@ -22,6 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.bus.dao.BusDataDAO;
 import kr.or.bus.dao.BusStopDAO;
@@ -416,7 +419,8 @@ public class BusStopManageService {
 	}
 
 //실시간 위치 추적
-	public void busLocationSearch(String r_num, RouteDTO dto, HttpServletRequest request , HttpServletResponse response) throws IOException{	
+	public String busLocationSearch(String r_num, RouteDTO dto, HttpServletRequest request , HttpServletResponse response) throws IOException{	
+		String busno = null ;
 		PrintWriter out=null;
 		response.setCharacterEncoding("UTF-8");
 		out = response.getWriter();
@@ -460,8 +464,9 @@ public class BusStopManageService {
 			
 			
 			
-			LocationSearch(request , response, venid);
+			busno = LocationSearch(request , response, venid);
 		}
+		return busno;
 	}
 	
 	public JSONObject multiLocationSearch(HttpServletRequest request , HttpServletResponse response, RouteDTO dto, String r_num) throws IOException{
@@ -522,7 +527,7 @@ public class BusStopManageService {
 		return jsonmaps;
 	}
 	
-	public void LocationSearch(HttpServletRequest request , HttpServletResponse response, String venid) throws IOException{
+	public String LocationSearch(HttpServletRequest request , HttpServletResponse response, String venid) throws IOException{
 		System.out.println("너하나만 타냐");
 			
 		PrintWriter out=null;
@@ -571,10 +576,12 @@ public class BusStopManageService {
 		jsonno = (JSONObject) jsonno.get("itemList");
 		System.out.println("차량번호 가져왔냐???"+jsonno.get("plainNo"));
 		BusDataDAO busdatadao = sqlsession.getMapper(BusDataDAO.class);
-		String busNo = busdatadao.SearchRider(jsonno.get("plainNo").toString());
+		String busNo = busdatadao.SearchRider(jsonno.get("plainNo").toString());		
 		System.out.println(busNo);
+		
 		out.print(jsonmaps);
 		
+		return busNo;
 	}
 	
 	//뷰에서 r_num 을 받아서 공공데이터로 보낸뒤 결과값 route_id 를 디비에 저장시키는 함수. 

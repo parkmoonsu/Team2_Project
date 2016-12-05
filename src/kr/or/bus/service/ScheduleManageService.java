@@ -23,6 +23,9 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+
+import kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO;
+
 import kr.or.bus.dto.OscheduleJoinMemberDTO;
 import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
@@ -68,6 +71,11 @@ public class ScheduleManageService {
 		return mrmbrjdto;
 	}
 	
+	public List<MemberJoinReguloffrJoinMoffDTO> requestRescheduled(String r_num){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		List<MemberJoinReguloffrJoinMoffDTO> mjrjmdto = dao.getReqRescheduled(r_num);
+		return mjrjmdto;
+	}
 	public String decideReguloffMember(String m_id, String o_date){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.insertReguloff(m_id, dao.getOcode(o_date));

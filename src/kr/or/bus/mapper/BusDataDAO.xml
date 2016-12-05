@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="SearchRider" parameterType="String" resultType="String">
-		select bus.B_VEHICLENUM, bus.R_NUM, member.M_NAME
+		select member.M_NAME
 		from bus, member 
 		where bus.B_VEHICLENUM = member.B_VEHICLENUM and bus.B_VEHICLENUM = #{b_vehiclenum}
 	</select>

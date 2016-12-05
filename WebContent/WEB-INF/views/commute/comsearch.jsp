@@ -156,7 +156,7 @@ var som;
 						});
 						
 						} else {
-							alert("이미 출근 하셨습니다.");
+							alert("이미 퇴근 하셨습니다.");
 						}
 					}); 
 
@@ -296,7 +296,7 @@ ul.pagination li a {
 													<tbody>
 														<c:forEach var="i" items="${list}">
 															<tr>
-																<td>${i.rownum}</td>
+																<td>${i.ro}</td>
 																<td>${i.c_date}</td>
 																<td>${i.c_start}</td>
 																<td>${i.cs_stat}</td>
@@ -311,29 +311,34 @@ ul.pagination li a {
 												<!-- 요기서부터 페이징처리 -->
 												<c:set var="count" value="${count}" />
 												<c:set var="pgc" value="${pgs}" />
-												<c:choose>
-													<c:when test="${count % 10 == 0}">
-														<c:set value="${count/10}" var="pagecount" />
-													</c:when>
-													<c:otherwise>
-														<c:set value="${count/10 + 1}" var="pagecount" />
-													</c:otherwise>
-												</c:choose>
+												<c:set var = "pagecount" value = "${pagecount}"/>
 
 												<div style="text-align: center">
 													<ul class="pagination">
 													<c:if test="${pgc > 1}">
-														<li><a href="comsearch.member?pg=${pgc-1}">Previous</a></li>
+														<li><a href="comsearch.member?m_id=${LoginUser}&pg=${pgc-1}">Previous</a></li>
 													</c:if>
 
-													<c:forEach begin="1" end="${pagecount}" var="i">
-														<c:if test="${i==pgc}">
-															<li><a class="active" href="#">${i}</a></li>
-														</c:if>
-														<c:if test="${i!=pgc}">
-															<li><a href="comsearch.member?pg=${i}">${i}</a></li>
-														</c:if>
-													</c:forEach>
+														<c:forEach begin="1" end="${pagecount}" var="i" step="5">
+															<c:forEach begin="${i}" end="${i+4}" step="1" var="x">
+																<c:if test="${x <= pagecount}">
+																	<c:choose>
+																		<c:when test="${pgc == x}">
+																			<li><a class="active" href="#">${x}</a></li>
+																		</c:when>
+																		<c:when test="${pgc > i-1 && pgc < i+5 }">
+																			<li><a href="comsearch.member?m_id=${LoginUser}&pg=${x}">${x}</a></li>
+																		</c:when>
+																		<c:when test="${x == i+5}">
+																			<c:forEach begin="${x}" end="${x+4}" step="1" var="y">
+																				<li><a href="comsearch.member?m_id=${LoginUser}&pg=${y}">${y}</a></li>
+																			</c:forEach>
+																		</c:when>
+																	</c:choose>
+																</c:if>
+
+															</c:forEach>
+														</c:forEach>
 
 
 														<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
@@ -342,7 +347,7 @@ ul.pagination li a {
 
 
 													<c:if test="${pgc < count/10 }">
-														<li><a href="comsearch.member?pg=${pgc+1}">Next</a></li>
+														<li><a href="comsearch.member?m_id=${LoginUser}&pg=${pgc+1}">Next</a></li>
 													</c:if>
 												</ul>
 												</div>

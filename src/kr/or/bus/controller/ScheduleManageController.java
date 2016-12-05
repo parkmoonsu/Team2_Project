@@ -14,6 +14,9 @@ import kr.or.bus.dto.GarageDTO;
 import kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+
+import kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO;
+
 import kr.or.bus.dto.OscheduleJoinMemberDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
@@ -57,7 +60,9 @@ public class ScheduleManageController {
 		System.out.println("r_num"+r_num);
 		List<MemberJoinRegulOffDTO> mjrdto = service.unScheduledMember(r_num);
 		List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> mrmbrjdto = service.scheduledMember(r_num);
+		List<MemberJoinReguloffrJoinMoffDTO> mjrjmdto = service.requestRescheduled(r_num);
 		model.addAttribute("mjrdto", mjrdto);
+		model.addAttribute("mjrjmdto", mjrjmdto);
 		model.addAttribute("mrmbrjdto", mrmbrjdto);
 		return jsonview;
 	}
