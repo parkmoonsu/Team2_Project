@@ -558,6 +558,7 @@
 		}
 		if(BusMarker !=null){
 			BusMarker.setMap(null);
+			BusMarker = null;
 		}
     }
     
