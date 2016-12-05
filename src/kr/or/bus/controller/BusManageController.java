@@ -285,5 +285,52 @@ public class BusManageController {
 		map.addAttribute("list", busStopManageService.routeList());
 		return "busmanage/RealTimeLocation";
 	}
+	
+	@RequestMapping("noroute.admin")
+	public String noRoute(String pg , Model model){
 
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.noRouteInfo(pg);
+
+		 
+
+		model.addAttribute("list", list);
+	
+		return "busmanage/clickcount";
+	}
+	
+	@RequestMapping("mbusinfo.admin")
+	public String mBusInfo(Model model){
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.mBusInfo();
+		
+		model.addAttribute("list",list);
+		
+		return "busmanage/clickcount";
+	}
+	
+	@RequestMapping("nbusinfo.admin")
+	public String nBusInfo(Model model){
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.nBusInfo();
+		
+		model.addAttribute("list",list);
+		
+		return "busmanage/clickcount";
+	}
+	
+	@RequestMapping("wbusinfo.admin")
+	public String wBusInfo(Model model){
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.wBusInfo();
+		
+		model.addAttribute("list",list);
+		
+		return "busmanage/clickcount";
+	}
+	
+	@RequestMapping("gbusinfo.admin")
+	public String gBusInfo(Model model){
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.gBusInfo();
+		
+		model.addAttribute("list",list);
+		 
+		return "busmanage/clickcount";
+	}
 }

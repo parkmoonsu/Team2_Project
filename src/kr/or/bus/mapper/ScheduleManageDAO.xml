@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- timetable -->
-	<select id="selectdistinct" resultType="kr.or.bus.dto.SelectDistinctDTO">
+	<!-- <select id="selectdistinct" resultType="kr.or.bus.dto.SelectDistinctDTO">
 		select distinct m.m_name, b.r_num, m.b_vehiclenum, o.o_date from member m
 		join bus b on m.b_vehiclenum=b.b_vehiclenum
 		join oschedule o on m.b_vehiclenum=o.b_vehiclenum
@@ -77,6 +77,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selecttime" resultType="String">
 		select o_time from oschedule
 		where o_date=#{o_date} and b_vehiclenum=#{b_vehiclenum}
+	</select> -->
+	<select id="timetable_get" resultType="kr.or.bus.dto.OscheduleJoinMemberDTO">
+		select * from oschedule o
+		join member m on o.b_vehiclenum=m.b_vehiclenum
 	</select>
 	
 	<!-- vschedule -->
@@ -141,11 +145,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 휴무 요청 상태 관리 -->
 	<select id="getRequestNum" resultType="Integer">
-		select count(*) from reguloffr where ko_code='600' and o_check='y'
+	select count(*)
+	from reguloffr rego
+	join member mem
+	on mem.m_id = rego.m_id
+	join bus bu
+	on bu.B_VEHICLENUM = mem.B_VEHICLENUM
+	join member mem1
+	on mem1.m_id = rego.ro_object
+	join koff ko
+	on ko.ko_code = rego.ko_code
+	join moff mo
+	on mo.o_code = rego.o_code
+	join moff mo1
+	on mo1.o_code = rego.ro_code
+	where ko.ko_code = '600' and rego.o_check='y'
 	</select>
 	
 	<select id="getRequestRefuseNum" resultType="Integer">
-		select count(*) from reguloffr where ko_code='602' and o_check='y'
+	select count(*)
+	from reguloffr rego
+	join member mem
+	on mem.m_id = rego.m_id
+	join bus bu
+	on bu.B_VEHICLENUM = mem.B_VEHICLENUM
+	join member mem1
+	on mem1.m_id = rego.ro_object
+	join koff ko
+	on ko.ko_code = rego.ko_code
+	join moff mo
+	on mo.o_code = rego.o_code
+	join moff mo1
+	on mo1.o_code = rego.ro_code
+	where ko.ko_code = '602' and rego.o_check='y'
 	</select>
 	
 	<select id="getRequestMember" resultType="kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO">
