@@ -294,7 +294,8 @@ th, table{
 		</div>
 
 
-
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -389,7 +390,9 @@ th, table{
 	}
 	
 	$(function(){
-		
+			  $.oPageLoader(); 
+
+		  </script>
 		var count = 1;
 		
 		//console.log(num);

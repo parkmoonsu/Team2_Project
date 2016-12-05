@@ -220,7 +220,8 @@
     <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
     <!-- /calendar modal -->
         
-   
+   <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
     <!-- Bootstrap -->
     <script src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -238,4 +239,9 @@
     <script src="${pageContext.request.contextPath}/js/schedule_reguloff.js"></script>   
     <!-- /FullCalendar -->
   </body>
+  <script type="text/javascript">
+  $(function(){
+	  $.oPageLoader(); 
+  });
+  </script>
 </html>
