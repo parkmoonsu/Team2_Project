@@ -208,7 +208,10 @@ select#selectroute{
 												</select>
 												</div>
 										<div class="x_panel">
-						                         
+						                    <c:set var = "m" value ="${month}"/>
+						                    <c:set var = "y" value ="${year}"/>
+						                    <c:set var = "date" value ="${date}"/>
+						                   ${m}월
 											<div class="x_content" id="commutesearchstarttableinfo">
 											
 											
@@ -217,19 +220,39 @@ select#selectroute{
 													<thead>
 														<tr>
 															<th class='backslash' style = "width:75px; height: 20px;"><div>일(日)&nbsp;</div>&nbsp;이름</th>
-															
-															
-															<c:forEach var="i" begin="1" end="31" step="1">
-																<th style = "width:35px; text-align: center" >${i}</th>
-															</c:forEach> 
-															
+															<c:choose>
+																<c:when test="${m == 1 || m == 3 || m == 5 || m==7 || m==8 || m==10 || m== 12}">
+																	<c:forEach var="i" begin="1" end="31" step="1">
+																		<th style = "width:35px; text-align: center" >${i}</th>
+																	</c:forEach> 
+																</c:when>
+																<c:when test="${m == 4 || m == 6 || m == 9 || m == 11}">
+																	<c:forEach var="i" begin="1" end="30" step="1">
+																		<th style = "width:35px; text-align: center" >${i}</th>
+																	</c:forEach> 
+																</c:when>
+																<c:otherwise>
+																	<c:choose>
+																		<c:when test="${year % 4 == 0 }">
+																			<c:forEach var="i" begin="1" end="29" step="1">
+																				<th style = "width:35px; text-align: center" >${i}</th>
+																			</c:forEach> 
+																		</c:when>
+																		<c:otherwise>
+																			<c:forEach var="i" begin="1" end="28" step="1">
+																				<th style = "width:35px; text-align: center" >${i}</th>
+																			</c:forEach> 
+																		</c:otherwise>
+																	</c:choose>
+																</c:otherwise>
+															</c:choose>	
 														</tr>
 													</thead>
 													<tbody>
 														<c:forEach var = "a" begin = "0" end = "${fn:length(d)-1}" step = "1">
 														<tr>
 															<td style = "height: 40px;">${d[a].m_name}</td>
-													 		<c:forEach var="i" begin="0" end="29" step="1">
+													 		<c:forEach var="i" begin="0" end="30" step="1">
 																<td style = "height: 40px;">${d[a].cs_stat[i]}</td>
 															</c:forEach>
 														</tr>

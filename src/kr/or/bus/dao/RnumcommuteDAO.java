@@ -18,7 +18,7 @@ import kr.or.bus.dto.RnumcommuteDTO2;
 public interface RnumcommuteDAO {
 
 	//노선별 출결현황 날짜
-	public String[] getShow(String m_name);
+	public String[] getShow(String m_name , String date);
 	
 	//노선 선택시 출결현황 날짜
 	public List<RnumcommuteDTO2> getShow2(String m_name, String r_num);

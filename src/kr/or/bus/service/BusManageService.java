@@ -113,7 +113,7 @@ public class BusManageService {
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> garage = dao.getGarage(g_num);
 		return garage;
-	}
+	} 
 	
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRoute(String g_num){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
@@ -253,6 +253,49 @@ public class BusManageService {
 		int noroute = dao.noRoute();
 		return noroute;
 	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> noRouteInfo(String pg){
+		int page = 1;
+		
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.noRouteInfo(page);
 
+		return list;
+	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> mBusInfo(){
+
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.mBusInfo();
+
+		return list;
+	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> nBusInfo(){
+
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.nBusInfo();
+
+		return list;
+	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> wBusInfo(){
+
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.wBusInfo();
+
+		return list;
+	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> gBusInfo(){
+
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.gBusInfo();
+
+		return list;
+	}
 	
 }

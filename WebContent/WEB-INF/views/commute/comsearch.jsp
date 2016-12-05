@@ -52,6 +52,12 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+<!-- Editor -->
+<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+<!-- jQuery -->
+<script
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
+</script>
 <script type="text/javascript">
 var som;
 
@@ -170,6 +176,25 @@ var som;
 <style type="text/css">
 #gotowork {
 	width: "100px";
+}
+
+th{
+	text-align: center;
+}
+
+table, th{
+	text-align: center;
+}
+ul.pagination li a.active {
+    background-color: #1ABB9C;
+    color: white;
+}
+
+ul.pagination li a {
+    color: #73879C;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
 }
 </style>
 </head>
@@ -295,22 +320,32 @@ var som;
 													</c:otherwise>
 												</c:choose>
 
-												<ul class="pager">
+												<div style="text-align: center">
+													<ul class="pagination">
 													<c:if test="${pgc > 1}">
 														<li><a href="comsearch.member?pg=${pgc-1}">Previous</a></li>
 													</c:if>
 
-
-
-													<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-														<li><a href="comsearch.member?pg=${i}">${i}</a></li>
+													<c:forEach begin="1" end="${pagecount}" var="i">
+														<c:if test="${i==pgc}">
+															<li><a class="active" href="#">${i}</a></li>
+														</c:if>
+														<c:if test="${i!=pgc}">
+															<li><a href="comsearch.member?pg=${i}">${i}</a></li>
+														</c:if>
 													</c:forEach>
+
+
+														<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
+														<li><a href="comsearch.member?pg=${i}">${i}</a></li>
+													</c:forEach> --%>
 
 
 													<c:if test="${pgc < count/10 }">
 														<li><a href="comsearch.member?pg=${pgc+1}">Next</a></li>
 													</c:if>
 												</ul>
+												</div>
 											</div>
 											<div style="text-align: right">
 

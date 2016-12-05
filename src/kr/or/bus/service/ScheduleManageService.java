@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+import kr.or.bus.dto.OscheduleJoinMemberDTO;
 import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
@@ -31,6 +35,8 @@ import kr.or.bus.dto.RouteJoinGarageDTO;
 import kr.or.bus.dto.SelectDistinctDTO;
 import kr.or.bus.dto.TimetableDTO;
 
+@Configuration
+@EnableScheduling
 @Service
 public class ScheduleManageService {
 	
@@ -86,10 +92,13 @@ public class ScheduleManageService {
 	}
 	
 	//timetable
-	public List<TimetableDTO> timetable_get(){
+	public List<OscheduleJoinMemberDTO> timetable_get(){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		List<OscheduleJoinMemberDTO> list=dao.timetable_get();
 		
-		List<SelectDistinctDTO> list1=dao.selectdistinct();
+		return list;
+		
+		/*List<SelectDistinctDTO> list1=dao.selectdistinct();
 		
 		List<TimetableDTO> list2=new ArrayList<TimetableDTO>();
 		
@@ -108,19 +117,7 @@ public class ScheduleManageService {
 			list2.add(dto);
 		}
 
-		return list2;
-	}
-	
-	/*
-	제목 : 가상스케줄 생성
-	작성자 : 길한종
-	목적 : VSCHEDULE에서 이용할 차량번호(B_VEHICLENUM), 노선변호(R_NUM), 휴무코드(O_CODE) 가져오기 
-	*/
-	
-	public List<ReguloffJoinMemberJoinBusJoinRouteDTO> get_ocode(){
-		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		List<ReguloffJoinMemberJoinBusJoinRouteDTO> list=dao.ocode_select();
-		return list;
+		return list2;*/
 	}
 	
 	/*
@@ -266,7 +263,19 @@ public class ScheduleManageService {
 		return dto2;
 	}
 	
-	
+	/*
+	제목 : 스케줄러 
+	작성자 : 길한종
+	목적 : vschedule의 정보를 매일 0:00:00에 oschedule로 복사, vschedule 삭제
+		
+	*/
+
+	@Scheduled(cron="0 0 0 * * *")
+	public void copyScheduler(){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		dao.copy_vschedule();
+		dao.delete_vschedule();
+	}
 
 	//수행할 최종스케줄 _김수현
 	

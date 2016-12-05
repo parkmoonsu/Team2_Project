@@ -61,7 +61,12 @@
 <!-- jQuery -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+<style>
+th, table{
+ text-align: center;
+}
 
+</style>
 </head>
 <body class="nav-md">
 	<div class="container body">
@@ -105,8 +110,8 @@
 				<div class="">
 				<div class="page-title">
 						<div class="title_left">
-							<h3>휴무 신청 내역
-								<small>확인 및 승인</small>
+							<h3>운행 스케줄
+								<small>일정 확인</small>
 							</h3>
 						</div>
 					</div>
@@ -128,15 +133,17 @@
 											</span> -->
 										</div>
 									</div>
-									<table class="table table-hover projects">
+									<table class="table table-hover projects" id="table">
 										<thead>
 											<tr>
-												<th>번호</th>
+												<th  style="text-align: center;">번호</th>
 												<th>이름</th>
 												<th>차량번호</th>
 												<th>노선번호</th>
 												<th>운행일</th>
-												<th colspan="3" style="text-align: center">운행시간</th>
+												<th style="text-align: center">운행시간</th>
+												<th></th>
+												<th></th>
 												
 											</tr>
 										</thead>
@@ -146,13 +153,16 @@
 											<c:forEach var="i" items="${d}" varStatus="status">
 											
 											<tr>
-												<td>${status.count}</td>
-												<td>${i.selectdistinctdto.m_name}</td>
-												<td>${i.selectdistinctdto.r_num}</td>
-												<td>${i.selectdistinctdto.b_vehiclenum}</td>
-												<td>${i.selectdistinctdto.o_date}</td>
+												<td style="text-align: center;">${status.count}</td>
+												<td>${i.m_name}</td>
+												<td>${i.b_vehiclenum}</td>
+												<td>${i.r_num}</td>
+												<td>${i.o_date}</td>
+												<td>${i.o_time1}</td>
+												<td>${i.o_time2}</td>
+												<td>${i.o_time3}</td>
 											
-												<c:forEach var="j" items="${i.o_time}">
+												<%-- <c:forEach var="j" items="${i.o_time}">
 													<c:if test="${'0' eq j || '' eq j}">
 														<td>없음:!@#!</td>
 													</c:if>
@@ -169,7 +179,7 @@
 														<td>${j}</td>
 													</c:if>
 													
-												</c:forEach>
+												</c:forEach> --%>
 											</tr>
 											</c:forEach>
 										</tbody>

@@ -67,7 +67,7 @@ th {
 	text-align: center;
 }
 ul.pagination li a.active {
-    background-color: #4CAF50;
+    background-color: #1ABB9C;
     color: white;
 }
 
@@ -193,12 +193,7 @@ ul.pagination li a {
 							<c:set value="${list}" var="d" />
 
 									<!-- start project list -->
-									<select id="sel">
-										<option></option>
-									<c:forEach var="f" items="${d}">
-										<option value="${f.r_num}">${f.r_num}</option>
-									</c:forEach>
-									</select>
+									
 									<div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
@@ -268,7 +263,7 @@ ul.pagination li a {
 											</c:if>
 
 
-											<c:forEach begin="1" end="${pagecount}" var="i">
+											<c:forEach begin="1" end="${pagecount}" var="i" step = "1">
 												<c:if test="${i==pgc}">
 													<li><a  class="active" href="#">${i}</a></li>
 												</c:if>

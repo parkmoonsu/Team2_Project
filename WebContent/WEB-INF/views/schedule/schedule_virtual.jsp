@@ -1,4 +1,4 @@
-m9<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
@@ -108,6 +108,27 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 #calendar {
 	float: left;
 	width: 80%;
+}
+
+select#selectedrnum {
+	-webkit-appearance: button;
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+	-webkit-padding-end: 10px;
+	-webkit-padding-start: 2px;
+	-webkit-user-select: none;
+	background-image: url(http://i62.tinypic.com/15xvbd5.png),
+		-webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+	background-position: 97% center;
+	background-repeat: no-repeat;
+	border: 1px solid #AAA;
+	color: #555;
+	font-size: inherit;
+	overflow: hidden;
+	padding: 5px 10px; 
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 150px;
 }
 </style>
 
@@ -240,10 +261,10 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 						$.each(data.mjrolist, function(index, obj) {
 							
 							/* 
-							$.each(data.mjrolist,function(index1,obj1){
+						
 								String array = new Array();
 								for(int i=0;i<7;i++){
-								if(ocode==i){
+								if(ocode==i ||index>7){
 									
 								}else{
 									array+=i;
@@ -301,10 +322,11 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 			$('#calendar2').empty();
 			$('#calendar2').append('<div id="calendar"></div>');
 			$('#calendar').fullCalendar({
+				defaultView: 'agendaWeek',
 				header : {
 					left : 'prev,next today',
 					center : 'title',
-					right : 'month,agendaWeek,agendaDay'
+					right : 'agendaWeek,agendaDay'
 				},
 
 				slotDuration : '00:10:00',

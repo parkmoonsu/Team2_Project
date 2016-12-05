@@ -22,6 +22,9 @@ public interface CommuteDAO {
 	//회원의 출/퇴근 시간조회  
 	public List<CommuteJoinCstartJoinCendDTO> getSelect(int page,String m_id);	
 	
+	//출/퇴근 목록 개수
+	public int count(String m_id);
+	
 	//출근insert
 	public int gotowork(String m_id, String m_name, String tdate,String dhour);
 		

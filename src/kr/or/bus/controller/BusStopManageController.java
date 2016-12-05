@@ -22,7 +22,8 @@ public class BusStopManageController {
 	BusStopManageService busStopManageService;
 	
 	@RequestMapping(value="/busStation.admin",method=RequestMethod.GET)
-	public String busStopOpen(){		
+	public String busStopOpen(ModelMap map){		
+		map.addAttribute("list", busStopManageService.routeList());
 		return "busstopmanage/BusStop";
 		
 	}
@@ -54,8 +55,8 @@ public class BusStopManageController {
 
 	//실시간 위치추적 30초마다 갱신됨
 	@RequestMapping(value="/RealTimeSearch.admin",method=RequestMethod.GET)
-	public void buslocationLoad(HttpServletRequest request ,HttpServletResponse response) throws Exception{
-		busStopManageService.busLocationSearch(request, response);;
+	public void buslocationLoad(String r_num, RouteDTO dto, HttpServletRequest request ,HttpServletResponse response) throws Exception{
+		busStopManageService.busLocationSearch(r_num, dto, request, response);
 	}
 	
 	//버스번호 를 가져와 해당 버스가 다니는 정류장 정보를 디비에 저장한다.

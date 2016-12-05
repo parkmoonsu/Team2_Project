@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.CommuteJoinCstartJoinCendDTO;
+import kr.or.bus.dto.MemberJoinMDetailDTO;
 import kr.or.bus.dto.reguloffrDTO2;
 import kr.or.bus.service.CommuteService;
 import kr.or.bus.service.MemberManageService;
@@ -69,13 +70,15 @@ public class CommuteController {
 	public String showlist(String pg , String m_id, String tdate, Model model) {
 		
 		List<CommuteJoinCstartJoinCendDTO> list = service.getSelect(pg, m_id);
+		int count=service.count(m_id);
 		int page = service.pg(pg);
 		
 		int cscheck = service.csCheck(m_id);
 		int cecheck = service.ceCheck(m_id);
 		
-		model.addAttribute("page", page);
+		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
+		model.addAttribute("count",count);
 		model.addAttribute("cscheck", cscheck);
 		model.addAttribute("cecheck", cecheck);
 		System.out.println(list.toString()+"asfasd");
@@ -87,13 +90,18 @@ public class CommuteController {
 	public String showstartinfolist(String pg , String m_id, Model model) {
 		
 		List<CommuteJoinCstartJoinCendDTO> list = service.getSelect(pg, m_id);
+		int count=service.count(m_id);
 		int page = service.pg(pg);
 		
-		model.addAttribute("page", page);
+		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
-
+		model.addAttribute("count",count);
+		
 		return "commute/commutesearchtable";	 
 	}
+	
+	
+	
 	
 	@RequestMapping("/joinapprove.member")
 	public String joinapprove(String pg , Model model,String m_id){
