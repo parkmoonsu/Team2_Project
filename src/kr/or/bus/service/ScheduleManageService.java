@@ -82,9 +82,10 @@ public class ScheduleManageService {
 		return dao.getOcode(o_date);
 	}
 	
-	public void modifyReguloffMember(String m_id, String o_date){
+	public String modifyReguloffMember(String m_id, String o_date){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.updateReguloff(m_id, dao.getOcode(o_date));
+		return dao.getOcode(o_date);
 	}
 	
 	
@@ -361,9 +362,9 @@ public class ScheduleManageService {
 		if(o_code.equals(o_code_1)){
 		result = dao.refuseSameDelete(m_id);
 		}else{
-		result = dao.refuseFirstRegisterRecord(m_id);
+		result = dao.refuseFirstRegister(m_id, o_code);
 		}
-		result1 = dao.refuseFirstRegister(m_id, o_code);
+		result1 = dao.refuseFirstRegisterRecord(m_id);
 		return result;
 	}
 	

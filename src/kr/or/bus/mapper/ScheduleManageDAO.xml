@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on mem.B_VEHICLENUM = bu.B_VEHICLENUM
 		join route rou
 		on rou.R_NUM = bu.R_NUM
-		where rou.r_num = #{r_num}
+		where rou.r_num = #{r_num} and rego.temp is null and rego.m_id not in (select m_id from reguloffr where ko_code = '600')
 	</select>
 	
 	<select id="getReqRescheduled" resultType="kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO">

@@ -266,85 +266,67 @@ select#selectedgaragename, select#selectedroutenumber {
 				var item = "";
 				var m_name = "";
 				var m_id = "";
+				var o_date = "";
 				var array = new Array(); //db에 저장된 일정을 담는 배열
 				$.each(data.mjrjmdto,function(index,obj){
-					console.log('변경중 m_id'+obj.m_id);
-					console.log('변경중 m_id_1'+obj.m_id_1);
-					console.log('변경중 m_name'+obj.m_name);
-					console.log('변경중 m_name_1'+obj.m_name_1);
-					console.log('변경중 o_code'+obj.o_code);
-					console.log('변경중 o_code_1'+obj.o_code_1);
-					console.log('변경중 o_check'+obj.o_check);
-				});
-				$.each(data.mrmbrjdto,function(index,obj1){ //reguloff 전체 
-					$.each(data.mjrjmdto,function(index,obj2){ //변경중인 
-						if(obj1.m_id == obj2.m_id){ //변경중인 기사 찾기
-							if(obj2.m_id == obj2.m_id_1){ // 변경 요청 == 변경 대상
-								if(obj2.o_code == obj2.o_code_1){ //변경 요청 == 변경 대상 and 요청자 휴무 == 대상자 휴무
-									    item = {
-										title : obj2.m_name,
-										aftername : obj2.m_name_1,
-										id : obj2.m_id,
-										afterid : obj2.m_id_1,
-										dow : obj2.o_code,
-										afterdow : obj2.o_code_1, //어차피 o_code = o_code_1
-										color : "red"
-									}
-								//array.push(item);
-								}else{ //변경 요청 == 변경 대상 and 요청자 휴무 != 대상자 휴무
-									    item = {
-										title : obj2.m_name,
-										aftername : obj2.m_name_1,
-										id : obj2.m_id,
-										afterid : obj2.m_id_1,
-										dow : obj2.o_code,
-										afterdow : obj2.o_code_1, // o_code != o_code_1
-										color : "red"//red로 바꿔야함
-									}
-								//array.push(item);
-								}//else 끝
-							}else{ //변경 요청 != 변경 대상
-								        item = {
-										title : obj2.m_name,
-										aftername : obj2.m_name_1,
-										id : obj2.m_id,
-										afterid : obj2.m_id_1,
-										dow : obj2.o_code,
-										afterdow : obj2.o_code_1, // o_code != o_code_1
-										color : "green"
+						if(obj.m_id == obj.m_id_1){ // 변경 요청 == 변경 대상
+							if(obj.o_code == obj.o_code_1){ //변경 요청 == 변경 대상 and 요청자 휴무 == 대상자 휴무
+								item = {
+								title : obj.m_name,
+								aftername : obj.m_name_1,
+								id : obj.m_id,
+								afterid : obj.m_id_1,
+								dow : obj.o_code,
+								afterdow : obj.o_code_1, //어차피 o_code = o_code_1
+								color : "red"
 								}
-							//array.push(item);
-							}
-						}else{ //변경중 아닌 기사
-							        item = {
-									title : obj1.m_name,
-									aftername : obj1.m_name_1,
-									id : obj1.m_id,
-									afterid : obj1.m_id_1,
-									dow : obj1.o_code,
-									afterdow : obj1.o_code_1, // o_code != o_code_1
-									color : "black"
-							}
-						
-						}//else
-					});//each
-					array.push(item);
-				});//each
-				/* $.each(data.mrmbrjdto,function(index,obj){
-					console.log("휴무있는m_id: "+obj.m_id);
-					console.log("휴무있는m_name: "+obj.m_name);
-					console.log("휴무있는o_date: "+obj.o_date);
-					console.log("휴무있는o_code: "+obj.o_code);
-					var item = {
+							array.push(item);
+							}else{ //변경 요청 == 변경 대상 and 요청자 휴무 != 대상자 휴무
+							    item = {
+								title : obj.m_name,
+								aftername : obj.m_name_1,
+								id : obj.m_id,
+								afterid : obj.m_id_1,
+								dow : obj.o_code,
+								afterdow : obj.o_code_1, // o_code != o_code_1
+								color : "red"//red로 바꿔야함
+								}
+							array.push(item);
+							}//else 끝
+						}else{ //변경 요청 != 변경 대상
+					        item = {
 							title : obj.m_name,
+							aftername : obj.m_name_1,
 							id : obj.m_id,
-							dow : obj.o_code
-					};
-					array.push(item);
-				}); //each */
+							afterid : obj.m_id_1,
+							dow : obj.o_code,
+							afterdow : obj.o_code_1, // o_code != o_code_1
+							color : "purple"
+							}
+							array.push(item);
+					        item = {
+									title : obj.m_name_1,
+									aftername : obj.m_name,
+									id : obj.m_id_1,
+									afterid : obj.m_id,
+									dow : obj.o_code_1,
+									afterdow : obj.o_code, // o_code != o_code_1
+									color : "purple"
+									}
+					        array.push(item);
+						}//else
+					
+				});//each
+				 $.each(data.mrmbrjdto,function(index,obj1){ //reguloff 전체중에서 신청 중인것 뺀 dto
+							 item = {
+										title : obj1.m_name,
+										id : obj1.m_id,
+										dow : obj1.o_code
+								}
+						array.push(item);
+				});//each 
 				var eventObject;
 				    calendar = $('#calendar').fullCalendar({
-
 					header : {
 						left : 'prev,next today',
 						center : 'title',
@@ -352,10 +334,7 @@ select#selectedgaragename, select#selectedroutenumber {
 					},
 					editable : true,
 					eventDrop : function(event,dayDelta,minuteDelta,allDay,revertFunc){
-						console.log('변경자'+event.title);
-						console.log('시작일'+event.start.format('YYYY-MM-DD'));
-						console.log('변경자 id:'+event.id);
-						if(event.color=="red" || event.color=="skyblue"){
+						if(event.color=="red" || event.color=="purple"){
 							alert(event.title + '님은 현재 휴무 변경 승인 대기 중입니다.');
 							revertFunc();
 						}else{
@@ -369,6 +348,15 @@ select#selectedgaragename, select#selectedroutenumber {
 							data: item,
 							success:function(data){
 								
+								var eventObjectr = {
+									id : data.m_id,
+									title : data.m_name,
+									dow : data.o_code	
+								};
+								$('#calendar').fullCalendar('removeEvents', event.id);
+								$('#calendar').fullCalendar('renderEvent', eventObjectr);
+								$('#calendar').fullCalendar('unselect');
+								alert(event.title+' 님의 일정이 변경 되었습니다.');
 							}
 						});
 						}
@@ -388,7 +376,6 @@ select#selectedgaragename, select#selectedroutenumber {
 						eventObject=event;
 					},
 					drop : function(date, jsEvent) {
-						console.log(date.format('dddd').substr(0,3));
 						var o_date = date.format('dddd').substr(0,3);
 						var dragitem = $(this);
 						
@@ -401,8 +388,7 @@ select#selectedgaragename, select#selectedroutenumber {
 								"o_date":o_date
 							},
 							success : function(data){
-								console.log("야야야야야ㅑㅇ야ㅑ"+data);
-								console.log(eventObject);
+								
 								var eventObject2={
 									id:eventObject.id,
 									title:eventObject.title,
@@ -416,7 +402,7 @@ select#selectedgaragename, select#selectedroutenumber {
 						});
 						
 					}
-				});
+				}); //calendar
 				
 				$.each(data.mjrdto,function(index,value){
 					console.log("휴무없는m_id: "+value.m_id);
@@ -429,7 +415,7 @@ select#selectedgaragename, select#selectedroutenumber {
 					view += value.m_id;
 					view += "'>";
 					view += "</div>";
-				});
+				});//each
 				$('#draggablemember').empty();
 				$('#draggablemember').append(view);
 				
@@ -450,8 +436,8 @@ select#selectedgaragename, select#selectedroutenumber {
 						revertDuration: 0  //  original position after the drag
 					});
 
-				});
-			}
+				}); //each
+			}//success
 		});
 	});
 
