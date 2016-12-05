@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.GarageDTO;
-
+import kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
@@ -113,19 +113,6 @@ public class ScheduleManageController {
 	}
 	
 	/*
-	제목 : 가상 스케줄 생성
-	작성자 : 길한종
-	목적 : VSCHEDULE에서 이용할 차량번호(B_VEHICLENUM), 노선변호(R_NUM), 휴무코드(O_CODE) 가져오기 
-	*/
-	
-	@RequestMapping("/getocode.admin")
-	public View getOcode(ModelMap map){
-		List<ReguloffJoinMemberJoinBusJoinRouteDTO> list=service.get_ocode();
-		map.addAttribute("list", list);
-		return jsonview;
-	}
-	
-	/*
 	제목 : 
 	예상 스케쥴 뽑기
 	작성자 : 김수현
@@ -148,19 +135,19 @@ public class ScheduleManageController {
 	public View lastpredictschedule(String r_num,Model model){
 		System.out.println("lastpredictschedule.admin 타나여?");
 		System.out.println("r_num :  "+r_num);
-		List<MemberJo> mjrolist=service.schedule_get(r_num);
+		List<MemberJoinBusJoinRouteJoinReguloffDTO> mjrolist=service.schedule_get(r_num);
 		model.addAttribute("mjrolist",mjrolist);
 		System.out.println("mjrolist.toString() :"+mjrolist.toString());
 		return jsonview;
 	}
-	
-	//배차간격, 첫차 ,막차 시간 가져오기
-	@RequestMapping(value = "/lastpredictschedule.admin", method = RequestMethod.GET)
+
+/*	//배차간격, 첫차 ,막차 시간 가져오기
+	@RequestMapping("/lastpredictschedule.admin")
 	public String getSelecttime(Model model){
 		service.getintervalstartlast(model);
 		return "schedule/schedule_virtual";
 	}
-	
+	*/
 	
 	/*
 	 @RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)

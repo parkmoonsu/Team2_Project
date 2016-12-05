@@ -58,9 +58,15 @@
 	</bean>
 
 	<!-- scheduler -->
-	<context:component-scan base-package="ko.or.bus.controller" />
+	<!-- <context:component-scan base-package="ko.or.bus.service" />
 	<task:scheduler id="jobScheduler" pool-size="10" />
-	<task:annotation-driven scheduler="jobScheduler" />
+	<task:annotation-driven scheduler="jobScheduler" /> -->
+	
+	<context:component-scan base-package="ko.or.bus.service" />
+	<task:annotation-driven/>
+	
+	
+	
 	
 </beans>
 
