@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -46,6 +47,7 @@ th, table{
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-xs-12  col-md-3 left_col">
+
 
 				<c:choose>
 					<c:when test="${jobname == '기사'}">
@@ -298,6 +300,9 @@ th, table{
 
 	<script>
       $(function() {
+    			  $.oPageLoader(); 
+
+    	  
         Morris.Bar({
           element: 'graph_bar',
           data: [
