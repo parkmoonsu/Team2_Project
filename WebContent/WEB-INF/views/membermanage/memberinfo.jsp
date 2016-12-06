@@ -193,12 +193,7 @@ ul.pagination li a {
 							<c:set value="${list}" var="d" />
 
 									<!-- start project list -->
-									<select id="sel">
-										<option></option>
-									<c:forEach var="f" items="${d}">
-										<option value="${f.r_num}">${f.r_num}</option>
-									</c:forEach>
-									</select>
+									
 									<div
 										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
@@ -251,31 +246,46 @@ ul.pagination li a {
 									<!-- 요기서부터 페이징처리 -->
 									<c:set var="mc" value="${membercount}" />
 									<c:set var="pgc" value="${pgs}" />
-									<c:choose>
-										<c:when test="${mc % 10 == 0}">
-											<c:set value="${mc/10}" var="pagecount" />
-										</c:when>
-										<c:otherwise>
-											<c:set value="${mc/10 + 1}" var="pagecount" />
-										</c:otherwise>
-									</c:choose>
+									<c:set var ="pagecount" value = "${pagecount}"/>
 
 									<div style="text-align: center" id="coco">
 										<ul class="pagination">
 
 											<c:if test="${pgc > 1}">
-												<li><a href="membermanage.admin?pg=${pgc-1}">Previous</a></li>
+												<li><a href="membermanage.admin?pg=${pgc-1}">Prev</a></li>
 											</c:if>
 
-
-											<c:forEach begin="1" end="${pagecount}" var="i">
+											
+										<c:forEach begin="1" end="${pagecount}" var="i" step = "5">
+											<c:forEach begin = "${i}" end = "${i+4}" step = "1" var = "x">
+												<c:if test="${x <= pagecount}">
+													<c:choose>
+														<c:when test="${pgc == x}">
+															<li><a  class="active" href="#">${x}</a></li>
+														</c:when>
+														<c:when test="${pgc > i-1 && pgc < i+5 }">
+															<li><a href="membermanage.admin?pg=${x}">${x}</a></li>
+														</c:when>
+														<c:when test ="${x == i+5}">
+															<c:forEach begin = "${x}" end = "${x+4}" step = "1" var = "y">
+																<li><a href="membermanage.admin?pg=${y}">${y}</a></li>
+															</c:forEach>
+														</c:when>
+													</c:choose>
+												</c:if>
+												
+											</c:forEach>
+										</c:forEach>
+											
+											
+											<%-- <c:forEach begin="1" end="${pagecount}" var="i" step = "1">
 												<c:if test="${i==pgc}">
 													<li><a  class="active" href="#">${i}</a></li>
 												</c:if>
 												<c:if test="${i!=pgc}">
 													<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
 												</c:if>
-											</c:forEach>
+											</c:forEach> --%>
 
 											<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
 											<li class="active"><a href="membermanage.admin?pg=${i}">${i}</a></li>

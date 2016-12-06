@@ -60,6 +60,10 @@
 	margin-right: auto;
 	width: 95%;
 }}
+
+footer {
+	margin-left: 0px;
+}
 select#selectBus, select#selectBus2 {
 	-webkit-appearance: button;
 	-webkit-border-radius: 2px;
@@ -74,7 +78,7 @@ select#selectBus, select#selectBus2 {
 	border: 1px solid #AAA;
 	color: #555;
 	font-size: inherit;
-	margin: 20px; 
+	margin: 7px; 
 	overflow: hidden;
 	padding: 5px 10px; 
 	text-overflow: ellipsis;
@@ -82,6 +86,13 @@ select#selectBus, select#selectBus2 {
 	width: 150px;
 }
 .btn{border-radius: 8px};
+
+#inputBusStop {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
 </style>
 </head>
 
@@ -126,7 +137,7 @@ select#selectBus, select#selectBus2 {
 					<div class="row" style="text-align: right">
 						<input type="button" id="newsave" value="원본좌표저장" class="btn btn-default">
 						<input type="button" id="newsave2" value="수정좌표저장" class="btn btn-default">
-						<input type="button" id="busLoad" value="버스 보기" class="btn btn-default" style="margin-right: 17px;">
+						<input type="button" id="busLoad" value="버스 보기" class="btn btn-default"zdddd>
 					
 					
 					<select id="selectBus" style="margin:5px" >
@@ -144,15 +155,16 @@ select#selectBus, select#selectBus2 {
 					</select>				
 					
 					<span>
-					<input type="text" id="inputBusStop" placeholder="노선번호를 입력해주세요">
-					<input type="button" id="sendBusStop" value="정류장저장"></span>
+					<input type="text" style="width:210px; height:34px; padding: 12px 20px; 
+    					   border-radius: 8px;" id="inputBusStop" placeholder="&nbsp;노선번호를 입력해주세요">
+					<input type="button" class="btn btn-default" id="sendBusStop" value="정류장저장"></span>
 					
 					
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="container" id="map"
-								style="width: auto; height: 500px; border: solid black 1px; margin-left: auto; margin-right: auto;">
+								style="width: auto; height: 500px; border: solid black 1px; ">
 							</div>
 						</div>
 
@@ -164,10 +176,7 @@ select#selectBus, select#selectBus2 {
 
 				<!-- footer content -->
 				<footer>
-					<div class="pull-right">
-						Gentelella - Bootstrap Admin Template by <a
-							href="https://colorlib.com">Colorlib</a>
-					</div>
+					<jsp:include page="/sidebar/footer.jsp"></jsp:include>
 					<div class="clearfix"></div>
 				</footer>
 				<!-- /footer content -->
@@ -312,10 +321,11 @@ select#selectBus, select#selectBus2 {
     
     var dataArray = new Array();
    
-    
+    var stopSearch;
     //원본 정류장 좌표 로 부터 새로 저장한후 불러올떄 좌표들을 저장할 배열변수\
     var copyMarker;
     
+    var BusMarker;
     
     var copyMarkers= new Array();
    
@@ -349,7 +359,34 @@ select#selectBus, select#selectBus2 {
        var trafficLayer = new google.maps.TrafficLayer();
        trafficLayer.setMap(map);
     }
-    
+    //버스 정류장 수동 생성 db 변경
+    function copyMarkerMakes(latLng, map){
+    	console.log(latLng);
+    	var num =$("#end").val();
+    	console.log("알고싶어넘버"+num);
+    	if(num=='' || num==null){//아무것도 입력 안했을때
+    		console.log("?여기??"+num);
+       		var copyMarker = new google.maps.Marker({
+             	position: latLng,        
+                map: map,
+                label : as.toString(),
+                animation: google.maps.Animation.DROP,
+                draggable : true
+          	});    
+       		copyMarkers.push(copyMarker);
+          	as++;
+    	}else{ //노선값과 배차 순서 rs_order보내기
+    		var r_num = $('#selectBus').val();
+    		$.ajax({
+    			url : "editordernumber.admin",
+    			type : "post",
+    			data : {"r_num":r_num,"rs_order":num,"latlng":latlng},
+    			success:function(data){
+    				
+    			}
+    		});
+    	}
+    }
   //버류 정류장 수동 생성
     /* function copyMarkerMakes(latLng, map) {
         console.log(latLng);
@@ -415,7 +452,7 @@ select#selectBus, select#selectBus2 {
         });
          
         dataArray.push(latLng);
-    } */
+    }*/
 	
     function copyMarkerMakes(latLng, map) {
         console.log(latLng);
@@ -427,7 +464,7 @@ select#selectBus, select#selectBus2 {
        			var copyMarker = new google.maps.Marker({
              		position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),        
                 	map: map,
-                	label : as.toString(),
+                	label : latLng[i].rs_order,
                 	animation: google.maps.Animation.DROP,
                 	draggable : true
           		});    
@@ -451,28 +488,27 @@ select#selectBus, select#selectBus2 {
       		}
    			
         }
-      	//마커 드래그 끝났을떄
-        copyMarker.addListener('dragend', function() {
+      		//마커 드래그 끝났을떄
+        	copyMarker.addListener('dragend', function() {
             
-        	//마커 라벨을 얻어와 담을 변수
-        	var markerLabel = copyMarker.getLabel();
+        		//마커 라벨을 얻어와 담을 변수
+        		var markerLabel = copyMarker.getLabel();
             
-        	//마커를 드래그후 마커의 좌표를 담기위한 변수
-        	var dragendX= copyMarker.getPosition().lat;
-        	var dragendY= copyMarker.getPosition().lng;
+        		//마커를 드래그후 마커의 좌표를 담기위한 변수
+        		var dragendX= copyMarker.getPosition().lat;
+        		var dragendY= copyMarker.getPosition().lng;
               
            
-        	for(var i=0; i<copyMarkers.length;i++){
-            	console.log(copyMarkers.length);
-            	console.log("bmarker ? "+copyMarkers[i]);
-                
-            	if(copyMarkers[i].getLabel() == markerLabel){
-                	copyMarkers[i].getPosition().lat = dragendX;
-                	copyMarkers[i].getPosition().lng = dragendY;
+        		for(var i=0; i<copyMarkers.length;i++){
+            		console.log(copyMarkers.length);
+            		console.log("bmarker ? "+copyMarkers[i]);                
+            		if(copyMarkers[i].getLabel() == markerLabel){
+                		copyMarkers[i].getPosition().lat = dragendX;
+                		copyMarkers[i].getPosition().lng = dragendY;
                       
-            	}
-        	}     
-    	});
+            		}
+        		}     
+    		});
       
         //마커의 라벨 이름을 알기위해 적용. 추후삭제 할것
         copyMarker.addListener('click', function() {         
@@ -482,13 +518,13 @@ select#selectBus, select#selectBus2 {
             
         });
         dataArray.push(latLng);
-        copymovingBusMarker(latLng, map);
+        //copymovingBusMarker(latLng, map);
                
     }
            
     function copymovingBusMarker(latLng, map){
        	console.log(latLng);    
-       	var BusMarker = new google.maps.Marker({
+       	BusMarker = new google.maps.Marker({
             position: new google.maps.LatLng(latLng[0].s_y, latLng[0].s_x),
             map: map,
             icon:"${pageContext.request.contextPath}/images/bus.png"
@@ -499,22 +535,29 @@ select#selectBus, select#selectBus2 {
     
     function copymoveBus(BusMarker, map, latLng) {
        	var i=0;
-       	setInterval(function(){
-        if(i == latLng.length){
-            return false;
-        }else{
-            console.log(latLng[i]);
-            BusMarker.setPosition(new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x));
-        }
-        i++;
-       },1000);    
+       	stopSearch = setInterval(function(){
+        	if(i == latLng.length){
+            	return false;
+        	}else{
+            	console.log(latLng[i]);
+            	BusMarker.setPosition(new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x));
+        	}
+        	i++;
+       	},1000);    
     };
     
+    function deleteBusMarker(){
+    	clearInterval(stopSearch);
+    	if(BusMarker !=null){
+			BusMarker.setMap(null);
+		}
+    }
     
     $(function() {
       
        	$("#selectBus").change(function(){
    			deleteRoute();
+   			deleteBusMarker();
    			if($("#selectBus").val() !=null){     		
        			/* $.ajax({
                    	url : "busStopOriginalRead.admin",
@@ -585,7 +628,7 @@ select#selectBus, select#selectBus2 {
    			}
     	});
        
-       $("#selectBus2").change(function(){
+       	/* $("#selectBus2").change(function(){
 			deleteRoute();
 			if($("#selectBus").val() !=null){
   				$.ajax({
@@ -609,7 +652,7 @@ select#selectBus, select#selectBus2 {
            			}
 				});   	    	         
 			}
-  		});
+  		}); */
        
        	$('#shy').click(function(){
           	//console.log(e.latLng);
@@ -632,15 +675,15 @@ select#selectBus, select#selectBus2 {
         });
        	
         //새로운 좌표 저장
-        function BusEditSave() {
-           	/*
-              	새로 변경된 좌표들을 파일에 저장하기 위해 
-              	for문을 돌리면서 editX 에 lng , editY 에 lat 좌표를 담고
-              	savelocation 에 lng, lat 키 로하고,  editX ,editY 변수를 값으로 한다. 
-           	*/
+        /* function BusEditSave() {
+           	
+              	//새로 변경된 좌표들을 파일에 저장하기 위해 
+              	//for문을 돌리면서 editX 에 lng , editY 에 lat 좌표를 담고
+              	//savelocation 에 lng, lat 키 로하고,  editX ,editY 변수를 값으로 한다. 
+           	
            var editX;
            var editY;
-           for(var i=0;i<copyMarkers.length;i++){
+           for(var i=0;i<copyMarkers.length;i++){//현재 원본 좌표
               editX = copyMarkers[i].getPosition().lng();
               editY = copyMarkers[i].getPosition().lat();
               savelocation = {
@@ -652,7 +695,7 @@ select#selectBus, select#selectBus2 {
            }
            console.log(savelocations.length);
            $.ajax({
-                url : "busStoplocationEdit.admin",
+                url : "busStoplocationEdit.admin", //원본을 수정 파일에 저장
                 type : "get",                          
                 data : {
                     kml : JSON.stringify(savelocations),
@@ -662,14 +705,14 @@ select#selectBus, select#selectBus2 {
                     console.log("저장잘됨?");
                 }
             });
-          }
+          } */
           
-        function BusEditSave2() {
-            /*
-               	새로 변경된 좌표들을 파일에 저장하기 위해 
-               	for문을 돌리면서 editX 에 lng , editY 에 lat 좌표를 담고
-               	savelocation 에 lng, lat 키 로하고,  editX ,editY 변수를 값으로 한다. 
-            */
+        /* function BusEditSave2() { //수정한 것을 저장한다.
+            
+               	//새로 변경된 좌표들을 파일에 저장하기 위해 
+               //for문을 돌리면서 editX 에 lng , editY 에 lat 좌표를 담고
+               	//savelocation 에 lng, lat 키 로하고,  editX ,editY 변수를 값으로 한다. 
+            
             var editX;
             var editY;
             for(var i=0;i<copyMarkers.length;i++){
@@ -694,20 +737,19 @@ select#selectBus, select#selectBus2 {
                      console.log("저장잘됨?");
                  }
              });
-           }
+           } */
        
       	$("#newsave").click(function() {
-         	BusEditSave();
-         
+         	//BusEditSave();        
       	});
+           
       	$("#newsave2").click(function() {
-          	BusEditSave2();
-          
+          	//BusEditSave2();         
        	});
                  
-      	$("#busLoad").click(function() {
+      	/* $("#busLoad").click(function() {
          	copymovingBusMarker(dataArray, map);
-      	});
+      	}); */
       
       	function deleteRoute(){      	
       		if(copyMarkers !=null){ 		
@@ -725,7 +767,9 @@ select#selectBus, select#selectBus2 {
        		}
        		copyMarkers=[];
        		copyMarkers.length = 0;
-       		as=0;
+       		//as=0;
+       		
+       		
       	}
       
       	$("#sendBusStop").click(function(){    	

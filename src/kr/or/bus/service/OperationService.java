@@ -1,180 +1,88 @@
 /*
 *	@FileName : OperationService.java
 *	@Project	: KosBus
-*	@Date	: 2016. 12. 01
-*	@Author	: 조한솔
-*	@Discription : 노선별 출결현황 페이지 Service
+*	@Date	: 2016.12.06
+*	@Author	: 박문수
+*	@Discription : 운영 관리 페이지 service
 */
-
 
 package kr.or.bus.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.bus.dao.BusDAO;
-import kr.or.bus.dao.RnumcommuteDAO;
-import kr.or.bus.dao.RouteDAO;
-import kr.or.bus.dao.ScheduleManageDAO;
-import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
-import kr.or.bus.dto.GarageDTO;
-import kr.or.bus.dto.RnumcommuteDTO;
-import kr.or.bus.dto.RnumcommuteDTO2;
+import kr.or.bus.dao.RegulOffRDAO;
+import kr.or.bus.dto.ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO;
 import kr.or.bus.dto.RouteDTO;
-import kr.or.bus.dto.RouteJoinGarageDTO;
 
 @Service
-public class OperationService {
-
+public class OperationService{
+	
 	@Autowired
 	private SqlSession sqlsession;
-
-	// 임시노선별 출결현황에서 이름 가져오기
-	public List<RnumcommuteDTO> getNdselect() {
-
-		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);
-
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getNdselect();
-		List<RnumcommuteDTO> list2 = new ArrayList<RnumcommuteDTO>();
-		for (int i = 0; i < list.size(); i++) {
-
-			// list {이름+ 날짜[] + 상태[]}
-			String m_name = list.get(i).getM_name();
-			//String c_date = list.get(i).getC_date();
-			
-			//String r_num = list.get(i).getR_num();
-
-			String[] tdate = dao.getStat(m_name); // 날짜
-			String[] stat = dao.getShow(m_name); // 상태
-			
-			RnumcommuteDTO dto = new RnumcommuteDTO();
-
-			dto.setM_name(list.get(i).getM_name());
-			dto.setC_date(tdate);
-			dto.setCs_stat(stat);
-
-			list2.add(dto);
-		}
-
-		return list2;
-	}
 	
-	public List<RnumcommuteDTO> getMember() {
-
-		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);
-
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getNdselect();
-		List<RnumcommuteDTO> list2 = new ArrayList<RnumcommuteDTO>();
-		for (int i = 0; i < list.size(); i++) {
-
-			// list {이름+ 날짜[] + 상태[]}
-			String m_name = list.get(i).getM_name();
-			//String c_date = list.get(i).getC_date();
-			
-			//String r_num = list.get(i).getR_num();
-
-			String[] tdate = dao.getStat(m_name); // 날짜
-			String[] stat = dao.getShow(m_name); // 상태
-			
-			RnumcommuteDTO dto = new RnumcommuteDTO();
-
-			dto.setM_name(list.get(i).getM_name());
-			dto.setC_date(tdate);
-			dto.setCs_stat(stat);
-
-			list2.add(dto);
-		}
-
-		return list2;
-	}
-	
-	
-	/*public List<RnumcommuteDTO> getMember(String r_num){
-		System.out.println("여기능??");
-		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);
-
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getMember(r_num);
-		List<RnumcommuteDTO> list2 = new ArrayList<RnumcommuteDTO>();
-		//String[] tdate = null;
-		RnumcommuteDTO dto = new RnumcommuteDTO();
-		for (int i = 0; i < list.size(); i++) {
-
-			// list {이름+ 날짜[] + 상태[]}
-			String m_name = list.get(i).getM_name();
-			String c_date = list.get(i).getC_date();
-					
-			//ArrayList<String> tdate = dao.getStat2(r_num, m_name);
-			//String[] tdate = dao.getStat2(r_num, m_name); // 날짜
-			//String[] stat = dao.getShow2(r_num, m_name); // 상태
-			//System.out.println("#####" +dao.getStat2(r_num, m_name));
-			dto = new RnumcommuteDTO();
-			
-			//dto.setM_name(list.get(i).getM_name());
-			//dto.setC_date(tdate);
-			//dto.setCs_stat(stat);
-		
-			list2.add(dto);
-		}
-	
-		return list2;		
-	}*/
-	
-	public List<String> getStat2(String r_num){
-		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);
-
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getMember(r_num);
-		List<String> list2 = null;
-		
-		for (int i = 0; i < list.size(); i++) {
-
-			// list {이름+ 날짜[] + 상태[]}
-			
-			String m_name = list.get(i).getM_name();
-			String date =  dao.getStat2(r_num, m_name).get(i).getC_date();
-			list2.add(date);
+	public List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> regulList(String pg){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class); 
+		int page = 1;
+		if(pg != null){
+			page = Integer.parseInt(pg);
 		}
 		
-		return list2;
-	}
-	
-	public List<String> getShow2(String r_num){
-		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);
-
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getMember(r_num);
-		List<String> list2 = null;
-		
-		for (int i = 0; i < list.size(); i++) {
-
-			// list {이름+ 날짜[] + 상태[]}
-			
-			String m_name = list.get(i).getM_name();
-			String cs_stat =  dao.getShow2(r_num, m_name).get(i).getCs_stat();
-			list2.add(cs_stat);
-		}
-		
-		return list2;
-	}
-	
-	//전체 노선
-	public List<RouteDTO> getRout(){
-		
-		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
-		List<RouteDTO> rdto = dao.route();
-		return rdto;
-		
-	}
-/*	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getselect(String r_num){
-		
-		RnumcommuteDAO dao = sqlsession.getMapper(RnumcommuteDAO.class);
-		
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getselect(r_num);
+		List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> list = dao.regulList(page);
 		
 		return list;
+	}
+	
+	public int countList(){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class); 
+		int count = dao.countList();
 		
-	}*/
-
+		return count;
+	}
+	
+	public int pg(String pg){
+		int page = 1;
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		return page;
+	}
+	
+	public List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> dayList(String search){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class); 
+		List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> list =  dao.dayList(search);
+		
+		return list; 
+	}
+	
+	public List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> codeList(String search){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class); 
+		List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> list = dao.codeList(search);
+		
+		return list;
+	}
+	
+	public List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> nameList(String search){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class); 
+		List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> list = dao.nameList(search);
+		
+		return list;
+	}
+	
+	public List<RouteDTO> getRoute(){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class);
+		List<RouteDTO> list = dao.getrouteajax();
+		 
+		return list;
+	}
+	
+	public List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> routeList(String search){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class); 
+		List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> list = dao.routeList(search);
+		
+		return list;
+	}
 }

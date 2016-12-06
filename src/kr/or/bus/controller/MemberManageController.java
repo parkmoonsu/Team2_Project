@@ -58,7 +58,15 @@ public class MemberManageController {
 		List<MemberJoinMDetailDTO> list = service.memberInfo(pg);
 		int membercount = service.memberCount();
 		int page = service.pg(pg);
+		int pagecount = 0;
+		if(membercount % 10 == 0){
+			pagecount = membercount/10;
+		}else{
+			pagecount = membercount/10 + 1;
+		}
 		
+		
+		model.addAttribute("pagecount", pagecount);
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("membercount",membercount);
@@ -78,7 +86,14 @@ public class MemberManageController {
 		List<MemberJoinMDetailDTO> list = service.memberNList(pg);
 		int page = service.pg(pg);
 		int ncount = service.memberNCount();
+		int pagecount = 0;
+		if(ncount % 10 == 0){
+			pagecount = ncount/10;
+		}else{
+			pagecount = ncount/10 + 1;
+		}
 		
+		model.addAttribute("pagecount", pagecount);
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("membercount",ncount);

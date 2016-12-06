@@ -11,15 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.GarageDTO;
-
+import kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+
+import kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO;
+
+import kr.or.bus.dto.OscheduleJoinMemberDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
-import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
 import kr.or.bus.dto.RouteDTO;
-import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
-import kr.or.bus.dto.TimetableDTO;
 import kr.or.bus.service.ScheduleManageService;
 
 
@@ -56,7 +57,9 @@ public class ScheduleManageController {
 		System.out.println("r_num"+r_num);
 		List<MemberJoinRegulOffDTO> mjrdto = service.unScheduledMember(r_num);
 		List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> mrmbrjdto = service.scheduledMember(r_num);
+		List<MemberJoinReguloffrJoinMoffDTO> mjrjmdto = service.requestRescheduled(r_num);
 		model.addAttribute("mjrdto", mjrdto);
+		model.addAttribute("mjrjmdto", mjrjmdto);
 		model.addAttribute("mrmbrjdto", mrmbrjdto);
 		return jsonview;
 	}
@@ -70,9 +73,12 @@ public class ScheduleManageController {
 	}
 	//유효성 처리 해줘야 함,reguloffr
 	@RequestMapping("/modifyingschedule.admin")
-	public View modifyingSchedule(String m_id, String o_date, Model model){
+	public View modifyingSchedule(String m_id, String m_name, String o_date, Model model){
 		System.out.println(m_id+"/"+o_date);
-		service.modifyReguloffMember(m_id, o_date);
+		String o_code = service.modifyReguloffMember(m_id, o_date);
+		model.addAttribute("m_id", m_id);
+		model.addAttribute("m_name", m_name);
+		model.addAttribute("o_code", o_code);
 		return jsonview;
 	}
 	
@@ -106,23 +112,10 @@ public class ScheduleManageController {
 	
 	@RequestMapping("/gettimetable.admin")
 	public String getTimetable(ModelMap map){
-		List<TimetableDTO> list=service.timetable_get();
+		List<OscheduleJoinMemberDTO> list=service.timetable_get();
+
 		map.addAttribute("list", list);
-		System.out.println(list);
 		return "schedule/schedule_managertimetable";
-	}
-	
-	/*
-	제목 : 가상 스케줄 생성
-	작성자 : 길한종
-	목적 : VSCHEDULE에서 이용할 차량번호(B_VEHICLENUM), 노선변호(R_NUM), 휴무코드(O_CODE) 가져오기 
-	*/
-	
-	@RequestMapping("/getocode.admin")
-	public View getOcode(ModelMap map){
-		List<ReguloffJoinMemberJoinBusJoinRouteDTO> list=service.get_ocode();
-		map.addAttribute("list", list);
-		return jsonview;
 	}
 	
 	/*
@@ -148,19 +141,19 @@ public class ScheduleManageController {
 	public View lastpredictschedule(String r_num,Model model){
 		System.out.println("lastpredictschedule.admin 타나여?");
 		System.out.println("r_num :  "+r_num);
-		List<MemberJo> mjrolist=service.schedule_get(r_num);
+		List<MemberJoinBusJoinRouteJoinReguloffDTO> mjrolist=service.schedule_get(r_num);
 		model.addAttribute("mjrolist",mjrolist);
 		System.out.println("mjrolist.toString() :"+mjrolist.toString());
 		return jsonview;
 	}
-	
-	//배차간격, 첫차 ,막차 시간 가져오기
-	@RequestMapping(value = "/lastpredictschedule.admin", method = RequestMethod.GET)
+
+/*	//배차간격, 첫차 ,막차 시간 가져오기
+	@RequestMapping("/lastpredictschedule.admin")
 	public String getSelecttime(Model model){
 		service.getintervalstartlast(model);
 		return "schedule/schedule_virtual";
 	}
-	
+	*/
 	
 	/*
 	 @RequestMapping(value = "/gethistorycal.admin", method = RequestMethod.GET)
@@ -199,10 +192,11 @@ public class ScheduleManageController {
 	
 	//최초 정규휴무 등록 승인
 	@RequestMapping("/approvefirstregister.admin")
-	public View approveFirstRegister(String m_id, String o_code,Model model){
+	public View approveFirstRegister(String m_id,String m_name, String o_code,Model model){
 		System.out.println(m_id + o_code);
 		int result = service.approveFirstRegister(m_id, o_code);
 		int result1 = service.updateFirstRegisterRecord(m_id, o_code);
+		model.addAttribute("o_code", o_code);
 		model.addAttribute("result", result);
 		model.addAttribute("result1", result1);
 		return jsonview;
@@ -213,6 +207,11 @@ public class ScheduleManageController {
 	public View refuseFirstRegister(String m_id, String o_code, String o_code_1,Model model){
 		System.out.println(m_id + o_code + o_code_1);
 		int result = service.updateRefuseFirstRegister(m_id, o_code, o_code_1);
+		if(o_code.equals(o_code_1)){
+			model.addAttribute("o_code", "null");
+		}else{
+			model.addAttribute("o_code", o_code);
+		}
 		model.addAttribute("result", result);
 		return jsonview;
 	}

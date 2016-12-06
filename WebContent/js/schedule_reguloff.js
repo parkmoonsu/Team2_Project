@@ -10,8 +10,7 @@ var loginid=$('#hidden').val();//{LoginUser}의 id
 var displayname; //일정에 id대신 표시될 이름
 
 $(function() {
-
-	// id로 이름 불러오기
+	
 	$.ajax({
 		url : "name.htm",
 		data : {
@@ -86,7 +85,8 @@ $(function() {
 				}
 				array.push(item);
 			});
-
+			
+			//로그인 사용자와 일정을 바꾸는 경우 같은 색으로
 			for (var i=0; i<array.length; i++){
 				if (array[i].id==temp){
 					array[i].color="red";
@@ -253,19 +253,34 @@ function loadCalendar(){
 		//날짜 선택시 이벤트
 		select : function(start, end, jsEvent) {
 			
-			//중복일정 체크
 			$.ajax({
-				url:"checkmid.member",
-				data:{"m_id":loginid},
-				type:"post",
+				type:'post',
+				url:'reguloffschedulecheck.member',
 				success:function(data){
-					if (data.row != "0"){
-						alert("더는 일정을 추가할 수 없습니다.");
-					} else {							
-						//모달 입력창
-						$("#select1").val(start.weekday());
-						$('#fc_create').click();
-						
+					if(data.str=="false"){
+						console.log(data.str);
+						alert('지금은 휴무 변경 시간이 아닙니다.');
+					} else if(data.str==null || data.str==""){
+						console.log(data.str);
+						alert('언디파인드');
+					} else {
+						console.log(data.str);
+						//중복일정 체크
+						$.ajax({
+							url:"checkmid.member",
+							data:{"m_id":loginid},
+							type:"post",
+							success:function(data){
+								if (data.row != "0"){
+									alert("더는 일정을 추가할 수 없습니다.");
+								} else {							
+									//모달 입력창
+									$("#select1").val(start.weekday());
+									$('#fc_create').click();
+									
+								}
+							}
+						});
 					}
 				}
 			});
@@ -273,38 +288,227 @@ function loadCalendar(){
 		
 		//일정 클릭시 이벤트
 		eventClick : function(calEvent, jsEvent, view) {
-			
 			$.ajax({
-				url:"mid.member",
-				data:{m_id:loginid},
-				type:"post",
-				dataType:"json",
+				type:'post',
+				url:'reguloffschedulecheck.member',
 				success:function(data){
-					
-					if (data.rid=="" || data.rid==null){
-						alert('먼저 일정을 등록 하세요');
+					if(data.str=="false"){
+						console.log(data.str);
+						alert('지금은 휴무 변경 시간이 아닙니다.');
+					} else if(data.str==null || data.str==""){
+						console.log(data.str);
+						alert('언디파인드');
 					} else {
-						
 						$.ajax({
 							url:"mid.member",
-							data:{m_id:calEvent.id},
+							data:{m_id:loginid},
 							type:"post",
 							dataType:"json",
 							success:function(data){
-								console.log(data);
-								//동일사용자인 경우 일정 수정
-								if(data.rid==loginid){
-									//모달 창 띄우기
-									$('#fc_edit').click();
-									calEventObj=calEvent;	
-									
-									//데이터 저장
-									$("#title2").val(calEvent.title);
-									$("#select2").val(calEvent.dow[0]);
 								
-								}else{
-									//동일 사용자가 아닌 경우 일정 바꾸기
-									if (confirm("해당 사용자와 일정을 바꾸시겠습니까?") == true) {
+								if (data.rid=="" || data.rid==null){
+									alert('먼저 일정을 등록 하세요');
+								} else {
+									
+									$.ajax({
+										url:"mid.member",
+										data:{m_id:calEvent.id},
+										type:"post",
+										dataType:"json",
+										success:function(data){
+											
+											//동일사용자인 경우 일정 수정
+											if(data.rid==loginid){
+												//모달 창 띄우기
+												$('#fc_edit').click();
+												calEventObj=calEvent;	
+												
+												//데이터 저장
+												$("#title2").val(calEvent.title);
+												$("#select2").val(calEvent.dow[0]);
+											
+											}else{
+												//동일 사용자가 아닌 경우 일정 바꾸기
+												if (confirm("해당 사용자와 일정을 바꾸시겠습니까?") == true) {
+													$.ajax({
+														type:"post",
+														url:"checkstatus.member",
+														dataType:"json",
+														data:{m_id:loginid},
+														success:function(data){
+															if(data.row!=0){
+																alert('이미 일정변경을 신청 중 입니다.');
+															}else{
+															
+																$.ajax({
+																	type:"post",
+																	url:"checkstatus.member",
+																	dataType:"json",
+																	data:{m_id:calEvent.id},
+																	success:function(data){
+																		if(data.row!=0){
+																			alert('변경 중인 일정입니다.');
+																		} else {
+																			var event1={
+																					id:calEvent.id,
+																					title:calEvent.title,
+																					dow:calEvent.dow,
+																					color:"black"
+																			};
+																			
+																			//신청자
+																			var event2;
+																			
+																			$.ajax({
+																				url:"selectseq.member",
+																				data:{m_id:loginid},
+																				dataType:"json",
+																				type:"post",
+																				success:function(data){
+																					event2={
+																							id:data.dto.m_id,
+																							title:data.dto.m_name,
+																							dow:[data.dto.o_code],
+																							color:"green"
+																					};
+																					
+																					//바꾸기		
+																					var event3={
+																							id : event1.id,
+																							title : event1.title,
+																							dow:event2.dow,
+																							color:'red'
+																								
+																					};
+																					
+																					var event4={
+																							id: event2.id,
+																							title : event2.title,
+																							dow:event1.dow,
+																							color:'red'
+																					};
+																					
+																					$("#calendar").fullCalendar('renderEvent', event3);
+																					$("#calendar").fullCalendar('unselect');
+																					$("#calendar").fullCalendar('renderEvent', event4);
+																					$("#calendar").fullCalendar('unselect');
+																					
+																					//reguloff 업데이트
+																					$.ajax({
+																						url : 'reguloff_update.htm',
+																						type : 'post',
+																						data : {
+																							m_id:event1.id,
+																							o_code:event1.dow[0],
+																							temp:''
+																						},
+																						success : function(data) {
+																							
+																						}
+																					});
+																					
+																					$.ajax({
+																						url : 'reguloff_update.htm',
+																						type : 'post',
+																						data : {
+																							m_id:event2.id,
+																							o_code:event2.dow[0],
+																							temp:'s'
+																						},
+																						success : function(data) {
+																							
+																						}
+																					});
+																					
+																					//history 저장
+																					$.ajax({
+																						url : 'history_insert.htm',
+																						type : 'post',
+																						data : { 
+																							ko_code:'600',
+																							o_code:event1.dow[0], //변경전 요일
+																							m_id:event1.id, //본인id > 클릭된 사람
+																							ro_code:event2.dow[0], //변경후 요일
+																							ro_object:event2.id, //바꿀사람id
+																							o_check:""
+																						},
+																						success : function(data) {
+																							
+																							console.log('대상자는 o_check 없음');
+																						}
+																					});
+																					
+																					$.ajax({
+																						url : 'history_insert.htm',
+																						type : 'post',
+																						data : { 
+																							ko_code:'600',
+																							o_code:event2.dow[0], //변경전 요일
+																							m_id:event2.id, //본인id > 클릭된 사람
+																							ro_code:event1.dow[0], //변경후 요일
+																							ro_object:event1.id, //바꿀사람id
+																							o_check:'y'
+																						},
+																						success : function(data) {
+																							console.log('신청자는 o_check=y');
+																						}
+																					});
+																					
+																					
+																				} //success
+																			}); //ajax
+																			
+																		} //else
+																	}//success
+																});//ajax
+
+															} //else
+														}//success
+														
+													}); //ajax
+												} //if
+											} //else
+										} //success
+									}); //ajax							
+								} //else
+							} //success
+						}); //ajax
+					} //else
+				} //success
+			}); //ajax
+		}, //eventclick
+							
+		//일정 드래그시 이벤트
+		eventDrop : function(event, delta, revertFunc, jsEvent) {
+			var dowbefore=event.dow[0];
+			var dowafter= Number(event.dow[0])+delta.days();
+			var evt;
+			
+			$.ajax({
+				type:'post',
+				url:'reguloffschedulecheck.member',
+				success:function(data){
+					if(data.str=="false"){
+						console.log(data.str);
+						alert('지금은 휴무 변경 시간이 아닙니다.');
+						
+						$("#calendar").fullCalendar('refetchEvents');
+						$("#calendar").fullCalendar('unselect');
+					} else if(data.str==null || data.str==""){
+						console.log(data.str);
+						alert('언디파인드');
+					} else {
+						
+						//동일사용자 확인
+						$.ajax({
+							url:"mid.member",
+							data:{m_id:event.id},
+							type:"post",
+							dataType:"json",
+							success:function(data){
+								if(data.rid==loginid){
+									if (confirm("정말 일정을 변경하시겠습니까??") == true) {
+										
 										$.ajax({
 											type:"post",
 											url:"checkstatus.member",
@@ -313,268 +517,105 @@ function loadCalendar(){
 											success:function(data){
 												if(data.row!=0){
 													alert('이미 일정변경을 신청 중 입니다.');
+													$('#calendar').fullCalendar('refetchEvents');
+													$('#calendar').fullCalendar('unselect');
 												}else{
-												
+													
+													if (dowafter>6){
+														dowafter=dowafter%7;
+													} else if (dowafter<0){
+														dowafter=dowafter%7+7;
+													} else {
+													}
+													
+													$("#calendar").fullCalendar('removeEvents', event.id);
+													
 													$.ajax({
+														url:"reguloff_update.htm",
+														data:{
+															m_id : event.id,
+															o_code : dowbefore,
+															temp:'s'
+														},
 														type:"post",
-														url:"checkstatus.member",
 														dataType:"json",
-														data:{m_id:calEvent.id},
 														success:function(data){
-															if(data.row!=0){
-																alert('변경 중인 일정입니다.');
-															} else {
-																var event1={
-																		id:calEvent.id,
-																		title:calEvent.title,
-																		dow:calEvent.dow,
-																		color:"black"
+															
+															evt={
+																	id:event.id,
+																	title:event.title,
+																	dow:[dowbefore],
+																	color:'green'
+															};
+															
+															$("#calendar").fullCalendar('renderEvent', evt);
+														}
+													});
+													
+													//history 저장
+													$.ajax({
+														url : 'history_insert.htm',
+														type : 'post',
+														data : { 
+															ko_code:'600',
+															o_code:dowbefore,
+															m_id:loginid,
+															ro_code:dowafter,
+															ro_object:loginid,
+															o_check:'y'
+														},
+														success : function(data) {
+															
+															var event = {
+																	id : data.data.m_id,
+																	title : data.data.m_name,
+																	dow : [ dowafter ],
+																	color:"red"
 																};
 																
-																//신청자
-																var event2;
-																
-																$.ajax({
-																	url:"selectseq.member",
-																	data:{m_id:loginid},
-																	dataType:"json",
-																	type:"post",
-																	success:function(data){
-																		console.log(data);
-																		event2={
-																				id:data.dto.m_id,
-																				title:data.dto.m_name,
-																				dow:[data.dto.o_code],
-																				color:"green"
-																		};
-																		
-																		//바꾸기		
-																		var event3={
-																				id : event1.id,
-																				title : event1.title,
-																				dow:event2.dow,
-																				color:'red'
-																					
-																		};
-																		
-																		var event4={
-																				id: event2.id,
-																				title : event2.title,
-																				dow:event1.dow,
-																				color:'red'
-																		};
-																		
-																		$("#calendar").fullCalendar('renderEvent', event3);
-																		$("#calendar").fullCalendar('unselect');
-																		$("#calendar").fullCalendar('renderEvent', event4);
-																		$("#calendar").fullCalendar('unselect');
-																		
-																		//reguloff 업데이트
-																		$.ajax({
-																			url : 'reguloff_update.htm',
-																			type : 'post',
-																			data : {
-																				m_id:event1.id,
-																				o_code:event1.dow[0],
-																				temp:'s'
-																			},
-																			success : function(data) {
-																				
-																			}
-																		});
-																		
-																		$.ajax({
-																			url : 'reguloff_update.htm',
-																			type : 'post',
-																			data : {
-																				m_id:event2.id,
-																				o_code:event2.dow[0],
-																				temp:'s'
-																			},
-																			success : function(data) {
-																				
-																			}
-																		});
-																		
-																		//history 저장
-																		$.ajax({
-																			url : 'history_insert.htm',
-																			type : 'post',
-																			data : { 
-																				ko_code:'600',
-																				o_code:event1.dow[0], //변경전 요일
-																				m_id:event1.id, //본인id > 클릭된 사람
-																				ro_code:event2.dow[0], //변경후 요일
-																				ro_object:event2.id, //바꿀사람id
-																				o_check:""
-																			},
-																			success : function(data) {
-																				
-																				console.log('대상자는 o_check 없음');
-																			}
-																		});
-																		
-																		$.ajax({
-																			url : 'history_insert.htm',
-																			type : 'post',
-																			data : { 
-																				ko_code:'600',
-																				o_code:event2.dow[0], //변경전 요일
-																				m_id:event2.id, //본인id > 클릭된 사람
-																				ro_code:event1.dow[0], //변경후 요일
-																				ro_object:event1.id, //바꿀사람id
-																				o_check:'y'
-																			},
-																			success : function(data) {
-																				console.log('신청자는 o_check=y');
-																			}
-																		});
-																		
-																		
-																	} //success
-																}); //ajax
-																
-															} //else
-														}//success
-													});//ajax
-												} //else
-											}//success
+																$("#calendar").fullCalendar('renderEvent', event);
+																$("#calendar").fullCalendar('unselect');
+														}
+													});
+												}
+											}
+										});
+													
+										} else {
+											$("#calendar").fullCalendar('refetchEvents');
+											/*//원위치
+											evt={
+													id:event.id,
+													title:event.title,
+													dow:[dowbefore]
+											};
+											$("#calendar").fullCalendar('removeEvents', event.id);
+											$("#calendar").fullCalendar('renderEvent', evt);
+											$("#calendar").fullCalendar('unselect');*/
 											
-										}); //ajax
-									} //if
-								} //else
-							} //success
-						}); //ajax
-						
-						
-						
+			
+										}
+									
+										$("#calendar").fullCalendar('unselect');
+														
+									}else{
+										alert("해당 일정은 편집할 수 없습니다.");
+										$("#calendar").fullCalendar('refetchEvents');
+										$("#calendar").fullCalendar('unselect');
+										/*//원위치
+										evt={
+												id:event.id,
+												title:event.title,
+												dow:[dowbefore]
+										};
+										$("#calendar").fullCalendar('removeEvents', event.id);
+										$("#calendar").fullCalendar('renderEvent', evt);*/
+									}	//else
+								} //success
+							});	//ajax	
 					} //else
 				} //success
-			}); //ajax
-			
-		}, //eventclick
-							
-		
-		//일정 드래그시 이벤트
-		eventDrop : function(event, delta, revertFunc, jsEvent) {
-			var dowbefore=event.dow[0];
-			var dowafter= Number(event.dow[0])+delta.days();
-			var evt;
-			
-			//동일사용자 확인
-			$.ajax({
-				url:"mid.member",
-				data:{m_id:event.id},
-				type:"post",
-				dataType:"json",
-				success:function(data){
-					if(data.rid==loginid){
-						if (confirm("정말 일정을 변경하시겠습니까??") == true) {
-							
-							////////////////
-							$.ajax({
-								type:"post",
-								url:"checkstatus.member",
-								dataType:"json",
-								data:{m_id:loginid},
-								success:function(data){
-									if(data.row!=0){
-										alert('이미 일정변경을 신청 중 입니다.');
-										$('#calendar').fullCalendar('refetchEvents');
-										$('#calendar').fullCalendar('unselect');
-									}else{
-										
-										if (dowafter>6){
-											dowafter=dowafter%7;
-										} else if (dowafter<0){
-											dowafter=dowafter%7+7;
-										} else {
-										}
-										
-										$("#calendar").fullCalendar('removeEvents', event.id);
-										
-										$.ajax({
-											url:"reguloff_update.htm",
-											data:{
-												m_id : event.id,
-												o_code : dowbefore,
-												temp:'s'
-											},
-											type:"post",
-											dataType:"json",
-											success:function(data){
-												console.log(data.data);
-												evt={
-														id:event.id,
-														title:event.title,
-														dow:[dowbefore],
-														color:'green'
-												};
-												
-												$("#calendar").fullCalendar('renderEvent', evt);
-											}
-										});
-										
-										//history 저장
-										$.ajax({
-											url : 'history_insert.htm',
-											type : 'post',
-											data : { 
-												ko_code:'600',
-												o_code:dowbefore,
-												m_id:loginid,
-												ro_code:dowafter,
-												ro_object:loginid,
-												o_check:'y'
-											},
-											success : function(data) {
-												
-												var event = {
-														id : data.data.m_id,
-														title : data.data.m_name,
-														dow : [ dowafter ],
-														color:"red"
-													};
-													
-													$("#calendar").fullCalendar('renderEvent', event);
-													$("#calendar").fullCalendar('unselect');
-											}
-										});
-									}
-								}
-							});
-										
-							} else {
-								//원위치
-								evt={
-										id:event.id,
-										title:event.title,
-										dow:[dowbefore]
-								};
-								$("#calendar").fullCalendar('removeEvents', event.id);
-								$("#calendar").fullCalendar('renderEvent', evt);
-
-							}
-						
-							$("#calendar").fullCalendar('unselect');
-											
-						}else{
-							alert("해당 일정은 편집할 수 없습니다.");
-							$("#calendar").fullCalendar('refetchEvents');
-							$("#calendar").fullCalendar('unselect');
-							/*//원위치
-							evt={
-									id:event.id,
-									title:event.title,
-									dow:[dowbefore]
-							};
-							$("#calendar").fullCalendar('removeEvents', event.id);
-							$("#calendar").fullCalendar('renderEvent', evt);*/
-						}	
-					}
-				});		
-		}
-	});
-}
-							
-							
+			});	//ajax
+		} //eventdrop
+	}); //calendar
+} //function

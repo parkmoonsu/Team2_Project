@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.bus.dao.BusDataDAO">
+	<select id="busnoCheck" parameterType="kr.or.bus.dto.BusDTO" resultType="Integer">
+		SELECT count(*) FROM BUS WHERE B_VEHICLENUM = #{b_vehiclenum}
+	</select>
+	
+	<insert id="insertBusno" parameterType="kr.or.bus.dto.BusDTO">
+		INSERT INTO BUS(B_VEHICLENUM, R_NUM) VALUES(#{b_vehiclenum}, #{r_num})
+	</insert>
+	
+</mapper>

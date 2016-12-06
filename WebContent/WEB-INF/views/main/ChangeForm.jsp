@@ -10,9 +10,29 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style type="text/css">
+#loading {
+ width: 100%;   
+ height: 100%;   
+ top: 0px;
+ left: 0px;
+ position: fixed;   
+ display: block;   
+ opacity: 0.7;   
+ background-color: #fff;   
+ z-index: 99;   
+ text-align: center; }  
+ 
+#loading-image {   
+ position: absolute;   
+ top: 100px;   <-- 이부분과
+ left: 240px;   <-- 이부분을 50% 로 하면 화면 정 가운데에 로딩 이미지가 나타난다
+ z-index: 100; }
+</style>
 
-<script
-	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
+
 
 <title>KOSBUS</title>
 
@@ -24,41 +44,20 @@
 <link
 	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet">
-<!-- NProgress -->
-<link
-	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
-	rel="stylesheet">
-<!-- iCheck -->
-<link
-	href="${pageContext.request.contextPath}/vendors/iCheck/skins/flat/green.css"
-	rel="stylesheet">
-<!-- bootstrap-progressbar -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css"
-	rel="stylesheet">
-<!-- JQVMap -->
-<link
-	href="${pageContext.request.contextPath}/vendors/jqvmap/dist/jqvmap.min.css"
-	rel="stylesheet" />
+
 <!-- bootstrap-daterangepicker -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css"
-	rel="stylesheet">
 
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-<script type="text/javascript">
-	$(function(){
-		$("#photo_swipe").click(function(){
-			$("#photo").click();
-		});
-	});
-</script>
 </head>
 
 
 <body class="nav-md">
+<div id="loading"><img id="loading-image" src="${pageContext.request.contextPath}/images/images.png" alt="Loading..." /></div>
+<div>
+ <img src = "${pageContext.request.contextPath}/images/images.png">
+</div>
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -296,6 +295,7 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function() {
+		$('#loading').hide();  
 		$('#watch').click(function(){
 			$('#new-modal').modal();
 		});
@@ -368,5 +368,18 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+	
+	<script type="text/javascript">
+  $(function(){
+	  $('body').oLoader({
+		  wholeWindow: true, 
+		  effect:'slide',
+		  hideAfter: 1500
+		});
+
+
+ 
+  });
+  </script>
 </body>
 </html>

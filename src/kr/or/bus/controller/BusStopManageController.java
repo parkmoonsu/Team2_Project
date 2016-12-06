@@ -5,9 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.bus.dto.BusStopDTO;
 import kr.or.bus.dto.RouteDTO;
@@ -28,35 +30,35 @@ public class BusStopManageController {
 		
 	}
 	//수정된 버스정류장 마커 좌표를 저장한다.
-	@RequestMapping(value="/busStoplocationEdit.admin",method=RequestMethod.GET)
+	/*@RequestMapping(value="/busStoplocationEdit.admin",method=RequestMethod.GET)
 	public void busStopEditSave(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		busStopManageService.busStoplocationEdit(request, response);
-	}
+	}*/
 		
 	//수정된 버스정류장 좌표를 파일에서 읽어온다.
-	@RequestMapping(value="/busStoplocationEditRead.admin",method=RequestMethod.GET)
+	/*@RequestMapping(value="/busStoplocationEditRead.admin",method=RequestMethod.GET)
 	public void busStopEditRead(HttpServletRequest request ,HttpServletResponse response) throws Exception{
 		busStopManageService.busStoplocationEditRead(request, response);
-	}
+	}*/
 		
 	
 	
 	//버스정류장 원본 마커 좌표를 파일에서 읽어온다.
-	@RequestMapping(value="/busStopOriginalRead.admin",method=RequestMethod.GET)
+	/*@RequestMapping(value="/busStopOriginalRead.admin",method=RequestMethod.GET)
 	public void busStopOriginRead(HttpServletRequest request ,HttpServletResponse response) throws Exception{
 		busStopManageService.busStopOriginalRead(request, response);
-	}
+	}*/
 	
 	//버스 원본 경로 를 파일에서 읽어온다.
-	@RequestMapping(value="/busRoute.admin",method=RequestMethod.GET)	
+	/*@RequestMapping(value="/busRoute.admin",method=RequestMethod.GET)	
 	public void busStopRouteLoad(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		busStopManageService.busRouteRead(request, response);
-	}
+	}*/
 
 	//실시간 위치추적 30초마다 갱신됨
 	@RequestMapping(value="/RealTimeSearch.admin",method=RequestMethod.GET)
-	public void buslocationLoad(HttpServletRequest request ,HttpServletResponse response) throws Exception{
-		busStopManageService.busLocationSearch(request, response);;
+	public void buslocationLoad(String r_num, RouteDTO dto, HttpServletRequest request ,HttpServletResponse response, ModelMap model) throws Exception{
+		busStopManageService.busLocationSearch(r_num, dto, request, response);	
 	}
 	
 	//버스번호 를 가져와 해당 버스가 다니는 정류장 정보를 디비에 저장한다.
@@ -76,4 +78,13 @@ public class BusStopManageController {
 	public void busStopRoad(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		busStopManageService.busStopRoadSearch(r_num, dto, busstopdto, request, response);
 	}
+	
+	//DB에서 정류장 정차 순서 바꿔주는 함수
+	@RequestMapping("/editordernumber.admin")
+	public void editordernum(String r_num, String rs_order, String latlng){
+		System.out.println("r_num"+r_num);
+		System.out.println("rs_order"+rs_order);
+		System.out.println("latlng"+latlng);
+	}
+	
 }

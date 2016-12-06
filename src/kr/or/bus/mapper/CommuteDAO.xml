@@ -9,12 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="getSelect" resultType="kr.or.bus.dto.CommuteJoinCstartJoinCendDTO" >
 		
 		select *
-		from (select rownum, N.*
+		from (select rownum ro, N.*
         	  from (select com.c_date, com.c_start, cs.cs_stat, com.c_end, ce.ce_stat
         	  		from commute com full outer join cstart cs on com.cs_code=cs.cs_code
         	  		full outer join cend ce on ce.ce_code=com.ce_code
         	  		where m_id= #{param2} order by c_date desc) N) 
-		where rownum between 1 + (#{param1}-1) * 5 and 5 + (#{param1}-1)*10
+		where ro between 1 + (#{param1}-1) * 10 and 10 + (#{param1}-1) * 10
 	</select>
 	
 	<select id="count" resultType="int" parameterType="String">

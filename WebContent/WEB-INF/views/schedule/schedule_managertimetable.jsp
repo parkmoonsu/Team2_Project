@@ -110,8 +110,8 @@ th, table{
 				<div class="">
 				<div class="page-title">
 						<div class="title_left">
-							<h3>휴무 신청 내역
-								<small>확인 및 승인</small>
+							<h3>운행 스케줄
+								<small>일정 확인</small>
 							</h3>
 						</div>
 					</div>
@@ -141,7 +141,9 @@ th, table{
 												<th>차량번호</th>
 												<th>노선번호</th>
 												<th>운행일</th>
-												<th colspan="3" style="text-align: center">운행시간</th>
+												<th style="text-align: center">운행시간</th>
+												<th></th>
+												<th></th>
 												
 											</tr>
 										</thead>
@@ -152,12 +154,15 @@ th, table{
 											
 											<tr>
 												<td style="text-align: center;">${status.count}</td>
-												<td>${i.selectdistinctdto.m_name}</td>
-												<td>${i.selectdistinctdto.r_num}</td>
-												<td>${i.selectdistinctdto.b_vehiclenum}</td>
-												<td>${i.selectdistinctdto.o_date}</td>
+												<td>${i.m_name}</td>
+												<td>${i.b_vehiclenum}</td>
+												<td>${i.r_num}</td>
+												<td>${i.o_date}</td>
+												<td>${i.o_time1}</td>
+												<td>${i.o_time2}</td>
+												<td>${i.o_time3}</td>
 											
-												<c:forEach var="j" items="${i.o_time}">
+												<%-- <c:forEach var="j" items="${i.o_time}">
 													<c:if test="${'0' eq j || '' eq j}">
 														<td>없음:!@#!</td>
 													</c:if>
@@ -174,7 +179,7 @@ th, table{
 														<td>${j}</td>
 													</c:if>
 													
-												</c:forEach>
+												</c:forEach> --%>
 											</tr>
 											</c:forEach>
 										</tbody>
@@ -279,17 +284,15 @@ th, table{
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
 			<!-- /footer content -->
 		</div>
 
 
-
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -384,7 +387,9 @@ th, table{
 	}
 	
 	$(function(){
-		
+			  $.oPageLoader(); 
+
+		  </script>
 		var count = 1;
 		
 		//console.log(num);

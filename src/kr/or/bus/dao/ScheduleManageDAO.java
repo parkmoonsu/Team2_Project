@@ -11,6 +11,11 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+
+import kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO;
+
+import kr.or.bus.dto.OscheduleJoinMemberDTO;
+
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
 import kr.or.bus.dto.RouteDTO;
@@ -45,12 +50,19 @@ public interface ScheduleManageDAO {
 	public void history_agree(@Param("m_id") String m_id, @Param("ro_object") String ro_object);
 
 	// timetable
-	public List<SelectDistinctDTO> selectdistinct();
-	public String[] selecttime(SelectDistinctDTO selectdistinctdto);
+	public List<OscheduleJoinMemberDTO> timetable_get();
+	/*public List<SelectDistinctDTO> selectdistinct();
+	public String[] selecttime(SelectDistinctDTO selectdistinctdto);*/
 	
 	//가상스케줄 복사
-	//public List<ReguloffJoinMemberJoinBusJoinRouteDTO> ocode_select();
 	public void copy_vschedule();
+	public void delete_vschedule();
+	
+	//스케줄상태 자동변경
+	public void reguloffscheduler(String reguloff);
+	
+	//스케줄 상태 불러오기
+	public String reguloff_schedulecheck();
 
 	//최증스케줄
 	public List<MemberJoinBusJoinRouteJoinReguloffDTO> getmemberjoinreg(String r_num); 
@@ -64,11 +76,10 @@ public interface ScheduleManageDAO {
 	public int getRequestRefuseNum();
 
 	public List<MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO> getRequestMember();
-
 	public List<MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO> getRequestInfoCal(String r_num);
-
 	public List<MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2> getMemberTempTrue(String r_num);
-
+	public List<MemberJoinReguloffrJoinMoffDTO> getReqRescheduled(String r_num);
+	
 	public int updateFirstRegister(String m_id, String o_code); //승인
 	public int updateFirstRegisterRecord(String m_id); //승인
 	public int refuseFirstRegisterRecord(String m_id); //거절

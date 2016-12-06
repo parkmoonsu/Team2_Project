@@ -4,7 +4,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--
- * @File Name: calendar_reguloff.jsp
+ * @File Name: schedule_managereguloff.jsp
  * @Author: 길한종
  * @Data: 2016. 11. 22
  * @Desc: 일정관리(정기휴무) -  풀캘린더 ui
@@ -65,9 +65,9 @@
 
 }
 #external-events {
-	margin-left:65%;
+	margin-left:64%;
 	width: 10%;
-	padding: 0 1%;
+	padding: 1 1%;
 	border: 1% solid #ccc;
 	background: #eee;
 	text-align: left;
@@ -219,6 +219,7 @@ select#selectedgaragename, select#selectedroutenumber {
 											<hr>
 											<div id="draggablemember"></div>
 										</div>
+										
 										<div id='calendar2'>
 										<div id='calendar'></div>
 										</div>
@@ -237,12 +238,9 @@ select#selectedgaragename, select#selectedroutenumber {
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
 			<!-- /footer content -->
 		</div>
 	</div>
@@ -263,26 +261,70 @@ select#selectedgaragename, select#selectedroutenumber {
 			url:"getselectedmember.admin",
 			data:{"r_num":param},
 			success:function(data){
-
+				var item = "";
 				var m_name = "";
 				var m_id = "";
+				var o_date = "";
 				var array = new Array(); //db에 저장된 일정을 담는 배열
-				
-				$.each(data.mrmbrjdto,function(index,obj){
-					console.log("휴무있는m_id: "+obj.m_id);
-					console.log("휴무있는m_name: "+obj.m_name);
-					console.log("휴무있는o_date: "+obj.o_date);
-					console.log("휴무있는o_code: "+obj.o_code);
-					var item = {
+				$.each(data.mjrjmdto,function(index,obj){
+						if(obj.m_id == obj.m_id_1){ // 변경 요청 == 변경 대상
+							if(obj.o_code == obj.o_code_1){ //변경 요청 == 변경 대상 and 요청자 휴무 == 대상자 휴무
+								item = {
+								title : obj.m_name,
+								aftername : obj.m_name_1,
+								id : obj.m_id,
+								afterid : obj.m_id_1,
+								dow : obj.o_code,
+								afterdow : obj.o_code_1, //어차피 o_code = o_code_1
+								color : "red"
+								}
+							array.push(item);
+							}else{ //변경 요청 == 변경 대상 and 요청자 휴무 != 대상자 휴무
+							    item = {
+								title : obj.m_name,
+								aftername : obj.m_name_1,
+								id : obj.m_id,
+								afterid : obj.m_id_1,
+								dow : obj.o_code,
+								afterdow : obj.o_code_1, // o_code != o_code_1
+								color : "red"//red로 바꿔야함
+								}
+							array.push(item);
+							}//else 끝
+						}else{ //변경 요청 != 변경 대상
+					        item = {
 							title : obj.m_name,
+							aftername : obj.m_name_1,
 							id : obj.m_id,
-							dow : obj.o_code
-					};
-					array.push(item);
-				}); 
+							afterid : obj.m_id_1,
+							dow : obj.o_code,
+							afterdow : obj.o_code_1, // o_code != o_code_1
+							color : "purple"
+							}
+							array.push(item);
+					        item = {
+									title : obj.m_name_1,
+									aftername : obj.m_name,
+									id : obj.m_id_1,
+									afterid : obj.m_id,
+									dow : obj.o_code_1,
+									afterdow : obj.o_code, // o_code != o_code_1
+									color : "purple"
+									}
+					        array.push(item);
+						}//else
+					
+				});//each
+				 $.each(data.mrmbrjdto,function(index,obj1){ //reguloff 전체중에서 신청 중인것 뺀 dto
+							 item = {
+										title : obj1.m_name,
+										id : obj1.m_id,
+										dow : obj1.o_code
+								}
+						array.push(item);
+				});//each 
 				var eventObject;
-				var calendar = $('#calendar').fullCalendar({
-
+				    calendar = $('#calendar').fullCalendar({
 					header : {
 						left : 'prev,next today',
 						center : 'title',
@@ -290,9 +332,10 @@ select#selectedgaragename, select#selectedroutenumber {
 					},
 					editable : true,
 					eventDrop : function(event,dayDelta,minuteDelta,allDay,revertFunc){
-						console.log('변경자'+event.title);
-						console.log('시작일'+event.start.format('YYYY-MM-DD'));
-						console.log('변경자 id:'+event.id);
+						if(event.color=="red" || event.color=="purple"){
+							alert(event.title + '님은 현재 휴무 변경 승인 대기 중입니다.');
+							revertFunc();
+						}else{
 						var item = {
 								m_id : event.id,
 								m_name : event.title,
@@ -302,10 +345,19 @@ select#selectedgaragename, select#selectedroutenumber {
 							url:"modifyingschedule.admin",
 							data: item,
 							success:function(data){
-								console.log(data);
 								
+								var eventObjectr = {
+									id : data.m_id,
+									title : data.m_name,
+									dow : data.o_code	
+								};
+								$('#calendar').fullCalendar('removeEvents', event.id);
+								$('#calendar').fullCalendar('renderEvent', eventObjectr);
+								$('#calendar').fullCalendar('unselect');
+								alert(event.title+' 님의 일정이 변경 되었습니다.');
 							}
 						});
+						}
 					},
 					eventDurationEditable : false,
 					droppable : true, // this allows things to be dropped onto the calendar
@@ -322,7 +374,6 @@ select#selectedgaragename, select#selectedroutenumber {
 						eventObject=event;
 					},
 					drop : function(date, jsEvent) {
-						console.log(date.format('dddd').substr(0,3));
 						var o_date = date.format('dddd').substr(0,3);
 						var dragitem = $(this);
 						
@@ -335,8 +386,7 @@ select#selectedgaragename, select#selectedroutenumber {
 								"o_date":o_date
 							},
 							success : function(data){
-								console.log("야야야야야ㅑㅇ야ㅑ"+data);
-								console.log(eventObject);
+								
 								var eventObject2={
 									id:eventObject.id,
 									title:eventObject.title,
@@ -350,7 +400,7 @@ select#selectedgaragename, select#selectedroutenumber {
 						});
 						
 					}
-				});
+				}); //calendar
 				
 				$.each(data.mjrdto,function(index,value){
 					console.log("휴무없는m_id: "+value.m_id);
@@ -363,7 +413,7 @@ select#selectedgaragename, select#selectedroutenumber {
 					view += value.m_id;
 					view += "'>";
 					view += "</div>";
-				});
+				});//each
 				$('#draggablemember').empty();
 				$('#draggablemember').append(view);
 				
@@ -384,8 +434,8 @@ select#selectedgaragename, select#selectedroutenumber {
 						revertDuration: 0  //  original position after the drag
 					});
 
-				});
-			}
+				}); //each
+			}//success
 		});
 	});
 

@@ -7,6 +7,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
+	<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 <div class="nav_menu">
 	<nav>
 		<div class="nav toggle">
@@ -61,6 +63,13 @@
 
 <script type="text/javascript">
 	$(function(){
+		$('body').oLoader({
+			  wholeWindow: true, 
+			  effect:'doornslide',
+			  image: "${pageContext.request.contextPath}/images/king.gif",
+			  hideAfter: 500
+			});
+		
 		$.ajax({
 			url:"name.htm",
 			data:{"m_id":"${LoginUser}"},
