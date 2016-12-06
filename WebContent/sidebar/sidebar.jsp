@@ -11,8 +11,8 @@
 <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
            <a href = "main.htm">
-           	<img src="" style = "width:100%">
-           	kosbus
+           	<img src="images/newlogo1.png" style = "width:100%">
+           
            </a>
             </div>
 

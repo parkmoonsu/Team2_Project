@@ -11,9 +11,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO BUS(B_VEHICLENUM, R_NUM) VALUES(#{b_vehiclenum}, #{r_num})
 	</insert>
 	
-	<select id="SearchRider" parameterType="String" resultType="String">
-		select member.M_NAME
-		from bus, member 
-		where bus.B_VEHICLENUM = member.B_VEHICLENUM and bus.B_VEHICLENUM = #{b_vehiclenum}
-	</select>
 </mapper>
