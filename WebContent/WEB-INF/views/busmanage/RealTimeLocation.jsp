@@ -90,12 +90,12 @@
 
           <div class="row" style="text-align: right">
             <div class="col-md-12 col-sm-12 col-xs-12">
-            <input type="button" id="Search"  value="버스위치추적 ">
+            <input type="button" id="Search" class="btn btn-default" value="버스위치추적 ">
 				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
 				<c:set var="d" value="${busNo}"></c:set>
 				<select id="selectBus">
 					<option>노선을 선택하세요</option>
-					<%-- <option value="${d}"></option> --%>
+					<option value="${d}"></option>
 					<option>all</option>
 					<c:forEach var="i" items="${list}">
 					<option>${i.r_num}</option>					

@@ -13,7 +13,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>KOSBUS</title>
+<title>RoadOneBell</title>
 
 		    <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
@@ -168,7 +168,7 @@
 			    <nav class="navbar navbar-default">
 		        <div class="navbar-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-		         <a class="navbar-brand" href="bus.htm">KosBus</a> 
+		         <a class="navbar-brand" href="bus.htm">RoadOneBell</a> 
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		          <ul class="nav navbar-nav navbar-right">
