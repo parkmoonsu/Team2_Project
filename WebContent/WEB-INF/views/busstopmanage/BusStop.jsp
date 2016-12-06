@@ -364,7 +364,7 @@ select#selectBus, select#selectBus2 {
     	console.log(latLng);
     	var num =$("#end").val();
     	console.log("알고싶어넘버"+num);
-    	if(num=='' || num==null){//아무것도 입력 안했을때
+    	if(num==0){
     		console.log("?여기??"+num);
        		var copyMarker = new google.maps.Marker({
              	position: latLng,        
@@ -453,8 +453,8 @@ select#selectBus, select#selectBus2 {
          
         dataArray.push(latLng);
     }*/
-	
-    function copyMarkerMakes(latLng, map) {
+	//db에서 불러오기
+    /* function copyMarkerMakes(latLng, map) {
         console.log(latLng);
         for(var i=0; i<latLng.length; i++){
     		var num =$("#end").val();
@@ -520,7 +520,7 @@ select#selectBus, select#selectBus2 {
         dataArray.push(latLng);
         //copymovingBusMarker(latLng, map);
                
-    }
+    } */
            
     function copymovingBusMarker(latLng, map){
        	console.log(latLng);    
@@ -657,7 +657,7 @@ select#selectBus, select#selectBus2 {
        	$('#shy').click(function(){
           	//console.log(e.latLng);
             console.log('하이');
-            copyMarkerMakes(er.latLng, map);
+            copyMarkerMakess(er.latLng, map);
             console.log('하이1');
              
         });
