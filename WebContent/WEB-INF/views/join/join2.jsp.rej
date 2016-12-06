@@ -1,0 +1,83 @@
+diff a/WebContent/WEB-INF/views/join/join2.jsp b/WebContent/WEB-INF/views/join/join2.jsp	(rejected hunks)
+@@ -184,9 +184,6 @@
+ label{
+ font-size:12px;
+ }
+-.form-group{
+-height: 35px;
+-}
+ 
+ </style>
+ </head>
+@@ -232,8 +229,8 @@
+             <div class="inner-bg">
+                 <div class="container">
+                     <div class="row">
+-                 <div class="col-sm-2"></div>
+-						<div class="col-md-8 col-sm-8 col-xs-8 form-box">
++                 <div class="col-sm-1"></div>
++						<div class="col-md-10 col-sm-10 col-xs-10 form-box">
+ 							<div class="x_panel">
+ 							<div class="form-top" align="center" style="color: white">
+ 								<div class="form-top-center">
+@@ -283,7 +280,7 @@
+ 													<div class = "col-md-1 col-sm-1" align="left" style="padding:0px">
+ 														<input type = "button" class = "btn btn-default" id = "checkid" value = "중복확인">
+ 													</div>
+-													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
++													<div class = "col-md-2 col-sm-2" style="margin-bottom:1px">
+ 														<span id = "check"></span>
+ 													</div>
+ 												</div>
+@@ -367,7 +364,7 @@
+ 												
+ 												<div class="form-group">
+ 													<label class="control-label col-md-3 col-sm-3 col-xs-12">성별</label>
+-													<div class="col-md-6 col-sm-6 col-xs-12">
++													<div class="col-md-6 col-sm-6 col-xs-12" align="left">
+ 														<div id="m_gender" class="btn-group" data-toggle="buttons">
+ 															<label class="btn btn-default"
+ 																data-toggle-class="btn-primary"
+@@ -548,7 +545,7 @@
+ 					$("#birth2").empty();
+ 					
+ 					if(bir.test($("#m_birth").val().trim())){
+-						$('#birth').after("<font color = 'blue' size='1px' id='birth2'>가능합니다</font>");
++						$('#birth').after("<font color = '#52d3aa' size='1px' id='birth2'>가능합니다</font>");
+ 					}else{
+ 						$('#birth').after("<font color = 'red' size='1px' id='birth2'>생년월일 예)1992-02-03</font>");
+ 					}
+@@ -562,7 +559,7 @@
+ 					
+ 					if(bir2.test($("#m_phone").val().trim())){
+ 						
+-						$('#phone').after("<font color = 'blue' size='1px' id='phone2'>가능합니다</font>");
++						$('#phone').after("<font color = '#52d3aa' size='1px' id='phone2'>가능합니다</font>");
+ 					}else{
+ 						$('#phone').after("<font color = 'red' size='1px' id='phone2'align='center'>전화번호 예)010-0000-0000</font>");
+ 					}
+@@ -605,12 +602,12 @@
+ 							console.log($.trim(rd.check));
+ 							$("#check").empty();
+ 							if($.trim(rd.check)=="y"){
+-								$('#check').append("<font color = 'red'>이미 있는 ID 입니다!</font>");
++								$('#check').append("<font color = 'red' size='1px' >이미 있는 ID 입니다!</font>");
+ 								$('#m_id').focus();
+ 							}else if($.trim(rd.check)=="n" && $("#m_id").val().trim().length >= 8){
+-								$('#check').append("<font color = '#369F36'>사용 가능한 ID 입니다!</font>");
++								$('#check').append("<font  color = '#52d3aa' size='1px'>사용 가능한 ID 입니다!</font>");
+ 							}else{
+-								$('#check').append("<font color = 'red'>ID는 8자 이상입니다!</font>");
++								$('#check').append("<font color = 'red' size='1px'>ID는 8자 이상입니다!</font>");
+ 							}
+ 						}
+ 						
+@@ -627,7 +624,7 @@
+ 						alert("비밀번호를 입력하세요.");
+ 						$("#m_pw").focus();
+ 				        return false;
+-					}else if($("#m_pw2").val() == "" || !($("#m_pw").val() != $("#m_pw2").val())){
++					}else if($("#m_pw2").val() == "" || ($("#m_pw").val() != $("#m_pw2").val())){
+ 						alert("비밀번호가 일치 하지 않습니다.");
+ 						$("#m_pw2").focus();
+ 						return false;

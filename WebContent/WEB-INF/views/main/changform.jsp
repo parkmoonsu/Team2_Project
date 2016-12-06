@@ -276,7 +276,12 @@
 
     <script>
       $(function() {
-    			  $.oPageLoader(); 
+    	  $('body').oLoader({
+    		  wholeWindow: true, 
+    		  effect:'slide',
+    		  hideAfter: 1500
+    		});
+ 
 
     	  
         Morris.Bar({
