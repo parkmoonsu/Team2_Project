@@ -40,7 +40,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-edit"></i> 버스관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="busenroll.admin">버스 등록/삭제</a></li>
+                      <li><a href="">버스 등록/삭제</a></li>
                       <li><a href="realTime.admin">실시간 버스 위치</a></li>
                       <li><a href="chagozi.admin">차고지 별 버스 상태</a></li>
                     </ul>
@@ -65,6 +65,7 @@
                   <li><a><i class="fa fa-bar-chart-o"></i>운영 관리<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="changehistory.admin">휴무변경 이력확인</a></li>
+                      <li><a href="busenroll.admin">버스-노선-기사 등록(이름좀 정해주셈 슈발)</a></li>
                     </ul>
                   </li>
                  <li><a href="membermanage.admin"><i class="fa fa-clone"></i>회원 관리</a> 

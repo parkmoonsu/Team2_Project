@@ -160,12 +160,23 @@ ul.pagination li a {
 											<tr>
 												
 												<td>${i.r_num}</td>
-												<td>${i.m_name}</td>
+												<td><font color = "#1ABB9C">${i.m_name}</font></td>
 												<td>${i.o_date}</td>
-												<td>${i.c_name}</td>
+												<td><font color = "#1ABB9C">${i.c_name}</font></td>
 												<td>${i.c_date}</td>
 												<td>${i.ro_reqdate}</td>
-												<td>${i.ko_name}</td>
+												<c:choose>
+													<c:when test="${i.ko_name == '승인'}">
+														<td><font color = "green">${i.ko_name}</font></td>
+													</c:when>
+													<c:when test="${i.ko_name == '거절'}">
+														<td><font color = "red">${i.ko_name}</font></td>
+													</c:when>
+													<c:otherwise>
+														<td><font color = "orange">${i.ko_name}</font></td>
+													</c:otherwise>
+												</c:choose>
+												
 												<td>${i.ro_regdate}</td>
 											</tr>
 											</c:forEach>
