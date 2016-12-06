@@ -27,11 +27,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.bus.dao.BusDataDAO;
+import kr.or.bus.dao.BusLocationInfoDAO;
 import kr.or.bus.dao.BusStopDAO;
 import kr.or.bus.dao.RouteDAO;
 import kr.or.bus.dao.RouteStopDAO;
 import kr.or.bus.dao.StopDAO;
 import kr.or.bus.dto.BusDTO;
+import kr.or.bus.dto.BusLocationInfoDTO;
 import kr.or.bus.dto.BusStopDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteStopDTO;
@@ -419,8 +421,7 @@ public class BusStopManageService {
 	}
 
 //실시간 위치 추적
-	public String busLocationSearch(String r_num, RouteDTO dto, HttpServletRequest request , HttpServletResponse response) throws IOException{	
-		String busno = null ;
+	public void busLocationSearch(String r_num, RouteDTO dto, HttpServletRequest request , HttpServletResponse response) throws IOException{			
 		PrintWriter out=null;
 		response.setCharacterEncoding("UTF-8");
 		out = response.getWriter();
@@ -460,13 +461,9 @@ public class BusStopManageService {
 			dto = dao.routeidSearch(r_num);		
 			
 			
-			String venid = venidSearch(dto,r_num);		
-			
-			
-			
-			busno = LocationSearch(request , response, venid);
+			String venid = venidSearch(dto,r_num);				
+			LocationSearch(request , response, venid);
 		}
-		return busno;
 	}
 	
 	public JSONObject multiLocationSearch(HttpServletRequest request , HttpServletResponse response, RouteDTO dto, String r_num) throws IOException{
@@ -527,11 +524,14 @@ public class BusStopManageService {
 		return jsonmaps;
 	}
 	
-	public String LocationSearch(HttpServletRequest request , HttpServletResponse response, String venid) throws IOException{
+	public void LocationSearch(HttpServletRequest request , HttpServletResponse response, String venid) throws IOException{
 		System.out.println("너하나만 타냐");
 			
 		PrintWriter out=null;
 		JSONObject jsonmaps = null;
+		JSONArray jsonlist = null;
+		JSONObject jsonno = null;
+		
 		StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/buspos/getBusPosByVehId"); //URL
 	    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); //Service Key
 	    urlBuilder.append("&" + URLEncoder.encode("vehId","UTF-8") + "=" + URLEncoder.encode(venid, "UTF-8")); //버스ID
@@ -569,19 +569,21 @@ public class BusStopManageService {
 		System.out.println(sb.toString());
 		jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
 		
-		JSONObject jsonno = jsonmaps;
+		jsonno = jsonmaps;
+		
 		System.out.println("시발"+jsonno);
 		System.out.println(jsonno.get("msgBody"));
 		jsonno = (JSONObject) jsonno.get("msgBody");
 		jsonno = (JSONObject) jsonno.get("itemList");
 		System.out.println("차량번호 가져왔냐???"+jsonno.get("plainNo"));
-		BusDataDAO busdatadao = sqlsession.getMapper(BusDataDAO.class);
-		String busNo = busdatadao.SearchRider(jsonno.get("plainNo").toString());		
-		System.out.println(busNo);
+		BusLocationInfoDAO buslocationinfodao = sqlsession.getMapper(BusLocationInfoDAO.class);
 		
-		out.print(jsonmaps);
-		
-		return busNo;
+		BusLocationInfoDTO buslocationinfodto = buslocationinfodao.SearchRider(jsonno.get("plainNo").toString());		
+		System.out.println(buslocationinfodto);
+		jsonlist = JSONArray.fromObject(jsonmaps);
+					
+		jsonlist.add(1, buslocationinfodto);
+		out.print(jsonlist);
 	}
 	
 	//뷰에서 r_num 을 받아서 공공데이터로 보낸뒤 결과값 route_id 를 디비에 저장시키는 함수. 
