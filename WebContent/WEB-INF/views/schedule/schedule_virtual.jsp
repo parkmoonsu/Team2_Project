@@ -20,7 +20,7 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 <se:authentication property="name" var="LoginUser" />
 <!-- jQuery -->
 <script
-   src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+   src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></scrsipt>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8">
@@ -114,6 +114,7 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
 </script>
 
 <body class="nav-md">
+
 
    <div class="container body">
       <div class="main_container">
@@ -375,5 +376,249 @@ m9<%@ page language="java" contentType="text/html; charset=UTF-8"
    <!-- FullCalendar -->
    <script
       src="${pageContext.request.contextPath }/js/schedule_managereguloff.js"></script>
+
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+			</div>
+
+			<!--상단 menu -->
+			<div class="top_nav">
+				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
+			</div>
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>
+								 예상 스케줄 <i class="fa fa-calendar"></i>
+							</h3>
+						</div>
+
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>
+										<select id="selectedrnum">
+											<option value="0">노선선택</option>
+											<c:forEach var="rlist" items="${routelist}">
+												<option value="${rlist.r_num}">${rlist.r_num}</option>
+											</c:forEach>
+										</select>
+										<!--  <small>Sessions</small> -->
+
+									</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i
+												class="fa fa-chevron-up"></i></a></li>
+										<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown" role="button" aria-expanded="false"><i
+												class="fa fa-wrench"></i></a>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#">Settings 1</a></li>
+												<li><a href="#">Settings 2</a></li>
+											</ul></li>
+										<li><a class="close-link"><i class="fa fa-close"></i></a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+
+								<div class="x_content">
+
+									<div id='wrap'>
+
+
+										<div id='calendar2'>
+											<div id='calendar'></div>
+										</div>
+										<div style='clear: both'></div>
+
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!-- calendar modal -->
+	<!-- /calendar modal -->
+	<script>
+	var array = new Array();
+	var dowarray = new Array();
+		$(function() {
+			$.oPageLoader();
+			//rlist.r_num
+			
+			$('#selectedrnum').change(function() {
+				array = [];
+				console.log('선택한 노선번호(r_num): ' + $('#selectedrnum').val());
+				var param = $('#selectedrnum').val();
+				var view = "";
+				$.ajax({
+					url : "lastpredictschedule.admin",
+					type : "post",
+					data : {
+						"r_num" : param
+					},
+					success : function(data) {
+						
+						
+						
+						var year=new Date().getFullYear();
+						var month=new Date().getMonth()+1;
+						var day=new Date().getDate();
+						var date=year.toString()
+							+"-"+month.toString()
+							+"-"+day.toString();
+						
+						var test=0;
+						var ocode="";
+						var ocode2="";
+						var interval=new Array();
+
+						$.each(data.mjrolist, function(index, obj) {
+						
+							//swich obj.o_code="0" dowarray=[1, 2, 3, 4, 5, 6]]
+							var dayoff=obj.o_code;
+							switch(dayoff){
+							case "0":
+								dowarray=[1, 2, 3, 4, 5, 6]; break;
+							case "1":
+								dowarray=[0, 2, 3, 4, 5, 6]; break;
+							case "2":
+								dowarray=[0, 1, 3, 4, 5, 6]; break;
+							case "3":
+								dowarray=[0, 1, 2, 4, 5, 6]; break;
+							case "4":
+								dowarray=[0, 1, 2, 3, 5, 6]; break;
+							case "5":
+								dowarray=[0, 1, 2, 3, 4, 6]; break;
+							case "6":
+								dowarray=[0, 1, 2, 3, 4, 5]; break;
+							
+							}
+						
+							
+							var time2=date+" "+obj.r_start;
+							var time3=new Date(time2);
+							var time4=new Date(time2);
+							
+							time3.setMinutes(time3.getMinutes()+test);
+							var starttime=time3.getHours().toString()+":"+time3.getMinutes().toString(); //time2.time();
+						
+							time4.setMinutes(time3.getMinutes()+10);
+						    var endtime=time4.getHours().toString()+":"+time4.getMinutes().toString();
+							console.log('endtime : '+endtime);
+							 
+		 
+							
+							 
+							 
+							var item = {
+								title : obj.m_name,
+								id : obj.m_id,
+								start :obj.r_start,
+								end:/* obj.r_end */ endtime ,
+								dow : obj.o_code 
+							};
+							
+							array.push(item);
+							interval.push(obj.r_interval);
+							//test+=Number(obj.r_interval);
+						});
+						console.log(array);
+						var intv=0;
+
+						 for(var i=0; i<7; i++){
+							 if(array[i].dow[0]=="0"){
+								 var minute=Number(array[i].start.substring(3,5))+intv; //시작시간(분)
+								 var hour=array[i].start.substring(0,3);
+								 var second=array[i].start.substring(5,8);
+								 var time=hour+minute+second;
+								 array[i].start=time;
+								 
+								 intv+=Number(interval[0]);
+							 }
+							
+						 }
+						 
+						
+					}
+				});
+			});//change
+		});//ready
+		$(document).ajaxStop(function(){
+			$('#calendar2').empty();
+			$('#calendar2').append('<div id="calendar"></div>');
+			$('#calendar').fullCalendar({
+				defaultView:'agendaWeek',
+				header : {
+					left : 'prev,next today',
+					center : 'title',
+					right : 'agendaWeek,agendaDay'
+				},
+
+				slotDuration : '00:10:00',
+				buttonIcons : false, // show the prev/next text
+				weekNumbers : true,
+				navLinks : true, // can click day/week names to navigate views
+				editable : true,
+				eventLimit : true, // allow "more" link when too many events
+				events : array
+
+		
+			});
+		});
+			
+
+		
+	</script>
+	<!-- Bootstrap -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- FastClick -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
+	<!-- NProgress -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
+	<!-- FullCalendar -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/vendors/fullcalendar/dist/jquery-ui.min.js"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+
+	<!-- FullCalendar -->
+	<script
+		src="${pageContext.request.contextPath }/js/schedule_managereguloff.js"></script>
+>>>>>>> 34815a3563e9a80eb280faed927c99c4630a69c3
 </body>
 </html>
