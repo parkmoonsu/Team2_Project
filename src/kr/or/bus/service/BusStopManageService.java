@@ -51,7 +51,8 @@ public class BusStopManageService {
 	
 	//버스정류장 원본 좌표를 파일로부터 읽어온다.
 	//버스 정류장 원본 좌표를 파일로부터 읽어온다.
-	public void busStopOriginalRead(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
+	/*public void busStopOriginalRead(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		PrintWriter out=null;
 		
         String busno = request.getParameter("busNo");
@@ -73,10 +74,10 @@ public class BusStopManageService {
         }else if(!busno.equals("all")){
         	busStopOrgRead(busno ,request ,response );
         }
-	}
+	}*/
 	
 	//읽은 데이터가 1개일경우
-	public void busStopOrgRead(String busno , HttpServletRequest request, HttpServletResponse response){
+	/*public void busStopOrgRead(String busno , HttpServletRequest request, HttpServletResponse response){
 		System.out.println("너타냐");
 		FileReader fr = null;
         BufferedReader br = null;
@@ -109,10 +110,10 @@ public class BusStopManageService {
         		System.out.println(e.getMessage());
         	}
         }
-	}
+	}*/
 	
 	//읽을 데이터가 4개일경우
-	public JSONObject busStopOrgRead(int busno, HttpServletRequest request ,HttpServletResponse response){
+	/*public JSONObject busStopOrgRead(int busno, HttpServletRequest request ,HttpServletResponse response){
 		FileReader fr = null;
         BufferedReader br = null;
        
@@ -170,10 +171,10 @@ public class BusStopManageService {
             	busOrgRouteRead(busno ,request, response);
             }
         
-	}
+	}*/
 	
 	//읽은 데이터가 1개일경우
-	public void busOrgRouteRead(String busno ,HttpServletRequest request, HttpServletResponse response){
+	/*public void busOrgRouteRead(String busno ,HttpServletRequest request, HttpServletResponse response){
 		System.out.println("너타냐");
 		FileReader fr = null;
         BufferedReader br = null;
@@ -205,10 +206,10 @@ public class BusStopManageService {
         		System.out.println(e.getMessage());
         	}
         }
-	}
+	}*/
 	
 	//읽을 데이터가 4개일경우
-		public JSONObject busOrgRouteRead(int busno, HttpServletRequest request, HttpServletResponse response){
+		/*public JSONObject busOrgRouteRead(int busno, HttpServletRequest request, HttpServletResponse response){
 			FileReader fr = null;
 			BufferedReader br = null;
        
@@ -240,7 +241,7 @@ public class BusStopManageService {
 	        	}
 	        }
 		return jsonmaps;
-	}
+	}*/
 	
 		//버스 원본 경로를 디비 로부터  route id select 해서 공공데이터에서 버스 경로를 가져온다.	
 		public void busRouteCall(String r_num,RouteDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException{						
@@ -250,8 +251,8 @@ public class BusStopManageService {
 			if(r_num.equals("all")){				
             	JSONObject obs1 = busMultiRouteRead("5623" , dto, request, response);
             	JSONObject obs2 = busMultiRouteRead("6702" , dto, request, response);
-            	JSONObject obs3 = busMultiRouteRead("9000광주", dto, request, response);
-            	JSONObject obs4 = busMultiRouteRead("6501광주", dto, request, response);
+            	JSONObject obs3 = busMultiRouteRead("143", dto, request, response);
+            	JSONObject obs4 = busMultiRouteRead("3030안양", dto, request, response);
             	
             	ArrayList<JSONObject> obss = new ArrayList<JSONObject>();
             	obss.add(obs1);
@@ -309,14 +310,17 @@ public class BusStopManageService {
 			if(r_num.equals("5623")){
 				dto = dao.routeidSearch("5623");
 				id = dto.getR_id();
-			}else if(r_num.equals("6702")){
+			}
+			else if(r_num.equals("6702")){
 				dto = dao.routeidSearch("6702");
 				id = dto.getR_id();				
-			}else if(r_num.equals("6501광주")){
-				dto = dao.routeidSearch("6501광주");
+			}
+			else if(r_num.equals("143")){
+				dto = dao.routeidSearch("143");
 				id = dto.getR_id();
-			}else if(r_num.equals("9000광주")){
-				dto = dao.routeidSearch("9000광주");
+			}
+			else if(r_num.equals("3030안양")){
+				dto = dao.routeidSearch("3030안양");
 				id = dto.getR_id();		
 			}
 			
@@ -354,7 +358,7 @@ public class BusStopManageService {
 	
 
 	//수정된 버스정류장 좌표를 저장한다.
-	public void busStoplocationEdit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	/*public void busStoplocationEdit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		FileWriter fw = null;
 	    BufferedWriter bw = null;
 	    String map = request.getParameter("kml");
@@ -382,10 +386,10 @@ public class BusStopManageService {
 	        }
 	    }	      	  
 	    System.out.println("지도 좌표가 저장되었습니다.");
-	}
+	}*/
 
 	//수정된 버스정류장 좌표를 파일로 부터 읽어오는 함수.
-	public void busStoplocationEditRead(HttpServletRequest request ,HttpServletResponse response) throws Exception {
+	/*public void busStoplocationEditRead(HttpServletRequest request ,HttpServletResponse response) throws Exception {
 		
 		String busno = request.getParameter("busNo");
 		FileReader fr = null;
@@ -418,7 +422,7 @@ public class BusStopManageService {
 	    		System.out.println(e.getMessage());
 	    	}
 	    }
-	}
+	}*/
 
 //실시간 위치 추적
 	public void busLocationSearch(String r_num, RouteDTO dto, HttpServletRequest request , HttpServletResponse response) throws IOException{			
@@ -480,7 +484,7 @@ public class BusStopManageService {
 		}else if(r_num.equals("6702")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("9000광주")){
+		}else if(r_num.equals("3030안양")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
 		}else if(r_num.equals("6501광주")){
@@ -726,9 +730,9 @@ public class BusStopManageService {
 			//busStopRoadAllSearch("6702", dto, busstopdto, request, response);
 			busstoplist.addAll(1, busStopRoadAllSearch("6702", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("3500포천", dto, busstopdto, request, response);
-			busstoplist.addAll(2, busStopRoadAllSearch("9000광주", dto, busstopdto, request, response));
+			busstoplist.addAll(2, busStopRoadAllSearch("3030안양", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("6501광주", dto, busstopdto, request, response);
-			busstoplist.addAll(3, busStopRoadAllSearch("6501광주", dto, busstopdto, request, response));
+			busstoplist.addAll(3, busStopRoadAllSearch("143", dto, busstopdto, request, response));
 			jsonmaps = JSONArray.fromObject(busstoplist);
 			out.print(jsonmaps);
 			
@@ -951,6 +955,7 @@ public class BusStopManageService {
         }else{
         	System.out.println("입력실패");
         }
+        
         
 		return venid;
 	}

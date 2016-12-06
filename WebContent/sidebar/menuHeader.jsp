@@ -67,7 +67,7 @@
 			  wholeWindow: true, 
 			  effect:'doornslide',
 			  image: "${pageContext.request.contextPath}/images/king.gif",
-			  hideAfter: 1500
+			  hideAfter: 500
 			});
 		
 		$.ajax({

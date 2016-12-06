@@ -42,7 +42,7 @@
 .inner-bg{
     background-image:url(images/background2.jpg);
     background-repeat:no-repeat;
-    background-size:100% 100%;
+    background-size: 100%;
 
 }
  #login:hover {
