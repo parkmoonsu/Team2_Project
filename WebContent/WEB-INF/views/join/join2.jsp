@@ -82,6 +82,10 @@
   float: left;
   padding: 0 10px; }
 
+.form_wizard wizard_horizontal{
+	color:balck;
+}
+
 .actionBar {
   width: 100%;
   border-top: 1px solid #ddd;
@@ -143,7 +147,7 @@
 .wizard_verticle ul.wizard_steps li a.disabled .step_no {
   background: #ccc; }
  .small{
- 	color:white;
+ 	color:black;
  }
 
 .wizard_verticle ul.wizard_steps li a .step_no {
@@ -187,13 +191,39 @@ font-size:12px;
 .form-group{
 height: 35px;
 }
-
+  #fh5co-header #navbar li a:hover {
+    color: #52d3aa !important;
+  }
 </style>
 </head>
-		<meta charset="utf-8">
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-filestyle.js"></script>
+      
+
+</head>
+<style>
+bodoy{
+margin-left: 0px;
+}
+.wizard_steps{
+	color: black;
+}
+
+.small{
+	color: black;
+}
+.my-box{
+	color: black;
+}
+
+
+
+</style>
+<meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>KosBus로그인</title>
+        <title>RoadOneBell로그인</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/bootstrap/css/bootstrap.min.css">
@@ -201,12 +231,8 @@ height: 35px;
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/form-elements.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/style.css">
         <link rel="stylesheet" id="theme-switch" href="${pageContext.request.contextPath}/mainCss/css/style.css">
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-filestyle.js"></script>
-      
+        
 
-</head>
 <body>
 <header role="banner" id="fh5co-header">
 			<div class="container">
@@ -214,36 +240,32 @@ height: 35px;
 			    <nav class="navbar navbar-default">
 		        <div class="navbar-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-		         <a class="navbar-brand" href="bus.htm">KosBus</a> 
+		         <a class="navbar-brand" href="bus.htm">RoadOneBell</a> 
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		          <ul class="nav navbar-nav navbar-right">
 		            <li class="active"><a href="bus.htm" data-nav-section="home"><span>Home</span></a></li> 
 		            <li><a href="login.htm" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
-		           	<li><a href="join.htm" id="gaip"><span>회원가입</span></a></li>
+		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
 		          </ul>
 		        </div>
 			    </nav>
 		  </div>
 	</header>
 
+
 	<div class="top-content">
         	
             <div class="inner-bg">
                 <div class="container">
                     <div class="row">
-                 <div class="col-sm-2"></div>
-						<div class="col-md-8 col-sm-8 col-xs-8 form-box">
+                    <hr>
+                 <div class="col-sm-1"></div>
+						<div class="col-md-10 col-sm-10 col-xs-10 form-box">
 							<div class="x_panel">
-							<div class="form-top" align="center" style="color: white">
+							<div class="form-top" align="center" style="color: black">
 								<div class="form-top-center">
-								<div class="x_title">
-									<h2>
-										회원가입 <small style="color: white">KosBus</small>
-									</h2>
-
-									<div class="clearfix"></div>
-								</div>
+							
 								<div class="x_content">
 
 
@@ -252,17 +274,17 @@ height: 35px;
 									<div id="wizard" class="form_wizard wizard_horizontal">
 										<ul class="wizard_steps">
 											<li ><a href="#step-2"> <span class="step_no">1</span>
-													<span class="step_descr" style="color: white"> Step 1<br /> <small style="color: white">
+													<span class="step_descr" style="color: black"> Step 1<br /> <small style="color: black">
 															약관동의</small>
 												</span>
 											</a></li>
 											<li ><a href="#step-2"> <span class="step_no">2</span>
-													<span class="step_descr" style="color: white"> Step 2<br /> <small style="color: white">
+													<span class="step_descr" style="color: black"> Step 2<br /> <small style="color: black">
 															정보작성</small>
 												</span>
 											</a></li>
 											<li><a href="#step-2"> <span class="step_no">3</span>
-													<span class="step_descr" style="color: white"> Step 3<br /> <small style="color: white">
+													<span class="step_descr" style="color: black"> Step 3<br /> <small style="color: black">
 															가입완료</small>
 												</span>
 											</a></li>
@@ -508,7 +530,10 @@ height: 35px;
 						</div>
                         
                     </div>
-                </div>
+                </div><br><br><hr>
+                <footer>
+				<jsp:include page="/sidebar/footer.jsp" />
+			</footer>
             </div>
             
         </div>
@@ -605,12 +630,12 @@ height: 35px;
 							console.log($.trim(rd.check));
 							$("#check").empty();
 							if($.trim(rd.check)=="y"){
-								$('#check').append("<font color = 'red'>이미 있는 ID 입니다!</font>");
+								$('#check').append("<font color = 'red'  size='1px'>이미 있는 ID 입니다!</font>");
 								$('#m_id').focus();
 							}else if($.trim(rd.check)=="n" && $("#m_id").val().trim().length >= 8){
-								$('#check').append("<font color = '#369F36'>사용 가능한 ID 입니다!</font>");
+								$('#check').append("<font color = '#369F36'  size='1px'>사용 가능한 ID 입니다!</font>");
 							}else{
-								$('#check').append("<font color = 'red'>ID는 8자 이상입니다!</font>");
+								$('#check').append("<font color = 'red'  size='1px'>ID는 8자 이상입니다!</font>");
 							}
 						}
 						
@@ -627,7 +652,7 @@ height: 35px;
 						alert("비밀번호를 입력하세요.");
 						$("#m_pw").focus();
 				        return false;
-					}else if($("#m_pw2").val() == "" || !($("#m_pw").val() != $("#m_pw2").val())){
+					}else if($("#m_pw2").val() == "" || $("#m_pw").val() != $("#m_pw2").val()){
 						alert("비밀번호가 일치 하지 않습니다.");
 						$("#m_pw2").focus();
 						return false;

@@ -4,13 +4,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Javascript -->
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery.backstretch.min.js"></script>
+        <script src="${pageContext.request.contextPath}/loginassets/assets/js/scripts.js"></script>
+        <script type="text/javascript">
+        $(function() {
+
+			$("#log").click(function() {
+				location.href="login.htm"
+			});
+			
+			$("#gaip").click(function() {
+				location.href="join.htm"
+			});
+		});
+        </script>
 <style type="text/css">
 .my-box {
 	border: 1px solid;
 	padding: 10px;
 }
-</style>
-<style>
+
 /* body { 
     background: url(images/background2.jpg) no-repeat center center fixed; 
  
@@ -48,6 +64,9 @@ placeholder{
     background-color: #4CAF50;
     color: white;
 }  */
+  #fh5co-header #navbar li a:hover {
+    color: #52d3aa !important;
+  }
 </style>
 </head>
 		<meta charset="utf-8">
@@ -78,7 +97,7 @@ placeholder{
 		          <ul class="nav navbar-nav navbar-right">
 		            <li class="active"><a href="bus.htm" data-nav-section="home"><span>Home</span></a></li> 
 		            <li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
-		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
+		           	<li><a href="join.htm" id="gaip"><span>회원가입</span></a></li>
 		          </ul>
 		        </div>
 			    </nav>
@@ -129,14 +148,14 @@ placeholder{
 			                        </div> -->
 
 			                        <!-- <button class="btn btn-block" type="submit" style="height:40px; padding-bottom: 15px">LogIN</button> -->
-			                        <input class="btn btn-success btn btn-block" id="login" style="background-color: #86E57F; border:0" type="submit"  value="LogIn">
+			                        <input class="btn btn-success btn btn-block" id="login" style="background-color: #008C8C; border:0" type="submit"  value="LogIn">
 			                        <br>
 									<div class="col-sm-6 col-xs-12" style=":padding-right:5px">
-			                        <a href="search.htm"class="btn btn-primary btn-sm btn-block" style="height:30px">아이디/비밀번호찾기</a>
+			                        <a href="search.htm"class="btn btn-primary btn-sm btn-block" style="height:30px; background-color:#5050FF; border:0">아이디/비밀번호찾기</a>
 			                        </div>
 			                        
 			                        <div class="col-sm-6 col-xs-12" style="padding-left: 3px">
-			                        <a href="join.htm"	class="btn btn-primary btn-sm btn-block" style="height:30px">회원가입</a>
+			                        <a href="join.htm"	class="btn btn-primary btn-sm btn-block" style="height:30px; background-color: #5050FF; border:0">회원가입</a>
 			                        </div>
 			                        
 			                      </form>
@@ -155,28 +174,15 @@ placeholder{
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><br>
+                    <footer>
+				<jsp:include page="/sidebar/footer.jsp" />
+			</footer>
            
    
 
 
-        <!-- Javascript -->
-        <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery-1.11.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/loginassets/assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/loginassets/assets/js/jquery.backstretch.min.js"></script>
-        <script src="${pageContext.request.contextPath}/loginassets/assets/js/scripts.js"></script>
-        <script type="text/javascript">
-        $(function() {
-
-			$("#log").click(function() {
-				location.href="login.htm"
-			});
-			
-			$("#gaip").click(function() {
-				location.href="join.htm"
-			});
-		});
-        </script>
+        
 
 </body>
 </html>
