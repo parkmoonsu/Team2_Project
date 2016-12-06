@@ -78,4 +78,13 @@ public class BusStopManageController {
 	public void busStopRoad(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		busStopManageService.busStopRoadSearch(r_num, dto, busstopdto, request, response);
 	}
+	
+	//DB에서 정류장 정차 순서 바꿔주는 함수
+	@RequestMapping("/editordernumber.admin")
+	public void editordernum(String r_num, String rs_order, String latlng){
+		System.out.println("r_num"+r_num);
+		System.out.println("rs_order"+rs_order);
+		System.out.println("latlng"+latlng);
+	}
+	
 }

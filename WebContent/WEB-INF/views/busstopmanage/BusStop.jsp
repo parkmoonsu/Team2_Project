@@ -359,7 +359,34 @@ select#selectBus, select#selectBus2 {
        var trafficLayer = new google.maps.TrafficLayer();
        trafficLayer.setMap(map);
     }
-    
+    //버스 정류장 수동 생성 db 변경
+    function copyMarkerMakes(latLng, map){
+    	console.log(latLng);
+    	var num =$("#end").val();
+    	console.log("알고싶어넘버"+num);
+    	if(num=='' || num==null){//아무것도 입력 안했을때
+    		console.log("?여기??"+num);
+       		var copyMarker = new google.maps.Marker({
+             	position: latLng,        
+                map: map,
+                label : as.toString(),
+                animation: google.maps.Animation.DROP,
+                draggable : true
+          	});    
+       		copyMarkers.push(copyMarker);
+          	as++;
+    	}else{ //노선값과 배차 순서 rs_order보내기
+    		var r_num = $('#selectBus').val();
+    		$.ajax({
+    			url : "editordernumber.admin",
+    			type : "post",
+    			data : {"r_num":r_num,"rs_order":num,"latlng":latlng},
+    			success:function(data){
+    				
+    			}
+    		});
+    	}
+    }
   //버류 정류장 수동 생성
     function copyMarkerMakes(latLng, map) {
         console.log(latLng);
@@ -656,7 +683,7 @@ select#selectBus, select#selectBus2 {
            	*/
            var editX;
            var editY;
-           for(var i=0;i<copyMarkers.length;i++){
+           for(var i=0;i<copyMarkers.length;i++){//현재 원본 좌표
               editX = copyMarkers[i].getPosition().lng();
               editY = copyMarkers[i].getPosition().lat();
               savelocation = {
@@ -668,7 +695,7 @@ select#selectBus, select#selectBus2 {
            }
            console.log(savelocations.length);
            $.ajax({
-                url : "busStoplocationEdit.admin",
+                url : "busStoplocationEdit.admin", //원본을 수정 파일에 저장
                 type : "get",                          
                 data : {
                     kml : JSON.stringify(savelocations),
@@ -680,7 +707,7 @@ select#selectBus, select#selectBus2 {
             });
           }
           
-        function BusEditSave2() {
+        function BusEditSave2() { //수정한 것을 저장한다.
             /*
                	새로 변경된 좌표들을 파일에 저장하기 위해 
                	for문을 돌리면서 editX 에 lng , editY 에 lat 좌표를 담고
