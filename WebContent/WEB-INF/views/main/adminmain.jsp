@@ -12,13 +12,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<script
-	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-
 <title>KOSBUS</title>
 
 
-
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 
 <!-- Bootstrap -->
 <link
@@ -52,11 +50,13 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-
+	
 
 </head>
 
+   
 <body class="nav-md">
+	<img  src="${pageContext.request.contextPath}/images/loading.gif">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
@@ -452,20 +452,22 @@
 	<script
 		src="${pageContext.request.contextPath}/vendors/morris.js/morris.min.js"></script>
 
+
 	<script type="text/javascript">
+	
 	// moris 시작
 	Morris.Bar({ //// 엑박 무시하세요~
 	element : 'graph_bar',
 	data : [ 
-		{device : '미정', geekbench : ${no}},
+		{device : '미정', geekbench : ${no }},
 
 	
-		{device : '간선버스',geekbench : ${m}},
-		{device : '지선버스',geekbench : ${n}}, 
-		{device : '순환버스',geekbench : ${w}},
-		{device : '광역버스',geekbench : ${g}},
+		{device : '간선버스',geekbench : ${m }},
+		{device : '지선버스',geekbench : ${n }}, 
+		{device : '순환버스',geekbench : ${w }},
+		{device : '광역버스',geekbench : ${g }},
 		
-		{device : '전체버스',geekbench : ${m+n+w+g+no}} 
+		{device : '전체버스',geekbench : ${m+n+w+g+no } } 
 
 	],
 	xkey : 'device',
@@ -729,7 +731,8 @@
 		    // echart 끝  
 	
 	
-		$(function(){
+		$(function() {	
+			  $.oPageLoader();
 			$.ajax({
 				url : "route.htm",
 				success : function(data){
@@ -1157,7 +1160,6 @@
 			//도넛 종료
 			
 		});
-	
 	</script>
 </body>
 </html>

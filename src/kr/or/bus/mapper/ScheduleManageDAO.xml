@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- timetable -->
-	<select id="selectdistinct" resultType="kr.or.bus.dto.SelectDistinctDTO">
+	<!-- <select id="selectdistinct" resultType="kr.or.bus.dto.SelectDistinctDTO">
 		select distinct m.m_name, b.r_num, m.b_vehiclenum, o.o_date from member m
 		join bus b on m.b_vehiclenum=b.b_vehiclenum
 		join oschedule o on m.b_vehiclenum=o.b_vehiclenum
@@ -77,6 +77,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selecttime" resultType="String">
 		select o_time from oschedule
 		where o_date=#{o_date} and b_vehiclenum=#{b_vehiclenum}
+	</select> -->
+	<select id="timetable_get" resultType="kr.or.bus.dto.OscheduleJoinMemberDTO">
+		select * from oschedule o
+		join member m on o.b_vehiclenum=m.b_vehiclenum
 	</select>
 	
 	<!-- vschedule -->
@@ -100,7 +104,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on mem.B_VEHICLENUM = bu.B_VEHICLENUM
 		join route rou
 		on rou.R_NUM = bu.R_NUM
-		where rou.r_num = #{r_num}
+		where rou.r_num = #{r_num} and rego.temp is null and rego.m_id not in (select m_id from reguloffr where ko_code = '600')
+	</select>
+	
+	<select id="getReqRescheduled" resultType="kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO">
+	  select regr.KO_CODE, mem.M_ID, mem.M_NAME, mo.O_CODE, mo.O_DATE, mem1.M_ID as m_id_1, mem1.M_NAME as m_name_1, mo1.O_CODE as o_code_1, mo1.O_DATE as o_date_1, regr.O_CHECK
+	  from reguloffr regr
+	  join member mem
+	  on regr.M_ID = mem.M_ID
+	  join moff mo
+	  on mo.O_CODE = regr.O_CODE
+	  join member mem1
+	  on mem1.M_ID = regr.RO_OBJECT
+	  join moff mo1
+	  on mo1.O_CODE = regr.RO_CODE
+	  where regr.KO_CODE = '600' and regr.O_CHECK = 'y' and regr.M_ID in ( select rego.M_ID
+	  from reguloff rego
+	  join member mem
+	  on rego.m_id = mem.m_id
+	  join bus bu
+	  on bu.b_vehiclenum = mem.b_vehiclenum
+	  where bu.r_num = #{r_num} and rego.TEMP = 't' or rego.TEMP = 's')
 	</select>
 	
 	<select id="getOcode" resultType="String">
@@ -112,7 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="updateReguloff">
-		update reguloff set o_code = #{param2} where m_id = #{param1}
+		update reguloff set o_code = #{param2}, ro_regdate = sysdate where m_id = #{param1}
 	</update>
 	
 
@@ -141,11 +165,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 휴무 요청 상태 관리 -->
 	<select id="getRequestNum" resultType="Integer">
-		select count(*) from reguloffr where ko_code='600' and o_check='y'
+	select count(*)
+	from reguloffr rego
+	join member mem
+	on mem.m_id = rego.m_id
+	join bus bu
+	on bu.B_VEHICLENUM = mem.B_VEHICLENUM
+	join member mem1
+	on mem1.m_id = rego.ro_object
+	join koff ko
+	on ko.ko_code = rego.ko_code
+	join moff mo
+	on mo.o_code = rego.o_code
+	join moff mo1
+	on mo1.o_code = rego.ro_code
+	where ko.ko_code = '600' and rego.o_check='y'
 	</select>
 	
 	<select id="getRequestRefuseNum" resultType="Integer">
-		select count(*) from reguloffr where ko_code='602' and o_check='y'
+	select count(*)
+	from reguloffr rego
+	join member mem
+	on mem.m_id = rego.m_id
+	join bus bu
+	on bu.B_VEHICLENUM = mem.B_VEHICLENUM
+	join member mem1
+	on mem1.m_id = rego.ro_object
+	join koff ko
+	on ko.ko_code = rego.ko_code
+	join moff mo
+	on mo.o_code = rego.o_code
+	join moff mo1
+	on mo1.o_code = rego.ro_code
+	where ko.ko_code = '602' and rego.o_check='y'
 	</select>
 	
 	<select id="getRequestMember" resultType="kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO">

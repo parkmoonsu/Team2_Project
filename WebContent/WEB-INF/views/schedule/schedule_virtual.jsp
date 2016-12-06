@@ -30,6 +30,9 @@
 <title>최종 예상 스케줄</title>
 
 <!-- Bootstrap -->
+
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -230,6 +233,7 @@ select#selectedrnum {
 	var array = new Array();
 	var dowarray = new Array();
 		$(function() {
+			$.oPageLoader();
 			//rlist.r_num
 			
 			$('#selectedrnum').change(function() {

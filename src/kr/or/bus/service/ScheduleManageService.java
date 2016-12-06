@@ -23,6 +23,10 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
+
+import kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO;
+
+import kr.or.bus.dto.OscheduleJoinMemberDTO;
 import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
@@ -67,15 +71,21 @@ public class ScheduleManageService {
 		return mrmbrjdto;
 	}
 	
+	public List<MemberJoinReguloffrJoinMoffDTO> requestRescheduled(String r_num){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		List<MemberJoinReguloffrJoinMoffDTO> mjrjmdto = dao.getReqRescheduled(r_num);
+		return mjrjmdto;
+	}
 	public String decideReguloffMember(String m_id, String o_date){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.insertReguloff(m_id, dao.getOcode(o_date));
 		return dao.getOcode(o_date);
 	}
 	
-	public void modifyReguloffMember(String m_id, String o_date){
+	public String modifyReguloffMember(String m_id, String o_date){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.updateReguloff(m_id, dao.getOcode(o_date));
+		return dao.getOcode(o_date);
 	}
 	
 	
@@ -91,10 +101,13 @@ public class ScheduleManageService {
 	}
 	
 	//timetable
-	public List<TimetableDTO> timetable_get(){
+	public List<OscheduleJoinMemberDTO> timetable_get(){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		List<OscheduleJoinMemberDTO> list=dao.timetable_get();
 		
-		List<SelectDistinctDTO> list1=dao.selectdistinct();
+		return list;
+		
+		/*List<SelectDistinctDTO> list1=dao.selectdistinct();
 		
 		List<TimetableDTO> list2=new ArrayList<TimetableDTO>();
 		
@@ -113,7 +126,7 @@ public class ScheduleManageService {
 			list2.add(dto);
 		}
 
-		return list2;
+		return list2;*/
 	}
 	
 	/*
@@ -349,9 +362,9 @@ public class ScheduleManageService {
 		if(o_code.equals(o_code_1)){
 		result = dao.refuseSameDelete(m_id);
 		}else{
-		result = dao.refuseFirstRegisterRecord(m_id);
+		result = dao.refuseFirstRegister(m_id, o_code);
 		}
-		result1 = dao.refuseFirstRegister(m_id, o_code);
+		result1 = dao.refuseFirstRegisterRecord(m_id);
 		return result;
 	}
 	
