@@ -5,12 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.or.bus.dao.RouteStopDAO">
 	<!-- routeStop 테이블 -->
 	
-	<select id="insertRouteStopCheck" parameterType="kr.or.bus.dto.RouteStopDTO" resultType="Integer">
+	<!-- <select id="insertRouteStopCheck" parameterType="kr.or.bus.dto.RouteStopDTO" resultType="Integer">
 		select COUNT(*) from routestop WHERE S_NUM = #{s_num}
-	</select>
+	</select> -->
 	
 	<insert id="insertRouteStopData" parameterType="kr.or.bus.dto.RouteStopDTO">
-		INSERT INTO routestop(R_NUM, S_NUM, ST_TYPE, RS_ORDER, RS_CHECK, R_ID, RS_START, RS_END) VALUES(#{r_num}, #{s_num}, '', #{rs_order}, '', #{r_id}, #{rs_start}, #{rs_end})
+		INSERT INTO ROUTESTOPCOPY(R_NUM, S_NUM, ST_TYPE, RS_ORDER, RS_CHECK, R_ID, RS_START, RS_END) VALUES(#{r_num}, #{s_num}, '', #{rs_order}, '', #{r_id}, #{rs_start}, #{rs_end})
 	</insert>
 	
 	

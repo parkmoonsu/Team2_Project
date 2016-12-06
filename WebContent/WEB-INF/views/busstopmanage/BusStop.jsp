@@ -60,6 +60,10 @@
 	margin-right: auto;
 	width: 95%;
 }}
+
+footer {
+	margin-left: 0px;
+}
 select#selectBus, select#selectBus2 {
 	-webkit-appearance: button;
 	-webkit-border-radius: 2px;
@@ -172,10 +176,7 @@ select#selectBus, select#selectBus2 {
 
 				<!-- footer content -->
 				<footer>
-					<div class="pull-right">
-						Gentelella - Bootstrap Admin Template by <a
-							href="https://colorlib.com">Colorlib</a>
-					</div>
+					<jsp:include page="/sidebar/footer.jsp"></jsp:include>
 					<div class="clearfix"></div>
 				</footer>
 				<!-- /footer content -->
@@ -358,7 +359,34 @@ select#selectBus, select#selectBus2 {
        var trafficLayer = new google.maps.TrafficLayer();
        trafficLayer.setMap(map);
     }
-    
+    //버스 정류장 수동 생성 db 변경
+    function copyMarkerMakes(latLng, map){
+    	console.log(latLng);
+    	var num =$("#end").val();
+    	console.log("알고싶어넘버"+num);
+    	if(num=='' || num==null){//아무것도 입력 안했을때
+    		console.log("?여기??"+num);
+       		var copyMarker = new google.maps.Marker({
+             	position: latLng,        
+                map: map,
+                label : as.toString(),
+                animation: google.maps.Animation.DROP,
+                draggable : true
+          	});    
+       		copyMarkers.push(copyMarker);
+          	as++;
+    	}else{ //노선값과 배차 순서 rs_order보내기
+    		var r_num = $('#selectBus').val();
+    		$.ajax({
+    			url : "editordernumber.admin",
+    			type : "post",
+    			data : {"r_num":r_num,"rs_order":num,"latlng":latlng},
+    			success:function(data){
+    				
+    			}
+    		});
+    	}
+    }
   //버류 정류장 수동 생성
     /* function copyMarkerMakes(latLng, map) {
         console.log(latLng);
@@ -424,7 +452,7 @@ select#selectBus, select#selectBus2 {
         });
          
         dataArray.push(latLng);
-    } */
+    }*/
 	
     function copyMarkerMakes(latLng, map) {
         console.log(latLng);
@@ -461,7 +489,7 @@ select#selectBus, select#selectBus2 {
    			
         }
       		//마커 드래그 끝났을떄
-        	/* copyMarker.addListener('dragend', function() {
+        	copyMarker.addListener('dragend', function() {
             
         		//마커 라벨을 얻어와 담을 변수
         		var markerLabel = copyMarker.getLabel();
@@ -480,15 +508,15 @@ select#selectBus, select#selectBus2 {
                       
             		}
         		}     
-    		}); */
+    		});
       
         //마커의 라벨 이름을 알기위해 적용. 추후삭제 할것
-        /* copyMarker.addListener('click', function() {         
+        copyMarker.addListener('click', function() {         
            	console.log(copyMarker.getLabel());
             fr=copyMarker.getLabel();
             $("#new-modal").modal(); 
             
-        }); */
+        });
         dataArray.push(latLng);
         //copymovingBusMarker(latLng, map);
                
@@ -600,7 +628,7 @@ select#selectBus, select#selectBus2 {
    			}
     	});
        
-       $("#selectBus2").change(function(){
+       	/* $("#selectBus2").change(function(){
 			deleteRoute();
 			if($("#selectBus").val() !=null){
   				$.ajax({
@@ -624,7 +652,7 @@ select#selectBus, select#selectBus2 {
            			}
 				});   	    	         
 			}
-  		});
+  		}); */
        
        	$('#shy').click(function(){
           	//console.log(e.latLng);
@@ -647,15 +675,15 @@ select#selectBus, select#selectBus2 {
         });
        	
         //새로운 좌표 저장
-        function BusEditSave() {
-           	/*
-              	새로 변경된 좌표들을 파일에 저장하기 위해 
-              	for문을 돌리면서 editX 에 lng , editY 에 lat 좌표를 담고
-              	savelocation 에 lng, lat 키 로하고,  editX ,editY 변수를 값으로 한다. 
-           	*/
+        /* function BusEditSave() {
+           	
+              	//새로 변경된 좌표들을 파일에 저장하기 위해 
+              	//for문을 돌리면서 editX 에 lng , editY 에 lat 좌표를 담고
+              	//savelocation 에 lng, lat 키 로하고,  editX ,editY 변수를 값으로 한다. 
+           	
            var editX;
            var editY;
-           for(var i=0;i<copyMarkers.length;i++){
+           for(var i=0;i<copyMarkers.length;i++){//현재 원본 좌표
               editX = copyMarkers[i].getPosition().lng();
               editY = copyMarkers[i].getPosition().lat();
               savelocation = {
@@ -667,7 +695,7 @@ select#selectBus, select#selectBus2 {
            }
            console.log(savelocations.length);
            $.ajax({
-                url : "busStoplocationEdit.admin",
+                url : "busStoplocationEdit.admin", //원본을 수정 파일에 저장
                 type : "get",                          
                 data : {
                     kml : JSON.stringify(savelocations),
@@ -677,14 +705,14 @@ select#selectBus, select#selectBus2 {
                     console.log("저장잘됨?");
                 }
             });
-          }
+          } */
           
-        function BusEditSave2() {
-            /*
-               	새로 변경된 좌표들을 파일에 저장하기 위해 
-               	for문을 돌리면서 editX 에 lng , editY 에 lat 좌표를 담고
-               	savelocation 에 lng, lat 키 로하고,  editX ,editY 변수를 값으로 한다. 
-            */
+        /* function BusEditSave2() { //수정한 것을 저장한다.
+            
+               	//새로 변경된 좌표들을 파일에 저장하기 위해 
+               //for문을 돌리면서 editX 에 lng , editY 에 lat 좌표를 담고
+               	//savelocation 에 lng, lat 키 로하고,  editX ,editY 변수를 값으로 한다. 
+            
             var editX;
             var editY;
             for(var i=0;i<copyMarkers.length;i++){
@@ -709,15 +737,14 @@ select#selectBus, select#selectBus2 {
                      console.log("저장잘됨?");
                  }
              });
-           }
+           } */
        
       	$("#newsave").click(function() {
-         	BusEditSave();
-         
+         	//BusEditSave();        
       	});
+           
       	$("#newsave2").click(function() {
-          	BusEditSave2();
-          
+          	//BusEditSave2();         
        	});
                  
       	/* $("#busLoad").click(function() {

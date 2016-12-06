@@ -10,6 +10,7 @@ $(function() {
 </script>
 <c:choose>
 	<c:when test="${jobname == '기사'}">
+		<%-- <jsp:forward page  ="ChangeForm.htm"/> --%>
 		<script>
 			location.href = "ChangeForm.htm";
 		</script>

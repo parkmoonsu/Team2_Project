@@ -26,13 +26,13 @@
 .inner-bg{
     background-image:url(images/background2.jpg);
     background-repeat:no-repeat;
-    background-size:100% 100%;
+    background-size: 100%;
 
 }
-.btn:hover {
-    background-color: #4CAF50;
-    border: 2px solid #4CAF50;
-    color: black;
+ #login:hover {
+    background-color: #86E57F;
+    border-color: 2px solid #4CAF50;
+    color: white;
 } 
 #uesrname, #password{
 	background-color: white; 
@@ -53,7 +53,7 @@ placeholder{
 		<meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>KosBus로그인</title>
+        <title>RoadOneBell로그인</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/bootstrap/css/bootstrap.min.css">
@@ -72,7 +72,7 @@ placeholder{
 			    <nav class="navbar navbar-default">
 		        <div class="navbar-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-		         <a class="navbar-brand" href="bus.htm">KosBus</a> 
+		         <a class="navbar-brand" href="bus.htm">RoadOneBell</a> 
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		          <ul class="nav navbar-nav navbar-right">
@@ -128,7 +128,8 @@ placeholder{
 			                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
 			                        </div> -->
 
-			                        <button class="btn btn-block" type="submit" class="btn" >LogIN</button>
+			                        <!-- <button class="btn btn-block" type="submit" style="height:40px; padding-bottom: 15px">LogIN</button> -->
+			                        <input class="btn btn-success btn btn-block" id="login" style="background-color: #86E57F; border:0" type="submit"  value="LogIn">
 			                        <br>
 									<div class="col-sm-6 col-xs-12" style=":padding-right:5px">
 			                        <a href="search.htm"class="btn btn-primary btn-sm btn-block" style="height:30px">아이디/비밀번호찾기</a>

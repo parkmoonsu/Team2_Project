@@ -1,0 +1,11 @@
+diff a/WebContent/WEB-INF/views/join/join.jsp b/WebContent/WEB-INF/views/join/join.jsp	(rejected hunks)
+@@ -60,9 +60,6 @@
+ 
+ </head>
+ <body>
+-	<header>
+-		<jsp:include page="/sidebar/header.jsp" />
+-	</header>
+ 
+ 
+ 	<div class="container" style="margin-top: 20px;">
