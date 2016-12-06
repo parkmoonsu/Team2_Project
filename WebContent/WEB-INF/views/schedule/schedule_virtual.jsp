@@ -156,7 +156,7 @@ select#selectedrnum {
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								Calendar<i class="fa fa-calendar"></i>
+								 예상 스케줄 <i class="fa fa-calendar"></i>
 							</h3>
 						</div>
 
@@ -217,12 +217,9 @@ select#selectedrnum {
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
 			<!-- /footer content -->
 		</div>
 	</div>
@@ -231,6 +228,7 @@ select#selectedrnum {
 	<!-- /calendar modal -->
 	<script>
 	var array = new Array();
+	var dowarray = new Array();
 		$(function() {
 			$.oPageLoader();
 			//rlist.r_num
@@ -248,6 +246,8 @@ select#selectedrnum {
 					},
 					success : function(data) {
 						
+						
+						
 						var year=new Date().getFullYear();
 						var month=new Date().getMonth()+1;
 						var day=new Date().getDate();
@@ -258,62 +258,75 @@ select#selectedrnum {
 						var test=0;
 						var ocode="";
 						var ocode2="";
+						var interval=new Array();
+
 						$.each(data.mjrolist, function(index, obj) {
-							
-							/* 
 						
-								String array = new Array();
-								for(int i=0;i<7;i++){
-								if(ocode==i ||index>7){
-									
-								}else{
-									array+=i;
-								}
-								
-								}
-								dow:array
-							});
+							//swich obj.o_code="0" dowarray=[1, 2, 3, 4, 5, 6]]
+							var dayoff=obj.o_code;
+							switch(dayoff){
+							case "0":
+								dowarray=[1, 2, 3, 4, 5, 6]; break;
+							case "1":
+								dowarray=[0, 2, 3, 4, 5, 6]; break;
+							case "2":
+								dowarray=[0, 1, 3, 4, 5, 6]; break;
+							case "3":
+								dowarray=[0, 1, 2, 4, 5, 6]; break;
+							case "4":
+								dowarray=[0, 1, 2, 3, 5, 6]; break;
+							case "5":
+								dowarray=[0, 1, 2, 3, 4, 6]; break;
+							case "6":
+								dowarray=[0, 1, 2, 3, 4, 5]; break;
 							
-							*/
-							
-							
-					         ocode2=obj.o_code;
-							if(ocode==ocode2){
-								
-							}else{
-								test=0;
-								ocode=ocode2;
 							}
-							//	setHours(dt.getHours() + 6);  
-							console.log(index);
-							console.log('ocode : '+ocode);
-							console.log('ocode2 : '+ocode2);
+						
 							
 							var time2=date+" "+obj.r_start;
 							var time3=new Date(time2);
 							var time4=new Date(time2);
 							
-							//time3.setMinutes(time3.getMinutes()+10);
 							time3.setMinutes(time3.getMinutes()+test);
 							var starttime=time3.getHours().toString()+":"+time3.getMinutes().toString(); //time2.time();
-							
+						
 							time4.setMinutes(time3.getMinutes()+10);
 						    var endtime=time4.getHours().toString()+":"+time4.getMinutes().toString();
 							console.log('endtime : '+endtime);
+							 
+		 
 							
+							 
+							 
 							var item = {
 								title : obj.m_name,
 								id : obj.m_id,
-								start :starttime,
-								end:endtime,
-								dow :obj.o_code
+								start :obj.r_start,
+								end:/* obj.r_end */ endtime ,
+								dow : obj.o_code 
 							};
-							console.log(item);
 							
 							array.push(item);
-							test+=Number(obj.r_interval);
+							interval.push(obj.r_interval);
+							//test+=Number(obj.r_interval);
 						});
-					 console.log(array);
+						console.log(array);
+						var intv=0;
+
+						 for(var i=0; i<7; i++){
+							 if(array[i].dow[0]=="0"){
+								 var minute=Number(array[i].start.substring(3,5))+intv; //시작시간(분)
+								 var hour=array[i].start.substring(0,3);
+								 var second=array[i].start.substring(5,8);
+								 var time=hour+minute+second;
+								 array[i].start=time;
+								 
+								 intv+=Number(interval[0]);
+							 }
+							
+						 }
+						 
+						
 					}
 				});
 			});//change
@@ -322,7 +335,7 @@ select#selectedrnum {
 			$('#calendar2').empty();
 			$('#calendar2').append('<div id="calendar"></div>');
 			$('#calendar').fullCalendar({
-				defaultView: 'agendaWeek',
+				defaultView:'agendaWeek',
 				header : {
 					left : 'prev,next today',
 					center : 'title',
@@ -337,88 +350,7 @@ select#selectedrnum {
 				eventLimit : true, // allow "more" link when too many events
 				events : array
 
-			/* [
-			   {
-			      title: 'All Day Event',
-			      start: '2016-09-01'
-			   },
-			   {
-			      title: 'Long Event',
-			      start: '2016-09-07',
-			      end: '2016-09-10'
-			   },
-			   {
-			   
-			      title: '김수현',
-			      start: '17:10:00',
-			      dow : [0]
-			   },
-			   {
-			      
-			      title: '김용현',
-			      start: '2016-09-16T16:10:00'
-			   },
-			   {
-			      
-			      title: '박문수',
-			      start: '2016-09-16T16:20:00'
-			   },
-			   {
-			      
-			      title: '조한솔',
-			      start: '2016-09-16T16:30:00'
-			   },
-			   {
-			      
-			      title: '김지현',
-			      start: '2016-09-16T16:40:00'
-			   },
-			   {
-			      
-			      title: '길한종',
-			      start: '2016-09-16T16:50:00'
-			   },
-			   {
-			      
-			      title: '강민수',
-			      start: '2016-09-16T17:00:00'
-			   },
-			   
-			   {
-			      title: 'Conference',
-			      start: '2016-09-11',
-			      end: '2016-09-13'
-			   },
-			   {
-			      title: 'Meeting',
-			      start: '2016-09-12T10:30:00',
-			   },
-			   {
-			      title: 'Lunch',
-			      start: '2016-09-12T12:00:00'
-			   },
-			   {
-			      title: 'Meeting',
-			      start: '2016-09-12T14:30:00'
-			   },
-			   {
-			      title: 'Happy Hour',
-			      start: '2016-09-12T17:30:00'
-			   },
-			   {
-			      title: 'Dinner',
-			      start: '2016-09-12T20:00:00'
-			   },
-			   {
-			      title: 'Birthday Party',
-			      start: '2016-09-13T07:00:00'
-			   },
-			   {
-			      title: 'Click for Google',
-			      url: 'http://google.com/',
-			      start: '2016-09-28'
-			   }
-			]   */
+		
 			});
 		});
 			

@@ -57,6 +57,12 @@ public interface ScheduleManageDAO {
 	//가상스케줄 복사
 	public void copy_vschedule();
 	public void delete_vschedule();
+	
+	//스케줄상태 자동변경
+	public void reguloffscheduler(String reguloff);
+	
+	//스케줄 상태 불러오기
+	public String reguloff_schedulecheck();
 
 	//최증스케줄
 	public List<MemberJoinBusJoinRouteJoinReguloffDTO> getmemberjoinreg(String r_num); 

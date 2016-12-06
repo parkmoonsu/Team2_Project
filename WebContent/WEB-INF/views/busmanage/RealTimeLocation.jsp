@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
-<%request.getCharacterEncoding();
-  String test = request.getParameter("busNo");%>
-  <%=test %>
+<%request.getCharacterEncoding();%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -92,9 +90,10 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
             <input type="button" id="Search" class="btn btn-default" value="버스위치추적 ">
 				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
-				<c:set var="d" value="${busNo}"></c:set>
 				<select id="selectBus">
-					<option value="${d}"></option>
+
+					<option>노선을 선택하세요</option>
+					<option>보기</option>
 					<option>all</option>
 					<c:forEach var="i" items="${list}">
 					<option>${i.r_num}</option>					
@@ -428,13 +427,25 @@
   	}
     
     //원본 움직이는 버스마커(XML -> JSON 파싱용)
-    function movingBusMarker(itemList,map){
+    function movingBusMarker(data,map){
+    	console.log(data[1]);
        if(BusMarker == null){
        		BusMarker = new google.maps.Marker({
-          		map: map,        		
-          		position:new google.maps.LatLng(itemList.tmY,itemList.tmX),
+          		map: map,
+          		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
           		icon:"${pageContext.request.contextPath}/images/bus.png"
        		});
+      		
+			var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
+     	  	
+     	  	(function (BusMarker, data, infowindow) {
+     	        google.maps.event.addListener(BusMarker, "click", function (e) {
+     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
+     	            infowindow.open(map, BusMarker);
+     	           
+     	        });
+     	    })(BusMarker, data[1], infowindow);
+     	  	
        }else{
     	    console.log("너 마커 새로 생성안함??");
        		BusMarker.setPosition(new google.maps.LatLng(itemList.tmY,itemList.tmX));
@@ -717,7 +728,7 @@
         });
     	
     	//비동기로 노선 전체 버스를 위치추적한다.
-    	stopSearch = setInterval(function(){
+    	/* stopSearch = setInterval(function(){
     		$.ajax({
                 url : "RealTimeSearch.admin",
                 type : "get",
@@ -748,7 +759,7 @@
                 	           		  	
                 }
             });  		
-    	},30000);
+    	},30000); */
     
     	
     	$("#selectBus").change(function() {
@@ -865,7 +876,7 @@
                     data : {r_num:$("#selectBus").val()},
                     success : function(data) {                   	
                     	console.log(data);
-                    	if(data.length == 4){
+                    	if(data[0].length == 4){
                     		console.log("멀티위치추적");
                     		console.log(data.length);
                     		console.log(data[0].msgBody.itemList);
@@ -881,8 +892,8 @@
                     		console.log("멀티추적된다");
                     	}else{
                     		console.log("혼자 추적");
-                    		console.log(data.msgBody.itemList);
-                    		movingBusMarker(data.msgBody.itemList, map);
+                    		console.log(data[0].msgBody.itemList);
+                    		movingBusMarker(data, map);
                     		console.log("너되니");
                     	}        
                     	           		  	

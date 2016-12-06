@@ -65,9 +65,9 @@
 
 }
 #external-events {
-	margin-left:65%;
+	margin-left:64%;
 	width: 10%;
-	padding: 0 1%;
+	padding: 1 1%;
 	border: 1% solid #ccc;
 	background: #eee;
 	text-align: left;
@@ -219,6 +219,7 @@ select#selectedgaragename, select#selectedroutenumber {
 											<hr>
 											<div id="draggablemember"></div>
 										</div>
+										
 										<div id='calendar2'>
 										<div id='calendar'></div>
 										</div>
@@ -237,12 +238,9 @@ select#selectedgaragename, select#selectedroutenumber {
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
 			<!-- /footer content -->
 		</div>
 	</div>

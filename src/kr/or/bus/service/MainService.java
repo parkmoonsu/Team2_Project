@@ -158,7 +158,6 @@ public class MainService {
 		return  dto;
 	}
 	
-	@SuppressWarnings("null")
 	public List<Integer> csStatic(String m_id){
 		Calendar cal = java.util.Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
