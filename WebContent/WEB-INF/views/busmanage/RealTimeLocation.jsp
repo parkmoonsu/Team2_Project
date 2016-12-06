@@ -448,7 +448,7 @@
      	  	
        }else{
     	    console.log("너 마커 새로 생성안함??");
-       		BusMarker.setPosition(new google.maps.LatLng(itemList.tmY,itemList.tmX));
+       		BusMarker.setPosition(new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX));
        		
        }
     }
@@ -665,7 +665,7 @@
                      		}
                      		//console.log(route5623);
                      		
-                     		for(var j=0;j<route5623.length;j+=3){
+                     		for(var j=0;j<route5623.length;j++){
                      			var f=route5623[j].gpsY;
                          		var d=route5623[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
@@ -674,7 +674,7 @@
                      		loadVector5623(hell);
                      		
                      		hell=[];
-                  			for(var j=0;j<route6702.length;j+=3){
+                  			for(var j=0;j<route6702.length;j++){
                      			var f=route6702[j].gpsY;
                          		var d=route6702[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
@@ -683,7 +683,7 @@
                   			
                   			
                   			hell=[];
-                  			for(var j=0;j<route9000.length;j+=3){                          		
+                  			for(var j=0;j<route9000.length;j++){                          		
                      			var f=route9000[j].gpsY;
                          		var d=route9000[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
@@ -692,7 +692,7 @@
                   			
                   			
                   			hell=[];
-                  			for(var j=0;j<route6501.length;j+=20){
+                  			for(var j=0;j<route6501.length;j++){
                      			var f=route6501[j].gpsY;
                          		var d=route6501[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));

@@ -251,8 +251,8 @@ public class BusStopManageService {
 			if(r_num.equals("all")){				
             	JSONObject obs1 = busMultiRouteRead("5623" , dto, request, response);
             	JSONObject obs2 = busMultiRouteRead("6702" , dto, request, response);
-            	JSONObject obs3 = busMultiRouteRead("9000광주", dto, request, response);
-            	JSONObject obs4 = busMultiRouteRead("143", dto, request, response);
+            	JSONObject obs3 = busMultiRouteRead("143", dto, request, response);
+            	JSONObject obs4 = busMultiRouteRead("3030안양", dto, request, response);
             	
             	ArrayList<JSONObject> obss = new ArrayList<JSONObject>();
             	obss.add(obs1);
@@ -310,13 +310,16 @@ public class BusStopManageService {
 			if(r_num.equals("5623")){
 				dto = dao.routeidSearch("5623");
 				id = dto.getR_id();
-			}else if(r_num.equals("6702")){
+			}
+			else if(r_num.equals("6702")){
 				dto = dao.routeidSearch("6702");
 				id = dto.getR_id();				
-			}else if(r_num.equals("143")){
+			}
+			else if(r_num.equals("143")){
 				dto = dao.routeidSearch("143");
 				id = dto.getR_id();
-			}else if(r_num.equals("3030안양")){
+			}
+			else if(r_num.equals("3030안양")){
 				dto = dao.routeidSearch("3030안양");
 				id = dto.getR_id();		
 			}
@@ -952,6 +955,7 @@ public class BusStopManageService {
         }else{
         	System.out.println("입력실패");
         }
+        
         
 		return venid;
 	}
