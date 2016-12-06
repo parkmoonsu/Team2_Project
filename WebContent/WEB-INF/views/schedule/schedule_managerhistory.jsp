@@ -21,7 +21,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>버스 관리</title>
-
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 <!-- Bootstrap -->
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
@@ -273,12 +274,9 @@ table, th{
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
 			<!-- /footer content -->
 		</div>
 

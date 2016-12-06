@@ -30,6 +30,9 @@
 <title>최종 예상 스케줄</title>
 
 <!-- Bootstrap -->
+
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -153,7 +156,7 @@ select#selectedrnum {
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								Calendar<i class="fa fa-calendar"></i>
+								<i class="fa fa-calendar"></i>&nbsp;&nbsp;Calendar
 							</h3>
 						</div>
 
@@ -214,12 +217,9 @@ select#selectedrnum {
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
 			<!-- /footer content -->
 		</div>
 	</div>
@@ -229,6 +229,7 @@ select#selectedrnum {
 	<script>
 	var array = new Array();
 		$(function() {
+			$.oPageLoader();
 			//rlist.r_num
 			
 			$('#selectedrnum').change(function() {

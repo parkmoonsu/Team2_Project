@@ -284,17 +284,15 @@ th, table{
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
 			<!-- /footer content -->
 		</div>
 
 
-
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 	<!-- Bootstrap -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -389,7 +387,9 @@ th, table{
 	}
 	
 	$(function(){
-		
+			  $.oPageLoader(); 
+
+		  </script>
 		var count = 1;
 		
 		//console.log(num);

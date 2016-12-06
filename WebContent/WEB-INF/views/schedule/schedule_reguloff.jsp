@@ -58,10 +58,9 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <!-- <h3>Calendar <small>Click to add/edit events</small></h3> -->
               </div>
 
-              <div class="title_right">
+              
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
                     <!-- <input type="text" class="form-control" placeholder="Search for..."> -->
@@ -71,7 +70,7 @@
                     </span>
                   </div>
                 </div>
-              </div>
+             
             </div>
 
             <div class="clearfix"></div>
@@ -120,7 +119,7 @@
           <div class="pull-right">
             Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
           </div>
-          <div class="clearfix"></div>
+        <!--   <div class="clearfix"></div> -->
         </footer>
         <!-- /footer content -->
       </div>
@@ -220,7 +219,8 @@
     <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
     <!-- /calendar modal -->
         
-   
+   <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
     <!-- Bootstrap -->
     <script src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -238,4 +238,9 @@
     <script src="${pageContext.request.contextPath}/js/schedule_reguloff.js"></script>   
     <!-- /FullCalendar -->
   </body>
+  <script type="text/javascript">
+  $(function(){
+	  $.oPageLoader(); 
+  });
+  </script>
 </html>

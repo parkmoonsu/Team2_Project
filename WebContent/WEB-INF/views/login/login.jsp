@@ -29,10 +29,10 @@
     background-size:100% 100%;
 
 }
-.btn:hover {
-    background-color: #4CAF50;
-    border: 2px solid #4CAF50;
-    color: black;
+ #login:hover {
+    background-color: #86E57F;
+    border-color: 2px solid #4CAF50;
+    color: white;
 } 
 #uesrname, #password{
 	background-color: white; 
@@ -128,7 +128,8 @@ placeholder{
 			                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
 			                        </div> -->
 
-			                        <button class="btn btn-block" type="submit" class="btn" >LogIN</button>
+			                        <!-- <button class="btn btn-block" type="submit" style="height:40px; padding-bottom: 15px">LogIN</button> -->
+			                        <input class="btn btn-success btn btn-block" id="login" style="background-color: #86E57F; border:0" type="submit"  value="LogIn">
 			                        <br>
 									<div class="col-sm-6 col-xs-12" style=":padding-right:5px">
 			                        <a href="search.htm"class="btn btn-primary btn-sm btn-block" style="height:30px">아이디/비밀번호찾기</a>
