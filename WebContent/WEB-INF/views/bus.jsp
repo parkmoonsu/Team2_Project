@@ -189,10 +189,10 @@
 			<div class="text-wrap">
 				<div class="text-inner">
 					<div class="row">
-						<div class="col-md-8 col-md-offset-2">
+						<!-- <div class="col-md-8 col-md-offset-2">
 							<h1 class="to-animate">북유럽사람들이 책을 사랑하는 이유는..?</h1>
 							<h2 class="to-animate">Book you love.....</h2>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
