@@ -303,12 +303,9 @@ $(document).ready(function() {
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
 			<!-- /footer content -->
 		</div>
 	</div>
@@ -316,6 +313,8 @@ $(document).ready(function() {
 	<script>
 	var array = new Array();
 	var dropObject;
+	var calEventObject;
+	var eventObjecte;
 	function showCalInfo(r_num){
 		array = []; //아무 동작도 처리 하지 않고 눌렀을때 array에 들어있던 값을 비워야한다.
 		alert(r_num);
@@ -326,7 +325,7 @@ $(document).ready(function() {
 			success:function(data){
 				var array1 = new Array();
 				var item;
-				var color = ["green", "black", "red", "purple","orange","yellow","silver"];
+				var color = ["green", "black", "red", "purple","orange","yellow","silver","skyblue","gold"];
 				$.each(data.mrmbrdto,function(index,obj){ //정규 휴무 같은 노선
 					$.each(data.mbrdto,function(index1,obj1){ //변경 신청자 reguloff temp ='t'
 					    console.log(obj.m_id + "/" + obj1.m_id + "/" + obj1.m_id_1);
@@ -445,7 +444,9 @@ $(document).ready(function() {
 							alert('변경 요청자의 휴무 변경은 변경 대상자로 해야 합니다.')
 							revertFunc();
 						}else{
+							eventObjecte=event;
 							alert(event.title + "/" + event.aftername);
+							$('#1,#2').empty();
 							$('#1').append(event.title);
 							$('#2').append(event.aftername);
 							$('#m_id').val(event.id);
@@ -460,12 +461,15 @@ $(document).ready(function() {
 					//최초 휴무 신청자 처리 내용
 					if(calEvent.id == calEvent.afterid){
 						$('#approverefusebtw').modal('show');
+						$('#3,#4,#5').empty();
 						$('#3').append(calEvent.title);
 						$('#4').append(calEvent.downame);
 						$('#5').append(calEvent.afterdowname);
 						$('#sm_id').val(calEvent.id);
 						$('#so_code').val(calEvent.afterdow); //afterdow = o_code
 						$('#so_code_1').val(calEvent.dow); //dow = o_code_1
+						calEventObject = calEvent; //이벤트 할당
+						
 					}else{
 						if(calEvent.afterdow == null){
 							alert(calEvent.title + '님은 휴무 변경 신청자가 아닙니다.');
@@ -493,6 +497,9 @@ $(document).ready(function() {
 				data:{"m_id":m_id,"o_code":o_code,"m_id_1":m_id_1,"o_code_1":o_code_1},
 				success:function(){
 					alert('등록성공');
+					$('#calendar').fullCalendar('removeEvents', eventObjecte.id);
+					$('#calendar').fullCalendar('renderEvent', resultObject);
+					$('#calendar').fullCalendar('unselect');
 				}
 			});
 		});//approvebtn ajax
@@ -521,7 +528,16 @@ $(document).ready(function() {
 				data:{"m_id":m_id,"o_code":o_code_1}, //변경 휴무로 reguloff에 등록되어야 한다.
 				type:"post",
 				success:function(data){
-					alert('등록완료');
+					alert('등록완료'+calEventObject.id+calEventObject.title);
+					var resultObject = {
+						id : calEventObject.id,
+						title : calEventObject.title,
+						dow : data.o_code,
+						color : "red"
+					};
+					$('#calendar').fullCalendar('removeEvents', calEventObject.id);
+					$('#calendar').fullCalendar('renderEvent', resultObject);
+					$('#calendar').fullCalendar('unselect');
 				}
 			});
 		});
@@ -535,10 +551,26 @@ $(document).ready(function() {
 				type:"post",
 				success:function(data){
 					alert('변경 거절');
+					if(calEventObject.dow==calEventObject.afterdow){
+					var resultObject = {
+							id : calEventObject.id,
+							title : calEventObject.title
+						};
+					}else{
+					var resultObject = {
+							id : calEventObject.id,
+							title : calEventObject.title,
+							dow : data.o_code
+						};	
+					}
+					$('#calendar').fullCalendar('removeEvents', calEventObject.id);
+					$('#calendar').fullCalendar('renderEvent', resultObject);
+					$('#calendar').fullCalendar('unselect');
 				}
 			});
 		});
 	});
+	
 		
 	</script>
 	<!-- Bootstrap -->

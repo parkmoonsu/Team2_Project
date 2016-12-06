@@ -9,6 +9,12 @@
 	border: 1px solid;
 	padding: 10px;
 }
+.inner-bg{
+    background-image:url(images/background2.jpg);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+
+}
 </style>
 </head>
 		<meta charset="utf-8">
@@ -51,7 +57,7 @@
                 <div class="container">
                     <div class="row">
                     <div class="form-box">
-                    <div class="form-top" align="center" style="color: white">
+                    <div class="form-top" align="center" style="color: white;">
 					<div class="form-top-center">
                         <ul class="nav nav-tabs">	
 								<li class="active">

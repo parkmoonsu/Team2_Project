@@ -60,6 +60,10 @@
 	margin-right: auto;
 	width: 95%;
 }}
+
+footer {
+	margin-left: 0px;
+}
 select#selectBus, select#selectBus2 {
 	-webkit-appearance: button;
 	-webkit-border-radius: 2px;
@@ -172,10 +176,7 @@ select#selectBus, select#selectBus2 {
 
 				<!-- footer content -->
 				<footer>
-					<div class="pull-right">
-						Gentelella - Bootstrap Admin Template by <a
-							href="https://colorlib.com">Colorlib</a>
-					</div>
+					<jsp:include page="/sidebar/footer.jsp"></jsp:include>
 					<div class="clearfix"></div>
 				</footer>
 				<!-- /footer content -->
@@ -360,7 +361,7 @@ select#selectBus, select#selectBus2 {
     }
     
   //버류 정류장 수동 생성
-    /* function copyMarkerMakes(latLng, map) {
+    function copyMarkerMakes(latLng, map) {
         console.log(latLng);
     	var num =$("#end").val();
     	console.log("알고싶어넘버"+num);
@@ -424,9 +425,9 @@ select#selectBus, select#selectBus2 {
         });
          
         dataArray.push(latLng);
-    } */
+    }
 	
-    function copyMarkerMakes(latLng, map) {
+    /* function copyMarkerMakes(latLng, map) {
         console.log(latLng);
         for(var i=0; i<latLng.length; i++){
     		var num =$("#end").val();
@@ -459,7 +460,7 @@ select#selectBus, select#selectBus2 {
            		console.log($("#end").val());           
       		}
    			
-        }
+        } */
       		//마커 드래그 끝났을떄
         	/* copyMarker.addListener('dragend', function() {
             
@@ -489,10 +490,10 @@ select#selectBus, select#selectBus2 {
             $("#new-modal").modal(); 
             
         }); */
-        dataArray.push(latLng);
+        //dataArray.push(latLng);
         //copymovingBusMarker(latLng, map);
                
-    }
+    //}
            
     function copymovingBusMarker(latLng, map){
        	console.log(latLng);    
@@ -531,7 +532,7 @@ select#selectBus, select#selectBus2 {
    			deleteRoute();
    			deleteBusMarker();
    			if($("#selectBus").val() !=null){     		
-       			/* $.ajax({
+       			$.ajax({
                    	url : "busStopOriginalRead.admin",
                    	type : "get",
                    	dataType : "json",
@@ -581,10 +582,10 @@ select#selectBus, select#selectBus2 {
                       		}         
                    		}
                 	}
-   				}); */
+   				});
        		
        		 
-       			$.ajax({
+       			/* $.ajax({
                 	url : "busStopRoad.admin",
                 	type : "get",
                 	dataType : "json",
@@ -596,7 +597,7 @@ select#selectBus, select#selectBus2 {
                       	console.log("1개 노선");                     		                     		                     			
                       	copyMarkerMakes(data,map);                       	                          	                   		                   		
              		}
-				});
+				}); */
    			}
     	});
        
