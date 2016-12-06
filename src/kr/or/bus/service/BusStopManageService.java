@@ -427,14 +427,13 @@ public class BusStopManageService {
 
 //실시간 위치 추적
 	public void busLocationSearch(String r_num, RouteDTO dto, HttpServletRequest request , HttpServletResponse response) throws IOException{			
-		PrintWriter out=null;
-		JSONObject jsonmaps = null;
-		JSONArray jsonlist = null;
-		JSONObject jsonno = null;
+		System.out.println("야 너 진짜 안타냐");
+		
+		PrintWriter out=null;		
 		
 		response.setCharacterEncoding("UTF-8");
 		out = response.getWriter();
-		ArrayList<JSONObject> locations = null;
+		ArrayList<JSONArray> locations = null;
 		/*
 		 	route id
 		 	
@@ -448,17 +447,17 @@ public class BusStopManageService {
 		*/		
 		if(r_num.equals("all")){
 			
-			JSONObject locations1 = multiLocationSearch(request , response, dto, "5623");
-			JSONObject locations2 = multiLocationSearch(request , response, dto, "6702");
-			JSONObject locations3 = multiLocationSearch(request , response, dto, "9000광주");
-			JSONObject locations4 = multiLocationSearch(request , response, dto, "6501광주");
+			JSONArray jsonlist1 = multiLocationSearch(request , response, dto, "N13");
+			JSONArray jsonlist2 = multiLocationSearch(request , response, dto, "N16");
+			JSONArray jsonlist3 = multiLocationSearch(request , response, dto, "N26");
+			JSONArray jsonlist4 = multiLocationSearch(request , response, dto, "N30");
 			
-			locations = new ArrayList<JSONObject>();
-			locations.add(locations1);
-			locations.add(locations2);
-			locations.add(locations3);
-			locations.add(locations4);
-			
+			locations = new ArrayList<JSONArray>();
+			locations.add(jsonlist1);
+			locations.add(jsonlist2);
+			locations.add(jsonlist3);
+			locations.add(jsonlist4);
+						
 			out.print(locations);
 			
 		}else if(!r_num.equals("all")){
@@ -475,20 +474,20 @@ public class BusStopManageService {
 		}
 	}
 	
-	public JSONObject multiLocationSearch(HttpServletRequest request , HttpServletResponse response, RouteDTO dto, String r_num) throws IOException{
+	public JSONArray multiLocationSearch(HttpServletRequest request , HttpServletResponse response, RouteDTO dto, String r_num) throws IOException{
 		String venid = null;
 		
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
-		if(r_num.equals("5623")){
+		if(r_num.equals("N13")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("6702")){
+		}else if(r_num.equals("N16")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("3030안양")){
+		}else if(r_num.equals("N26")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("6501광주")){
+		}else if(r_num.equals("N30")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
 		}
@@ -497,6 +496,8 @@ public class BusStopManageService {
 		
 		System.out.println("멀티위치추적되냐");				
 		JSONObject jsonmaps = null;
+		JSONObject jsonno = null;
+		JSONArray jsonlist = null;
 		StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/buspos/getBusPosByVehId"); //URL
 	    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); //Service Key
 	    urlBuilder.append("&" + URLEncoder.encode("vehId","UTF-8") + "=" + URLEncoder.encode(venid, "UTF-8")); //버스ID
@@ -532,7 +533,23 @@ public class BusStopManageService {
 		System.out.println(sb.toString());
 		jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
 		
-		return jsonmaps;
+		jsonno = jsonmaps;
+		
+		System.out.println("시발"+jsonno);
+		System.out.println(jsonno.get("msgBody"));
+		jsonno = (JSONObject) jsonno.get("msgBody");
+		jsonno = (JSONObject) jsonno.get("itemList");
+		System.out.println("차량번호 가져왔냐???"+jsonno.get("plainNo"));
+		
+		BusLocationInfoDAO buslocationinfodao = sqlsession.getMapper(BusLocationInfoDAO.class);
+		
+		BusLocationInfoDTO buslocationinfodto = buslocationinfodao.SearchRider(jsonno.get("plainNo").toString());		
+		System.out.println(buslocationinfodto);
+		jsonlist = JSONArray.fromObject(jsonmaps);
+					
+		jsonlist.add(1, buslocationinfodto);
+		
+		return jsonlist;
 	}
 	
 	public void LocationSearch(HttpServletRequest request , HttpServletResponse response, String venid) throws IOException{
@@ -895,31 +912,36 @@ public class BusStopManageService {
         
         System.out.println("차량 id 뽑았다"+jsonlist.getJSONObject(0).get("vehId"));
         
-        String venid = (String) jsonlist.getJSONObject(0).get("vehId");
-        String busno = (String) jsonlist.getJSONObject(0).get("plainNo");
-        //String busno = (String) jsonlist.getJSONObject(0).get("plainNo");
-        System.out.println("차량id string 에 담았고"+venid);
-	    
-        BusDTO busdto = new BusDTO();
-        busdto.setB_vehiclenum(busno);
-        busdto.setR_num(r_num);
+        //String venid = (String) jsonlist.getJSONObject(0).get("vehId");
         
-        BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
-        int check = busdao.busnoCheck(busdto);
         int insertcheck = 0;
-        if(check == 0){
-        	System.out.println("차량번호 중복없음");
-        	insertcheck = busdao.insertBusno(busdto);
-        }else{
-        	System.out.println("차량번호 중복데이터임");
-        }
+        int check = 0;
+        String busno = null;
         
-        if(insertcheck ==1){
-        	System.out.println("입력완료");
-        }else{
-        	System.out.println("입력실패");
-        }
-	   
+        int jsonsize = jsonlist.size();
+        BusDTO busdto = new BusDTO();
+        for(int i=0; i<jsonsize; i++){
+        	
+        	busno = (String) jsonlist.getJSONObject(i).get("plainNo");
+        	busdto.setB_vehiclenum(busno);
+        	busdto.setR_num(r_num);
+        	
+        	BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
+        	check = busdao.busnoCheck(busdto);
+      	
+        	if(check == 0){
+        		System.out.println("차량번호 중복없음");
+        		insertcheck = busdao.insertBusno(busdto);
+        	}else{
+        		System.out.println("차량번호 중복데이터임");
+        	}
+        	
+        	if(insertcheck ==1){
+        		System.out.println("입력완료");
+        	}else{
+        		System.out.println("입력실패");
+        	}        	
+        }        	   
 	}
 	
 	public List<RouteDTO> routeList(){
