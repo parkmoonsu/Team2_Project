@@ -723,12 +723,12 @@ public class BusStopManageService {
         
         if(result == 1){
         	System.out.println("route 입력성공");        	
-        	busStopSearch(dto, stopdto, routestopdto, request, response, r_num);
         	out.print("저장 성공!");
         }else{
         	System.out.println("route 입력 실패");
         	out.print("중복 노선번호 또는 지원하지 않는 노선번호입니다. 서울시 버스를 참고해주세요");
         }
+        busStopSearch(dto, stopdto, routestopdto, request, response, r_num);
 	}
 	
 	//버스 정류장 좌표를 찍어주기 위해  route id검색
@@ -914,8 +914,7 @@ public class BusStopManageService {
         
         //String venid = (String) jsonlist.getJSONObject(0).get("vehId");
         
-        int insertcheck = 0;
-        int check = 0;
+        
         String busno = null;
         
         int jsonsize = jsonlist.size();
@@ -927,8 +926,8 @@ public class BusStopManageService {
         	busdto.setR_num(r_num);
         	
         	BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
-        	check = busdao.busnoCheck(busdto);
-      	
+        	int check = busdao.busnoCheck(busdto);
+        	int insertcheck = 0;
         	if(check == 0){
         		System.out.println("차량번호 중복없음");
         		insertcheck = busdao.insertBusno(busdto);

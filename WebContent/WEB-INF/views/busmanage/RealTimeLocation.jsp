@@ -800,7 +800,7 @@
     		polyRemove();
     		busMarkerRemove();          	
         	if($("#selectBus").val() !=null){       		             		
-        		/* $.ajax({
+        		$.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
                    	dataType : "json",
@@ -875,9 +875,9 @@
                         	loadVector(hell);
                    	  	}
                 	}
-           		}); */
+           		});
         		
-        		/* $.ajax({
+        		$.ajax({
                     url : "busStopRoad.admin",
                     type : "get",
                     dataType : "json",
@@ -888,7 +888,7 @@
                     	   originalMarkerMake(data, map);
                        	                 	                     	
                     }        		
-        		}); */
+        		});
         	}
     	});    	   		    	          
              
