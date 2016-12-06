@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -705,7 +706,7 @@ public class BusStopManageService {
         
         if(result == 1){
         	System.out.println("route 입력성공");        	
-        	busStopSearch(dto, stopdto, routestopdto, request, response);
+        	busStopSearch(dto, stopdto, routestopdto, request, response, r_num);
         	out.print("저장 성공!");
         }else{
         	System.out.println("route 입력 실패");
@@ -766,7 +767,7 @@ public class BusStopManageService {
 	}
 	
 	//공공데이터에서 받아온 정류장 정보들을 디비에 저장하는 함수
-	public void busStopSearch(RouteDTO dto, StopDTO stopdto, RouteStopDTO routestopdto, HttpServletRequest request ,HttpServletResponse response) throws IOException{
+	public void busStopSearch(RouteDTO dto, StopDTO stopdto, RouteStopDTO routestopdto, HttpServletRequest request ,HttpServletResponse response, String r_num) throws IOException{
 		System.out.println("r_id");
 		System.out.println(dto.getR_id());		
 		request.setCharacterEncoding("UTF-8");	
@@ -886,6 +887,38 @@ public class BusStopManageService {
     	}else{
     		System.out.println("RouteStop입력실패");
     	}
+	    
+	    JSONObject venidjson =  accessVenID(dto, r_num);
+	    
+	    JSONArray jsonlist = venidjson.getJSONArray("msgBody");
+        System.out.println("너된다??"+jsonlist);
+        
+        System.out.println("차량 id 뽑았다"+jsonlist.getJSONObject(0).get("vehId"));
+        
+        String venid = (String) jsonlist.getJSONObject(0).get("vehId");
+        String busno = (String) jsonlist.getJSONObject(0).get("plainNo");
+        //String busno = (String) jsonlist.getJSONObject(0).get("plainNo");
+        System.out.println("차량id string 에 담았고"+venid);
+	    
+        BusDTO busdto = new BusDTO();
+        busdto.setB_vehiclenum(busno);
+        busdto.setR_num(r_num);
+        
+        BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
+        int check = busdao.busnoCheck(busdto);
+        int insertcheck = 0;
+        if(check == 0){
+        	System.out.println("차량번호 중복없음");
+        	insertcheck = busdao.insertBusno(busdto);
+        }else{
+        	System.out.println("차량번호 중복데이터임");
+        }
+        
+        if(insertcheck ==1){
+        	System.out.println("입력완료");
+        }else{
+        	System.out.println("입력실패");
+        }
 	   
 	}
 	
@@ -897,9 +930,78 @@ public class BusStopManageService {
 		
 	}
 	
+	//accessVenID 함수 의 리턴값 json 을 받아서 차량 id 추출하고 차량 id return
 	public String venidSearch(RouteDTO dto, String r_num) throws IOException{
 		System.out.println("노선id???"+dto.getR_id());
 		JSONObject jsonmaps = null;
+		/*JSONObject jsonmaps = null;
+		StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid"); URL
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); Service Key
+        urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(dto.getR_id(), "UTF-8")); 노선ID
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("999", "UTF-8")); 검색건수
+        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); 페이지 번호
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/xml");
+        //System.out.println("Response code: " + conn.getResponseCode());
+        BufferedReader rd;
+        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        } else {
+            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+        }
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+        //System.out.println(sb.toString());
+        jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
+        System.out.println("너왜안되냐"+jsonmaps);*/
+        
+		jsonmaps = accessVenID(dto,r_num);
+		
+        JSONArray jsonlist = jsonmaps.getJSONArray("msgBody");
+        System.out.println("너된다??"+jsonlist);
+        
+        System.out.println("차량 id 뽑았다"+jsonlist.getJSONObject(0).get("vehId"));
+        
+        String venid = (String) jsonlist.getJSONObject(0).get("vehId");
+        //String busno = (String) jsonlist.getJSONObject(0).get("plainNo");
+        //System.out.println("차량id string 에 담았고"+venid);
+        
+        /*BusDTO busdto = new BusDTO();
+        busdto.setB_vehiclenum(busno);
+        busdto.setR_num(r_num);
+        
+        BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
+        int check = busdao.busnoCheck(busdto);
+        int insertcheck = 0;
+        if(check == 0){
+        	System.out.println("차량번호 중복없음");
+        	insertcheck = busdao.insertBusno(busdto);
+        }else{
+        	System.out.println("차량번호 중복데이터임");
+        }
+        
+        if(insertcheck ==1){
+        	System.out.println("입력완료");
+        }else{
+        	System.out.println("입력실패");
+        }*/
+        
+        
+		return venid;
+	}
+	
+	//노선 id 가지고 차량 id 를 구하려고 공공데이터에 접근하고 결과값을 리턴하는 함수
+	public JSONObject accessVenID(RouteDTO dto, String r_num) throws IOException{
+		
+		JSONObject jsonmaps = null;
+		
 		StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(dto.getR_id(), "UTF-8")); /*노선ID*/
@@ -927,37 +1029,7 @@ public class BusStopManageService {
         jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
         System.out.println("너왜안되냐"+jsonmaps);
         
-        JSONArray jsonlist = jsonmaps.getJSONArray("msgBody");
-        System.out.println("너된다??"+jsonlist);
-        
-        System.out.println("차량 id 뽑았다"+jsonlist.getJSONObject(0).get("vehId"));
-        
-        String venid = (String) jsonlist.getJSONObject(0).get("vehId");
-        String busno = (String) jsonlist.getJSONObject(0).get("plainNo");
-        System.out.println("차량id string 에 담았고"+venid);
-        
-        BusDTO busdto = new BusDTO();
-        busdto.setB_vehiclenum(busno);
-        busdto.setR_num(r_num);
-        
-        BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
-        int check = busdao.busnoCheck(busdto);
-        int insertcheck = 0;
-        if(check == 0){
-        	System.out.println("차량번호 중복없음");
-        	insertcheck = busdao.insertBusno(busdto);
-        }else{
-        	System.out.println("차량번호 중복데이터임");
-        }
-        
-        if(insertcheck ==1){
-        	System.out.println("입력완료");
-        }else{
-        	System.out.println("입력실패");
-        }
-        
-        
-		return venid;
+		return jsonmaps;
 	}
 
 }
