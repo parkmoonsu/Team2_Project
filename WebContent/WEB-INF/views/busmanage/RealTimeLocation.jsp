@@ -54,12 +54,12 @@
 	color: #555;
 	font-size: inherit;
 	overflow: hidden;
-	padding: 5px 10px; 
+	padding: 6px 6px; 
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 150px;
 	border-radius: 8px;
-	margin-bottom:15px;
+	margin: 3px;
 }
 .btn{border-radius: 8px};
 </style>
@@ -90,11 +90,12 @@
 
           <div class="row" style="text-align: right">
             <div class="col-md-12 col-sm-12 col-xs-12">
-            <input type="button" id="Search" class="btn btn-default" value="버스위치추적 ">
+            <input type="button" id="Search"  value="버스위치추적 ">
 				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
 				<c:set var="d" value="${busNo}"></c:set>
 				<select id="selectBus">
-					<option value="${d}"></option>
+					<option>노선을 선택하세요</option>
+					<%-- <option value="${d}"></option> --%>
 					<option>all</option>
 					<c:forEach var="i" items="${list}">
 					<option>${i.r_num}</option>					
@@ -284,7 +285,7 @@
      	  	
      	  	(function (originalMarker, latLng, infowindow) {
      	        google.maps.event.addListener(originalMarker, "click", function (e) {
-     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');
+     	            infowindow.setContent('<p style="margin:7px 12px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');
      	            infowindow.open(map, originalMarker);
      	           
      	        });

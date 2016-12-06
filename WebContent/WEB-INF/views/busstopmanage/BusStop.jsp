@@ -60,6 +60,10 @@
 	margin-right: auto;
 	width: 95%;
 }}
+
+footer {
+	margin-left: 0px;
+}
 select#selectBus, select#selectBus2 {
 	-webkit-appearance: button;
 	-webkit-border-radius: 2px;
@@ -172,10 +176,7 @@ select#selectBus, select#selectBus2 {
 
 				<!-- footer content -->
 				<footer>
-					<div class="pull-right">
-						Gentelella - Bootstrap Admin Template by <a
-							href="https://colorlib.com">Colorlib</a>
-					</div>
+					<jsp:include page="/sidebar/footer.jsp"></jsp:include>
 					<div class="clearfix"></div>
 				</footer>
 				<!-- /footer content -->
