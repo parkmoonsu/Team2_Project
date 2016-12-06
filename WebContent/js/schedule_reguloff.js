@@ -10,7 +10,7 @@ var loginid=$('#hidden').val();//{LoginUser}의 id
 var displayname; //일정에 id대신 표시될 이름
 
 $(function() {
-
+	
 	$.ajax({
 		url : "name.htm",
 		data : {
@@ -85,7 +85,8 @@ $(function() {
 				}
 				array.push(item);
 			});
-
+			
+			//로그인 사용자와 일정을 바꾸는 경우 같은 색으로
 			for (var i=0; i<array.length; i++){
 				if (array[i].id==temp){
 					array[i].color="red";
@@ -294,7 +295,7 @@ function loadCalendar(){
 					if(data.str=="false"){
 						console.log(data.str);
 						alert('지금은 휴무 변경 시간이 아닙니다.');
-					} else if(data.str==null || result==""){
+					} else if(data.str==null || data.str==""){
 						console.log(data.str);
 						alert('언디파인드');
 					} else {
@@ -479,6 +480,10 @@ function loadCalendar(){
 							
 		//일정 드래그시 이벤트
 		eventDrop : function(event, delta, revertFunc, jsEvent) {
+			var dowbefore=event.dow[0];
+			var dowafter= Number(event.dow[0])+delta.days();
+			var evt;
+			
 			$.ajax({
 				type:'post',
 				url:'reguloffschedulecheck.member',
@@ -487,16 +492,12 @@ function loadCalendar(){
 						console.log(data.str);
 						alert('지금은 휴무 변경 시간이 아닙니다.');
 						
-						alert('지금은 휴무 변경 시간이 아닙니다.');
 						$("#calendar").fullCalendar('refetchEvents');
 						$("#calendar").fullCalendar('unselect');
-					} else if(data.str==null || result==""){
+					} else if(data.str==null || data.str==""){
 						console.log(data.str);
 						alert('언디파인드');
 					} else {
-						var dowbefore=event.dow[0];
-						var dowafter= Number(event.dow[0])+delta.days();
-						var evt;
 						
 						//동일사용자 확인
 						$.ajax({
@@ -508,7 +509,6 @@ function loadCalendar(){
 								if(data.rid==loginid){
 									if (confirm("정말 일정을 변경하시겠습니까??") == true) {
 										
-										////////////////
 										$.ajax({
 											type:"post",
 											url:"checkstatus.member",
@@ -582,7 +582,8 @@ function loadCalendar(){
 										});
 													
 										} else {
-											//원위치
+											$("#calendar").fullCalendar('refetchEvents');
+											/*//원위치
 											evt={
 													id:event.id,
 													title:event.title,
@@ -590,6 +591,8 @@ function loadCalendar(){
 											};
 											$("#calendar").fullCalendar('removeEvents', event.id);
 											$("#calendar").fullCalendar('renderEvent', evt);
+											$("#calendar").fullCalendar('unselect');*/
+											
 			
 										}
 									
