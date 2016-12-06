@@ -26,26 +26,9 @@
 <link
 	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet">
-<!-- NProgress -->
-<link
-	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
-	rel="stylesheet">
-<!-- iCheck -->
-<link
-	href="${pageContext.request.contextPath}/vendors/iCheck/skins/flat/green.css"
-	rel="stylesheet">
-<!-- bootstrap-progressbar -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css"
-	rel="stylesheet">
-<!-- JQVMap -->
-<link
-	href="${pageContext.request.contextPath}/vendors/jqvmap/dist/jqvmap.min.css"
-	rel="stylesheet" />
+
+
 <!-- bootstrap-daterangepicker -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css"
-	rel="stylesheet">
 
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
@@ -732,7 +715,7 @@
 	
 	
 		$(function() {	
-			  $.oPageLoader();
+
 			$.ajax({
 				url : "route.htm",
 				success : function(data){

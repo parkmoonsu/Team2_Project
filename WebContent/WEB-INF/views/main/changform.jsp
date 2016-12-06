@@ -4,49 +4,43 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>KOSBUS</title>
-<!-- jQuery -->
-<script
-	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Font Awesome -->
-<link
-	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<!-- NProgress -->
-<link
-	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
-	rel="stylesheet">
-<!-- bootstrap-daterangepicker -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css"
-	rel="stylesheet">
+    <title>KOSBUS</title>
+	    <!-- jQuery -->
+	    
+	    <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
+   
+    <!-- Bootstrap -->
+    <link href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    
+    <!-- Custom Theme Style -->
+    <link href="${pageContext.request.contextPath}/build/css/custom.min.css" rel="stylesheet">
+  <style>
+  th,table{
+  text-align: center;
+  }
+  
+  
+  </style>
+  </head>
 
-<!-- Custom Theme Style -->
-<link href="${pageContext.request.contextPath}/build/css/custom.min.css"
-	rel="stylesheet">
-
-<style>
-th, table{
-	text-align: center;
-}
-</style>
-</head>
-
-<body class="nav-md">
-	<div class="container body">
-		<div class="main_container">
-			<div class="col-xs-12  col-md-3 left_col">
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+       <div class="col-xs-12  col-md-3 left_col">
 
 
 				<c:choose>
@@ -300,7 +294,12 @@ th, table{
 
 	<script>
       $(function() {
-    			  $.oPageLoader(); 
+    	  $('body').oLoader({
+    		  wholeWindow: true, 
+    		  effect:'slide',
+    		  hideAfter: 1500
+    		});
+ 
 
     	  
         Morris.Bar({
