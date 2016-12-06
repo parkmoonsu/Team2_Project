@@ -1,14 +1,20 @@
 package kr.or.bus.service;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,12 +37,10 @@ import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinMemberJoinBusDTO;
-import kr.or.bus.dto.ReguloffJoinMemberJoinBusJoinRouteDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteDTO2;
 import kr.or.bus.dto.RouteJoinGarageDTO;
-import kr.or.bus.dto.SelectDistinctDTO;
-import kr.or.bus.dto.TimetableDTO;
+
 
 @Configuration
 @EnableScheduling
@@ -284,6 +288,33 @@ public class ScheduleManageService {
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.copy_vschedule();
 		dao.delete_vschedule();
+	}
+	
+	/*
+	제목 : 스케줄러 
+	작성자 : 길한종
+	목적 : 특정 시간에만 정규휴무를 신청/변경할 수 있도록
+	*/
+
+	@Scheduled(cron="0 50 10 * * *")
+	public void reguloffScheduler1(){
+		System.out.println("휴무변경 가능으로 변경");
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		dao.reguloffscheduler("true");
+	}
+	
+	@Scheduled(cron="0 51 10 * * *")
+	public void reguloffScheduler2(){
+		System.out.println("휴무변경 불가능으로 변경");
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		dao.reguloffscheduler("false");
+	}
+	
+	//신청가능 여부 판별
+	public String reguloff_schedulecheck(){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		String str=dao.reguloff_schedulecheck();
+		return str;
 	}
 
 	//수행할 최종스케줄 _김수현

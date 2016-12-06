@@ -60,6 +60,9 @@
 
 </head>
 <body>
+	<header>
+		<jsp:include page="/sidebar/header.jsp" />
+	</header>
 
 
 	<div class="container" style="margin-top: 20px;">
