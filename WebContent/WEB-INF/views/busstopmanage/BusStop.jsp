@@ -364,7 +364,7 @@ select#selectBus, select#selectBus2 {
     	console.log(latLng);
     	var num =$("#end").val();
     	console.log("알고싶어넘버"+num);
-    	if(num=='' || num==null){//아무것도 입력 안했을때
+    	if(num==0){//아무것도 입력 안했을때
     		console.log("?여기??"+num);
        		var copyMarker = new google.maps.Marker({
              	position: latLng,        
@@ -377,10 +377,11 @@ select#selectBus, select#selectBus2 {
           	as++;
     	}else{ //노선값과 배차 순서 rs_order보내기
     		var r_num = $('#selectBus').val();
-    		$.ajax({
+  			console.log('xy좌표'+latLng);
+    	$.ajax({
     			url : "editordernumber.admin",
     			type : "post",
-    			data : {"r_num":r_num,"rs_order":num,"latlng":latlng},
+    			data : {"r_num":r_num,"rs_order":num,"latlng":latLng},
     			success:function(data){
     				
     			}
@@ -388,7 +389,7 @@ select#selectBus, select#selectBus2 {
     	}
     }
   //버류 정류장 수동 생성
-    function copyMarkerMakes(latLng, map) {
+     /*function copyMarkerMakes(latLng, map) {
         console.log(latLng);
     	var num =$("#end").val();
     	console.log("알고싶어넘버"+num);
@@ -419,7 +420,7 @@ select#selectBus, select#selectBus2 {
            		$("#end").val('');
            		console.log($("#end").val());
            
-      	}
+      	} 
       	//마커 드래그 끝났을떄
         copyMarker.addListener('dragend', function() {
             
@@ -452,7 +453,7 @@ select#selectBus, select#selectBus2 {
         });
          
         dataArray.push(latLng);
-    }
+    }*/
 	
     /* function copyMarkerMakes(latLng, map) {
         console.log(latLng);
