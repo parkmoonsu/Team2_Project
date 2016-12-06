@@ -423,6 +423,10 @@ public class BusStopManageService {
 //실시간 위치 추적
 	public void busLocationSearch(String r_num, RouteDTO dto, HttpServletRequest request , HttpServletResponse response) throws IOException{			
 		PrintWriter out=null;
+		JSONObject jsonmaps = null;
+		JSONArray jsonlist = null;
+		JSONObject jsonno = null;
+		
 		response.setCharacterEncoding("UTF-8");
 		out = response.getWriter();
 		ArrayList<JSONObject> locations = null;
@@ -468,6 +472,7 @@ public class BusStopManageService {
 	
 	public JSONObject multiLocationSearch(HttpServletRequest request , HttpServletResponse response, RouteDTO dto, String r_num) throws IOException{
 		String venid = null;
+		
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
 		if(r_num.equals("5623")){
 			dto = dao.routeidSearch(r_num);
@@ -520,7 +525,8 @@ public class BusStopManageService {
 	    System.out.println(sb.toString()); 
 		System.out.println("실시간 위치추적");
 		System.out.println(sb.toString());
-		jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());	
+		jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
+		
 		return jsonmaps;
 	}
 	
@@ -576,6 +582,7 @@ public class BusStopManageService {
 		jsonno = (JSONObject) jsonno.get("msgBody");
 		jsonno = (JSONObject) jsonno.get("itemList");
 		System.out.println("차량번호 가져왔냐???"+jsonno.get("plainNo"));
+		
 		BusLocationInfoDAO buslocationinfodao = sqlsession.getMapper(BusLocationInfoDAO.class);
 		
 		BusLocationInfoDTO buslocationinfodto = buslocationinfodao.SearchRider(jsonno.get("plainNo").toString());		
