@@ -10,8 +10,25 @@
   		4.2.5.RELEASE
   	</org.springframework-version>
   </properties>
+  
+  <repositories>
+  <repository>
+    <id>oracle</id>
+    <name>ORACLE JDBC Repository</name>
+    <url>http://maven.jahia.org/maven2</url>
+</repository>
+  </repositories>
+
   <!-- 의존 추가 -->
   <dependencies>
+  <dependency>
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>11.1.0.7.0</version>
+</dependency>
+  
+  
+  
   	<dependency>
   		<!-- Spring -->
   		<groupId>org.springframework</groupId>
@@ -61,13 +78,7 @@
   		<version>${org.springframework-version}</version>
   	</dependency>
   	
-  	<dependency>
-  		<!-- DB -->
-  		<groupId>com.oracle</groupId>
-  		<artifactId>ojdbc</artifactId>
-  		<version>11</version>
-  	</dependency>
-  	<dependency>
+   	<dependency>
   		<!-- fileupload -->  	
     	<groupId>commons-fileupload</groupId>
     	<artifactId>commons-fileupload</artifactId>
