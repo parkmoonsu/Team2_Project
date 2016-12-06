@@ -44,6 +44,13 @@ public class BusManageController {
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.busInfo(pg);
 		int page = service.pg(pg);
 		int count = service.busCount();
+		int pagecount = 0;
+		if(count % 10 == 0){
+			pagecount = count/10;
+		}else{
+			pagecount = count/10 + 1;
+		}
+		
 		int acount = service.aBus(); //공항
 		int mcount = service.mBus(); //간선
 		int ncount = service.nBus(); //지선
@@ -66,6 +73,7 @@ public class BusManageController {
 		model.addAttribute("p", pcount);
 		model.addAttribute("no", noroute);
 		
+		model.addAttribute("pagecount", pagecount);
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("count",count);
@@ -285,5 +293,52 @@ public class BusManageController {
 		map.addAttribute("list", busStopManageService.routeList());
 		return "busmanage/RealTimeLocation";
 	}
+	
+	@RequestMapping("noroute.admin")
+	public String noRoute(String pg , Model model){
 
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.noRouteInfo(pg);
+
+		 
+
+		model.addAttribute("list", list);
+	
+		return "busmanage/clickcount";
+	}
+	
+	@RequestMapping("mbusinfo.admin")
+	public String mBusInfo(Model model){
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.mBusInfo();
+		
+		model.addAttribute("list",list);
+		
+		return "busmanage/clickcount";
+	}
+	
+	@RequestMapping("nbusinfo.admin")
+	public String nBusInfo(Model model){
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.nBusInfo();
+		
+		model.addAttribute("list",list);
+		
+		return "busmanage/clickcount";
+	}
+	
+	@RequestMapping("wbusinfo.admin")
+	public String wBusInfo(Model model){
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.wBusInfo();
+		
+		model.addAttribute("list",list);
+		
+		return "busmanage/clickcount";
+	}
+	
+	@RequestMapping("gbusinfo.admin")
+	public String gBusInfo(Model model){
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.gBusInfo();
+		
+		model.addAttribute("list",list);
+		 
+		return "busmanage/clickcount";
+	}
 }

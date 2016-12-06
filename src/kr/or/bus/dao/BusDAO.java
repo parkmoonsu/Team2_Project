@@ -84,4 +84,19 @@ public interface BusDAO {
 	public int pBus();
 	//미정
 	public int noRoute();
+	
+	//경로가 지정 안된 리스트
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> noRouteInfo(int page);
+	
+	//간선버스
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> mBusInfo();
+	
+	//지선버스
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> nBusInfo();
+		
+	//순환버스
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> wBusInfo();
+	
+	//광역버스
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> gBusInfo();
 }

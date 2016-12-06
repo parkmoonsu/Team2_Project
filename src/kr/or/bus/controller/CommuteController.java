@@ -12,6 +12,7 @@ package kr.or.bus.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -67,15 +68,23 @@ public class CommuteController {
 	}
 		
 	@RequestMapping("/comsearch.member")
-	public String showlist(String pg , String m_id, String tdate, Model model) {
+	public String showlist(String pg , Principal principal, String tdate, Model model) {
 		
-		List<CommuteJoinCstartJoinCendDTO> list = service.getSelect(pg, m_id);
-		int count=service.count(m_id);
+		List<CommuteJoinCstartJoinCendDTO> list = service.getSelect(pg, principal.getName());
+		int count=service.count(principal.getName());
 		int page = service.pg(pg);
+		  
+		int cscheck = service.csCheck(principal.getName());
+		int cecheck = service.ceCheck(principal.getName());
 		
-		int cscheck = service.csCheck(m_id);
-		int cecheck = service.ceCheck(m_id);
+		int pagecount = 0;
+		if(count % 10 == 0){
+			pagecount = count/10;
+		}else{
+			pagecount = count/10 + 1;
+		}
 		
+		model.addAttribute("pagecount", pagecount);
 		model.addAttribute("pgs", page);
 		model.addAttribute("list", list);
 		model.addAttribute("count",count);

@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
-<%request.getParameter("UTF-8");%>
+<%request.getCharacterEncoding();
+  String test = request.getParameter("busNo");%>
+  <%=test %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -90,9 +92,9 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
             <input type="button" id="Search" class="btn btn-default" value="버스위치추적 ">
 				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
-	
+				<c:set var="d" value="${busNo}"></c:set>
 				<select id="selectBus">
-					<option>보기</option>
+					<option value="${d}"></option>
 					<option>all</option>
 					<c:forEach var="i" items="${list}">
 					<option>${i.r_num}</option>					
@@ -272,12 +274,22 @@
         
     		var originalMarker = new google.maps.Marker({
             	position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
-           		map: map,
-           		//label: latLng.title,
+           		map: map,           		
            		animation: google.maps.Animation.DROP,
            		icon : '${pageContext.request.contextPath}/images/busstop.png',
            		zindex : "5"
         	});
+     	   
+     	  	var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
+     	  	
+     	  	(function (originalMarker, latLng, infowindow) {
+     	        google.maps.event.addListener(originalMarker, "click", function (e) {
+     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');
+     	            infowindow.open(map, originalMarker);
+     	           
+     	        });
+     	    })(originalMarker, latLng[i], infowindow);
+
      	  	//map.panTo(originalMarker.getPosition());
      	  	originalMarkers.push(originalMarker);
             
@@ -419,7 +431,7 @@
     function movingBusMarker(itemList,map){
        if(BusMarker == null){
        		BusMarker = new google.maps.Marker({
-          		map: map,
+          		map: map,        		
           		position:new google.maps.LatLng(itemList.tmY,itemList.tmX),
           		icon:"${pageContext.request.contextPath}/images/bus.png"
        		});
@@ -548,6 +560,7 @@
 		}
 		if(BusMarker !=null){
 			BusMarker.setMap(null);
+			BusMarker = null;
 		}
     }
     
@@ -612,108 +625,96 @@
     }
     
     $(function() {
-    	//비동기 버스 경로 을 뿌린다.
-    	/* $.ajax({
-           	url : "busRoute.admin",
-           	type : "get",
-           	dataType : "json",
-           	data : {busNo:"all"},
-           	success : function(data2) {
-            	console.log("읽어옴?");
-              	console.log(data2);                              	                                                                  	                       
-              	//노선 전체로드 현재 안됨...
-              	if(data2.length == 4){
-             	   
-              		var hell =new Array();
-         			var route5623;
-         			var route702;
-         			var route9000;
-         			var route6501
-         			
-             		console.log("4개 노선");
-             		console.log(data2.length);
-             		
-             		for(var j=0;j<data2.length;j++){
-             			route5623 = data2[0].msgBody;
-             			route702 = data2[1].msgBody;
-             			route9000 = data2[2].msgBody;
-             			route6501 = data2[3].msgBody;
-             		}
-             		console.log(route5623);
-             		
-             		for(var j=0;j<route5623.length;j+=3){
-             			var f=route5623[j].gpsY;
-                 		var d=route5623[j].gpsX;
-                 		hell.push(new google.maps.LatLng(f,d));
-                 		console.log(hell);
-             		}
-             		loadVector5623(hell);
-             		
-             		hell=[];
-          			for(var j=0;j<route702.length;j+=3){
-             			var f=route702[j].gpsY;
-                 		var d=route702[j].gpsX;
-                 		hell.push(new google.maps.LatLng(f,d));
-             		}
-          			loadVector702(hell);
-          			
-          			
-          			hell=[];
-          			for(var j=0;j<route9000.length;j+=3){                          		
-             			var f=route9000[j].gpsY;
-                 		var d=route9000[j].gpsX;
-                 		hell.push(new google.maps.LatLng(f,d));
-             		}
-          			loadVector9000(hell);
-          			
-          			
-          			hell=[];
-          			for(var j=0;j<route6501.length;j+=20){
-             			var f=route6501[j].gpsY;
-                 		var d=route6501[j].gpsX;
-                 		hell.push(new google.maps.LatLng(f,d));
-             		}
-          			loadVector6501(hell);
-          			hell=[];
-          			
-                }else{
-           	   		console.log("1개 노선");
-           			console.log(data2.length);                          	
-           			var hell =new Array();
-           			for(var j=0;j<data2.msgBody.length;j+=3){
-           				var f=parseFloat(data2.msgBody[j].gpsY);
-               			var d=parseFloat(data2.msgBody[j].gpsX);
-   		      			hell.push(new google.maps.LatLng(f,d));
-           			}    							
-                	loadVector(hell);
-           	  	}
-        	}
-   		});   	 
+    			//비동기 버스 경로 을 뿌린다.
+    			$.ajax({
+                   	url : "busRouteSearch.admin",
+                   	type : "get",
+                   	dataType : "json",
+                   	data : {r_num:"all"},
+                   	success : function(data2) {
+                    	console.log("읽어옴?");
+                      	//console.log(data2);                              	                                                                  	                       
+                      	//노선 전체로드 현재 안됨...
+                      	if(data2.length == 4){
+                     	   
+                      		var hell =new Array();
+                 			var route5623;
+                 			var route6702;
+                 			var route9000;
+                 			var route6501
+                 			
+                     		console.log("4개 경로노선");
+                     		console.log(data2.length);
+                     		
+                     		for(var j=0;j<data2.length;j++){
+                     			route5623 = data2[0].msgBody;
+                     			route6702 = data2[1].msgBody;
+                     			route9000 = data2[2].msgBody;
+                     			route6501 = data2[3].msgBody;
+                     		}
+                     		//console.log(route5623);
+                     		
+                     		for(var j=0;j<route5623.length;j+=3){
+                     			var f=route5623[j].gpsY;
+                         		var d=route5623[j].gpsX;
+                         		hell.push(new google.maps.LatLng(f,d));
+                         		//console.log(hell);
+                     		}
+                     		loadVector5623(hell);
+                     		
+                     		hell=[];
+                  			for(var j=0;j<route6702.length;j+=3){
+                     			var f=route6702[j].gpsY;
+                         		var d=route6702[j].gpsX;
+                         		hell.push(new google.maps.LatLng(f,d));
+                     		}
+                  			loadVector6702(hell);
+                  			
+                  			
+                  			hell=[];
+                  			for(var j=0;j<route9000.length;j+=3){                          		
+                     			var f=route9000[j].gpsY;
+                         		var d=route9000[j].gpsX;
+                         		hell.push(new google.maps.LatLng(f,d));
+                     		}
+                  			loadVector9000(hell);
+                  			
+                  			
+                  			hell=[];
+                  			for(var j=0;j<route6501.length;j+=20){
+                     			var f=route6501[j].gpsY;
+                         		var d=route6501[j].gpsX;
+                         		hell.push(new google.maps.LatLng(f,d));
+                     		}
+                  			loadVector6501(hell);
+                  			hell=[];
+                  			
+                        }else{
+                   	   		console.log("1개 경로 노선");
+                   			console.log(data2.length);                          	
+                   			var hell =new Array();
+                   			for(var j=0;j<data2.msgBody.length;j++){
+                   				var f=parseFloat(data2.msgBody[j].gpsY);
+                       			var d=parseFloat(data2.msgBody[j].gpsX);
+           		      			hell.push(new google.maps.LatLng(f,d));
+                   			}    							
+                        	loadVector(hell);
+                   	  	}
+                	}
+           		});
     	
     	//비동기로 정류장 생성
     	$.ajax({
-            url : "busStopOriginalRead.admin",
+            url : "busStopRoad.admin",
             type : "get",
             dataType : "json",
-            data : {busNo:"all"},
+            data : {r_num:"all"},
             success : function(data) {
-               	console.log("읽어옴?");
-               	console.log(data);
-               	console.log(data.length);                                                                   	                       
-               
-               	if(data.length == 4){
-            	console.log("4개 노선");
-            	console.log(data.length);
-               	originalMarkerMake5623(data[0].msgBody, map);
-               	originalMarkerMake702(data[1].msgBody, map);
-               	originalMarkerMake9000(data[2].msgBody, map);
-               	originalMarkerMake6501(data[3].msgBody, map);
-               	}else{
-            	   console.log("1개 노선");
-            	   originalMarkerMake(data.msgBody, map);
-               	}
-            }
-    	});
+                console.log("읽어옴?");
+                console.log(data);                                                                                                               	                                                                  	                       	   
+                originalMarkerMake(data, map);                     	                 	                     	
+            }        		
+        });
     	
     	//비동기로 노선 전체 버스를 위치추적한다.
     	stopSearch = setInterval(function(){
@@ -721,37 +722,16 @@
                 url : "RealTimeSearch.admin",
                 type : "get",
                 dataType : "json",
-                data : {busNo:"all"},
-                success : function(data) {
-                	//console.log(data);
+                data : {r_num:"all"},
+                success : function(data) {                   	
+                	 
                 	if(data.length == 4){
                 		console.log("멀티위치추적");
                 		console.log(data.length);
-                		
-                		 
-                		console.log("5623");
-                		console.log(data[0].msgBody.itemList.tmX);
-                		console.log(data[0].msgBody.itemList.tmY);
-                		console.log("제공시간? "+data[0].msgBody.itemList.dataTm);
-                		console.log("현재시간? "+ now.getHours() +""+ now.getMinutes());
-                		
-                		console.log("702");
-                		console.log(data[1].msgBody.itemList.tmX);
-                		console.log(data[1].msgBody.itemList.tmY);
-                		console.log("제공시간? "+data[1].msgBody.itemList.dataTm);
-                		console.log("현재시간? "+ now.getHours() +""+ now.getMinutes());
-                		
-                		console.log("9000");
-                		console.log(data[2].msgBody.itemList.tmX);
-                		console.log(data[2].msgBody.itemList.tmY);
-                		console.log("제공시간? "+data[2].msgBody.itemList.dataTm);
-                		console.log("현재시간? "+ now.getHours() +""+ now.getMinutes());
-                		
-                		console.log("6501");
-                		console.log(data[3].msgBody.itemList.tmX);
-                		console.log(data[3].msgBody.itemList.tmY);
-                		console.log("제공시간? "+data[3].msgBody.itemList.dataTm);
-                		console.log("현재시간? "+ now.getHours() +""+ now.getMinutes());
+                		console.log(data[0].msgBody.itemList);
+                		console.log(data[1].msgBody.itemList);
+                		console.log(data[2].msgBody.itemList);
+                		console.log(data[3].msgBody.itemList);
                 		
                 		movingBusMarker(data[0].msgBody.itemList, map);
                 		movingBusMarker2(data[1].msgBody.itemList, map);
@@ -761,17 +741,15 @@
                 		console.log("멀티추적된다");
                 	}else{
                 		console.log("혼자 추적");
-                		console.log(data.msgBody.itemList.tmX);
-                		console.log(data.msgBody.itemList.tmY);
-                		console.log("제공시간? "+data.msgBody.itemList.dataTm);
-                		console.log("현재시간? "+ now.getHours() +""+ now.getMinutes());
-                		//console.log(data.msgBody.itemList);
+                		console.log(data.msgBody.itemList);
                 		movingBusMarker(data.msgBody.itemList, map);
                 		console.log("너되니");
-                	}
+                	}        
+                	           		  	
                 }
             });  		
-    	},20000); */
+    	},30000);
+    
     	
     	$("#selectBus").change(function() {
     		deleteRoute();
@@ -862,7 +840,7 @@
                     data : {r_num:$("#selectBus").val()},
                     success : function(data) {
                        console.log("읽어옴?");
-                       console.log(data);s                                                                                                               	                                                                  	                       	   
+                       console.log(data);                                                                                                              	                                                                  	                       	   
                     	   originalMarkerMake(data, map);
                        	                 	                     	
                     }        		
@@ -879,14 +857,14 @@
                
         
         $("#Search").click(function() {
-        	stopSearch = setInterval(function(){
+        	//stopSearch = setInterval(function(){
         		$.ajax({
                     url : "RealTimeSearch.admin",
                     type : "get",
                     dataType : "json",
-                    data : {busNo:$("#selectBus").val()},
+                    data : {r_num:$("#selectBus").val()},
                     success : function(data) {                   	
-                    	 
+                    	console.log(data);
                     	if(data.length == 4){
                     		console.log("멀티위치추적");
                     		console.log(data.length);
@@ -910,7 +888,7 @@
                     	           		  	
                     }
                 });  		
-        	},30000);
+        	//},30000);
         });
         
     });//ready 함수 끝

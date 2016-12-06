@@ -364,7 +364,6 @@ function loadCalendar(){
 																				dataType:"json",
 																				type:"post",
 																				success:function(data){
-																					
 																					event2={
 																							id:data.dto.m_id,
 																							title:data.dto.m_name,
@@ -461,6 +460,7 @@ function loadCalendar(){
 																		} //else
 																	}//success
 																});//ajax
+
 															} //else
 														}//success
 														
@@ -468,8 +468,7 @@ function loadCalendar(){
 												} //if
 											} //else
 										} //success
-									}); //ajax
-															
+									}); //ajax							
 								} //else
 							} //success
 						}); //ajax

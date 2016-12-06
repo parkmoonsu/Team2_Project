@@ -58,7 +58,17 @@
 table, th{
 	text-align: center;
 }
+ul.pagination li a.active {
+    background-color: #1ABB9C;
+    color: white;
+}
 
+ul.pagination li a {
+    color: #73879C;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
 </style>
 </head>
 
@@ -87,7 +97,7 @@ table, th{
 					<c:set value="${list}" var="d"/>
 					<c:if test="${d != '[]'}">
 						<a href="Okay.member?m_id=${d[0].m_id}"
-					    	class="btn btn-success btn-xs"><i class="fa fa-check"></i>
+					    	class="btn btn-success btn-xs" style="height:30px; padding-top: 5px; border:0; background-color: #269abc"><i class="fa fa-check"></i>
 						        전체 삭제 </a>
 					</c:if>
 					</div>
@@ -160,7 +170,7 @@ table, th{
 
 											<c:forEach begin="1" end="${pagecount}" var="i">
 												<c:if test="${i==pgc}">
-													<li class="active"><a href="#">${i}</a></li>
+													<li><a href="#" class="active">${i}</a></li>
 												</c:if>
 												<c:if test="${i!=pgc}">
 													<li><a href="joinapprove.member?m_id=${LoginUser}&pg=${i}">${i}</a></li>
