@@ -848,15 +848,12 @@ public class BusStopManageService {
 	    	
 	    	//중복체크 작업
 	    	RouteStopDAO routestopdao = sqlsession.getMapper(RouteStopDAO.class);
-	    	routestopcheck =  routestopdao.insertRouteStopCheck(routestopdto);
+	    	//routestopcheck =  routestopdao.insertRouteStopCheck(routestopdto);
 	    		
 	    	
-	    	System.out.println("되냐1");
-	    	if(routestopcheck == 0){	    		
-	    		routestopinsertcheck = routestopdao.insertRouteStopData(routestopdto);
-	    		System.out.println("되냐2");
-	    	}
-	    	System.out.println("되냐3");
+	    	System.out.println("되냐1");    		
+	    	routestopinsertcheck = routestopdao.insertRouteStopData(routestopdto);
+	    	
 	    	k++;
 	    }
 	    
