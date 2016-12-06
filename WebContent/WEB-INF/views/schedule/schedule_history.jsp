@@ -109,9 +109,6 @@ th{
 				<div class="">
 				<div class="page-title">
 						<div class="title_left">
-							<!-- <h3>
-								<small>교대신청내역</small>
-							</h3> -->
 						</div>
 					</div>
 					<div class="clearfix"></div>
