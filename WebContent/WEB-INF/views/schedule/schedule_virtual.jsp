@@ -306,7 +306,7 @@ select#selectedrnum {
 								id : obj.m_id,
 								start :obj.r_start,
 								end:/* obj.r_end */ endtime ,
-								dow :/* obj.o_code */ dowarray
+								dow : obj.o_code 
 							};
 							
 							array.push(item);
