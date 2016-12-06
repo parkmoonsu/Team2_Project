@@ -68,16 +68,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m_id=#{m_id} and ro_object=#{ro_object}
 	</update>
 	
-	<!-- timetable -->
-	<!-- <select id="selectdistinct" resultType="kr.or.bus.dto.SelectDistinctDTO">
-		select distinct m.m_name, b.r_num, m.b_vehiclenum, o.o_date from member m
-		join bus b on m.b_vehiclenum=b.b_vehiclenum
-		join oschedule o on m.b_vehiclenum=o.b_vehiclenum
-	</select>
-	<select id="selecttime" resultType="String">
-		select o_time from oschedule
-		where o_date=#{o_date} and b_vehiclenum=#{b_vehiclenum}
-	</select> -->
 	<select id="timetable_get" resultType="kr.or.bus.dto.OscheduleJoinMemberDTO">
 		select * from oschedule o
 		join member m on o.b_vehiclenum=m.b_vehiclenum
@@ -90,6 +80,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete_vschedule">
 		delete * from vschedule
 	</delete>
+	
+	<!-- scheduler -->
+	<update id="reguloffscheduler" parameterType="String">
+		update schedulecheck
+		set schedulevalue=#{reguloff}
+		where schedulename='reguloff'
+	</update>
+	<select id="reguloff_schedulecheck" resultType="String">
+		select schedulevalue
+		from schedulecheck
+		where schedulename='reguloff'
+	</select>
+	
 	
 	<!-- 정기휴무가 정해진 노선이 배정된 기사님 뽑기 -->
 	<select id="getDecideReguloffMember"

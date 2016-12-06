@@ -17,6 +17,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -34,7 +37,6 @@ import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinMemberJoinBusDTO;
 
 @Controller
-
 public class ScheduleController {
 	
 	@Autowired
@@ -63,7 +65,7 @@ public class ScheduleController {
 		
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		
-		dao.insert(dto);
+		dao.insert(jdto);
 		ScheduleDTO dto2=dao.selectseq();
 		map.addAttribute("data", dto2);
 		return jsonview;//str;
@@ -111,11 +113,6 @@ public class ScheduleController {
 		return "bus";
 	}*/
 	
-	//reguloff(정기휴무)
-	@RequestMapping("/schedule_reguloff.htm")
-	public String schedule_reguloff(){
-		return "schedule/schedule_reguloff";
-	}
 	
 	@RequestMapping(value="/reguloff_insert.htm", method=RequestMethod.POST)
 	public View reguloffInsert(String m_id, String o_code, String temp, ModelMap map)
@@ -213,6 +210,13 @@ public class ScheduleController {
 		return jsonview;
 	}	
 	
+	//이거 없어진듯
+	@RequestMapping("/schedule_reguloff.htm")
+	public String schedule_reguloff() throws ClassNotFoundException, SQLException{
+
+		return "schedule/schedule_reguloff";
+	}
+	
 	//기록보기
 	@RequestMapping("/schedule_history.htm")
 	public String viewHistory(String m_id, Model model) throws ClassNotFoundException, SQLException{
@@ -257,5 +261,12 @@ public class ScheduleController {
 		
 		return "schedule/schedule_last";
 	}
-
+	
+	@RequestMapping("/reguloffschedulecheck.member")
+	public View reguloff_schedulecheck(Model model){
+		String str=service.reguloff_schedulecheck();
+		model.addAttribute("str", str);		
+		return jsonview;
+	}
+	
 }
