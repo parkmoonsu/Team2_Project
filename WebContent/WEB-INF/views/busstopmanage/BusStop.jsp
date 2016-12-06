@@ -405,10 +405,12 @@ select#selectBus, select#selectBus2 {
     			type : "post",
     			data : param,
     			success:function(data){
-    				alert(data.alert);
-    				$.each(data.rssdto,function(index,obj){
+    				//alert(data.alert);
+    				/* $.each(data.rssdto,function(index,obj){
     					console.log(obj.r_num+"/"+obj.s_num+"/"+obj.rs_order);
-    				});
+    				}); */
+    				console.log(data.rssdto);
+    				copyMarkerMakes(data.rssdto,map);
     	
     			}
     		});
@@ -482,6 +484,35 @@ select#selectBus, select#selectBus2 {
     }*/
 	//db에서 불러오기
      function copyMarkerMakes(latLng, map) {
+    	     	
+      		if(copyMarkers !=null){ 		
+      			map.data.forEach(function(features) {           
+           			map.data.remove(features);
+           		});
+           
+           		for(var i=0; i<copyMarkers.length; i++){
+           			copyMarkers[i].setMap(null);
+           		}
+           		copyMarkers=[];
+           		copyMarkers.length = 0;
+           		as=0;   		
+      		}      	    	      	
+      	
+      
+      	
+      		map.data.forEach(function(features) {           
+       			map.data.remove(features);
+       		});
+       
+       		for(var i=0; i<copyMarkers.length; i++){
+       			copyMarkers[i].setMap(null);
+       		}
+       		copyMarkers=[];
+       		copyMarkers.length = 0;
+       		as=0;
+       		
+       		
+      
         console.log(latLng);
         for(var i=0; i<latLng.length; i++){
     		var num =$("#end").val();
@@ -547,7 +578,9 @@ select#selectBus, select#selectBus2 {
         dataArray.push(latLng);
         //copymovingBusMarker(latLng, map);
                
-    } 
+    }
+    
+    
            
     function copymovingBusMarker(latLng, map){
        	console.log(latLng);    
@@ -774,7 +807,7 @@ select#selectBus, select#selectBus2 {
           	//BusEditSave2();         
        	});
                  
-      	/* $("#busLoad").click(function() {
+      	/*$("#busLoad").click(function() {
          	copymovingBusMarker(dataArray, map);
       	}); */
       
@@ -794,7 +827,7 @@ select#selectBus, select#selectBus2 {
        		}
        		copyMarkers=[];
        		copyMarkers.length = 0;
-       		//as=0;
+       		as=0;
        		
        		
       	}
