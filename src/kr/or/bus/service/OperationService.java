@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.bus.dao.RegulOffRDAO;
 import kr.or.bus.dto.ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO;
+import kr.or.bus.dto.RouteDTO;
 
 @Service
 public class OperationService{
@@ -48,5 +49,40 @@ public class OperationService{
 			page = Integer.parseInt(pg);
 		}
 		return page;
+	}
+	
+	public List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> dayList(String search){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class); 
+		List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> list =  dao.dayList(search);
+		
+		return list; 
+	}
+	
+	public List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> codeList(String search){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class); 
+		List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> list = dao.codeList(search);
+		
+		return list;
+	}
+	
+	public List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> nameList(String search){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class); 
+		List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> list = dao.nameList(search);
+		
+		return list;
+	}
+	
+	public List<RouteDTO> getRoute(){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class);
+		List<RouteDTO> list = dao.getrouteajax();
+		 
+		return list;
+	}
+	
+	public List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> routeList(String search){
+		RegulOffRDAO dao = sqlsession.getMapper(RegulOffRDAO.class); 
+		List<ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO> list = dao.routeList(search);
+		
+		return list;
 	}
 }
