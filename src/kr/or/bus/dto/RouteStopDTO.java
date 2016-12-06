@@ -3,6 +3,8 @@ package kr.or.bus.dto;
 public class RouteStopDTO {
 	String s_num; //정류장 고유번호
 	String r_num; //노선번호
+	String st_type; //
+	String rs_check; //
 	String rs_order; //정차순서
 	String r_id; //노선 id
 	String rs_start; //첫차시간

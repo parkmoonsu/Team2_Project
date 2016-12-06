@@ -3,6 +3,8 @@ package kr.or.bus.dao;
 import java.util.List;
 
 import kr.or.bus.dto.RouteDTO;
+import kr.or.bus.dto.RouteStopDTO;
+import kr.or.bus.dto.StopDTO;
 
 public interface RouteDAO {
 	public RouteDTO routeidSearch(String r_num);
@@ -18,4 +20,5 @@ public interface RouteDAO {
 	
 	//route 중복체크
 	public int routeDataCheck(RouteDTO routedto);
+	
 }
