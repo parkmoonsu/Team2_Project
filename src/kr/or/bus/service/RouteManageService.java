@@ -6,13 +6,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import kr.or.bus.dao.RouteDAO;
+import kr.or.bus.dao.ScheduleManageDAO;
+import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
 
 @Service
 public class RouteManageService {
@@ -81,5 +86,19 @@ public class RouteManageService {
               System.out.println(e.getMessage());
            }
         }
+   	}
+   	
+   	//추가
+   	@Autowired
+   	private SqlSession sqlsession;
+   	
+   	
+   	public List<RouteStopCopyJoinStopDTO> routeRead(HttpServletRequest request, HttpServletResponse response){
+   		String r_num = request.getParameter("r_num");
+   		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
+   		System.out.println(r_num);
+   		List<RouteStopCopyJoinStopDTO> list=dao.routeRead(r_num);
+
+		return list;
    	}
 }
