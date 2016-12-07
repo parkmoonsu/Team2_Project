@@ -23,14 +23,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
-<script>
-
-
-
-</script>
-<title>운영 관리</title>
+<title>버스 관리</title>
 
 <!-- Bootstrap -->
 <link
@@ -71,7 +64,7 @@
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
 <body class="nav-md">
@@ -87,9 +80,7 @@
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
-			<br>
-			<br>
-			<br>
+			<br> <br> <br>
 			<!-- page content -->
 			<div class="right_col" role="main">
 
@@ -97,7 +88,7 @@
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>버스 등록/삭제</small>
+								<small>버스 등록</small>
 							</h3>
 						</div>
 					</div>
@@ -105,8 +96,126 @@
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<div class="x_panel">
-								<div class="x_content">
+								<div class="x_title">
+									<h2>
+										버스 등록
+									</h2>
+									<ul class="nav navbar-right panel_toolbox">
+										<li><a class="collapse-link"><i
+												class="fa fa-chevron-up"></i></a></li>
+										<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown" role="button" aria-expanded="false"><i
+												class="fa fa-wrench"></i></a>
+											</li>
+										<li><a class="close-link"><i class="fa fa-close"></i></a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_panel">
+									<div class="x_content">
+										<form class="form-horizontal form-label-left input_mask">
+											<div class="form-group has-feedback">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="b_vehiclenum">
+													버스 번호
+												 </label>
+												<div class = "col-md-6 col-sm-6 col-xs-12">
+													<input type="text" class="form-control has-feedback-left" id="b_vehiclenum" name = "b_vehiclenum"> 
+													<span class="fa fa-bus form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+											<div class="form-group has-feedback">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="b_sdate">
+													구입 시기
+												 </label>
+												<div class = "col-md-6 col-sm-6 col-xs-12">
+													<input type="text" class="form-control has-feedback-left" id="b_sdate" name = "b_sdate"> 
+													<span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+											<div class="form-group has-feedback">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="b_sprice">
+													구매 가격
+												 </label>
+												<div class = "col-md-6 col-sm-6 col-xs-12">
+													<input type="text" class="form-control has-feedback-left" id="b_sprice" name = "b_sprice"> 
+													<span class="fa fa-krw form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+											<div class="form-group has-feedback">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="b_manuf">
+													제조사
+												 </label>
+												<div class = "col-md-6 col-sm-6 col-xs-12">
+													<input type="text" class="form-control has-feedback-left" id="b_manuf" name = "b_manuf"> 
+													<span class="fa fa-building-o form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+											<div class="form-group has-feedback">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="b_caryear">
+													연식
+												 </label>
+												<div class = "col-md-6 col-sm-6 col-xs-12">
+													<input type="text" class="form-control has-feedback-left" id="b_caryear" name = "b_caryear"> 
+													<span class="fa fa-dashboard form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+											<div class="form-group has-feedback">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="b_model">
+													모델명
+												 </label>
+												<div class = "col-md-6 col-sm-6 col-xs-12">
+													<input type="text" class="form-control has-feedback-left" id="b_model" name = "b_model"> 
+													<span class="fa fa-font form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+											<div class="form-group has-feedback">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="b_effic">
+													연비
+												 </label>
+												<div class = "col-md-6 col-sm-6 col-xs-12">
+													<input type="text" class="form-control has-feedback-left" id="b_effic" name = "b_effic"> 
+													<span class="fa fa-database form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+											<div class="form-group has-feedback">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="b_pcount">
+													탑승 가능 인원
+												 </label>
+												<div class = "col-md-6 col-sm-6 col-xs-12">
+													<input type="text" class="form-control has-feedback-left" id="b_pcount" name = "b_pcount"> 
+													<span class="fa fa-group form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
 								
+											<div class="form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12">차고지</label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<select class="form-control" id = "g_num">
+														<option>(미정)</option>
+													</select>
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12">노선</label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<select class="form-control" id = "r_num">
+														<option>(미정)</option>
+														
+													</select>
+												</div>
+											</div>
+											
+											<div class = "col-md-6 col-sm-6">
+											</div>
+											<div class="col-sm-3 col-xs-12" align="right">
+												<button class = "btn btn-success btn-xs"><i class="fa fa-check"></i>등록</button>
+												
+												<input type = "reset" class = "btn btn-default btn-xs" value = "다시쓰기">
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -115,76 +224,107 @@
 			</div>
 		</div>
 	</div>
-	<!-- footer content -->
-	<footer>
-		<jsp:include page="/sidebar/footer.jsp"></jsp:include>
-		<div class="clearfix"></div>
-	</footer>
-	<!-- /footer content -->
+		<!-- footer content -->
+		<footer>
+			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+			<div class="clearfix"></div>
+		</footer>
+		<!-- /footer content -->
 
 
 
 
-	<!-- Bootstrap -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- FastClick -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
-	<!-- NProgress -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
-	<!-- Chart.js -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/Chart.js/dist/Chart.min.js"></script>
-	<!-- gauge.js -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/gauge.js/dist/gauge.min.js"></script>
-	<!-- bootstrap-progressbar -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-	<!-- iCheck -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/iCheck/icheck.min.js"></script>
-	<!-- Skycons -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/skycons/skycons.js"></script>
-	<!-- Flot -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.pie.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.time.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.stack.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.resize.js"></script>
-	<!-- Flot plugins -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/flot.curvedlines/curvedLines.js"></script>
-	<!-- DateJS -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/DateJS/build/date.js"></script>
-	<!-- JQVMap -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/jqvmap/dist/jquery.vmap.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-	<!-- bootstrap-daterangepicker -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<!-- Bootstrap -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+		<!-- FastClick -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
+		<!-- NProgress -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
+		<!-- Chart.js -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/Chart.js/dist/Chart.min.js"></script>
+		<!-- gauge.js -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/gauge.js/dist/gauge.min.js"></script>
+		<!-- bootstrap-progressbar -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+		<!-- iCheck -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/iCheck/icheck.min.js"></script>
+		<!-- Skycons -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/skycons/skycons.js"></script>
+		<!-- Flot -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.pie.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.time.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.stack.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.resize.js"></script>
+		<!-- Flot plugins -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/vendors/flot.curvedlines/curvedLines.js"></script>
+		<!-- DateJS -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/DateJS/build/date.js"></script>
+		<!-- JQVMap -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/jqvmap/dist/jquery.vmap.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+		<!-- bootstrap-daterangepicker -->
+		<script
+			src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-	<!-- Custom Theme Scripts -->
-	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-	
+		<!-- Custom Theme Scripts -->
+		<script
+			src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
+			
+	<script type="text/javascript">
+		$.datepicker.regional['ko'] = {
+		        closeText : '닫기',
+		        prevText : '이전달',
+		        nextText : '다음달',
+		        currentText : '오늘',
+		        monthNames : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        monthNamesShort : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        dayNames : ['일', '월', '화', '수', '목', '금', '토'],
+		        dayNamesShort : ['일', '월', '화', '수', '목', '금', '토'],
+		        dayNamesMin : ['일', '월', '화', '수', '목', '금', '토'],
+		        weekHeader : 'Wk',
+		        dateFormat : 'yy-mm-dd',
+		        firstDay : 0,
+		        isRTL : false,
+		        showMonthAfterYear : true,
+		        yearSuffix : '년'
+		};
+		$.datepicker.setDefaults($.datepicker.regional['ko']);
+		
+		
+		$('#b_sdate').datepicker( {
+		     changeMonth: true,
+		     changeYear: true,        
+		     dateFormat: 'y/mm/dd',
+		     showAnim : "clip"
+		});
+		
+	</script>
 </body>
 </html>
