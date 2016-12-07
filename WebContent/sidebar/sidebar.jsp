@@ -45,11 +45,12 @@
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i>기사 관리 <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
+                    <ul class="nav child_menu">	
+                      <li><a href="membermanage.admin">회원 정보 확인 & 관리</a></li>
                       <li><a href="managereguloff.admin">기사 휴무 배정 & 확인</a></li>
                       <!-- <li><a href="gethistory.admin">휴무 신청내역 확인/승인</a></li> -->
                       <!-- <li><a href="membermanage.admin"><i class="fa fa-clone"></i>회원 관리</a></li> -->
-                      <li><a href="membermanage.admin">회원 정보 확인 & 관리</a></li>
+                     
                       <li><a href="gethistorycal.admin">휴무 신청 내역 확인 & 승인</a></li>
                     </ul>
                   </li>
