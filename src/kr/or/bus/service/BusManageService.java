@@ -10,6 +10,7 @@
 
 package kr.or.bus.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,21 @@ public class BusManageService {
 		return page;
 	}
 	
+	public int count(){	
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int count=dao.count();
+		return count;
+	}
+	
+	public int scount(String g_name){
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int scount = dao.scount(g_name);
+		
+		return scount;
+	}
+	
+	
 	public int busCount(){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		int count = dao.busCount();
@@ -71,6 +87,36 @@ public class BusManageService {
 		
 		return g_name;
 	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getAllStat(String pg){
+		int page = 1;
+		
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		
+		System.out.println("page : " + page);
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getAllStat(page);
+		
+		return list;		
+	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getStat(String g_name, String pg){
+		int page = 1;
+		
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		
+		System.out.println("page : " + page);
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> sclist =dao.getStat(g_name, page);
+		
+		return sclist;
+	}
+
 	
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRouteNum(String g_num){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
@@ -298,20 +344,15 @@ public class BusManageService {
 	}
 ///////////////////////////버스 운영관리////////////////////////////////////////////////////////
 	
-	public List<BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO> busreglist(String pg){
-		int page = 1;
+	public void busReg(String b_vehiclenum,String b_sdate,String b_sprice,String b_manuf,String b_pcount,String b_effic,String b_model,String b_caryear){
 		
-		if(pg != null){
-			page = Integer.parseInt(pg);
-		}
-		System.out.println("page : " + page);
+		Date date = Date.valueOf(b_sdate);
 		
+		int pcount = Integer.parseInt(b_pcount);
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
-		List<BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO> list = dao.busreglist(page);
-
-		return list;
+		
+		dao.busReg(b_vehiclenum, date, b_sprice, b_manuf, pcount, b_model, b_caryear);
 	}
-	
 	
 	
 }

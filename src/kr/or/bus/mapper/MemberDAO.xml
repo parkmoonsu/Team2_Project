@@ -178,6 +178,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where alarm is null and m_id=#{m_id}
 	</select>
 	
+	<select id="getMail" resultType = "String" parameterType="String">
+		select m_email 
+		from mdetail
+		where m_id=#{m_id}
+	</select>
+	
+	
 	<update id="updateCheck" parameterType = "String">
 		update mdetail
 		set m_check = 'Y'

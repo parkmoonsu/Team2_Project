@@ -9,19 +9,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType = "int">
 		
 		select * 
-		from(
-  			select ROWNUM r , b.b_vehiclenum , nvl(b.r_num,'(미정)') as "r_num", nvl(m.m_name,'(미정)') as "m_name" , nvl(g.g_name,'(미정)') as "g_name" , s.s_name
-    		from bus b left outer join member m
-    		on b.b_vehiclenum = m.b_vehiclenum
-    		left outer join garage g
-    		on b.G_NUM = g.g_num
-    		left outer join bstatus bs
-    		on b.b_vehiclenum = bs.b_vehiclenum
-    		left outer join status s
-    		on bs.s_code = s.s_code
-    		)
-		where r between 1 + (#{page} - 1) * 10  and 10 + (#{page} - 1) * 10 
-		order by r
+			from(
+  				select ROWNUM r , b.b_vehiclenum , b.b_sdate ,b.b_sprice , b.b_manuf ,b.b_caryear ,b.b_model , b.b_effic , b.b_pcount , nvl(b.r_num,'(미정)') as "r_num", nvl(m.m_name,'(미정)') as "m_name" , nvl(g.g_name,'(미정)') as "g_name" , s.s_name
+    			from bus b left outer join member m
+    			on b.b_vehiclenum = m.b_vehiclenum
+    			left outer join garage g
+    			on b.G_NUM = g.g_num
+    			left outer join bstatus bs
+    			on b.b_vehiclenum = bs.b_vehiclenum
+    			left outer join status s
+    			on bs.s_code = s.s_code
+    			order by b.b_vehiclenum)
+          	where r between 1 + (#{page} - 1) * 10  and 10 + (#{page} - 1) * 10
+          	order by r
 	
 	</select>
 	
@@ -48,6 +48,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member
 		where b_vehiclenum is null
 	</select>
+	
+	<!-- 모든 차고지 버스 상태 -->
+	<select id="getAllStat" parameterType="int"  resultType="kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select *
+		from (select rownum r, N.*
+		from ( select bus.r_num, bus.b_vehiclenum, mem.m_name, g_name
+		from bus join garage ga on bus.g_num = ga.g_num
+		join member mem on mem.b_vehiclenum = bus.b_vehiclenum) N)
+		where r between 1 + (#{page} - 1) * 10 and 10 + (#{page} - 1) * 10
+	</select>
+	
+	<!-- 차고지별 버스 수 -->
+	<select id="count" resultType="int" parameterType="String">
+		select count(*)
+    	from bus  join garage ga on bus.g_num = ga.g_num
+     	join member mem on mem.b_vehiclenum = bus.b_vehiclenum
+	</select>
+	
+<!-- 차고지별 버스 상태  -->
+	<select id="getStat" resultType="kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO">
+		select *
+		from (select rownum r, N.*
+		from ( select bus.r_num, bus.b_vehiclenum, mem.m_name, g_name
+		from bus join garage ga on bus.g_num = ga.g_num
+		join member mem on mem.b_vehiclenum = bus.b_vehiclenum
+		where g_name=#{param1}) N)
+		where r between 1 + (#{param} - 1) * 10 and 10 + (#{param2} - 1) * 10
+	</select>
+	
+	<select id="scount" resultType="int" parameterType="String">
+		select count(*)
+		from bus join garage ga on bus.g_num = ga.g_num
+		join member mem on mem.b_vehiclenum = bus.b_vehiclenum
+		where g_name=#{g_name}
+	</select>
+	
 	
 	<insert id="insertBus">
 	insert into bus(b_vehiclenum 
@@ -374,20 +410,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<select id="busreglist" resultType = "kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO" parameterType = "int">
-			select * 
-			from(
-  				select ROWNUM r , b.b_vehiclenum , b.b_sdate ,b.b_sprice , b.b_manuf ,b.b_caryear ,b.b_model , b.b_effic , b.b_pcount , nvl(b.r_num,'(미정)') as "r_num", nvl(m.m_name,'(미정)') as "m_name" , nvl(g.g_name,'(미정)') as "g_name" , s.s_name
-    			from bus b left outer join member m
-    			on b.b_vehiclenum = m.b_vehiclenum
-    			left outer join garage g
-    			on b.G_NUM = g.g_num
-    			left outer join bstatus bs
-    			on b.b_vehiclenum = bs.b_vehiclenum
-    			left outer join status s
-    			on bs.s_code = s.s_code
-    			order by b.b_vehiclenum)
-          	where r between 1 + (#{page} - 1) * 10  and 10 + (#{page} - 1) * 10
-          	order by r
-	</select>
+	<insert id="busReg">
+		 insert into bus(b_vehiclenum , b_sdate , b_sprice , b_manuf , 
+			b_pcount , b_model , b_caryear) values (#{param1} , #{param2} ,#{param3} ,#{param4} ,#{param5} ,#{param6} , #{param7})
+	</insert>
 </mapper>
