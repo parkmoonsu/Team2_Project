@@ -549,7 +549,7 @@ select#selectBus, select#selectBus2 {
                           
                 		}
             		}     
-        		});
+        		});//drag
           
             //마커의 라벨 이름을 알기위해 적용. 추후삭제 할것
             copyMarker.addListener('click', function() {
