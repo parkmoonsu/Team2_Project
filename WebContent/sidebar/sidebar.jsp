@@ -40,36 +40,34 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-edit"></i> 버스관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="busreg.admin">버스 등록/삭제</a></li>
-                      <li><a href="realTime.admin">실시간 버스 위치</a></li>
+                      <li><a href="">버스 등록/삭제</a></li>
                       <li><a href="chagozi.admin">차고지 별 버스 상태</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i>기사 관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="managereguloff.admin">기사 휴무 & 스케쥴 관리</a></li>
-                      <li><a href="gethistory.admin">휴무 신청내역 확인/승인</a></li>
-                      <li><a href="gethistorycal.admin">휴무 신청 내역 확인/승인(cal)</a></li>
-                      <li><a href="gettimetable.admin">운행 스케줄</a></li>
-                      <li><a href="getvirtualschedule.admin">예상 스케줄</a></li>
-
+                      <li><a href="managereguloff.admin">기사 휴무 배정 & 확인</a></li>
+                      <!-- <li><a href="gethistory.admin">휴무 신청내역 확인/승인</a></li> -->
+                      <!-- <li><a href="membermanage.admin"><i class="fa fa-clone"></i>회원 관리</a></li> -->
+                      <li><a href="membermanage.admin">회원 정보 확인 & 관리</a></li>
+                      <li><a href="gethistorycal.admin">휴무 신청 내역 확인 & 승인</a></li>
                     </ul>
                   </li>
                             
                   <li><a><i class="fa fa-table"></i>노선 관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="route.admin">노선</a></li>
-                      <li><a href="busStation.admin">정류장</a></li>
+                      <li><a href="route.admin">노선 수정 & 확인</a></li>
+                      <li><a href="busStation.admin">정류장 수정 & 확인</a></li>
+                      <li><a href="realTime.admin">실시간 버스 정보 확인</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i>운영 관리<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="changehistory.admin">휴무변경 이력확인</a></li>
-                      <li><a href="busenroll.admin">버스-노선-기사 등록(이름좀 정해주셈 슈발)</a></li>
+                      <li><a href="busenroll.admin">버스 & 기사 배정</a></li>
+                      <li><a href="changehistory.admin">휴무 변경 & 이력 확인</a></li>
+                      <li><a href="gettimetable.admin">운행 스케줄 확인</a></li>
+                      <li><a href="getvirtualschedule.admin">예상 스케줄 확인</a></li>
                     </ul>
-                  </li>
-                 <li><a href="membermanage.admin"><i class="fa fa-clone"></i>회원 관리</a> 
-                  
                   </li>
                 </ul>
               </div>
