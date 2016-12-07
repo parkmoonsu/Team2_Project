@@ -1027,6 +1027,20 @@
         	//},30000);
         });
         
+        
+        $("#selectRoute").change(function(){
+        	$.ajax({
+                url : "RouteTypeRouteNo.admin",
+                type : "get",
+                dataType : "json",
+                data : {r_type:$("#selectRoute").val()},
+                success : function(data) {                   	
+                	console.log("노선타입 전송잘되냐?");
+                	console.log(data);
+                }#
+        	});
+        });
+        
     });//ready 함수 끝
    </script>
 	<!-- 구글 맵 인증키 -->

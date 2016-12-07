@@ -322,12 +322,21 @@ public class BusManageController {
 		return jsonview;
 	}
 	
-	//실시간 위치추적 페이지
+	//실시간 위치추적 페이지 오픈
 	@RequestMapping("/realTime.admin")
 	public String realTimeOpen(ModelMap map){
 		map.addAttribute("list", busStopManageService.routetype());
 		return "busmanage/RealTimeLocation";
 	}
+	
+	@RequestMapping("/RouteTypeRouteNo.admin")
+	public View routeTypeNo(String r_type, ModelMap map){
+		map.addAttribute("nlist", busStopManageService.routetypeNumber(r_type));
+		return jsonview;
+	}
+	
+	
+	
 	
 	@RequestMapping("/noroute.admin")
 	public String noRoute(String pg , Model model){

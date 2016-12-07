@@ -958,6 +958,12 @@ public class BusStopManageService {
 		return list;
 	}
 	
+	public List<RouteTypeDTO> routetypeNumber(String r_type){
+		RouteDAO routedao = sqlsession.getMapper(RouteDAO.class);
+		List<RouteTypeDTO> nlist =routedao.searchRouteNumber(r_type);
+		return nlist;		
+	}
+	
 	//accessVenID 함수 의 리턴값 json 을 받아서 차량 id 추출하고 차량 id return
 	public String venidSearch(RouteDTO dto, String r_num) throws IOException{
 		System.out.println("노선id???"+dto.getR_id());
