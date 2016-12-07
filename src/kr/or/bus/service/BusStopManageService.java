@@ -913,7 +913,7 @@ public class BusStopManageService {
         
         System.out.println("차량 id 뽑았다"+jsonlist.getJSONObject(0).get("vehId"));
         
-        //String venid = (String) jsonlist.getJSONObject(0).get("vehId");
+        String venid = null;
         
         
         String busno = null;
@@ -923,8 +923,10 @@ public class BusStopManageService {
         for(int i=0; i<jsonsize; i++){
         	
         	busno = (String) jsonlist.getJSONObject(i).get("plainNo");
+        	venid = (String) jsonlist.getJSONObject(i).get("vehId");
         	busdto.setB_vehiclenum(busno);
         	busdto.setR_num(dto.getR_num());
+        	busdto.setB_venid(venid);
         	
         	BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
         	int check = busdao.busnoCheck(busdto);

@@ -27,7 +27,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Gentellela Alela! |</title>
+<title>기사 관리</title>
 
 <!-- Bootstrap -->
 <link
@@ -152,33 +152,21 @@ select#selectedgaragename, select#selectedroutenumber {
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								Calendar <small>Click to add/edit events</small>
+								<small>기사 휴무 배정</small>
 							</h3>
 						</div>
 
-						<div class="title_right">
-							<div
-								class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-								<div class="input-group">
-									<input type="text" class="form-control"
-										placeholder="Search for..."> <input type="hidden"
-										id="hidden" value="${LoginUser}"> <span
-										class="input-group-btn">
-										<button class="btn btn-default" type="button">Go!</button>
-									</span>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 
 					<div class="clearfix"></div>
-
+					
 					<div class="row">
 						<div class="col-md-12">
 							<div class="x_panel">
 								<div class="x_title">
 									<h2>
-										Calendar Events <small>Sessions</small>
+										기사 휴무 배정 & 확인
 									</h2>
 									<ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i

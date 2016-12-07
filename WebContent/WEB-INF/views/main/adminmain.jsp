@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<title>KOSBUS</title>
+<title>RoadOneBell</title>
 
 
 <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
