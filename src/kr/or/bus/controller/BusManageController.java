@@ -24,6 +24,7 @@ import org.springframework.web.servlet.View;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.BusJoinRdetailJoinRepairDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
 import kr.or.bus.service.BusManageService;
 import kr.or.bus.service.BusStopManageService;
@@ -245,8 +246,9 @@ public class BusManageController {
 	}
 	//scount(String g_name)
 	@RequestMapping("/selectchagozi.admin")
-	public View selectchagozi(String g_name, String pg, Model model){
+	public String selectchagozi(String g_name, String pg, Model model){
 		System.out.println(g_name + "###");
+		System.out.println("pg는"+pg);
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> sclist = service.getStat(g_name, pg);
 		int count=service.scount(g_name);
 		int page = service.pg(pg);
@@ -255,9 +257,21 @@ public class BusManageController {
 		model.addAttribute("count",count);	
 		model.addAttribute("sclist", sclist);
 		
-		return jsonview;
+		return "busmanage/chagozitable";
 	}
 
+	@RequestMapping("/busstatsearch.admin")
+	public View getStatSearch(String b_vehiclenum, Model model){
+		
+		System.out.println("333" + b_vehiclenum);
+		List<BusJoinRdetailJoinRepairDTO> list = service.getSearch(b_vehiclenum);
+		model.addAttribute("list", list);
+		
+		return jsonview;
+		
+		
+	}
+	
 	@RequestMapping("/update.admin")
 	public String update(String b_vehiclenum_u , String g_name_u , String r_num_u , String mname_u , String hidden){
 		System.out.println("update column : " + b_vehiclenum_u + "/" + g_name_u + "/" + r_num_u + "/" + mname_u + "/" + hidden);
