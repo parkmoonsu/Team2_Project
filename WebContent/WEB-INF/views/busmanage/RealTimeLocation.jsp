@@ -90,10 +90,18 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
             <input type="button" id="Search" class="btn btn-default" value="버스위치추적 ">
 				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
+				
+				<select id="selectRoute">
+					<option>노선종류</option>																	
+				</select>
+				
+				<select id="selectGisa">
+					<option>기사 명단</option>																	
+				</select>
+				
+								
 				<select id="selectBus">
-
 					<option>노선을 선택하세요</option>
-					<option>보기</option>
 					<option>all</option>
 					<c:forEach var="i" items="${list}">
 					<option>${i.r_num}</option>					
