@@ -344,21 +344,8 @@ public class BusManageController {
 	}
 	
 	@RequestMapping("busreg.admin")
-	public String busReg(Model model , String pg){
-		List<BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO> list = service.busreglist(pg);
-		int page = service.pg(pg);
-		int count = service.busCount();
-		int pagecount = 0;
-		if(count % 10 == 0){
-			pagecount = count/10;
-		}else{
-			pagecount = count/10 + 1;
-		}
-		 
-		model.addAttribute("pagecount", pagecount);
-		model.addAttribute("pgs", page);
-		model.addAttribute("list", list);
-		model.addAttribute("count",count);
+	public String busReg(Model model){
+		
 		return "busmanage/busreg";
 	}
 }

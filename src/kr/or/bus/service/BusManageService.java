@@ -298,20 +298,7 @@ public class BusManageService {
 	}
 ///////////////////////////버스 운영관리////////////////////////////////////////////////////////
 	
-	public List<BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO> busreglist(String pg){
-		int page = 1;
-		
-		if(pg != null){
-			page = Integer.parseInt(pg);
-		}
-		System.out.println("page : " + page);
-		
-		BusDAO dao = sqlsession.getMapper(BusDAO.class);
-		List<BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO> list = dao.busreglist(page);
 
-		return list;
-	}
-	
 	
 	
 }

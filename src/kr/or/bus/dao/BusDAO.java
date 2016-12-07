@@ -105,5 +105,5 @@ public interface BusDAO {
 	
 	
 	/////////////////버스 등록 / 삭제 ////////////////////////////////////////////////////////////////
-	public List<BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO> busreglist(int page);
+	
 }
