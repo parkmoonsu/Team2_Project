@@ -62,4 +62,14 @@ public class RouteManageController {
 			model.addAttribute("rssdto", rssdto);
 			return jsonview;
 		}
+		@RequestMapping(value="/deleteroutestop.admin",method=RequestMethod.POST)
+		public View deletestopandroutestop(String r_num, String s_num, String rs_order, Model model){
+			System.out.println("r_num"+r_num);
+			System.out.println("s_num"+s_num);
+			System.out.println("rs_order"+rs_order);
+			routeManageSerivce.deleteStopRoute(r_num, s_num, rs_order, model);
+			List<RouteStopJoinStopDTO> rssdto = routeManageSerivce.getRouteStopInfoList(r_num);
+			model.addAttribute("rssdto", rssdto);
+			return jsonview;
+		}
 }

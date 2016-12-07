@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertBusno" parameterType="kr.or.bus.dto.BusDTO">
-		INSERT INTO BUS(B_VEHICLENUM, R_NUM) VALUES(#{b_vehiclenum}, #{r_num})
+		INSERT INTO BUS(B_VEHICLENUM, R_NUM, B_VENID) VALUES(#{b_vehiclenum}, #{r_num}, #{b_venid})
 	</insert>
 	
 </mapper>

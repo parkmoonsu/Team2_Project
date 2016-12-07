@@ -9,6 +9,7 @@
 
 package kr.or.bus.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
@@ -120,6 +121,7 @@ public interface BusDAO {
 	
 	
 	
-	/////////////////버스 등록 / 삭제 ////////////////////////////////////////////////////////////////
-	
+	/////////////////버스 등록  ////////////////////////////////////////////////////////////////
+	public int busReg(String b_vehiclenum , Date b_sdate , String b_sprice , String b_manuf , 
+			int b_pcount , String b_model , String b_caryear);
 }

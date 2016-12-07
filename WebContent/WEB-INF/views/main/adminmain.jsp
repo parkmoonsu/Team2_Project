@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<title>KOSBUS</title>
+<title>RoadOneBell</title>
 
 
 <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>
@@ -39,7 +39,6 @@
 
    
 <body class="nav-md">
-	<img  src="${pageContext.request.contextPath}/images/loading.gif">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">

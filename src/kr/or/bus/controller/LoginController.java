@@ -86,6 +86,7 @@ public class LoginController {
 	
 	@RequestMapping("/searchid.htm")
 	public String searchId(String m_name , String m_email) throws Exception{
+		System.out.println("오거라 어서 ");
 		String viewpage = "";
 		
 		if(service.searchName(m_name, m_email).equals("")){

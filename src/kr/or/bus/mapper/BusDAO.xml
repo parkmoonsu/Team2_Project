@@ -416,5 +416,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
 		order by r
 	</select>
-
+	
+	
+	<insert id="busReg">
+		 insert into bus(b_vehiclenum , b_sdate , b_sprice , b_manuf , 
+			b_pcount , b_model , b_caryear) values (#{param1} , #{param2} ,#{param3} ,#{param4} ,#{param5} ,#{param6} , #{param7})
+	</insert>
 </mapper>

@@ -15,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -109,9 +110,8 @@ public class MemberManageController {
 	}
 	
 	@RequestMapping("/approveMember.admin")
-	public String approveMember(String m_id){
+	public String approveMember(String m_id) throws MessagingException{
 		System.out.println("m_id : " + m_id);
-		
 		service.updateCheck(m_id);
 		
 		return "membermanage/updatesuccess";
