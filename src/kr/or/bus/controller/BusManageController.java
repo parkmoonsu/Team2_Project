@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
+import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
 import kr.or.bus.service.BusManageService;
@@ -340,5 +341,24 @@ public class BusManageController {
 		model.addAttribute("list",list);
 		 
 		return "busmanage/clickcount";
+	}
+	
+	@RequestMapping("busreg.admin")
+	public String busReg(Model model , String pg){
+		List<BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO> list = service.busreglist(pg);
+		int page = service.pg(pg);
+		int count = service.busCount();
+		int pagecount = 0;
+		if(count % 10 == 0){
+			pagecount = count/10;
+		}else{
+			pagecount = count/10 + 1;
+		}
+		 
+		model.addAttribute("pagecount", pagecount);
+		model.addAttribute("pgs", page);
+		model.addAttribute("list", list);
+		model.addAttribute("count",count);
+		return "busmanage/busreg";
 	}
 }

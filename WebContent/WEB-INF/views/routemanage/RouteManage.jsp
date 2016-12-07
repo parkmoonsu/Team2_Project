@@ -234,209 +234,137 @@ select#selectBus, select#selectBus2 {
 
 	<script type="text/javascript">
 
- 	
- $(document).ready(function() {
- 	
- 	//저장하는 함수
- $("#newsave").click(function() {
- 	for(var i=0;i<poly.getPath().length;i++){
- 	var locationX = poly.getPath().getAt(i).lat();
- 	var locationY = poly.getPath().getAt(i).lng();
- 	
- 	savelocation = {
- 	        lng : locationX,
-             lat : locationY
-         }
-      savelocations.push(savelocation);
- 	}
-     $.ajax({	
-          url : "routeSave.admin",
-          type : "get",                          
-          data : {
-              kml : JSON.stringify(savelocations),
-              busNo:$("#selectBus").val()
-          },
-          success : function(data) {
-              console.log("저장잘됨?");
-          }
-      });
-  }); 
- 	
- $("#newsave2").click(function() {
-	 	for(var i=0;i<poly.getPath().length;i++){
-	 	var locationX = poly.getPath().getAt(i).lat();
-	 	var locationY = poly.getPath().getAt(i).lng();
-	 	
-	 	savelocation = {
-	 	        lng : locationX,
-	            lat : locationY
-	         }
-	      savelocations.push(savelocation);
-	 	}
-	     $.ajax({	
-	          url : "routeSave.admin",
-	          type : "get",                          
-	          data : {
-	              kml : JSON.stringify(savelocations),
-	              busNo:$("#selectBus2").val()
-	          },
-	          success : function(data) {
-	              console.log("저장잘됨?");
-	          }
-	      });
-	  }); 
- 
-//원본 불러오기
- $("#selectBus").change(function(){
-	 poly.setMap(null); 
-	 console.log("????????????????????????");
-if($("#selectBus").val() !=null){
-	$.ajax({
-        url : "busStopOriginalRead.admin",
-        type : "get",
-        dataType : "json",
-        data : {busNo:$("#selectBus").val()},
-        success : function(data) {
-           console.log("읽어옴?");
-           console.log(data);
-           console.log(data.length);                                                                   	                       
-           
-           if(data.length == 4){
-        	   var hell =new Array();
-    
-        	console.log("4개 노선");
-        	console.log(data.length);
-        	for(var j=0;j<data.length;j++){
-        		var f=data[0].msgBody.latLng[j].gpsY;
-            	var d=data[0].msgBody.latLng[j].gpsX;
-            	hell.push(new google.maps.LatLng(f,d));
-        	}
-        	loadVector(hell);
-        	hell=[];
-     	for(var j=0;j<data.length;j++){
-        		var f=data[1].msgBody.latLng[j].gpsY;
-            	var d=data[1].msgBody.latLng[j].gpsX;
-            	hell.push(new google.maps.LatLng(f,d));
-        	}
-     	loadVector(hell);
-     	hell=[];
-     	for(var j=0;j<data.length;j++){
-     		
-        		var f=data[2].msgBody.latLng[j].gpsY;
-            	var d=data[2].msgBody.latLng[j].gpsX;
-            	hell.push(new google.maps.LatLng(f,d));
-        	}
-     	loadVector(hell);
-     	hell=[];
-     	for(var j=0;j<data.length;j++){
-        		var f=data[3].msgBody.latLng[j].gpsY;
-            	var d=data[3].msgBody.latLng[j].gpsX;
-            	hell.push(new google.maps.LatLng(f,d));
-        	}
-     		loadVector(hell);
-     		hell=[];
-           }else{
-        	   console.log("1개 노선");
-        	console.log(data.length);
-        	var hell =new Array();
-        	for(var j=0;j<data.msgBody.length;j++){
-        		var f=parseFloat(data.msgBody[j].gpsY);
-            	var d=parseFloat(data.msgBody[j].gpsX);
- 
-		      hell.push(new google.maps.LatLng(f,d));
-        	}
-             loadVector(hell);
-        }
-     }
-	});   	    	         
-}
-});
+		var map;
+		var myLatlng;
+		var array=new Array();
+		
+		function initMap() {
+			map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 15,
+				center : new google.maps.LatLng(37.39489285215817,
+						127.11115658283234)
+			});
 
-//원본 불러오기
- $("#selectBus2").change(function(){
-	 poly.setMap(null); 
-if($("#selectBus2").val() !=null){
-	$.ajax({
-        url : "routeEditRead.admin",
-        type : "get",
-        dataType : "json",
-        data : {busNo:$("#selectBus2").val()},
-        success : function(data) {
-           console.log("읽어옴?");                                                            	                       
-        	   console.log("1개 노선");
-        	console.log(data.length);
-        	 var hell =new Array();
-             for(var i=0;i<data.length;i++){
-            	 var what= parseFloat(data[i].lng);
-            	 var that=parseFloat(data[i].lat);
-		      hell.push(new google.maps.LatLng(what,that));
-		      console.log("흠");
-		      console.log(hell[i]);
-             }
-             loadVector(hell);
-        
-     }
-	});   	    	         
-}
-});
- 
- });
-            
- 
- 
- var poly;
- var map;
- var loc=Array();
- var savelocations = new Array();
- var savelocation;
+			map.addListener('click', function(e) {
 
+				myLatlng = {
+					lat : e.latLng.lat(),
+					lng : e.latLng.lng()
+				};
+				makeInfowindow();
 
- function initMap() {
-   map = new google.maps.Map(document.getElementById('map'), {
-     zoom: 15,
-     center: new google.maps.LatLng(37.39489285215817, 127.11115658283234)
-   });
+			});
 
-   		poly = new google.maps.Polyline({
- 	    editable: true,
- 	    strokeColor: 'black',
- 	    strokeOpacity: 1.0,
- 	    strokeWeight: 2,
- 	    draggable:true
-   });
-   poly.setMap(map);
+		}
+		
+		
 
-   map.addListener('click', addLatLng);
-   
- }
+		//추가
+		function makeInfowindow() {
+			//var r_num="5623";
+			var contentString = '<div id="content">'
+			+'<button class="btn btn-default" onclick="addstop()" >정류장 추가</button><br>'
+			+'<button class="btn btn-default" onclick="searchstop()">주변 정류장 찾기</button>'
+				
+			+'</div>';
 
- function loadVector(data){
- 	console.log("옴?");
- 	console.log(data);
- 	poly = new google.maps.Polyline({
- 		path: data,
- 	    editable: true,
- 	    strokeColor: 'red',
- 	    strokeOpacity: 1.0,
- 	    strokeWeight: 2,
- 	    draggable:true
-   });
- 	 poly.setMap(map);
- }
- google.maps.event.addDomListener(window, 'load', initMap);	
+			var infowindow = new google.maps.InfoWindow({
+				content : contentString
+			});
 
+			var marker = new google.maps.Marker({
+				position : myLatlng,
+				map : map
+			});
+			
+			infowindow.open(map, marker);
+			/* marker.addListener('click', function() {
+				infowindow.open(map, marker);
+			}); */
+		}
+		
+		function addstop(){
+			alert('정류장 추가');
+			
+		}
+		
+		function searchstop(){
+			
+			alert('정류장 검색');
+			
+			$.ajax({
+				type:'post',
+				url:'routeRead.admin',
+				data: {r_num:"5623"},
+				success:function(data){
+					$.each(data.list, function(index, obj){
+						
+						var buff=0.001; //사각형 범위
+						
+						var high_y=myLatlng.lat+buff;
+						var low_y=myLatlng.lat-buff;
+						var high_x=myLatlng.lng-buff;
+						var low_x=myLatlng.lng-buff;
 
- function addLatLng(event){
- 	  var path = poly.getPath();
- 	  path.push(event.latLng);
- 	  loc.push(event.latLng);
- 	  
- 	  console.log("getPath:");
- 	  console.log(poly.getPath().getAt(0).lat());
- 	  console.log(poly.getPath().getAt(0).lng());
- 	  
- 	}
-   </script>
+						if(obj.s_y<high_y && obj.s_y>low_y){
+							//&& obj.s_y>low_y && obj.s_x<high_x && obj.s_x>low_x
+							array.push(obj);
+						}
+						
+					});
+					console.log(array);
+					
+					$.each(array, function(index, obj){
+						var loc={
+							lat : Number(obj.s_y),
+							lng : Number(obj.s_x)
+						};
+					
+						var marker = new google.maps.Marker({
+							position : loc,
+							map : map,
+							label : obj.rs_order
+						});
+						
+						var contentString = '<div id="content">'
+							+'정류장번호 : '+obj.s_num+
+							+'</div>';
+
+						var infowindow = new google.maps.InfoWindow({
+							content : contentString
+						});
+						
+						marker.addListener('click', function() {
+							//선택했던 지점의 마커와 인포윈도우가 사라져야 한다.close()
+							setMapOnAll(null);
+							infowindow.open(map, marker);
+						});
+						
+						
+					});
+					
+				
+				}
+			});
+			
+			//배열의 각 값마다 비교
+			//해서 제일 가까운 5개 뽑기
+			//선택하면 노선 테이블에 등록
+			
+		}
+		
+		
+
+		$(document).ready(function() {
+			/* $('#addstop').click(function(){
+				alert('정류장 추가 클릭');
+			});
+			$('#searchstop').click(function(){
+				alert('정류장 검색 클릭');
+			}); */
+		});
+
+	</script>
 	<!-- 구글 맵 인증키 -->
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiviyGXEVDNM2G1FB323aGa4kyKgVouw8&callback=initMap">    

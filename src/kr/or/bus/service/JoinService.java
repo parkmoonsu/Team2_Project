@@ -11,9 +11,10 @@ package kr.or.bus.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -27,7 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.view.velocity.VelocityConfig;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -45,6 +48,9 @@ public class JoinService {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private VelocityConfig velocityconfig;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -148,21 +154,31 @@ public class JoinService {
 	
 	public void popup(String m_email) throws AddressException, MessagingException{
 		System.out.println("이메일 : " + m_email);
-		
-		MimeMessage mimemessage = mailSender.createMimeMessage();
-		mimemessage.setSubject("KOSBUS 인증번호입니다.", "utf-8");
+		MimeMessage mimemessage = mailSender.createMimeMessage();	
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		
 		ApproveDTO dto = dao.emailApp();
 		System.out.println("num : " + dto.getA_num());
+		 
+		Map<String,Object> param=new HashMap<>();
+		param.put("content",dto.getA_num());
+		mimemessage.setSubject("OneRoadBell 인증번호입니다.","UTF-8");
+		String Url="hello.html";
+		String format=VelocityEngineUtils.mergeTemplateIntoString(velocityconfig.getVelocityEngine(),Url,"UTF-8",param);
+		mimemessage.setText(format,"UTF-8","html");
+		mimemessage.addRecipient(RecipientType.TO, new InternetAddress(m_email));
+		
+		mailSender.send(mimemessage);
+		/*
+		mimemessage.setSubject("KOSBUS 인증번호입니다.", "utf-8");
 		String htmlContent = "<div style = 'text-align:center;'>";
 		htmlContent += "<img src = 'http://karenkolbcoaching.com/wp-content/uploads/2011/09/166152840.jpg'><br>";
 		htmlContent +=	"<h2>KOSBUS 이메일 인증번호는<br> <font color = 'green'><strong>" + dto.getA_num() + "</strong></font>입니다.</h2></div>";
 
 		mimemessage.setText(htmlContent, "utf-8", "html");
 		
-		mimemessage.addRecipient(RecipientType.TO, new InternetAddress(m_email));
 		System.out.println(mimemessage.toString());
-		mailSender.send(mimemessage);
+		*/
 	}
 	
 	

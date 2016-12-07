@@ -1,10 +1,10 @@
 
 <!-- 
-	@FileName : busenroll.jsp
+	@FileName : changehistory.jsp
 	@Project	: KosBus
-	@Date	: 2016. 11.25
+	@Date	: 2016. 12.06
 	@Author	: 박문수
-	@Discription : (관리자)버스 관리 페이지 View단
+	@Discription : (관리자)휴무변경 이력확인 View단
  -->
 
 
@@ -48,10 +48,6 @@
 <link
 	href="${pageContext.request.contextPath}/vendors/jqvmap/dist/jqvmap.min.css"
 	rel="stylesheet" />
-<!-- bootstrap-daterangepicker -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css"
-	rel="stylesheet">
 
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
@@ -63,8 +59,11 @@
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
+
 <style>
 th{
 	text-align: center;
@@ -82,17 +81,7 @@ ul.pagination li a {
     text-decoration: none;
 }
 </style>
-<script type="text/javascript">
-	$(function(){
-		$("#search").datepicker({
-			changeMonth: true,
-		    changeYear: true
-		});
-		$("#search").datepicker("option", "dateFormat", "yy-mm-dd");
-		$("#search").datepicker( "option", "showAnim", "clip" );
-	});
-	
-</script>
+
 
 </head>
 
@@ -128,10 +117,10 @@ ul.pagination li a {
 									<!-- start project list -->
 								
 									<div
-										class="col-md-3 col-sm-5 col-xs-12 form-group top_search" style = "float:right;">
-										<div class="input-group">
+										class="col-md-2 col-sm-5 col-xs-12 form-group top_search" style = "float:right;"><!-- 이부분으로 searchbox 크기 조절 -->
+										<div class="input-group" id = "searchbox">
 											<input type="text" class="form-control"
-												placeholder="Search for..." id="search"> <span
+												placeholder="Search" id="search"> <span
 												class="input-group-btn">
 												<button class="btn btn-default" type="button" id="btnsearch">검색</button>
 											</span>
@@ -139,13 +128,17 @@ ul.pagination li a {
 									</div>
 									
 									<div>
-										<div class = "col-md-2" style = "float:right; margin-top:5px" >
-											<input type = "radio" name = "check" checked>요청일
-											&nbsp;&nbsp;&nbsp;
-											<input type = "radio" name = "check">상태
+										<div class = "col-md-3" style = "float:right; margin-top:5px" >
+											<input type = "radio" name = "check" id = "reqdate" checked>요청일
+											&nbsp;&nbsp;
+											<input type = "radio" name = "check" id = "mname">기사명
+											&nbsp;&nbsp;
+											<input type = "radio" name = "check" id = "route">노선
+											&nbsp;&nbsp;
+											<input type = "radio" name = "check" id = "ocode">상태
 										</div>
 									</div>
-									
+									<div id = "xbody">
 									<table class="table table-hover projects"
 										style="text-align: center">
 										<thead>
@@ -167,12 +160,23 @@ ul.pagination li a {
 											<tr>
 												
 												<td>${i.r_num}</td>
-												<td>${i.m_name}</td>
+												<td><font color = "#1ABB9C">${i.m_name}</font></td>
 												<td>${i.o_date}</td>
-												<td>${i.c_name}</td>
+												<td><font color = "#1ABB9C">${i.c_name}</font></td>
 												<td>${i.c_date}</td>
 												<td>${i.ro_reqdate}</td>
-												<td>${i.ko_name}</td>
+												<c:choose>
+													<c:when test="${i.ko_name == '승인'}">
+														<td><font color = "green">${i.ko_name}</font></td>
+													</c:when>
+													<c:when test="${i.ko_name == '거절'}">
+														<td><font color = "red">${i.ko_name}</font></td>
+													</c:when>
+													<c:otherwise>
+														<td><font color = "orange">${i.ko_name}</font></td>
+													</c:otherwise>
+												</c:choose>
+												
 												<td>${i.ro_regdate}</td>
 											</tr>
 											</c:forEach>
@@ -226,7 +230,7 @@ ul.pagination li a {
 										</c:if>
 									</ul>
 								</div>
-									
+									</div>
 								</div>
 							</div>
 						</div>
@@ -302,6 +306,129 @@ ul.pagination li a {
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-
+	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$.datepicker.regional['ko'] = {
+		        closeText : '닫기',
+		        prevText : '이전달',
+		        nextText : '다음달',
+		        currentText : '오늘',
+		        monthNames : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        monthNamesShort : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		        dayNames : ['일', '월', '화', '수', '목', '금', '토'],
+		        dayNamesShort : ['일', '월', '화', '수', '목', '금', '토'],
+		        dayNamesMin : ['일', '월', '화', '수', '목', '금', '토'],
+		        weekHeader : 'Wk',
+		        dateFormat : 'yy-mm-dd',
+		        firstDay : 0,
+		        isRTL : false,
+		        showMonthAfterYear : true,
+		        yearSuffix : '년'
+		};
+		$.datepicker.setDefaults($.datepicker.regional['ko']);
+		
+		
+		$('#search').datepicker( {
+		     changeMonth: true,
+		     changeYear: true,        
+		     dateFormat: 'y/mm/dd',
+		     showAnim : "clip"
+		});
+		  
+		 $("#btnsearch").click(function(){
+			$.ajax({
+				url : "searchHistory.admin",
+				data : {search : $("#search").val()},
+				success : function(data){
+					$("#xbody").empty();
+					$("#xbody").append(data);
+				}
+			}); 
+		 });
+		 
+		 $("#ocode").click(function(){
+			$("#searchbox").empty();
+			$("#searchbox").append("<select class = 'form-control' id = 'osearch'><option>상태</option><option>신청중</option><option>승인</option><option>거절</option></select>");
+		 	 $("#osearch").change(function(){
+		 		$.ajax({
+		 			url : "searchCode.admin",
+		 			data : {search : $("#osearch").val().trim()},
+		 			success : function(data){
+		 				$("#xbody").empty();
+						$("#xbody").append(data);
+		 			}
+		 		});
+		 	}); 
+		 });
+		 
+		 $("#reqdate").click(function(){
+			 $("#searchbox").empty();
+			 $("#searchbox").append("<input type = 'text' class = 'form-control' placeholder = 'Search' id = 'search'><span class = 'input-group-btn'><button class = 'btn btn-default' type = 'button' id = 'btnsearch'>검색</button>");
+			 $('#search').datepicker( {
+			     changeMonth: true,
+			     changeYear: true,        
+			     dateFormat: 'y/mm/dd',
+			     showAnim : "clip"
+			});
+		 
+			 $("#btnsearch").click(function(){
+				$.ajax({
+					url : "searchHistory.admin",
+					data : {search : $("#search").val()},
+					success : function(data){
+						$("#xbody").empty();
+						$("#xbody").append(data);
+					}
+				}); 
+			});
+			 
+		 });
+		 
+		 $("#mname").click(function(){
+			 $("#searchbox").empty();
+			 $("#searchbox").append("<input type = 'text' class = 'form-control' placeholder = 'Search' id = 'msearch'><span class = 'input-group-btn'><button class = 'btn btn-default' type = 'button' id = 'mbtnsearch'>검색</button>");
+		 	 
+			 $("#mbtnsearch").click(function(){
+				 $.ajax({
+			 		 url : "searchName.admin",
+			 		 data : {search : $("#msearch").val().trim()},
+			 		 success : function(data){
+			 			$("#xbody").empty();
+						$("#xbody").append(data);
+			 		 }
+			 	 });				 
+			 });
+		 });
+		 
+		 $("#route").click(function(){
+			 $("#searchbox").empty();
+			 $("#searchbox").append("<select class = 'form-control' id = 'rsearch'><option>노선</option></select>");
+		 	 
+			 $.ajax({
+				 url : "getrouteajax.admin",
+				 success:function(data){
+					 for(var i = 0 ; i < data.list.length ; i++){
+						 $("#rsearch").append("<option>" + data.list[i].r_num + "</option>");
+					 }
+				 }
+			 });
+			 
+			 $("#rsearch").change(function(){
+				$.ajax({
+					url : "searchRoute.admin",
+					data : {search : $("#rsearch").val().trim()},
+					success:function(data){
+						$("#xbody").empty();
+						$("#xbody").append(data);
+					}
+				}); 
+			 });
+		 
+		 });
+	});
+	
+</script>
 </body>
 </html>
