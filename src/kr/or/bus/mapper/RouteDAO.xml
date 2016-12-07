@@ -48,5 +48,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where cp.r_num=#{r_num}
 	</select>
 	
+	<!-- 노선타입 조회 -->
+	<select id="searchRouteType" resultType="kr.or.bus.dto.RouteTypeDTO">
+		SELECT BD_NAME FROM BUSDIS
+	</select>
+	<!-- 입력받은 select 박스 옵션 값 에 따라 일치하는 노선번호 리스트 출력 -->
+	<select id="searchRouteNumber" parameterType="String" resultType="kr.or.bus.dto.RouteTypeDTO">
+		select ROUTE.R_NUM 
+		FROM BUSDIS, ROUTE
+		WHERE ROUTE.BD_NUM = BUSDIS.BD_NUM and BUSDIS.BD_NAME  = #{bd_name}
+	</select>
 	
 </mapper>

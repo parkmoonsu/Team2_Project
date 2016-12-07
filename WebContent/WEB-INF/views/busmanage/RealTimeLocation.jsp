@@ -37,7 +37,7 @@
     <style type="text/css">
     .element {
  #map { margin-left:auto; margin-right:auto; width:95%; }}
- select#selectBus {
+ select#selectBus, #selectRoute, #selectGisa{
 	-webkit-appearance: button;
 	-webkit-border-radius: 2px;
 	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -92,7 +92,10 @@
 				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
 				
 				<select id="selectRoute">
-					<option>노선종류</option>																	
+					<option>노선종류</option>
+					<c:forEach var="i" items="${list}">
+					<option>${i.bd_name}</option>					
+					</c:forEach>																	
 				</select>
 				
 				<select id="selectGisa">
@@ -102,10 +105,7 @@
 								
 				<select id="selectBus">
 					<option>노선을 선택하세요</option>
-					<option>all</option>
-					<c:forEach var="i" items="${list}">
-					<option>${i.r_num}</option>					
-					</c:forEach>
+					<option>all</option>					
 				</select>								
      <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
 		</div>
@@ -1025,6 +1025,20 @@
                     }
                 });  		
         	//},30000);
+        });
+        
+        
+        $("#selectRoute").change(function(){
+        	$.ajax({
+                url : "RouteTypeRouteNo.admin",
+                type : "get",
+                dataType : "json",
+                data : {r_type:$("#selectRoute").val()},
+                success : function(data) {                   	
+                	console.log("노선타입 전송잘되냐?");
+                	console.log(data);
+                }#
+        	});
         });
         
     });//ready 함수 끝
