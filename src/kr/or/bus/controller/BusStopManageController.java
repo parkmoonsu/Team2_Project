@@ -29,7 +29,7 @@ public class BusStopManageController {
 	
 	@RequestMapping(value="/busStation.admin",method=RequestMethod.GET)
 	public String busStopOpen(ModelMap map){		
-		map.addAttribute("list", busStopManageService.routeList());
+		map.addAttribute("list", busStopManageService.routetype());
 		return "busstopmanage/BusStop";
 		
 	}

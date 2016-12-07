@@ -38,6 +38,7 @@ import kr.or.bus.dto.BusLocationInfoDTO;
 import kr.or.bus.dto.BusStopDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteStopDTO;
+import kr.or.bus.dto.RouteTypeDTO;
 import kr.or.bus.dto.StopDTO;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
@@ -949,6 +950,12 @@ public class BusStopManageService {
 		List<RouteDTO> list = routedao.getRouteNum();
 		return list;
 		
+	}
+	
+	public List<RouteTypeDTO> routetype(){
+		RouteDAO routedao = sqlsession.getMapper(RouteDAO.class);
+		List<RouteTypeDTO> list = routedao.searchRouteType();
+		return list;
 	}
 	
 	//accessVenID 함수 의 리턴값 json 을 받아서 차량 id 추출하고 차량 id return
