@@ -180,7 +180,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getMail" resultType = "String" parameterType="String">
 		select m_email 
-		from mdetail;
+		from mdetail
 		where m_id=#{m_id}
 	</select>
 	
