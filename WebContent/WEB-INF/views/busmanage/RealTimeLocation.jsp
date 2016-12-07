@@ -456,7 +456,7 @@
     function movingBusMarker1(data,map){
     	console.log("0번쨰 버스마커");
     	console.log(data);
-       /* if(B1usMarker == null){
+       if(B1usMarker == null){
        		B1usMarker = new google.maps.Marker({
           		map: map,
           		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
@@ -466,7 +466,7 @@
 			var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
      	  	
      	  	(function (B1usMarker, data, infowindow) {
-     	        google.maps.event.addListener(BusMarker, "click", function (e) {
+     	        google.maps.event.addListener(B1usMarker, "click", function (e) {
      	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
      	            infowindow.open(map, B1usMarker);
      	           
@@ -477,55 +477,84 @@
     	    console.log("너 마커 새로 생성안함??");
        		B1usMarker.setPosition(new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX));
        		
-       } */
+       }
     }
     
     function movingBusMarker2(data,map){
     	console.log("1번쨰 버스마커");
     	console.log(data);
-        /* if(B2usMarker == null){
+        if(B2usMarker == null){
         		B2usMarker = new google.maps.Marker({
            		map: map,
-           		position:new google.maps.LatLng(itemList.tmY,itemList.tmX),
+           		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
            		icon:"${pageContext.request.contextPath}/images/bus.png"
         		});
+        		
+        		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
+         	  	
+         	  	(function (B2usMarker, data, infowindow) {
+         	        google.maps.event.addListener(B2usMarker, "click", function (e) {
+         	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
+         	            infowindow.open(map, B2usMarker);
+         	           
+         	        });
+         	    })(B2usMarker, data[1], infowindow);
+         	  	
         }else{
      	    console.log("너 마커 새로 생성안함??");
-        		B2usMarker.setPosition(new google.maps.LatLng(itemList.tmY,itemList.tmX));
+        		B2usMarker.setPosition(new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX));
         		
-        } */
+        }
      }
     
     function movingBusMarker3(data,map){
     	console.log("2번쨰 버스마커");
     	console.log(data);
-        /* if(B3usMarker == null){
+        if(B3usMarker == null){
         		B3usMarker = new google.maps.Marker({
            		map: map,
-           		position:new google.maps.LatLng(itemList.tmY,itemList.tmX),
+           		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
            		icon:"${pageContext.request.contextPath}/images/bus.png"
         		});
+        		
+        		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
+        		(function (B3usMarker, data, infowindow) {
+         	        google.maps.event.addListener(B3usMarker, "click", function (e) {
+         	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
+         	            infowindow.open(map, B3usMarker);
+         	           
+         	        });
+         	    })(B3usMarker, data[1], infowindow);
         }else{
      	    console.log("너 마커 새로 생성안함??");
-        		B3usMarker.setPosition(new google.maps.LatLng(itemList.tmY,itemList.tmX));
+        		B3usMarker.setPosition(new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX));
         		
-        } */
+        }
      }
     
     function movingBusMarker4(data,map){
     	console.log("3번쨰 버스마커");
     	console.log(data);
-        /* if(B4usMarker == null){
+        if(B4usMarker == null){
         		B4usMarker = new google.maps.Marker({
            		map: map,
-           		position:new google.maps.LatLng(itemList.tmY,itemList.tmX),
+           		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
            		icon:"${pageContext.request.contextPath}/images/bus.png"
         		});
+        		
+        		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
+        		(function (B4usMarker, data, infowindow) {
+         	        google.maps.event.addListener(B4usMarker, "click", function (e) {
+         	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
+         	            infowindow.open(map, B4usMarker);
+         	           
+         	        });
+         	    })(B4usMarker, data[1], infowindow);
         }else{
      	    console.log("너 마커 새로 생성안함??");
-        		B4usMarker.setPosition(new google.maps.LatLng(itemList.tmY,itemList.tmX));
+        		B4usMarker.setPosition(new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX));
         		
-        } */
+        }
      }
     
     
@@ -596,8 +625,8 @@
     function busMarkerRemove(){
     	clearInterval(stopSearch);
     	
-    	if(BusMarker !=null && B2usMarker !=null && B3usMarker !=null && B4usMarker !=null){
-    		BusMarker.setMap(null);
+    	if(B1usMarker !=null && B2usMarker !=null && B3usMarker !=null && B4usMarker !=null){
+    		B1usMarker.setMap(null);
     		B2usMarker.setMap(null);
     		B3usMarker.setMap(null);
     		B4usMarker.setMap(null);   			
@@ -828,7 +857,7 @@
                      		}
                      		//console.log(route5623);
                      		
-                     		for(var j=0;j<route5623.length;j+=3){
+                     		for(var j=0;j<route5623.length;j++){
                      			var f=route5623[j].gpsY;
                          		var d=route5623[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
@@ -837,7 +866,7 @@
                      		loadVector5623(hell);
                      		
                      		hell=[];
-                  			for(var j=0;j<route6702.length;j+=3){
+                  			for(var j=0;j<route6702.length;j++){
                      			var f=route6702[j].gpsY;
                          		var d=route6702[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
@@ -846,7 +875,7 @@
                   			
                   			
                   			hell=[];
-                  			for(var j=0;j<route9000.length;j+=3){                          		
+                  			for(var j=0;j<route9000.length;j++){                          		
                      			var f=route9000[j].gpsY;
                          		var d=route9000[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
@@ -855,7 +884,7 @@
                   			
                   			
                   			hell=[];
-                  			for(var j=0;j<route6501.length;j+=20){
+                  			for(var j=0;j<route6501.length;j++){
                      			var f=route6501[j].gpsY;
                          		var d=route6501[j].gpsX;
                          		hell.push(new google.maps.LatLng(f,d));
