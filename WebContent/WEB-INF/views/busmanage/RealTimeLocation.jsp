@@ -465,14 +465,27 @@
       		
 			var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
      	  	
-     	  	(function (B1usMarker, data, infowindow) {
-     	        google.maps.event.addListener(B1usMarker, "click", function (e) {
-     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
-     	            infowindow.open(map, B1usMarker);
-     	           
-     	        });
-     	    })(B1usMarker, data[1], infowindow);
-     	  	
+			if(data[1] == null){
+				(function (B1usMarker, data, infowindow) {
+	     	        google.maps.event.addListener(B1usMarker, "click", function (e) {
+	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">매칭된 기사없음</p>');
+	     	            infowindow.open(map, B1usMarker);
+	     	           
+	     	        });
+	     	    })(B1usMarker, data[1], infowindow);
+				
+				
+				
+			}else{
+				(function (B1usMarker, data, infowindow) {
+	     	        google.maps.event.addListener(B1usMarker, "click", function (e) {
+	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
+	     	            infowindow.open(map, B1usMarker);
+	     	           
+	     	        });
+	     	    })(B1usMarker, data[1], infowindow);
+			}
+			
        }else{
     	    console.log("너 마커 새로 생성안함??");
        		B1usMarker.setPosition(new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX));
@@ -492,13 +505,26 @@
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
          	  	
-         	  	(function (B2usMarker, data, infowindow) {
-         	        google.maps.event.addListener(B2usMarker, "click", function (e) {
-         	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
-         	            infowindow.open(map, B2usMarker);
-         	           
-         	        });
-         	    })(B2usMarker, data[1], infowindow);
+        		
+        		if(data[1] == null){
+    				(function (B2usMarker, data, infowindow) {
+    	     	        google.maps.event.addListener(B2usMarker, "click", function (e) {
+    	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">매칭된 기사없음</p>');
+    	     	            infowindow.open(map, B2usMarker);
+    	     	           
+    	     	        });
+    	     	    })(B2usMarker, data[1], infowindow);   				
+    				
+    				
+    			}else{
+    				(function (B2usMarker, data, infowindow) {
+    	     	        google.maps.event.addListener(B2usMarker, "click", function (e) {
+    	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
+    	     	            infowindow.open(map, B2usMarker);
+    	     	           
+    	     	        });
+    	     	    })(B2usMarker, data[1], infowindow);
+    			}
          	  	
         }else{
      	    console.log("너 마커 새로 생성안함??");
@@ -518,13 +544,28 @@
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
-        		(function (B3usMarker, data, infowindow) {
-         	        google.maps.event.addListener(B3usMarker, "click", function (e) {
-         	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
-         	            infowindow.open(map, B3usMarker);
-         	           
-         	        });
-         	    })(B3usMarker, data[1], infowindow);
+        		
+        		if(data[1] == null){
+    				(function (B3usMarker, data, infowindow) {
+    	     	        google.maps.event.addListener(B3usMarker, "click", function (e) {
+    	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">매칭된 기사없음</p>');
+    	     	            infowindow.open(map, B3usMarker);
+    	     	           
+    	     	        });
+    	     	    })(B3usMarker, data[1], infowindow);
+    				
+    				
+    				
+    			}else{
+    				(function (B3usMarker, data, infowindow) {
+    	     	        google.maps.event.addListener(B3usMarker, "click", function (e) {
+    	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
+    	     	            infowindow.open(map, B3usMarker);
+    	     	           
+    	     	        });
+    	     	    })(B3usMarker, data[1], infowindow);
+    			}
+        		
         }else{
      	    console.log("너 마커 새로 생성안함??");
         		B3usMarker.setPosition(new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX));
@@ -543,13 +584,27 @@
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
-        		(function (B4usMarker, data, infowindow) {
-         	        google.maps.event.addListener(B4usMarker, "click", function (e) {
-         	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
-         	            infowindow.open(map, B4usMarker);
-         	           
-         	        });
-         	    })(B4usMarker, data[1], infowindow);
+        		
+        		if(data[1] == null){
+    				(function (B4usMarker, data, infowindow) {
+    	     	        google.maps.event.addListener(B4usMarker, "click", function (e) {
+    	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">매칭된 기사없음</p>');
+    	     	            infowindow.open(map, B4usMarker);
+    	     	           
+    	     	        });
+    	     	    })(B4usMarker, data[1], infowindow);
+    				
+    				
+    				
+    			}else{
+    				(function (B4usMarker, data, infowindow) {
+    	     	        google.maps.event.addListener(B4usMarker, "click", function (e) {
+    	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
+    	     	            infowindow.open(map, B4usMarker);
+    	     	           
+    	     	        });
+    	     	    })(B4usMarker, data[1], infowindow);
+    			}
         }else{
      	    console.log("너 마커 새로 생성안함??");
         		B4usMarker.setPosition(new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX));
