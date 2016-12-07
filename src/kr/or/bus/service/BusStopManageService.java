@@ -250,7 +250,7 @@ public class BusStopManageService {
 			PrintWriter out=null;			
 			RouteDAO dao = null;
 			
-			if(r_num.equals("all")){				
+			if(r_num.equals("전체선택")){				
             	JSONObject obs1 = busMultiRouteRead("5623" , dto, request, response);
             	JSONObject obs2 = busMultiRouteRead("6702" , dto, request, response);
             	JSONObject obs3 = busMultiRouteRead("143", dto, request, response);
@@ -265,7 +265,7 @@ public class BusStopManageService {
             	out = response.getWriter();
             	out.print(obss);
             	
-            }else if(!r_num.equals("all")){
+            }else if(!r_num.equals("전체선택")){
             	dao = sqlsession.getMapper(RouteDAO.class);
             	dto = dao.routeidSearch(r_num);
             	busSingleRouteRead(dto ,request, response);
@@ -446,7 +446,7 @@ public class BusStopManageService {
 			
 			에 해당하는 차량 id가 아래에 입력되어야함.
 		*/		
-		if(r_num.equals("all")){
+		if(r_num.equals("전체선택")){
 			
 			JSONArray jsonlist1 = multiLocationSearch(request , response, dto, "5623");
 			JSONArray jsonlist2 = multiLocationSearch(request , response, dto, "6702");
@@ -461,7 +461,7 @@ public class BusStopManageService {
 						
 			out.print(locations);
 			
-		}else if(!r_num.equals("all")){
+		}else if(!r_num.equals("전체선택")){
 			System.out.println("버스번호? "+r_num);
 			System.out.println("버스하나만 조회");
 			
@@ -742,7 +742,7 @@ public class BusStopManageService {
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
 		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
 
-		if(r_num.equals("all")){
+		if(r_num.equals("전체선택")){
 			List<BusStopDTO> busstoplist = new ArrayList<>();
 			//busStopRoadAllSearch("5623", dto, busstopdto, request, response);
 			busstoplist.addAll(0, busStopRoadAllSearch("5623", dto, busstopdto, request, response));
@@ -755,7 +755,7 @@ public class BusStopManageService {
 			jsonmaps = JSONArray.fromObject(busstoplist);
 			out.print(jsonmaps);
 			
-		}else if(!r_num.equals("all")){
+		}else if(!r_num.equals("전체선택")){
 			dto = dao.routeidSearch(r_num);
 			System.out.println(dto.getR_id());
 						
@@ -913,7 +913,7 @@ public class BusStopManageService {
         
         System.out.println("차량 id 뽑았다"+jsonlist.getJSONObject(0).get("vehId"));
         
-        //String venid = (String) jsonlist.getJSONObject(0).get("vehId");
+        String venid = null;
         
         
         String busno = null;
@@ -923,8 +923,10 @@ public class BusStopManageService {
         for(int i=0; i<jsonsize; i++){
         	
         	busno = (String) jsonlist.getJSONObject(i).get("plainNo");
+        	venid = (String) jsonlist.getJSONObject(i).get("vehId");
         	busdto.setB_vehiclenum(busno);
         	busdto.setR_num(dto.getR_num());
+        	busdto.setB_venid(venid);
         	
         	BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
         	int check = busdao.busnoCheck(busdto);
