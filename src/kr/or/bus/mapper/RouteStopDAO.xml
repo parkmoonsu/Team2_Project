@@ -14,4 +14,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
+	<select id="checkStopNum" parameterType="String" resultType="Integer">
+		select count(s_num) from stop where s_num = #{s_num}
+	</select>
+	
+	<insert id="addStopInfo" parameterType="kr.or.bus.dto.StopDTO">
+		insert into stop(s_num,s_x,s_y,s_name) values(#{s_num},#{s_x},#{s_y},#{s_name})
+	</insert>
+	
+	<select id="getRouteStopInfo" parameterType="String" resultType="kr.or.bus.dto.RouteStopDTO">
+		select r_num, s_num, rs_order, r_id, rs_start, rs_end from routestop3 where r_num = #{param1} and rs_order = #{param2}
+	</select>
+	
+	<insert id="addRouteStopInfo" parameterType="kr.or.bus.dto.RouteStopDTO">
+		insert into routestop3(r_num,s_num,rs_order,r_id,rs_start,rs_end) values(#{r_num},#{s_num},#{rs_order},#{r_id},#{rs_start},#{rs_end})
+	</insert>
+	
+	<update id="updateRouteStopInfo" parameterType="String">
+		update routestop3 set rs_order = rs_order+1 where r_num = #{param1} and rs_order <![CDATA[>=]]> #{param2} and s_num != #{param3}
+	</update>
+	
+	<select id="getRouteStopInfoList" parameterType="String" resultType="kr.or.bus.dto.RouteStopJoinStopDTO">
+		select sto.s_num, sto.s_x, sto.s_y, sto.s_name, rs3.r_num, rs3.rs_order, rs3.r_id, rs3.rs_start, rs3.rs_end
+		from stop sto
+		join routestop3 rs3
+		on sto.S_NUM = rs3.S_NUM 
+		where rs3.r_num = #{r_num}
+	</select>
 </mapper>
