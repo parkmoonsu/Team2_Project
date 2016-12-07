@@ -10,6 +10,7 @@
 
 package kr.or.bus.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -343,7 +344,15 @@ public class BusManageService {
 	}
 ///////////////////////////버스 운영관리////////////////////////////////////////////////////////
 	
-
+	public void busReg(String b_vehiclenum,String b_sdate,String b_sprice,String b_manuf,String b_pcount,String b_effic,String b_model,String b_caryear){
+		
+		Date date = Date.valueOf(b_sdate);
+		
+		int pcount = Integer.parseInt(b_pcount);
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		
+		dao.busReg(b_vehiclenum, date, b_sprice, b_manuf, pcount, b_model, b_caryear);
+	}
 	
 	
 }

@@ -11,10 +11,11 @@ package kr.or.bus.service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -25,13 +26,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.velocity.VelocityEngineUtils;
+import org.springframework.web.servlet.view.velocity.VelocityConfig;
 
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.MemberJoinJobDTO;
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
-import net.sf.json.xml.XMLSerializer;
-import nu.xom.*;
 
 @Service
 public class LoginService {
@@ -41,6 +41,9 @@ public class LoginService {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private VelocityConfig velocityconfig;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -56,13 +59,13 @@ public class LoginService {
 			MimeMessage mimemessage = mailSender.createMimeMessage();
 			mimemessage.setSubject("KOSBUS 회원님 ID 입니다.", "utf-8");
 			
-			String htmlContent = "<div style = 'text-align:center;'>";
-			htmlContent += "<img src = 'http://kmug.co.kr/board/data/illust/1223534233/%B5%B8%BA%B8%B1%E2.jpg'><br>";
-			htmlContent +=	"<h2>KOSBUS 회원님의 ID는 <br> <font color = 'blue'><strong>" + m_id + "</strong></font>입니다.</h2></div>";
-
-			mimemessage.setText(htmlContent, "utf-8", "html");
-			
+			Map<String,Object> param=new HashMap<>();
+			param.put("content",m_id);
+			String Url="hello.html";
+			String format=VelocityEngineUtils.mergeTemplateIntoString(velocityconfig.getVelocityEngine(),Url,"UTF-8",param);
+			mimemessage.setText(format,"UTF-8","html");
 			mimemessage.addRecipient(RecipientType.TO, new InternetAddress(m_email));
+			
 			mailSender.send(mimemessage);
 		
 		}else{
@@ -96,14 +99,13 @@ public class LoginService {
 			MimeMessage mimemessage = mailSender.createMimeMessage();
 			mimemessage.setSubject("KOSBUS"+ dao.getName(m_id).getM_name() +"님 비밀번호 입니다.", "utf-8");
 			
-			String htmlContent = "<div style = 'text-align:center;'>";
-			htmlContent += "<img src = 'http://kmug.co.kr/board/data/illust/1223534233/%B5%B8%BA%B8%B1%E2.jpg'><br>";
-			htmlContent +=	"<h2>KOSBUS 회원님의 임시 비밀번호는 <br> <font color = 'blue'><strong>" + temp + "</strong></font>입니다.<br>"
-					+ "로그인 후 비밀번호를 변경해주세요.</h2></div>";
-
-			mimemessage.setText(htmlContent, "utf-8", "html");
-			
+			Map<String,Object> param=new HashMap<>();
+			param.put("content",temp);
+			String Url="hello.html";
+			String format=VelocityEngineUtils.mergeTemplateIntoString(velocityconfig.getVelocityEngine(),Url,"UTF-8",param);
+			mimemessage.setText(format,"UTF-8","html");
 			mimemessage.addRecipient(RecipientType.TO, new InternetAddress(m_email));
+			
 			mailSender.send(mimemessage);
 			
 			temp = this.bCryptPasswordEncoder.encode(temp);
