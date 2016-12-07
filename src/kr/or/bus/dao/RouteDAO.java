@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
+import kr.or.bus.dto.RouteTypeDTO;
 
 public interface RouteDAO {
 	public RouteDTO routeidSearch(String r_num);
@@ -22,5 +23,14 @@ public interface RouteDAO {
 	
 	//추가
 	public List<RouteStopCopyJoinStopDTO> routeRead(String r_num);
+	
+	//노선 타입 조회
+	
+	public List<RouteTypeDTO> searchRouteType();
+	
+	//입력받아 같은 타입 인경우 노선번호리스트출력
+	
+	public List<RouteTypeDTO> searchRouteNumber(String no);
+	
 	
 }

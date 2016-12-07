@@ -173,12 +173,12 @@ cursor: pointer;
 									<table class="table table-hover projects" style="text-align: center">
 										<thead>
 											<tr>
-												<th style="width: 50px">번호</th>
-												<th style="width: 100px">차량번호</th>
-												<th style="width: 110px">노선번호</th>
-												<th style="width: 90px">기사</th>
+												<th style="width: 70px">번호</th>
+												<th style="width: 120px">차량번호</th>
+												<th style="width: 120px">노선번호</th>
+												<th style="width: 120px">기사</th>
 												<th style="width: 180px">차고지 이름</th>
-												<th style="width: 60px">상태</th>
+												
 												<th style="width: 100px; text-align: center;"><i
 													class="fa fa-trash" style="margin-bottom: 2px"></i> <input
 													type="checkbox" class="form" id = "checkall"></th>
@@ -195,7 +195,7 @@ cursor: pointer;
 												<td>${i.r_num}</td>
 												<td>${i.m_name}</td>
 												<td>${i.g_name}</td>
-												<td>${i.s_name}</td>
+												
 												<td style = "text-align:center"> 
 													<input type = "checkbox" id = "check${i.r}" value = "${i.b_vehiclenum}" name = "chklist">
                                          		</td>
@@ -737,10 +737,8 @@ cursor: pointer;
 											$("#r_num1").append("<option value = " + data.rnum[i] + ">" + data.rnum[i] + "</option>");
 											
 										}
-								}
-								
+								}	
 							});
-							
 						});
 				}
 			});
@@ -750,6 +748,7 @@ cursor: pointer;
 			$.ajax({
 				url: "noroute.admin",
 				success:function(data){
+					$("#updateenroll").empty();
 					$("#xbody").empty();
 					$("#xbody").append(data);
 				}
@@ -761,6 +760,7 @@ cursor: pointer;
 			$.ajax({
 				url: "mbusinfo.admin",
 				success:function(data){
+					$("#updateenroll").empty();
 					$("#xbody").empty();
 					$("#xbody").append(data);
 				}
@@ -772,6 +772,7 @@ cursor: pointer;
 			$.ajax({
 				url: "nbusinfo.admin",
 				success:function(data){
+					$("#updateenroll").empty();
 					$("#xbody").empty();
 					$("#xbody").append(data);
 				}
@@ -782,6 +783,7 @@ cursor: pointer;
 			$.ajax({
 				url: "wbusinfo.admin",
 				success:function(data){
+					$("#updateenroll").empty();
 					$("#xbody").empty();
 					$("#xbody").append(data);
 				}
@@ -792,6 +794,7 @@ cursor: pointer;
 			$.ajax({
 				url: "gbusinfo.admin",
 				success:function(data){
+					$("#updateenroll").empty();
 					$("#xbody").empty();
 					$("#xbody").append(data);
 				}
