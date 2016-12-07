@@ -23,6 +23,7 @@ import kr.or.bus.dao.BusDAO;
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dao.RnumcommuteDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
+import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 
 @Service
@@ -295,5 +296,22 @@ public class BusManageService {
 
 		return list;
 	}
+///////////////////////////버스 운영관리////////////////////////////////////////////////////////
+	
+	public List<BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO> busreglist(String pg){
+		int page = 1;
+		
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		System.out.println("page : " + page);
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO> list = dao.busreglist(page);
+
+		return list;
+	}
+	
+	
 	
 }

@@ -1,9 +1,9 @@
  <!-- 
 	@FileName : busenroll.jsp
 	@Project	: KosBus
-	@Date	: 2016. 11.25
+	@Date	: 2016. 12.07
 	@Author	: 박문수
-	@Discription : (관리자)버스 관리 페이지 View단
+	@Discription : (관리자)버스 등록 페이지 View단
  -->
 
 
@@ -109,47 +109,12 @@ cursor: pointer;
 			<br><br><br>
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<!-- top tiles -->
-				<div class="row tile_count" style="text-align: center">
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "no">
-						
-						<span class="count_top"><i class="fa fa-bus"></i> 미정</span>
-						<div class="count red">${no}</div>
-					
-					</div>
-					
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "m">
-
-						<span class="count_top"><i class="fa fa-bus"></i> 간선버스</span>
-						<div class="count">${m}</div>
-					</div>
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "n">
-						<span class="count_top"><i class="fa fa-bus"></i> 지선버스</span>
-						<div class="count">${n}</div>
-					</div>
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "w">
-						<span class="count_top"><i class="fa fa-bus"></i> 순환버스</span>
-						<div class="count">${w}</div>
-					</div>
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "g">
-						<span class="count_top"><i class="fa fa-bus"></i> 광역버스</span>
-						<div class="count">${g}</div>
-					</div>
-					
-					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "allbus">
-						<a href ="busenroll.admin">
-							<span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
-							<div class="count green">${m+n+w+g+no}</div>
-						</a>
-					</div>
-					
-				</div>
-				<!-- /top tiles -->
+				
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>노선-기사 등록</small>
+								<small>버스 등록/삭제</small>
 							</h3>
 						</div>
 					</div>
@@ -159,17 +124,6 @@ cursor: pointer;
 						<div class="col-md-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_content" id = "xbody">
-									<!-- start project list -->
-									<!-- <div
-										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-										<div class="input-group">
-											<input type="text" class="form-control"
-												placeholder="Search for..." id="search"> <span
-												class="input-group-btn">
-												<button class="btn btn-default" type="button" id="btnsearch">Go!</button>
-											</span>
-										</div>
-									</div> -->
 									<table class="table table-hover projects" style="text-align: center">
 										<thead>
 											<tr>
@@ -179,7 +133,7 @@ cursor: pointer;
 												<th style="width: 90px">기사</th>
 												<th style="width: 180px">차고지 이름</th>
 												<th style="width: 60px">상태</th>
-												<th style="width: 100px; text-align: center;"><i
+												<th style="width: 70px; text-align: center;"><i
 													class="fa fa-trash" style="margin-bottom: 2px"></i> <input
 													type="checkbox" class="form" id = "checkall"></th>
 											</tr>
@@ -214,7 +168,7 @@ cursor: pointer;
 									<c:set var = "pagecount" value = "${pagecount}" />
 									
 									
-									<div style="text-align: center">
+								<%-- 	<div style="text-align: center">
 										<ul class="pagination">
 										<c:if test="${pgc > 1}">
 											<li><a href="busenroll.admin?pg=${pgc-1}">Prev</a></li>
@@ -241,23 +195,18 @@ cursor: pointer;
 											</c:forEach>
 										</c:forEach>
 											
-
-										<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
-										</c:forEach> --%>
-										
 										<c:if test="${pgc < Count/10 }">
 
 											<li><a href="busenroll.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
 								</div>
-
+ --%>
 								</div>
 
 									<div style = "float: right;">
-									<!-- <div class="btn btn-success btn-xs" id = "ebtn"><i class="fa fa-check"></i>
-                                         			 등록 </div> -->
+									<div class="btn btn-success btn-xs" id = "ebtn"><i class="fa fa-check"></i>
+                                         			 등록 </div>
                                     <div class="btn btn-default btn-xs" id = "ubtn"><i class="fa fa-retweet"></i>
                                          			 수정 </div>
 									<div class="btn btn-danger btn-xs" id = "dbtn"><i class="fa fa-trash-o"></i>

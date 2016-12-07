@@ -40,7 +40,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-edit"></i> 버스관리 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="">버스 등록/삭제</a></li>
+                      <li><a href="busreg.admin">버스 등록/삭제</a></li>
                       <li><a href="realTime.admin">실시간 버스 위치</a></li>
                       <li><a href="chagozi.admin">차고지 별 버스 상태</a></li>
                     </ul>
