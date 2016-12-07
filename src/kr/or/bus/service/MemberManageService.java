@@ -11,12 +11,16 @@
 package kr.or.bus.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.mail.internet.MimeUtility;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,7 +29,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.velocity.VelocityConfig;
 
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dto.MemberJoinMDetailDTO;
@@ -43,6 +49,9 @@ private JavaMailSender mailSender;
 	public void setMailSender(JavaMailSender mailSender){
 		this.mailSender=mailSender;
 	}
+	@Autowired
+	private VelocityConfig velocityconfig;
+	
 	
 	@Autowired
 	private SqlSession sqlsession;
@@ -155,10 +164,28 @@ private JavaMailSender mailSender;
 	}
 
 	//승인여부 y 로 바꾸고 권한 부여
-	public void updateCheck(String m_id){
+	public void updateCheck(String m_id) throws MessagingException{
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		String what=dao.getMail(m_id);
 		dao.updateCheck(m_id);
 		dao.insertAuth(m_id);
+		
+		MimeMessage mimemessage = mailSender.createMimeMessage();			
+		String cong=what+"님 축하드립니다. 가입이 완료되었습니다.";
+		Map<String,Object> param=new HashMap<>();
+		param.put("content",cong);
+		mimemessage.setSubject("OneRoadBell 가입완료 확인입니다.","UTF-8");
+		String Url="hello.html";
+		String format=VelocityEngineUtils.mergeTemplateIntoString(velocityconfig.getVelocityEngine(),Url,"UTF-8",param);
+		mimemessage.setText(format,"UTF-8","html");
+		mimemessage.addRecipient(RecipientType.TO, new InternetAddress(what));
+		
+		mailSender.send(mimemessage);
+
+
+		
+		
+		
 	}
 	
 	public MemberJoinMDetailRegulOffDTO memberDetail(String m_id){

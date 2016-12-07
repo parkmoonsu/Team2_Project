@@ -97,7 +97,9 @@ public interface MemberDAO {
 	public void updateCheck(String m_id);
 	//승인시 권한 부여
 	public void insertAuth(String m_id);
-
+	
+	public String getMail(String m_id);
+	
 	//(관리자) 회원 정보 상세 확인(휴무부여한 사람)
 	public MemberJoinMDetailRegulOffDTO getMemberDetailRegulOff(String m_id);
 	//(관리자) 회원 정보 상세확인(휴무부여하지 않은 사람)

@@ -114,7 +114,7 @@
 								</div>
 								<div class="x_panel">
 									<div class="x_content">
-										<form class="form-horizontal form-label-left input_mask">
+										<form action = "busreg2.admin" method = "post" class="form-horizontal form-label-left input_mask">
 											<div class="form-group has-feedback">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="b_vehiclenum">
 													버스 번호
@@ -187,30 +187,11 @@
 													<span class="fa fa-group form-control-feedback left" aria-hidden="true"></span>
 												</div>
 											</div>
-								
-											<div class="form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12">차고지</label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<select class="form-control" id = "g_num">
-														<option>(미정)</option>
-													</select>
-												</div>
-											</div>
-											
-											<div class="form-group">
-												<label class="control-label col-md-3 col-sm-3 col-xs-12">노선</label>
-												<div class="col-md-6 col-sm-6 col-xs-12">
-													<select class="form-control" id = "r_num">
-														<option>(미정)</option>
-														
-													</select>
-												</div>
-											</div>
 											
 											<div class = "col-md-6 col-sm-6">
 											</div>
 											<div class="col-sm-3 col-xs-12" align="right">
-												<button class = "btn btn-success btn-xs"><i class="fa fa-check"></i>등록</button>
+												<button type = "submit" class = "btn btn-success btn-xs" id="reg"><i class="fa fa-check"></i>등록</button>
 												
 												<input type = "reset" class = "btn btn-default btn-xs" value = "다시쓰기">
 											</div>
@@ -298,6 +279,12 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
 			
 	<script type="text/javascript">
+		$(function(){
+			$("#reg").click(function(){
+				$("#reg").submit();
+			});
+		});
+	
 		$.datepicker.regional['ko'] = {
 		        closeText : '닫기',
 		        prevText : '이전달',
@@ -320,8 +307,8 @@
 		
 		$('#b_sdate').datepicker( {
 		     changeMonth: true,
-		     changeYear: true,        
-		     dateFormat: 'y/mm/dd',
+		     changeYear: true,
+		     dateFormat: 'yy-mm-dd',
 		     showAnim : "clip"
 		});
 		
