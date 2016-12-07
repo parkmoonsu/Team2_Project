@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			s.s_x,
 			s.s_y,
 			s.s_name
-		from routestopcopy cp
+		from routestopcopy4 cp
 		join stop s on cp.s_num=s.s_num
 		where cp.r_num=#{r_num}
 	</select>

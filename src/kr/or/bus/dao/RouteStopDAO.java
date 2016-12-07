@@ -15,4 +15,6 @@ public interface RouteStopDAO {
 	public int addRouteStopInfo(RouteStopDTO dto);
 	public int updateRouteStopInfo(String r_num, String rs_order, String s_num);
 	public List<RouteStopJoinStopDTO> getRouteStopInfoList(String r_num);
+	public void routeUpdate(int rs_order, String r_num);
+	public void routeUpdate2(int rs_order, String s_num);
 }

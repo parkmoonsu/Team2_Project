@@ -555,6 +555,7 @@ select#selectBus, select#selectBus2 {
             copyMarker.addListener('click', function() {
             	//console.log(copyMarkers[i].getLabel());
                	//console.log(copyMarker.getLabel());
+               	console.log('라벨값은??'+copyMarkers[i].getLabel());
                 fr=copyMarker.getLabel();
                 $("#new-modal").modal(); 
                 
@@ -598,12 +599,12 @@ select#selectBus, select#selectBus2 {
         		});
           
             //마커의 라벨 이름을 알기위해 적용. 추후삭제 할것
-            copyMarker.addListener('click', function() {         
-               	console.log(copyMarkers[i].label);
+             copyMarker.addListener('click', function() {         
+               	console.log('hi'+copyMarker.label);
                 fr=copyMarker.getLabel();
                 $("#new-modal").modal(); 
                 
-            });
+            }); 
       		}
    			
         }

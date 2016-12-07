@@ -169,6 +169,42 @@ select#selectBus, select#selectBus2 {
 			<!-- /footer content -->
 		</div>
 	</div>
+	
+	<!-- 비밀번호 모달 :match-pass -->
+   <div class="modal fade" id="match-pass" tabindex="-1" role="dialog"
+      aria-labelledby="myModalLabel" aria-hidden="true"
+      style="display: none;">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <!-- Begin # DIV Form -->
+            <div id="div-forms">
+               <div class="modal-header" align="center">
+                  <h3>정류장 순서 지정</h3>
+               </div>
+               <!-- Begin # Login Form -->
+               <form id="login-form" method="post">
+                  <div class="modal-body">
+                     <div style="text-align: center">
+                        <label for="m_pw">정류장 순서 입력 </label> <input type="text"
+                           name="m_pw" id="m_pw">
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <div>
+                        <input type="button" class="btn btn-dark" value="완료"
+                           id="passtrue" data-target="myModal">
+                        <button type="button" class="btn btn-default"
+                           data-dismiss="modal">닫기</button>
+                     </div>
+                  </div>
+               </form>
+               <!-- End # Login Form -->
+            </div>
+            <!-- End # DIV Form -->
+         </div>
+      </div>
+   </div>
+   <!-- end modal -->
 
 
 	<!-- Bootstrap -->
@@ -236,17 +272,26 @@ select#selectBus, select#selectBus2 {
 
 		var map;
 		var myLatlng;
-		var array=new Array();
+		var markerList=new Array();
+		var dataList=new Array();
 		
 		function initMap() {
 			map = new google.maps.Map(document.getElementById('map'), {
 				zoom : 15,
-				center : new google.maps.LatLng(37.39489285215817,
-						127.11115658283234)
+				center : new google.maps.LatLng(37.332835,
+						126.926840)
+
 			});
 
 			map.addListener('click', function(e) {
-
+				//초기화
+				for(var i=0; i<markerList.length; i++){
+					markerList[i].setMap(null);
+				}
+				markerList=[];
+				dataList=[];
+				//changedmarker.setMap(null);
+				
 				myLatlng = {
 					lat : e.latLng.lat(),
 					lng : e.latLng.lng()
@@ -257,40 +302,76 @@ select#selectBus, select#selectBus2 {
 
 		}
 		
-		
+		var cinfowindow;
+		var cmarker;
+		var markerobject;
+		var dataobject;
+		var changedmarker;
 
 		//추가
 		function makeInfowindow() {
-			//var r_num="5623";
 			var contentString = '<div id="content">'
 			+'<button class="btn btn-default" onclick="addstop()" >정류장 추가</button><br>'
 			+'<button class="btn btn-default" onclick="searchstop()">주변 정류장 찾기</button>'
-				
 			+'</div>';
 
-			var infowindow = new google.maps.InfoWindow({
+			cinfowindow = new google.maps.InfoWindow({
 				content : contentString
 			});
 
-			var marker = new google.maps.Marker({
+			cmarker = new google.maps.Marker({
 				position : myLatlng,
 				map : map
 			});
 			
-			infowindow.open(map, marker);
-			/* marker.addListener('click', function() {
-				infowindow.open(map, marker);
-			}); */
+			cinfowindow.open(map, cmarker);
+
 		}
 		
 		function addstop(){
-			alert('정류장 추가');
+			alert('정류장 추가');	
+		}
+		
+		function stopclick(s_num){
+			//모달창
+			$('#match-pass').modal("show");
 			
+			//클릭하면
+			$('#passtrue').click(function(){
+				//확인버튼 누르면
+
+				
+				//지도 표시 변경			
+				changedmarker = new google.maps.Marker({
+					position : markerobject.getPosition(),
+					label : $('#m_pw').val(),
+					map : map
+				});
+				
+				//db 업데이트
+				$.ajax({
+					url:'routeUpdate.admin',
+					type:'post',
+					data: {
+						rsorder: $('#m_pw').val().trim(),
+						snum: dataobject.s_num,
+						rnum: dataobject.r_num
+					},
+					success:function(data){
+						$('#match-pass').modal("hide");
+						//다른 마커 지우기
+						for(var i=0; i<markerList.length; i++){
+							markerList[i].setMap(null);
+						}
+						markerList=[];
+						dataList=[];
+					}
+				});
+			});
+					
 		}
 		
 		function searchstop(){
-			
-			alert('정류장 검색');
 			
 			$.ajax({
 				type:'post',
@@ -307,14 +388,12 @@ select#selectBus, select#selectBus2 {
 						var low_x=myLatlng.lng-buff;
 
 						if(obj.s_y<high_y && obj.s_y>low_y){
-							//&& obj.s_y>low_y && obj.s_x<high_x && obj.s_x>low_x
-							array.push(obj);
+								dataList.push(obj);
 						}
 						
 					});
-					console.log(array);
 					
-					$.each(array, function(index, obj){
+					$.each(dataList, function(index, obj){
 						var loc={
 							lat : Number(obj.s_y),
 							lng : Number(obj.s_x)
@@ -323,11 +402,14 @@ select#selectBus, select#selectBus2 {
 						var marker = new google.maps.Marker({
 							position : loc,
 							map : map,
-							label : obj.rs_order
+							label : String(obj.rs_order)
 						});
 						
-						var contentString = '<div id="content">'
-							+'정류장번호 : '+obj.s_num+
+						var contentString = '<div id="content" style="text-align:left, padding-right:40px">'
+							+'정류장 번호 : '+obj.s_num+'<br>'
+							+'정류장 이름 : '+obj.s_name+'<br>'
+							+'<button class="btn btn-default" onclick="stopclick('
+							+obj.s_num+')">등록하기</button>';
 							+'</div>';
 
 						var infowindow = new google.maps.InfoWindow({
@@ -335,34 +417,18 @@ select#selectBus, select#selectBus2 {
 						});
 						
 						marker.addListener('click', function() {
-							//선택했던 지점의 마커와 인포윈도우가 사라져야 한다.close()
-							setMapOnAll(null);
+							markerobject=marker;
+							dataobject=obj;
+							cmarker.setMap(null);
 							infowindow.open(map, marker);
 						});
 						
-						
+						markerList.push(marker);
+									
 					});
-					
-				
 				}
-			});
-			
-			//배열의 각 값마다 비교
-			//해서 제일 가까운 5개 뽑기
-			//선택하면 노선 테이블에 등록
-			
+			});			
 		}
-		
-		
-
-		$(document).ready(function() {
-			/* $('#addstop').click(function(){
-				alert('정류장 추가 클릭');
-			});
-			$('#searchstop').click(function(){
-				alert('정류장 검색 클릭');
-			}); */
-		});
 
 	</script>
 	<!-- 구글 맵 인증키 -->

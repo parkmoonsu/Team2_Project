@@ -5,13 +5,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 
+import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
 import kr.or.bus.dto.RouteStopJoinStopDTO;
 import kr.or.bus.service.RouteManageService;
 
@@ -62,4 +65,26 @@ public class RouteManageController {
 			model.addAttribute("rssdto", rssdto);
 			return jsonview;
 		}
+		
+	    //추가
+	    @RequestMapping(value="/routeRead.admin",method=RequestMethod.POST)
+	    public View routeRead(HttpServletRequest request , HttpServletResponse response, Model model) throws Exception{
+
+	        List<RouteStopCopyJoinStopDTO> list=routeManageSerivce.routeRead(request , response);
+
+	        model.addAttribute("list", list);
+	        return jsonview;
+	    }
+	    
+	    @RequestMapping(value="/routeUpdate.admin",method=RequestMethod.POST)
+	    public View routeUpdate(String rsorder, String snum, String rnum) throws Exception{
+	    	int rs_order=Integer.parseInt(rsorder);
+	    	String s_num=snum;
+	    	String r_num=rnum;
+	    	
+	    	routeManageSerivce.routeUpdate(rs_order, s_num, r_num);
+	    	System.out.println("여길 타긴 하냐?");
+	    	return jsonview;
+	    }
+
 }
