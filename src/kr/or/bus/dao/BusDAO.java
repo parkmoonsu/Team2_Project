@@ -117,6 +117,6 @@ public interface BusDAO {
 	
 	
 	/////////////////버스 등록  ////////////////////////////////////////////////////////////////
-	public void busReg(String b_vehiclenum , Date b_sdate , String b_sprice , String b_manuf , 
+	public int busReg(String b_vehiclenum , Date b_sdate , String b_sprice , String b_manuf , 
 			int b_pcount , String b_model , String b_caryear);
 }

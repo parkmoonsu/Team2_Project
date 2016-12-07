@@ -344,14 +344,16 @@ public class BusManageService {
 	}
 ///////////////////////////버스 운영관리////////////////////////////////////////////////////////
 	
-	public void busReg(String b_vehiclenum,String b_sdate,String b_sprice,String b_manuf,String b_pcount,String b_effic,String b_model,String b_caryear){
+	public int busReg(String b_vehiclenum,String b_sdate,String b_sprice,String b_manuf,String b_pcount,String b_effic,String b_model,String b_caryear){
 		
 		Date date = Date.valueOf(b_sdate);
 		
 		int pcount = Integer.parseInt(b_pcount);
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		
-		dao.busReg(b_vehiclenum, date, b_sprice, b_manuf, pcount, b_model, b_caryear);
+		int result = dao.busReg(b_vehiclenum, date, b_sprice, b_manuf, pcount, b_model, b_caryear);
+		
+		return result;
 	}
 	
 	
