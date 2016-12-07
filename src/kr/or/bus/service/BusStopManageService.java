@@ -446,7 +446,7 @@ public class BusStopManageService {
 			
 			에 해당하는 차량 id가 아래에 입력되어야함.
 		*/		
-		if(r_num.equals("all")){
+		if(r_num.equals("전체선택")){
 			
 			JSONArray jsonlist1 = multiLocationSearch(request , response, dto, "5623");
 			JSONArray jsonlist2 = multiLocationSearch(request , response, dto, "6702");
@@ -461,7 +461,7 @@ public class BusStopManageService {
 						
 			out.print(locations);
 			
-		}else if(!r_num.equals("all")){
+		}else if(!r_num.equals("전체선택")){
 			System.out.println("버스번호? "+r_num);
 			System.out.println("버스하나만 조회");
 			
