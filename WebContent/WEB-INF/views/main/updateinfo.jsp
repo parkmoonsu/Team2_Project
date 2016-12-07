@@ -11,6 +11,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-filestyle.js"></script>
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
@@ -166,8 +169,7 @@
 																			<div class="form-group">
 																				<span class="col-xs-3 col-sm-3">사진</span>
 																				<div class="col-xs-9 col-sm-9">
-																					<input id="m_photo" class="control" type="file"
-																						name="files[0]">
+<input  id="m_photo" onchange = "imagecheck(this)" name="files[0]" type="file" class="filestyle" data-buttonText="Open" data-input="false" data-iconName="glyphicon-plus" data-classButton="btn btn-primary">													
 																				</div>
 																			</div>
 																		</td>

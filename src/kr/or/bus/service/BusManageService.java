@@ -26,6 +26,7 @@ import kr.or.bus.dao.RnumcommuteDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.BusJoinRdetailJoinRepairDTO;
 
 @Service
 public class BusManageService {
@@ -117,6 +118,14 @@ public class BusManageService {
 		return sclist;
 	}
 
+	public List<BusJoinRdetailJoinRepairDTO> getSearch(String b_vehiclenum){
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinRdetailJoinRepairDTO> list = dao.getSearch(b_vehiclenum);
+		
+		return list;
+	}
+	
 	
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRouteNum(String g_num){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
@@ -344,14 +353,16 @@ public class BusManageService {
 	}
 ///////////////////////////버스 운영관리////////////////////////////////////////////////////////
 	
-	public void busReg(String b_vehiclenum,String b_sdate,String b_sprice,String b_manuf,String b_pcount,String b_effic,String b_model,String b_caryear){
+	public int busReg(String b_vehiclenum,String b_sdate,String b_sprice,String b_manuf,String b_pcount,String b_effic,String b_model,String b_caryear){
 		
 		Date date = Date.valueOf(b_sdate);
 		
 		int pcount = Integer.parseInt(b_pcount);
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		
-		dao.busReg(b_vehiclenum, date, b_sprice, b_manuf, pcount, b_model, b_caryear);
+		int result = dao.busReg(b_vehiclenum, date, b_sprice, b_manuf, pcount, b_model, b_caryear);
+		
+		return result;
 	}
 	
 	

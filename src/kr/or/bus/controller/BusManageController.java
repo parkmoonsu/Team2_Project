@@ -26,6 +26,7 @@ import kr.or.bus.dto.BusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.BusJoinRdetailJoinRepairDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
 import kr.or.bus.service.BusManageService;
 import kr.or.bus.service.BusStopManageService;
@@ -247,8 +248,9 @@ public class BusManageController {
 	}
 	//scount(String g_name)
 	@RequestMapping("/selectchagozi.admin")
-	public View selectchagozi(String g_name, String pg, Model model){
+	public String selectchagozi(String g_name, String pg, Model model){
 		System.out.println(g_name + "###");
+		System.out.println("pg는"+pg);
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> sclist = service.getStat(g_name, pg);
 		int count=service.scount(g_name);
 		int page = service.pg(pg);
@@ -257,9 +259,21 @@ public class BusManageController {
 		model.addAttribute("count",count);	
 		model.addAttribute("sclist", sclist);
 		
-		return jsonview;
+		return "busmanage/chagozitable";
 	}
 
+	@RequestMapping("/busstatsearch.admin")
+	public View getStatSearch(String b_vehiclenum, Model model){
+		
+		System.out.println("333" + b_vehiclenum);
+		List<BusJoinRdetailJoinRepairDTO> list = service.getSearch(b_vehiclenum);
+		model.addAttribute("list", list);
+		
+		return jsonview;
+		
+		
+	}
+	
 	@RequestMapping("/update.admin")
 	public String update(String b_vehiclenum_u , String g_name_u , String r_num_u , String mname_u , String hidden){
 		System.out.println("update column : " + b_vehiclenum_u + "/" + g_name_u + "/" + r_num_u + "/" + mname_u + "/" + hidden);
@@ -280,24 +294,7 @@ public class BusManageController {
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("array", array);
-		
-		/*for(int i = 0 ; i < array.length ; i++){
-			System.out.println(array[i] + "의 유무 : " + service.alreadyUse(array[i]));
-			data[i] = service.alreadyUse(array[i]);
-		}
-		model.addAttribute("data", data);
-		*/
-		//System.out.println("받은것 : " +array.length);
-		/*int result = 0;
-		for(int i = 0; i < array.length; i++){
-			System.out.println("넘어온 값 : "+array[i]);
-			result = service.alreadyUse(array[i]);
-		}
-		//int data = service.alreadyUse(b_vehiclenum);
-		System.out.println("#####data### : " + result );
-		model.addAttribute("result", result);
-		model.addAttribute("num", b_vehiclenum);
-		*/return jsonview;
+		return jsonview;
 	}
 	
 	@RequestMapping("/matchpass.admin")
@@ -395,45 +392,16 @@ public class BusManageController {
 	public String busReg(String b_vehiclenum,String b_sdate,String b_sprice,String b_manuf,String b_pcount,String b_effic,String b_model,String b_caryear , String pg , Model model){
 		System.out.println("##########" + b_vehiclenum + "/" + b_sdate + "/" + b_sprice + "/" + b_manuf + "/" + b_pcount + "/" + b_effic + "/" + b_model + "/" + b_caryear);
 		
-		service.busReg(b_vehiclenum, b_sdate, b_sprice, b_manuf, b_pcount, b_effic, b_model, b_caryear);
+		int result = service.busReg(b_vehiclenum, b_sdate, b_sprice, b_manuf, b_pcount, b_effic, b_model, b_caryear);
 		
-		
-		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.busInfo(pg);
-		int page = service.pg(pg);
-		int count = service.busCount();
-		int pagecount = 0;
-		if(count % 10 == 0){
-			pagecount = count/10;
+		String viewpage = "";
+		if(result > 0){
+			viewpage = "busmanage/insertsuccess";
 		}else{
-			pagecount = count/10 + 1;
+			viewpage = "busmanage/insertfail";
 		}
-		
-		int acount = service.aBus(); //공항
-		int mcount = service.mBus(); //간선
-		int ncount = service.nBus(); //지선
-		int wcount = service.wBus(); //순환
-		int gcount = service.gBus(); //광역
-		int icount = service.iBus(); //인천
-		int kcount = service.kBus(); //경기
-		int dcount = service.dBus(); //폐지
-		int pcount = service.pBus(); //공용
-		int noroute = service.noRoute();
-		//1:공항, 3:간선, 4:지선, 5:순환, 6:광역, 7:인천, 8:경기, 9:폐지, 0:공용
-		model.addAttribute("a", acount);
-		model.addAttribute("m", mcount);
-		model.addAttribute("n", ncount);
-		model.addAttribute("w", wcount);
-		model.addAttribute("g", gcount);
-		model.addAttribute("i", icount);
-		model.addAttribute("k", kcount);
-		model.addAttribute("d", dcount);
-		model.addAttribute("p", pcount);
-		model.addAttribute("no", noroute);
-		
-		model.addAttribute("pagecount", pagecount);
-		model.addAttribute("pgs", page);
-		model.addAttribute("list", list);
-		model.addAttribute("count",count);
-		return "busmanage/busenroll";
+		return viewpage;
 	}
+	
+	
 }

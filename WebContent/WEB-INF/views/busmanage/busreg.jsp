@@ -114,7 +114,7 @@
 								</div>
 								<div class="x_panel">
 									<div class="x_content">
-										<form action = "busreg2.admin" method = "post" class="form-horizontal form-label-left input_mask">
+										<form action = "busreg2.admin" method = "post" class="form-horizontal form-label-left input_mask" id = "regform">
 											<div class="form-group has-feedback">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="b_vehiclenum">
 													버스 번호
@@ -191,7 +191,7 @@
 											<div class = "col-md-6 col-sm-6">
 											</div>
 											<div class="col-sm-3 col-xs-12" align="right">
-												<button type = "submit" class = "btn btn-success btn-xs" id="reg"><i class="fa fa-check"></i>등록</button>
+												<div class = "btn btn-success btn-xs" id="reg"><i class="fa fa-check"></i>등록</div>
 												
 												<input type = "reset" class = "btn btn-default btn-xs" value = "다시쓰기">
 											</div>
@@ -281,6 +281,20 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#reg").click(function(){
+				$.ajax({
+					url:"alreadyuse.admin",
+					data : {b_vehiclenum : $("#b_vehiclenum").val().trim()},
+					success : function(data){
+						console.log(data.list[0]);
+						if(data.list[0] == 1){
+							alert("버스번호가 이미 존재합니다.");
+							$("#b_vehiclenum").focus();
+						}else{
+							$("#regform").submit();
+						}
+					}
+				});
+
 				if($("#b_vehiclenum").val() == ''){
 					alert("버스 번호를 입력하세요.");
 					$("#b_vehiclenum").focus();
@@ -313,8 +327,6 @@
 					alert("탑승 가능 인원을 입력하세요.");
 					$("#b_pcount").focus();
 					return false;
-				}else{
-					$("#reg").submit();
 				}
 			});
 		});

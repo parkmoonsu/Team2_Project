@@ -227,12 +227,22 @@ select#selectBus, select#selectBus2 {
 						</div>
 						<!-- Begin # Login Form -->
 						<div class="modal-body">
-							<div style="text-align: center"></div>
+							<div id="deleteinfo" style="text-align: center">
+								<div>
+								<label for="stopn">정류소 이름 </label> <input type="text" name="stopn"
+									id="stopn" readonly>
+								</div>
+								<div>
+								<label for="stopno">정류소 번호 </label> <input type="text" name="stopno"
+									id="stopno" readonly>
+								</div>
+								
+							</div>
 						</div>
 						<div class="modal-footer">
 							<div>
 								<button class="btn btn-default" data-dismiss="modal"
-									aria-hidden="true" id="what">완료</button>
+									aria-hidden="true" id="what">삭제</button>
 								<button class="btn btn-default" data-dismiss="modal"
 									aria-hidden="true">취소</button>
 							</div>
@@ -362,9 +372,10 @@ select#selectBus, select#selectBus2 {
             		console.log(data.s_num);
             		$('#snum').val(data.s_num);
             		console.log($('#snum').val());
+            		
             	}
              });
-        	 $("#pass-modal").modal(); 
+             $("#pass-modal").modal(); 
              er=e;
         });                                                    
             
@@ -373,7 +384,7 @@ select#selectBus, select#selectBus2 {
        trafficLayer.setMap(map);
     }
     //버스 정류장 수동 생성 db 변경
-    function copyMarkerMakess(latLng, map){
+   /*  function copyMarkerMakess(latLng, map){
     	console.log(latLng);
     	var num =$("#end").val();
     	var s_num = $('#snum').val();
@@ -381,7 +392,8 @@ select#selectBus, select#selectBus2 {
     	console.log("알고싶어정류번호"+s_num);
     	console.log("알고싶어 정류장 이름 "+s_name);
     	console.log("알고싶어넘버"+num);
-    	if(num==0){
+    	console.log('as'+as); 
+    	if(num==0){ //번호가 만약 0이면 
     		console.log("?여기??"+num);
        		var copyMarker = new google.maps.Marker({
              	position: latLng,        
@@ -409,157 +421,43 @@ select#selectBus, select#selectBus2 {
     				/* $.each(data.rssdto,function(index,obj){
     					console.log(obj.r_num+"/"+obj.s_num+"/"+obj.rs_order);
     				}); */
-    				console.log(data.rssdto);
+    	/* 			console.log(data.rssdto);
     				copyMarkerMakes(data.rssdto,map);
     	
     			}
     		});
     	}
-    }
-  //버류 정류장 수동 생성
-    /* function copyMarkerMakes(latLng, map) {
-        console.log(latLng);
-    	var num =$("#end").val();
-    	console.log("알고싶어넘버"+num);
-   		if(num==0){
-      		console.log("?여기??"+num);
-       		var copyMarker = new google.maps.Marker({
-             	position: latLng,        
-                map: map,
-                label : as.toString(),
-                animation: google.maps.Animation.DROP,
-                draggable : true
-          	});    
-       		copyMarkers.push(copyMarker);
-          	as++;
-      	}else{
-         	 	console.log("오너라오너라:"+num);
-         		var copyMarker = new google.maps.Marker({
-                	position: latLng,        
-                   	map: map,
-                   	label : as.toString(),
-                   	animation: google.maps.Animation.DROP,
-                   	draggable : true
-             	});    
-            	copyMarkers.splice(parseInt(num),0,copyMarker);
-            	console.log(copyMarkers);
-           		as++;
-           		num=0;
-           		$("#end").val('');
-           		console.log($("#end").val());
-           
-      	}
-      	//마커 드래그 끝났을떄
-        copyMarker.addListener('dragend', function() {
-            
-        	//마커 라벨을 얻어와 담을 변수
-        	var markerLabel = copyMarker.getLabel();
-            
-        	//마커를 드래그후 마커의 좌표를 담기위한 변수
-        	var dragendX= copyMarker.getPosition().lat;
-        	var dragendY= copyMarker.getPosition().lng;
-              
-           
-        	for(var i=0; i<copyMarkers.length;i++){
-            	console.log(copyMarkers.length);
-            	console.log("bmarker ? "+copyMarkers[i]);
-                
-            	if(copyMarkers[i].getLabel() == markerLabel){
-                	copyMarkers[i].getPosition().lat = dragendX;
-                	copyMarkers[i].getPosition().lng = dragendY;
-                      
-            	}
-        	}     
-    	});
-      
-        //마커의 라벨 이름을 알기위해 적용. 추후삭제 할것
-        copyMarker.addListener('click', function() {         
-           	console.log(copyMarker.getLabel());
-            fr=copyMarker.getLabel();
-            $("#new-modal").modal(); 
-            
-        });
-         
-        dataArray.push(latLng);
     }*/
+   
+ 
 	//db에서 불러오기
      function copyMarkerMakes(latLng, map) {
-    	     	
-      		if(copyMarkers !=null){ 		
-      			map.data.forEach(function(features) {           
-           			map.data.remove(features);
-           		});
-           
-           		for(var i=0; i<copyMarkers.length; i++){
-           			copyMarkers[i].setMap(null);
-           		}
-           		copyMarkers=[];
-           		copyMarkers.length = 0;
-           		as=0;   		
-      		}      	    	      	
-      	
-      
-      	
-      		map.data.forEach(function(features) {           
-       			map.data.remove(features);
-       		});
-       
-       		for(var i=0; i<copyMarkers.length; i++){
-       			copyMarkers[i].setMap(null);
-       		}
-       		copyMarkers=[];
-       		copyMarkers.length = 0;
-       		as=0;
        		
-       		
-      
+      //요기욕
         console.log(latLng);
-        for(var i=0; i<latLng.length; i++){
+               	
+        	var what={
+        		lat:parseFloat(latLng.s_y), 
+        		lng:parseFloat(latLng.s_x)
+        	}
+        
     		var num =$("#end").val();
     		console.log("알고싶어넘버"+num);
-   			if(num==0){
+    		console.log("순서 보여주세여"+latLng.rs_order);
+   			if(num==""){
       			console.log("?여기??"+num);
        			var copyMarker = new google.maps.Marker({
-             		position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),        
+             		title : latLng.s_name,
+             		s_num : latLng.s_num,
+       				position: what,        
                 	map: map,
-                	label : latLng[i].rs_order,
+                	label : latLng.rs_order,
                 	animation: google.maps.Animation.DROP,
                 	draggable : true
           		});    
        			copyMarkers.push(copyMarker);
           		as++;
-          		
-          	//마커 드래그 끝났을떄
-            	copyMarker.addListener('dragend', function() {
-                
-            		//마커 라벨을 얻어와 담을 변수
-            		var markerLabel = copyMarker.getLabel();
-                
-            		//마커를 드래그후 마커의 좌표를 담기위한 변수
-            		var dragendX= copyMarker.getPosition().lat;
-            		var dragendY= copyMarker.getPosition().lng;
-                  
-               
-            		for(var i=0; i<copyMarkers.length;i++){
-                		console.log(copyMarkers.length);
-                		console.log("bmarker ? "+copyMarkers[i]);                
-                		if(copyMarkers[i].getLabel() == markerLabel){
-                    		copyMarkers[i].getPosition().lat = dragendX;
-                    		copyMarkers[i].getPosition().lng = dragendY;
-                          
-                		}
-            		}     
-        		});//drag
-          
-            //마커의 라벨 이름을 알기위해 적용. 추후삭제 할것
-            copyMarker.addListener('click', function() {
-            	//console.log(copyMarkers[i].getLabel());
-               	//console.log(copyMarker.getLabel());
-                fr=copyMarker.getLabel();
-                $("#new-modal").modal(); 
-                
-            });
-      		}else{
+   			}else{
          	 	console.log("오너라오너라:"+num);
          		var copyMarker = new google.maps.Marker({
                 	position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),        
@@ -574,8 +472,9 @@ select#selectBus, select#selectBus2 {
            		num=0;
            		$("#end").val('');
            		console.log($("#end").val()); 
-           		
-           	//마커 드래그 끝났을떄
+      		 }
+   
+          	//마커 드래그 끝났을떄
             	copyMarker.addListener('dragend', function() {
                 
             		//마커 라벨을 얻어와 담을 변수
@@ -585,63 +484,34 @@ select#selectBus, select#selectBus2 {
             		var dragendX= copyMarker.getPosition().lat;
             		var dragendY= copyMarker.getPosition().lng;
                   
-               
+               			console.log(copyMarker.getLabel());
             		for(var i=0; i<copyMarkers.length;i++){
-                		console.log(copyMarkers.length);
-                		console.log("bmarker ? "+copyMarkers[i]);                
+                		/* console.log(copyMarkers.length);
+                		console.log("bmarker ? "+copyMarkers[i]); */                
                 		if(copyMarkers[i].getLabel() == markerLabel){
                     		copyMarkers[i].getPosition().lat = dragendX;
                     		copyMarkers[i].getPosition().lng = dragendY;
                           
                 		}
             		}     
-        		});
+        		});//drag
           
             //마커의 라벨 이름을 알기위해 적용. 추후삭제 할것
-            copyMarker.addListener('click', function() {         
-               	console.log(copyMarkers[i].label);
-                fr=copyMarker.getLabel();
+            copyMarker.addListener('click', function() {
+            	//console.log(copyMarkers[i].getLabel());
+               	//console.log(copyMarker.getLabel());
+               	console.log(copyMarker.getLabel());
+                fr=copyMarker.getLabel(); //삭제시 라벨번호
                 $("#new-modal").modal(); 
-                
+                $('#stopn').val('');
+                $('#stopno').val('');
+                $('#stopn').val(copyMarker.title);
+                $('#stopno').val(copyMarker.s_num);
+                //$('#stopn').val();
             });
-      		}
-   			
-        }
-      		/* //마커 드래그 끝났을떄
-        	copyMarker.addListener('dragend', function() {
-            
-        		//마커 라벨을 얻어와 담을 변수
-        		var markerLabel = copyMarker.getLabel();
-            
-        		//마커를 드래그후 마커의 좌표를 담기위한 변수
-        		var dragendX= copyMarker.getPosition().lat;
-        		var dragendY= copyMarker.getPosition().lng;
-              
            
-        		for(var i=0; i<copyMarkers.length;i++){
-            		console.log(copyMarkers.length);
-            		console.log("bmarker ? "+copyMarkers[i]);                
-            		if(copyMarkers[i].getLabel() == markerLabel){
-                		copyMarkers[i].getPosition().lat = dragendX;
-                		copyMarkers[i].getPosition().lng = dragendY;
-                      
-            		}
-        		}     
-    		});
-      
-        //마커의 라벨 이름을 알기위해 적용. 추후삭제 할것
-        copyMarker.addListener('click', function() {         
-           	console.log(copyMarker.getLabel());
-            fr=copyMarker.getLabel();
-            $("#new-modal").modal(); 
-            
-        }); */
-        dataArray.push(latLng);
-        //copymovingBusMarker(latLng, map);
-               
-    }
-    
-    
+         
+	}
            
     function copymovingBusMarker(latLng, map){
        	console.log(latLng);    
@@ -672,7 +542,7 @@ select#selectBus, select#selectBus2 {
     	if(BusMarker !=null){
 			BusMarker.setMap(null);
 		}
-    }
+    };
     
     $(function() {
       
@@ -742,8 +612,10 @@ select#selectBus, select#selectBus2 {
                    		console.log("읽어옴?");
                    		console.log(data);                  		                                                                  	                       
                   		console.log(data);
-                      	console.log("1개 노선");                     		                     		                     			
-                      	copyMarkerMakes(data,map);                       	                          	                   		                   		
+                      	console.log("1개 노선");        
+                      	 for(var i=0; i<data.length; i++){
+                      		copyMarkerMakes(data[i], map);     
+                      	 }
              		}
 				});
    			}
@@ -784,15 +656,29 @@ select#selectBus, select#selectBus2 {
         });
        
        	$('#what').click(function(){
-           	var d=fr;
-          	console.log("d는:"+d);          
-            for(var j=0;j<copyMarkers.length;j++){
+           	var rs_order=fr;
+          
+          	var r_num = $('#selectBus').val();
+          	$.ajax({
+          		url : "deleteroutestop.admin",
+          		type : "post",
+          		data : {"r_num":r_num,"s_num":$('#stopno').val(),"rs_order":rs_order},
+          		success : function(data){
+          			alert(data.alert);
+          			deleteRoute();
+           			deleteBusMarker();
+          			$.each(data.rssdto,function(index,obj){
+          				copyMarkerMakes(obj[i], map);   
+          			});
+          		}
+          	});
+            /* for(var j=0;j<copyMarkers.length;j++){
                 if(d==copyMarkers[j].getLabel()){
                   copyMarkers[j].setMap(null);
                   copyMarkers[j].length=0;
                   copyMarkers.splice(j,1);
-                }
-            }  
+                } */
+            //}  
         });
        	
         //새로운 좌표 저장
@@ -890,7 +776,6 @@ select#selectBus, select#selectBus2 {
        		copyMarkers.length = 0;
        		as=0;
        		
-       		
       	}
       
       	$("#sendBusStop").click(function(){    	
@@ -910,7 +795,7 @@ select#selectBus, select#selectBus2 {
   		});   	  
       
    		 
-    }); //ready 함수 끝
+    });
    
    </script>
 		<!-- 구글 맵 인증키 -->

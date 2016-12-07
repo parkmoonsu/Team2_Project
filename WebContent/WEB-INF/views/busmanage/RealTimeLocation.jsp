@@ -715,7 +715,7 @@
      		path: data,
      	    strokeColor: 'red',
      	    strokeOpacity: 1.0,
-     	    strokeWeight: 4,
+     	    strokeWeight: 2,
        	});
      	poly.setMap(map);
     }
@@ -727,7 +727,7 @@
      		path: data,
      	    strokeColor: 'red',
      	    strokeOpacity: 1.0,
-     	    strokeWeight: 4,
+     	    strokeWeight: 2,
        	});
      	poly1.setMap(map);
     }
@@ -739,7 +739,7 @@
      		path: data,
      	    strokeColor: 'navy',
      	    strokeOpacity: 1.0,
-     	    strokeWeight: 4,
+     	    strokeWeight: 2,
        	});
      	poly2.setMap(map);
     }
@@ -751,7 +751,7 @@
      		path: data,
      	    strokeColor: 'purple',
      	    strokeOpacity: 1.0,
-     	    strokeWeight: 4,
+     	    strokeWeight: 2,
        	});
      	poly3.setMap(map);
     }
@@ -763,7 +763,7 @@
      		path: data,
      	    strokeColor: 'green',
      	    strokeOpacity: 1.0,
-     	    strokeWeight: 4,
+     	    strokeWeight: 2,
        	});
      	poly4.setMap(map);
     }
@@ -892,7 +892,7 @@
                 	           		  	
                 }
             });  		
-    	},30000);
+    	},20000);
     
     	
     	$("#selectBus").change(function() {

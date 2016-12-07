@@ -27,7 +27,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Gentellela Alela! |</title>
+<title>기사 관리</title>
 
 <!-- Bootstrap -->
 <link
@@ -234,7 +234,7 @@ $(document).ready(function() {
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								Calendar <small>Click to add/edit events</small>
+								<small>휴무신청 내역확인</small>
 							</h3>
 						</div>
 
@@ -249,7 +249,7 @@ $(document).ready(function() {
 
 								<div class="x_title">
 									<h2>
-										Calendar Events <small>Sessions</small>
+										휴무신청 내역확인 & 승인 
 									</h2>
 									<ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i
@@ -428,6 +428,8 @@ $(document).ready(function() {
 					center: 'title',
 					right: 'month,basicWeek,basicDay'
 				},
+				monthNames : ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+				titleFormat : "YYYY년 MM월",
 				navLinks: true, // can click day/week names to navigate views
 				editable: true,
 				eventLimit: true, // allow "more" link when too many events

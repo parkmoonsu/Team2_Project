@@ -14,7 +14,16 @@ public class BusDTO {
 	private String b_effic;
 	private String b_model;
 	private String b_caryear;
+	private String b_venid;
 	
+	public String getB_venid() {
+		return b_venid;
+	}
+
+	public void setB_venid(String b_venid) {
+		this.b_venid = b_venid;
+	}
+
 	public String getR_num() {
 		return r_num;
 	}

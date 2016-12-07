@@ -197,8 +197,9 @@ color: black;
 p, h5{
 text-align: left;
 }
-  #fh5co-header #navbar li a:hover {
-    color: #52d3aa !important;
+
+    #fh5co-header #navbar li a:hover {
+    color: #fc9700 !important;
   }
 </style>
 </head>

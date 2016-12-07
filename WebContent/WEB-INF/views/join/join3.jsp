@@ -220,9 +220,6 @@
 .my-box{
 	color: black;
 }
-  #fh5co-header #navbar li a:hover {
-    color: #52d3aa !important;
-  }
 </style>
 </head>
 <meta charset="utf-8">
