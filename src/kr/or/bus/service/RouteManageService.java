@@ -22,10 +22,16 @@ import kr.or.bus.dto.RouteStopDTO;
 import kr.or.bus.dto.RouteStopJoinStopDTO;
 import kr.or.bus.dto.StopDTO;
 
+import kr.or.bus.dao.RouteDAO;
+import kr.or.bus.dao.ScheduleManageDAO;
+import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
+
 @Service
 public class RouteManageService {
+	
 	@Autowired
 	private SqlSession sqlsession;
+	
 	//노선좌표를 파일에 저장하는 함수
 	public void routelocationSave(HttpServletRequest request , HttpServletResponse response){
       FileWriter fw = null;
@@ -92,6 +98,15 @@ public class RouteManageService {
         }
    	}
    	
+   	public List<RouteStopCopyJoinStopDTO> routeRead(HttpServletRequest request, HttpServletResponse response){
+   		String r_num = request.getParameter("r_num");
+   		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
+   		System.out.println(r_num);
+   		List<RouteStopCopyJoinStopDTO> list=dao.routeRead(r_num);
+
+		return list;
+   	}
+
    	public String getRandomSnum(){//5자리 랜덤 값 뽑기
 		int s_num;
 		s_num = (int)(Math.random()*100000+10000);
