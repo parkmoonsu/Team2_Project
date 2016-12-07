@@ -26,7 +26,9 @@
 			</props>
 		</property>
 	</bean>
-	
+<bean id="velocityconfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+	<property name="resourceLoaderPath" value="WEB-INF/velocity"/>
+</bean>
 
 <bean name="jsonview" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 	
