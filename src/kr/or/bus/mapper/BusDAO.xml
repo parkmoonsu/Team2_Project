@@ -74,9 +74,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from ( select bus.r_num, bus.b_vehiclenum, mem.m_name, g_name
 		from bus join garage ga on bus.g_num = ga.g_num
 		join member mem on mem.b_vehiclenum = bus.b_vehiclenum
+
 		where g_name=#{param1}
 		order by g_name) N)
 		where r between 1 + (#{param} - 1) * 10 and 10 + (#{param2} - 1) * 10
+
 	</select>
 	
 	<select id="scount" resultType="int" parameterType="String">
@@ -84,6 +86,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from bus join garage ga on bus.g_num = ga.g_num
 		join member mem on mem.b_vehiclenum = bus.b_vehiclenum
 		where g_name=#{g_name}
+	</select>
+	
+	<select id="getSearch" resultType="kr.or.bus.dto.BusJoinRdetailJoinRepairDTO">
+		select rownum r, N.*
+		from (select bus.r_num, rep.rep_name, rd_detail, rde.rd_cost, rde.rd_date
+	    from rdetail rde join repair rep on rep.rep_code = rde.rep_code
+      	join bus on  bus.b_vehiclenum=rde.b_vehiclenum
+	    where rde.b_vehiclenum=#{b_vehiclenum}) N
 	</select>
 	
 	

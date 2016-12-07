@@ -15,6 +15,7 @@ import java.util.List;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.BusJoinRdetailJoinRepairDTO;
 
 public interface BusDAO {
 	////////////////////////////////////////////////////////////////운영관리로 빠짐//////////////////////////
@@ -30,13 +31,17 @@ public interface BusDAO {
 	//모든 버스현황 리스트
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getAllStat(int page);
 	
-	//차고지별 버스현황 개수
+	//모든 버스현황 수
 	public int count();
 	
+	//차고지별 버스현황 개수
 	public int scount(String g_name);
 	
 	//차고지별 버스현황 리스트 
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getStat(String g_name, int page);
+	
+	//특정 버스 수리내역 조회
+	public List<BusJoinRdetailJoinRepairDTO> getSearch(String b_vehiclenum);
 	
 	//등록된 차고지의 이름을 통해 차고지에 맞는 노선 번호 가져오기
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRouteNum(String g_num);			////

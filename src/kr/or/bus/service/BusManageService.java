@@ -26,6 +26,7 @@ import kr.or.bus.dao.RnumcommuteDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.BusJoinRdetailJoinRepairDTO;
 
 @Service
 public class BusManageService {
@@ -117,6 +118,14 @@ public class BusManageService {
 		return sclist;
 	}
 
+	public List<BusJoinRdetailJoinRepairDTO> getSearch(String b_vehiclenum){
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinRdetailJoinRepairDTO> list = dao.getSearch(b_vehiclenum);
+		
+		return list;
+	}
+	
 	
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRouteNum(String g_num){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);

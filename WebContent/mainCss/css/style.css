@@ -196,7 +196,8 @@ h1, h2, h3, h4, h5, h6 {
   transform-origin: 0 0;
 }
 
-#fh5co-header {
+#fh5co-header
+ {
   position: absolute;
   z-index: 99;
   width: 100%;
@@ -214,24 +215,24 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   }
   #fh5co-header .navbar-brand {
-    color: #52d3aa !important;
+    color: #fc9700 !important;
   }
   #fh5co-header #navbar li a {
-    color: #52d3aa !important;
+    color: #fc9700 !important;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
   }
   #fh5co-header #navbar li a:hover {
-    color: #52d3aa !important;
+    color: #fc9700 !important;
   }
   #fh5co-header #navbar li a span:before {
-    background: #52d3aa !important;
+    background: #fc9700 !important;
   }
   #fh5co-header #navbar li.active a {
     background: transparent;
     background: none;
-    color: #52d3aa !important;
+    color: #fc9700 !important;
   }
   #fh5co-header #navbar li.active a span:before {
     visibility: visible;
@@ -245,7 +246,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-header #navbar li a {
   font-family: "Source Sans Pro", Arial, sans-serif;
-  color: #52d3aa;
+  color: #fc9700;
   position: relative;
   font-size: 19px;
   font-weight: 300;
@@ -289,7 +290,7 @@ h1, h2, h3, h4, h5, h6 {
 #fh5co-header #navbar li.active a {
   background: transparent;
   background: none;
-  color: #52d3aa;
+  color: #fc9700;
 }
 #fh5co-header #navbar li.active a span:before {
   visibility: visible;
@@ -302,7 +303,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 30px;
   font-weight: 700;
   padding-left: 0;
-  color:  #52d3aa;
+  color:  #fc9700;
 }
 #fh5co-header.navbar-fixed-top {
   position: fixed !important;
@@ -315,7 +316,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
 }
 #fh5co-header.navbar-fixed-top .navbar-brand {
-  color: #52d3aa;
+  color: #fc9700;
 }
 #fh5co-header.navbar-fixed-top #navbar li a {
   color: rgba(0, 0, 0, 0.5);
@@ -324,18 +325,18 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.3s;
 }
 #fh5co-header.navbar-fixed-top #navbar li a:hover {
-  color: #52d3aa;
+  color: #fc9700;
 }
 #fh5co-header.navbar-fixed-top #navbar li.active a {
   background: transparent;
   background: none;
-  color: #52d3aa;
+  color: #fc9700;
 }
 #fh5co-header.navbar-fixed-top #navbar li.active a span:before {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
-  background-color: #52d3aa;
+  background-color: #fc9700;
 }
 #fh5co-header .navbar-default {
   border: transparent;
@@ -359,7 +360,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #adadad;
 }
 #fh5co-header .navbar-default .brand-slogan em {
-  color: #52d3aa;
+  color: #fc9700;
   font-style: normal;
 }
 #fh5co-header a {
@@ -374,7 +375,7 @@ h1, h2, h3, h4, h5, h6 {
   background-attachment: fixed;
   position: relative;
   width: 100%;
-  background-color: #52d3aa;
+  background-color: #fc9700;
   color: #fff;
   overflow: hidden;
 }
@@ -420,7 +421,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-home .text-inner a:hover, #fh5co-home .text-inner a:active, #fh5co-home .text-inner a:focus {
   text-decoration: none;
-  color: white;
+  color: #fc9700;
   border-bottom: 1px dashed white; 
 }
 #fh5co-home .text-inner h1 {
@@ -530,7 +531,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-intro .fh5co-block > .fh5co-text .fh5co-intro-icon {
   font-size: 50px;
-  color: #52d3aa;
+  color: #fc9700;
   margin-bottom: 30px;
   display: block;
 }
@@ -556,7 +557,7 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
 }
 #fh5co-intro .fh5co-block:hover .btn:hover, #fh5co-intro .fh5co-block:focus .btn:hover {
-  background: #52d3aa !important;
+  background: #fc9700 !important;
   border: 2px solid #52d3aa !important;
 }
 
@@ -877,7 +878,7 @@ h1, h2, h3, h4, h5, h6 {
    text-decoration: underline; 
 }
 #fh5co-work a:hover {
-  color: white;
+  color: #fc9700;
 }
 #fh5co-work:before, #fh5co-work:after {
   position: absolute;
@@ -1132,11 +1133,11 @@ h1, h2, h3, h4, h5, h6 {
   *display: inline;
   width: 25px;
   height: 3px;
-  color: #52d3aa;
+  color: #fc9700;
   font: bold 14px/.4 Helvetica;
   text-transform: uppercase;
   text-indent: -55px;
-  background: #52d3aa;
+  background: #fc9700;
   transition: all .2s ease-out;
 }
 .fh5co-nav-toggle i::before, .fh5co-nav-toggle i::after {
