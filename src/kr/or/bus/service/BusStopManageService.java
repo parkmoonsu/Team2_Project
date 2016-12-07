@@ -250,7 +250,7 @@ public class BusStopManageService {
 			PrintWriter out=null;			
 			RouteDAO dao = null;
 			
-			if(r_num.equals("all")){				
+			if(r_num.equals("전체선택")){				
             	JSONObject obs1 = busMultiRouteRead("5623" , dto, request, response);
             	JSONObject obs2 = busMultiRouteRead("6702" , dto, request, response);
             	JSONObject obs3 = busMultiRouteRead("143", dto, request, response);
@@ -265,7 +265,7 @@ public class BusStopManageService {
             	out = response.getWriter();
             	out.print(obss);
             	
-            }else if(!r_num.equals("all")){
+            }else if(!r_num.equals("전체선택")){
             	dao = sqlsession.getMapper(RouteDAO.class);
             	dto = dao.routeidSearch(r_num);
             	busSingleRouteRead(dto ,request, response);
@@ -742,7 +742,7 @@ public class BusStopManageService {
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
 		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
 
-		if(r_num.equals("all")){
+		if(r_num.equals("전체선택")){
 			List<BusStopDTO> busstoplist = new ArrayList<>();
 			//busStopRoadAllSearch("5623", dto, busstopdto, request, response);
 			busstoplist.addAll(0, busStopRoadAllSearch("5623", dto, busstopdto, request, response));
@@ -755,7 +755,7 @@ public class BusStopManageService {
 			jsonmaps = JSONArray.fromObject(busstoplist);
 			out.print(jsonmaps);
 			
-		}else if(!r_num.equals("all")){
+		}else if(!r_num.equals("전체선택")){
 			dto = dao.routeidSearch(r_num);
 			System.out.println(dto.getR_id());
 						
