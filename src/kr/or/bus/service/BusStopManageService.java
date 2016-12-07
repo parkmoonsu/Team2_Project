@@ -447,10 +447,10 @@ public class BusStopManageService {
 		*/		
 		if(r_num.equals("all")){
 			
-			JSONArray jsonlist1 = multiLocationSearch(request , response, dto, "N13");
-			JSONArray jsonlist2 = multiLocationSearch(request , response, dto, "N16");
-			JSONArray jsonlist3 = multiLocationSearch(request , response, dto, "N26");
-			JSONArray jsonlist4 = multiLocationSearch(request , response, dto, "N30");
+			JSONArray jsonlist1 = multiLocationSearch(request , response, dto, "5623");
+			JSONArray jsonlist2 = multiLocationSearch(request , response, dto, "6702");
+			JSONArray jsonlist3 = multiLocationSearch(request , response, dto, "143");
+			JSONArray jsonlist4 = multiLocationSearch(request , response, dto, "3030안양");
 			
 			locations = new ArrayList<JSONArray>();
 			locations.add(jsonlist1);
@@ -478,16 +478,16 @@ public class BusStopManageService {
 		String venid = null;
 		
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
-		if(r_num.equals("N13")){
+		if(r_num.equals("5623")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("N16")){
+		}else if(r_num.equals("6702")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("N26")){
+		}else if(r_num.equals("143")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("N30")){
+		}else if(r_num.equals("3030안양")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
 		}
@@ -723,12 +723,12 @@ public class BusStopManageService {
         
         if(result == 1){
         	System.out.println("route 입력성공");        	
-        	busStopSearch(dto, stopdto, routestopdto, request, response, r_num);
         	out.print("저장 성공!");
         }else{
         	System.out.println("route 입력 실패");
         	out.print("중복 노선번호 또는 지원하지 않는 노선번호입니다. 서울시 버스를 참고해주세요");
         }
+        busStopSearch(dto, stopdto, routestopdto, request, response, r_num);
 	}
 	
 	//버스 정류장 좌표를 찍어주기 위해  route id검색
@@ -914,8 +914,7 @@ public class BusStopManageService {
         
         //String venid = (String) jsonlist.getJSONObject(0).get("vehId");
         
-        int insertcheck = 0;
-        int check = 0;
+        
         String busno = null;
         
         int jsonsize = jsonlist.size();
@@ -924,11 +923,11 @@ public class BusStopManageService {
         	
         	busno = (String) jsonlist.getJSONObject(i).get("plainNo");
         	busdto.setB_vehiclenum(busno);
-        	busdto.setR_num(r_num);
+        	busdto.setR_num(dto.getR_num());
         	
         	BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
-        	check = busdao.busnoCheck(busdto);
-      	
+        	int check = busdao.busnoCheck(busdto);
+        	int insertcheck = 0;
         	if(check == 0){
         		System.out.println("차량번호 중복없음");
         		insertcheck = busdao.insertBusno(busdto);

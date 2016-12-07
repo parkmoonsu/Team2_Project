@@ -12,16 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
+
+import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
 import kr.or.bus.dto.RouteStopJoinStopDTO;
 import kr.or.bus.service.RouteManageService;
 
 @Controller
 public class RouteManageController {
+	
 	@Autowired
 	RouteManageService routeManageSerivce;
 	
 	@Autowired
 	private View jsonview;
+
 	@RequestMapping(value="/route.admin",method=RequestMethod.GET)
 	public String routePageOpen(){
 		return "routemanage/RouteManage";	
@@ -39,6 +43,17 @@ public class RouteManageController {
 	public void routeEditRead(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		routeManageSerivce.routelocationEditRead(request , response);
 	}
+	
+	//추가
+	@RequestMapping(value="/routeRead.admin",method=RequestMethod.POST)
+	public View routeRead(HttpServletRequest request , HttpServletResponse response, Model model) throws Exception{
+
+		List<RouteStopCopyJoinStopDTO> list=routeManageSerivce.routeRead(request , response);
+
+		model.addAttribute("list", list);
+		return jsonview;
+	}
+
 	//정류장 번호 자동 생성 함수
 		@RequestMapping(value="/getrandomsnum.admin",method=RequestMethod.POST)
 		public View getRandomSnum(Model model){
@@ -62,4 +77,5 @@ public class RouteManageController {
 			model.addAttribute("rssdto", rssdto);
 			return jsonview;
 		}
+
 }
