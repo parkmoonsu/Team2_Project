@@ -6,17 +6,32 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import kr.or.bus.dao.BusStopDAO;
+import kr.or.bus.dao.RouteStopDAO;
+import kr.or.bus.dto.RouteStopDTO;
+import kr.or.bus.dto.RouteStopJoinStopDTO;
+import kr.or.bus.dto.StopDTO;
+
+import kr.or.bus.dao.RouteDAO;
+import kr.or.bus.dao.ScheduleManageDAO;
+import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
 
 @Service
 public class RouteManageService {
-   
+	
+	@Autowired
+	private SqlSession sqlsession;
+	
 	//노선좌표를 파일에 저장하는 함수
 	public void routelocationSave(HttpServletRequest request , HttpServletResponse response){
       FileWriter fw = null;
@@ -82,4 +97,65 @@ public class RouteManageService {
            }
         }
    	}
+   	
+   	public List<RouteStopCopyJoinStopDTO> routeRead(HttpServletRequest request, HttpServletResponse response){
+   		String r_num = request.getParameter("r_num");
+   		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
+   		System.out.println(r_num);
+   		List<RouteStopCopyJoinStopDTO> list=dao.routeRead(r_num);
+
+		return list;
+   	}
+
+   	public String getRandomSnum(){//5자리 랜덤 값 뽑기
+		int s_num;
+		s_num = (int)(Math.random()*100000+10000);
+		if(s_num>100000){
+			s_num -= 100000;
+		}
+		if(s_num<10000){
+			s_num += 10000;
+		}
+		return String.valueOf(s_num);
+	}
+	public void addStopInfo(String r_num,String s_num, String s_name, String rs_order, String s_x, String s_y,Model model){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		String alert;
+		StopDTO sdto = new StopDTO();
+		sdto.setS_num(s_num);
+		sdto.setS_name(s_name);
+		sdto.setS_x(s_x);
+		sdto.setS_y(s_y);
+		System.out.println(sdto.toString());
+		int result = dao.addStopInfo(sdto);
+		if (result > 0) {
+			RouteStopDTO rsdto = dao.getRouteStopInfo(r_num, rs_order);
+			rsdto.setS_num(s_num);
+			int result1 = dao.addRouteStopInfo(rsdto);
+			if (result1 > 0) {
+				int result2 = dao.updateRouteStopInfo(r_num, rs_order, s_num);
+				if (result2 > 0) {
+					alert = "정류장 생성에 성공했습니다.";
+				} else {
+					alert = "정류장 생성에 실패 했습니다.";
+				}
+			} else {
+				alert = "정류장 생성에 실패 했습니다.";
+			}
+		} else {
+			alert = "정류장 생성에 실패 했습니다.";
+		}
+		model.addAttribute("alert", alert);
+	}
+	public int checkStopNum(String s_num){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		int result = dao.checkStopNum(s_num);
+		return result;
+	}
+	
+	public List<RouteStopJoinStopDTO> getRouteStopInfoList(String r_num){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		List<RouteStopJoinStopDTO> rssdto = dao.getRouteStopInfoList(r_num);
+		return rssdto;
+	}
 }

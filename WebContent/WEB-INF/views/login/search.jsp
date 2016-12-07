@@ -9,12 +9,17 @@
 	border: 1px solid;
 	padding: 10px;
 }
-.inner-bg{
-    background-image:url(images/background2.jpg);
-    background-repeat:no-repeat;
-    background-size:100% 100%;
+ .inner-bg{
+  /*  background-color: #F9FFFF; */
+   background-color: #2A3F54;
+  /*  background-color: #dcdcdc; */
 
-}
+} 
+/* 
+.form-top{
+   background-color: #EBFBFF;
+
+} */
 </style>
 </head>
 		<meta charset="utf-8">
@@ -38,13 +43,13 @@
 			    <nav class="navbar navbar-default">
 		        <div class="navbar-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-		         <a class="navbar-brand" href="bus.htm">KosBus</a> 
+		         <a class="navbar-brand" href="bus.htm">RoadOneBell</a> 
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		          <ul class="nav navbar-nav navbar-right">
 		            <li class="active"><a href="bus.htm	" data-nav-section="home"><span>Home</span></a></li> 
-		            <li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
-		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
+		            <li><a href="login.htm" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
+		           	<li><a href="join.htm" id="gaip"><span>회원가입</span></a></li>
 		          </ul>
 		        </div>
 			    </nav>
@@ -56,8 +61,7 @@
             <div class="inner-bg">
                 <div class="container">
                     <div class="row">
-                    <div class="form-box">
-                    <div class="form-top" align="center" style="color: white;">
+                    <div class="form-top" align="center" style="color: #7f7f7f; background-color:#F9FFFF">
 					<div class="form-top-center">
                         <ul class="nav nav-tabs">	
 								<li class="active">
@@ -71,12 +75,13 @@
 								 비밀번호 찾기 </a>
 								 </li>
 								</ul>
-								 <div class="tab-content">
+								 <div class="tab-content" style="background-color: white">
 								 
-								 <div id="findId" class="tab-pane fade in active">
-										<div class="my-box" style="margin:30px" >				
-												<h2 class="StepTitle" align="center">아이디 찾기</h2>
-												<div class="form-group" style="padding: 25px">
+								 <div id="findId" class="tab-pane fade in active" style="background-color: white;"> 
+									<div style="background-color: white"></div>
+										<div class="my-box" style="margin:30px;">				
+												<h2 class="StepTitle" align="center" style="color: #7f7f7f;">아이디 찾기</h2>
+												<div class="form-group" style="padding : 30px ;">
 													<div id="step-2">
 														<form class="form-horizontal form-label-left"
 															method="post" action="searchid.htm">
@@ -112,7 +117,7 @@
 
 												<div id="findPw" class="tab-pane fade">
 												<div class="my-box" style="margin:30px" >
-												<h2 class="StepTitle" align="center">비밀번호 찾기</h2>
+												<h2 class="StepTitle" align="center" style="color: #7f7f7f;">비밀번호 찾기</h2>
 												<div class="form-group" style="padding: 25px">
 													<div id="step-2">
 														<form class="form-horizontal form-label-left"
@@ -151,11 +156,14 @@
                     </div>
                     </div>
                     
-                    
-                </div>
-            </div>
-            
+                   <hr>
+                <footer style="color: white">
+				<jsp:include page="/sidebar/footer.jsp" />
+			</footer> 
         </div>
+            </div>
+                
+            
 
 
         <!-- Javascript -->

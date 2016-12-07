@@ -217,7 +217,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #52d3aa !important;
   }
   #fh5co-header #navbar li a {
-    color: rgba(0, 0, 0, 0.5) !important;
+    color: #52d3aa !important;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
@@ -226,7 +226,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #52d3aa !important;
   }
   #fh5co-header #navbar li a span:before {
-    background: transparent !important;
+    background: #52d3aa !important;
   }
   #fh5co-header #navbar li.active a {
     background: transparent;
@@ -245,7 +245,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-header #navbar li a {
   font-family: "Source Sans Pro", Arial, sans-serif;
-  color: rgba(255, 255, 255, 0.5);
+  color: #52d3aa;
   position: relative;
   font-size: 19px;
   font-weight: 300;
@@ -289,7 +289,7 @@ h1, h2, h3, h4, h5, h6 {
 #fh5co-header #navbar li.active a {
   background: transparent;
   background: none;
-  color: #fff;
+  color: #52d3aa;
 }
 #fh5co-header #navbar li.active a span:before {
   visibility: visible;
@@ -302,11 +302,11 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 30px;
   font-weight: 700;
   padding-left: 0;
-  color: #fff;
+  color:  #52d3aa;
 }
 #fh5co-header.navbar-fixed-top {
   position: fixed !important;
-  background: #fff;
+  background:  black;
   -webkit-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   -ms-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
@@ -421,18 +421,18 @@ h1, h2, h3, h4, h5, h6 {
 #fh5co-home .text-inner a:hover, #fh5co-home .text-inner a:active, #fh5co-home .text-inner a:focus {
   text-decoration: none;
   color: white;
-  border-bottom: 1px dashed white;
+  border-bottom: 1px dashed white; 
 }
 #fh5co-home .text-inner h1 {
   font-size: 50px;
-  color: white;
+  color: #7f7f7f;
   margin: 0 0 20px 0;
 }
 #fh5co-home .text-inner h2 {
   font-size: 28px;
   line-height: 38px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.8);
+  color: #7f7f7f;
   margin: 0;
 }
 
@@ -834,7 +834,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #52d3aa;
 }
 #fh5co-testimonials .box-testimony .author a:hover {
-  text-decoration: underline;
+  text-decoration: underline; 
 }
 #fh5co-testimonials .box-testimony .author > figure {
   float: left;
@@ -874,7 +874,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-work a {
   color: rgba(255, 255, 255, 0.5);
-  text-decoration: underline;
+   text-decoration: underline; 
 }
 #fh5co-work a:hover {
   color: white;

@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.BusStopDTO;
 import kr.or.bus.dto.RouteDTO;
@@ -22,6 +23,9 @@ import nu.xom.*;
 public class BusStopManageController {
 	@Autowired
 	BusStopManageService busStopManageService;
+	
+	@Autowired
+	private View jsonview;
 	
 	@RequestMapping(value="/busStation.admin",method=RequestMethod.GET)
 	public String busStopOpen(ModelMap map){		
@@ -77,14 +81,6 @@ public class BusStopManageController {
 	@RequestMapping(value="/busStopRoad.admin",method=RequestMethod.GET)
 	public void busStopRoad(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		busStopManageService.busStopRoadSearch(r_num, dto, busstopdto, request, response);
-	}
-	
-	//DB에서 정류장 정차 순서 바꿔주는 함수
-	@RequestMapping("/editordernumber.admin")
-	public void editordernum(String r_num, String rs_order, String latlng){
-		System.out.println("r_num"+r_num);
-		System.out.println("rs_order"+rs_order);
-		System.out.println("latlng"+latlng);
 	}
 	
 }
