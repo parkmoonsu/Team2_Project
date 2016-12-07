@@ -325,7 +325,7 @@ public class BusManageController {
 	//실시간 위치추적 페이지
 	@RequestMapping("/realTime.admin")
 	public String realTimeOpen(ModelMap map){
-		map.addAttribute("list", busStopManageService.routeList());
+		map.addAttribute("list", busStopManageService.routetype());
 		return "busmanage/RealTimeLocation";
 	}
 	
