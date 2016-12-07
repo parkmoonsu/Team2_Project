@@ -66,7 +66,7 @@
 		$('body').oLoader({
 			  wholeWindow: true, 
 			  effect:'doornslide',
-			  image: "${pageContext.request.contextPath}/images/king.gif",
+			  image: "${pageContext.request.contextPath}/images/loading.gif",
 			  hideAfter: 500
 			});
 		

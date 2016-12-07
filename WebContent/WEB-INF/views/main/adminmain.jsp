@@ -39,7 +39,6 @@
 
    
 <body class="nav-md">
-	<img  src="${pageContext.request.contextPath}/images/loading.gif">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
