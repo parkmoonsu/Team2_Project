@@ -37,7 +37,7 @@
     <style type="text/css">
     .element {
  #map { margin-left:auto; margin-right:auto; width:95%; }}
- select#selectBus {
+ select#selectBus, #selectRoute, #selectGisa{
 	-webkit-appearance: button;
 	-webkit-border-radius: 2px;
 	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -92,20 +92,19 @@
 				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
 				
 				<select id="selectRoute">
-					<option>노선종류</option>																	
+					<option>노선종류</option>
+					<c:forEach var="i" items="${list}">
+					<option>${i.bd_name}</option>					
+					</c:forEach>																	
 				</select>
 				
 				<select id="selectGisa">
 					<option>기사 명단</option>																	
 				</select>
-				
-								
+												
 				<select id="selectBus">
 					<option>노선을 선택하세요</option>
-					<option>all</option>
-					<c:forEach var="i" items="${list}">
-					<option>${i.r_num}</option>					
-					</c:forEach>
+					<option>전체검색</option>										
 				</select>								
      <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
 		</div>
@@ -445,14 +444,23 @@
        		});
       		
 			var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
-     	  	
-     	  	(function (BusMarker, data, infowindow) {
-     	        google.maps.event.addListener(BusMarker, "click", function (e) {
-     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
-     	            infowindow.open(map, BusMarker);
-     	           
-     	        });
-     	    })(BusMarker, data[1], infowindow);
+			if(data[1] == null){
+				(function (BusMarker, data, infowindow) {
+	     	        google.maps.event.addListener(BusMarker, "click", function (e) {
+	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">매칭된 기사없음</p>');
+	     	            infowindow.open(map, BusMarker);
+	     	           
+	     	        });
+	     	    })(BusMarker, data[1], infowindow);		
+			}else{
+				(function (BusMarker, data, infowindow) {
+	     	        google.maps.event.addListener(BusMarker, "click", function (e) {
+	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data.r_num+ "<br>"+ "<b>차량번호</b>: "+data.b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data.m_name + "<br>"+'</p>');
+	     	            infowindow.open(map, BusMarker);
+	     	           
+	     	        });
+	     	    })(BusMarker, data[1], infowindow);
+			}
      	  	
        }else{
     	    console.log("너 마커 새로 생성안함??");
@@ -707,7 +715,7 @@
      		path: data,
      	    strokeColor: 'red',
      	    strokeOpacity: 1.0,
-     	    strokeWeight: 4,
+     	    strokeWeight: 2,
        	});
      	poly.setMap(map);
     }
@@ -719,7 +727,7 @@
      		path: data,
      	    strokeColor: 'red',
      	    strokeOpacity: 1.0,
-     	    strokeWeight: 4,
+     	    strokeWeight: 2,
        	});
      	poly1.setMap(map);
     }
@@ -731,7 +739,7 @@
      		path: data,
      	    strokeColor: 'navy',
      	    strokeOpacity: 1.0,
-     	    strokeWeight: 4,
+     	    strokeWeight: 2,
        	});
      	poly2.setMap(map);
     }
@@ -743,7 +751,7 @@
      		path: data,
      	    strokeColor: 'purple',
      	    strokeOpacity: 1.0,
-     	    strokeWeight: 4,
+     	    strokeWeight: 2,
        	});
      	poly3.setMap(map);
     }
@@ -755,18 +763,18 @@
      		path: data,
      	    strokeColor: 'green',
      	    strokeOpacity: 1.0,
-     	    strokeWeight: 4,
+     	    strokeWeight: 2,
        	});
      	poly4.setMap(map);
     }
     
     $(function() {
     			//비동기 버스 경로 을 뿌린다.
-    			/* $.ajax({
+    	$.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
                    	dataType : "json",
-                   	data : {r_num:"all"},
+                   	data : {r_num:"전체선택"},
                    	success : function(data2) {
                     	console.log("읽어옴?");
                       	//console.log(data2);                              	                                                                  	                       
@@ -837,54 +845,54 @@
                         	loadVector(hell);
                    	  	}
                 	}
-           		}); */
+           		});		
     	
     	//비동기로 정류장 생성
-    	/* $.ajax({
+    	$.ajax({
             url : "busStopRoad.admin",
             type : "get",
             dataType : "json",
-            data : {r_num:"all"},
+            data : {r_num:"전체선택"},
             success : function(data) {
-                console.log("읽어옴?");
-                console.log(data);                                                                                                               	                                                                  	                       	   
-                originalMarkerMake(data, map);                     	                 	                     	
+            	console.log("읽어옴?");
+            	console.log(data);                                                                                                              	                                                                  	                       	   
+            	originalMarkerMake(data, map);                      	                 	                     	
             }        		
-        }); */
+        });
     	
     	//비동기로 노선 전체 버스를 위치추적한다.
-    	/* stopSearch = setInterval(function(){
+		stopSearch = setInterval(function(){
     		$.ajax({
                 url : "RealTimeSearch.admin",
                 type : "get",
                 dataType : "json",
-                data : {r_num:"all"},
+                data : {r_num:"전체선택"},
                 success : function(data) {                   	
-                	 
+                	console.log(data);
                 	if(data.length == 4){
                 		console.log("멀티위치추적");
                 		console.log(data.length);
-                		console.log(data[0].msgBody.itemList);
-                		console.log(data[1].msgBody.itemList);
-                		console.log(data[2].msgBody.itemList);
-                		console.log(data[3].msgBody.itemList);
+                		console.log(data[0]);
+                		console.log(data[1]);
+                		console.log(data[2]);
+                		console.log(data[3]);
                 		
-                		movingBusMarker(data[0].msgBody.itemList, map);
-                		movingBusMarker2(data[1].msgBody.itemList, map);
-                		movingBusMarker3(data[2].msgBody.itemList, map);
-                		movingBusMarker4(data[3].msgBody.itemList, map);
+                		movingBusMarker1(data[0], map);
+                		movingBusMarker2(data[1], map);
+                		movingBusMarker3(data[2], map);
+                		movingBusMarker4(data[3], map);
                 		
                 		console.log("멀티추적된다");
                 	}else{
                 		console.log("혼자 추적");
-                		console.log(data.msgBody.itemList);
-                		movingBusMarker(data.msgBody.itemList, map);
+                		console.log(data[0].msgBody.itemList);
+                		movingBusMarker(data, map);
                 		console.log("너되니");
-                	}        
+                	}
                 	           		  	
                 }
             });  		
-    	},30000); */
+    	},20000);
     
     	
     	$("#selectBus").change(function() {
@@ -1025,6 +1033,32 @@
                     }
                 });  		
         	//},30000);
+        });
+        
+        
+        $("#selectRoute").change(function(){
+        	$.ajax({
+                url : "RouteTypeRouteNo.admin",
+                type : "get",
+                dataType : "json",
+                data : {r_type:$("#selectRoute").val()},
+                success : function(data) {                   	
+                	console.log("노선타입 전송잘되냐?");
+                	//console.log(data.nlist);
+					if(data.nlist != null){
+						$("#selectBus").empty();
+						$("#selectBus").append("<option>노선을 선택하세요</option><option>전체검색</option>");
+                		for(var i=0; i<data.nlist.length; i++){
+                			console.log(data.nlist[i].r_num);                			                			
+                			$("#selectBus").append("<option>"+data.nlist[i].r_num+"</option>");                			                			              			
+                			
+                		}                	                		
+                	}else{
+                		$("#selectBus").empty();
+						$("#selectBus").append("<option>노선을 선택하세요</option><option>전체검색</option>");               		
+                	}
+                }
+        	});
         });
         
     });//ready 함수 끝
