@@ -55,7 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select rownum r, N.*
 		from ( select bus.r_num, bus.b_vehiclenum, mem.m_name, g_name
 		from bus join garage ga on bus.g_num = ga.g_num
-		join member mem on mem.b_vehiclenum = bus.b_vehiclenum) N)
+		join member mem on mem.b_vehiclenum = bus.b_vehiclenum
+		order by g_name) N)
 		where r between 1 + (#{page} - 1) * 10 and 10 + (#{page} - 1) * 10
 	</select>
 	
@@ -73,7 +74,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from ( select bus.r_num, bus.b_vehiclenum, mem.m_name, g_name
 		from bus join garage ga on bus.g_num = ga.g_num
 		join member mem on mem.b_vehiclenum = bus.b_vehiclenum
-		where g_name=#{param1}) N)
+		where g_name=#{param1}
+		order by g_name) N)
 		where r between 1 + (#{param} - 1) * 10 and 10 + (#{param2} - 1) * 10
 	</select>
 	
