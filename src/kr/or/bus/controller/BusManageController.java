@@ -219,11 +219,43 @@ public class BusManageController {
 		return jsonview;
 	}
 	@RequestMapping("/chagozi.admin")
-	public String chagozi(){
+	public String chagozi(String pg, Model model){
 		
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> clist = service.getGarageName();
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> slist = service.getAllStat(pg);
 		
-		return "redirect:chagozi.jsp";
+		int page = service.pg(pg);
+		int count = service.count();	
+		int pagecount = 0;
+		
+		if(count % 10 == 0){
+			pagecount = count/10;
+		}else{
+			pagecount = count/10 + 1;
+		}
+				
+		model.addAttribute("pagecount", pagecount);
+		model.addAttribute("pgs",page);
+		model.addAttribute("clist",clist);
+		model.addAttribute("slist",slist);
+		model.addAttribute("count", count);
+		
+		return "busmanage/chagozi";
 
+	}
+	//scount(String g_name)
+	@RequestMapping("/selectchagozi.admin")
+	public View selectchagozi(String g_name, String pg, Model model){
+		System.out.println(g_name + "###");
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> sclist = service.getStat(g_name, pg);
+		int count=service.scount(g_name);
+		int page = service.pg(pg);
+		
+		model.addAttribute("pgs", page);
+		model.addAttribute("count",count);	
+		model.addAttribute("sclist", sclist);
+		
+		return jsonview;
 	}
 
 	@RequestMapping("/update.admin")
@@ -344,21 +376,8 @@ public class BusManageController {
 	}
 	
 	@RequestMapping("busreg.admin")
-	public String busReg(Model model , String pg){
-		List<BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO> list = service.busreglist(pg);
-		int page = service.pg(pg);
-		int count = service.busCount();
-		int pagecount = 0;
-		if(count % 10 == 0){
-			pagecount = count/10;
-		}else{
-			pagecount = count/10 + 1;
-		}
-		 
-		model.addAttribute("pagecount", pagecount);
-		model.addAttribute("pgs", page);
-		model.addAttribute("list", list);
-		model.addAttribute("count",count);
+	public String busReg(Model model){
+		
 		return "busmanage/busreg";
 	}
 }

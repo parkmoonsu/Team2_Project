@@ -63,6 +63,38 @@
 <script
 		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
+<script>
+	$(function() {
+		$('#chagozi').change(function() {
+			$('#tbody').empty();
+			//$('#table2').append("<table id='bustable'></table>")
+			console.log("확인한다 " + $('#chagozi').val());
+			var param = $('#chagozi').val();
+				
+			$.ajax({
+				url : "selectchagozi.admin",
+				data : {"g_name" : param},
+				type : "post",
+				success : function(data) {
+					var i="";
+					i+="<tr>"
+					$.each(data.sclist, function(index, object){
+						i+="<td>"+object.r+"</td>";
+						i+="<td>"+object.b_vehiclenum+"</td>";
+						i+="<td>"+object.r_num+"</td>";
+						i+="<td>"+object.m_name+"</td>";
+						i+="<td>"+object.g_name+"</td>";
+						i+="<td><div class='btn  btn-xs' style='background-color: #0A6ECD; color:white' data-toggle='modal' data-target='#myModal' data-whatever='${i.m_name},${i.m_id}''><i class='fa fa-search'></i>&nbsp;조회 </div></td>";
+					});
+					i+="</tr>"
+					$('#tbody').append(i);
+					
+				}
+			});
+			
+		});
+	});
+</script>
 <style>
 table, th{
 	text-align: center	
@@ -88,7 +120,20 @@ select#chagozi {
 	width: 150px;
 	border-radius: 8px;
 }
+
+ul.pagination li a.active {
+    background-color: #1ABB9C;
+    color: white;
+}
+
+ul.pagination li a {
+    color: #73879C;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
 </style>
+
 
 </head>
 
@@ -108,11 +153,6 @@ select#chagozi {
         <div class="right_col" role="main">
           <!-- top tiles -->
           <div class="row tile_count" style = "text-align: left">
-          <select id="chagozi">
-          	<option>차고지 선택하세요</option>
-          	<option>2</option>
-          	<option>3</option>
-          </select>  
           </div>
           <!-- /top tiles -->
 				<div class="">
@@ -123,6 +163,15 @@ select#chagozi {
 							</h3>
 						</div>
 					</div>
+          <div style="text-align: right">
+          <select id="chagozi">
+          	<option>차고지 선택</option>
+          	<c:forEach var="cl" items="${clist}" varStatus="clisst">
+          		<option value="${cl.g_name}">${cl.g_name}</option>
+          		
+          	</c:forEach>
+          </select>  
+          </div><br>
 					<div class="clearfix"></div>
 
 					<div class="row">
@@ -140,7 +189,8 @@ select#chagozi {
 											</span>
 										</div>
 									</div> -->
-									<table class="table table-hover projects">
+									
+									<table class="table table-hover projects" id="bustable">
 										<thead>
 											<tr>
 												<th>구분</th>
@@ -152,8 +202,8 @@ select#chagozi {
 												
 											</tr>
 										</thead>
-										<tbody>
-											<c:set value="${list}" var="d"/>
+										<tbody id="tbody">
+											<c:set value="${slist}" var="d"/>
 										
 											<c:forEach var="i" items="${d}">
 											<tr>
@@ -162,45 +212,64 @@ select#chagozi {
 												<td>${i.r_num}</td>
 												<td>${i.m_name}</td>
 												<td>${i.g_name}</td>
-											<td>		<div class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-trash-o"></i>
-                                         			 조회 </div></td>
+											<td>		<div class="btn  btn-xs" style="background-color: #0A6ECD; color:white" data-toggle="modal" data-target="#myModal" data-whatever="${i.m_name},${i.m_id}"><i class="fa fa-search"></i>
+                                         			&nbsp;조회 </div></td>
 									
 											</tr>
 											</c:forEach>
 										</tbody>
 									</table>
+									
 									<!-- end project list -->
 									
 									<!-- 요기서부터 페이징처리 -->
 									<c:set var = "count" value = "${count}"/>
 									<c:set var = "pgc" value = "${pgs}"/>
-									<c:choose>
+									<c:set var = "pagecount" value = "${pagecount}"/>
+									<%-- <c:choose>
 											<c:when test="${count % 10 == 0}">
 												<c:set value = "${count/10}" var = "pagecount"/>
 											</c:when>
 											<c:otherwise>
 												<c:set value = "${count/10 + 1}" var = "pagecount"/>
 											</c:otherwise>
-									</c:choose>	
+									</c:choose>	 --%>
 									
-									<ul class="pager">
+									<div style="text-align: center">
+										<ul class="pagination">
 										<c:if test="${pgc > 1}">
-											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
+											<li><a href="chagozi.admin?pg=${pgc-1}">Previous</a></li>
 										</c:if>
-										
-									
-										
-										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
-										</c:forEach>
-									
-										
+
+											<c:forEach begin="1" end="${pagecount}" var="i" step="5">
+												<c:forEach begin="${i}" end="${i+4}" step="1" var="x">
+													<c:if test="${x <= pagecount}">
+														<c:choose>
+															<c:when test="${pgc == x}">
+																<li><a class="active" href="#">${x}</a></li>
+															</c:when>
+															<c:when test="${pgc > i-1 && pgc < i+5 }">
+																<li><a
+																	href="chagozi.admin?&pg=${x}">${x}</a></li>
+															</c:when>
+															<c:when test="${x == i+5}">
+																<c:forEach begin="${x}" end="${x+4}" step="1" var="y">
+																	<li><a
+																		href="chagozi.admin?&pg=${y}">${y}</a></li>
+																</c:forEach>
+															</c:when>
+														</c:choose>
+													</c:if>
+
+												</c:forEach>
+											</c:forEach>
+			
 										<c:if test="${pgc < count/10 }">
-											<li><a href="busenroll.admin?pg=${pgc+1}">Next</a></li>
+											<li><a href="chagozi.admin?pg=${pgc+1}">Next</a></li>
 										</c:if>
 									</ul>
 									
-								
+								</div>
 								</div>
 							</div>
 							
@@ -263,12 +332,8 @@ select#chagozi {
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer> 
+				<jsp:include page="/sidebar/footer.jsp" />
+			</footer>
 			
 			
 			<!-- /footer content -->

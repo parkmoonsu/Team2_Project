@@ -387,9 +387,10 @@ th, table{
 	}
 	
 	$(function(){
-			  $.oPageLoader(); 
+			  $.oPageLoader() 
 
 		  </script>
+		  <script>
 		var count = 1;
 		
 		//console.log(num);
