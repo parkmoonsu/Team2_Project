@@ -58,6 +58,21 @@ public class BusManageService {
 		return page;
 	}
 	
+	public int count(){	
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int count=dao.count();
+		return count;
+	}
+	
+	public int scount(String g_name){
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int scount = dao.scount(g_name);
+		
+		return scount;
+	}
+	
+	
 	public int busCount(){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		int count = dao.busCount();
@@ -71,6 +86,36 @@ public class BusManageService {
 		
 		return g_name;
 	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getAllStat(String pg){
+		int page = 1;
+		
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		
+		System.out.println("page : " + page);
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = dao.getAllStat(page);
+		
+		return list;		
+	}
+	
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getStat(String g_name, String pg){
+		int page = 1;
+		
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		
+		System.out.println("page : " + page);
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> sclist =dao.getStat(g_name, page);
+		
+		return sclist;
+	}
+
 	
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRouteNum(String g_num){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
