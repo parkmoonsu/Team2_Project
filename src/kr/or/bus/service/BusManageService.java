@@ -23,6 +23,7 @@ import kr.or.bus.dao.BusDAO;
 import kr.or.bus.dao.MemberDAO;
 import kr.or.bus.dao.RnumcommuteDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
+import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 
 @Service
@@ -340,5 +341,9 @@ public class BusManageService {
 
 		return list;
 	}
+///////////////////////////버스 운영관리////////////////////////////////////////////////////////
+	
+
+	
 	
 }

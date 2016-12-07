@@ -29,7 +29,7 @@
 
 
 </script>
-<title>버스 관리</title>
+<title>운영 관리</title>
 
 <!-- Bootstrap -->
 <link
@@ -149,7 +149,7 @@ cursor: pointer;
 					<div class="page-title">
 						<div class="title_left">
 							<h3>
-								<small>버스등록/삭제</small>
+								<small>노선-기사 등록</small>
 							</h3>
 						</div>
 					</div>
@@ -256,8 +256,8 @@ cursor: pointer;
 								</div>
 
 									<div style = "float: right;">
-									<div class="btn btn-success btn-xs" id = "ebtn"><i class="fa fa-check"></i>
-                                         			 등록 </div>
+									<!-- <div class="btn btn-success btn-xs" id = "ebtn"><i class="fa fa-check"></i>
+                                         			 등록 </div> -->
                                     <div class="btn btn-default btn-xs" id = "ubtn"><i class="fa fa-retweet"></i>
                                          			 수정 </div>
 									<div class="btn btn-danger btn-xs" id = "dbtn"><i class="fa fa-trash-o"></i>

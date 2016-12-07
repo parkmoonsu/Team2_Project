@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
+import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
 import kr.or.bus.service.BusManageService;
@@ -374,4 +375,9 @@ public class BusManageController {
 		return "busmanage/clickcount";
 	}
 	
+	@RequestMapping("busreg.admin")
+	public String busReg(Model model){
+		
+		return "busmanage/busreg";
+	}
 }
