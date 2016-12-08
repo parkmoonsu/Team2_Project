@@ -909,7 +909,18 @@
     		deleteRoute();
     		polyRemove();
     		busMarkerRemove();          	
-        	if($("#selectBus").val() !=null){       		             		
+        	if($("#selectBus").val() !=null){
+        		$.ajax({
+                    url : "RouteSelectGisalist.admin",
+                    type : "get",
+                    dataType : "json",
+                    data : {r_num:$("#selectBus").val()},
+                    success : function(data) {                       
+                       	console.log("기사명단 출력");
+                       	console.log(data);
+                    }        		
+        		});
+        		
         		$.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
@@ -998,7 +1009,7 @@
                     	   originalMarkerMake(data, map);
                        	                 	                     	
                     }        		
-        		});
+        		});        		       
         	}
     	});    	   		    	          
              
