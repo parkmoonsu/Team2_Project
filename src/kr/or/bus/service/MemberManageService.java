@@ -11,6 +11,8 @@
 package kr.or.bus.service;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,10 +173,18 @@ private JavaMailSender mailSender;
 		dao.insertAuth(m_id);
 		
 		MimeMessage mimemessage = mailSender.createMimeMessage();			
-		String cong=what+"님 축하드립니다. 가입이 완료되었습니다.";
+		String cong=m_id+"님 축하드립니다. 가입이 완료되었습니다.";
+		String curTime = new SimpleDateFormat("yyyy-MM-dd-").format(new Date());	 
+		String head="회원가입 보호를 위한 RoadOneBell 안내";
+		String content1="RoadOneBell에 관심을 가져주신것에 대해 감사드리며,RoadOneBell 가입을 축하드리는 바 입니다.";
+		
 		Map<String,Object> param=new HashMap<>();
 		param.put("content",cong);
-		mimemessage.setSubject("OneRoadBell 가입완료 확인입니다.","UTF-8");
+		param.put("content1",content1);
+		param.put("head", head);
+		param.put("date", curTime);
+		
+		mimemessage.setSubject("RoadOneBell 가입을 축하드립니다^^.","UTF-8");
 		String Url="hello.html";
 		String format=VelocityEngineUtils.mergeTemplateIntoString(velocityconfig.getVelocityEngine(),Url,"UTF-8",param);
 		mimemessage.setText(format,"UTF-8","html");
