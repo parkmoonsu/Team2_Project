@@ -364,6 +364,34 @@ public class BusManageService {
 		
 		return result;
 	}
+	//////////////////////////////////////////////////////////
 	
+	public int origarage(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int ori = dao.origarage();
+		
+		return ori;
+		
+	}
 	
+	public int sngarage(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int sn = dao.sngarage();
+		
+		return sn;
+	}
+	
+	public int pggarage(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int pg = dao.pggarage();
+		
+		return pg;
+	}
+	
+	public int nullgarage(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int nullgarage = dao.nullgarage();
+		
+		return nullgarage;
+	}
 }
