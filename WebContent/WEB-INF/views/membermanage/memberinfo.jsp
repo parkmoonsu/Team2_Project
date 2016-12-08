@@ -73,8 +73,9 @@ ul.pagination li a.active {
 
 ul.pagination li a {
     color: #73879C;
-    float: left;
-   /*  padding: 8px 16px; */
+    /* float: left;  */
+    float: ㅛ; 
+    padding: 8px 16px;
     text-decoration: none;
 }
 </style>
@@ -357,7 +358,7 @@ ul.pagination li a {
 								data-dismiss="modal" id="cancelbutton">삭제</button>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">취소</button>
-							<input type="hidden" id="hvalue"> 
+							<input type="hidden" id="hvalue2"> 
 							<!-- <input type="hidden" id=""> -->
 						</div>
 					</div>
@@ -677,7 +678,7 @@ ul.pagination li a {
 			console.log("m_name" + m_name);
 			$("#match-pass").modal("show");
 			$('#hvalue').val(m_id); 
-			$('#').val(m_name); 
+			$('#hvalue2').val(m_name); 
 			$("#myModalLabel2").empty();//
 			$('#myModalLabel2').html(m_name + '님을 삭제하시겠습니까?'); 
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.or.bus.dto.GarageDTO;
+import kr.or.bus.dto.MemberJoinBusDTO;
 import kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
@@ -97,4 +98,6 @@ public interface ScheduleManageDAO {
 	public int updateBtwByRegrre(String m_id_1,String o_code_1); //거절 변경 대상자 update reguloffr
 	public int updateBtwByRegore(String m_id_1,String o_code_1); //거절 변경 대상자 update reguloff
 	
+	public MemberJoinBusDTO rnumcheck(String m_id);
+
 }
