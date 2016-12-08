@@ -11,7 +11,9 @@ package kr.or.bus.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -159,10 +161,17 @@ public class JoinService {
 		
 		ApproveDTO dto = dao.emailApp();
 		System.out.println("num : " + dto.getA_num());
-		 
+		String curTime = new SimpleDateFormat("yyyy-MM-dd-").format(new Date());	 
+		String head="회원가입 보호를 위한 RoadOneBell 안내";
+		String content1="RoadOneBell에 관심을 가져주신것에 대해 감사드리며,RoadOneBell 개인확인을 위하여 부득이하게 이메일로 확인하는점 양해 부탁드립니다.";
+		String content=dto.getA_num()+"입니다.";
 		Map<String,Object> param=new HashMap<>();
-		param.put("content",dto.getA_num());
-		mimemessage.setSubject("OneRoadBell 인증번호입니다.","UTF-8");
+		param.put("content",content);
+		param.put("date", curTime);
+		param.put("head", head);
+		param.put("content1", content1);
+		
+		mimemessage.setSubject("RoadOneBell 인증번호입니다.","UTF-8");
 		String Url="hello.html";
 		String format=VelocityEngineUtils.mergeTemplateIntoString(velocityconfig.getVelocityEngine(),Url,"UTF-8",param);
 		mimemessage.setText(format,"UTF-8","html");

@@ -37,6 +37,7 @@ import kr.or.bus.dto.BusDTO;
 import kr.or.bus.dto.BusLocationInfoDTO;
 import kr.or.bus.dto.BusStopDTO;
 import kr.or.bus.dto.RouteDTO;
+import kr.or.bus.dto.RouteSelectGisaDTO;
 import kr.or.bus.dto.RouteStopDTO;
 import kr.or.bus.dto.RouteTypeDTO;
 import kr.or.bus.dto.StopDTO;
@@ -252,8 +253,8 @@ public class BusStopManageService {
 			
 			if(r_num.equals("전체선택")){				
             	JSONObject obs1 = busMultiRouteRead("5623" , dto, request, response);
-            	JSONObject obs2 = busMultiRouteRead("6702" , dto, request, response);
-            	JSONObject obs3 = busMultiRouteRead("143", dto, request, response);
+            	JSONObject obs2 = busMultiRouteRead("5624" , dto, request, response);
+            	JSONObject obs3 = busMultiRouteRead("5531", dto, request, response);
             	JSONObject obs4 = busMultiRouteRead("3030안양", dto, request, response);
             	
             	ArrayList<JSONObject> obss = new ArrayList<JSONObject>();
@@ -313,12 +314,12 @@ public class BusStopManageService {
 				dto = dao.routeidSearch("5623");
 				id = dto.getR_id();
 			}
-			else if(r_num.equals("6702")){
-				dto = dao.routeidSearch("6702");
+			else if(r_num.equals("5624")){
+				dto = dao.routeidSearch("5624");
 				id = dto.getR_id();				
 			}
-			else if(r_num.equals("143")){
-				dto = dao.routeidSearch("143");
+			else if(r_num.equals("5531")){
+				dto = dao.routeidSearch("5531");
 				id = dto.getR_id();
 			}
 			else if(r_num.equals("3030안양")){
@@ -449,8 +450,8 @@ public class BusStopManageService {
 		if(r_num.equals("전체선택")){
 			
 			JSONArray jsonlist1 = multiLocationSearch(request , response, dto, "5623");
-			JSONArray jsonlist2 = multiLocationSearch(request , response, dto, "6702");
-			JSONArray jsonlist3 = multiLocationSearch(request , response, dto, "143");
+			JSONArray jsonlist2 = multiLocationSearch(request , response, dto, "5624");
+			JSONArray jsonlist3 = multiLocationSearch(request , response, dto, "5531");
 			JSONArray jsonlist4 = multiLocationSearch(request , response, dto, "3030안양");
 			
 			locations = new ArrayList<JSONArray>();
@@ -470,7 +471,8 @@ public class BusStopManageService {
 			dto = dao.routeidSearch(r_num);		
 			
 			
-			String venid = venidSearch(dto,r_num);				
+			//String venid = venidSearch(dto,r_num);
+			String venid = venidSearch(r_num);
 			LocationSearch(request , response, venid);
 		}
 	}
@@ -481,16 +483,20 @@ public class BusStopManageService {
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
 		if(r_num.equals("5623")){
 			dto = dao.routeidSearch(r_num);
-			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("6702")){
+			//venid = venidSearch(dto, r_num);
+			venid = venidSearch(r_num);
+		}else if(r_num.equals("5624")){
 			dto = dao.routeidSearch(r_num);
-			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("143")){
+			//venid = venidSearch(dto, r_num);
+			venid = venidSearch(r_num);
+		}else if(r_num.equals("5531")){
 			dto = dao.routeidSearch(r_num);
-			venid = venidSearch(dto, r_num);
+			//venid = venidSearch(dto, r_num);
+			venid = venidSearch(r_num);
 		}else if(r_num.equals("3030안양")){
 			dto = dao.routeidSearch(r_num);
-			venid = venidSearch(dto, r_num);
+			//venid = venidSearch(dto, r_num);
+			venid = venidSearch(r_num);
 		}
 		
 		
@@ -747,11 +753,11 @@ public class BusStopManageService {
 			//busStopRoadAllSearch("5623", dto, busstopdto, request, response);
 			busstoplist.addAll(0, busStopRoadAllSearch("5623", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("6702", dto, busstopdto, request, response);
-			busstoplist.addAll(1, busStopRoadAllSearch("6702", dto, busstopdto, request, response));
+			busstoplist.addAll(1, busStopRoadAllSearch("5624", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("3500포천", dto, busstopdto, request, response);
 			busstoplist.addAll(2, busStopRoadAllSearch("3030안양", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("6501광주", dto, busstopdto, request, response);
-			busstoplist.addAll(3, busStopRoadAllSearch("143", dto, busstopdto, request, response));
+			busstoplist.addAll(3, busStopRoadAllSearch("5531", dto, busstopdto, request, response));
 			jsonmaps = JSONArray.fromObject(busstoplist);
 			out.print(jsonmaps);
 			
@@ -822,8 +828,7 @@ public class BusStopManageService {
 	    int stopcheck = 0;
 	    int stopinsertcheck = 0;
 	    
-	    int routestopinsertcheck =0;
-	    int routestopcheck = 0;
+	    int routestopinsertcheck =0;	    
 	    
 	    int jsons =  jsonarray.size();
 	        
@@ -966,37 +971,17 @@ public class BusStopManageService {
 		return nlist;		
 	}
 	
+	public List<RouteSelectGisaDTO> routeSelectGisalist(String r_num){
+		System.out.println("기사 조회 서비스 타냐?"+r_num);
+		RouteDAO routedao = sqlsession.getMapper(RouteDAO.class);
+		List<RouteSelectGisaDTO> glist = routedao.searchBusGisa(r_num);
+		return glist;
+	}
+	
 	//accessVenID 함수 의 리턴값 json 을 받아서 차량 id 추출하고 차량 id return
-	public String venidSearch(RouteDTO dto, String r_num) throws IOException{
+	/*public String venidSearch(RouteDTO dto, String r_num) throws IOException{
 		System.out.println("노선id???"+dto.getR_id());
-		JSONObject jsonmaps = null;
-		/*JSONObject jsonmaps = null;
-		StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/buspos/getBusPosByRtid"); URL
-        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); Service Key
-        urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(dto.getR_id(), "UTF-8")); 노선ID
-        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("999", "UTF-8")); 검색건수
-        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); 페이지 번호
-        URL url = new URL(urlBuilder.toString());
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-type", "application/xml");
-        //System.out.println("Response code: " + conn.getResponseCode());
-        BufferedReader rd;
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        } else {
-            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-        }
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            sb.append(line);
-        }
-        rd.close();
-        conn.disconnect();
-        //System.out.println(sb.toString());
-        jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
-        System.out.println("너왜안되냐"+jsonmaps);*/
+		JSONObject jsonmaps = null;		
         
 		jsonmaps = accessVenID(dto,r_num);
 		
@@ -1006,30 +991,17 @@ public class BusStopManageService {
         System.out.println("차량 id 뽑았다"+jsonlist.getJSONObject(0).get("vehId"));
         
         String venid = (String) jsonlist.getJSONObject(0).get("vehId");
-        //String busno = (String) jsonlist.getJSONObject(0).get("plainNo");
-        //System.out.println("차량id string 에 담았고"+venid);
-        
-        /*BusDTO busdto = new BusDTO();
-        busdto.setB_vehiclenum(busno);
-        busdto.setR_num(r_num);
-        
-        BusDataDAO busdao = sqlsession.getMapper(BusDataDAO.class);
-        int check = busdao.busnoCheck(busdto);
-        int insertcheck = 0;
-        if(check == 0){
-        	System.out.println("차량번호 중복없음");
-        	insertcheck = busdao.insertBusno(busdto);
-        }else{
-        	System.out.println("차량번호 중복데이터임");
-        }
-        
-        if(insertcheck ==1){
-        	System.out.println("입력완료");
-        }else{
-        	System.out.println("입력실패");
-        }*/
         
         
+        
+		return venid;
+	}*/
+	
+	//차량에 기사가 배정된 차량만 차량 id 리턴
+	public String venidSearch(String r_num){		
+		BusDataDAO busdatadao = sqlsession.getMapper(BusDataDAO.class);
+		RouteSelectGisaDTO routeselectgisadto = busdatadao.selectvenid(r_num);
+		String venid = routeselectgisadto.getB_venid();
 		return venid;
 	}
 	

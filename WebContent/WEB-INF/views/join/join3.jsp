@@ -220,9 +220,6 @@
 .my-box{
 	color: black;
 }
-  #fh5co-header #navbar li a:hover {
-    color: #52d3aa !important;
-  }
 </style>
 </head>
 <meta charset="utf-8">
@@ -268,7 +265,7 @@
 
 	<div class="top-content">
 
-		<div class="inner-bg">
+		<div class="inner-bg" style="padding-top: 60px; padding-bottom: 60px">
 			<div class="container">
 				<div class="row">
 				<hr>

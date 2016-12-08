@@ -26,6 +26,7 @@ import kr.or.bus.dao.RnumcommuteDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.BusJoinRdetailJoinRepairDTO;
 
 @Service
 public class BusManageService {
@@ -117,6 +118,14 @@ public class BusManageService {
 		return sclist;
 	}
 
+	public List<BusJoinRdetailJoinRepairDTO> getSearch(String b_vehiclenum){
+		
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		List<BusJoinRdetailJoinRepairDTO> list = dao.getSearch(b_vehiclenum);
+		
+		return list;
+	}
+	
 	
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRouteNum(String g_num){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
@@ -355,6 +364,34 @@ public class BusManageService {
 		
 		return result;
 	}
+	//////////////////////////////////////////////////////////
 	
+	public int origarage(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int ori = dao.origarage();
+		
+		return ori;
+		
+	}
 	
+	public int sngarage(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int sn = dao.sngarage();
+		
+		return sn;
+	}
+	
+	public int pggarage(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int pg = dao.pggarage();
+		
+		return pg;
+	}
+	
+	public int nullgarage(){
+		BusDAO dao = sqlsession.getMapper(BusDAO.class);
+		int nullgarage = dao.nullgarage();
+		
+		return nullgarage;
+	}
 }

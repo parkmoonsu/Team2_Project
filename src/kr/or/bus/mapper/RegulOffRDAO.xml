@@ -7,7 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id = "regulList" resultType = "kr.or.bus.dto.ReguloffrJoinMemberJoinBusJoinKoffJoinMoffDTO" parameterType = "int">
 		select * 
 		from(
-			select ROWNUM r , ko.KO_NAME, rego.M_ID,mem.M_NAME, mo.O_DATE,mo.O_CODE, mo1.O_DATE as c_date, mo1.O_CODE as c_code,
+		select ROWNUM r, N.*
+		from(
+			select ko.KO_NAME, rego.M_ID,mem.M_NAME, mo.O_DATE,mo.O_CODE, mo1.O_DATE as c_date, mo1.O_CODE as c_code,
    				rego.RO_REQDATE , rego.RO_REGDATE,mem1.M_ID as c_id, mem1.M_NAME as c_name,bu.R_NUM
    			from reguloffr rego 
    			join member mem on mem.m_id = rego.m_id
@@ -15,8 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    			join member mem1 on mem1.m_id = rego.ro_object
    			join koff ko on ko.ko_code = rego.ko_code
    			join moff mo on mo.o_code = rego.o_code
-   			join moff mo1 on mo1.o_code = rego.ro_code order by rego.ro_reqdate desc)
+   			join moff mo1 on mo1.o_code = rego.ro_code order by rego.ro_reqdate desc)N)
    			where r between 1 + (#{page} - 1) * 10 and 10 + (#{page} -1) * 10
+   			order by r
 	</select>
 	
 	<select id = "countList" resultType = "int">

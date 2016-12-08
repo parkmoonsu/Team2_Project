@@ -26,6 +26,7 @@ import kr.or.bus.dto.BusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
+import kr.or.bus.dto.BusJoinRdetailJoinRepairDTO;
 import kr.or.bus.dto.RnumcommuteDTO;
 import kr.or.bus.service.BusManageService;
 import kr.or.bus.service.BusStopManageService;
@@ -247,8 +248,9 @@ public class BusManageController {
 	}
 	//scount(String g_name)
 	@RequestMapping("/selectchagozi.admin")
-	public View selectchagozi(String g_name, String pg, Model model){
+	public String selectchagozi(String g_name, String pg, Model model){
 		System.out.println(g_name + "###");
+		System.out.println("pg는"+pg);
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> sclist = service.getStat(g_name, pg);
 		int count=service.scount(g_name);
 		int page = service.pg(pg);
@@ -257,9 +259,21 @@ public class BusManageController {
 		model.addAttribute("count",count);	
 		model.addAttribute("sclist", sclist);
 		
-		return jsonview;
+		return "busmanage/chagozitable";
 	}
 
+	@RequestMapping("/busstatsearch.admin")
+	public View getStatSearch(String b_vehiclenum, Model model){
+		
+		System.out.println("333" + b_vehiclenum);
+		List<BusJoinRdetailJoinRepairDTO> list = service.getSearch(b_vehiclenum);
+		model.addAttribute("list", list);
+		
+		return jsonview;
+		
+		
+	}
+	
 	@RequestMapping("/update.admin")
 	public String update(String b_vehiclenum_u , String g_name_u , String r_num_u , String mname_u , String hidden){
 		System.out.println("update column : " + b_vehiclenum_u + "/" + g_name_u + "/" + r_num_u + "/" + mname_u + "/" + hidden);
@@ -312,14 +326,20 @@ public class BusManageController {
 		return "busmanage/RealTimeLocation";
 	}
 	
+	//노선타입에 해당되는 노선번호 출력
 	@RequestMapping("/RouteTypeRouteNo.admin")
 	public View routeTypeNo(String r_type, ModelMap map){
 		map.addAttribute("nlist", busStopManageService.routetypeNumber(r_type));
 		return jsonview;
 	}
 	
-	
-	
+	//노선번호에  배정되어있는 버스기사명단 출력
+	@RequestMapping(value="/RouteSelectGisalist.admin", method=RequestMethod.GET)
+	public View routeSelectGisalist(String r_num, ModelMap map){
+		System.out.println("노선샐랙트 r_num"+r_num);
+		map.addAttribute("glist", busStopManageService.routeSelectGisalist(r_num));
+		return jsonview;
+	}
 	
 	@RequestMapping("/noroute.admin")
 	public String noRoute(String pg , Model model){

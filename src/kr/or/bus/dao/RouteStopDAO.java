@@ -15,6 +15,10 @@ public interface RouteStopDAO {
 	public int addRouteStopInfo(RouteStopDTO dto);
 	public int updateRouteStopInfo(String r_num, String rs_order, String s_num);
 	public List<RouteStopJoinStopDTO> getRouteStopInfoList(String r_num);
+
+	public void routeUpdate(int rs_order, String r_num);
+	public void routeUpdate2(int rs_order, String s_num);
+
 	public int deleteStopRoute(String r_num,String s_num); //정류장-삭제
 	public int getDuplicateStop(String s_num);//정류장 - 삭제
 	public int updateDeletedRouteStopInfo(String r_num, String rs_order);//정류장-삭제
@@ -23,5 +27,5 @@ public interface RouteStopDAO {
 	//추가된 s_num을 routestop에서 업데이트, 기존의 s_num은 stop테이블에 남긴다
 	public int updateRouteStopNewStop(String s_num1, String s_num, String r_num); 
 	
-	
+
 }

@@ -41,7 +41,7 @@ public interface MemberDAO {
 	//resrecord table insert
 	public int insertResrecord(ResRecordDTO dto);
 	
-	public List<MemberDTO> SelectAll(String search,String search2);
+	public List<MemberDTO> SelectAll(String search);
 	//resrecord table insert
 	//public int insertRecord(ResRecordDTO dto);
 	

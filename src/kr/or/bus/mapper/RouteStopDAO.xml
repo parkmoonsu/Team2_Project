@@ -46,6 +46,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rs3.r_num = #{r_num}
 	</select>
 	
+
+	<update id="routeUpdate">
+		update routestopcopy4
+		set rs_order=rs_order+1
+		where rs_order > #{param1}-1 and r_num=#{param2}
+	</update>
+	<update id="routeUpdate2">
+		update routestopcopy4
+		set rs_order=#{param1}
+		where s_num=#{param2}
+	</update>
+
 	<delete id="deleteStopRoute" parameterType="String">
 		delete from routestop3 where r_num = #{param1} and s_num = #{param2}
 	</delete>
@@ -61,4 +73,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteStopInfo" parameterType="String">
 		delete from stop where s_num = #{s_num}
 	</delete>
+
 </mapper>

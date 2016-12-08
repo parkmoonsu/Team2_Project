@@ -161,6 +161,16 @@ public class RouteManageService {
 		List<RouteStopJoinStopDTO> rssdto = dao.getRouteStopInfoList(r_num);
 		return rssdto;
 	}
+	
+	public void routeUpdate(int rs_order, String s_num, String r_num){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+
+		dao.routeUpdate(rs_order, r_num);
+
+		dao.routeUpdate2(rs_order, s_num);
+
+	}
+
 	//정류장 마커 삭제하기
 	public void deleteStopRoute(String r_num, String s_num, String rs_order,Model model){
 		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);

@@ -196,7 +196,8 @@ h1, h2, h3, h4, h5, h6 {
   transform-origin: 0 0;
 }
 
-#fh5co-header {
+#fh5co-header
+ {
   position: absolute;
   z-index: 99;
   width: 100%;
@@ -214,24 +215,24 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   }
   #fh5co-header .navbar-brand {
-    color: #52d3aa !important;
+    color: #1E3269 !important;
   }
   #fh5co-header #navbar li a {
-    color: #52d3aa !important;
+    color: #1E3269 !important;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
   }
   #fh5co-header #navbar li a:hover {
-    color: #52d3aa !important;
+    color: #1E3269 !important;
   }
   #fh5co-header #navbar li a span:before {
-    background: #52d3aa !important;
+    background: #1E3269 !important;
   }
   #fh5co-header #navbar li.active a {
     background: transparent;
     background: none;
-    color: #52d3aa !important;
+    color: #1E3269 !important;
   }
   #fh5co-header #navbar li.active a span:before {
     visibility: visible;
@@ -245,7 +246,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-header #navbar li a {
   font-family: "Source Sans Pro", Arial, sans-serif;
-  color: #52d3aa;
+  color: #1E3269;
   position: relative;
   font-size: 19px;
   font-weight: 300;
@@ -276,7 +277,8 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.3s ease-in-out 0s;
 }
 #fh5co-header #navbar li a:hover {
-  color: #fff;
+  /* color: #fff; */
+  color:#56B37F;
 }
 #fh5co-header #navbar li a:hover span:before {
   visibility: visible;
@@ -289,7 +291,7 @@ h1, h2, h3, h4, h5, h6 {
 #fh5co-header #navbar li.active a {
   background: transparent;
   background: none;
-  color: #52d3aa;
+  color: #1E3269;
 }
 #fh5co-header #navbar li.active a span:before {
   visibility: visible;
@@ -302,11 +304,11 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 30px;
   font-weight: 700;
   padding-left: 0;
-  color:  #52d3aa;
+  color:  #1E3269;
 }
 #fh5co-header.navbar-fixed-top {
   position: fixed !important;
-  background:  black;
+  background:  white;
   -webkit-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   -ms-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
@@ -315,7 +317,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
 }
 #fh5co-header.navbar-fixed-top .navbar-brand {
-  color: #52d3aa;
+  color: #1E3269;
 }
 #fh5co-header.navbar-fixed-top #navbar li a {
   color: rgba(0, 0, 0, 0.5);
@@ -324,18 +326,18 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.3s;
 }
 #fh5co-header.navbar-fixed-top #navbar li a:hover {
-  color: #52d3aa;
+  color: #56B37F;
 }
 #fh5co-header.navbar-fixed-top #navbar li.active a {
   background: transparent;
   background: none;
-  color: #52d3aa;
+  color: #56B37F;
 }
 #fh5co-header.navbar-fixed-top #navbar li.active a span:before {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
-  background-color: #52d3aa;
+  background-color: #56B37F;
 }
 #fh5co-header .navbar-default {
   border: transparent;
@@ -420,7 +422,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-home .text-inner a:hover, #fh5co-home .text-inner a:active, #fh5co-home .text-inner a:focus {
   text-decoration: none;
-  color: white;
+  color: #56B37F;
   border-bottom: 1px dashed white; 
 }
 #fh5co-home .text-inner h1 {
@@ -556,8 +558,8 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
 }
 #fh5co-intro .fh5co-block:hover .btn:hover, #fh5co-intro .fh5co-block:focus .btn:hover {
-  background: #52d3aa !important;
-  border: 2px solid #52d3aa !important;
+  background: #56B37F !important;
+  border: 2px solid #56B37F !important;
 }
 
 .watch-video {
@@ -877,7 +879,7 @@ h1, h2, h3, h4, h5, h6 {
    text-decoration: underline; 
 }
 #fh5co-work a:hover {
-  color: white;
+  color: #52d3aa;
 }
 #fh5co-work:before, #fh5co-work:after {
   position: absolute;

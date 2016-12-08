@@ -66,7 +66,7 @@
 		$('body').oLoader({
 			  wholeWindow: true, 
 			  effect:'doornslide',
-			  image: "${pageContext.request.contextPath}/images/king.gif",
+			  image: "${pageContext.request.contextPath}/images/loading.gif",
 			  hideAfter: 500
 			});
 		
@@ -92,7 +92,7 @@
 		
 		bell();
 		bell2();
-		var Approve = setInterval(function(){ bell() }, 30000);
+		var Approve = setInterval(function(){ bell() }, 1000);
 		
 	});
 	
