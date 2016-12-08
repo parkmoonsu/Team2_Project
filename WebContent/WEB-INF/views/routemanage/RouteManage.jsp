@@ -78,14 +78,8 @@ select#selectBus, select#selectBus2 {
 	padding: 5px 10px; 
 	text-overflow: ellipsis;
 	white-space: nowrap;
-<<<<<<< HEAD
-	width: 150px;
-	border-radius: 8px;
-	margin-bottom:15px;
-=======
 	width: 140px;
 	border-radius: 8px;
->>>>>>> 7b929e99e06ba8d25369de65a159b9dab4173ee8
 }
 .btn{border-radius: 8px};
 
