@@ -24,6 +24,7 @@ import org.springframework.web.servlet.View;
 import kr.or.bus.dao.ScheduleDAO;
 import kr.or.bus.dao.ScheduleManageDAO;
 import kr.or.bus.dto.GarageDTO;
+import kr.or.bus.dto.MemberJoinBusDTO;
 import kr.or.bus.dto.MemberJoinBusJoinRouteJoinReguloffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
@@ -412,11 +413,12 @@ public class ScheduleManageService {
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 	}
 	
-	/*public String rnumcheck(String m_id){
+	public MemberJoinBusDTO rnumcheck(String m_id){
+		System.out.println("어디까지왓니");
+		System.out.println(m_id);
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		MemberJoinBusJoinRouteJoinReguloffDTO=dao.rnumcheck(m_id);
-
-		return str;		
-	}*/
+		MemberJoinBusDTO dto=dao.rnumcheck(m_id);
+		return dto;		
+	}
 
 }
