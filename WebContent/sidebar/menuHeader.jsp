@@ -92,7 +92,7 @@
 		
 		bell();
 		bell2();
-		var Approve = setInterval(function(){ bell() }, 30000);
+		var Approve = setInterval(function(){ bell() }, 1000);
 		
 	});
 	

@@ -199,7 +199,7 @@ text-align: left;
 }
 
     #fh5co-header #navbar li a:hover {
-    color: #fc9700 !important;
+    color: #52d3aa !important;
   }
 </style>
 </head>

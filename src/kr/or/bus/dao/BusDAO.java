@@ -124,4 +124,13 @@ public interface BusDAO {
 	/////////////////버스 등록  ////////////////////////////////////////////////////////////////
 	public int busReg(String b_vehiclenum , Date b_sdate , String b_sprice , String b_manuf , 
 			int b_pcount , String b_model , String b_caryear);
+	/////////////////////////////////////////////////////////////////////////////////////////
+	
+	//차고지별 차 대수
+	public int origarage();
+	public int sngarage();
+	public int pggarage();
+	public int nullgarage();
+	
+	
 }

@@ -27,17 +27,17 @@
 		});
         function showPassword() {
             
-            var key_attr = $('#key').attr('type');
+            var key_attr = $('#password').attr('type');
             
             if(key_attr != 'text') {
                 
                 $('.checkbox').addClass('show');
-                $('#key').attr('type', 'text');
+                $('#password').attr('type', 'text');
                 
             } else {
                 
                 $('.checkbox').removeClass('show');
-                $('#key').attr('type', 'password');
+                $('#password').attr('type', 'password');
                 
             }
             
@@ -96,7 +96,7 @@ placeholder {
     color: white;
 }  */
 #fh5co-header #navbar li a:hover {
-	color: #fc9700 !important;
+	color: #52d3aa !important;
 }
 </style>
 </head>
@@ -165,9 +165,9 @@ placeholder {
                     <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log In">
                 </form>
                 <div class="col-sm-6">
-                <a href="search.htm" class="forget">아이디/비밀번호 찾기</a>
+                <a href="search.htm" class="forget" style="color:#1F50B5">아이디/비밀번호 찾기</a>
                 </div><div class="col-sm-6">
-                <a href="join.htm"class="forget">회원가입</a>
+                <a href="join.htm"class="forget" style="color:#1F50B5">회원가입</a>
 				</div>
 						
                 <hr/>            	   
