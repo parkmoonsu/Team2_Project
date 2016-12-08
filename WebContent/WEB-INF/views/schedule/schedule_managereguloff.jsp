@@ -188,7 +188,7 @@ select#selectedgaragename, select#selectedroutenumber {
 								</div>
 								<div class="x_content">
 								<div style="text-align: center">
-									<button style="width:100px; height:30px; background-color: #46AAEB; border:0" class="btn btn-default"></button>
+									<button style="width:100px; height:30px; background-color: #46AAEB; border:0" class="btn btn-default disabled"></button>
 									변경 신청이 없는 데이터&nbsp;&nbsp;&nbsp;
 									<button style="width:100px; height:30px; background-color: #329632; border:0" class="btn btn-default"></button>
 									변경 신청이 있는 데이터 (1인 신청)&nbsp;&nbsp;&nbsp;

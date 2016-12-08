@@ -8,6 +8,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select R_ID from route where R_NUM = #{r_num}
 	</select>
 	
+	<insert id="InsertRoute" parameterType="kr.or.bus.dto.RoutePathDTO">
+		insert into roro2(R_NUM,R_X,R_Y,R_ORDER) values(#{r_num},#{r_},#{r_y},#{r_order})
+	</insert>
+	<select id="routeidselect" parameterType="String" resultType="kr.or.bus.dto.RoutePathDTO" >
+		select *from roro where R_NUM=#{r_num} order by R_ORDER+0
+	</select>
 
 	<!-- 전체 노선 -->
 	<select id="route" resultType="kr.or.bus.dto.RouteDTO">
@@ -41,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 노선타입 조회 -->
 	<select id="searchRouteType" resultType="kr.or.bus.dto.RouteTypeDTO">
-		SELECT BD_NAME FROM BUSDIS
+		SELECT BD_NAME,BD_NUM FROM BUSDIS
 	</select>
 	<!-- 입력받은 select 박스 옵션 값 에 따라 일치하는 노선번호 리스트 출력 -->
 	<select id="searchRouteNumber" parameterType="String" resultType="kr.or.bus.dto.RouteTypeDTO">
@@ -49,6 +55,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM BUSDIS, ROUTE
 		WHERE ROUTE.BD_NUM = BUSDIS.BD_NUM and BUSDIS.BD_NAME  = #{bd_name}
 	</select>
+	
+	<select id="routeEdit" resultType="kr.or.bus.dto.RouteTypeDTO" parameterType="String">
+		select distinct(r.r_num)as r_num from roro r join ROUTE t on r.r_num=t.r_num join busdis d on t.BD_NUM=d.BD_NUM where d.BD_NUM =#{name}
+	</select>
+	
 	
 	<!-- SELECT 박스에서 노선번호를 선택하면 해당 노선번호 차량에 배정되어있는 기사 출력 -->
 	<select id="searchBusGisa" parameterType="String" resultType="kr.or.bus.dto.RouteSelectGisaDTO">

@@ -196,7 +196,7 @@ ul.pagination li a {
 									<!-- start project list -->
 									
 									<div
-										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+										class="col-md-3 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
 											<input type="text" class="form-control"
 												placeholder="Search for..." id="search"> <span
@@ -480,9 +480,15 @@ ul.pagination li a {
 						$('#people').val(recipient[1]);
 					});
 
-			$('.modal').on('hidden.bs.modal', function () {
+			///////
+			/* $('.modal').on('hidden.bs.modal', function () {
 		        $(this).removeData('bs.modal');
 			});
+			
+			$('#match-pass').on('hidden', function () {
+				  $(this).removeData('modal');
+				}); */
+			//////
 			
 			$("#passtrue").click(function() {
 				$.ajax({
@@ -494,6 +500,9 @@ ul.pagination li a {
 						console.log(data.data);
 						if (data.data == 'true') {
 							$("#match-pass").modal("hide");
+							 /* $('#match-pass').on('hidden.bs.modal', function () {
+								  $(this).removeData();
+								});  */
 							$("#myModal").modal("show");
 
 						} else {
