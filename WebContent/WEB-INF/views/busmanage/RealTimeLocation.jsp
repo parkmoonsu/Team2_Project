@@ -193,9 +193,9 @@
    
    
    	//마커의 번호를 부여하기 위한 변수.
-    var as=0;
+    //var as=0;
    	
-   	var infoContents = new Array();
+   	//var infoContents = new Array();
    	
    	var BusMarker;
    	var B1usMarker;
@@ -204,10 +204,10 @@
    	var B4usMarker;
    	
     var originalMarkers = new Array();
-    var originalMarkers5623 = new Array();
-    var originalMarkers6702 = new Array();
-    var originalMarkers9000 = new Array();
-    var originalMarkers6501 = new Array();
+    //var originalMarkers5623 = new Array();
+    //var originalMarkers6702 = new Array();
+    //var originalMarkers9000 = new Array();
+    //var originalMarkers6501 = new Array();
    	
    	//원본 버스 실시간 추적 중지 변수.
    	var stopSearch;
@@ -219,7 +219,7 @@
     var poly3;
     var poly4;
     
-    var now = new Date();
+    //var now = new Date();
     //지도 기본 위치 , 마커 기본위치 가 됨.  
     //현 기본 좌표 : 판교역
     var myLatLng = {
@@ -316,9 +316,9 @@
     	}//for문 끝
     }
      
-    function originalMarkerMake5623(latLng, map) {
+    /* function originalMarkerMake5623(latLng, map) {
    	 	for(var i=0; i<latLng.length; i++){
-    	   /* console.log("---------------------------------");
+    	  console.log("---------------------------------");
     	   console.log("진행방향 "+latLng[i].direction);
     	   console.log("정류장명 "+latLng[i].stationNm);
     	   console.log("순번 "+latLng[i].seq);
@@ -331,7 +331,7 @@
     	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
     	   console.log("정류장 X "+latLng[i].gpsX);
     	   console.log("정류장 Y "+latLng[i].gpsY);
-    	   console.log("---------------------------------"); */    	  
+    	   console.log("---------------------------------");   	  
     	                                       
        
    			var originalMarker5623 = new google.maps.Marker({
@@ -353,7 +353,7 @@
     
     function originalMarkerMake6702(latLng, map) {
       	for(var i=0; i<latLng.length; i++){
-       	   /* console.log("---------------------------------");
+       	   console.log("---------------------------------");
        	   console.log("진행방향 "+latLng[i].direction);
        	   console.log("정류장명 "+latLng[i].stationNm);
        	   console.log("순번 "+latLng[i].seq);
@@ -366,7 +366,7 @@
        	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
        	   console.log("정류장 X "+latLng[i].gpsX);
        	   console.log("정류장 Y "+latLng[i].gpsY);
-       	   console.log("---------------------------------"); */    	  
+       	   console.log("---------------------------------");   	  
        	                                       
           
       			var originalMarker6702 = new google.maps.Marker({
@@ -386,7 +386,7 @@
     
     function originalMarkerMake9000(latLng, map) {
      	 for(var i=0; i<latLng.length; i++){
-      	   /* console.log("---------------------------------");
+      	   console.log("---------------------------------");
       	   console.log("진행방향 "+latLng[i].direction);
       	   console.log("정류장명 "+latLng[i].stationNm);
       	   console.log("순번 "+latLng[i].seq);
@@ -399,7 +399,7 @@
       	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
       	   console.log("정류장 X "+latLng[i].gpsX);
       	   console.log("정류장 Y "+latLng[i].gpsY);
-      	   console.log("---------------------------------"); */    	  
+      	   console.log("---------------------------------");    	  
       	                                       
          
      			var originalMarker9000 = new google.maps.Marker({
@@ -417,7 +417,7 @@
     
     function originalMarkerMake6501(latLng, map) {
     	for(var i=0; i<latLng.length; i++){
-     	   /* console.log("---------------------------------");
+     	   console.log("---------------------------------");
      	   console.log("진행방향 "+latLng[i].direction);
      	   console.log("정류장명 "+latLng[i].stationNm);
      	   console.log("순번 "+latLng[i].seq);
@@ -430,7 +430,7 @@
      	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
      	   console.log("정류장 X "+latLng[i].gpsX);
      	   console.log("정류장 Y "+latLng[i].gpsY);
-     	   console.log("---------------------------------"); */    	  
+     	   console.log("---------------------------------");  	  
      	                                       
         
     			var originalMarker6501 = new google.maps.Marker({
@@ -444,7 +444,7 @@
      			//map.panTo(originalMarker6501.getPosition());
     			originalMarkers6501.push(originalMarker6501);   		      		    		
     	}//for문 끝      	 	      		
-  	}
+  	} */
     
     //원본 움직이는 버스마커(XML -> JSON 파싱용)
     function movingBusMarker(data,map){
@@ -488,7 +488,7 @@
        		B1usMarker = new google.maps.Marker({
           		map: map,
           		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-          		icon:"${pageContext.request.contextPath}/images/bus.png"
+          		icon:"${pageContext.request.contextPath}/images/bus1.png"
        		});
       		
 			var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
@@ -528,7 +528,7 @@
         		B2usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-           		icon:"${pageContext.request.contextPath}/images/bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus2.png"
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
@@ -568,7 +568,7 @@
         		B3usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-           		icon:"${pageContext.request.contextPath}/images/bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus3.png"
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
@@ -608,7 +608,7 @@
         		B4usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-           		icon:"${pageContext.request.contextPath}/images/bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus4.png"
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
