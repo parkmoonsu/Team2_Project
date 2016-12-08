@@ -15,6 +15,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.bus.dao.BusStopDAO;
 import kr.or.bus.dao.RouteStopDAO;
@@ -147,12 +149,13 @@ public class RouteManageService {
 		}
 		model.addAttribute("alert", alert);
 	}
+	//정류장 번호 유효성 체크
 	public int checkStopNum(String s_num){
 		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
 		int result = dao.checkStopNum(s_num);
 		return result;
 	}
-	
+	//저장된 노선별 경로 불러오기
 	public List<RouteStopJoinStopDTO> getRouteStopInfoList(String r_num){
 		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
 		List<RouteStopJoinStopDTO> rssdto = dao.getRouteStopInfoList(r_num);
@@ -196,6 +199,41 @@ public class RouteManageService {
 				}
 			}else{
 				alert = "정류장 삭제 처리에 오류가 생겼습니다.1";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		model.addAttribute("alert", alert);
+	}
+	//정류장 좌표 수정하기
+	public void modifyStopPosition(String r_num,String s_num,String s_name, String s_x, String s_y, Model model){
+		//정류장 좌표가 바뀌면 새로운 정류장으로 인식해야함
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		int result = 0;
+		String alert = "";
+		String s_num1 = "";
+		do{
+			s_num1 = getRandomSnum();
+			result = checkStopNum(s_num1);	
+			System.out.println("몇 번 도는 거니?");
+		}while(result>0);
+		//바뀐 s_num, s_name을 stop table에 삽입
+		StopDTO sdto = new StopDTO();
+		sdto.setS_num(s_num1);
+		sdto.setS_name(s_name);
+		sdto.setS_x(s_x);
+		sdto.setS_y(s_y);
+		try{
+			result = dao.addStopInfo(sdto);
+			if(result>0){
+				result = dao.updateRouteStopNewStop(s_num1, s_num, r_num);
+				if(result>0){
+					alert = "새로운 정류장을 생성하셨습니다.";
+				}else{
+					alert = "정류장 생성에 실패하셨습니다.";
+				}
+			}else{//stop table 삽입 실패
+				alert = "정류장 생성에 실패하셨습니다.";
 			}
 		}catch(Exception e){
 			e.printStackTrace();

@@ -24,6 +24,8 @@ public interface RouteStopDAO {
 	public int updateDeletedRouteStopInfo(String r_num, String rs_order);//정류장-삭제
 	public int getDuplicateStopNum(String s_num);//정류장-삭제
 	public int deleteStopInfo(String s_num);//정류장-삭제
+	//추가된 s_num을 routestop에서 업데이트, 기존의 s_num은 stop테이블에 남긴다
+	public int updateRouteStopNewStop(String s_num1, String s_num, String r_num); 
 	
 
 }
