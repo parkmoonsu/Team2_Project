@@ -42,7 +42,7 @@
 										</c:if>
 										<c:if test ="${d == '[]' }">
 											<tr>
-												<td colspan = '6' align = "center">가입신청 회원 없음</td>
+												<td colspan = '6' align = "center">검색회원이 없습니다..</td>
 											</tr>
 										</c:if>
 										</tbody>
