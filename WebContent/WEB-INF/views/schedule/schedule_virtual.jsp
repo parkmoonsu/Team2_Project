@@ -229,6 +229,15 @@ select#selectedrnum {
    <script>
    var array = new Array();
    var dowarray = new Array();
+   
+   var arr0 = new Array();
+   var arr1 = new Array();
+   var arr2 = new Array();
+   var arr3 = new Array();
+   var arr4 = new Array();
+   var arr5 = new Array();
+   var arr6 = new Array();
+   
       $(function() {
        
          //rlist.r_num
@@ -245,10 +254,8 @@ select#selectedrnum {
                   "r_num" : param
                },
                success : function(data) {
-                  
-                  
-                  
-                  var year=new Date().getFullYear();
+       
+               /*    var year=new Date().getFullYear();
                   var month=new Date().getMonth()+1;
                   var day=new Date().getDate();
                   var date=year.toString()
@@ -261,11 +268,6 @@ select#selectedrnum {
                   
                   var Start="";
                   var End="";
-                  
-                  
-                  
-              
-      
                   
                   var starttime0="";
                   var starttime1="";
@@ -308,8 +310,73 @@ select#selectedrnum {
                   var bye6;
                   
                   var interval=0;
-                  
+                   */
+                  for(var i=0;i<7;i++){
+                	  
+                	  
+                	   var year=new Date().getFullYear();
+                       var month=new Date().getMonth()+1;
+                       var day=new Date().getDate();
+                       var date=year.toString()
+                          +"-"+month.toString()
+                          +"-"+day.toString();
+                       
+                       var test=0;
+                       var ocode="";
+                       var ocode2="";
+                       
+                       var Start="";
+                       var End="";
+                       
+                       var starttime0="";
+                       var starttime1="";
+                       var starttime2="";
+                       var starttime3="";
+                       var starttime4="";
+                       var starttime5="";
+                       var starttime6="";
+                       
+                       var endtime0="";
+                       var endtime1="";
+                       var endtime2="";
+                       var endtime3="";
+                       var endtime4="";
+                       var endtime5="";
+                       var endtime6="";
+                       
+                       var inter0=0;
+                       var inter1=0;
+                       var inter2=0;
+                       var inter3=0;
+                       var inter4=0;
+                       var inter5=0;
+                       var inter6=0;
+                       
+                       var hi0;
+                       var hi1;
+                       var hi2;
+                       var hi3;
+                       var hi4;
+                       var hi5;
+                       var hi6;
+                       
+                       var bye0;
+                       var bye1;
+                       var bye2;
+                       var bye3;
+                       var bye4;
+                       var bye5;
+                       var bye6;
+                       
+                       var interval=0;
+                       
+                	  
+                	  
                   $.each(data.mjrolist, function(index, obj) {
+                
+                	  
+                	 if(Number(obj.o_code)!=i){
+                	  
                       var time00=date+" "+obj.r_start;  //time2 = "2016-12-7 05:30:00" ->첫차시간
                       var time01=new Date(time00);  //time3 = Wed Dec 07 2016 05:30:00  ->(대한민국 표준시)
                       var time02=new Date(time00);  //time4 = Wed Dec 07 2016 05:30:00  ->(대한민국 표준시)
@@ -341,117 +408,107 @@ select#selectedrnum {
                   
                       interval=Number(obj.r_interval);
                       
-                    ////////////////////////////////////////
-                /*       time3.setMinutes(time3.getMinutes()+interval);
-                      var starttime=time3.getHours().toString()+":"+time3.getMinutes().toString(); //time2.time();
-                      console.log('starttime : '+starttime);
-                      time4.setMinutes(time3.getMinutes()+10);
-                      var endtime=time4.getHours().toString()+":"+time4.getMinutes().toString();
-                      console.log('endtime : '+endtime);
-                        var st=starttime;
-                       console.log('st: '+st);
-                      var et=endtime;
-                      console.log('et : '+et); */
-                  //////////////////////////////////////////////
+       
                       var dayoff=obj.o_code;  //휴무요일
                   
                   
                       time01.setMinutes(time01.getMinutes()+inter0);
                       time02.setMinutes(time02.getMinutes()+interval+inter0)   
-                      starttime0=time01.getHours().toString()+":"+time01.getMinutes().toString();      // o_code가 "0"일때 첫차 시간 
-                      endtime0=  time02.getHours().toString()+":"+time02.getMinutes().toString();       // o_code가 "0"일때 첫차 + r_interval
+                      starttime0=time01.getHours().toString()+":"+time01.getMinutes().toString();      
+                      endtime0=  time02.getHours().toString()+":"+time02.getMinutes().toString();       
                       inter0+=interval;           
                     
                       
                       hi1=time11.setMinutes(time11.getMinutes()+inter1);
                       bye1=time12.setMinutes(time12.getMinutes()+interval+inter1)   
-                      starttime1=time11.getHours().toString()+":"+time11.getMinutes().toString();      // o_code가 "0"일때 첫차 시간 
-                      endtime1=  time12.getHours().toString()+":"+time12.getMinutes().toString();       // o_code가 "0"일때 첫차 + r_interval
+                      starttime1=time11.getHours().toString()+":"+time11.getMinutes().toString();      
+                      endtime1=  time12.getHours().toString()+":"+time12.getMinutes().toString();       
                       inter1+=interval;           
                      
                       
                       hi2=time21.setMinutes(time21.getMinutes()+inter2);
                        bye2=time22.setMinutes(time22.getMinutes()+interval+inter2)   
-                      starttime2=time21.getHours().toString()+":"+time21.getMinutes().toString();      // o_code가 "0"일때 첫차 시간 
-                      endtime2=  time22.getHours().toString()+":"+time22.getMinutes().toString();       // o_code가 "0"일때 첫차 + r_interval
+                      starttime2=time21.getHours().toString()+":"+time21.getMinutes().toString();      
+                      endtime2=  time22.getHours().toString()+":"+time22.getMinutes().toString();       
                       inter2+=interval;         
                      
                       
                       hi3=time31.setMinutes(time31.getMinutes()+inter3);
                       bye3=time32.setMinutes(time32.getMinutes()+interval+inter3)   
-                      starttime3=time31.getHours().toString()+":"+time31.getMinutes().toString();      // o_code가 "0"일때 첫차 시간 
-                      endtime3=  time32.getHours().toString()+":"+time32.getMinutes().toString();       // o_code가 "0"일때 첫차 + r_interval
+                      starttime3=time31.getHours().toString()+":"+time31.getMinutes().toString();      
+                      endtime3=  time32.getHours().toString()+":"+time32.getMinutes().toString();       
                       inter3+=interval;            
                     
                       
                       hi4=time41.setMinutes(time41.getMinutes()+inter4);
                       bye4=time42.setMinutes(time42.getMinutes()+interval+inter4)   
-                      starttime4=time41.getHours().toString()+":"+time41.getMinutes().toString();      // o_code가 "0"일때 첫차 시간 
-                      endtime4=  time42.getHours().toString()+":"+time42.getMinutes().toString();       // o_code가 "0"일때 첫차 + r_interval
+                      starttime4=time41.getHours().toString()+":"+time41.getMinutes().toString();      
+                      endtime4=  time42.getHours().toString()+":"+time42.getMinutes().toString();      
                       inter4+=interval;         
                       
                       
                       hi5=time51.setMinutes(time51.getMinutes()+inter5);
                       bye5=time52.setMinutes(time52.getMinutes()+interval+inter5)   
-                      starttime5=time51.getHours().toString()+":"+time51.getMinutes().toString();      // o_code가 "0"일때 첫차 시간 
-                      endtime5=  time52.getHours().toString()+":"+time52.getMinutes().toString();       // o_code가 "0"일때 첫차 + r_interval
+                      starttime5=time51.getHours().toString()+":"+time51.getMinutes().toString();     
+                      endtime5=  time52.getHours().toString()+":"+time52.getMinutes().toString();       
                       inter5+=interval;           
                      
                       
                       hi6=time61.setMinutes(time61.getMinutes()+inter6);
                       bye6=time62.setMinutes(time62 .getMinutes()+interval+inter6)   
-                      starttime6=time61.getHours().toString()+":"+time61.getMinutes().toString();      // o_code가 "0"일때 첫차 시간 
-                      endtime6=  time62.getHours().toString()+":"+time62.getMinutes().toString();       // o_code가 "0"일때 첫차 + r_interval
+                      starttime6=time61.getHours().toString()+":"+time61.getMinutes().toString();      
+                      endtime6=  time62.getHours().toString()+":"+time62.getMinutes().toString();      
                       inter6+=interval;          
                       
+                	 
   
                      
                     switch(dayoff){
                    
                      case "0":
-                        dowarray=[1, 2, 3, 4, 5, 6]; 
+                   //  dowarray=[1, 2, 3, 4, 5, 6]; 
             
                   Start=starttime0;
                   End=endtime0;
                   break;
                      
                      case "1":
-                        dowarray=[0, 2, 3, 4, 5, 6]; 
+                    // dowarray=[0, 2, 3, 4, 5, 6]; 
      
                         Start=starttime1;
                   End=endtime1;
                   break;
                   
                      case "2":
-                        dowarray=[0, 1, 3, 4, 5, 6]; 
+                     //  dowarray=[0, 1, 3, 4, 5, 6]; 
                
                         Start=starttime2;
-                  End=endtime2;
+                       End=endtime2;
                   break;
                   
                      case "3":
-                        dowarray=[0, 1, 2, 4, 5, 6]; 
+                     //  dowarray=[0, 1, 2, 4, 5, 6]; 
                     
                         Start=starttime3;
                   End=endtime3;
                   break;
                   
                      case "4":
-                        dowarray=[0, 1, 2, 3, 5, 6]; 
+                     //dowarray=[0, 1, 2, 3, 5, 6]; 
                   
                         Start=starttime4;
                   End=endtime4;
                   break;
                   
                      case "5":
-                        dowarray=[0, 1, 2, 3, 4, 6]; 
+                    //  dowarray=[0, 1, 2, 3, 4, 6]; 
                       
                         Start=starttime5;
                   End=endtime5;
                   break;
                   
                      case "6":
-                        dowarray=[0, 1, 2, 3, 4, 5]; 
+                     // dowarray=[0, 1, 2, 3, 4, 5]; 
                        
                     Start=starttime6;
                   End=endtime6;
@@ -459,32 +516,31 @@ select#selectedrnum {
                      
                      }  //휴무요일에 따라서 근무 요일 지정
                      
-                     
-             
-                     
+                	 
+                	
                      
                      var item = {
                         title : obj.m_name,
-                        id : obj.m_id,
+                       id : obj.m_id,
                         start : Start,
                         end:  End,
-                        dow : dowarray 
+                        dow :[i]
                      };
-                     console.log('obj.m_id : '+obj.m_id); 
-                     console.log('Start : '+Start);
-                     console.log('End : '+End);
-                     
                      array.push(item);
-                  //   interval.push(obj.r_interval);
-                
-                    
-                     
+                     console.log('item : '+item);
+                	 
+                	 }
+          /////////////////////뀨
+          
+          
+          
                    
                   });
+                  }///for문
                  
             
                  
-
+                
                   
                   
                }
@@ -509,16 +565,7 @@ select#selectedrnum {
             editable : true,
             eventLimit : true, // allow "more" link when too many events
             events :  array 
-          /*   [ 
-               {
-                
-                title: '뚜효니',
-                start: ' 05:30',
-                end: ' 05:40',
-                dow : [0]
-             }
-               ]  
- */
+
       
          });
       });
