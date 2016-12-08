@@ -411,5 +411,12 @@ public class ScheduleManageService {
 	public void updatebtwinforefuse(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 	}
+	
+	/*public String rnumcheck(String m_id){
+		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		MemberJoinBusJoinRouteJoinReguloffDTO=dao.rnumcheck(m_id);
+
+		return str;		
+	}*/
 
 }
