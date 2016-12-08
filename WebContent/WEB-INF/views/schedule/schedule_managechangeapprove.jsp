@@ -391,7 +391,9 @@ $(document).ready(function() {
 							alert('변경 요청자의 휴무 변경은 변경 대상자로 해야 합니다.')
 							revertFunc();
 						}else{
+							//revertFunc();
 							eventObjecte=event;
+							$('#calendar').fullCalendar('removeEvents', eventObjecte.id);
 							alert(event.title + "/" + event.aftername);
 							$('#1,#2').empty();
 							$('#1').append(event.title);
@@ -443,13 +445,15 @@ $(document).ready(function() {
 				type:"post",
 				data:{"m_id":m_id,"o_code":o_code,"m_id_1":m_id_1,"o_code_1":o_code_1},
 				success:function(data){
-					alert('등록성공1');
+					alert('등록성공11');
+					alert('id??'+eventObjecte.id);
+					alert('o_code_1??'+o_code_1);
 					var resultObject = {
-						id : eventObjecte.id,
+						id : m_id,
 						title : '뭐야',
-						row : o_code_1
-					}
-					$('#calendar').fullCalendar('removeEvents', eventObjecte.id);
+						dow : o_code_1
+					};
+					
 					$('#calendar').fullCalendar('renderEvent', resultObject);
 					$('#calendar').fullCalendar('unselect');
 				}
