@@ -30,6 +30,7 @@ import org.springframework.web.servlet.View;
 import kr.or.bus.dao.ScheduleDAO;
 import kr.or.bus.dto.ScheduleDTO;
 import kr.or.bus.service.ScheduleManageService;
+import kr.or.bus.dto.MemberJoinBusDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
@@ -269,11 +270,12 @@ public class ScheduleController {
 		return jsonview;
 	}
 	
-	/*@RequestMapping("/rnumcheck.member")
+	@RequestMapping(value="/rnumcheck.member", method=RequestMethod.POST)
 	public View rnum_check(String m_id, Model model){
-		String str=service.rnumcheck(m_id);
-		model.addAttribute("str", str);		
+
+		MemberJoinBusDTO dto=service.rnumcheck(m_id);
+		model.addAttribute("dto", dto);		
 		return jsonview;
-	}*/
+	}
 	
 }
