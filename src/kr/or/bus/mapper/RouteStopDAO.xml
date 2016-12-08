@@ -34,6 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update routestop3 set rs_order = rs_order+1 where r_num = #{param1} and rs_order <![CDATA[>=]]> #{param2} and s_num != #{param3}
 	</update>
 	
+	<update id="updateRouteStopNewStop" parameterType="String">
+		update routestop3 set s_num = #{param1} where s_num = #{param2} and r_num = #{param3}
+	</update>
+	
 	<select id="getRouteStopInfoList" parameterType="String" resultType="kr.or.bus.dto.RouteStopJoinStopDTO">
 		select sto.s_num, sto.s_x, sto.s_y, sto.s_name, rs3.r_num, rs3.rs_order, rs3.r_id, rs3.rs_start, rs3.rs_end
 		from stop sto
