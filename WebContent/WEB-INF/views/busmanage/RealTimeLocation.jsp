@@ -1030,7 +1030,8 @@
         $("#SearchStop").click(function() {
         	clearInterval(stopSearch);
         	console.log("너되냐");
-        	alert("위치추적이 중지되었습니다. 다시 추적하실경우 이 페이지를 새로고침 하십시오");
+        	alert("위치추적이 중지되었습니다.페이지가 새로고침 됩니다.");
+        	history.go(0);
         });
                
         
