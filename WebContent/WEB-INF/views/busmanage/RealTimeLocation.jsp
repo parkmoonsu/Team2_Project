@@ -223,14 +223,15 @@
     //지도 기본 위치 , 마커 기본위치 가 됨.  
     //현 기본 좌표 : 판교역
     var myLatLng = {
-    	lat : 37.48085213924345,
-     	lng : 126.91500663757324
+    	lat : 37.462050994737076,
+     	lng : 126.96109771728516
     };
+      
     
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
            center : myLatLng,
-           zoom : 13
+           zoom : 11
         });                                                  
        
        	//교통 지도
