@@ -6,7 +6,7 @@
 <head>
 <style type="text/css">
   #fh5co-header #navbar li a:hover {
-    color: #fc9700 !important;
+    color: #52d3aa !important;
   }
 .my-box {
 	border: 1px solid;
