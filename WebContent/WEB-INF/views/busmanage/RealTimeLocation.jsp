@@ -735,7 +735,7 @@
      	//console.log(data);
      	poly1 = new google.maps.Polyline({
      		path: data,
-     	    strokeColor: 'red',
+     	    strokeColor: '#FF0000',
      	    strokeOpacity: 1.0,
      	    strokeWeight: 2,
        	});
@@ -747,7 +747,7 @@
      	//console.log(data);
      	poly2 = new google.maps.Polyline({
      		path: data,
-     	    strokeColor: 'navy',
+     	    strokeColor: '#666600',
      	    strokeOpacity: 1.0,
      	    strokeWeight: 2,
        	});
@@ -759,7 +759,7 @@
      	console.log(data);
      	poly3 = new google.maps.Polyline({
      		path: data,
-     	    strokeColor: 'purple',
+     	    strokeColor: '#0099FF',
      	    strokeOpacity: 1.0,
      	    strokeWeight: 2,
        	});
@@ -771,7 +771,7 @@
      	console.log(data);
      	poly4 = new google.maps.Polyline({
      		path: data,
-     	    strokeColor: 'green',
+     	    strokeColor: '#FF6600',
      	    strokeOpacity: 1.0,
      	    strokeWeight: 2,
        	});
@@ -910,7 +910,7 @@
     		polyRemove();
     		busMarkerRemove();          	
         	if($("#selectBus").val() !=null){       	
-        		
+        		//버스경로 읽어옴
         		$.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
@@ -988,6 +988,7 @@
                 	}
            		});
         		
+        		//버스정류장 읽어옴
         		$.ajax({
                     url : "busStopRoad.admin",
                     type : "get",
@@ -1001,6 +1002,7 @@
                     }        		
         		});
         		
+        		//기사명단 selet 박스에 출력
         		$.ajax({
                     url : "RouteSelectGisalist.admin",
                     type : "get",
@@ -1033,7 +1035,7 @@
                
         
         $("#Search").click(function() {
-        	//stopSearch = setInterval(function(){
+        	stopSearch = setInterval(function(){
         		$.ajax({
                     url : "RealTimeSearch.admin",
                     type : "get",
@@ -1064,7 +1066,7 @@
                     	           		  	
                     }
                 });  		
-        	//},30000);
+        	},20000);
         });
         
         
