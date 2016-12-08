@@ -12,30 +12,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
-
-import kr.or.bus.dto.RouteStopDTO;
+import kr.or.bus.dto.RouteDTO;
+import kr.or.bus.dto.RoutePathDTO;
 import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
 import kr.or.bus.dto.RouteStopJoinStopDTO;
+import kr.or.bus.service.BusStopManageService;
 import kr.or.bus.service.RouteManageService;
+import kr.or.bus.service.RoutePathService;
 
 @Controller
 public class RouteManageController {
 	@Autowired
 	RouteManageService routeManageSerivce;
+
+	@Autowired
+	BusStopManageService busStopManageService;
 	
 	@Autowired
+	RoutePathService routepathservice;
+	@Autowired
 	private View jsonview;
-	@RequestMapping(value="/route.admin",method=RequestMethod.GET)
-	public String routePageOpen(){
-		return "routemanage/RouteManage";	
-	}
-	//현재 불러오기 버튼이 두개지만.. 추후 하나로 통합할예정.
 	
-	//파일의 마커 좌표 저장
-	@RequestMapping(value="/routeSave.admin",method=RequestMethod.GET)
-	public void routeSave(HttpServletRequest request , HttpServletResponse response) throws Exception{
-		routeManageSerivce.routelocationSave(request , response);
-	}
+	
+
 		
 	//수정된 마커 좌표 불러오기
 	@RequestMapping(value="/routeEditRead.admin",method=RequestMethod.GET)
@@ -121,6 +120,47 @@ public class RouteManageController {
             
             routeManageSerivce.routeUpdate(rs_order, s_num, r_num);
             System.out.println("여길 타긴 하냐?");
+            return jsonview;
+        }
+        
+        @RequestMapping(value="/routeSave.admin",method=RequestMethod.GET)
+    	public void routeSave(HttpServletRequest request , HttpServletResponse response) throws Exception{
+    		routeManageSerivce.routelocationSave(request , response);
+    	}
+        
+        
+        //처음 데이터 가져오는 서비스(r_type)
+    	@RequestMapping(value="/route.admin",method=RequestMethod.GET)
+    	public String routePageOpen(Model map){
+    		map.addAttribute("list", busStopManageService.routetype());
+    		
+    		return "routemanage/RouteManage";	
+    	}
+    	//(r_type)을 받아서 DB에 원본 insert 하는 서비스
+    	@RequestMapping(value="/insertpath.admin",method=RequestMethod.GET)
+    	public View insertpath(List<RoutePathDTO> data) throws Exception{
+    		routepathservice.busSingleRouteRead(data);
+    		
+    		System.out.println("여길 타긴 하냐?");
+    		return jsonview;
+    	}
+    	
+    	 //있는 데이터 가져오는 서비스(r_type)
+    	@RequestMapping(value="/RouteTypeEdit.admin",method=RequestMethod.GET)
+    	public View routeEdit(Model map,String name){
+    		System.out.println(name);
+    		map.addAttribute("list", busStopManageService.routeEdit(name));
+    		return jsonview;	
+    	}
+    	
+    	
+
+        //데이터 가져오기
+        @RequestMapping(value="/selectpath.admin",method=RequestMethod.GET)
+        public View Selectpath(String r_num,Model model) throws Exception{
+        	List<RouteDTO> dto =routepathservice.Selectpath(r_num);
+        	model.addAttribute("list", dto);
+        	System.out.println("간다");
             return jsonview;
         }
 

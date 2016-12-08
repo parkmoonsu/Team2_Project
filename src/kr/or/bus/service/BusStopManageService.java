@@ -971,6 +971,12 @@ public class BusStopManageService {
 		return nlist;		
 	}
 	
+	public List<RouteTypeDTO> routeEdit(String name){
+		RouteDAO routedao = sqlsession.getMapper(RouteDAO.class);
+		List<RouteTypeDTO> nlist =routedao.routeEdit(name);
+		return nlist;		
+	}
+	
 	public List<RouteSelectGisaDTO> routeSelectGisalist(String r_num){
 		System.out.println("기사 조회 서비스 타냐?"+r_num);
 		RouteDAO routedao = sqlsession.getMapper(RouteDAO.class);
