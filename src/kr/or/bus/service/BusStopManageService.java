@@ -472,7 +472,7 @@ public class BusStopManageService {
 			
 			
 			//String venid = venidSearch(dto,r_num);
-			String venid = venidSearch(dto,r_num);
+			String venid = venidSearch(r_num);
 			LocationSearch(request , response, venid);
 		}
 	}
@@ -484,19 +484,19 @@ public class BusStopManageService {
 		if(r_num.equals("5623")){
 			dto = dao.routeidSearch(r_num);
 			//venid = venidSearch(dto, r_num);
-			venid = venidSearch(dto,r_num);
+			venid = venidSearch(r_num);
 		}else if(r_num.equals("5624")){
 			dto = dao.routeidSearch(r_num);
 			//venid = venidSearch(dto, r_num);
-			venid = venidSearch(dto,r_num);
+			venid = venidSearch(r_num);
 		}else if(r_num.equals("5531")){
 			dto = dao.routeidSearch(r_num);
 			//venid = venidSearch(dto, r_num);
-			venid = venidSearch(dto,r_num);
+			venid = venidSearch(r_num);
 		}else if(r_num.equals("3030안양")){
 			dto = dao.routeidSearch(r_num);
 			//venid = venidSearch(dto, r_num);
-			venid = venidSearch(dto,r_num);
+			venid = venidSearch(r_num);
 		}
 		
 		
@@ -998,7 +998,7 @@ public class BusStopManageService {
 	}*/
 	
 	//차량에 기사가 배정된 차량만 차량 id 리턴
-	public String venidSearch(RouteDTO dto, String r_num){		
+	public String venidSearch(String r_num){		
 		BusDataDAO busdatadao = sqlsession.getMapper(BusDataDAO.class);
 		RouteSelectGisaDTO routeselectgisadto = busdatadao.selectvenid(r_num);
 		String venid = routeselectgisadto.getB_venid();
