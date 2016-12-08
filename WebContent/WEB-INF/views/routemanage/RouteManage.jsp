@@ -124,7 +124,7 @@ select#selectBus, select#selectBus2 {
 					<div  class="x_panel" style="text-align: right">
 						
 					<div class="row" style="margin-bottom: 10px;text-align: right">
-					<select id="selectBus">
+					<%-- <select id="selectBus">
 						<option>원본</option>
 						<option>all</option>
 						<option>5623</option>
@@ -132,17 +132,14 @@ select#selectBus, select#selectBus2 {
 						<option>9000</option>
 						<option>6501</option>
 					</select>
-						<input type="button" id="newsave"  class="btn btn-default" value="원본저장" style="width:95px"> 
+						<input type="button" id="newsave"  class="btn btn-default" value="원본저장" style="width:95px">  --%>
 					
 					<select id="selectBus2">
-						<option>수정</option>
-						<option>all</option>
-						<option>5623</option>
-						<option>702</option>
-						<option>9000</option>
-						<option>6501</option>
+						<option>노선 선택</option>
+						<option value="5623">5623</option>
+						
 					</select>
-						<input type="button" id="newsave2" class="btn btn-default" value="수정본저장">
+						<!-- <input type="button" id="newsave2" class="btn btn-default" value="수정본저장"> -->
 				</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
@@ -274,6 +271,11 @@ select#selectBus, select#selectBus2 {
 		var myLatlng;
 		var markerList=new Array();
 		var dataList=new Array();
+		var cinfowindow;
+		var cmarker;
+		var markerobject;
+		var dataobject;
+		var changedmarker;
 		
 		function initMap() {
 			map = new google.maps.Map(document.getElementById('map'), {
@@ -290,7 +292,12 @@ select#selectBus, select#selectBus2 {
 				}
 				markerList=[];
 				dataList=[];
-				//changedmarker.setMap(null);
+				if(changedmarker!=null){
+					changedmarker.setMap(null);	
+				}
+				if(cmarker!=null){
+					cmarker.setMap(null);	
+				}
 				
 				myLatlng = {
 					lat : e.latLng.lat(),
@@ -301,12 +308,6 @@ select#selectBus, select#selectBus2 {
 			});
 
 		}
-		
-		var cinfowindow;
-		var cmarker;
-		var markerobject;
-		var dataobject;
-		var changedmarker;
 
 		//추가
 		function makeInfowindow() {
@@ -376,7 +377,7 @@ select#selectBus, select#selectBus2 {
 			$.ajax({
 				type:'post',
 				url:'routeRead.admin',
-				data: {r_num:"5623"},
+				data: {r_num:$('#selectBus2').val()},
 				success:function(data){
 					$.each(data.list, function(index, obj){
 						

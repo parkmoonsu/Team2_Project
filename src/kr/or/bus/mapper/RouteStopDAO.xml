@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="routeUpdate">
 		update routestopcopy4
 		set rs_order=rs_order+1
-		where rs_order > #{param1} and r_num=#{param2}
+		where rs_order > #{param1}-1 and r_num=#{param2}
 	</update>
 	<update id="routeUpdate2">
 		update routestopcopy4
