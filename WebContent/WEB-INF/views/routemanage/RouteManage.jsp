@@ -483,8 +483,8 @@ select#selectBus, select#selectBus2 {
 					
 						var marker = new google.maps.Marker({
 							position : loc,
-							map : map,
-							label : String(obj.rs_order)
+							map : map
+							//label : String(obj.rs_order)
 						});
 						
 						var contentString = '<div id="content" style="text-align:left, padding-right:40px">'

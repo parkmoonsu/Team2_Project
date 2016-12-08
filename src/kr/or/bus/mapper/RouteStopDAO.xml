@@ -18,6 +18,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(s_num) from stop where s_num = #{s_num}
 	</select>
 	
+	<select id="checkRouteNum" parameterType="String" resultType="Integer">
+		select count(r_num) from route where r_num = #{r_num}
+	</select>
+	
 	<insert id="addStopInfo" parameterType="kr.or.bus.dto.StopDTO">
 		insert into stop(s_num,s_x,s_y,s_name) values(#{s_num},#{s_x},#{s_y},#{s_name})
 	</insert>
@@ -28,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="addRouteStopInfo" parameterType="kr.or.bus.dto.RouteStopDTO">
 		insert into routestop3(r_num,s_num,rs_order,r_id,rs_start,rs_end) values(#{r_num},#{s_num},#{rs_order},#{r_id},#{rs_start},#{rs_end})
+		<!-- insert into routestop3(r_num,s_num,rs_order,r_id,rs_start,rs_end) values(#{r_num},#{s_num},#{rs_order},#{r_id},#{rs_start},#{rs_end}) -->
 	</insert>
 	
 	<update id="updateRouteStopInfo" parameterType="String">
@@ -48,12 +53,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<update id="routeUpdate">
-		update routestopcopy4
+		update routestop3
 		set rs_order=rs_order+1
 		where rs_order > #{param1}-1 and r_num=#{param2}
 	</update>
 	<update id="routeUpdate2">
-		update routestopcopy4
+		update routestop3
 		set rs_order=#{param1}
 		where s_num=#{param2}
 	</update>
@@ -77,4 +82,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getRsOrderfRsStop" resultType="kr.or.bus.dto.RouteStopDTO">
 		select rs_order from routestop3 where r_num = #{r_num} order by rs_order asc
 	</select>
+	
+	<insert id="routeInsert">
+		insert into route(r_num, bd_num, g_num, r_start, r_last, r_interval) values(#{param1}, #{param2}, #{param3}, '00:00:00', '00:00:00', '10')
+	</insert>
+	<insert id="routeStopInsert">
+		insert into routestop3(r_num, s_num, rs_order) values(#{param1}, #{param2}, #{param3})
+	</insert>
 </mapper>
