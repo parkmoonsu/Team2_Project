@@ -195,10 +195,16 @@ select#selectBus, select#selectBus2 {
 						<!-- Begin # Login Form -->
 						<div class="modal-body">
 							<div style="text-align: center">
-								<label for="m_pw">값은? </label> <input type="text" name="m_pw"
-									id="end">
+								<label for="m_pw">정류장 순서는? </label> 
+								<%-- <select name="m_pw" id="end"></select> --%>
+								 <input type="text" name="m_pw"
+									id="end"> 
+							</div>
+							<div style="text-align: center">
 								<label for="m_pq">정류장 번호는? </label> <input type="text" name="m_pq"
 									id="snum" readonly>
+							</div>
+							<div style="text-align: center">
 								<label for="m_pe">정류장 이름은? </label> <input type="text" name="m_pe"
 									id="sname">	
 							</div>
@@ -413,14 +419,28 @@ select#selectBus, select#selectBus2 {
         });
         //지도 를 마우스를 클릭시 마커를 생성하는 함수 호출.      
           map.addListener('click', function(e) {
-             $.ajax({ //정류장 번호 랜덤 값으로 생성
+        	  var r_num = $('#selectBus').val();
+        	  $('#end').val('');
+        	  //var totalv = "";
+        	  $.ajax({ //정류장 번호 랜덤 값으로 생성
             	url:"getrandomsnum.admin",
+            	data:{"r_num":r_num},
             	type:"post",
             	success:function(data){
+            		/* $.each(data.rslist,function(index,obj){
+            			console.log('순서'+obj.rs_order);
+            			 totalv += "<option value='";
+            			totalv += obj.rs_order;
+            			totalv += "'>";// 
+            			totalv += "<option>";
+            			totalv += obj.rs_order;
+            			totalv += "<option>";
+            		}); */
+            		//$('#end').append(totalv);
             		console.log(data.s_num);
             		$('#snum').val(data.s_num);
+            		//alert('선택한 순서값'+$('#end').val());
             		console.log($('#snum').val());
-            		
             	}
              });
              $("#pass-modal").modal(); 

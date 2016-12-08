@@ -73,5 +73,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteStopInfo" parameterType="String">
 		delete from stop where s_num = #{s_num}
 	</delete>
-
+	
+	<select id="getRsOrderfRsStop" resultType="kr.or.bus.dto.RouteStopDTO">
+		select rs_order from routestop3 where r_num = #{r_num} order by rs_order asc
+	</select>
 </mapper>
