@@ -6,13 +6,11 @@
    @Discription : (관리자)차고지별 버스 현황 View단
  -->
 
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="se"
-   uri="http://www.springframework.org/security/tags"%>
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="UTF-8">
 <head>
@@ -26,42 +24,42 @@
 
 <!-- Bootstrap -->
 <link
-   href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
-   rel="stylesheet">
+	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 <!-- Font Awesome -->
 <link
-   href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
-   rel="stylesheet">
+	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet">
 <!-- NProgress -->
 <link
-   href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
-   rel="stylesheet">
+	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
+	rel="stylesheet">
 <!-- iCheck -->
 <link
-   href="${pageContext.request.contextPath}/vendors/iCheck/skins/flat/green.css"
-   rel="stylesheet">
+	href="${pageContext.request.contextPath}/vendors/iCheck/skins/flat/green.css"
+	rel="stylesheet">
 <!-- bootstrap-progressbar -->
 <link
-   href="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css"
-   rel="stylesheet">
+	href="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css"
+	rel="stylesheet">
 <!-- JQVMap -->
 <link
-   href="${pageContext.request.contextPath}/vendors/jqvmap/dist/jqvmap.min.css"
-   rel="stylesheet" />
+	href="${pageContext.request.contextPath}/vendors/jqvmap/dist/jqvmap.min.css"
+	rel="stylesheet" />
 <!-- bootstrap-daterangepicker -->
 <link
-   href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css"
-   rel="stylesheet">
+	href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css"
+	rel="stylesheet">
 
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
-   rel="stylesheet">
-   
+	rel="stylesheet">
+
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
 <script
-      src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
 <script>
    $(function() {
@@ -108,49 +106,46 @@
                 $('#repairmodal').modal('show');
              }
 
-           /*  success:function(data){
-               $('#myModalLabel2').empty();
-               $('#myModalLabel2').append(data);
-            } */
          });
       }
 </script>
 <style>
-table, th{
-   text-align: center   
+table, th {
+	text-align: center
 }
+
 select#chagozi {
-   -webkit-appearance: button;
-   -webkit-border-radius: 2px;
-   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-   -webkit-padding-end: 20px;
-   -webkit-padding-start: 2px;
-   -webkit-user-select: none;
-   background-image: url(http://i62.tinypic.com/15xvbd5.png),
-      -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
-   background-position: 97% center;                                                      
-   background-repeat: no-repeat;
-   border: 1px solid #AAA;
-   color: #555;
-   font-size: inherit;
-   overflow: hidden;
-   padding: 5px 5px; 
-   text-overflow: ellipsis;
-   white-space: nowrap;
-   width: 150px;
-   border-radius: 8px;
+	-webkit-appearance: button;
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+	-webkit-padding-end: 20px;
+	-webkit-padding-start: 2px;
+	-webkit-user-select: none;
+	background-image: url(http://i62.tinypic.com/15xvbd5.png),
+		-webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+	background-position: 97% center;
+	background-repeat: no-repeat;
+	border: 1px solid #AAA;
+	color: #555;
+	font-size: inherit;
+	overflow: hidden;
+	padding: 5px 5px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 150px;
+	border-radius: 8px;
 }
 
 ul.pagination li a.active {
-    background-color: #1ABB9C;
-    color: white;
+	background-color: #1ABB9C;
+	color: white;
 }
 
 ul.pagination li a {
-    color: #73879C;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
+	color: #73879C;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
 }
 </style>
 
@@ -158,298 +153,266 @@ ul.pagination li a {
 </head>
 
 <body class="nav-md">
-   <div class="container body">
-      <div class="main_container">
-         <div class="col-xs-12  col-md-3 left_col">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-xs-12  col-md-3 left_col">
 
-            <jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
-         </div>
+				<jsp:include page="/sidebar/sidebar.jsp"></jsp:include>
+			</div>
 
-         <!--상단 menu -->
-         <div class="top_nav">
-            <jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
-         </div>
-           <!-- page content -->
-        <div class="right_col" role="main">
-          <!-- top tiles -->
-          <div class="row tile_count" style = "text-align: left">
-          </div>
-          <!-- /top tiles -->
-            <div class="">
-            <div class="page-title">
-                  <div class="title_left">
-                     <h3>
-                        <small>차고지별 버스현황</small>
-                     </h3>
-                  </div>
-               </div>
-          <div style="text-align: right">
-          <select id="chagozi">
-             <option>차고지 선택</option>
-             
-          </select>  
-          </div><br>
-               <div class="clearfix"></div>
+			<!--상단 menu -->
+			<div class="top_nav">
+				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
+			</div>
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<!-- top tiles -->
+				<div class="row tile_count" style="text-align: left"></div>
+				<!-- /top tiles -->
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>
+								<small>차고지별 버스현황</small>
+							</h3>
+						</div>
+					</div>
+					<div style="text-align: right">
+						<select id="chagozi">
+							<option>차고지 선택</option>
 
-               <div class="row">
-                  <div class="col-md-12 col-xs-12">
-                     <div class="x_panel">
-                        <div class="x_content" id="tabelinfo">
-                           <!-- start project list -->
-                           <!-- <div
-                              class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                              <div class="input-group">
-                                 <input type="text" class="form-control"
-                                    placeholder="Search for..." id="search"> <span
-                                    class="input-group-btn">
-                                    <button class="btn btn-default" type="button" id="btnsearch">Go!</button>
-                                 </span>
-                              </div>
-                           </div> -->
-                           
-                           <table class="table table-hover projects" id="bustable">
-                              <thead>
-                                 <tr>
-                                    <th>구분</th>
-                                    <th>버스번호</th>
-                                    <th>차량번호</th>
-                                    <th>기사</th>
-                                    <th>등록</th>
-                                    <th>수리조회</th>
-                                    
-                                 </tr>
-                              </thead>
-                              <tbody id="tbody">
-                                 <c:set value="${slist}" var="d"/>
-                              
-                                 <c:forEach var="i" items="${d}">
-                                 <tr>
-                                    <td>${i.r}</td>
-                                    <td>${i.b_vehiclenum}</td>
-                                    <td>${i.r_num}</td>
-                                    <td>${i.m_name}</td>
-                                    <td>${i.g_name}</td>
-                                    <td>
-                                       <div class="btn btn-success btn-xs" style="color:white" onClick="smodal('${i.b_vehiclenum}');"><i class="fa fa-search"></i>
-                                                  &nbsp;조회 </div>
-                                               </td>
-                           
-                                 </tr>
-                                 </c:forEach>
-                              </tbody>
-                           </table>
-                           
-                           <!-- end project list -->
-                           
-                           <!-- 요기서부터 페이징처리 -->
-                           <c:set var = "count" value = "${count}"/>
-                           <c:set var = "pgc" value = "${pgs}"/>
-                           <c:set var = "pagecount" value = "${pagecount}"/>
-                                                      
-                           <div style="text-align: center">
-                              <ul class="pagination">
-                              <c:if test="${pgc > 1}">
-                                 <li><a href="chagozi.admin?pg=${pgc-1}">Previous</a></li>
-                              </c:if>
+						</select>
+					</div>
+					<br>
+					<div class="clearfix"></div>
 
-                                 <c:forEach begin="1" end="${pagecount}" var="i" step="5">
-                                    <c:forEach begin="${i}" end="${i+4}" step="1" var="x">
-                                       <c:if test="${x <= pagecount}">
-                                          <c:choose>
-                                             <c:when test="${pgc == x}">
-                                                <li><a class="active" href="#">${x}</a></li>
-                                             </c:when>
-                                             <c:when test="${pgc > i-1 && pgc < i+5 }">
-                                                <li><a
-                                                   href="chagozi.admin?&pg=${x}">${x}</a></li>
-                                             </c:when>
-                                             <c:when test="${x == i+5}">
-                                                <c:forEach begin="${x}" end="${x+4}" step="1" var="y">
-                                                   <li><a
-                                                      href="chagozi.admin?&pg=${y}">${y}</a></li>
-                                                </c:forEach>
-                                             </c:when>
-                                          </c:choose>
-                                       </c:if>
+					<div class="row">
+						<div class="col-md-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_content" id="tabelinfo">
+									<!-- start project list -->
+									<table class="table table-hover projects" id="bustable">
+										<thead>
+											<tr>
+												<th style="width:90px">구분</th>
+												<th style="width:145px">버스번호</th>
+												<th style="width:150px">차량번호</th>
+												<th style="width:130px">기사</th>
+												<th style="width:180px">등록</th>
+												<th style="width:160px">수리조회</th>
 
-                                    </c:forEach>
-                                 </c:forEach>
-         
-                              <c:if test="${pgc < count/10 }">
-                                 <li><a href="chagozi.admin?pg=${pgc+1}">Next</a></li>
-                              </c:if>
-                           </ul>
-                           
-                        </div>
-                        </div>
-                     </div>
-                     
-                     <div id = "enroll">
-                     
-                     <!-- 여기에 ajax 내용 삽입됨(enroll.jsp) -->
-                     </div>   
-                        
-                     </div>
-                     
-                     
-                     
-                  </div>
-               </div>
-            </div>
-         </div>
+											</tr>
+										</thead>
+										<tbody id="tbody">
+											<c:set value="${slist}" var="d" />
 
-      <!-- 수리내역모달    -->
-         <div class="modal fade" id="repairmodal" role="dialog">
-            <div class="modal-dialog modal-md">
-               <div class="modal-content">
-                  <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">
-                        <i class="fa fa-cogs"></i>&nbsp;수리내역
-                     </h4>
-                  </div>
-                  <div class="modal-body" aria-labelledby="myModalLabel"
-                     id="myModalLabel">
-                     
-                     <table class="table table-hover projects" id="bustable">
+											<c:forEach var="i" items="${d}">
+												<tr>
+													<td style="width:90px">${i.r}</td>
+													<td style="width:145px">${i.b_vehiclenum}</td>
+													<td style="width:150px">${i.r_num}</td>
+													<td style="width:130px">${i.m_name}</td>
+													<td style="width:180px">${i.g_name}</td>
+													<td style="width:160px">
+														<div class="btn btn-success btn-xs" style="color: white"
+															onClick="smodal('${i.b_vehiclenum}');">
+															<i class="fa fa-search"></i> &nbsp;조회
+														</div>
+													</td>
+
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+
+									<!-- end project list -->
+
+									<!-- 요기서부터 페이징처리 -->
+									<c:set var="count" value="${count}" />
+									<c:set var="pgc" value="${pgs}" />
+									<c:set var="pagecount" value="${pagecount}" />
+
+									<div style="text-align: center">
+										<ul class="pagination">
+											<c:if test="${pgc > 1}">
+												<li><a href="chagozi.admin?pg=${pgc-1}">Previous</a></li>
+											</c:if>
+
+											<c:forEach begin="1" end="${pagecount}" var="i" step="5">
+												<c:forEach begin="${i}" end="${i+4}" step="1" var="x">
+													<c:if test="${x <= pagecount}">
+														<c:choose>
+															<c:when test="${pgc == x}">
+																<li><a class="active" href="#">${x}</a></li>
+															</c:when>
+															<c:when test="${pgc > i-1 && pgc < i+5 }">
+																<li><a href="chagozi.admin?&pg=${x}">${x}</a></li>
+															</c:when>
+															<c:when test="${x == i+5}">
+																<c:forEach begin="${x}" end="${x+4}" step="1" var="y">
+																	<li><a href="chagozi.admin?&pg=${y}">${y}</a></li>
+																</c:forEach>
+															</c:when>
+														</c:choose>
+													</c:if>
+
+												</c:forEach>
+											</c:forEach>
+
+											<c:if test="${pgc < count/10 }">
+												<li><a href="chagozi.admin?pg=${pgc+1}">Next</a></li>
+											</c:if>
+										</ul>
+
+									</div>
+								</div>
+							</div>
+
+							<div id="enroll">
+
+								<!-- 여기에 ajax 내용 삽입됨(enroll.jsp) -->
+							</div>
+
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 수리내역모달    -->
+		<div class="modal fade" id="repairmodal" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">
+							<i class="fa fa-cogs"></i>&nbsp;수리내역
+						</h4>
+					</div>
+					<div class="modal-body" aria-labelledby="myModalLabel"
+						id="myModalLabel">
+
+						<table class="table table-hover projects" id="bustable">
 							<thead>
-                        <tr>
-                           <th>구분</th>
-                           <th>노선번호</th>
-                           <th>수리명</th>
-                           <th>수리내역</th>
-                           <th>수리비용</th>
-                           <th>수리날짜</th>
+								<tr>
+									<th>구분</th>
+									<th>노선번호</th>
+									<th>수리명</th>
+									<th>수리내역</th>
+									<th>수리비용</th>
+									<th>수리날짜</th>
 
-                        </tr>
-                     </thead>
+								</tr>
+							</thead>
 
-		 <tbody id="modalbody">
-      <%-- <c:set value="${sclist}" var="d" />
+							<tbody id="modalbody">
 
-      <c:forEach var="i" items="${d}">
-         <tr>
-            <td>${i.r}</td>
-            <td>${i.r_num}</td>
-            <td>${i.rep_name}</td>
-            <td>${i.rd_detail}</td>
-            <td>${i.rd_cost}</td>
-            <td>${i.rd_date}</td>
-            <td>
-               <div class="btn btn-success btn-xs" data-toggle="modal"
-                  data-target="#myModal">
-                  <i class="fa fa-search"></i>&nbsp;조회
-               </div>
-            </td>
+							</tbody>
 
-         </tr>
-      </c:forEach> --%>
-   </tbody>
+						</table>
 
-</table>
-                     
-                  </div>
+					</div>
 
-                  <div class="modal-footer">
-                     <button type="button" class="btn btn-default"
-                        data-dismiss="modal">확인</button>
-                     <input type="hidden" id="hvalue">
-                  </div>
-               </div>
-            </div>
-         </div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+						<input type="hidden" id="hvalue">
+					</div>
+				</div>
+			</div>
+		</div>
 
-         <!-- 수현:삭제모달 끝 -->
+		<!-- 수현:삭제모달 끝 -->
 
-         <div class="modal fade" id="memberresrecord" role="dialog">
-            <div class="modal-dialog">
-               <div class="modal-content">
-                  <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title" id="resrecordtitle">
-                         
-                     </h4>
-                  </div>
-                  <div class="modal-body" aria-labelledby="myModalLabel"
-                     id="resrecordtable"></div>
-               </div>
-            </div>
-         </div> 
+		<div class="modal fade" id="memberresrecord" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" id="resrecordtitle"></h4>
+					</div>
+					<div class="modal-body" aria-labelledby="myModalLabel"
+						id="resrecordtable"></div>
+				</div>
+			</div>
+		</div>
 
 
 
-         <!-- footer content -->
-         <footer>
-            <jsp:include page="/sidebar/footer.jsp" />
-         </footer>
-         
-         
-         <!-- /footer content -->
-      </div>
+		<!-- footer content -->
+		<footer>
+			<jsp:include page="/sidebar/footer.jsp" />
+		</footer>
+
+
+		<!-- /footer content -->
+	</div>
 
 
 
-   <!-- Bootstrap -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-   <!-- FastClick -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
-   <!-- NProgress -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
-   <!-- Chart.js -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/Chart.js/dist/Chart.min.js"></script>
-   <!-- gauge.js -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/gauge.js/dist/gauge.min.js"></script>
-   <!-- bootstrap-progressbar -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-   <!-- iCheck -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/iCheck/icheck.min.js"></script>
-   <!-- Skycons -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/skycons/skycons.js"></script>
-   <!-- Flot -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.pie.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.time.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.stack.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.resize.js"></script>
-   <!-- Flot plugins -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/flot.curvedlines/curvedLines.js"></script>
-   <!-- DateJS -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/DateJS/build/date.js"></script>
-   <!-- JQVMap -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/jqvmap/dist/jquery.vmap.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-   <!-- bootstrap-daterangepicker -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<!-- Bootstrap -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- FastClick -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
+	<!-- NProgress -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
+	<!-- Chart.js -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/Chart.js/dist/Chart.min.js"></script>
+	<!-- gauge.js -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/gauge.js/dist/gauge.min.js"></script>
+	<!-- bootstrap-progressbar -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+	<!-- iCheck -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/iCheck/icheck.min.js"></script>
+	<!-- Skycons -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/skycons/skycons.js"></script>
+	<!-- Flot -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.pie.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.time.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.stack.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendors/Flot/jquery.flot.resize.js"></script>
+	<!-- Flot plugins -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendors/flot.curvedlines/curvedLines.js"></script>
+	<!-- DateJS -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/DateJS/build/date.js"></script>
+	<!-- JQVMap -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/jqvmap/dist/jquery.vmap.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+	<!-- bootstrap-daterangepicker -->
+	<script
+		src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-   <!-- Custom Theme Scripts -->
-   <script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-   <script type="text/javascript">
+	<!-- Custom Theme Scripts -->
+	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+	<script type="text/javascript">
    var num = 1;
    
    function plus(){
@@ -603,5 +566,5 @@ ul.pagination li a {
    });
    
    </script>
-</body>    
+</body>
 </html>

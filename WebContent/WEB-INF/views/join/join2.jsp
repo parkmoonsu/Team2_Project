@@ -257,7 +257,7 @@ margin-left: 0px;
 
 	<div class="top-content">
         	
-            <div class="inner-bg">
+            <div class="inner-bg" style="padding-top: 60px; padding-bottom: 60px">
                 <div class="container">
                     <div class="row">
                     <hr>
