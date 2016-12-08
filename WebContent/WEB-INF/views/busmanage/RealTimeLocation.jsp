@@ -641,7 +641,7 @@
         }
      }
     
-    
+    	
     function originaldelete(){
     	map.data.forEach(function(features) {           
      		map.data.remove(features);
@@ -783,11 +783,11 @@
     
     $(function() {
     			//비동기 버스 경로 을 뿌린다.
-    	/* $.ajax({
+    	$.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
                    	dataType : "json",
-                   	data : {r_num:"전체선택"},
+                   	data : {r_num:"전체검색"},
                    	success : function(data2) {
                     	console.log("읽어옴?");
                       	//console.log(data2);                              	                                                                  	                       
@@ -858,20 +858,20 @@
                         	loadVector(hell);
                    	  	}
                 	}
-           		});		 */
+           		});
     	
     	//비동기로 정류장 생성
-    	/* $.ajax({
+    	$.ajax({
             url : "busStopRoad.admin",
             type : "get",
             dataType : "json",
-            data : {r_num:"전체선택"},
+            data : {r_num:"전체검색"},
             success : function(data) {
             	console.log("읽어옴?");
             	console.log(data);                                                                                                              	                                                                  	                       	   
             	originalMarkerMake(data, map);                      	                 	                     	
             }        		
-        }); */
+        });
     	
     	//비동기로 노선 전체 버스를 위치추적한다.
 		/* stopSearch = setInterval(function(){
@@ -879,7 +879,7 @@
                 url : "RealTimeSearch.admin",
                 type : "get",
                 dataType : "json",
-                data : {r_num:"전체선택"},
+                data : {r_num:"전체검색"},
                 success : function(data) {                   	
                 	console.log(data);
                 	if(data.length == 4){
