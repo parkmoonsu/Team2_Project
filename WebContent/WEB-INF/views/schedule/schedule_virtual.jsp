@@ -228,16 +228,7 @@ select#selectedrnum {
    <!-- /calendar modal -->
    <script>
    var array = new Array();
-   var dowarray = new Array();
-   
-   var arr0 = new Array();
-   var arr1 = new Array();
-   var arr2 = new Array();
-   var arr3 = new Array();
-   var arr4 = new Array();
-   var arr5 = new Array();
-   var arr6 = new Array();
-   
+  
       $(function() {
        
          //rlist.r_num
@@ -255,62 +246,7 @@ select#selectedrnum {
                },
                success : function(data) {
        
-               /*    var year=new Date().getFullYear();
-                  var month=new Date().getMonth()+1;
-                  var day=new Date().getDate();
-                  var date=year.toString()
-                     +"-"+month.toString()
-                     +"-"+day.toString();
-                  
-                  var test=0;
-                  var ocode="";
-                  var ocode2="";
-                  
-                  var Start="";
-                  var End="";
-                  
-                  var starttime0="";
-                  var starttime1="";
-                  var starttime2="";
-                  var starttime3="";
-                  var starttime4="";
-                  var starttime5="";
-                  var starttime6="";
-                  
-                  var endtime0="";
-                  var endtime1="";
-                  var endtime2="";
-                  var endtime3="";
-                  var endtime4="";
-                  var endtime5="";
-                  var endtime6="";
-                  
-                  var inter0=0;
-                  var inter1=0;
-                  var inter2=0;
-                  var inter3=0;
-                  var inter4=0;
-                  var inter5=0;
-                  var inter6=0;
-                  
-                  var hi0;
-                  var hi1;
-                  var hi2;
-                  var hi3;
-                  var hi4;
-                  var hi5;
-                  var hi6;
-                  
-                  var bye0;
-                  var bye1;
-                  var bye2;
-                  var bye3;
-                  var bye4;
-                  var bye5;
-                  var bye6;
-                  
-                  var interval=0;
-                   */
+              
                   for(var i=0;i<7;i++){
                 	  
                 	  
@@ -466,51 +402,37 @@ select#selectedrnum {
                     switch(dayoff){
                    
                      case "0":
-                   //  dowarray=[1, 2, 3, 4, 5, 6]; 
-            
-                  Start=starttime0;
-                  End=endtime0;
-                  break;
+             	   Start=starttime0;
+                   End=endtime0;
+                   break;
                      
-                     case "1":
-                    // dowarray=[0, 2, 3, 4, 5, 6]; 
-     
-                        Start=starttime1;
+                    case "1":
+                  Start=starttime1;
                   End=endtime1;
                   break;
                   
-                     case "2":
-                     //  dowarray=[0, 1, 3, 4, 5, 6]; 
-               
-                        Start=starttime2;
-                       End=endtime2;
+                    case "2":
+                  Start=starttime2;
+                  End=endtime2;
                   break;
                   
-                     case "3":
-                     //  dowarray=[0, 1, 2, 4, 5, 6]; 
-                    
-                        Start=starttime3;
+                    case "3":
+                  Start=starttime3;
                   End=endtime3;
                   break;
                   
-                     case "4":
-                     //dowarray=[0, 1, 2, 3, 5, 6]; 
-                  
-                        Start=starttime4;
+                    case "4":
+                  Start=starttime4;
                   End=endtime4;
                   break;
                   
-                     case "5":
-                    //  dowarray=[0, 1, 2, 3, 4, 6]; 
-                      
-                        Start=starttime5;
+                    case "5":
+                  Start=starttime5;
                   End=endtime5;
                   break;
                   
-                     case "6":
-                     // dowarray=[0, 1, 2, 3, 4, 5]; 
-                       
-                    Start=starttime6;
+                    case "6":
+                  Start=starttime6;
                   End=endtime6;
                   break;
                      
@@ -521,7 +443,7 @@ select#selectedrnum {
                      
                      var item = {
                         title : obj.m_name,
-                       id : obj.m_id,
+                        id : obj.m_id,
                         start : Start,
                         end:  End,
                         dow :[i]
@@ -530,10 +452,7 @@ select#selectedrnum {
                      console.log('item : '+item);
                 	 
                 	 }
-          /////////////////////뀨
-          
-          
-          
+      
                    
                   });
                   }///for문
@@ -564,7 +483,10 @@ select#selectedrnum {
             navLinks : true, // can click day/week names to navigate views
             editable : true,
             eventLimit : true, // allow "more" link when too many events
-            events :  array 
+            events :  array ,
+            enventDrop : function(event, delta, revertFunc, jsEvent){
+            	
+            }
 
       
          });
