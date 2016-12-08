@@ -176,9 +176,11 @@ private JavaMailSender mailSender;
 		String cong=m_id+"님 축하드립니다. 가입이 완료되었습니다.";
 		String curTime = new SimpleDateFormat("yyyy-MM-dd-").format(new Date());	 
 		String head="회원가입 보호를 위한 RoadOneBell 안내";
-		String content1="RoadOneBell에 관심을 가져주신것에 대해 감사드리며,RoadOneBell 가입을 축하드리는 바 입니다.";
+		String content1="RoadOneBell에 관심을 가져주신것에 대해 감사드리며,<br>RoadOneBell 가입을 축하드리는 바 입니다.";
+		String img="http://mblogthumb3.phinf.naver.net/20151005_286/osr130_1444031061919XFaln_JPEG/%B0%A8%BB%E7%C7%D51.JPG?type=w2";
 		
 		Map<String,Object> param=new HashMap<>();
+		param.put("img", img);
 		param.put("content",cong);
 		param.put("content1",content1);
 		param.put("head", head);

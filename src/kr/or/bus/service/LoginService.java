@@ -64,12 +64,14 @@ public class LoginService {
 			String head="회원아이디 찾기 를 위한 RoadOneBell 안내";
 			String content1="RoadOneBell 아이디 찾기 입니다.";
 			String contetn="회원님 아이디는 :"+m_id+"입니다.";
+			String img="https://cdn.pixabay.com/photo/2015/02/03/09/25/question-622164_960_720.jpg";
 			
 			Map<String,Object> param=new HashMap<>();
 			param.put("content",contetn);
 			param.put("head", head);
 			param.put("date", curTime);
 			param.put("content1", content1);
+			param.put("img",img);
 			
 			String Url="hello.html";
 			String format=VelocityEngineUtils.mergeTemplateIntoString(velocityconfig.getVelocityEngine(),Url,"UTF-8",param);
@@ -113,11 +115,14 @@ public class LoginService {
 			String head="회원아이디 찾기 를 위한 RoadOneBell 안내";
 			String content1="RoadOneBell 비밀번호 찾기 입니다.";
 			String content="회원님 임시 비밀번호는  :"+temp+"입니다.";
+			String img="https://cdn.pixabay.com/photo/2015/02/03/09/25/question-622164_960_720.jpg";
+			
 			
 			Map<String,Object> param=new HashMap<>();
 			param.put("head", head);
 			param.put("date", curTime);
 			param.put("content1", content1);
+			param.put("img",img);
 			
 			param.put("content",content);
 			String Url="hello.html";
