@@ -107,14 +107,14 @@
 					<option>${i.bd_name}</option>					
 					</c:forEach>																	
 				</select>
-				
-				<select id="selectGisa">
-					<option>기사 명단</option>																	
-				</select>
 												
 				<select id="selectBus">
 					<option>노선을 선택하세요</option>
 					<option>전체검색</option>										
+				</select>
+				
+				<select id="selectGisa">
+					<option>기사 명단</option>																	
 				</select>								
      			<div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;"></div>
             </div>
@@ -1030,7 +1030,8 @@
         $("#SearchStop").click(function() {
         	clearInterval(stopSearch);
         	console.log("너되냐");
-        	alert("위치추적이 중지되었습니다. 다시 추적하실경우 이 페이지를 새로고침 하십시오");
+        	alert("위치추적이 중지되었습니다.페이지가 새로고침 됩니다.");
+        	history.go(0);
         });
                
         
