@@ -252,8 +252,8 @@ public class BusStopManageService {
 			
 			if(r_num.equals("전체선택")){				
             	JSONObject obs1 = busMultiRouteRead("5623" , dto, request, response);
-            	JSONObject obs2 = busMultiRouteRead("6702" , dto, request, response);
-            	JSONObject obs3 = busMultiRouteRead("143", dto, request, response);
+            	JSONObject obs2 = busMultiRouteRead("5624" , dto, request, response);
+            	JSONObject obs3 = busMultiRouteRead("5531", dto, request, response);
             	JSONObject obs4 = busMultiRouteRead("3030안양", dto, request, response);
             	
             	ArrayList<JSONObject> obss = new ArrayList<JSONObject>();
@@ -313,12 +313,12 @@ public class BusStopManageService {
 				dto = dao.routeidSearch("5623");
 				id = dto.getR_id();
 			}
-			else if(r_num.equals("6702")){
-				dto = dao.routeidSearch("6702");
+			else if(r_num.equals("5624")){
+				dto = dao.routeidSearch("5624");
 				id = dto.getR_id();				
 			}
-			else if(r_num.equals("143")){
-				dto = dao.routeidSearch("143");
+			else if(r_num.equals("5531")){
+				dto = dao.routeidSearch("5531");
 				id = dto.getR_id();
 			}
 			else if(r_num.equals("3030안양")){
@@ -449,8 +449,8 @@ public class BusStopManageService {
 		if(r_num.equals("전체선택")){
 			
 			JSONArray jsonlist1 = multiLocationSearch(request , response, dto, "5623");
-			JSONArray jsonlist2 = multiLocationSearch(request , response, dto, "6702");
-			JSONArray jsonlist3 = multiLocationSearch(request , response, dto, "143");
+			JSONArray jsonlist2 = multiLocationSearch(request , response, dto, "5624");
+			JSONArray jsonlist3 = multiLocationSearch(request , response, dto, "5531");
 			JSONArray jsonlist4 = multiLocationSearch(request , response, dto, "3030안양");
 			
 			locations = new ArrayList<JSONArray>();
@@ -482,10 +482,10 @@ public class BusStopManageService {
 		if(r_num.equals("5623")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("6702")){
+		}else if(r_num.equals("5624")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
-		}else if(r_num.equals("143")){
+		}else if(r_num.equals("5531")){
 			dto = dao.routeidSearch(r_num);
 			venid = venidSearch(dto, r_num);
 		}else if(r_num.equals("3030안양")){
@@ -747,11 +747,11 @@ public class BusStopManageService {
 			//busStopRoadAllSearch("5623", dto, busstopdto, request, response);
 			busstoplist.addAll(0, busStopRoadAllSearch("5623", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("6702", dto, busstopdto, request, response);
-			busstoplist.addAll(1, busStopRoadAllSearch("6702", dto, busstopdto, request, response));
+			busstoplist.addAll(1, busStopRoadAllSearch("5624", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("3500포천", dto, busstopdto, request, response);
 			busstoplist.addAll(2, busStopRoadAllSearch("3030안양", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("6501광주", dto, busstopdto, request, response);
-			busstoplist.addAll(3, busStopRoadAllSearch("143", dto, busstopdto, request, response));
+			busstoplist.addAll(3, busStopRoadAllSearch("5531", dto, busstopdto, request, response));
 			jsonmaps = JSONArray.fromObject(busstoplist);
 			out.print(jsonmaps);
 			

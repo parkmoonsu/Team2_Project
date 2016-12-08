@@ -59,4 +59,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE ROUTE.BD_NUM = BUSDIS.BD_NUM and BUSDIS.BD_NAME  = #{bd_name}
 	</select>
 	
+	<!-- SELECT 박스에서 노선번호를 선택하면 해당 노선번호 차량에 배정되어있는 기사 출력 -->
+	
 </mapper>
