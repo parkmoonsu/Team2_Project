@@ -11,8 +11,9 @@
 }
  .inner-bg{
   /*  background-color: #F9FFFF; */
-   background-color: #2A3F54;
+/*    background-color: #2A3F54; */
   /*  background-color: #dcdcdc; */
+  background-color: white;
 
 } 
 /* 
@@ -57,11 +58,11 @@
 	</header>
 
 	<div class="top-content">
-        	
-            <div class="inner-bg">
+        
+            <div class="inner-bg" style="padding-top: 90px; padding-bottom: 30px">
                 <div class="container">
                     <div class="row">
-                    <div class="form-top" align="center" style="color: #7f7f7f; background-color:#F9FFFF">
+                    <div class="form-top" align="center" style="color: #7f7f7f;">
 					<div class="form-top-center">
                         <ul class="nav nav-tabs">	
 								<li class="active">
@@ -75,11 +76,11 @@
 								 비밀번호 찾기 </a>
 								 </li>
 								</ul>
-								 <div class="tab-content" style="background-color: white">
+								 <div class="tab-content">
 								 
 								 <div id="findId" class="tab-pane fade in active" style="background-color: white;"> 
 									<div style="background-color: white"></div>
-										<div class="my-box" style="margin:30px;">				
+										<div class="my-box" style="margin:30px" >				
 												<h2 class="StepTitle" align="center" style="color: #7f7f7f;">아이디 찾기</h2>
 												<div class="form-group" style="padding : 30px ;">
 													<div id="step-2">
@@ -118,7 +119,7 @@
 												<div id="findPw" class="tab-pane fade">
 												<div class="my-box" style="margin:30px" >
 												<h2 class="StepTitle" align="center" style="color: #7f7f7f;">비밀번호 찾기</h2>
-												<div class="form-group" style="padding: 25px">
+												<div class="form-group" style="padding: 30px">
 													<div id="step-2">
 														<form class="form-horizontal form-label-left"
 															method="post" action="searchpw.htm">
@@ -157,7 +158,7 @@
                     </div>
                     
                    <hr>
-                <footer style="color: white">
+                <footer style="color:#ccc">
 				<jsp:include page="/sidebar/footer.jsp" />
 			</footer> 
         </div>

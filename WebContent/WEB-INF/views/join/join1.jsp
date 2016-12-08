@@ -197,8 +197,9 @@ color: black;
 p, h5{
 text-align: left;
 }
-  #fh5co-header #navbar li a:hover {
-    color: #52d3aa !important;
+
+    #fh5co-header #navbar li a:hover {
+    color: #fc9700 !important;
   }
 </style>
 </head>
@@ -223,7 +224,7 @@ text-align: left;
 			    <nav class="navbar navbar-default">
 		        <div class="navbar-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-		         <a class="navbar-brand" href="bus.htm">RoadOneBell</a> 
+		         <a class="navbar-brand" href="bus.htm" >RoadOneBell</a> 
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		          <ul class="nav navbar-nav navbar-right">
@@ -238,7 +239,7 @@ text-align: left;
 
 	<div class="top-content">
         	
-            <div class="inner-bg">
+            <div class="inner-bg" style="padding-top: 60px; padding-bottom: 60px">
                 <div class="container">
                     <div class="row">
                     <hr>
@@ -250,8 +251,8 @@ text-align: left;
 								<div class="form-top" align="center" style="color: black">
 								<div class="form-top-center">
 								
-									<h2 style="color: black">
-										RoadOneBell&nbsp;<small style="color: black">회원가입</small>
+									<h2 style="color: #56B37F">
+										RoadOneBell&nbsp;<small style="color: #56B37F">회원가입</small>
 									</h2>
 								</div>
 								

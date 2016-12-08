@@ -9,7 +9,7 @@
 <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
       		<a href = "main.htm">
-           	<img src="images/newlogo1.png" style = "width:100%">
+           	<img src="images/newlogo1.png" style = "width:100%; padding-top: 20px">
           
            	</a>
             </div>
