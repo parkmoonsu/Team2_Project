@@ -384,7 +384,7 @@ select#selectBus, select#selectBus2 {
        trafficLayer.setMap(map);
     }
     //버스 정류장 수동 생성 db 변경
-   /*  function copyMarkerMakess(latLng, map){
+   function copyMarkerMakess(latLng, map){
     	console.log(latLng);
     	var num =$("#end").val();
     	var s_num = $('#snum').val();
@@ -417,17 +417,17 @@ select#selectBus, select#selectBus2 {
     			type : "post",
     			data : param,
     			success:function(data){
-    				//alert(data.alert);
-    				/* $.each(data.rssdto,function(index,obj){
+    				alert(data.alert);
+    				$.each(data.rssdto,function(index,obj){
     					console.log(obj.r_num+"/"+obj.s_num+"/"+obj.rs_order);
-    				}); */
-    	/* 			console.log(data.rssdto);
+    				}); 
+    	 			console.log(data.rssdto);
     				copyMarkerMakes(data.rssdto,map);
     	
     			}
     		});
     	}
-    }*/
+    }
    
  
 	//db에서 불러오기
