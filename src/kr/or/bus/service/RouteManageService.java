@@ -166,7 +166,41 @@ public class RouteManageService {
 
 		dao.routeUpdate2(rs_order, s_num);
 
-
 	}
 
+	//정류장 마커 삭제하기
+	public void deleteStopRoute(String r_num, String s_num, String rs_order,Model model){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		int result = 0;
+		String alert = "";
+		try{
+			result = dao.deleteStopRoute(r_num, s_num); //routestop3에서 해당 정류장 정보 삭제하기
+			System.out.println(result);
+			if(result>0){
+				result = dao.updateDeletedRouteStopInfo(r_num, rs_order);
+				if(result>0){
+					result = dao.getDuplicateStopNum(s_num);
+					if(result>0){
+						
+					}else{
+						result = dao.deleteStopInfo(s_num);
+						if(result>0){
+							alert = "정류장 삭제 처리 되었습니다.5";
+						}else{
+							alert = "정류장 삭제 처리에 오류가 생겼습니다.4";
+						}
+					}
+					alert = "정류장 삭제 처리 되었습니다.3";
+				}else{
+					alert = "정류장 삭제 처리에 오류가 생겼습니다.2";
+				}
+			}else{
+				alert = "정류장 삭제 처리에 오류가 생겼습니다.1";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		model.addAttribute("alert", alert);
+	}
+	
 }

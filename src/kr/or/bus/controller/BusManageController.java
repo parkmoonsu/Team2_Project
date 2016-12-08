@@ -10,6 +10,7 @@
 package kr.or.bus.controller;
 
 import java.security.Principal;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
+import kr.or.bus.dto.BusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
 import kr.or.bus.dto.MemberDTO;
@@ -219,11 +221,43 @@ public class BusManageController {
 		return jsonview;
 	}
 	@RequestMapping("/chagozi.admin")
-	public String chagozi(){
+	public String chagozi(String pg, Model model){
 		
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> clist = service.getGarageName();
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> slist = service.getAllStat(pg);
 		
-		return "redirect:chagozi.jsp";
+		int page = service.pg(pg);
+		int count = service.count();	
+		int pagecount = 0;
+		
+		if(count % 10 == 0){
+			pagecount = count/10;
+		}else{
+			pagecount = count/10 + 1;
+		}
+				
+		model.addAttribute("pagecount", pagecount);
+		model.addAttribute("pgs",page);
+		model.addAttribute("clist",clist);
+		model.addAttribute("slist",slist);
+		model.addAttribute("count", count);
+		
+		return "busmanage/chagozi";
 
+	}
+	//scount(String g_name)
+	@RequestMapping("/selectchagozi.admin")
+	public View selectchagozi(String g_name, String pg, Model model){
+		System.out.println(g_name + "###");
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> sclist = service.getStat(g_name, pg);
+		int count=service.scount(g_name);
+		int page = service.pg(pg);
+		
+		model.addAttribute("pgs", page);
+		model.addAttribute("count",count);	
+		model.addAttribute("sclist", sclist);
+		
+		return jsonview;
 	}
 
 	@RequestMapping("/update.admin")
@@ -246,24 +280,7 @@ public class BusManageController {
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("array", array);
-		
-		/*for(int i = 0 ; i < array.length ; i++){
-			System.out.println(array[i] + "의 유무 : " + service.alreadyUse(array[i]));
-			data[i] = service.alreadyUse(array[i]);
-		}
-		model.addAttribute("data", data);
-		*/
-		//System.out.println("받은것 : " +array.length);
-		/*int result = 0;
-		for(int i = 0; i < array.length; i++){
-			System.out.println("넘어온 값 : "+array[i]);
-			result = service.alreadyUse(array[i]);
-		}
-		//int data = service.alreadyUse(b_vehiclenum);
-		System.out.println("#####data### : " + result );
-		model.addAttribute("result", result);
-		model.addAttribute("num", b_vehiclenum);
-		*/return jsonview;
+		return jsonview;
 	}
 	
 	@RequestMapping("/matchpass.admin")
@@ -288,14 +305,23 @@ public class BusManageController {
 		return jsonview;
 	}
 	
-	//실시간 위치추적 페이지
+	//실시간 위치추적 페이지 오픈
 	@RequestMapping("/realTime.admin")
 	public String realTimeOpen(ModelMap map){
-		map.addAttribute("list", busStopManageService.routeList());
+		map.addAttribute("list", busStopManageService.routetype());
 		return "busmanage/RealTimeLocation";
 	}
 	
-	@RequestMapping("noroute.admin")
+	@RequestMapping("/RouteTypeRouteNo.admin")
+	public View routeTypeNo(String r_type, ModelMap map){
+		map.addAttribute("nlist", busStopManageService.routetypeNumber(r_type));
+		return jsonview;
+	}
+	
+	
+	
+	
+	@RequestMapping("/noroute.admin")
 	public String noRoute(String pg , Model model){
 
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.noRouteInfo(pg);
@@ -307,7 +333,7 @@ public class BusManageController {
 		return "busmanage/clickcount";
 	}
 	
-	@RequestMapping("mbusinfo.admin")
+	@RequestMapping("/mbusinfo.admin")
 	public String mBusInfo(Model model){
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.mBusInfo();
 		
@@ -316,7 +342,7 @@ public class BusManageController {
 		return "busmanage/clickcount";
 	}
 	
-	@RequestMapping("nbusinfo.admin")
+	@RequestMapping("/nbusinfo.admin")
 	public String nBusInfo(Model model){
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.nBusInfo();
 		
@@ -325,16 +351,16 @@ public class BusManageController {
 		return "busmanage/clickcount";
 	}
 	
-	@RequestMapping("wbusinfo.admin")
+	@RequestMapping("/wbusinfo.admin")
 	public String wBusInfo(Model model){
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.wBusInfo();
 		
-		model.addAttribute("list",list);
+		model.addAttribute("list",list); 
 		
 		return "busmanage/clickcount";
 	}
 	
-	@RequestMapping("gbusinfo.admin")
+	@RequestMapping("/gbusinfo.admin")
 	public String gBusInfo(Model model){
 		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> list = service.gBusInfo();
 		
@@ -343,9 +369,25 @@ public class BusManageController {
 		return "busmanage/clickcount";
 	}
 	
-	@RequestMapping("busreg.admin")
-	public String busReg(Model model){
-		
+	@RequestMapping("/busreg.admin")
+	public String busReg(){
 		return "busmanage/busreg";
 	}
+	
+	@RequestMapping("/busreg2.admin")
+	public String busReg(String b_vehiclenum,String b_sdate,String b_sprice,String b_manuf,String b_pcount,String b_effic,String b_model,String b_caryear , String pg , Model model){
+		System.out.println("##########" + b_vehiclenum + "/" + b_sdate + "/" + b_sprice + "/" + b_manuf + "/" + b_pcount + "/" + b_effic + "/" + b_model + "/" + b_caryear);
+		
+		int result = service.busReg(b_vehiclenum, b_sdate, b_sprice, b_manuf, b_pcount, b_effic, b_model, b_caryear);
+		
+		String viewpage = "";
+		if(result > 0){
+			viewpage = "busmanage/insertsuccess";
+		}else{
+			viewpage = "busmanage/insertfail";
+		}
+		return viewpage;
+	}
+	
+	
 }

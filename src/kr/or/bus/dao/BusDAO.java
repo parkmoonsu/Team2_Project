@@ -9,6 +9,7 @@
 
 package kr.or.bus.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
@@ -25,6 +26,17 @@ public interface BusDAO {
 	
 	//등록된 차고지의 이름 가지고오기
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getGarageName();					////
+	
+	//모든 버스현황 리스트
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getAllStat(int page);
+	
+	//차고지별 버스현황 개수
+	public int count();
+	
+	public int scount(String g_name);
+	
+	//차고지별 버스현황 리스트 
+	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getStat(String g_name, int page);
 	
 	//등록된 차고지의 이름을 통해 차고지에 맞는 노선 번호 가져오기
 	public List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getRouteNum(String g_num);			////
@@ -104,6 +116,7 @@ public interface BusDAO {
 	
 	
 	
-	/////////////////버스 등록 / 삭제 ////////////////////////////////////////////////////////////////
-	
+	/////////////////버스 등록  ////////////////////////////////////////////////////////////////
+	public int busReg(String b_vehiclenum , Date b_sdate , String b_sprice , String b_manuf , 
+			int b_pcount , String b_model , String b_caryear);
 }

@@ -42,6 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rs3.r_num = #{r_num}
 	</select>
 	
+
 	<update id="routeUpdate">
 		update routestopcopy4
 		set rs_order=rs_order+1
@@ -52,4 +53,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set rs_order=#{param1}
 		where s_num=#{param2}
 	</update>
+
+	<delete id="deleteStopRoute" parameterType="String">
+		delete from routestop3 where r_num = #{param1} and s_num = #{param2}
+	</delete>
+	
+	<update id="updateDeletedRouteStopInfo" parameterType="String">
+		update routestop3 set rs_order = rs_order - 1 where r_num = #{param1}  and rs_order <![CDATA[>=]]> #{param2}
+	</update>
+	
+	<select id="getDuplicateStopNum" resultType="Integer" parameterType="String">
+		select count(s_num) from routestop3 where s_num = #{s_num}
+	</select>
+	
+	<delete id="deleteStopInfo" parameterType="String">
+		delete from stop where s_num = #{s_num}
+	</delete>
+
 </mapper>
