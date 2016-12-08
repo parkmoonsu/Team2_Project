@@ -60,6 +60,8 @@
 	margin-bottom:15px;
 }
 .btn{border-radius: 8px};
+
+
 </style>
   </head>
 
@@ -107,14 +109,14 @@
 					<option>${i.bd_name}</option>					
 					</c:forEach>																	
 				</select>
-				
-				<select id="selectGisa">
-					<option>기사 명단</option>																	
-				</select>
 												
 				<select id="selectBus">
 					<option>노선을 선택하세요</option>
 					<option>전체검색</option>										
+				</select>
+				
+				<select id="selectGisa">
+					<option>기사 명단</option>																	
 				</select>								
      			<div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;"></div>
             </div>
@@ -294,14 +296,14 @@
            		map: map,           		
            		animation: google.maps.Animation.DROP,
            		icon : '${pageContext.request.contextPath}/images/busstop.png',
-           		zindex : "5"
+           		zindex : "1"
         	});
      	   
-     	  	var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
-     	  	
+     	  	var infowindow = new google.maps.InfoWindow({ maxWidth: 400});  
+     	    
      	  	(function (originalMarker, latLng, infowindow) {
      	        google.maps.event.addListener(originalMarker, "click", function (e) {
-     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');
+     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');    	            
      	            infowindow.open(map, originalMarker);
      	           
      	        });
@@ -735,7 +737,7 @@
      	//console.log(data);
      	poly1 = new google.maps.Polyline({
      		path: data,
-     	    strokeColor: 'red',
+     	    strokeColor: '#FF0000',
      	    strokeOpacity: 1.0,
      	    strokeWeight: 2,
        	});
@@ -747,7 +749,7 @@
      	//console.log(data);
      	poly2 = new google.maps.Polyline({
      		path: data,
-     	    strokeColor: 'navy',
+     	    strokeColor: '#666600',
      	    strokeOpacity: 1.0,
      	    strokeWeight: 2,
        	});
@@ -759,7 +761,7 @@
      	console.log(data);
      	poly3 = new google.maps.Polyline({
      		path: data,
-     	    strokeColor: 'purple',
+     	    strokeColor: '#0099FF',
      	    strokeOpacity: 1.0,
      	    strokeWeight: 2,
        	});
@@ -771,7 +773,7 @@
      	console.log(data);
      	poly4 = new google.maps.Polyline({
      		path: data,
-     	    strokeColor: 'green',
+     	    strokeColor: '#FF6600',
      	    strokeOpacity: 1.0,
      	    strokeWeight: 2,
        	});
@@ -910,7 +912,7 @@
     		polyRemove();
     		busMarkerRemove();          	
         	if($("#selectBus").val() !=null){       	
-        		
+        		//버스경로 읽어옴
         		$.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
@@ -988,6 +990,7 @@
                 	}
            		});
         		
+        		//버스정류장 읽어옴
         		$.ajax({
                     url : "busStopRoad.admin",
                     type : "get",
@@ -1001,6 +1004,7 @@
                     }        		
         		});
         		
+        		//기사명단 selet 박스에 출력
         		$.ajax({
                     url : "RouteSelectGisalist.admin",
                     type : "get",
@@ -1028,12 +1032,13 @@
         $("#SearchStop").click(function() {
         	clearInterval(stopSearch);
         	console.log("너되냐");
-        	alert("위치추적이 중지되었습니다. 다시 추적하실경우 이 페이지를 새로고침 하십시오");
+        	alert("위치추적이 중지되었습니다.페이지가 새로고침 됩니다.");
+        	history.go(0);
         });
                
         
         $("#Search").click(function() {
-        	//stopSearch = setInterval(function(){
+        	stopSearch = setInterval(function(){
         		$.ajax({
                     url : "RealTimeSearch.admin",
                     type : "get",
@@ -1064,7 +1069,7 @@
                     	           		  	
                     }
                 });  		
-        	//},30000);
+        	},20000);
         });
         
         
