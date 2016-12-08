@@ -123,12 +123,13 @@ select#selectedrnum {
    background-repeat: no-repeat;
    border: 1px solid #AAA;
    color: #555;
-   font-size: inherit;
+  /*  font-size: inherit; */
    overflow: hidden;
    padding: 5px 10px; 
    text-overflow: ellipsis;
    white-space: nowrap;
-   width: 150px;
+   width: 140px;
+   border-radius: 8px;
 }
 </style>
 
@@ -156,7 +157,7 @@ select#selectedrnum {
                <div class="page-title">
                   <div class="title_left">
                      <h3>
-                         예상 스케줄 <i class="fa fa-calendar"></i>
+                        <i class="fa fa-calendar"></i>&nbsp;예상 스케줄 
                      </h3>
                   </div>
 
@@ -168,7 +169,7 @@ select#selectedrnum {
                   <div class="col-md-12">
                      <div class="x_panel">
                         <div class="x_title">
-                           <h2>
+                          
                               <select id="selectedrnum">
                                  <option value="0">노선선택</option>
                                  <c:forEach var="rlist" items="${routelist}">
@@ -177,7 +178,7 @@ select#selectedrnum {
                               </select>
                               <!--  <small>Sessions</small> -->
 
-                           </h2>
+                          
                            <ul class="nav navbar-right panel_toolbox">
                               <li><a class="collapse-link"><i
                                     class="fa fa-chevron-up"></i></a></li>
@@ -226,7 +227,37 @@ select#selectedrnum {
 
    <!-- calendar modal -->
    <!-- /calendar modal -->
-   <script>
+   
+   <!-- Bootstrap -->
+   <script
+      src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+   <!-- FastClick -->
+   <script
+      src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
+   <!-- NProgress -->
+   <script
+      src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
+   <!-- FullCalendar -->
+   <script
+      src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
+   <script
+      src="${pageContext.request.contextPath}/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+
+   <script
+      src="${pageContext.request.contextPath}/vendors/fullcalendar/dist/jquery-ui.min.js"></script>
+
+   <!-- Custom Theme Scripts -->
+   <script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+
+   <!-- FullCalendar -->
+   <script
+      src="${pageContext.request.contextPath }/js/schedule_managereguloff.js"></script>
+      
+      
+      
+      
+      
+  <script>
    var array = new Array();
   
       $(function() {
@@ -468,16 +499,32 @@ select#selectedrnum {
                center : 'title',
                right : 'agendaWeek,agendaDay'
             },
-
+			titleFormat:{week:"YYYY년 MMMM DD일"},
             slotDuration : '00:10:00',
-            buttonIcons : false, // show the prev/next text
+            buttonIcons : false,
             weekNumbers : true,
-            navLinks : true, // can click day/week names to navigate views
+            navLinks : true,
             editable : true,
-            eventLimit : true, // allow "more" link when too many events
+            eventLimit : true,
             events :  array ,
-            enventDrop : function(event, delta, revertFunc, jsEvent){
-            	 
+            monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+			monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+			dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+			dayNamesShort: ["일","월","화 ","수 ","목 ","금 ","토 "],
+            eventDrop : function(event, delta, revertFunc, jsEvent){//revertFunc : 취소시 되돌리는
+       			console.log("####" + array[13].start + "####" + array[13].title);
+       			console.log("####" + event.dow);
+       			if(delta.days() > 0){ //다른 영역으로 가지 않게 설정
+       				$("#calendar").fullCalendar('refetchEvents');
+       				$("#calendar").fullCalendar('unselect');
+       			}
+       			if(true){
+       				console.log("###" + array.length);
+       				for(var i = 0 ; i < array[0].length ; i++){
+       					
+						console.log(i);
+       				}
+       			} 
             }
 
       
@@ -486,30 +533,6 @@ select#selectedrnum {
          
 
       
-   </script>
-   <!-- Bootstrap -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-   <!-- FastClick -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
-   <!-- NProgress -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
-   <!-- FullCalendar -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
-
-   <script
-      src="${pageContext.request.contextPath}/vendors/fullcalendar/dist/jquery-ui.min.js"></script>
-
-   <!-- Custom Theme Scripts -->
-   <script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-
-   <!-- FullCalendar -->
-   <script
-      src="${pageContext.request.contextPath }/js/schedule_managereguloff.js"></script>
+   </script>    
 </body>
 </html>

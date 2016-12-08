@@ -15,7 +15,7 @@
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
-<title>KOSBUS</title>
+<title>RoadOneBell</title>
 
 <!-- Bootstrap -->
 <link
@@ -76,7 +76,8 @@ select#selectBus, select#selectBus2 {
 	padding: 5px 10px; 
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	width: 150px;
+	width: 140px;
+	border-radius: 8px;
 }
 .btn{border-radius: 8px};
 </style>
@@ -157,11 +158,7 @@ select#selectBus, select#selectBus2 {
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
+				<jsp:include page="/sidebar/footer.jsp" />
 			</footer>
 			<!-- /footer content -->
 		</div>

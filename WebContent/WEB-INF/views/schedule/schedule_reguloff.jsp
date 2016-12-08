@@ -103,7 +103,16 @@
                     <div class="clearfix"></div>
                   </div> -->
                   <div class="x_content">
-
+				  <div style="text-align: center">
+									<button style="width:100px; height:30px; background-color: green; border:0" class="btn btn-default"></button>
+									나의 정기휴무&nbsp;&nbsp;&nbsp;
+									<button style="width:100px; height:30px; background-color: red; border:0" class="btn btn-default"></button>
+									휴무변경 중 (본인)&nbsp;&nbsp;&nbsp;
+									<button style="width:100px; height:30px; background-color: #46AAEB; border:0" class="btn btn-default"></button>
+									휴무변경 중 (타인)&nbsp;&nbsp;&nbsp;
+									<button style="width:100px; height:30px; background-color: black; border:0" class="btn btn-default"></button>
+									정해진 휴무&nbsp;&nbsp;&nbsp;
+					</div><hr>
                     <div id='calendar'></div>
 
                   </div>

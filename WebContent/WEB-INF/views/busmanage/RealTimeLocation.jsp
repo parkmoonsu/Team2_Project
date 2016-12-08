@@ -52,10 +52,10 @@
 	color: #555;
 	font-size: inherit;
 	overflow: hidden;
-	padding: 5px 10px; 
+	padding: 5px 5px; 
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	width: 150px;
+	width: 140px;
 	border-radius: 8px;
 	margin-bottom:15px;
 }
@@ -100,8 +100,8 @@
 			<div class="x_panel">
           <div class="row" style="text-align: right">
             <div class="col-md-12 col-sm-12 col-xs-12">
-            	<input type="button" id="Search" class="btn btn-default" value="버스위치추적 ">
-				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
+            	<input type="button" id="Search" class="btn btn-default btn-sm" value="버스위치추적 ">
+				<input type="button" id="SearchStop"  class="btn btn-default btn-sm" value="버스위치추적 중지">
 				
 				<select id="selectRoute">
 					<option>노선종류</option>
@@ -111,7 +111,7 @@
 				</select>
 												
 				<select id="selectBus">
-					<option>노선을 선택하세요</option>
+					<option>노선 선택</option>
 					<option>전체검색</option>										
 				</select>
 				
@@ -131,9 +131,9 @@
         	<!-- /page content -->
 
         	<!-- footer content -->
-        	<footer>
+        	<footer style="margin-left: -10px">
 				<jsp:include page="/sidebar/footer.jsp"></jsp:include>
-				<div class="clearfix"></div>
+				
 			</footer>
         	<!-- /footer content -->
         </div>

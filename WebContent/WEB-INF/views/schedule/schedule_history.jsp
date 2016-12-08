@@ -157,10 +157,10 @@ th{
 												<td>${i.ro_regdate}</td>
 												<td>${i.an}</td>
 												<c:if test="${i.ko_name=='신청중'}">
-													<td><button class="btn btn-info">${i.ko_name}</button></td>
+													<td><button class="btn btn-info btn-xs">${i.ko_name}</button></td>
 												</c:if>
 												<c:if test="${i.ko_name=='승인'}">
-													<td><button class="btn btn-success">${i.ko_name}</button></td>
+													<td><button class="btn btn-success btn-xs" style="width:50px; border:0">${i.ko_name}</button></td>
 												</c:if>
 												<c:if test="${i.ko_name=='거절'}">
 													<td><button class="btn btn-danger">${i.ko_name}</button></td>
