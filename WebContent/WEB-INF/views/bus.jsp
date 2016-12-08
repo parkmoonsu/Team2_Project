@@ -182,8 +182,8 @@
 		  </div>
 	</header>
 
-
-	<section id="fh5co-home" data-section="home" style="background-image: url(images/background2.jpg);" data-stellar-background-ratio="0.5">
+	<!--  style="background-image: url(images/background2.jpg);"  -->
+	<section id="fh5co-home" data-section="home"data-stellar-background-ratio="0.5">
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">

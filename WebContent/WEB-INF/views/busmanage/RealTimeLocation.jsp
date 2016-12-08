@@ -15,7 +15,7 @@
 
     <script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
-    <title>KOSBUS</title>
+    <title>노선관리</title>
 
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -85,10 +85,20 @@
 			</div>
         <!-- page content -->
         <div class="right_col" role="main">
+        <div class="row tile_count"></div>
+        <div class="">
+			<div class="page-title">
+				<div class="title_left">
+					<h3>
+						<small>실시간 버스정보</small>
+					</h3>
+				</div>
 
+			</div>
+			<div class="x_panel">
           <div class="row" style="text-align: right">
             <div class="col-md-12 col-sm-12 col-xs-12">
-            <input type="button" id="Search" class="btn btn-default" value="버스위치추적 ">
+            	<input type="button" id="Search" class="btn btn-default" value="버스위치추적 ">
 				<input type="button" id="SearchStop"  class="btn btn-default" value="버스위치추적 중지">
 				
 				<select id="selectRoute">
@@ -106,25 +116,25 @@
 					<option>노선을 선택하세요</option>
 					<option>전체검색</option>										
 				</select>								
-     <div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;">
-		</div>
+     			<div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;"></div>
             </div>
-            	<div class="col-sm-3"></div>
-            	<div class="col-sm-6">            	
+            </div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">            	
 				<div id="map"></div>
-             </div>
-
+            </div>
           </div>
-          <br />
-        </div>
-        <!-- /page content -->
+          </div>
+          <br />       
+        	<!-- /page content -->
 
-        <!-- footer content -->
-        <footer>
-			<jsp:include page="/sidebar/footer.jsp"></jsp:include>
-			<div class="clearfix"></div>
-		</footer>
-        <!-- /footer content -->
+        	<!-- footer content -->
+        	<footer>
+				<jsp:include page="/sidebar/footer.jsp"></jsp:include>
+				<div class="clearfix"></div>
+			</footer>
+        	<!-- /footer content -->
+        </div>
       </div>
     </div>
 
@@ -899,7 +909,8 @@
     		deleteRoute();
     		polyRemove();
     		busMarkerRemove();          	
-        	if($("#selectBus").val() !=null){       		             		
+        	if($("#selectBus").val() !=null){       	
+        		
         		$.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
@@ -987,6 +998,27 @@
                        console.log(data);                                                                                                              	                                                                  	                       	   
                     	   originalMarkerMake(data, map);
                        	                 	                     	
+                    }        		
+        		});
+        		
+        		$.ajax({
+                    url : "RouteSelectGisalist.admin",
+                    type : "get",
+                    dataType : "json",
+                    data : {r_num:$("#selectBus").val()},
+                    success : function(data) {                       
+                       	console.log("기사명단 출력");
+                       	$("#selectGisa").empty();
+                       	$("#selectGisa").append("<option>기사명단</option>");
+                       	if(data.glist != null){
+                       		for(var i=0; i<data.glist.length; i++){
+                       			console.log(data.glist[i].m_name);                       		
+        						$("#selectGisa").append("<option>"+ data.glist[i].m_name +"</option>");
+                       		}
+                       	}else{
+                       		$("#selectGisa").empty();
+    						$("#selectGisa").append("<option>기사명단</option>"); 
+                       	}
                     }        		
         		});
         	}
