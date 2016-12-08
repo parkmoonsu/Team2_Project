@@ -227,7 +227,37 @@ select#selectedrnum {
 
    <!-- calendar modal -->
    <!-- /calendar modal -->
-   <script>
+   
+   <!-- Bootstrap -->
+   <script
+      src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+   <!-- FastClick -->
+   <script
+      src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
+   <!-- NProgress -->
+   <script
+      src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
+   <!-- FullCalendar -->
+   <script
+      src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
+   <script
+      src="${pageContext.request.contextPath}/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+
+   <script
+      src="${pageContext.request.contextPath}/vendors/fullcalendar/dist/jquery-ui.min.js"></script>
+
+   <!-- Custom Theme Scripts -->
+   <script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
+
+   <!-- FullCalendar -->
+   <script
+      src="${pageContext.request.contextPath }/js/schedule_managereguloff.js"></script>
+      
+      
+      
+      
+      
+  <script>
    var array = new Array();
   
       $(function() {
@@ -469,16 +499,20 @@ select#selectedrnum {
                center : 'title',
                right : 'agendaWeek,agendaDay'
             },
-
+			titleFormat:{week:"YYYY년 MMMM DD일"},
             slotDuration : '00:10:00',
-            buttonIcons : false, // show the prev/next text
+            buttonIcons : false,
             weekNumbers : true,
-            navLinks : true, // can click day/week names to navigate views
+            navLinks : true,
             editable : true,
-            eventLimit : true, // allow "more" link when too many events
+            eventLimit : true,
             events :  array ,
+            monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+			monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+			dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+			dayNamesShort: ["일","월","화 ","수 ","목 ","금 ","토 "],
             enventDrop : function(event, delta, revertFunc, jsEvent){
-            	 
+       
             }
 
       
@@ -487,30 +521,6 @@ select#selectedrnum {
          
 
       
-   </script>
-   <!-- Bootstrap -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-   <!-- FastClick -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
-   <!-- NProgress -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
-   <!-- FullCalendar -->
-   <script
-      src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
-   <script
-      src="${pageContext.request.contextPath}/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
-
-   <script
-      src="${pageContext.request.contextPath}/vendors/fullcalendar/dist/jquery-ui.min.js"></script>
-
-   <!-- Custom Theme Scripts -->
-   <script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-
-   <!-- FullCalendar -->
-   <script
-      src="${pageContext.request.contextPath }/js/schedule_managereguloff.js"></script>
+   </script>    
 </body>
 </html>
