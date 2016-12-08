@@ -15,7 +15,7 @@
 
     <script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
-    <title>실시간버스정보</title>
+    <title>노선관리</title>
 
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -909,7 +909,8 @@
     		deleteRoute();
     		polyRemove();
     		busMarkerRemove();          	
-        	if($("#selectBus").val() !=null){       		             		
+        	if($("#selectBus").val() !=null){       	
+        		
         		$.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
@@ -997,6 +998,27 @@
                        console.log(data);                                                                                                              	                                                                  	                       	   
                     	   originalMarkerMake(data, map);
                        	                 	                     	
+                    }        		
+        		});
+        		
+        		$.ajax({
+                    url : "RouteSelectGisalist.admin",
+                    type : "get",
+                    dataType : "json",
+                    data : {r_num:$("#selectBus").val()},
+                    success : function(data) {                       
+                       	console.log("기사명단 출력");
+                       	$("#selectGisa").empty();
+                       	$("#selectGisa").append("<option>기사명단</option>");
+                       	if(data.glist != null){
+                       		for(var i=0; i<data.glist.length; i++){
+                       			console.log(data.glist[i].m_name);                       		
+        						$("#selectGisa").append("<option>"+ data.glist[i].m_name +"</option>");
+                       		}
+                       	}else{
+                       		$("#selectGisa").empty();
+    						$("#selectGisa").append("<option>기사명단</option>"); 
+                       	}
                     }        		
         		});
         	}

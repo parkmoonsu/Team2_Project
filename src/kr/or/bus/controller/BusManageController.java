@@ -326,14 +326,20 @@ public class BusManageController {
 		return "busmanage/RealTimeLocation";
 	}
 	
+	//노선타입에 해당되는 노선번호 출력
 	@RequestMapping("/RouteTypeRouteNo.admin")
 	public View routeTypeNo(String r_type, ModelMap map){
 		map.addAttribute("nlist", busStopManageService.routetypeNumber(r_type));
 		return jsonview;
 	}
 	
-	
-	
+	//노선번호에  배정되어있는 버스기사명단 출력
+	@RequestMapping(value="/RouteSelectGisalist.admin", method=RequestMethod.GET)
+	public View routeSelectGisalist(String r_num, ModelMap map){
+		System.out.println("노선샐랙트 r_num"+r_num);
+		map.addAttribute("glist", busStopManageService.routeSelectGisalist(r_num));
+		return jsonview;
+	}
 	
 	@RequestMapping("/noroute.admin")
 	public String noRoute(String pg , Model model){
