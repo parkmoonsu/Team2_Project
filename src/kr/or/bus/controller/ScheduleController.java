@@ -269,4 +269,11 @@ public class ScheduleController {
 		return jsonview;
 	}
 	
+	/*@RequestMapping("/rnumcheck.member")
+	public View rnum_check(String m_id, Model model){
+		String str=service.rnumcheck(m_id);
+		model.addAttribute("str", str);		
+		return jsonview;
+	}*/
+	
 }
