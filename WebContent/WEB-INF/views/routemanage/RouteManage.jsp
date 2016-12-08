@@ -135,7 +135,7 @@ select#selectBus, select#selectBus2 {
 						<input type="button" id="newsave"  class="btn btn-default" value="원본저장" style="width:95px">  --%>
 					
 					<select id="selectBus2">
-						<option>노선 선택</option>
+						<option value="">노선 선택</option>
 						<option value="5623">5623</option>
 						
 					</select>
@@ -167,7 +167,7 @@ select#selectBus, select#selectBus2 {
 		</div>
 	</div>
 	
-	<!-- 비밀번호 모달 :match-pass -->
+	<!-- 정류장 변경 모달 :match-pass -->
    <div class="modal fade" id="match-pass" tabindex="-1" role="dialog"
       aria-labelledby="myModalLabel" aria-hidden="true"
       style="display: none;">
@@ -182,8 +182,8 @@ select#selectBus, select#selectBus2 {
                <form id="login-form" method="post">
                   <div class="modal-body">
                      <div style="text-align: center">
-                        <label for="m_pw">정류장 순서 입력 </label> <input type="text"
-                           name="m_pw" id="m_pw">
+                        <label for="m_pw2">정류장 순서 입력 </label> <input type="text"
+                           name="m_pw2" id="m_pw2">
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -202,6 +202,44 @@ select#selectBus, select#selectBus2 {
       </div>
    </div>
    <!-- end modal -->
+   
+   <!-- 등록 모달 -->
+   <div class="modal fade" id="pass-modal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true"
+			style="display: none;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Begin # DIV Form -->
+					<div id="div-forms">
+						<div class="modal-header" align="center">
+							<h3>순번정하기</h3>
+						</div>
+						<!-- Begin # Login Form -->
+						<div class="modal-body">
+							<div style="text-align: center">
+								<label for="m_pw">값은? </label> <input type="text" name="m_pw"
+									id="end">
+								<label for="m_pq">정류장 번호는? </label> <input type="text" name="m_pq"
+									id="snum" readonly>
+								<label for="m_pe">정류장 이름은? </label> <input type="text" name="m_pe"
+									id="sname">	
+							</div>
+						</div>
+						<div class="modal-footer">
+							
+								<button class="btn btn-default" data-dismiss="modal"
+									aria-hidden="true" id="shy">완료</button>
+							
+								<button class="btn btn-default" data-dismiss="modal"
+									aria-hidden="true">취소</button>
+							
+						</div>
+						<!-- End # Login Form -->
+					</div>
+					<!-- End # DIV Form -->
+				</div>
+			</div>
+		</div>
 
 
 	<!-- Bootstrap -->
@@ -286,25 +324,31 @@ select#selectBus, select#selectBus2 {
 			});
 
 			map.addListener('click', function(e) {
-				//초기화
-				for(var i=0; i<markerList.length; i++){
-					markerList[i].setMap(null);
-				}
-				markerList=[];
-				dataList=[];
-				if(changedmarker!=null){
-					changedmarker.setMap(null);	
-				}
-				if(cmarker!=null){
-					cmarker.setMap(null);	
+				
+				if ($('#selectBus2').val()!=""){
+					//초기화
+					for(var i=0; i<markerList.length; i++){
+						markerList[i].setMap(null);
+					}
+					markerList=[];
+					dataList=[];
+					if(changedmarker!=null){
+						changedmarker.setMap(null);	
+					}
+					if(cmarker!=null){
+						cmarker.setMap(null);	
+					}
+					
+					myLatlng = {
+						lat : e.latLng.lat(),
+						lng : e.latLng.lng()
+					};
+					makeInfowindow();
+
+				} else {
+					alert('노선번호를 선택하세요.');
 				}
 				
-				myLatlng = {
-					lat : e.latLng.lat(),
-					lng : e.latLng.lng()
-				};
-				makeInfowindow();
-
 			});
 
 		}
@@ -330,7 +374,43 @@ select#selectBus, select#selectBus2 {
 		}
 		
 		function addstop(){
-			alert('정류장 추가');	
+			$('#pass-modal').modal();
+			//미리 정류장번호를 세팅해야 함
+			//모달의 어느부분? 랜덤함수 구하는 ajax
+			$.ajax({ //정류장 번호 랜덤 값으로 생성
+            	url:"getrandomsnum.admin",
+            	type:"post",
+            	success:function(data){	
+            		$('#snum').val(data.s_num);	
+            	}
+             });
+			
+			$('#shy').click(function(){
+						
+				//c마커의 인포윈도우 지우기
+				cinfowindow.close();
+				//마커 표시, c마커로 변경
+				cmarker.setLabel($('#end').val());
+						
+				//ajax db 저장
+				var param = {
+					"r_num":$('#selectBus2').val(),
+					"s_num":$('#snum').val(),
+					"s_name":$('#sname').val(),
+					"rs_order":$('#end').val(),
+					"s_x":cmarker.getPosition().lng(),
+					"s_y":cmarker.getPosition().lat()
+				};
+				
+	    		$.ajax({
+	    			url : "editordernumber.admin",
+	    			type : "post",
+	    			data : param,
+	    			success:function(data){
+	    				alert('신규 정류장 등록 완료');
+	    			}
+	    		});
+			});
 		}
 		
 		function stopclick(s_num){
@@ -345,7 +425,7 @@ select#selectBus, select#selectBus2 {
 				//지도 표시 변경			
 				changedmarker = new google.maps.Marker({
 					position : markerobject.getPosition(),
-					label : $('#m_pw').val(),
+					label : $('#m_pw2').val(),
 					map : map
 				});
 				
@@ -354,7 +434,7 @@ select#selectBus, select#selectBus2 {
 					url:'routeUpdate.admin',
 					type:'post',
 					data: {
-						rsorder: $('#m_pw').val().trim(),
+						rsorder: $('#m_pw2').val().trim(),
 						snum: dataobject.s_num,
 						rnum: dataobject.r_num
 					},
