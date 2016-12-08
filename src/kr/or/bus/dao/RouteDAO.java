@@ -34,6 +34,6 @@ public interface RouteDAO {
 	public List<RouteTypeDTO> searchRouteNumber(String no);
 	
 	//노선번호 셀렉트박스 의 선택된 노선번호에 따라 해당 노선에 배정된 버스기사 출력
-	public List<RouteSelectGisaDTO> searchBusGisa(String number);
+	public List<RouteSelectGisaDTO> searchBusGisa(String r_num);
 	
 }

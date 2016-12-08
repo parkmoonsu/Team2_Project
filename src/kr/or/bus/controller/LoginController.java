@@ -9,6 +9,8 @@
 package kr.or.bus.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
+import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
 import kr.or.bus.dto.MemberJoinJobDTO;
 import kr.or.bus.service.BusManageService;
 import kr.or.bus.service.LoginService;
@@ -75,6 +78,29 @@ public class LoginController {
 		model.addAttribute("no", noroute);
 		model.addAttribute("count", count);
 		
+		List<BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO> getgarage = service2.getGarageName();
+		List<String> garage = new ArrayList<String>();
+		for(int i = 0 ; i < getgarage.size() ; i++){
+			garage.add(getgarage.get(i).getG_name());
+		}
+		
+		model.addAttribute("garage", garage);
+		
+		int ori = service2.origarage();
+		int sn = service2.sngarage();
+		int pgg = service2.pggarage();
+		int nullg = service2.nullgarage();
+		
+		int orip = 100*ori / (ori+sn + pgg+nullg);
+		int snp = 100*sn /(ori+sn + pgg+nullg);
+		int pggp = 100*pgg/(ori+sn + pgg+nullg);
+		int nullgp = 100*nullg / (ori+sn + pgg+nullg);
+		
+		model.addAttribute("ori",orip);
+		model.addAttribute("sn", snp);
+		model.addAttribute("pgg", pggp);
+		model.addAttribute("nullg", nullgp);
+		 
 		return "main/adminmain";
 	}
 	
