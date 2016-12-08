@@ -48,10 +48,9 @@ public class MainController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@RequestMapping("/SearchMember.htm")
-	public String select(String search,String search2, Model model) {
-			System.out.println("search1 :"+search);
-			System.out.println("search2 :"+search2);
-		List<MemberDTO> dto = service.selectall(search,search2);
+	public String select(String search, Model model) {
+			System.out.println("search :"+search);
+		List<MemberDTO> dto = service.selectall(search);
 		model.addAttribute("dto", dto);
 
 		return "membermanage/SearchMemberInfo";

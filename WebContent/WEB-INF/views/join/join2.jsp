@@ -5,6 +5,9 @@
 <html>
 <head>
 <style type="text/css">
+  #fh5co-header #navbar li a:hover {
+    color: #52d3aa !important;
+  }
 .my-box {
 	border: 1px solid;
 	padding: 10px;
@@ -191,9 +194,7 @@ font-size:12px;
 .form-group{
 height: 35px;
 }
-  #fh5co-header #navbar li a:hover {
-    color: #52d3aa !important;
-  }
+ 
 </style>
 </head>
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -256,7 +257,7 @@ margin-left: 0px;
 
 	<div class="top-content">
         	
-            <div class="inner-bg">
+            <div class="inner-bg" style="padding-top: 60px; padding-bottom: 60px">
                 <div class="container">
                     <div class="row">
                     <hr>
