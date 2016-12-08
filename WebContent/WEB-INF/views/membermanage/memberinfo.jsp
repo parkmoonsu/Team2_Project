@@ -73,8 +73,9 @@ ul.pagination li a.active {
 
 ul.pagination li a {
     color: #73879C;
-    float: left;
-   /*  padding: 8px 16px; */
+    /* float: left;  */
+    float: ㅛ; 
+    padding: 8px 16px;
     text-decoration: none;
 }
 </style>
@@ -195,7 +196,7 @@ ul.pagination li a {
 									<!-- start project list -->
 									
 									<div
-										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+										class="col-md-3 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
 											<input type="text" class="form-control"
 												placeholder="Search for..." id="search"> <span
@@ -357,7 +358,7 @@ ul.pagination li a {
 								data-dismiss="modal" id="cancelbutton">삭제</button>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">취소</button>
-							<input type="hidden" id="hvalue"> 
+							<input type="hidden" id="hvalue2"> 
 							<!-- <input type="hidden" id=""> -->
 						</div>
 					</div>
@@ -479,9 +480,15 @@ ul.pagination li a {
 						$('#people').val(recipient[1]);
 					});
 
-			$('.modal').on('hidden.bs.modal', function () {
+			///////
+			/* $('.modal').on('hidden.bs.modal', function () {
 		        $(this).removeData('bs.modal');
 			});
+			
+			$('#match-pass').on('hidden', function () {
+				  $(this).removeData('modal');
+				}); */
+			//////
 			
 			$("#passtrue").click(function() {
 				$.ajax({
@@ -493,6 +500,9 @@ ul.pagination li a {
 						console.log(data.data);
 						if (data.data == 'true') {
 							$("#match-pass").modal("hide");
+							 /* $('#match-pass').on('hidden.bs.modal', function () {
+								  $(this).removeData();
+								});  */
 							$("#myModal").modal("show");
 
 						} else {
@@ -677,7 +687,7 @@ ul.pagination li a {
 			console.log("m_name" + m_name);
 			$("#match-pass").modal("show");
 			$('#hvalue').val(m_id); 
-			$('#').val(m_name); 
+			$('#hvalue2').val(m_name); 
 			$("#myModalLabel2").empty();//
 			$('#myModalLabel2').html(m_name + '님을 삭제하시겠습니까?'); 
 		}

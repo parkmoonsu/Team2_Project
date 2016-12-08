@@ -251,7 +251,7 @@ public class BusStopManageService {
 			PrintWriter out=null;			
 			RouteDAO dao = null;
 			
-			if(r_num.equals("전체선택")){				
+			if(r_num.equals("전체검색")){				
             	JSONObject obs1 = busMultiRouteRead("5623" , dto, request, response);
             	JSONObject obs2 = busMultiRouteRead("5624" , dto, request, response);
             	JSONObject obs3 = busMultiRouteRead("5531", dto, request, response);
@@ -266,7 +266,7 @@ public class BusStopManageService {
             	out = response.getWriter();
             	out.print(obss);
             	
-            }else if(!r_num.equals("전체선택")){
+            }else if(!r_num.equals("전체검색")){
             	dao = sqlsession.getMapper(RouteDAO.class);
             	dto = dao.routeidSearch(r_num);
             	busSingleRouteRead(dto ,request, response);
@@ -447,7 +447,7 @@ public class BusStopManageService {
 			
 			에 해당하는 차량 id가 아래에 입력되어야함.
 		*/		
-		if(r_num.equals("전체선택")){
+		if(r_num.equals("전체검색")){
 			
 			JSONArray jsonlist1 = multiLocationSearch(request , response, dto, "5623");
 			JSONArray jsonlist2 = multiLocationSearch(request , response, dto, "5624");
@@ -462,7 +462,7 @@ public class BusStopManageService {
 						
 			out.print(locations);
 			
-		}else if(!r_num.equals("전체선택")){
+		}else if(!r_num.equals("전체검색")){
 			System.out.println("버스번호? "+r_num);
 			System.out.println("버스하나만 조회");
 			
@@ -744,38 +744,51 @@ public class BusStopManageService {
 		PrintWriter out=null;
 		response.setCharacterEncoding("UTF-8");		
 		out = response.getWriter();		
-		JSONArray jsonmaps = null;		
+		JSONArray jsonmaps = null;
+		JSONArray jsonlist1 = null;
+		JSONArray jsonlist2 = null;
+		JSONArray jsonlist3 = null;
+		JSONArray jsonlist4 = null;		
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
 		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
 
-		if(r_num.equals("전체선택")){
-			List<BusStopDTO> busstoplist = new ArrayList<>();
+		if(r_num.equals("전체검색")){			
+			//List<BusStopDTO> busstoplist = new ArrayList<>();
 			//busStopRoadAllSearch("5623", dto, busstopdto, request, response);
-			busstoplist.addAll(0, busStopRoadAllSearch("5623", dto, busstopdto, request, response));
-			//busStopRoadAllSearch("6702", dto, busstopdto, request, response);
-			busstoplist.addAll(1, busStopRoadAllSearch("5624", dto, busstopdto, request, response));
-			//busStopRoadAllSearch("3500포천", dto, busstopdto, request, response);
-			busstoplist.addAll(2, busStopRoadAllSearch("3030안양", dto, busstopdto, request, response));
-			//busStopRoadAllSearch("6501광주", dto, busstopdto, request, response);
-			busstoplist.addAll(3, busStopRoadAllSearch("5531", dto, busstopdto, request, response));
-			jsonmaps = JSONArray.fromObject(busstoplist);
-			out.print(jsonmaps);
+			//busstoplist.addAll(0, busStopRoadAllSearch("5623", dto, busstopdto, request, response));
+			//busStopRoadAllSearch("5624", dto, busstopdto, request, response);
+			//busstoplist.addAll(1, busStopRoadAllSearch("5624", dto, busstopdto, request, response));
+			//busStopRoadAllSearch("3030안양", dto, busstopdto, request, response);
+			//busstoplist.addAll(2, busStopRoadAllSearch("3030안양", dto, busstopdto, request, response));
+			//busStopRoadAllSearch("5531", dto, busstopdto, request, response);
+			//busstoplist.addAll(3, busStopRoadAllSearch("5531", dto, busstopdto, request, response));
+			//jsonmaps = JSONArray.fromObject(busstoplist);			
 			
-		}else if(!r_num.equals("전체선택")){
+			jsonlist1 = busStopRoadAllSearch("5623", dto, busstopdto, request, response);
+			jsonlist2 = busStopRoadAllSearch("5624", dto, busstopdto, request, response);
+			jsonlist3 = busStopRoadAllSearch("3030안양", dto, busstopdto, request, response);
+			jsonlist4 = busStopRoadAllSearch("5531", dto, busstopdto, request, response);
+			
+			ArrayList<JSONArray> jsonlist = new ArrayList<JSONArray>();
+			jsonlist.add(jsonlist1);
+			jsonlist.add(jsonlist2);
+			jsonlist.add(jsonlist3);
+			jsonlist.add(jsonlist4);
+			
+			out.print(jsonlist);
+			
+		}else if(!r_num.equals("전체검색")){
 			dto = dao.routeidSearch(r_num);
-			System.out.println(dto.getR_id());
-						
-			List<BusStopDTO> busstoplist =  busstopdao.makeBusStop(dto.getR_id());
-			
-			jsonmaps = JSONArray.fromObject(busstoplist);
-			out.print(jsonmaps);
+			jsonmaps =  busstopdao.makeBusStop(dto.getR_id());
+			ArrayList<JSONArray> jsonlist = new ArrayList<JSONArray>();
+			jsonlist.add(jsonmaps);
+			out.print(jsonlist);
 		}
 	}
 	
 	//버스 정류장 전체 조회
-	public List<BusStopDTO> busStopRoadAllSearch(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{						
-		System.out.println(r_num);
-		
+	public JSONArray busStopRoadAllSearch(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{						
+		System.out.println(r_num);	
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
 		
 		System.out.println(dao.routeidSearch(r_num));				
@@ -783,11 +796,9 @@ public class BusStopManageService {
 		dto = dao.routeidSearch(r_num);
 		System.out.println(dto.getR_id());
 		
-		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
-		
-		List<BusStopDTO> busstoplist =  busstopdao.makeBusStop(dto.getR_id());					
-		
-		return busstoplist;
+		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);				
+			
+		return busstopdao.makeBusStop(dto.getR_id());
 	}
 	
 	//공공데이터에서 받아온 정류장 정보들을 디비에 저장하는 함수

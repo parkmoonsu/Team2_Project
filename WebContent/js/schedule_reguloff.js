@@ -252,38 +252,49 @@ function loadCalendar(){
 
 		//날짜 선택시 이벤트
 		select : function(start, end, jsEvent) {
-			
 			$.ajax({
-				type:'post',
-				url:'reguloffschedulecheck.member',
+				data:{m_id:loginid},
+				url:"rnumcheck.member",
+				type:"post",
 				success:function(data){
-					if(data.str=="false"){
-						console.log(data.str);
-						alert('지금은 휴무 변경 시간이 아닙니다.');
-					} else if(data.str==null || data.str==""){
-						console.log(data.str);
-						alert('언디파인드');
-					} else {
-						console.log(data.str);
-						//중복일정 체크
+					
 						$.ajax({
-							url:"checkmid.member",
-							data:{"m_id":loginid},
-							type:"post",
+							type:'post',
+							url:'reguloffschedulecheck.member',
 							success:function(data){
-								if (data.row != "0"){
-									alert("더는 일정을 추가할 수 없습니다.");
-								} else {							
-									//모달 입력창
-									$("#select1").val(start.weekday());
-									$('#fc_create').click();
-									
+								if(data.str=="false"){
+									console.log(data.str);
+									alert('지금은 휴무 변경 시간이 아닙니다.');
+								} else if(data.str==null || data.str==""){
+									console.log(data.str);
+									alert('언디파인드');
+								} else {
+									console.log(data.str);
+									//중복일정 체크
+									$.ajax({
+										url:"checkmid.member",
+										data:{"m_id":loginid},
+										type:"post",
+										success:function(data){
+											if (data.row != "0"){
+												alert("더는 일정을 추가할 수 없습니다.");
+											} else {							
+												//모달 입력창
+												$("#select1").val(start.weekday());
+												$('#fc_create').click();
+												
+											}
+										}
+									});
 								}
 							}
-						});
-					}
+						});		
+					
+				},
+				error:function(){
+					alert('먼저 차랑/노선을 배정 받아야 합니다.');
 				}
-			});
+			});		
 		},
 		
 		//일정 클릭시 이벤트

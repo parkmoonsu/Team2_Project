@@ -5,39 +5,62 @@
 <%request.getCharacterEncoding();%>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
-    <title>노선관리</title>
+<title>RoadOneBell</title>
 
-    <!-- Bootstrap -->
-    <link href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="${pageContext.request.contextPath}/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- bootstrap-progressbar -->
-    <link href="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="${pageContext.request.contextPath}/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+<!-- Bootstrap -->
+<link
+	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Font Awesome -->
+<link
+	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet">
+<!-- NProgress -->
+<link
+	href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
+	rel="stylesheet">
+<!-- iCheck -->
+<link
+	href="${pageContext.request.contextPath}/vendors/iCheck/skins/flat/green.css"
+	rel="stylesheet">
+<!-- bootstrap-progressbar -->
+<link
+	href="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css"
+	rel="stylesheet">
+<!-- JQVMap -->
+<link
+	href="${pageContext.request.contextPath}/vendors/jqvmap/dist/jqvmap.min.css"
+	rel="stylesheet" />
+<!-- bootstrap-daterangepicker -->
+<link
+	href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css"
+	rel="stylesheet">
 
-    <!-- Custom Theme Style -->
-    <link href="${pageContext.request.contextPath}/build/css/custom.min.css" rel="stylesheet">
-    <style type="text/css">
-    .element {
- #map { margin-left:auto; margin-right:auto; width:95%; }}
- select#selectBus, #selectRoute, #selectGisa{
+<!-- Custom Theme Style -->
+<link href="${pageContext.request.contextPath}/build/css/custom.min.css"
+	rel="stylesheet">
+
+<style type="text/css">
+.element { #map { margin-left:auto;
+	margin-right: auto;
+	width: 95%;
+}
+
+}
+select#selectBus, select#selectBus2 {
+
 	-webkit-appearance: button;
 	-webkit-border-radius: 2px;
 	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -55,9 +78,14 @@
 	padding: 5px 10px; 
 	text-overflow: ellipsis;
 	white-space: nowrap;
+<<<<<<< HEAD
 	width: 150px;
 	border-radius: 8px;
 	margin-bottom:15px;
+=======
+	width: 140px;
+	border-radius: 8px;
+>>>>>>> 7b929e99e06ba8d25369de65a159b9dab4173ee8
 }
 .btn{border-radius: 8px};
 
@@ -96,6 +124,7 @@
 					</h3>
 				</div>
 
+<<<<<<< HEAD
 			</div>
 			<div class="x_panel">
           <div class="row" style="text-align: right">
@@ -131,6 +160,11 @@
         	<footer>
 				<jsp:include page="/sidebar/footer.jsp"></jsp:include>
 				<div class="clearfix"></div>
+=======
+			<!-- footer content -->
+			<footer>
+				<jsp:include page="/sidebar/footer.jsp" />
+>>>>>>> 7b929e99e06ba8d25369de65a159b9dab4173ee8
 			</footer>
         	<!-- /footer content -->
         </div>
