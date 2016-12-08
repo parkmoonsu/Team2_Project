@@ -488,7 +488,7 @@
        		B1usMarker = new google.maps.Marker({
           		map: map,
           		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-          		icon:"${pageContext.request.contextPath}/images/bus.png"
+          		icon:"${pageContext.request.contextPath}/images/bus1.png"
        		});
       		
 			var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
@@ -528,7 +528,7 @@
         		B2usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-           		icon:"${pageContext.request.contextPath}/images/bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus2.png"
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
@@ -568,7 +568,7 @@
         		B3usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-           		icon:"${pageContext.request.contextPath}/images/bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus3.png"
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
@@ -608,7 +608,7 @@
         		B4usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-           		icon:"${pageContext.request.contextPath}/images/bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus4.png"
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
