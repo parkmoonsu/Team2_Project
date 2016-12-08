@@ -443,7 +443,7 @@ select#selectedrnum {
                      
                      var item = {
                         title : obj.m_name,
-                        id : obj.m_id,
+                      //  id : obj.m_id,
                         start : Start,
                         end:  End,
                         dow :[i]

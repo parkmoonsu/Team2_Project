@@ -72,4 +72,30 @@ public class RouteManageController {
 			model.addAttribute("rssdto", rssdto);
 			return jsonview;
 		}
+		//마커 이동후 정류장 정보 변경
+		@RequestMapping(value="/modifyroutestop.admin",method=RequestMethod.POST)
+		public View modifyRouteStop(String r_num,String s_name,String s_num, String s_x, String s_y, Model model){
+			System.out.println("s_x"+s_x);
+			System.out.println("s_y"+s_y);
+			System.out.println("s_num"+s_num);
+			routeManageSerivce.modifyStopPosition(r_num, s_num, s_name, s_x, s_y, model);
+			List<RouteStopJoinStopDTO> rssdto = routeManageSerivce.getRouteStopInfoList(r_num);
+			model.addAttribute("rssdto", rssdto);
+			return jsonview;
+		}
+		
+		@RequestMapping(value="/cancelaftermodify.admin", method = RequestMethod.POST)
+		public View getCancelAfterModify(String r_num, Model model){
+			List<RouteStopJoinStopDTO> rssdto = routeManageSerivce.getRouteStopInfoList(r_num);
+			model.addAttribute("rssdto", rssdto);
+			return jsonview;
+		}
+		
+		@RequestMapping(value="/getaftermodify.admin", method = RequestMethod.POST)
+		public View getAfterModify(String r_num, Model model){
+			List<RouteStopJoinStopDTO> rssdto = routeManageSerivce.getRouteStopInfoList(r_num);
+			model.addAttribute("rssdto", rssdto);
+			return jsonview;
+		}
+		
 }
