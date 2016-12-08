@@ -11,4 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO BUS(B_VEHICLENUM, R_NUM, B_VENID) VALUES(#{b_vehiclenum}, #{r_num}, #{b_venid})
 	</insert>
 	
+	<select id="selectvenid" parameterType="String" resultType="kr.or.bus.dto.RouteSelectGisaDTO">
+		select BUS.B_VENID
+		FROM BUS, MEMBER
+		WHERE BUS.B_VEHICLENUM = MEMBER.B_VEHICLENUM and BUS.R_NUM = #{r_num}
+	</select>
 </mapper>
