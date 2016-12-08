@@ -100,7 +100,7 @@
             <div class="form-group">
                <label class="control-label col-md-1 col-sm-1 col-xs-2">면허증</label>
                   <div class="col-md-4 col-sm-4 col-xs-4" style="padding-top: 9px;">
-                    <a href="download.admin?folder=upload&filename=${mjdrodto.m_license}">${mjdrodto.m_license}</a>
+                    <a href="download.admin?folder=upload&filename=${mjdrodto.m_license}"> <i class="fa fa-floppy-o">save</i></a>
                </div>
                 <label class="control-label col-md-1 col-sm-2 col-xs-2">생년월일</label>
                <div class="col-md-5 col-sm-4 col-xs-4">
@@ -114,7 +114,7 @@
             <div class="form-group">
                <label class="control-label col-md-1 col-sm-1 col-xs-1">이력서</label>
                <div class="col-md-4 col-sm-4 col-xs-4" style="padding-top: 9px;">
-                  <a href="download.admin?folder=upload&filename=${mjdrodto.m_resume }">${mjdrodto.m_resume }</a>
+                  <a href="download.admin?folder=upload&filename=${mjdrodto.m_resume }"> <i class="fa fa-floppy-o">save</i></a>
                </div>
             <label class="control-label col-md-1 col-sm-2 col-xs-2">정기휴무</label>
                <div class="col-md-5 col-sm-4 col-xs-4">
