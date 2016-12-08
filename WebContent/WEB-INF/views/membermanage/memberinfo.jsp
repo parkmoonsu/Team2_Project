@@ -209,12 +209,12 @@ ul.pagination li a {
 										style="text-align: center;">
 										<thead>
 											<tr>
-												<th style="width: 50px">번호</th>
-												<th style="width: 100px">ID</th>
-												<th style="width: 90px">이름</th>
-												<th style="width: 200px">이메일</th>
-												<th style="width: 80px">직책</th>
-												<th style="width: 50px">연차</th>
+												<th style="width: 70px">번호</th>
+												<th style="width: 150px">ID</th>
+												<th style="width: 150px">이름</th>
+												<th style="width: 150px">이메일</th>
+												<th style="width: 150px">직책</th>
+										
 												<th style="width: 100px"></th>
 											</tr>
 										</thead>
@@ -229,7 +229,7 @@ ul.pagination li a {
 													data-target="#exampleModal"
 													data-whatever="${i.m_name},${i.m_email}">${i.m_email}</a></td>
 												<td><small>${i.j_name}</small></td>
-												<td>${i.m_annual}일</td>
+												
 												<td style="text-align: center">
 													<div class="btn btn-danger btn-xs"
 														onclick="deleteMember('${i.m_id}','${i.m_name}');">
@@ -521,7 +521,7 @@ ul.pagination li a {
 					url : "SearchMember.htm",
 					type : "get",
 					success : function(data) {
-						if(data ==null){
+						if(data ==""){
 							$("#another").append("<label>검색결과가 없습니다.</label>")
 						}else{
 						console.log("날보고있다면");

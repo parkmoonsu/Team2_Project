@@ -296,14 +296,14 @@ public class ScheduleManageService {
 	목적 : 특정 시간에만 정규휴무를 신청/변경할 수 있도록
 	*/
 
-	@Scheduled(cron="0 50 10 * * *")
+	@Scheduled(cron="0 00 9 * * *")
 	public void reguloffScheduler1(){
 		System.out.println("휴무변경 가능으로 변경");
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		dao.reguloffscheduler("true");
 	}
 	
-	@Scheduled(cron="0 51 10 * * *")
+	@Scheduled(cron="0 00 20 * * *")
 	public void reguloffScheduler2(){
 		System.out.println("휴무변경 불가능으로 변경");
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
