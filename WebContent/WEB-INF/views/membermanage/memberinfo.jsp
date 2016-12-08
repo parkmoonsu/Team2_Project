@@ -505,12 +505,11 @@ ul.pagination li a {
 			$.ajax({
 				data : {
 					"search" : param,
-					"search2": param2
 				},
 				url : "SearchMember.htm",
 				type : "get",
 				success : function(data) {
-					if(data ==null){
+					if(data ==""){
 						$("#another").append("<label>검색결과가 없습니다.</label>")
 					}else{
 					console.log("날보고있다면");
