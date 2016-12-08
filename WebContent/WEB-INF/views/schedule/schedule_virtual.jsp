@@ -510,8 +510,20 @@ select#selectedrnum {
 			monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
 			dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
 			dayNamesShort: ["일","월","화 ","수 ","목 ","금 ","토 "],
-            enventDrop : function(event, delta, revertFunc, jsEvent){
-       
+            eventDrop : function(event, delta, revertFunc, jsEvent){//revertFunc : 취소시 되돌리는
+       			console.log("####" + array[13].start + "####" + array[13].title);
+       			console.log("####" + event.dow);
+       			if(delta.days() > 0){ //다른 영역으로 가지 않게 설정
+       				$("#calendar").fullCalendar('refetchEvents');
+       				$("#calendar").fullCalendar('unselect');
+       			}
+       			if(true){
+       				console.log("###" + array.length);
+       				for(var i = 0 ; i < array[0].length ; i++){
+       					
+						console.log(i);
+       				}
+       			} 
             }
 
       
