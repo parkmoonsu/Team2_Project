@@ -308,7 +308,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-header.navbar-fixed-top {
   position: fixed !important;
-  background:  black;
+  background:  white;
   -webkit-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   -ms-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
@@ -361,7 +361,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #adadad;
 }
 #fh5co-header .navbar-default .brand-slogan em {
-  color: #fc9700;
+  color: #52d3aa;
   font-style: normal;
 }
 #fh5co-header a {
@@ -376,7 +376,7 @@ h1, h2, h3, h4, h5, h6 {
   background-attachment: fixed;
   position: relative;
   width: 100%;
-  background-color: #fc9700;
+  background-color: #52d3aa;
   color: #fff;
   overflow: hidden;
 }
@@ -532,7 +532,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-intro .fh5co-block > .fh5co-text .fh5co-intro-icon {
   font-size: 50px;
-  color: #fc9700;
+  color: #52d3aa;
   margin-bottom: 30px;
   display: block;
 }
@@ -558,8 +558,8 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
 }
 #fh5co-intro .fh5co-block:hover .btn:hover, #fh5co-intro .fh5co-block:focus .btn:hover {
-  background: #fc9700 !important;
-  border: 2px solid #52d3aa !important;
+  background: #56B37F !important;
+  border: 2px solid #56B37F !important;
 }
 
 .watch-video {
@@ -879,7 +879,7 @@ h1, h2, h3, h4, h5, h6 {
    text-decoration: underline; 
 }
 #fh5co-work a:hover {
-  color: #fc9700;
+  color: #52d3aa;
 }
 #fh5co-work:before, #fh5co-work:after {
   position: absolute;
@@ -1134,11 +1134,11 @@ h1, h2, h3, h4, h5, h6 {
   *display: inline;
   width: 25px;
   height: 3px;
-  color: #fc9700;
+  color: #52d3aa;
   font: bold 14px/.4 Helvetica;
   text-transform: uppercase;
   text-indent: -55px;
-  background: #fc9700;
+  background: #52d3aa;
   transition: all .2s ease-out;
 }
 .fh5co-nav-toggle i::before, .fh5co-nav-toggle i::after {
@@ -1296,7 +1296,7 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: none;
 }
 .social li a.social-box {
-  background: #fc9700;
+  background: #52d3aa;
   color: #fff;
 }
 .social li a.social-circle {
