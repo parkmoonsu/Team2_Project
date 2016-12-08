@@ -65,9 +65,10 @@
 
 }
 #external-events {
-	margin-left:64%;
+	margin-left:65%;
+	margin-top:5%;
 	width: 10%;
-	padding: 1 1%;
+	padding: 2 3%;
 	border: 1% solid #ccc;
 	background: #eee;
 	text-align: left;
@@ -126,6 +127,7 @@ select#selectedgaragename, select#selectedroutenumber {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 120px;
+	border-radius: 8px;
 }
 </style>
 
@@ -164,6 +166,7 @@ select#selectedgaragename, select#selectedroutenumber {
 					<div class="row">
 						<div class="col-md-12">
 							<div class="x_panel">
+							
 								<div class="x_title">
 									<h2>
 										기사 휴무 배정 & 확인
@@ -184,9 +187,16 @@ select#selectedgaragename, select#selectedroutenumber {
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">
-
+								<div style="text-align: center">
+									<button style="width:100px; height:30px; background-color: #46AAEB; border:0" class="btn btn-default"></button>
+									변경 신청이 없는 데이터&nbsp;&nbsp;&nbsp;
+									<button style="width:100px; height:30px; background-color: #329632; border:0" class="btn btn-default"></button>
+									변경 신청이 있는 데이터 (1인 신청)&nbsp;&nbsp;&nbsp;
+									<button style="width:100px; height:30px; background-color: #FFB432; border:0" class="btn btn-default"></button>
+									변경 신청이 있는 데이터 (2인 신청)
+								</div>
+								<hr>
 									<div id='wrap'>
-										
 										<div id='external-events'>
 											<div>
 												<select id="selectedgaragename">
