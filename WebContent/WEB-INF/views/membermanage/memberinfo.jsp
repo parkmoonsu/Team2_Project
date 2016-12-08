@@ -509,13 +509,10 @@ ul.pagination li a {
 				url : "SearchMember.htm",
 				type : "get",
 				success : function(data) {
-					if(data ==""){
-						$("#another").append("<label>검색결과가 없습니다.</label>")
-					}else{
 					console.log("날보고있다면");
 					console.log(data);
 					$("#another").append(data);
-					}
+					
 				}
 			});
 			}else{
