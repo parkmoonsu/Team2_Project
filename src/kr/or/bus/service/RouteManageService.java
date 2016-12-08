@@ -241,4 +241,10 @@ public class RouteManageService {
 		model.addAttribute("alert", alert);
 	}
 	
+	public List<RouteStopDTO> getRsOrderFromRs(String r_num){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		List<RouteStopDTO> rslist = dao.getRsOrderfRsStop(r_num);
+		return rslist;
+	}
+	
 }
