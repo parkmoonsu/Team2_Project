@@ -109,10 +109,9 @@
 											<li><i class="fa fa-birthday-cake user-profile-icon"></i>&nbsp;&nbsp;${dto.m_birth}
 											</li>
 											<li><i class="fa fa-map-marker user-profile-icon"></i>&nbsp;&nbsp;&nbsp;&nbsp;${dto.m_addr}
-												<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.m_daddr}
+												&nbsp;${dto.m_daddr}
 											</li>
-											<li><i class="fa fa-calendar user-profile-icon"></i>&nbsp;&nbsp;연차
-												${dto.m_annual}일</li>
+											
 										</ul>
 
 										<a class="btn btn-success" id="pass"
