@@ -60,6 +60,8 @@
 	margin-bottom:15px;
 }
 .btn{border-radius: 8px};
+
+
 </style>
   </head>
 
@@ -294,14 +296,14 @@
            		map: map,           		
            		animation: google.maps.Animation.DROP,
            		icon : '${pageContext.request.contextPath}/images/busstop.png',
-           		zindex : "5"
+           		zindex : "1"
         	});
      	   
-     	  	var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
-     	  	
+     	  	var infowindow = new google.maps.InfoWindow({ maxWidth: 400});  
+     	    
      	  	(function (originalMarker, latLng, infowindow) {
      	        google.maps.event.addListener(originalMarker, "click", function (e) {
-     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');
+     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');    	            
      	            infowindow.open(map, originalMarker);
      	           
      	        });
