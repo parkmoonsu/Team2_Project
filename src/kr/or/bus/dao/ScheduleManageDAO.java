@@ -96,4 +96,5 @@ public interface ScheduleManageDAO {
 	public int updateBtwReqRegore(String m_id, String o_code);//거절 변경 요청자 update reguloff
 	public int updateBtwByRegrre(String m_id_1,String o_code_1); //거절 변경 대상자 update reguloffr
 	public int updateBtwByRegore(String m_id_1,String o_code_1); //거절 변경 대상자 update reguloff
+	
 }

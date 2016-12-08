@@ -442,8 +442,13 @@ $(document).ready(function() {
 				url:"updatebtwinfo.admin",
 				type:"post",
 				data:{"m_id":m_id,"o_code":o_code,"m_id_1":m_id_1,"o_code_1":o_code_1},
-				success:function(){
-					alert('등록성공');
+				success:function(data){
+					alert('등록성공1');
+					var resultObject = {
+						id : eventObjecte.id,
+						title : '뭐야',
+						row : o_code_1
+					}
 					$('#calendar').fullCalendar('removeEvents', eventObjecte.id);
 					$('#calendar').fullCalendar('renderEvent', resultObject);
 					$('#calendar').fullCalendar('unselect');
