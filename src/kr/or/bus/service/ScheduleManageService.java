@@ -407,6 +407,7 @@ public class ScheduleManageService {
 		dao.updateBtwReqRegr(m_id, o_code);
 		dao.updateBtwByRego(m_id_1, o_code);
 		dao.updateBtwByRegr(m_id_1, o_code_1);
+		
 	}
 	//정보 휴무 교환 정보 거절 업데이트
 	public void updatebtwinforefuse(String m_id, String o_code,String m_id_1, String o_code_1, Model model){

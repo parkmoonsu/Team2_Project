@@ -99,4 +99,5 @@ public interface ScheduleManageDAO {
 	public int updateBtwByRegore(String m_id_1,String o_code_1); //거절 변경 대상자 update reguloff
 	
 	public MemberJoinBusDTO rnumcheck(String m_id);
+
 }

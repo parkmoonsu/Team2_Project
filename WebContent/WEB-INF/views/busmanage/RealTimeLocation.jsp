@@ -55,7 +55,7 @@
 	padding: 5px 10px; 
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	width: 150px;
+	width: 140px;
 	border-radius: 8px;
 	margin-bottom:15px;
 }
@@ -111,7 +111,7 @@
 				</select>
 												
 				<select id="selectBus">
-					<option>노선을 선택하세요</option>
+					<option>노선 선택</option>
 					<option>전체검색</option>										
 				</select>
 				
