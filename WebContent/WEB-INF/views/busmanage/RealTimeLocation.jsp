@@ -204,10 +204,10 @@
    	var B4usMarker;
    	
     var originalMarkers = new Array();
-    //var originalMarkers5623 = new Array();
-    //var originalMarkers6702 = new Array();
-    //var originalMarkers9000 = new Array();
-    //var originalMarkers6501 = new Array();
+    var originalMarkers5623 = new Array();
+    var originalMarkers6702 = new Array();
+    var originalMarkers9000 = new Array();
+    var originalMarkers6501 = new Array();
    	
    	//원본 버스 실시간 추적 중지 변수.
    	var stopSearch;
@@ -300,6 +300,7 @@
            		zindex : "1"
         	});
      	   
+     		
      	  	var infowindow = new google.maps.InfoWindow({ maxWidth: 400});  
      	    
      	  	(function (originalMarker, latLng, infowindow) {
@@ -310,16 +311,16 @@
      	        });
      	    })(originalMarker, latLng[i], infowindow);
 
-     	  	//map.panTo(originalMarker.getPosition());
+     	  	map.panTo(originalMarker.getPosition());
      	  	originalMarkers.push(originalMarker);
             
 
     	}//for문 끝
     }
      
-    /* function originalMarkerMake5623(latLng, map) {
+    function originalMarkerMake5623(latLng, map) {
    	 	for(var i=0; i<latLng.length; i++){
-    	  console.log("---------------------------------");
+    	  /* console.log("---------------------------------");
     	   console.log("진행방향 "+latLng[i].direction);
     	   console.log("정류장명 "+latLng[i].stationNm);
     	   console.log("순번 "+latLng[i].seq);
@@ -332,7 +333,7 @@
     	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
     	   console.log("정류장 X "+latLng[i].gpsX);
     	   console.log("정류장 Y "+latLng[i].gpsY);
-    	   console.log("---------------------------------");   	  
+    	   console.log("---------------------------------");   	   */
     	                                       
        
    			var originalMarker5623 = new google.maps.Marker({
@@ -341,8 +342,18 @@
           		title: latLng[i].stationNm,
           		animation: google.maps.Animation.DROP,
           		icon : '${pageContext.request.contextPath}/images/busstop.png',
-          		zindex : "5"
+          		zindex : "1"
        		});
+    	   
+    	   	var infowindow = new google.maps.InfoWindow({ maxWidth: 400});  
+    	    
+    	  	(function (originalMarker5623, latLng, infowindow) {
+    	        google.maps.event.addListener(originalMarker5623, "click", function (e) {
+    	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');    	            
+    	            infowindow.open(map, originalMarker5623);
+    	           
+    	        });
+    	    })(originalMarker5623, latLng[i], infowindow);
     	  	//map.panTo(originalMarker5623.getPosition());
    			originalMarkers5623.push(originalMarker5623);   		
    		
@@ -354,7 +365,7 @@
     
     function originalMarkerMake6702(latLng, map) {
       	for(var i=0; i<latLng.length; i++){
-       	   console.log("---------------------------------");
+       	 /*   console.log("---------------------------------");
        	   console.log("진행방향 "+latLng[i].direction);
        	   console.log("정류장명 "+latLng[i].stationNm);
        	   console.log("순번 "+latLng[i].seq);
@@ -367,7 +378,7 @@
        	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
        	   console.log("정류장 X "+latLng[i].gpsX);
        	   console.log("정류장 Y "+latLng[i].gpsY);
-       	   console.log("---------------------------------");   	  
+       	   console.log("---------------------------------");   	   */
        	                                       
           
       			var originalMarker6702 = new google.maps.Marker({
@@ -376,8 +387,17 @@
              		title: latLng[i].stationNm,
              		animation: google.maps.Animation.DROP,
              		icon : '${pageContext.request.contextPath}/images/busstop.png',
-             		zindex : "5"
+             		zindex : "1"
           		});
+       	   
+       			var infowindow = new google.maps.InfoWindow({ maxWidth: 400});  
+ 	    
+ 	  			(function (originalMarker6702, latLng, infowindow) {
+ 	        		google.maps.event.addListener(originalMarker6702, "click", function (e) {
+ 	            	infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');    	            
+ 	            	infowindow.open(map, originalMarker6702);	           
+ 	        		});
+ 	   	 		})(originalMarker6702, latLng[i], infowindow);
        			//map.panTo(originalMarker702.getPosition());
       			originalMarkers6702.push(originalMarker6702);   		
       		
@@ -387,7 +407,7 @@
     
     function originalMarkerMake9000(latLng, map) {
      	 for(var i=0; i<latLng.length; i++){
-      	   console.log("---------------------------------");
+      	   /* console.log("---------------------------------");
       	   console.log("진행방향 "+latLng[i].direction);
       	   console.log("정류장명 "+latLng[i].stationNm);
       	   console.log("순번 "+latLng[i].seq);
@@ -400,7 +420,7 @@
       	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
       	   console.log("정류장 X "+latLng[i].gpsX);
       	   console.log("정류장 Y "+latLng[i].gpsY);
-      	   console.log("---------------------------------");    	  
+      	   console.log("---------------------------------");     */	  
       	                                       
          
      			var originalMarker9000 = new google.maps.Marker({
@@ -409,8 +429,16 @@
             		title: latLng[i].stationNm,
             		animation: google.maps.Animation.DROP,
             		icon : '${pageContext.request.contextPath}/images/busstop.png',
-            		zindex : "5"
+            		zindex : "1"
          		});
+      	 		var infowindow = new google.maps.InfoWindow({ maxWidth: 400});  
+  	    
+  	  			(function (originalMarker9000, latLng, infowindow) {
+  	        		google.maps.event.addListener(originalMarker9000, "click", function (e) {
+  	            			infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');    	            
+  	            			infowindow.open(map, originalMarker9000);  	           
+  	        		});
+  	    		})(originalMarker9000, latLng[i], infowindow);
       			//map.panTo(originalMarker9000.getPosition());
      			originalMarkers9000.push(originalMarker9000);   		      		    		
      	}//for문 끝      	 	      		
@@ -418,7 +446,7 @@
     
     function originalMarkerMake6501(latLng, map) {
     	for(var i=0; i<latLng.length; i++){
-     	   console.log("---------------------------------");
+     	  /*  console.log("---------------------------------");
      	   console.log("진행방향 "+latLng[i].direction);
      	   console.log("정류장명 "+latLng[i].stationNm);
      	   console.log("순번 "+latLng[i].seq);
@@ -431,21 +459,29 @@
      	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
      	   console.log("정류장 X "+latLng[i].gpsX);
      	   console.log("정류장 Y "+latLng[i].gpsY);
-     	   console.log("---------------------------------");  	  
+     	   console.log("---------------------------------");  	   */
      	                                       
         
     			var originalMarker6501 = new google.maps.Marker({
             		position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
-           		map: map,
-           		title: latLng[i].stationNm,
-           		animation: google.maps.Animation.DROP,
-           		icon : '${pageContext.request.contextPath}/images/busstop.png',
-           		zindex : "5"
+           			map: map,
+           			title: latLng[i].stationNm,
+           			animation: google.maps.Animation.DROP,
+           			icon : '${pageContext.request.contextPath}/images/busstop.png',
+           			zindex : "1"
         		});
+     	  		var infowindow = new google.maps.InfoWindow({ maxWidth: 400});  
+   	    
+   	  			(function (originalMarker6501, latLng, infowindow) {
+   	        		google.maps.event.addListener(originalMarker6501, "click", function (e) {
+   	            		infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');    	            
+   	            		infowindow.open(map, originalMarker6501);  	           
+   	        		});
+   	    		})(originalMarker6501, latLng[i], infowindow);
      			//map.panTo(originalMarker6501.getPosition());
     			originalMarkers6501.push(originalMarker6501);   		      		    		
     	}//for문 끝      	 	      		
-  	} */
+  	}
     
     //원본 움직이는 버스마커(XML -> JSON 파싱용)
     function movingBusMarker(data,map){
@@ -654,7 +690,7 @@
      	originalMarkers.length = 0;
     }
     
-    /* function originaldeleteAll(){
+    function originaldeleteAll(){
     	map.data.forEach(function(features) {           
      		map.data.remove(features);
      	});
@@ -682,16 +718,16 @@
      	}
      	originalMarkers6501=[];
      	originalMarkers6501.length = 0;
-    } */
+    }
     
 	function deleteRoute(){
     	
     	if(originalMarkers !=null){ 		
     		originaldelete();   		
     	}
-    	/* if(originalMarkers5623 !=null && originalMarkers6702 !=null && originalMarkers9000 !=null && originalMarkers6501 !=null){
+    	if(originalMarkers5623 !=null && originalMarkers6702 !=null && originalMarkers9000 !=null && originalMarkers6501 !=null){
     		originaldeleteAll();
-    	} */
+    	}
     }
     
     function polyRemove(){
@@ -783,7 +819,7 @@
     
     $(function() {
     			//비동기 버스 경로 을 뿌린다.
-    	$.ajax({
+    	/* $.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
                    	dataType : "json",
@@ -858,20 +894,28 @@
                         	loadVector(hell);
                    	  	}
                 	}
-           		});
+           		}); */
     	
     	//비동기로 정류장 생성
-    	$.ajax({
+    	/* $.ajax({
             url : "busStopRoad.admin",
             type : "get",
             dataType : "json",
             data : {r_num:"전체검색"},
             success : function(data) {
-            	console.log("읽어옴?");
-            	console.log(data);                                                                                                              	                                                                  	                       	   
-            	originalMarkerMake(data, map);                      	                 	                     	
+            	if(data.length == 4){
+             	   console.log("난 4개 노선");
+             	   originalMarkerMake5623(data[0],map);
+             	   originalMarkerMake6702(data[1],map);
+             	   originalMarkerMake9000(data[2],map);
+             	   originalMarkerMake6501(data[3],map);
+                }else{
+             	   console.log("난 1개 노선");
+             	   
+             	   originalMarkerMake(data[0], map);
+                }                      	                 	                     	
             }        		
-        });
+        }); */
     	
     	//비동기로 노선 전체 버스를 위치추적한다.
 		/* stopSearch = setInterval(function(){
@@ -999,33 +1043,45 @@
                     data : {r_num:$("#selectBus").val()},
                     success : function(data) {
                        console.log("읽어옴?");
-                       console.log(data);                                                                                                              	                                                                  	                       	   
-                    	   originalMarkerMake(data, map);
-                       	                 	                     	
+                       console.log(data);
+                       if(data.length == 4){
+                    	   console.log("난 4개 노선");
+                    	   originalMarkerMake5623(data[0],map);
+                    	   originalMarkerMake6702(data[1],map);
+                    	   originalMarkerMake9000(data[2],map);
+                    	   originalMarkerMake6501(data[3],map);
+                       }else{
+                    	   console.log("난 1개 노선");
+                    	   
+                    	   originalMarkerMake(data[0], map);
+                       }
+                    	                       	                 	                     	
                     }        		
         		});
         		
         		//기사명단 selet 박스에 출력
-        		$.ajax({
-                    url : "RouteSelectGisalist.admin",
-                    type : "get",
-                    dataType : "json",
-                    data : {r_num:$("#selectBus").val()},
-                    success : function(data) {                       
-                       	console.log("기사명단 출력");
-                       	$("#selectGisa").empty();
-                       	$("#selectGisa").append("<option>기사명단</option>");
-                       	if(data.glist != null){
-                       		for(var i=0; i<data.glist.length; i++){
-                       			console.log(data.glist[i].m_name);                       		
-        						$("#selectGisa").append("<option>"+ data.glist[i].m_name +"</option>");
-                       		}
-                       	}else{
-                       		$("#selectGisa").empty();
-    						$("#selectGisa").append("<option>기사명단</option>"); 
-                       	}
-                    }        		
-        		});
+        		if($("#selectBus").val() !="전체검색"){
+        			$.ajax({
+                        url : "RouteSelectGisalist.admin",
+                        type : "get",
+                        dataType : "json",
+                        data : {r_num:$("#selectBus").val()},
+                        success : function(data) {                       
+                           	console.log("기사명단 출력");
+                           	$("#selectGisa").empty();
+                           	$("#selectGisa").append("<option>기사명단</option>");
+                           	if(data.glist != null){
+                           		for(var i=0; i<data.glist.length; i++){
+                           			console.log(data.glist[i].m_name);                       		
+            						$("#selectGisa").append("<option>"+ data.glist[i].m_name +"</option>");
+                           		}
+                           	}else{
+                           		$("#selectGisa").empty();
+        						$("#selectGisa").append("<option>기사명단</option>"); 
+                           	}
+                        }        		
+            		});	
+        		}
         	}
     	});    	   		    	          
              
