@@ -437,13 +437,10 @@ select#selectedrnum {
                   break;
                      
                      }  //휴무요일에 따라서 근무 요일 지정
-                     
-                	 
-                	
-                     
+     
                      var item = {
                         title : obj.m_name,
-                      //  id : obj.m_id,
+                      // id : obj.m_id,
                         start : Start,
                         end:  End,
                         dow :[i]
@@ -456,12 +453,7 @@ select#selectedrnum {
                    
                   });
                   }///for문
-                 
-            
-                 
-                
-                  
-                  
+              
                }
             });
          });//change
@@ -485,7 +477,7 @@ select#selectedrnum {
             eventLimit : true, // allow "more" link when too many events
             events :  array ,
             enventDrop : function(event, delta, revertFunc, jsEvent){
-            	
+            	 
             }
 
       
