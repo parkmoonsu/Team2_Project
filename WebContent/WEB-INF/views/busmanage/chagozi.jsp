@@ -319,7 +319,7 @@ ul.pagination li a {
 					</div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+						<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">확인</button>
 						<input type="hidden" id="hvalue">
 					</div>
 				</div>

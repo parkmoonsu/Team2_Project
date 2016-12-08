@@ -117,7 +117,7 @@ ul.pagination li a {
 									<!-- start project list -->
 								
 									<div
-										class="col-md-2 col-sm-5 col-xs-12 form-group top_search" style = "float:right;"><!-- 이부분으로 searchbox 크기 조절 -->
+										class="col-md-3 col-sm-5 col-xs-12 form-group top_search" style = "float:right;"><!-- 이부분으로 searchbox 크기 조절 -->
 										<div class="input-group" id = "searchbox">
 											<input type="text" class="form-control"
 												placeholder="Search" id="search"> <span

@@ -138,7 +138,7 @@ select#selectBus, select#selectBus2 {
 					<div class="row" style="text-align: right">
 						<!-- <input type="button" id="newsave" value="원본좌표저장" class="btn btn-default">
 						<input type="button" id="newsave2" value="수정좌표저장" class="btn btn-default"> -->
-						<input type="button" id="busLoad" value="버스 보기" class="btn btn-default"zdddd>
+						<input type="button" id="busLoad" value="버스 보기" class="btn btn-default btn-sm">
 					
 					
 					<select id="selectBus" style="margin:5px" >
@@ -158,7 +158,7 @@ select#selectBus, select#selectBus2 {
 					<span>
 					<input type="text" style="width:210px; height:34px; padding: 12px 20px; 
     					   border-radius: 8px;" id="inputBusStop" placeholder="&nbsp;노선번호를 입력해주세요">
-					<input type="button" class="btn btn-default" id="sendBusStop" value="정류장저장"></span>
+					<input type="button" class="btn btn-default btn-sm" id="sendBusStop" value="정류장저장"></span>
 					
 					
 					</div>
