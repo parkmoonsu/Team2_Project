@@ -107,14 +107,14 @@
 					<option>${i.bd_name}</option>					
 					</c:forEach>																	
 				</select>
-				
-				<select id="selectGisa">
-					<option>기사 명단</option>																	
-				</select>
 												
 				<select id="selectBus">
 					<option>노선을 선택하세요</option>
 					<option>전체검색</option>										
+				</select>
+				
+				<select id="selectGisa">
+					<option>기사 명단</option>																	
 				</select>								
      			<div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;"></div>
             </div>
