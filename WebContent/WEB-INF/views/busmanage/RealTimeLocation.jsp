@@ -484,7 +484,7 @@
     
     function movingBusMarker1(data,map){
     	console.log("0번쨰 버스마커");
-    	console.log(data);
+    	//console.log(data);
        if(B1usMarker == null){
        		B1usMarker = new google.maps.Marker({
           		map: map,
@@ -524,7 +524,7 @@
     
     function movingBusMarker2(data,map){
     	console.log("1번쨰 버스마커");
-    	console.log(data);
+    	//console.log(data);
         if(B2usMarker == null){
         		B2usMarker = new google.maps.Marker({
            		map: map,
@@ -564,7 +564,7 @@
     
     function movingBusMarker3(data,map){
     	console.log("2번쨰 버스마커");
-    	console.log(data);
+    	//console.log(data);
         if(B3usMarker == null){
         		B3usMarker = new google.maps.Marker({
            		map: map,
@@ -604,7 +604,7 @@
     
     function movingBusMarker4(data,map){
     	console.log("3번쨰 버스마커");
-    	console.log(data);
+    	//console.log(data);
         if(B4usMarker == null){
         		B4usMarker = new google.maps.Marker({
            		map: map,
@@ -654,7 +654,7 @@
      	originalMarkers.length = 0;
     }
     
-    function originaldeleteAll(){
+    /* function originaldeleteAll(){
     	map.data.forEach(function(features) {           
      		map.data.remove(features);
      	});
@@ -682,16 +682,16 @@
      	}
      	originalMarkers6501=[];
      	originalMarkers6501.length = 0;
-    }
+    } */
     
 	function deleteRoute(){
     	
     	if(originalMarkers !=null){ 		
     		originaldelete();   		
     	}
-    	if(originalMarkers5623 !=null && originalMarkers6702 !=null && originalMarkers9000 !=null && originalMarkers6501 !=null){
+    	/* if(originalMarkers5623 !=null && originalMarkers6702 !=null && originalMarkers9000 !=null && originalMarkers6501 !=null){
     		originaldeleteAll();
-    	}
+    	} */
     }
     
     function polyRemove(){
@@ -783,7 +783,7 @@
     
     $(function() {
     			//비동기 버스 경로 을 뿌린다.
-    	$.ajax({
+    	/* $.ajax({
                    	url : "busRouteSearch.admin",
                    	type : "get",
                    	dataType : "json",
@@ -858,10 +858,10 @@
                         	loadVector(hell);
                    	  	}
                 	}
-           		});		
+           		});		 */
     	
     	//비동기로 정류장 생성
-    	$.ajax({
+    	/* $.ajax({
             url : "busStopRoad.admin",
             type : "get",
             dataType : "json",
@@ -871,10 +871,10 @@
             	console.log(data);                                                                                                              	                                                                  	                       	   
             	originalMarkerMake(data, map);                      	                 	                     	
             }        		
-        });
+        }); */
     	
     	//비동기로 노선 전체 버스를 위치추적한다.
-		stopSearch = setInterval(function(){
+		/* stopSearch = setInterval(function(){
     		$.ajax({
                 url : "RealTimeSearch.admin",
                 type : "get",
@@ -905,7 +905,7 @@
                 	           		  	
                 }
             });  		
-    	},20000);
+    	},20000); */
     
     	
     	$("#selectBus").change(function() {
