@@ -123,12 +123,13 @@ select#selectedrnum {
    background-repeat: no-repeat;
    border: 1px solid #AAA;
    color: #555;
-   font-size: inherit;
+  /*  font-size: inherit; */
    overflow: hidden;
    padding: 5px 10px; 
    text-overflow: ellipsis;
    white-space: nowrap;
-   width: 150px;
+   width: 140px;
+   border-radius: 8px;
 }
 </style>
 
@@ -156,7 +157,7 @@ select#selectedrnum {
                <div class="page-title">
                   <div class="title_left">
                      <h3>
-                         예상 스케줄 <i class="fa fa-calendar"></i>
+                        <i class="fa fa-calendar"></i>&nbsp;예상 스케줄 
                      </h3>
                   </div>
 

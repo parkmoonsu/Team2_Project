@@ -132,7 +132,7 @@ select#chagozi {
 	padding: 5px 5px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	width: 150px;
+	width: 140px;
 	margin:10px;
 	margin-bottom:20px;
 	border-radius: 8px;
