@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
+
+import kr.or.bus.dto.RouteStopDTO;
 import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
 import kr.or.bus.dto.RouteStopJoinStopDTO;
 import kr.or.bus.service.RouteManageService;
@@ -42,15 +44,17 @@ public class RouteManageController {
 	}
 	//정류장 번호 자동 생성 함수
 		@RequestMapping(value="/getrandomsnum.admin",method=RequestMethod.POST)
-		public View getRandomSnum(Model model){
+		public View getRandomSnum(String r_num,Model model){
 			int result;
 			String s_num;
+			//List<RouteStopDTO> rslist = routeManageSerivce.getRsOrderFromRs(r_num);
 			do{
 				s_num = routeManageSerivce.getRandomSnum();
 				result = routeManageSerivce.checkStopNum(s_num);	
 				System.out.println("몇 번 도는 거니?");
 			}while(result>0);
 			model.addAttribute("s_num", s_num);
+			//model.addAttribute("rslist",rslist);
 			return jsonview;
 		}
 		//DB에서 정류장 정차 순서 바꿔주는 함수(정류장 추가)

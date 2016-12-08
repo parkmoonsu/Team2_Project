@@ -164,8 +164,10 @@ public class JoinService {
 		String curTime = new SimpleDateFormat("yyyy-MM-dd-").format(new Date());	 
 		String head="회원가입 보호를 위한 RoadOneBell 안내";
 		String content1="RoadOneBell에 관심을 가져주신것에 대해 감사드리며,RoadOneBell 개인확인을 위하여 부득이하게 이메일로 확인하는점 양해 부탁드립니다.";
-		String content=dto.getA_num()+"입니다.";
+		String content="인증 번호는 :"+dto.getA_num()+"입니다.";
+		String img="http://kr.seaicons.com/wp-content/uploads/2015/10/lock-folded-icon.png";
 		Map<String,Object> param=new HashMap<>();
+		param.put("img", img);
 		param.put("content",content);
 		param.put("date", curTime);
 		param.put("head", head);
