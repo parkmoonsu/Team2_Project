@@ -73,7 +73,8 @@ ul.pagination li a.active {
 
 ul.pagination li a {
     color: #73879C;
-    float: left;
+    /* float: left;  */
+    float: ㅛ; 
     padding: 8px 16px;
     text-decoration: none;
 }
@@ -357,8 +358,8 @@ ul.pagination li a {
 								data-dismiss="modal" id="cancelbutton">삭제</button>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">취소</button>
-							<input type="hidden" id="hvalue"> <input type="hidden"
-								id="hvalue2">
+							<input type="hidden" id="hvalue2"> 
+							<!-- <input type="hidden" id=""> -->
 						</div>
 					</div>
 				</div>
@@ -452,8 +453,11 @@ ul.pagination li a {
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
 	<script type="text/javascript">
+
 		$(function() {
 
+			
+			
 			$('#exampleModal').on(
 					'show.bs.modal',
 					function(event) {
@@ -476,6 +480,10 @@ ul.pagination li a {
 						$('#people').val(recipient[1]);
 					});
 
+			$('.modal').on('hidden.bs.modal', function () {
+		        $(this).removeData('bs.modal');
+			});
+			
 			$("#passtrue").click(function() {
 				$.ajax({
 					url : "matchpass1.admin",
@@ -671,7 +679,7 @@ ul.pagination li a {
 			$("#match-pass").modal("show");
 			$('#hvalue').val(m_id); 
 			$('#hvalue2').val(m_name); 
-			$("#myModalLabel2").empty();
+			$("#myModalLabel2").empty();//
 			$('#myModalLabel2').html(m_name + '님을 삭제하시겠습니까?'); 
 		}
 	

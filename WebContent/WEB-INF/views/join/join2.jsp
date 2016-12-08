@@ -11,7 +11,7 @@
 .my-box {
 	border: 1px solid;
 	padding: 10px;
-}
+} 
 .form_wizard .stepContainer {
   display: block;
   position: relative;
@@ -299,14 +299,14 @@ margin-left: 0px;
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
 														for="m_id">아이디
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" id="m_id" name = "m_id"
+													<div class="col-md-5 col-sm-5 col-xs-12">
+														<input type="text" id="m_id" name = "m_id" 
 															class="form-control col-md-7 col-xs-12">
 													</div>
 													<div class = "col-md-1 col-sm-1" align="left" style="padding:0px">
 														<input type = "button" class = "btn btn-default" id = "checkid" value = "중복확인">
 													</div>
-													<div class = "col-md-2 col-sm-2" style="margin-top:7px">
+													<div class = "col-md-3 col-sm-2" style="margin-top:7px">
 														<span id = "check"></span>
 													</div>
 												</div>
@@ -316,7 +316,7 @@ margin-left: 0px;
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
 														for="m_pw">비밀번호
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<input type="password" id="m_pw" name="m_pw"
 															class="form-control col-md-7 col-xs-12">
 													</div>
@@ -325,7 +325,7 @@ margin-left: 0px;
 													<label class="control-label col-md-3 col-sm-3 col-xs-12"
 														for="m_pw2">비밀번호 다시입력
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<input type="password" id="m_pw2" name="m_pw2"
 															class="form-control col-md-7 col-xs-12">
 													</div>
@@ -335,7 +335,7 @@ margin-left: 0px;
 													<label for="m_name"
 														class="control-label col-md-3 col-sm-3 col-xs-12">이름
 														</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<input id="m_name"
 															class="form-control col-md-7 col-xs-12" type="text"
 															name="m_name">
@@ -345,7 +345,7 @@ margin-left: 0px;
 													<label for="m_email"
 														class="control-label col-md-3 col-sm-3 col-xs-12">이메일
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<input id="m_email"
 															class="form-control col-md-7 col-xs-12" type="email"
 															name="m_email">
@@ -360,7 +360,7 @@ margin-left: 0px;
 														class="control-label col-md-3 col-sm-3 col-xs-12">인증번호
 													</label>
 													<input type = 'hidden' id = 'm_nocheck' value = 'n'>
-													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 15px">
+													<div class="col-md-5 col-sm-5 col-xs-12" style="padding-left: 15px">
 														<input id="m_echeck"
 															class="form-control col-md-7 col-xs-12" type="text"
 															name="m_echeck">
@@ -376,7 +376,7 @@ margin-left: 0px;
 													<label for="j_code"
 														class="control-label col-md-3 col-sm-3 col-xs-12">직책
 														</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<select class = "form-control col-md-7 col-xs-12" name ="j_code" id = "j_code">
 															<option value ="">선택</option>
 															<option value = "01">최고관리자</option>
@@ -390,7 +390,7 @@ margin-left: 0px;
 												
 												<div class="form-group">
 													<label class="control-label col-md-3 col-sm-3 col-xs-12">성별</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-2 col-sm-2 col-xs-12">
 														<div id="m_gender" class="btn-group" data-toggle="buttons">
 															<label class="btn btn-default"
 																data-toggle-class="btn-primary"
@@ -405,18 +405,19 @@ margin-left: 0px;
 															</label>
 															
 														</div>
+														<div class="col-md-4 col-sm-4 col-xs-12"></div>
 													</div>
 												</div>
 												<div class="form-group">
 													<label for = "m_birth" 
 														class="control-label col-md-3 col-sm-3 col-xs-12">생년월일
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<input id="m_birth" name ="m_birth"
 															class="form-control col-md-7 col-xs-12"
 															 type="text">
 													</div>
-													<div  class="col-sm-3" >
+													<div  class="col-sm-4" >
 													<input id="birth" type="hidden" value="0">
 													</div>
 												</div>
@@ -424,18 +425,18 @@ margin-left: 0px;
 													<label for = "m_phone" 
 														class="control-label col-md-3 col-sm-3 col-xs-12">연락처
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<input id="m_phone" name ="m_phone"
 															class="form-control col-md-7 col-xs-12"
 															 type="text">
 													</div>
-													<div class="col-sm-3" id="phone"></div>
+													<div class="col-sm-4" id="phone"></div>
 												</div>
 												 <div class="form-group">
 													<label for="m_license"
 														class="control-label col-md-3 col-sm-3 col-xs-12">운전면허증
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 <input  id="m_photo" onchange = "imagecheck(this)" name="files[0]" type="file" class="filestyle" data-buttonText="Open" data-input="false" data-iconName="glyphicon-plus" data-classButton="btn btn-primary">
 									
 													</div>
@@ -444,7 +445,7 @@ margin-left: 0px;
 													<label for="m_photo"
 														class="control-label col-md-3 col-sm-3 col-xs-12">사진
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 <input  id="m_photo2" onchange = "imagecheck(this)" name="files[1]" type="file" class="filestyle" data-buttonText="Open" data-input="false" data-iconName="glyphicon-plus" data-classButton="btn btn-primary">
 
 													</div>
@@ -453,7 +454,7 @@ margin-left: 0px;
 													<label for="m_resume"
 														class="control-label col-md-3 col-sm-3 col-xs-12">이력서
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 <input  id="m_resume" onchange = "xlscheck(this)" name="files[2]" type="file" class="filestyle" data-buttonText="Open" data-input="false" data-iconName="glyphicon-plus" data-classButton="btn btn-primary">										
 													</div>
 												</div>  
@@ -461,7 +462,7 @@ margin-left: 0px;
 													<label for="m_addr"
 														class="control-label col-md-3 col-sm-3 col-xs-12">우편주소
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left:15px">
+													<div class="col-md-5 col-sm-5 col-xs-12" style="padding-left:15px">
 														<input id="m_addr"
 															class="form-control col-md-7 col-xs-12" type="text"
 															name="m_addr" >
@@ -476,7 +477,7 @@ margin-left: 0px;
 													<label for="m_daddr"
 														class="control-label col-md-3 col-sm-3 col-xs-12">상세주소
 													</label>
-													<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<input id="m_daddr"
 															class="form-control col-md-7 col-xs-12" type="text"
 															name="m_daddr">
@@ -574,9 +575,9 @@ margin-left: 0px;
 					$("#birth2").empty();
 					
 					if(bir.test($("#m_birth").val().trim())){
-						$('#birth').after("<font color = 'blue' size='1px' id='birth2'>가능합니다</font>");
+						$('#birth').after("<font color = 'blue' size='3px' id='birth2'>가능합니다</font>");
 					}else{
-						$('#birth').after("<font color = 'red' size='1px' id='birth2'>생년월일 예)1992-02-03</font>");
+						$('#birth').after("<font color = 'red' size='3px' id='birth2'>생년월일 예)1992-02-03</font>");
 					}
 					
 				});	
@@ -588,9 +589,9 @@ margin-left: 0px;
 					
 					if(bir2.test($("#m_phone").val().trim())){
 						
-						$('#phone').after("<font color = 'blue' size='1px' id='phone2'>가능합니다</font>");
+						$('#phone').after("<font color = 'blue' size='3px' id='phone2'>가능합니다</font>");
 					}else{
-						$('#phone').after("<font color = 'red' size='1px' id='phone2'align='center'>전화번호 예)010-0000-0000</font>");
+						$('#phone').after("<font color = 'red' size='3px' id='phone2'>전화번호 예)010-0000-0000</font>");
 					}
 					
 				});	
@@ -631,12 +632,12 @@ margin-left: 0px;
 							console.log($.trim(rd.check));
 							$("#check").empty();
 							if($.trim(rd.check)=="y"){
-								$('#check').append("<font color = 'red'  size='1px'>이미 있는 ID 입니다!</font>");
+								$('#check').append("<font color = 'red'  size='3px'>&nbsp;이미 있는 ID 입니다!</font>");
 								$('#m_id').focus();
 							}else if($.trim(rd.check)=="n" && $("#m_id").val().trim().length >= 8){
-								$('#check').append("<font color = '#369F36'  size='1px'>사용 가능한 ID 입니다!</font>");
+								$('#check').append("<font color = '#369F36'  size='3px'>사용 가능한 ID 입니다!</font>");
 							}else{
-								$('#check').append("<font color = 'red'  size='1px'>ID는 8자 이상입니다!</font>");
+								$('#check').append("<font color = 'red'  size='3px'>ID는 8자 이상입니다!</font>");
 							}
 						}
 						

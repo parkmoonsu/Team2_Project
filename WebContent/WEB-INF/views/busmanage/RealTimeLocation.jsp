@@ -193,9 +193,9 @@
    
    
    	//마커의 번호를 부여하기 위한 변수.
-    var as=0;
+    //var as=0;
    	
-   	var infoContents = new Array();
+   	//var infoContents = new Array();
    	
    	var BusMarker;
    	var B1usMarker;
@@ -204,10 +204,10 @@
    	var B4usMarker;
    	
     var originalMarkers = new Array();
-    var originalMarkers5623 = new Array();
-    var originalMarkers6702 = new Array();
-    var originalMarkers9000 = new Array();
-    var originalMarkers6501 = new Array();
+    //var originalMarkers5623 = new Array();
+    //var originalMarkers6702 = new Array();
+    //var originalMarkers9000 = new Array();
+    //var originalMarkers6501 = new Array();
    	
    	//원본 버스 실시간 추적 중지 변수.
    	var stopSearch;
@@ -219,18 +219,19 @@
     var poly3;
     var poly4;
     
-    var now = new Date();
+    //var now = new Date();
     //지도 기본 위치 , 마커 기본위치 가 됨.  
     //현 기본 좌표 : 판교역
     var myLatLng = {
-    	lat : 37.48085213924345,
-     	lng : 126.91500663757324
+    	lat : 37.462050994737076,
+     	lng : 126.96109771728516
     };
+      
     
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
            center : myLatLng,
-           zoom : 13
+           zoom : 11
         });                                                  
        
        	//교통 지도
@@ -316,9 +317,9 @@
     	}//for문 끝
     }
      
-    function originalMarkerMake5623(latLng, map) {
+    /* function originalMarkerMake5623(latLng, map) {
    	 	for(var i=0; i<latLng.length; i++){
-    	   /* console.log("---------------------------------");
+    	  console.log("---------------------------------");
     	   console.log("진행방향 "+latLng[i].direction);
     	   console.log("정류장명 "+latLng[i].stationNm);
     	   console.log("순번 "+latLng[i].seq);
@@ -331,7 +332,7 @@
     	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
     	   console.log("정류장 X "+latLng[i].gpsX);
     	   console.log("정류장 Y "+latLng[i].gpsY);
-    	   console.log("---------------------------------"); */    	  
+    	   console.log("---------------------------------");   	  
     	                                       
        
    			var originalMarker5623 = new google.maps.Marker({
@@ -353,7 +354,7 @@
     
     function originalMarkerMake6702(latLng, map) {
       	for(var i=0; i<latLng.length; i++){
-       	   /* console.log("---------------------------------");
+       	   console.log("---------------------------------");
        	   console.log("진행방향 "+latLng[i].direction);
        	   console.log("정류장명 "+latLng[i].stationNm);
        	   console.log("순번 "+latLng[i].seq);
@@ -366,7 +367,7 @@
        	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
        	   console.log("정류장 X "+latLng[i].gpsX);
        	   console.log("정류장 Y "+latLng[i].gpsY);
-       	   console.log("---------------------------------"); */    	  
+       	   console.log("---------------------------------");   	  
        	                                       
           
       			var originalMarker6702 = new google.maps.Marker({
@@ -386,7 +387,7 @@
     
     function originalMarkerMake9000(latLng, map) {
      	 for(var i=0; i<latLng.length; i++){
-      	   /* console.log("---------------------------------");
+      	   console.log("---------------------------------");
       	   console.log("진행방향 "+latLng[i].direction);
       	   console.log("정류장명 "+latLng[i].stationNm);
       	   console.log("순번 "+latLng[i].seq);
@@ -399,7 +400,7 @@
       	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
       	   console.log("정류장 X "+latLng[i].gpsX);
       	   console.log("정류장 Y "+latLng[i].gpsY);
-      	   console.log("---------------------------------"); */    	  
+      	   console.log("---------------------------------");    	  
       	                                       
          
      			var originalMarker9000 = new google.maps.Marker({
@@ -417,7 +418,7 @@
     
     function originalMarkerMake6501(latLng, map) {
     	for(var i=0; i<latLng.length; i++){
-     	   /* console.log("---------------------------------");
+     	   console.log("---------------------------------");
      	   console.log("진행방향 "+latLng[i].direction);
      	   console.log("정류장명 "+latLng[i].stationNm);
      	   console.log("순번 "+latLng[i].seq);
@@ -430,7 +431,7 @@
      	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
      	   console.log("정류장 X "+latLng[i].gpsX);
      	   console.log("정류장 Y "+latLng[i].gpsY);
-     	   console.log("---------------------------------"); */    	  
+     	   console.log("---------------------------------");  	  
      	                                       
         
     			var originalMarker6501 = new google.maps.Marker({
@@ -444,7 +445,7 @@
      			//map.panTo(originalMarker6501.getPosition());
     			originalMarkers6501.push(originalMarker6501);   		      		    		
     	}//for문 끝      	 	      		
-  	}
+  	} */
     
     //원본 움직이는 버스마커(XML -> JSON 파싱용)
     function movingBusMarker(data,map){
@@ -483,12 +484,12 @@
     
     function movingBusMarker1(data,map){
     	console.log("0번쨰 버스마커");
-    	console.log(data);
+    	//console.log(data);
        if(B1usMarker == null){
        		B1usMarker = new google.maps.Marker({
           		map: map,
           		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-          		icon:"${pageContext.request.contextPath}/images/bus.png"
+          		icon:"${pageContext.request.contextPath}/images/bus1.png"
        		});
       		
 			var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
@@ -523,12 +524,12 @@
     
     function movingBusMarker2(data,map){
     	console.log("1번쨰 버스마커");
-    	console.log(data);
+    	//console.log(data);
         if(B2usMarker == null){
         		B2usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-           		icon:"${pageContext.request.contextPath}/images/bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus2.png"
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
@@ -563,12 +564,12 @@
     
     function movingBusMarker3(data,map){
     	console.log("2번쨰 버스마커");
-    	console.log(data);
+    	//console.log(data);
         if(B3usMarker == null){
         		B3usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-           		icon:"${pageContext.request.contextPath}/images/bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus3.png"
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
@@ -603,12 +604,12 @@
     
     function movingBusMarker4(data,map){
     	console.log("3번쨰 버스마커");
-    	console.log(data);
+    	//console.log(data);
         if(B4usMarker == null){
         		B4usMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX),
-           		icon:"${pageContext.request.contextPath}/images/bus.png"
+           		icon:"${pageContext.request.contextPath}/images/bus4.png"
         		});
         		
         		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
@@ -640,7 +641,7 @@
         }
      }
     
-    
+    	
     function originaldelete(){
     	map.data.forEach(function(features) {           
      		map.data.remove(features);
@@ -653,7 +654,7 @@
      	originalMarkers.length = 0;
     }
     
-    function originaldeleteAll(){
+    /* function originaldeleteAll(){
     	map.data.forEach(function(features) {           
      		map.data.remove(features);
      	});
@@ -681,16 +682,16 @@
      	}
      	originalMarkers6501=[];
      	originalMarkers6501.length = 0;
-    }
+    } */
     
 	function deleteRoute(){
     	
     	if(originalMarkers !=null){ 		
     		originaldelete();   		
     	}
-    	if(originalMarkers5623 !=null && originalMarkers6702 !=null && originalMarkers9000 !=null && originalMarkers6501 !=null){
+    	/* if(originalMarkers5623 !=null && originalMarkers6702 !=null && originalMarkers9000 !=null && originalMarkers6501 !=null){
     		originaldeleteAll();
-    	}
+    	} */
     }
     
     function polyRemove(){
@@ -786,7 +787,7 @@
                    	url : "busRouteSearch.admin",
                    	type : "get",
                    	dataType : "json",
-                   	data : {r_num:"전체선택"},
+                   	data : {r_num:"전체검색"},
                    	success : function(data2) {
                     	console.log("읽어옴?");
                       	//console.log(data2);                              	                                                                  	                       
@@ -857,14 +858,14 @@
                         	loadVector(hell);
                    	  	}
                 	}
-           		});		
+           		});
     	
     	//비동기로 정류장 생성
     	$.ajax({
             url : "busStopRoad.admin",
             type : "get",
             dataType : "json",
-            data : {r_num:"전체선택"},
+            data : {r_num:"전체검색"},
             success : function(data) {
             	console.log("읽어옴?");
             	console.log(data);                                                                                                              	                                                                  	                       	   
@@ -873,12 +874,12 @@
         });
     	
     	//비동기로 노선 전체 버스를 위치추적한다.
-		stopSearch = setInterval(function(){
+		/* stopSearch = setInterval(function(){
     		$.ajax({
                 url : "RealTimeSearch.admin",
                 type : "get",
                 dataType : "json",
-                data : {r_num:"전체선택"},
+                data : {r_num:"전체검색"},
                 success : function(data) {                   	
                 	console.log(data);
                 	if(data.length == 4){
@@ -904,7 +905,7 @@
                 	           		  	
                 }
             });  		
-    	},20000);
+    	},20000); */
     
     	
     	$("#selectBus").change(function() {

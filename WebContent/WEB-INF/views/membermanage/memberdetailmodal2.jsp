@@ -135,7 +135,7 @@
       </div>
       <div class="modal-footer">
        <a href="#" class="btn btn-default btn-sm" onClick="s2modal();" role="button" data-toggle="modal" data-target="#memberresrecord" data-whatever="${dto2.m_name }"> <i class="fa fa-file-text-o"></i>경력조회</a>
-       <button type="button" class="btn btn-success btn-sm" >확인</button>
+       <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">확인</button>
       </div>
 
    </div>

@@ -118,8 +118,8 @@ select#chagozi {
 	-webkit-appearance: button;
 	-webkit-border-radius: 2px;
 	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-	-webkit-padding-end: 20px;
-	-webkit-padding-start: 2px;
+	/* -webkit-padding-end: 20px;
+	-webkit-padding-start: 2px; */
 	-webkit-user-select: none;
 	background-image: url(http://i62.tinypic.com/15xvbd5.png),
 		-webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
@@ -133,6 +133,8 @@ select#chagozi {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 150px;
+	margin:10px;
+	margin-bottom:20px;
 	border-radius: 8px;
 }
 
@@ -151,7 +153,6 @@ ul.pagination li a {
 
 
 </head>
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -170,25 +171,26 @@ ul.pagination li a {
 				<div class="row tile_count" style="text-align: left"></div>
 				<!-- /top tiles -->
 				<div class="">
-					<div class="page-title">
+					<div class="page-title row">
 						<div class="title_left">
 							<h3>
 								<small>차고지별 버스현황</small>
 							</h3>
 						</div>
 					</div>
-					<div style="text-align: right">
-						<select id="chagozi">
-							<option>차고지 선택</option>
-
-						</select>
-					</div>
+					
 					<br>
 					<div class="clearfix"></div>
 
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<div class="x_panel">
+					<div style="text-align: right">
+						<select id="chagozi">
+							<option>차고지 선택</option>
+
+						</select>
+					</div>
 								<div class="x_content" id="tabelinfo">
 									<!-- start project list -->
 									<table class="table table-hover projects" id="bustable">
@@ -345,8 +347,6 @@ ul.pagination li a {
 		<footer>
 			<jsp:include page="/sidebar/footer.jsp" />
 		</footer>
-
-
 		<!-- /footer content -->
 	</div>
 

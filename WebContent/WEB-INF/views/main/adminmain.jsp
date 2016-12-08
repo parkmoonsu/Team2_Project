@@ -710,10 +710,13 @@
 			});				
 							
 			$("#flotroute").change(function(){
+				
 				$.ajax({
 					url : "busstop.htm",
 					data : {flotyear : $("#flotyear").val() , flotmonth : $("#flotmonth").val() , flotroute : $("#flotroute").val()},
 					success : function(data){
+						$("#flotstop").empty();		
+						$("#flotstop").append("<option>정류장</option>");
 						for(var i = 0 ; i < data.jroute.CardBusTimeNew.row.length ; i++){
 							$("#flotstop").append("<option>" + data.jroute.CardBusTimeNew.row[i].BUS_STA_NM + "</option>");
 						}
@@ -732,33 +735,7 @@
 						for(var i = 0 ; i < data.jroute.CardBusTimeNew.row.length ; i++){
 							
 							if($("#flotstop").val() == data.jroute.CardBusTimeNew.row[i].BUS_STA_NM){
-								console.log("1시에 탄사람 : " + data.jroute.CardBusTimeNew.row[i].ONE_RIDE_NUM);
-								
-								/* d1.push(['0',data.jroute.CardBusTimeNew.row[i].MIDNIGHT_RIDE_NUM]);
-								d1.push(['1',data.jroute.CardBusTimeNew.row[i].ONE_RIDE_NUM]);
-								d1.push(['2',data.jroute.CardBusTimeNew.row[i].TWO_RIDE_NUM]);
-								d1.push(['3',data.jroute.CardBusTimeNew.row[i].THREE_RIDE_NUM]);
-								d1.push(['4',data.jroute.CardBusTimeNew.row[i].FOUR_RIDE_NUM]);
-								d1.push(['5',data.jroute.CardBusTimeNew.row[i].FIVE_RIDE_NUM]);
-								d1.push(['6',data.jroute.CardBusTimeNew.row[i].SIX_RIDE_NUM]);
-								d1.push(['7',data.jroute.CardBusTimeNew.row[i].SEVEN_RIDE_NUM]);
-								d1.push(['8',data.jroute.CardBusTimeNew.row[i].EIGHT_RIDE_NUM]);
-								d1.push(['9',data.jroute.CardBusTimeNew.row[i].NINE_RIDE_NUM]);
-								d1.push(['10',data.jroute.CardBusTimeNew.row[i].TEN_RIDE_NUM]);
-								d1.push(['11',data.jroute.CardBusTimeNew.row[i].ELEVEN_RIDE_NUM]);
-								d1.push(['12',data.jroute.CardBusTimeNew.row[i].TWELVE_RIDE_NUM]);
-								d1.push(['13',data.jroute.CardBusTimeNew.row[i].THIRTEEN_RIDE_NUM]);
-								d1.push(['14',data.jroute.CardBusTimeNew.row[i].FOURTEEN_RIDE_NUM]);
-								d1.push(['15',data.jroute.CardBusTimeNew.row[i].FIFTEEN_RIDE_NUM]);
-								d1.push(['16',data.jroute.CardBusTimeNew.row[i].SIXTEEN_RIDE_NUM]);
-								d1.push(['17',data.jroute.CardBusTimeNew.row[i].SEVENTEEN_RIDE_NUM]);
-								d1.push(['18',data.jroute.CardBusTimeNew.row[i].EIGHTEEN_RIDE_NUM]);
-								d1.push(['19',data.jroute.CardBusTimeNew.row[i].NINETEEN_RIDE_NUM]);
-								d1.push(['20',data.jroute.CardBusTimeNew.row[i].TWENTY_RIDE_NUM]);
-								d1.push(['21',data.jroute.CardBusTimeNew.row[i].TWENTY_ONE_RIDE_NUM]);
-								d1.push(['22',data.jroute.CardBusTimeNew.row[i].TWENTY_TWO_RIDE_NUM]);
-								d1.push(['23',data.jroute.CardBusTimeNew.row[i].TWENTY_THREE_RIDE_NUM]); */
-								
+		
 								 echartLine.setOption({
 								        title: {
 								          text: $("#flotroute").val() + "번",

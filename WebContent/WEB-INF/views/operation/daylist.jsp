@@ -40,6 +40,10 @@
 				<td>${i.ro_regdate}</td>
 			</tr>
 		</c:forEach>
-
+		<c:if test="${d == '[]' }">
+			<tr>
+				<td colspan='8' align="center">검색한 내용이 없습니다.</td>
+			</tr>
+		</c:if>
 	</tbody>
 </table>
