@@ -20,6 +20,7 @@
 										</thead>
 										
 								<c:set value="${dto}" var="d" />
+									<c:if test ="${d != '[]' }">
 										<c:forEach var="i" items="${d}">
 											<tr>
 												<td>${i.r}</td>
@@ -38,5 +39,11 @@
 												</td>
 											</tr>
 										</c:forEach>
+										</c:if>
+										<c:if test ="${d == '[]' }">
+											<tr>
+												<td colspan = '6' align = "center">가입신청 회원 없음</td>
+											</tr>
+										</c:if>
 										</tbody>
 									</table>		
