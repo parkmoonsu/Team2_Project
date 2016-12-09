@@ -10,7 +10,18 @@
 </head>
 <body>
 	<script type="text/javascript">
-		swal("등록 실패 - 입력 값이 잘못되었습니다.");
+		//swal("등록 실패 - 입력 값이 잘못되었습니다.");
+		swal(
+				{
+					title : "등록 실패",
+					text : "입력 값이 잘못되었습니다.",
+					type : "warning",
+					
+					confirmButtonColor : "#DD6B55",
+					confirmButtonText : "확인",
+					closeOnConfirm : true
+				}, function() {
+				});
 		location.href = "busreg.admin";
 	</script>
 </body>

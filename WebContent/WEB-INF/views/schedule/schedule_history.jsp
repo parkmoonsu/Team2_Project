@@ -163,7 +163,7 @@ th{
 													<td><button class="btn btn-success btn-xs" style="width:50px; border:0">${i.ko_name}</button></td>
 												</c:if>
 												<c:if test="${i.ko_name=='거절'}">
-													<td><button class="btn btn-danger">${i.ko_name}</button></td>
+													<td><button class="btn btn-danger btn-xs" style="width:50px; border:0">${i.ko_name}</button></td>
 												</c:if>									
 											</tr>
 											</c:forEach>

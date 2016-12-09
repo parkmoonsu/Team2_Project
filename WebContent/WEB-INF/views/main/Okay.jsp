@@ -6,12 +6,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <title>Insert title here</title>
 </head>
 <body>
 <se:authentication property="name" var="LoginUser" /> 
 <script type="text/javascript">
-	alert("수정 완료");
+	//alert("수정 완료");
+		swal({
+        title: "",
+        text: "수정 완료",
+        type: "info",
+        closeOnConfirm: true,
+        showLoaderOnConfirm: true,
+      },
+      function(){
+      });
 	location.href = "joinapprove.member?m_id=${LoginUser}";
 </script>
 </body>

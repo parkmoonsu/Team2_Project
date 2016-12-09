@@ -8,7 +8,16 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert("비밀번호가 일치하지 않습니다.");
+		//alert("비밀번호가 일치하지 않습니다.");
+		swal({
+                    title: "",
+                    text: "비밀번호가 일치하지 않습니다.",
+                    type: "info",
+                    closeOnConfirm: true,
+                    showLoaderOnConfirm: true,
+                  },
+                  function(){
+                  });
 		location.href = "membermanage.admin";
 	</script>
 </body>

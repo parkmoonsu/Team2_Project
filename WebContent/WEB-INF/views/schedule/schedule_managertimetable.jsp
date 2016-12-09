@@ -59,8 +59,10 @@
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
-	<script
+<script
 		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <style>
 th, table{
  text-align: center;
@@ -467,8 +469,16 @@ th, table{
 				},
 				url:"agreehistory.admin",
 				success:function(){
-					alert('승인 되었습니다.');
-					
+					//alert('승인 되었습니다.');
+					swal({
+	                    title: "",
+	                    text: "승인 되었습니다.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                  });
 					$('#'+m_id+'n'+ro_object).attr('class', 'btn btn-success');
 					$('#'+m_id+'n'+ro_object).attr('onclick', '');
 					$('#'+m_id+'n'+ro_object).text('승인');

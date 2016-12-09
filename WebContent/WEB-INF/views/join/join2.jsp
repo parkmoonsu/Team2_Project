@@ -280,7 +280,8 @@ bodoy {
 	href="${pageContext.request.contextPath}/mainCss/css/style5.css">
 <script src="dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
-
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <body>
 	<header role="banner" id="fh5co-header">
 		<div class="container">
@@ -861,7 +862,16 @@ bodoy {
         function xlscheck(file){
 			var filelen = file.value.length;
 			if(file.value.substring(filelen-3,filelen)!="xls"){
-				alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
+				//alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
+				swal({
+                    title: "",
+                    text: "확장자가 xls인 엑셀파일을 선택해 주세요.",
+                    type: "info",
+                    closeOnConfirm: true,
+                    showLoaderOnConfirm: true,
+                  },
+                  function(){
+                  });
 				file.value = "";
 			}
 		}
@@ -871,7 +881,16 @@ bodoy {
 			var filelen = file.value.length;
 			if(file.value.substring(filelen-3,filelen)!="png" && file.value.substring(filelen-3,filelen) != "jpg"){
 									
-				alert("JPG 또는 PNG인 이미지파일을 선택해 주세요,");
+				//alert("JPG 또는 PNG인 이미지파일을 선택해 주세요,");
+				swal({
+                    title: "",
+                    text: "JPG 또는 PNG인 이미지파일을 선택해 주세요.",
+                    type: "info",
+                    closeOnConfirm: true,
+                    showLoaderOnConfirm: true,
+                  },
+                  function(){
+                  });
 				file.value= "";
 			}
 		} 
