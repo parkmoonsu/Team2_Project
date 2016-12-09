@@ -97,7 +97,7 @@ ul.pagination li a {
 					<c:set value="${list}" var="d"/>
 					<c:if test="${d != '[]'}">
 						<a href="Okay.member?m_id=${d[0].m_id}"
-					    	class="btn btn-success btn-xs" style="height:30px; padding-top: 5px; border:0; background-color: #269abc"><i class="fa fa-check"></i>
+					    	class="btn btn-success btn-xs" style="background-color: #269abc"><i class="fa fa-check"></i>
 						        전체 삭제 </a>
 					</c:if>
 					</div>

@@ -191,7 +191,7 @@
 											<div class = "col-md-6 col-sm-6">
 											</div>
 											<div class="col-sm-3 col-xs-12" align="right">
-												<div class = "btn btn-success btn-xs" id="reg"><i class="fa fa-check"></i>등록</div>
+												<div class = "btn btn-success btn-xs" id="reg">&nbsp;<i class="fa fa-check"></i>&nbsp;&nbsp;등록</div>
 												
 												<input type = "reset" class = "btn btn-default btn-xs" value = "다시쓰기">
 											</div>

@@ -258,6 +258,9 @@ bodoy {
 .my-box {
 	color: black;
 }
+.form-gropu{
+	font-size: 12px;  
+}
 </style>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -346,7 +349,7 @@ bodoy {
 														<label class="control-label col-md-3 col-sm-3 col-xs-12"
 															for="m_id">아이디 </label>
 														<div class="col-md-5 col-sm-5 col-xs-12">
-															<input type="text" id="m_id" name="m_id"
+															<input type="text" id="m_id" name="m_id" style="font-size: 12px"
 																class="form-control col-md-7 col-xs-12">
 														</div>
 														<div class="col-md-1 col-sm-1" align="left"
@@ -384,7 +387,7 @@ bodoy {
 														<div class="col-md-5 col-sm-5 col-xs-12">
 															<input id="m_name"
 																class="form-control col-md-7 col-xs-12" type="text"
-																name="m_name">
+																name="m_name" style="font-size: 12px">
 														</div>
 													</div>
 													<div class="form-group">
@@ -394,7 +397,7 @@ bodoy {
 														<div class="col-md-5 col-sm-5 col-xs-12">
 															<input id="m_email"
 																class="form-control col-md-7 col-xs-12" type="email"
-																name="m_email">
+																name="m_email" style="font-size: 12px">
 														</div>
 														<div class="col-md-3 col-sm-3" align="left"
 															style="padding: 0px">
@@ -410,7 +413,7 @@ bodoy {
 															style="padding-left: 15px">
 															<input id="m_echeck"
 																class="form-control col-md-7 col-xs-12" type="text"
-																name="m_echeck">
+																name="m_echeck" style="font-size: 12px">
 														</div>
 														<div class="col-md-3 col-sm-3" align="left"
 															style="padding: 0px">
@@ -422,7 +425,7 @@ bodoy {
 
 													<div class="form-group">
 														<label for="j_code"
-															class="control-label col-md-3 col-sm-3 col-xs-12">직책
+															class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 12px">직책
 														</label>
 														<div class="col-md-5 col-sm-5 col-xs-12">
 															<select class="form-control col-md-7 col-xs-12"
@@ -462,7 +465,7 @@ bodoy {
 														</label>
 														<div class="col-md-5 col-sm-5 col-xs-12">
 															<input id="m_birth" name="m_birth"
-																class="form-control col-md-7 col-xs-12" type="text">
+																class="form-control col-md-7 col-xs-12" type="text" style="font-size: 12px">
 														</div>
 														<div class="col-sm-4">
 															<input id="birth" type="hidden" value="0">
@@ -474,7 +477,7 @@ bodoy {
 														</label>
 														<div class="col-md-5 col-sm-5 col-xs-12">
 															<input id="m_phone" name="m_phone"
-																class="form-control col-md-7 col-xs-12" type="text">
+																class="form-control col-md-7 col-xs-12" type="text" style="font-size: 12px">
 														</div>
 														<div class="col-sm-4" id="phone"></div>
 													</div>
@@ -523,7 +526,7 @@ bodoy {
 														<div class="col-md-5 col-sm-5 col-xs-12"
 															style="padding-left: 15px">
 															<input id="m_addr"
-																class="form-control col-md-7 col-xs-12" type="text"
+																class="form-control col-md-7 col-xs-12" type="text" style="font-size: 12px"
 																name="m_addr">
 														</div>
 														<div class="col-md-3 col-sm-3" style="padding: 0px"
@@ -539,7 +542,7 @@ bodoy {
 														</label>
 														<div class="col-md-5 col-sm-5 col-xs-12">
 															<input id="m_daddr"
-																class="form-control col-md-7 col-xs-12" type="text"
+																class="form-control col-md-7 col-xs-12" type="text" style="font-size: 12px"
 																name="m_daddr">
 														</div>
 													</div>

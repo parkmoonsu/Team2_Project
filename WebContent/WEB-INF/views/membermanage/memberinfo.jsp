@@ -184,7 +184,7 @@ ul.pagination li a {
 											<ul class="nav navbar-nav">
 												<li><a href="membermanage.admin"><strong>회원정보</strong></a></li>
 												<li><a href="joinapprove.admin">회원가입승인</a></li>
-												<li><a href="#">스케줄관리</a></li>
+												
 											</ul>
 										</div>
 									</nav>
@@ -196,7 +196,7 @@ ul.pagination li a {
 									<!-- start project list -->
 									
 									<div
-										class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+										class="col-md-3 col-sm-5 col-xs-12 form-group pull-right top_search">
 										<div class="input-group">
 											<input type="text" class="form-control"
 												placeholder="Search for..." id="search"> <span
@@ -242,7 +242,7 @@ ul.pagination li a {
 										</tbody>
 									</table>
 									</div>
-									<!-- end project list -->
+									<!-- end project list --
 
 									<!-- 요기서부터 페이징처리 -->
 									<c:set var="mc" value="${membercount}" />
@@ -480,9 +480,15 @@ ul.pagination li a {
 						$('#people').val(recipient[1]);
 					});
 
-			$('.modal').on('hidden.bs.modal', function () {
+			///////
+			/* $('.modal').on('hidden.bs.modal', function () {
 		        $(this).removeData('bs.modal');
 			});
+			
+			$('#match-pass').on('hidden', function () {
+				  $(this).removeData('modal');
+				}); */
+			//////
 			
 			$("#passtrue").click(function() {
 				$.ajax({
@@ -494,6 +500,9 @@ ul.pagination li a {
 						console.log(data.data);
 						if (data.data == 'true') {
 							$("#match-pass").modal("hide");
+							 /* $('#match-pass').on('hidden.bs.modal', function () {
+								  $(this).removeData();
+								});  */
 							$("#myModal").modal("show");
 
 						} else {
@@ -674,6 +683,7 @@ ul.pagination li a {
 		}  */
 		
 	 	function deleteMember(m_id,m_name) {
+			$("#m_pw").val("");
 			console.log("m_id" + m_id);
 			console.log("m_name" + m_name);
 			$("#match-pass").modal("show");

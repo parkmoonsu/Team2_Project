@@ -102,7 +102,7 @@ placeholder {
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/loginassets/assets/css/style.css">
 <link rel="stylesheet" id="theme-switch"
-	href="${pageContext.request.contextPath}/mainCss/css/style.css">
+	href="${pageContext.request.contextPath}/mainCss/css/style5.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/login-form/css/style.css">
 
@@ -142,12 +142,12 @@ placeholder {
 						<div class="form-group">
 							<label for="text" class="sr-only">UserId</label> <input
 								type="text" name="username" id="username" class="form-control"
-								placeholder="Userid">
+								placeholder="Userid" style="font-size: 12px">
 						</div>
 						<div class="form-group">
 							<label for="key" class="sr-only">Password</label> <input
 								type="password" name="password" id="password"
-								class="form-control" placeholder="Password">
+								class="form-control" placeholder="Password" style="font-size: 12px">
 						</div>
 						<div class="checkbox" style="text-align: left">
 							<span class="character-checkbox" onclick="showPassword()"></span>

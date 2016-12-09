@@ -2,7 +2,16 @@ package kr.or.bus.dto;
 
 public class RouteTypeDTO {
 	String bd_name;
+	String bd_num;
 	String r_num;
+	
+
+	public String getBd_num() {
+		return bd_num;
+	}
+	public void setBd_num(String bd_num) {
+		this.bd_num = bd_num;
+	}
 	public String getBd_name() {
 		return bd_name;
 	}
