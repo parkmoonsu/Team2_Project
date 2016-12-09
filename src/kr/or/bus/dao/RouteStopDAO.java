@@ -10,6 +10,7 @@ public interface RouteStopDAO {
 	public int insertRouteStopCheck(RouteStopDTO dto);
 	public int insertRouteStopData(RouteStopDTO dto);
 	public int checkStopNum(String s_num);
+	public int checkRouteNum(String r_num);
 	public RouteStopDTO getRouteStopInfo(String r_num, String rs_order);
 	public int addStopInfo(StopDTO dto);
 	public int addRouteStopInfo(RouteStopDTO dto);
@@ -28,5 +29,8 @@ public interface RouteStopDAO {
 	public int updateRouteStopNewStop(String s_num1, String s_num, String r_num); 
 	//rs_order를 순서대로 불러온다.
 	public List<RouteStopDTO> getRsOrderfRsStop(String r_num);
+	
+	public void routeInsert(String r_num, String bd_num, String g_num);
+	public void routeStopInsert(String r_num, String s_num, int rs_order);
 
 }

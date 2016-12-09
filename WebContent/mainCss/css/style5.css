@@ -215,19 +215,19 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   }
   #fh5co-header .navbar-brand {
-    color: 	#FFB432 !important;
+    color: #1E3269 !important;
   }
   #fh5co-header #navbar li a {
-    color: 	#FFB432 !important;
+    color: #1E3269 !important;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
   }
   #fh5co-header #navbar li a:hover {
-    color: 	#FFB432 !important;
+    color: 	#1E3269 !important;
   }
   #fh5co-header #navbar li a span:before {
-    background: 	#FFB432 !important;
+    background: #1E3269 !important;
   }
   #fh5co-header #navbar li.active a {
     background: transparent;
@@ -246,7 +246,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-header #navbar li a {
   font-family: "Source Sans Pro", Arial, sans-serif;
-  color: 	#FFB432;
+  color: 	#1E3269;
   position: relative;
   font-size: 19px;
   font-weight: 300;
@@ -278,7 +278,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-header #navbar li a:hover {
   /* color: #fff; */
-  color:	#FFB432;
+  color:	#1E3269;
 }
 #fh5co-header #navbar li a:hover span:before {
   visibility: visible;
@@ -291,21 +291,20 @@ h1, h2, h3, h4, h5, h6 {
 #fh5co-header #navbar li.active a {
   background: transparent;
   background: none;
-  color: 	#FFB432;
+  color: 	#1E3269;
 }
 #fh5co-header #navbar li.active a span:before {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
-/* work */
 #fh5co-header .navbar-brand {
   float: left;
   display: block;
   font-size: 30px;
   font-weight: 700;
   padding-left: 0;
-  color:  #FFB432;
+  color:  #1E3269;
 }
 #fh5co-header.navbar-fixed-top {
   position: fixed !important;
@@ -318,7 +317,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
 }
 #fh5co-header.navbar-fixed-top .navbar-brand {
-  color: #56B37F;
+  color: #1E3269;
 }
 #fh5co-header.navbar-fixed-top #navbar li a {
   color: rgba(0, 0, 0, 0.5);

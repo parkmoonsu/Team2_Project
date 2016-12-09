@@ -112,7 +112,7 @@ ul.pagination li a {
 											<ul class="nav navbar-nav">
 												<li><a href="membermanage.admin">회원정보</a></li>
 												<li><a href="joinapprove.admin"><strong>회원가입승인</strong></a></li>
-												<li><a href="#">스케줄관리</a></li>
+												
 											</ul>
 										</div>
 									</nav>

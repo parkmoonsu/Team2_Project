@@ -102,7 +102,7 @@ placeholder {
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/loginassets/assets/css/style.css">
 <link rel="stylesheet" id="theme-switch"
-	href="${pageContext.request.contextPath}/mainCss/css/style.css">
+	href="${pageContext.request.contextPath}/mainCss/css/style5.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/login-form/css/style.css">
 

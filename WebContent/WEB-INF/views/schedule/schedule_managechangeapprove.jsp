@@ -93,7 +93,7 @@ $(document).ready(function() {
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">
-								<i class="fa fa-exclamation-triangle"></i> 차량번호 삭제
+								<i class="fa fa-exclamation-triangle"></i> 휴무 변경 정보
 							</h4>
 						</div>
 						<div class="modal-body" aria-labelledby="myModalLabel"
@@ -214,12 +214,12 @@ $(document).ready(function() {
 
 								<div class="x_content">
 								<div style="text-align: center">
-									<button style="width:100px; height:30px; background-color: #46AAEB; border:0" class="btn btn-default"></button>
-									변경 신청이 없는 데이터&nbsp;&nbsp;&nbsp;
-									<button style="width:100px; height:30px; background-color: #329632; border:0" class="btn btn-default"></button>
-									변경 신청이 있는 데이터 (1인 신청)&nbsp;&nbsp;&nbsp;
-									<button style="width:100px; height:30px; background-color: #FFB432; border:0" class="btn btn-default"></button>
-									변경 신청이 있는 데이터 (2인 신청)
+									<button style="width:10%; height:30px; background-color: #46AAEB; border:0" class="btn btn-default"></button>
+									휴무 변경 신청 없음&nbsp;&nbsp;&nbsp;
+									<button style="width:10%; height:30px; background-color: #329632; border:0" class="btn btn-default"></button>
+									휴무 변경 신청 (1인)&nbsp;&nbsp;&nbsp;
+									<button style="width:10%; height:30px; background: linear-gradient(to right, red,orange,yellow,blue,indigo,violet);  border:0" class="btn btn-default"></button>
+									휴무 변경 신청 (2인)
 								</div>
 								<hr>
 									<ul class="stats-overview">
@@ -266,12 +266,12 @@ $(document).ready(function() {
 	
 	<script>
 	var array = new Array();
-	var dropObject;
+	//var dropObject;
 	var calEventObject;
 	var eventObjecte;
 	function showCalInfo(r_num){
 		array = []; //아무 동작도 처리 하지 않고 눌렀을때 array에 들어있던 값을 비워야한다.
-		alert(r_num);
+		alert('노선번호:'+r_num);
 		$.ajax({
 			url:"gethistorycal.admin",
 			data:{"r_num":r_num},
@@ -279,7 +279,8 @@ $(document).ready(function() {
 			success:function(data){
 				var array1 = new Array();
 				var item;
-				var color = ["green", "black", "red", "purple","orange","yellow","silver","skyblue","gold"];
+				var color = ["black", "red", "purple","orange","yellow","silver","skyblue","gold","indigo"];
+				var index3 = 0;
 				$.each(data.mrmbrdto,function(index,obj){ //정규 휴무 같은 노선
 					$.each(data.mbrdto,function(index1,obj1){ //변경 신청자 reguloff temp ='t'
 					    console.log(obj.m_id + "/" + obj1.m_id + "/" + obj1.m_id_1);
@@ -294,9 +295,10 @@ $(document).ready(function() {
 									title : obj1.m_name,
 									dow : obj1.o_code,
 									afterdow : obj1.o_code_1,
-									color : color[index]
+									color : color[index3]
 							}
 							array.push(item);
+							
 							item = {
 									id : obj1.m_id_1,
 									afterid : obj1.m_id,
@@ -304,9 +306,10 @@ $(document).ready(function() {
 									title : obj1.m_name_1,
 									dow : obj1.o_code_1,
 									afterdow : obj1.o_code,
-									color : color[index]
+									color : color[index3]
 							}
 							array.push(item);
+							index3++;
 							}else{//변경 대상자 = 변경 요청자
 								if(obj1.o_code == obj1.o_code_1){ //변경 대상자 휴무 = 변경 요청자 휴무
 									array1.push(obj1.m_id);
@@ -320,9 +323,9 @@ $(document).ready(function() {
 											downame : obj1.o_date,
 											afterdowname : obj1.o_date_1,
 											afterdow : obj1.o_code_1,
-											color : color[index]
+											color : '#329632'
 									}
-									array.push(item);
+									
 								}else{ //변경 대상자 휴무 != 변경 요청자 휴무
 									array1.push(obj1.m_id);
 									alert('변경 요청자 휴무'+obj1.o_code+'변경 대상자 휴무'+obj1.o_code_1);
@@ -335,9 +338,10 @@ $(document).ready(function() {
 											downame : obj1.o_date,
 											afterdowname : obj1.o_date_1,
 											afterdow : obj1.o_code,
-											color : color[index]
+											color : '#329632'
 									}
 									array.push(item);
+									
 								}
 								
 							}//else
@@ -388,8 +392,13 @@ $(document).ready(function() {
 				editable: true,
 				eventLimit: true, // allow "more" link when too many events
 				events: array,
-				eventDrop : function(event, delta, revertFunc, jsEvent) {
-					alert(event.afterdow);
+				/* eventRender : function(event, element) {
+					
+					console.log("description"+event.title);
+					//console.log("description2"+eventObjecte.title);
+				}, */
+				eventDrop : function(event, delta, revertFunc, jsEvent, ui, view) {
+					//alert(event.afterdow);
 					//변경 요청자 이외에 수정 하는 경우 막기
 					if(event.afterdow == null){
 						alert('변경 요청 데이터만 처리 할 수 있습니다.');
@@ -400,18 +409,16 @@ $(document).ready(function() {
 							alert('변경 요청자의 휴무 변경은 변경 대상자로 해야 합니다.')
 							revertFunc();
 						}else{
-							//revertFunc();
-							eventObjecte=event;
-							$('#calendar').fullCalendar('removeEvents', eventObjecte.id);
 							alert(event.title + "/" + event.aftername);
 							$('#1,#2').empty();
 							$('#1').append(event.title);
-							$('#2').append(event.aftername);
+						 	$('#2').append(event.aftername);
 							$('#m_id').val(event.id);
 							$('#o_code').val(event.dow);
 							$('#m_id_1').val(event.afterid);
 							$('#o_code_1').val(event.afterdow);
 							$('#approvebtw').modal('show');
+							eventObjecte=event;
 						}
 					}
 				},
@@ -443,28 +450,54 @@ $(document).ready(function() {
 	$(function(){
 		$('#approvebtw').modal('hide');
 		$('#approverefusebtw').modal('hide');
-		//일정 승인 처리
+		//일정 승인 처리 (휴무 변경자 =! 휴무 대상자)
+		
 		$('#approvebtn').click(function(){
 			var m_id = $('#m_id').val();
 			var o_code = $('#o_code').val();
 			var m_id_1 = $('#m_id_1').val();
 			var o_code_1 = $('#o_code_1').val();
+			
+			eventObjecte.title='test';
+			eventObjecte.dow[0]=0;
+			
+			/* var eventObject3 = {
+					id : eventObjecte.id,
+					title : 'test',
+					dow : [0],
+				}  */
+			$('#calendar').fullCalendar('removeEvents', eventObjecte.id);
+			
 			$.ajax({
 				url:"updatebtwinfo.admin",
 				type:"post",
 				data:{"m_id":m_id,"o_code":o_code,"m_id_1":m_id_1,"o_code_1":o_code_1},
 				success:function(data){
-					alert('등록성공11');
-					alert('id??'+eventObjecte.id);
-					alert('o_code_1??'+o_code_1);
-					var resultObject = {
-						id : m_id,
-						title : '뭐야',
-						dow : o_code_1
-					};
-					
-					$('#calendar').fullCalendar('renderEvent', resultObject);
+					alert('승인 처리 되었습니다.10');
+					alert('id'+eventObjecte.id);
+					/* var eventObject3 = {
+						id : 'hello',
+						title : 'test',
+						dow : ['0'],
+						
+					} */
+					/* var eventObject3 = {
+							id : 'hello',
+							title : 'test',
+							dow : [0],
+							
+						} */
+					/* var eventObject3 = {
+							id : 'hello',
+							title : 'test',
+							dow : '0',
+							
+						} */
+						
+					//$('#calendar').fullCalendar('refetchEvents');
+					$('#calendar').fullCalendar('renderEvent',eventObjecte);
 					$('#calendar').fullCalendar('unselect');
+					
 				}
 			});
 		});//approvebtn ajax
@@ -481,6 +514,18 @@ $(document).ready(function() {
 				data:{"m_id":m_id,"o_code":o_code,"m_id_1":m_id_1,"o_code_1":o_code_1},
 				success:function(){
 					alert('거절 처리 되었습니다.');
+					 //$('#calendar').fullCalendar('removeEvents');
+					var events = {
+						id : m_id,
+						dow : o_code,
+						title : '처리',
+						backgroundColor:'#SomeColor'
+					};
+		              //$('#calendar').fullCalendar('addEventSource', events);         
+		              //$('#calendar').fullCalendar('rerenderEvents' );
+					/* $('#calendar').fullCalendar('renderEvent', events, true);
+			        $('#calendar').fullCalendar('addEventSource', events);
+			        $('#calendar').fullCalendar('refetchEvents'); */
 				}
 			})	
 		});
@@ -500,9 +545,9 @@ $(document).ready(function() {
 						dow : data.o_code,
 						color : "red"
 					};
-					$('#calendar').fullCalendar('removeEvents', calEventObject.id);
-					$('#calendar').fullCalendar('renderEvent', resultObject);
-					$('#calendar').fullCalendar('unselect');
+					//$('#calendar').fullCalendar('removeEvents', calEventObject.id);
+					//$('#calendar').fullCalendar('renderEvent', resultObject);
+					//$('#calendar').fullCalendar('unselect');
 				}
 			});
 		});
