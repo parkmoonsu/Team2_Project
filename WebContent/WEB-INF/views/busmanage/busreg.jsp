@@ -281,19 +281,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#reg").click(function(){
-				$.ajax({
-					url:"alreadyuse.admin",
-					data : {b_vehiclenum : $("#b_vehiclenum").val().trim()},
-					success : function(data){
-						console.log(data.list[0]);
-						if(data.list[0] == 1){
-							alert("버스번호가 이미 존재합니다.");
-							$("#b_vehiclenum").focus();
-						}else{
-							$("#regform").submit();
-						}
-					}
-				});
+				
 
 				if($("#b_vehiclenum").val() == ''){
 					alert("버스 번호를 입력하세요.");
@@ -327,6 +315,20 @@
 					alert("탑승 가능 인원을 입력하세요.");
 					$("#b_pcount").focus();
 					return false;
+				}else{
+					$.ajax({
+						url:"alreadyuse.admin",
+						data : {b_vehiclenum : $("#b_vehiclenum").val().trim()},
+						success : function(data){
+							console.log(data.list[0]);
+							if(data.list[0] == 1){
+								alert("버스번호가 이미 존재합니다.");
+								$("#b_vehiclenum").focus();
+							}else{
+								$("#regform").submit();
+							}
+						}
+					});
 				}
 			});
 		});
