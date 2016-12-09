@@ -181,14 +181,12 @@ placeholder {
 	</div>
 
 	<c:if test="${param.error != null}">
-		<div>
-			로그인 실패 <br>
-			<script>
-									alert("극혐");
-								</script>
+		<div> 
+			
 			<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
-					                이유 : <c:out
-					value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+				 <font color = "red">
+					 ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+				</font>
 			</c:if>
 		</div>
 	</c:if>
