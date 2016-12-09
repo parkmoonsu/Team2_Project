@@ -220,7 +220,7 @@
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
-						<img src = "${pageContext.request.contextPath}/images/map.PNG" width ="200px" height = "100px">
+						<img src = "${pageContext.request.contextPath}/images/map.PNG" width ="200px" height = "100px" style="margin: 3px">
 						<h2>Map</h2>
 						<p>실시간 버스 위치와 노선, 정류장을 지도로 관리할 수 있습니다. 
 이 지도에 표시 됩니다.</p>
