@@ -17,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import kr.or.bus.dao.BusLocationInfoDAO;
 import kr.or.bus.dao.RouteDAO;
+import kr.or.bus.dto.BusLocationInfoDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RoutePathDTO;
 import net.sf.json.JSON;
@@ -75,6 +77,11 @@ public class RoutePathService {
 				return dao.editRouteRead(r_num);				
 			}
 			
+			//버스 시뮬레이션 과 매칭되는 버스 
+			public List<BusLocationInfoDTO> simulation(String r_num){
+				BusLocationInfoDAO locationdao = sqlsession.getMapper(BusLocationInfoDAO.class);				
+				return locationdao.simulationdata(r_num);				
+			}
 				
 	}
 

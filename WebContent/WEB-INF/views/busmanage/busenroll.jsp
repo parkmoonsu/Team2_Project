@@ -70,6 +70,9 @@
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+
 <style>
 th{
 	text-align: center;
@@ -521,7 +524,16 @@ cursor: pointer;
 				});
 				$.each(data.array,function(index,sd){
 					if(a == index){
-						alert(sd + "는 이미 존재하는 차량 번호입니다.");
+						//alert(sd + "는 이미 존재하는 차량 번호입니다.");
+						swal({
+		                    title: "",
+		                    text: sd + "는 이미 존재하는 차량 번호입니다.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 					}
 				});
 			}
@@ -588,7 +600,16 @@ cursor: pointer;
 						 $('#myModalLabel2').append("삭제 하시겠습니까?");
 
 					}else{
-						alert("비밀번호가 틀렸습니다.");
+						//alert("비밀번호가 틀렸습니다.");
+						swal({
+		                    title: "",
+		                    text: "비밀번호가 틀렸습니다.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 					}
 				}
 			});
@@ -615,7 +636,16 @@ cursor: pointer;
 		
 		$("#ubtn").click(function(){
 			if($("input[name='chklist']:checked").length >= 2){
-				alert("2개 이상을 수정 할 수 없습니다.");
+				//alert("2개 이상을 수정 할 수 없습니다.");
+				swal({
+                    title: "",
+                    text: "2개 이상을 수정 할 수 없습니다.",
+                    type: "info",
+                    closeOnConfirm: true,
+                    showLoaderOnConfirm: true,
+                  },
+                  function(){
+                  });
 			}else{
 				
 				$("#enroll").empty();

@@ -81,7 +81,7 @@ public class JoinService {
 
 				String fname = multipartfile.getOriginalFilename(); // 파일명 얻기
 				System.out.println("한글처리전 파일명"+fname);
-				//fname = new String(fname.getBytes("8859_1"),"EUC-KR");
+				fname = new String(multipartfile.getOriginalFilename().getBytes("8859_1"),"EUC-KR");
 				//fname = new String(fname.getBytes("euc-kr"), "8859_1");
 				//fname = new String(fname.getBytes("ISO8859_1"),"UTF-8");
 				//fname = URLEncoder.encode(fname);

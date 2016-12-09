@@ -51,7 +51,8 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <style type="text/css">
 .element { #map { margin-left:auto;
 	margin-right: auto;
@@ -282,12 +283,35 @@ select#selectBus, #selectRoute, #selectBuscopy {
     function movingBusMarker(data,map){
     	console.log("시뮬레이션 좌표데이터 ? 오냐");
     	console.log(data.editlist);
+    	
     	var i=0;        	
         	BusMarker = new google.maps.Marker({
            		map: map,
            		position:new google.maps.LatLng(data.editlist[0].r_y, data.editlist[0].r_x),
            		icon:"${pageContext.request.contextPath}/images/bus.png"
         	});
+        	
+        	var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
+			if(data.businfolist == null){
+				(function (BusMarker, data, infowindow) {
+	     	        google.maps.event.addListener(BusMarker, "click", function (e) {
+	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">매칭된 기사없음</p>');
+	     	            infowindow.open(map, BusMarker);
+	     	           
+	     	        });
+	     	    })(BusMarker, data.businfolist, infowindow);		
+			}else{
+				(function (BusMarker, data, infowindow) {
+					console.log(data[0].r_num);
+					/* for(var i=0; i<data.length; i++){
+						console.log(data[i].r_num);
+	     	        	google.maps.event.addListener(BusMarker, "click", function (e) {
+	     	            	infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data[i].r_num+ "<br>"+ "<b>차량번호</b>: "+data[i].b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data[i].m_name + "<br>"+'</p>');
+	     	            	infowindow.open(map, BusMarker);	     	           
+	     	        	});
+					} */
+	     	    })(BusMarker, data.businfolist, infowindow);
+			}
         		        	
      	    console.log("너 마커 새로 생성안함??");       		       		       		      		
         	busmoveBus(BusMarker, map, data);       		    		
@@ -336,7 +360,19 @@ select#selectBus, #selectRoute, #selectBuscopy {
     		//var locationX = poly.getPath().getAt(i).lng();
     		//var locationY = poly.getPath().getAt(i).lat();
     			if($("#selectBus").val()=='노선 선택' && $("#selectBuscopy").val() =='수정노선 선택'){    			
-    				alert('노선을 선택하여 주십시오');
+    				//alert('노선을 선택하여 주십시오');
+    				swal({
+						  title: "",
+						  text: "노선을 선택하세요.",
+						  type: "info",
+						  closeOnConfirm: true,
+						  showLoaderOnConfirm: true,
+						},
+						function(){
+						  /* setTimeout(function(){
+						    swal("Ajax request finished!");
+						  }, 2000); */
+						});
     				return false;
     			}else if($("#selectBus").val()=='노선 선택'){
     				var savelocation = {
@@ -354,7 +390,19 @@ select#selectBus, #selectRoute, #selectBuscopy {
         	        }    		
         	    	savelocations.push(savelocation);
     			}else if($("#selectBus").val() !='노선 선택' && $("#selectBuscopy").val() !='수정노선 선택'){
-    				alert('둘중에 하나만 선택가능함');
+    				//alert('둘중에 하나만 선택가능함');
+    				swal({
+						  title: "",
+						  text: "하나만 선택하세요",
+						  type: "info",
+						  closeOnConfirm: true,
+						  showLoaderOnConfirm: true,
+						},
+						function(){
+						  /* setTimeout(function(){
+						    swal("Ajax request finished!");
+						  }, 2000); */
+						});
     				return false;
     			}
     		}
@@ -407,6 +455,7 @@ select#selectBus, #selectRoute, #selectBuscopy {
         
         $("#selectBuscopy").change(function(){
         	//수정된 경로 를 뿌려줌
+        	polyRemove();
         	$.ajax({
                 url : "editpath.admin",
                 type : "get",
@@ -414,6 +463,7 @@ select#selectBus, #selectRoute, #selectBuscopy {
                 data : {r_num:$("#selectBuscopy").val()},
                 success : function(data) {                   	
                 	console.log("노선타입 전송잘되냐?");
+                	console.log(data);
                 	console.log(data.editlist);	
                 	var hell =new Array();
            			for(var j=0;j<data.editlist.length;j++){          				
@@ -427,6 +477,7 @@ select#selectBus, #selectRoute, #selectBuscopy {
         });
         
         $("#busStart").click(function() {
+        	       	
         	busmove = setInterval(function(){
         		$.ajax({
                     url : "editpath.admin",
