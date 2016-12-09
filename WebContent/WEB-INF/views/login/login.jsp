@@ -184,33 +184,18 @@ placeholder {
 	</div>
 
 	<c:if test="${param.error != null}">
+
 		<div>
 			로그인 실패 <br>
 			<script>
-				//alert("극혐");
-				swal({
-				  title: "로그인실패",
-				  text: "You will not be able to recover this imaginary file!",
-				  type: "warning",
-				  showCancelButton: true,
-				  confirmButtonColor: "#DD6B55",
-				  confirmButtonText: "Yes, delete it!",
-				  //cancelButtonText: "No, cancel plx!",
-				  closeOnConfirm: false,
-				  //closeOnCancel: false
-				},
-				function(isConfirm){
-					if (isConfirm) {
-						swal("Deleted!", "Your imaginary file has been deleted.", "success");
-					} else {
-						swal("Cancelled", "Your imaginary file is safe :)", "error");
-				    }
-				});
+				alert("극혐");
 				
 			</script>
-			<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
-					                이유 : <c:out
-					value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+</div>
+		<div> <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+				 <font color = "red">
+					 ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+				</font>
 			</c:if>
 		</div>
 	</c:if>

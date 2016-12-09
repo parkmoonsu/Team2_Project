@@ -59,7 +59,7 @@
 }
 
 }
-select#selectBus, select#selectBus2 {
+select#selectBus, #selectRoute, #selectBuscopy {
 
 	-webkit-appearance: button;
 	-webkit-border-radius: 2px;
@@ -118,7 +118,6 @@ select#selectBus, select#selectBus2 {
 					</h3>
 				</div>
 
-
 			</div>
 			<div class="x_panel">
           <div class="row" style="text-align: right">
@@ -132,10 +131,19 @@ select#selectBus, select#selectBus2 {
 				</select>
 												
 				<select id="selectBus">
-					<option>노선을 선택하세요</option>									
+					<option>노선 선택</option>									
 				</select>
+				
+				<select id="selectBuscopy">
+					<option>수정노선 선택</option>									
+				</select>
+				
 				<div>
-				 <button id="newsave">저장하기</button>
+				 <button id="newsave" class="btn">저장하기</button>
+				</div>
+				
+				<div>
+				 <button id="busStart" class="btn">시뮬레이션 시작</button>
 				</div>
 							
      			<div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;"></div>
@@ -200,6 +208,7 @@ select#selectBus, select#selectBus2 {
     <!-- Custom Theme Scripts -->
     <script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
     <script type="text/javascript">
+
 	
   //구글 지도 전역변수
     var map;
@@ -211,7 +220,8 @@ select#selectBus, select#selectBus2 {
     var originalMarkers = new Array();
    
    	var poly;
-
+	
+   	var BusMarker;
 
     //현 기본 좌표 : 판교역
     var myLatLng = {
@@ -230,8 +240,7 @@ select#selectBus, select#selectBus2 {
        	var trafficLayer = new google.maps.TrafficLayer();
        	trafficLayer.setMap(map);
        
-	   	poly = new google.maps.Polyline({ 
-	   	    editable: true,
+	   	poly = new google.maps.Polyline({ 	   	  
 		    strokeOpacity: 1.0,
 		    strokeWeight: 2,
 	  	});
@@ -241,14 +250,13 @@ select#selectBus, select#selectBus2 {
     function polyRemove(){
 		if(poly !=null){
 			poly.setMap(null);
-
 		}
     }
     
     
     function loadVector(data){
      	console.log("옴?");
-     	console.log(data);
+     	//console.log(data);
      	poly = new google.maps.Polyline({
      		editable: true,
      		path: data,
@@ -258,6 +266,44 @@ select#selectBus, select#selectBus2 {
        	});
      	poly.setMap(map);
     }
+    
+    function loadVector2(data){
+     	console.log("옴?");
+     	//console.log(data);
+     	poly = new google.maps.Polyline({     		
+     		path: data,
+     	    strokeColor: 'red',
+     	    strokeOpacity: 1.0,
+     	    strokeWeight: 2,
+       	});
+     	poly.setMap(map);
+    }
+    
+    function movingBusMarker(data,map){
+    	console.log("시뮬레이션 좌표데이터 ? 오냐");
+    	console.log(data.editlist);
+    	var i=0;        	
+        	BusMarker = new google.maps.Marker({
+           		map: map,
+           		position:new google.maps.LatLng(data.editlist[0].r_y, data.editlist[0].r_x),
+           		icon:"${pageContext.request.contextPath}/images/bus.png"
+        	});
+        		        	
+     	    console.log("너 마커 새로 생성안함??");       		       		       		      		
+        	busmoveBus(BusMarker, map, data);       		    		
+    }
+    
+    function busmoveBus(BusMarker, map, data) {
+    	var i=0;
+    	copystopSearch = setInterval(function(){
+    		if(i == data.editlist.length){
+    			return false;
+    		}else{    			
+    			BusMarker.setPosition(new google.maps.LatLng(data.editlist[i].r_y, data.editlist[i].r_x));
+    		}
+    		i++;
+    	},1000); 	
+    };
 
     $(function() {
     	
@@ -272,39 +318,52 @@ select#selectBus, select#selectBus2 {
                    	data : {r_num:$("#selectBus").val()},
                    	success : function(data) {
                     	console.log("읽어옴?");
-                   			console.log(data.list.length);                          	
+                   			console.log(data.list.length);
+                   			var datalist = data.list.length;
                    			var hell =new Array();
-                   			for(var j=0;j<data.list.length;j++){
-                   				var f=parseFloat(data.list[j].r_y);
-                       			var d=parseFloat(data.list[j].r_x);
-           		      			hell.push(new google.maps.LatLng(f,d));
-           		      			console.log(f);
-           		      			console.log(d);
+                   			for(var j=0;j<datalist;j++){                   				
+           		      			hell.push(new google.maps.LatLng(parseFloat(data.list[j].r_y), parseFloat(data.list[j].r_x)));          		      			         		      			
                    			}    							
-                        	loadVector(hell); 
+                        	loadVector2(hell); 
                 	}	
            		});
         	}
     	});    	   		    	          
 
     	$("#newsave").click(function() {
-    		for(var i=0;i<poly.getPath().length;i++){
-    		var locationX = poly.getPath().getAt(i).lng();
-    		var locationY = poly.getPath().getAt(i).lat();
-    		
-    		var savelocation = {
-    		        r_x : locationX,
-    	            r_y : locationY,
-    	            r_num:$("#selectBus").val(), 
-    	        }
     		var savelocations =new Array();
-    	     savelocations.push(savelocation);
+    		for(var i=0;i<poly.getPath().length;i++){
+    		//var locationX = poly.getPath().getAt(i).lng();
+    		//var locationY = poly.getPath().getAt(i).lat();
+    			if($("#selectBus").val()=='노선 선택' && $("#selectBuscopy").val() =='수정노선 선택'){    			
+    				alert('노선을 선택하여 주십시오');
+    				return false;
+    			}else if($("#selectBus").val()=='노선 선택'){
+    				var savelocation = {
+        		        r_x : poly.getPath().getAt(i).lng(),
+        	            r_y : poly.getPath().getAt(i).lat(),
+        	            r_num:$("#selectBuscopy").val(), 
+        	        }    		
+        	    	savelocations.push(savelocation);
+
+    			}else if($("#selectBuscopy").val() =='수정노선 선택'){
+    				var savelocation = {
+        		        r_x : poly.getPath().getAt(i).lng(),
+        	            r_y : poly.getPath().getAt(i).lat(),
+        	            r_num:$("#selectBus").val(), 
+        	        }    		
+        	    	savelocations.push(savelocation);
+    			}else if($("#selectBus").val() !='노선 선택' && $("#selectBuscopy").val() !='수정노선 선택'){
+    				alert('둘중에 하나만 선택가능함');
+    				return false;
+    			}
     		}
     	    $.ajax({	
     	         url : "insertpath.admin",
-    	         type : "get",                          
+    	         type : "get",
+    	         dataType : "json",
     	         data : {
-    	             data : savelocations
+    	             data : JSON.stringify(savelocations)
     	         },
     	         success : function(data) {
     	             console.log("저장잘됨?");
@@ -314,6 +373,7 @@ select#selectBus, select#selectBus2 {
     	         }
     	     });
     	 }); 
+    	
         $("#selectRoute").change(function(){
         	$.ajax({
                 url : "RouteTypeEdit.admin",
@@ -325,21 +385,62 @@ select#selectBus, select#selectBus2 {
                 	//console.log(data.nlist);
 					if(data.list != null){
 						$("#selectBus").empty();
-						$("#selectBus").append("<option>노선을 선택하세요</option>");
+						$("#selectBus").append("<option>노선 선택</option>");
+						$("#selectBuscopy").empty();
+						$("#selectBuscopy").append("<option>수정노선 선택</option>");
                 		for(var i=0; i<data.list.length; i++){
                 			console.log("여긴가..")
                 			console.log(data.list[i].r_num);                			                			
-                			$("#selectBus").append("<option>"+data.list[i].r_num+"</option>");                			                			              			
-                		}                	                		
+                			$("#selectBus").append("<option>"+data.list[i].r_num+"</option>");
+                			$("#selectBuscopy").append("<option>"+data.list[i].r_num+"</option>");
+                		}
                 	}else{
                 		console.log("???????");
                 		$("#selectBus").empty();
-						$("#selectBus").append("<option>노선을 선택하세요</option>");               		
+						$("#selectBus").append("<option>노선 선택</option>");
+						$("#selectBuscopy").empty();
+						$("#selectBuscopy").append("<option>수정노선 선택</option>");
                 	}
                 }
         	});
         });
         
+        $("#selectBuscopy").change(function(){
+        	//수정된 경로 를 뿌려줌
+        	$.ajax({
+                url : "editpath.admin",
+                type : "get",
+                dataType : "json",
+                data : {r_num:$("#selectBuscopy").val()},
+                success : function(data) {                   	
+                	console.log("노선타입 전송잘되냐?");
+                	console.log(data.editlist);	
+                	var hell =new Array();
+           			for(var j=0;j<data.editlist.length;j++){          				
+   		      			hell.push(new google.maps.LatLng(parseFloat(data.editlist[j].r_y), parseFloat(data.editlist[j].r_x)));  		      			
+           			}    							
+                	loadVector(hell);
+                }
+        	});
+        	
+        	//수정된 버스정류장을 뿌려줌
+        });
+        
+        $("#busStart").click(function() {
+        	busmove = setInterval(function(){
+        		$.ajax({
+                    url : "editpath.admin",
+                    type : "get",
+                    dataType : "json",
+                    data : {r_num:$("#selectBuscopy").val()},
+                    success : function(data) {
+                    	console.log("시뮬레이션 시작");
+                    	console.log(data);
+                    	movingBusMarker(data,map);
+                    }
+                });
+        	},20000);
+        });
         
         
     });//ready 함수 끝
