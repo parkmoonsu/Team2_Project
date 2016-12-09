@@ -8,4 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from bus, member 
 		where bus.B_VEHICLENUM = member.B_VEHICLENUM and bus.B_VEHICLENUM = #{b_vehiclenum}
 	</select>
+	
+	<select id="simulationdata" parameterType="String" resultType="kr.or.bus.dto.BusLocationInfoDTO">
+		select member.M_NAME, bus.R_NUM, bus.B_VEHICLENUM
+		from bus, member 
+		where bus.B_VEHICLENUM = member.B_VEHICLENUM and bus.R_NUM = #{r_num}
+	</select>
 </mapper>
