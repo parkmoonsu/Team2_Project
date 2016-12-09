@@ -117,8 +117,6 @@ select#selectBus, select#selectBus2 {
 						<small>실시간 버스정보</small>
 					</h3>
 				</div>
-
-<<<<<<< HEAD
 			</div>
 			<div class="x_panel">
           <div class="row" style="text-align: right">
@@ -154,11 +152,6 @@ select#selectBus, select#selectBus2 {
         	<footer>
 				<jsp:include page="/sidebar/footer.jsp"></jsp:include>
 				<div class="clearfix"></div>
-=======
-			<!-- footer content -->
-			<footer>
-				<jsp:include page="/sidebar/footer.jsp" />
->>>>>>> 7b929e99e06ba8d25369de65a159b9dab4173ee8
 			</footer>
         	<!-- /footer content -->
         </div>
