@@ -418,18 +418,18 @@ if($("#selectBus2").val() !=null){
  function makeMarker(){
 	 
   marker.addListener('click', function() {
-	  /* var marker = new google.maps.Marker({
+	   var marker = new google.maps.Marker({
 		    position: myLatlng,
 		    map: map,
 		    title: 'Click to zoom'
-	}); */
+	}); 
 	  
 	  
 	  
     /* map.setZoom(8);
     map.setCenter(marker.getPosition()); */
+ });
  }
-  });
  //추가
  
  

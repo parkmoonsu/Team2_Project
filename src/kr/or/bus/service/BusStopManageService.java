@@ -744,37 +744,50 @@ public class BusStopManageService {
 		PrintWriter out=null;
 		response.setCharacterEncoding("UTF-8");		
 		out = response.getWriter();		
-		JSONArray jsonmaps = null;		
+		JSONArray jsonmaps = null;
+		JSONArray jsonlist1 = null;
+		JSONArray jsonlist2 = null;
+		JSONArray jsonlist3 = null;
+		JSONArray jsonlist4 = null;		
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
 		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
 
-		if(r_num.equals("전체검색")){
-			List<BusStopDTO> busstoplist = new ArrayList<>();
+		if(r_num.equals("전체검색")){			
+			//List<BusStopDTO> busstoplist = new ArrayList<>();
 			//busStopRoadAllSearch("5623", dto, busstopdto, request, response);
-			busstoplist.addAll(0, busStopRoadAllSearch("5623", dto, busstopdto, request, response));
+			//busstoplist.addAll(0, busStopRoadAllSearch("5623", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("5624", dto, busstopdto, request, response);
-			busstoplist.addAll(1, busStopRoadAllSearch("5624", dto, busstopdto, request, response));
+			//busstoplist.addAll(1, busStopRoadAllSearch("5624", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("3030안양", dto, busstopdto, request, response);
-			busstoplist.addAll(2, busStopRoadAllSearch("3030안양", dto, busstopdto, request, response));
+			//busstoplist.addAll(2, busStopRoadAllSearch("3030안양", dto, busstopdto, request, response));
 			//busStopRoadAllSearch("5531", dto, busstopdto, request, response);
-			busstoplist.addAll(3, busStopRoadAllSearch("5531", dto, busstopdto, request, response));
-			jsonmaps = JSONArray.fromObject(busstoplist);			
+			//busstoplist.addAll(3, busStopRoadAllSearch("5531", dto, busstopdto, request, response));
+			//jsonmaps = JSONArray.fromObject(busstoplist);			
 			
-			out.print(jsonmaps);
+			jsonlist1 = busStopRoadAllSearch("5623", dto, busstopdto, request, response);
+			jsonlist2 = busStopRoadAllSearch("5624", dto, busstopdto, request, response);
+			jsonlist3 = busStopRoadAllSearch("3030안양", dto, busstopdto, request, response);
+			jsonlist4 = busStopRoadAllSearch("5531", dto, busstopdto, request, response);
+			
+			ArrayList<JSONArray> jsonlist = new ArrayList<JSONArray>();
+			jsonlist.add(jsonlist1);
+			jsonlist.add(jsonlist2);
+			jsonlist.add(jsonlist3);
+			jsonlist.add(jsonlist4);
+			
+			out.print(jsonlist);
 			
 		}else if(!r_num.equals("전체검색")){
 			dto = dao.routeidSearch(r_num);
-			System.out.println(dto.getR_id());
-						
-			List<BusStopDTO> busstoplist =  busstopdao.makeBusStop(dto.getR_id());
-			
-			jsonmaps = JSONArray.fromObject(busstoplist);
-			out.print(jsonmaps);
+			jsonmaps =  busstopdao.makeBusStop(dto.getR_id());
+			ArrayList<JSONArray> jsonlist = new ArrayList<JSONArray>();
+			jsonlist.add(jsonmaps);
+			out.print(jsonlist);
 		}
 	}
 	
 	//버스 정류장 전체 조회
-	public List<BusStopDTO> busStopRoadAllSearch(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{						
+	public JSONArray busStopRoadAllSearch(String r_num,RouteDTO dto, BusStopDTO busstopdto, HttpServletRequest request, HttpServletResponse response) throws IOException{						
 		System.out.println(r_num);	
 		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);		
 		
@@ -783,12 +796,9 @@ public class BusStopManageService {
 		dto = dao.routeidSearch(r_num);
 		System.out.println(dto.getR_id());
 		
-		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
-		
-		List<BusStopDTO> busstoplist =  busstopdao.makeBusStop(dto.getR_id());
-		
-		System.out.println(busstoplist);
-		return busstoplist;
+		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);				
+			
+		return busstopdao.makeBusStop(dto.getR_id());
 	}
 	
 	//공공데이터에서 받아온 정류장 정보들을 디비에 저장하는 함수
@@ -969,6 +979,12 @@ public class BusStopManageService {
 	public List<RouteTypeDTO> routetypeNumber(String r_type){
 		RouteDAO routedao = sqlsession.getMapper(RouteDAO.class);
 		List<RouteTypeDTO> nlist =routedao.searchRouteNumber(r_type);
+		return nlist;		
+	}
+	
+	public List<RouteTypeDTO> routeEdit(String name){
+		RouteDAO routedao = sqlsession.getMapper(RouteDAO.class);
+		List<RouteTypeDTO> nlist =routedao.routeEdit(name);
 		return nlist;		
 	}
 	
