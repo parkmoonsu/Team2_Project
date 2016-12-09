@@ -279,7 +279,7 @@ $(document).ready(function() {
       //alert('노선번호:'+r_num);
       swal({
             title: "",
-            text: "sht:"+r_num,
+            text: "노선 번호:"+r_num+" 휴무 관리로 이동합니다.",
             type: "info",
             closeOnConfirm: true,
             showLoaderOnConfirm: true,

@@ -61,7 +61,6 @@ public class JoinController {
 	
 	@RequestMapping(value="/join3.htm",method=RequestMethod.POST)
 	public String join3(MDetailDTO ddto , MemberDTO mdto , ResRecordDTO rdto , HttpServletRequest request) throws IOException, BiffException{
-		
 		service.join3(ddto, mdto, request);
 		return "join/join3";
 	}
