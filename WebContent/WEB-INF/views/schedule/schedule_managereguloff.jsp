@@ -189,11 +189,11 @@ select#selectedgaragename, select#selectedroutenumber {
 								<div class="x_content">
 								<div style="text-align: center">
 									<button style="width:100px; height:30px; background-color: #46AAEB; border:0" class="btn btn-default"></button>
-									변경 신청이 없는 데이터&nbsp;&nbsp;&nbsp;
+									휴무 변경 신청 없음&nbsp;&nbsp;&nbsp;
 									<button style="width:100px; height:30px; background-color: #329632; border:0" class="btn btn-default"></button>
-									변경 신청이 있는 데이터 (1인 신청)&nbsp;&nbsp;&nbsp;
+									휴무 변경 신청 (1인)&nbsp;&nbsp;&nbsp;
 									<button style="width:100px; height:30px; background-color: #FFB432; border:0" class="btn btn-default"></button>
-									변경 신청이 있는 데이터 (2인 신청)
+									휴무 변경 신청 (2인)
 								</div>
 								<hr>
 									<div id='wrap'>
@@ -274,7 +274,7 @@ select#selectedgaragename, select#selectedroutenumber {
 								afterid : obj.m_id_1,
 								dow : obj.o_code,
 								afterdow : obj.o_code_1, //어차피 o_code = o_code_1
-								color : "red"
+								color : "#329632"
 								}
 							array.push(item);
 							}else{ //변경 요청 == 변경 대상 and 요청자 휴무 != 대상자 휴무
@@ -285,7 +285,7 @@ select#selectedgaragename, select#selectedroutenumber {
 								afterid : obj.m_id_1,
 								dow : obj.o_code,
 								afterdow : obj.o_code_1, // o_code != o_code_1
-								color : "red"//red로 바꿔야함
+								color : "#329632"//red로 바꿔야함
 								}
 							array.push(item);
 							}//else 끝
@@ -297,7 +297,7 @@ select#selectedgaragename, select#selectedroutenumber {
 							afterid : obj.m_id_1,
 							dow : obj.o_code,
 							afterdow : obj.o_code_1, // o_code != o_code_1
-							color : "purple"
+							color : "#FFB432"
 							}
 							array.push(item);
 					        item = {
@@ -307,7 +307,7 @@ select#selectedgaragename, select#selectedroutenumber {
 									afterid : obj.m_id,
 									dow : obj.o_code_1,
 									afterdow : obj.o_code, // o_code != o_code_1
-									color : "purple"
+									color : "#FFB432"
 									}
 					        array.push(item);
 						}//else
@@ -329,10 +329,11 @@ select#selectedgaragename, select#selectedroutenumber {
 						right : 'month,agendaWeek,agendaDay'
 					},
 					editable : true,
-					eventDrop : function(event,dayDelta,minuteDelta,allDay,revertFunc){
-						if(event.color=="red" || event.color=="purple"){
+					eventDrop : function(event, delta, revertFunc, jsEvent, ui, view){
+						if(event.color=="#329632" || event.color=="#FFB432"){
 							alert(event.title + '님은 현재 휴무 변경 승인 대기 중입니다.');
 							revertFunc();
+							$('#calendar').fullCalendar('unselect');
 						}else{
 						var item = {
 								m_id : event.id,
@@ -343,7 +344,6 @@ select#selectedgaragename, select#selectedroutenumber {
 							url:"modifyingschedule.admin",
 							data: item,
 							success:function(data){
-								
 								var eventObjectr = {
 									id : data.m_id,
 									title : data.m_name,
@@ -384,7 +384,6 @@ select#selectedgaragename, select#selectedroutenumber {
 								"o_date":o_date
 							},
 							success : function(data){
-								
 								var eventObject2={
 									id:eventObject.id,
 									title:eventObject.title,
@@ -394,6 +393,7 @@ select#selectedgaragename, select#selectedroutenumber {
 								$('#calendar').fullCalendar('renderEvent', eventObject2);
 								$('#calendar').fullCalendar('unselect');
 								$(dragitem).remove();
+								alert(event.title+' 님의 일정을 설정하였습니다.');
 							}
 						});
 						

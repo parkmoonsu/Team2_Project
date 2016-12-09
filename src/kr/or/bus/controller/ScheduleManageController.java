@@ -230,7 +230,7 @@ public class ScheduleManageController {
 	@RequestMapping("/updatebtwinfore.admin")
 	public View updatebtwinfore(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
 		System.out.println("updatebtwinfore.admin");
-		service.updatebtwinforefuse(m_id, o_code, m_id_1, o_code_1, model);
+		//service.updatebtwinforefuse(m_id, o_code, m_id_1, o_code_1, model);
 		return jsonview;
 	}
 }

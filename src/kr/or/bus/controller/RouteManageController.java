@@ -44,7 +44,7 @@ public class RouteManageController {
 	}
 	//정류장 번호 자동 생성 함수
 		@RequestMapping(value="/getrandomsnum.admin",method=RequestMethod.POST)
-		public View getRandomSnum(String r_num,Model model){
+		public View getRandomSnum(Model model){
 			int result;
 			String s_num;
 			//List<RouteStopDTO> rslist = routeManageSerivce.getRsOrderFromRs(r_num);
