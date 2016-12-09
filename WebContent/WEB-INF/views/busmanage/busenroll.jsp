@@ -570,6 +570,8 @@ cursor: pointer;
 				success : function(data){
 					console.log(data.data);
 					if(data.data == 'true'){
+						
+						$("#m_pw").val("");
 						$("#match-pass").modal("hide");
 						$("#myModal").modal("show");
 						 $("#myModalLabel2").empty();
