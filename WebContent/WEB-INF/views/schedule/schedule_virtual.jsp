@@ -169,7 +169,7 @@ select#selectedrnum {
                   <div class="col-md-12">
                      <div class="x_panel">
                         <div class="x_title">
-                           <h2>
+                          
                               <select id="selectedrnum">
                                  <option value="0">노선선택</option>
                                  <c:forEach var="rlist" items="${routelist}">
@@ -178,7 +178,7 @@ select#selectedrnum {
                               </select>
                               <!--  <small>Sessions</small> -->
 
-                           </h2>
+                          
                            <ul class="nav navbar-right panel_toolbox">
                               <li><a class="collapse-link"><i
                                     class="fa fa-chevron-up"></i></a></li>

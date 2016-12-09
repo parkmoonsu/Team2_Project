@@ -95,7 +95,7 @@
 											</li>
 											<li><c:choose>
 													<c:when test="${dto.m_gender == 'male'}">
-														<i class="fa fa-male user-profile-icon"></i>&nbsp;남성
+													&nbsp;<i class="fa fa-male user-profile-icon"></i>&nbsp;&nbsp;남성
 								</c:when>
 													<c:otherwise>
 														<i class="fa fa-female user-profile-icon"></i>&nbsp;&nbsp;&nbsp;여성
@@ -108,16 +108,16 @@
 											</li>
 											<li><i class="fa fa-birthday-cake user-profile-icon"></i>&nbsp;&nbsp;${dto.m_birth}
 											</li>
-											<li><i class="fa fa-map-marker user-profile-icon"></i>&nbsp;&nbsp;&nbsp;&nbsp;${dto.m_addr}
+											<li>&nbsp;<i class="fa fa-map-marker user-profile-icon"></i>&nbsp;&nbsp;&nbsp;${dto.m_addr}
 												&nbsp;${dto.m_daddr}
 											</li>
 											
 										</ul>
 
-										<a class="btn btn-success" id="pass"
+										<a class="btn btn-success btn-xs" id="pass"
 											style="margin-top: 10px; border: 0"><i
-											class="fa fa-edit m-right-xs"></i>&nbsp;정보수정</a> <a
-											class="btn btn-success" id="watch"
+											class="fa fa-edit m-right-xs"></i>&nbsp;정보수정</a>&nbsp;&nbsp;<a
+											class="btn btn-success btn-xs" id="watch"
 											style="margin-top: 10px; background: #286090; border: 0"><i
 											class="fa fa-book m_right-xs"></i>&nbsp;이력보기</a> <br />
 
