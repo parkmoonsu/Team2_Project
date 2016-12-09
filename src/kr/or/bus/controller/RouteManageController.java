@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
+import kr.or.bus.dto.BusLocationInfoDTO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RoutePathDTO;
 import kr.or.bus.dto.RouteStopJoinStopDTO;
@@ -175,7 +176,10 @@ public class RouteManageController {
         @RequestMapping(value="/editpath.admin",method=RequestMethod.GET)
         public View selectEditpath(String r_num, Model model){
         	List<RoutePathDTO> editlist = routepathservice.selectEditPath(r_num);
+        	List<BusLocationInfoDTO> businfolist = routepathservice.simulation(r_num);
+        	
         	model.addAttribute("editlist", editlist);
+        	model.addAttribute("businfolist", businfolist);
 			return jsonview;       	
         }
 		
