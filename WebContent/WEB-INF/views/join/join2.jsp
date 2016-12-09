@@ -227,10 +227,6 @@
 label {
 	font-size: 12px;
 }
-
-.form-group {
-	height: 35px;
-}
 </style>
 </head>
 <script type="text/javascript"
