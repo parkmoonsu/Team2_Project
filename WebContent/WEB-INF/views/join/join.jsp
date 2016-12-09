@@ -54,12 +54,12 @@
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
-
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <style>
 .my-box{
 	color: black;
 }
-
 </style>
 
 
@@ -435,7 +435,16 @@
 				$("#emailbtn").click(function() {
 					if(regExp.test($("#m_email").val().trim())){
 						
-						alert("Email 전송 완료");
+						//alert("Email 전송 완료");
+						swal({
+                    title: "",
+                    text: "Email 전송 완료",
+                    type: "info",
+                    closeOnConfirm: true,
+                    showLoaderOnConfirm: true,
+                  },
+                  function(){
+                  });
 						$("#email-modal").modal();
 						$.ajax({
 							url : "popup.htm",
@@ -444,7 +453,16 @@
 						});
 						
 					}else{
-						alert("Email 형식이 잘못 되었습니다.");
+						//alert("Email 형식이 잘못 되었습니다.");
+						swal({
+		                    title: "",
+		                    text: "Email 형식이 잘못 되었습니다.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 					}
 					
 				});	

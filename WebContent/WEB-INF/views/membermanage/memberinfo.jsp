@@ -494,20 +494,6 @@ ul.pagination li a {
 
 						} else {
 							//alert("비밀번호가 틀렸습니다.");
-							/* swal({
-								 // title: "Ajax request example",
-								  text: "비밀번호가 틀렸습니다.",
-								  type: "info",
-								  showCancelButton: true,
-								  showCancelButtonText : "확인",
-								  closeOnConfirm: false,
-								  showLoaderOnConfirm: true,
-								},
-								function(){
-								  setTimeout(function(){
-								    swal("Ajax request finished!");
-								  }, 2000);
-								}); */
 						swal({
 							  title: "",
 							  text: "비밀번호가 틀렸습니다.",
@@ -516,9 +502,6 @@ ul.pagination li a {
 							  showLoaderOnConfirm: true,
 							},
 							function(){
-							  /* setTimeout(function(){
-							    swal("Ajax request finished!");
-							  }, 2000); */
 							});
 							}
 					}
