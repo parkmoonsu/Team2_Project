@@ -62,10 +62,10 @@
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i>운영 관리<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
+                    <ul class="nav child_menu"> 
                       <li><a href="busenroll.admin">버스 & 기사 배정</a></li>
                       <li><a href="changehistory.admin">휴무 변경 & 이력 확인</a></li>
-                      <li><a href="gettimetable.admin">운행 스케줄 확인</a></li>
+                     <!--  <li><a href="gettimetable.admin">운행 스케줄 확인</a></li> -->
                       <li><a href="getvirtualschedule.admin">예상 스케줄 확인</a></li>
                     </ul>
                   </li>

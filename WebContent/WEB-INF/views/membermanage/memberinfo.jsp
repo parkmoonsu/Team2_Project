@@ -184,7 +184,7 @@ ul.pagination li a {
 											<ul class="nav navbar-nav">
 												<li><a href="membermanage.admin"><strong>회원정보</strong></a></li>
 												<li><a href="joinapprove.admin">회원가입승인</a></li>
-												<li><a href="#">스케줄관리</a></li>
+												
 											</ul>
 										</div>
 									</nav>
@@ -674,6 +674,7 @@ ul.pagination li a {
 		}  */
 		
 	 	function deleteMember(m_id,m_name) {
+			$("#m_pw").val("");
 			console.log("m_id" + m_id);
 			console.log("m_name" + m_name);
 			$("#match-pass").modal("show");

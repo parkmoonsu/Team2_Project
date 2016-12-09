@@ -518,13 +518,11 @@ select#selectedrnum {
        				$("#calendar").fullCalendar('refetchEvents');
        				$("#calendar").fullCalendar('unselect');
        			}
-       			if(true){
-       				console.log("###" + array.length);
-       				for(var i = 0 ; i < array[0].length ; i++){
-       					
-						console.log(i);
+       			for(var i = 0 ; i < array.length ; i++){
+       				if(event.dow == 0){
+       					console.log("####" + i);
        				}
-       			} 
+       			}
             }
 
       
