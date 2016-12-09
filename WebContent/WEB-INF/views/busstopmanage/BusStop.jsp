@@ -346,6 +346,7 @@ select#selectBus, select#selectBus2 {
 				</div>
 			</div>
 		</div>
+	</div>
 
 		<!-- Bootstrap -->
 		<script
@@ -1261,11 +1262,7 @@ select#selectBus, select#selectBus2 {
       		}
   		}); 
     });
-    
-      
-   		 
-    
-   
+       
    </script>
 		<!-- 구글 맵 인증키 -->
 		<script async defer
