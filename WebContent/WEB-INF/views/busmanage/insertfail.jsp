@@ -5,10 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 </head>
 <body>
 	<script type="text/javascript">
-		alert("등록 실패 - 입력 값이 잘못되었습니다.");
+		swal("등록 실패 - 입력 값이 잘못되었습니다.");
 		location.href = "busreg.admin";
 	</script>
 </body>
