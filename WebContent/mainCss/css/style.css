@@ -215,24 +215,24 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   }
   #fh5co-header .navbar-brand {
-    color: #1E3269 !important;
+    color: #46BD7B !important;
   }
   #fh5co-header #navbar li a {
-    color: #1E3269 !important;
+    color: #46BD7B !important;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
   }
   #fh5co-header #navbar li a:hover {
-    color: #1E3269 !important;
+    color: #46BD7B !important;
   }
   #fh5co-header #navbar li a span:before {
-    background: #1E3269 !important;
+    background: #46BD7B !important;
   }
   #fh5co-header #navbar li.active a {
     background: transparent;
     background: none;
-    color: #1E3269 !important;
+    color: #46BD7B !important;
   }
   #fh5co-header #navbar li.active a span:before {
     visibility: visible;

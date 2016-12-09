@@ -242,7 +242,7 @@ ul.pagination li a {
 										</tbody>
 									</table>
 									</div>
-									<!-- end project list -->
+									<!-- end project list --
 
 									<!-- 요기서부터 페이징처리 -->
 									<c:set var="mc" value="${membercount}" />

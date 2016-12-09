@@ -102,7 +102,7 @@
                    i+="</tr>";
                    
                 });   
-                $('#modalbody').append(i);
+                $('#modalbody').html(i);
                 $('#repairmodal').modal('show');
              }
 

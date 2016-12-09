@@ -183,7 +183,7 @@
 	</header>
 
 <!-- 	<style="background-image: url(images/background2.jpg);"> -->
-	<section id="fh5co-home" data-section="home"data-stellar-background-ratio="0.5"style="background-image: url(images/background2.jpg);">
+	<section id="fh5co-home" data-section="home"data-stellar-backgmacubround-ratio="0.5"style="background-image: url(images/background2.jpg);">
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">
@@ -247,7 +247,7 @@
 		<!-- <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a> -->
 		<div class="container">
 			<div class="">
-				<div class="col-md-12 text-center">
+				<div class"col-md-12 text-center">
 					<p>씨바아아아앙아아아알 혀어어어어어어어ㅓ업ㅓ사아아아아앙아아아앙</p>
 					
 				</div>
