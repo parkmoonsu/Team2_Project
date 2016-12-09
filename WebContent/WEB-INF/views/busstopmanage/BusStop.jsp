@@ -523,7 +523,7 @@ select#selectBus, select#selectBus2 {
 				  /* setTimeout(function(){
 				    swal("Ajax request finished!");
 				  }, 2000); */
-				});
+			});
 		}
 		
 		$('#shy').click(function(){

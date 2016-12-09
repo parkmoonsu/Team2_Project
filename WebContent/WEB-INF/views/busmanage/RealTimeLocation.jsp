@@ -14,7 +14,8 @@
 
 
     <script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
     <title>노선관리</title>
 
     <!-- Bootstrap -->
@@ -1089,7 +1090,19 @@
         $("#SearchStop").click(function() {
         	clearInterval(stopSearch);
         	console.log("너되냐");
-        	alert("위치추적이 중지되었습니다.페이지가 새로고침 됩니다.");
+        	//alert("위치추적이 중지되었습니다.페이지가 새로고침 됩니다.");
+        	swal({
+				  title: "",
+				  text: "위치추적이 중지되었습니다.페이지가 새로고침 됩니다.",
+				  type: "info",
+				  closeOnConfirm: true,
+				  showLoaderOnConfirm: true,
+				},
+				function(){
+				  /* setTimeout(function(){
+				    swal("Ajax request finished!");
+				  }, 2000); */
+				});
         	history.go(0);
         });
                

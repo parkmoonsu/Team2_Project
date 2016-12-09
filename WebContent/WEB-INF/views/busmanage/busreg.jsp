@@ -288,35 +288,120 @@
 
 				if($("#b_vehiclenum").val() == ''){
 					$("#b_vehiclenum").focus();
-					swal("버스 번호를 입력하세요.");
+					//swal("버스 번호를 입력하세요.");
+					swal({
+	                    title: "",
+	                    text: "버스 번호를 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    /* setTimeout(function(){
+	                      swal("Ajax request finished!");
+	                    }, 2000); */
+	                  });
+					
 					return false;
 				}else if($("#b_sdate").val() == ''){
 					$("#b_sdate").focus();
-					swal("구입 시기를 입력하세요.");
+					
+					swal({
+	                    title: "",
+	                    text: "구입 시기를 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
+					
 					return false;
 				}else if($("#b_sprice").val() == ''){
 					$("#b_sprice").focus();
-					swal("구매 가격을 입력하세요.");
+					swal({
+	                    title: "",
+	                    text: "구매 가격을 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
 					return false;
 				}else if($("#b_manuf").val() == ''){
 					$("#b_manuf").focus();
-					swal("제조사를 입력하세요.");
+				
+					swal({
+	                    title: "",
+	                    text: "제조사를 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
+					
 					return false;
 				}else if($("#b_caryear").val() ==''){
 					$("#b_caryear").focus();
-					swal("연식을 입력하세요.");
+				
+					swal({
+	                    title: "",
+	                    text: "연식을 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
+					
 					return false;
 				}else if($("#b_model").val() ==''){
 					$("#b_model").focus();
-					swal("모델명을 입력하세요.");
+					
+					swal({
+	                    title: "",
+	                    text: "모델명을 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
 					return false;
 				}else if($("#b_effic").val() == ''){
 					$("#b_effic").focus();
-					swal("연비를 입력하세요.");
+					
+					swal({
+	                    title: "",
+	                    text: "연비를 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
 					return false;
 				}else if($("#b_pcount").val() == ''){
 					$("#b_pcount").focus();
-					swal("탑승 가능 인원을 입력하세요.");
+					
+					swal({
+	                    title: "",
+	                    text: "탑승 가능 인원을 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
 					return false;
 				}else{
 					$.ajax({
@@ -326,7 +411,17 @@
 							console.log(data.list[0]);
 							if(data.list[0] == 1){
 								$("#b_vehiclenum").focus();
-								swal("버스번호가 이미 존재합니다.");
+							
+								swal({
+				                    title: "",
+				                    text: "버스번호가 이미 존재합니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                    
+				                  });
 							}else{
 								$("#regform").submit();
 							}

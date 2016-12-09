@@ -189,15 +189,12 @@
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">
-				<div class="text-inner">
+				<div class="text-inner" style="padding-top: 15px">
 					<div class="row">
-						<!-- <div class="col-md-8 col-md-offset-2">
-							<h1 class="to-animate">북유럽사람들이 책을 사랑하는 이유는..?</h1>
-							<h2 class="to-animate">Book you love.....</h2>
-						</div> -->
-						<div class = "col-md-8 col-md-offset-2">
-							<h1 class="to-animate">버스관제시스템...</h1>
-							<h2 class="to-animate">김지현 개새끼.....</h2>
+						<div class = "col-md-9 col-md-offset-2">
+							<h1 class="to-animate">새롭고 편리한  통합 버스 관리 시스템, </h1>
+							<h1 class="to-animate">RoadOneBell 입니다.</h1>
+							
 						</div>
 					</div>
 				</div>
@@ -213,9 +210,9 @@
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
-												<img src = "${pageContext.request.contextPath}/images/chart.JPG" width ="150px" height = "100px">
+						<img src = "${pageContext.request.contextPath}/images/chart.JPG" width ="150px" height = "100px">
 						<h2>Chart</h2>
-						<p> 연도, 월, 노선</p>
+						<p> 노선별, 정류장별, 탑승객을 시간대별로 차트를 통해 확인 할 수 있습니다.</p>
 						
 					</div>
 				</div>
@@ -223,9 +220,10 @@
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
-						<i class="fh5co-intro-icon icon-wrench"></i>
+						<img src = "${pageContext.request.contextPath}/images/map.PNG" width ="200px" height = "100px">
 						<h2>Map</h2>
-						<p>나랏말싸미 듕귁에 달아 문자와로 서로 사맛디 아니할새 그런 젼챠로 어랜 뱩셩들이 이르고져 홀베이셔도 마참네 제뜻을 시를 펴지 못할 지니</p>
+						<p>실시간 버스 위치와 노선, 정류장을 지도로 관리할 수 있습니다. 
+이 지도에 표시 됩니다.</p>
 						
 					</div>
 				</div>
@@ -235,7 +233,7 @@
 					<div class="fh5co-text">
 						<img src = "${pageContext.request.contextPath}/images/bbaga.png" width ="150px" height = "100px">
 						<h2>Calendar</h2>
-						<p>캘린더를 이용</p>
+						<p>캘린더를 이용하여 일정을 쉽고 편하게 관리할 수 있습니다. </p>
 						
 					</div>
 				</div>

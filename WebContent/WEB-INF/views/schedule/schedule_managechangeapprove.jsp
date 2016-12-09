@@ -52,6 +52,8 @@
 <!-- Custom styling plus plugins -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 </head>
 <script>
 $(document).ready(function() {
@@ -269,9 +271,21 @@ $(document).ready(function() {
 	//var dropObject;
 	var calEventObject;
 	var eventObjecte;
+	var aid;
+	var atitle;
+	var adow;
 	function showCalInfo(r_num){
 		array = []; //아무 동작도 처리 하지 않고 눌렀을때 array에 들어있던 값을 비워야한다.
-		alert('노선번호:'+r_num);
+		//alert('노선번호:'+r_num);
+		swal({
+            title: "",
+            text: "노선번호:"+r_num,
+            type: "info",
+            closeOnConfirm: true,
+            showLoaderOnConfirm: true,
+          },
+          function(){
+          });
 		$.ajax({
 			url:"gethistorycal.admin",
 			data:{"r_num":r_num},
@@ -311,9 +325,20 @@ $(document).ready(function() {
 							array.push(item);
 							index3++;
 							}else{//변경 대상자 = 변경 요청자
+								console.log('누가 탓니?')
+								console.log(obj1.m_id);
 								if(obj1.o_code == obj1.o_code_1){ //변경 대상자 휴무 = 변경 요청자 휴무
 									array1.push(obj1.m_id);
-									alert('변경 요청자 휴무'+obj1.o_code+'변경 대상자 휴무'+obj1.o_code_1);
+									//alert('변경 요청자 휴무'+obj1.o_code+'변경 대상자 휴무'+obj1.o_code_1);
+									swal({
+							                 title: "",
+							                 text: "변경 요청자 휴무"+obj1.o_code+"변경 대상자 휴무"+obj1.o_code_1,
+							                 type: "info",
+							                 closeOnConfirm: true,
+							                 showLoaderOnConfirm: true,
+							               },
+							               function(){
+							               });
 									item = {
 											id : obj1.m_id,
 											title : obj1.m_name,
@@ -325,11 +350,23 @@ $(document).ready(function() {
 											afterdow : obj1.o_code_1,
 											color : '#329632'
 									}
-									
+									array.push(item);
 								}else{ //변경 대상자 휴무 != 변경 요청자 휴무
 									array1.push(obj1.m_id);
-									alert('변경 요청자 휴무'+obj1.o_code+'변경 대상자 휴무'+obj1.o_code_1);
-									item = {
+									//alert('변경 요청자 휴무'+obj1.o_code+'변경 대상자 휴무'+obj1.o_code_1);
+									swal({
+						                    title: "",
+						                    text: "변경 요청자 휴무"+obj1.o_code+"변경 대상자 휴무"+obj1.o_code_1,
+						                    type: "info",
+						                    closeOnConfirm: true,
+						                    showLoaderOnConfirm: true,
+						                  },
+						                  function(){
+						                    /* setTimeout(function(){
+						                      swal("Ajax request finished!");
+						                    }, 2000); */
+						                  });
+										item = {
 											id : obj1.m_id,
 											title : obj1.m_name,
 											afterid : obj1.m_id_1,
@@ -400,16 +437,37 @@ $(document).ready(function() {
 				eventDrop : function(event, delta, revertFunc, jsEvent, ui, view) {
 					//alert(event.afterdow);
 					//변경 요청자 이외에 수정 하는 경우 막기
+					aid = event.afterid;
+					atitle = event.aftername;
+					adow = event.afterdow;
 					if(event.afterdow == null){
-						alert('변경 요청 데이터만 처리 할 수 있습니다.');
+						//alert('변경 요청 데이터만 처리 할 수 있습니다.');
+						swal({
+	                    title: "",
+	                    text: "변경 요청 데이터만 처리 할 수 있습니다.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){});
 						revertFunc();
 					}else{
 						//변경 요청자 - 변경 대상자 매칭
 						if(event.afterdow != Number(event.dow)+delta.days()){
-							alert('변경 요청자의 휴무 변경은 변경 대상자로 해야 합니다.')
+							//alert('변경 요청자의 휴무 변경은 변경 대상자로 해야 합니다.')
+							swal({
+			                    title: "",
+			                    text: "변경 요청자의 휴무 변경은 변경 대상자로 해야 합니다.",
+			                    type: "info",
+			                    closeOnConfirm: true,
+			                    showLoaderOnConfirm: true,
+			                  },
+			                function(){});
 							revertFunc();
 						}else{
-							alert(event.title + "/" + event.aftername);
+
+							//alert(event.title + "/" + event.aftername);
+
 							$('#1,#2').empty();
 							$('#1').append(event.title);
 						 	$('#2').append(event.aftername);
@@ -418,7 +476,8 @@ $(document).ready(function() {
 							$('#m_id_1').val(event.afterid);
 							$('#o_code_1').val(event.afterdow);
 							$('#approvebtw').modal('show');
-							eventObjecte=event;
+							//eventObjecte = $('#calendar').fullCalendar('clientEvents', event);
+							eventObjecte = event;
 						}
 					}
 				},
@@ -437,9 +496,27 @@ $(document).ready(function() {
 						
 					}else{
 						if(calEvent.afterdow == null){
-							alert(calEvent.title + '님은 휴무 변경 신청자가 아닙니다.');
+							//alert(calEvent.title + '님은 휴무 변경 신청자가 아닙니다.');
+							swal({
+			                    title: "",
+			                    text: calEvent.title + "님은 휴무 변경 신청자가 아닙니다.",
+			                    type: "info",
+			                    closeOnConfirm: true,
+			                    showLoaderOnConfirm: true,
+			                  },
+			                  function(){
+			                  });
 						}else{
-							alert(calEvent.title + '님의 변경 대상자는' + calEvent.aftername + '입니다');
+							//alert(calEvent.title + '님의 변경 대상자는' + calEvent.aftername + '입니다');
+							swal({
+			                    title: "",
+			                    text: calEvent.title + "님의 변경 대상자는" + calEvent.aftername + "입니다",
+			                    type: "info",
+			                    closeOnConfirm: true,
+			                    showLoaderOnConfirm: true,
+			                  },
+			                  function(){
+			                  });
 						}
 					}//else
 					
@@ -447,7 +524,9 @@ $(document).ready(function() {
 			});
 		});
 		
-	$(function(){
+		$(function(){
+			
+		
 		$('#approvebtw').modal('hide');
 		$('#approverefusebtw').modal('hide');
 		//일정 승인 처리 (휴무 변경자 =! 휴무 대상자)
@@ -457,49 +536,50 @@ $(document).ready(function() {
 			var o_code = $('#o_code').val();
 			var m_id_1 = $('#m_id_1').val();
 			var o_code_1 = $('#o_code_1').val();
-			
-			eventObjecte.title='test';
-			eventObjecte.dow[0]=0;
-			
-			/* var eventObject3 = {
+				var eventObject3 = {
 					id : eventObjecte.id,
-					title : 'test',
-					dow : [0],
-				}  */
-			$('#calendar').fullCalendar('removeEvents', eventObjecte.id);
-			
-			$.ajax({
+					title : eventObjecte.title,
+					dow : adow,
+					color : '#FF5A5A'
+				}
+             	var eventObject4 = {
+            		id : aid,
+            		title : atitle,
+            		dow : eventObjecte.dow,
+            		color : '#FF5A5A'
+             	}
+             console.log(eventObjecte);
+			 $.ajax({
 				url:"updatebtwinfo.admin",
 				type:"post",
 				data:{"m_id":m_id,"o_code":o_code,"m_id_1":m_id_1,"o_code_1":o_code_1},
 				success:function(data){
-					alert('승인 처리 되었습니다.10');
+<<<<<<< HEAD
+					//alert('승인 처리 되었습니다.');
+					swal({
+	                    title: "",
+	                    text: "승인 처리 되었습니다.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                  });
+=======
+					alert('승인 처리 되었습니다.');
+>>>>>>> 78773f7596ab400feba96741946a4b9b229ad823
 					alert('id'+eventObjecte.id);
-					/* var eventObject3 = {
-						id : 'hello',
-						title : 'test',
-						dow : ['0'],
-						
-					} */
-					/* var eventObject3 = {
-							id : 'hello',
-							title : 'test',
-							dow : [0],
-							
-						} */
-					/* var eventObject3 = {
-							id : 'hello',
-							title : 'test',
-							dow : '0',
-							
-						} */
-						
-					//$('#calendar').fullCalendar('refetchEvents');
-					$('#calendar').fullCalendar('renderEvent',eventObjecte);
-					$('#calendar').fullCalendar('unselect');
-					
+					console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
+					console.log(eventObjecte);
+					console.log(eventObject3);
 				}
 			});
+			 $(document).ajaxStop(function(){
+			//$('#calendar').fullCalendar('removeEvents', eventObjecte.id);
+			$('#calendar').fullCalendar('renderEvent',eventObject3);
+			$('#calendar').fullCalendar('renderEvent',eventObject4);
+			$('#calendar').fullCalendar('unselect');
+			}); 
 		});//approvebtn ajax
 		//일정 거절 처리
 		$('#refusebtn').click(function(){
@@ -507,13 +587,25 @@ $(document).ready(function() {
 			var o_code = $('#o_code').val();
 			var m_id_1 = $('#m_id_1').val();
 			var o_code_1 = $('#o_code_1').val();
-			
 			$.ajax({
 				url:"updatebtwinfore.admin",
 				type:"post",
 				data:{"m_id":m_id,"o_code":o_code,"m_id_1":m_id_1,"o_code_1":o_code_1},
 				success:function(){
-					alert('거절 처리 되었습니다.');
+<<<<<<< HEAD
+					//alert('거절 처리 되었습니다.');
+					swal({
+	                    title: "",
+	                    text: "거절 처리 되었습니다.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    /* setTimeout(function(){
+	                      swal("Ajax request finished!");
+	                    }, 2000); */
+	                  });
 					 //$('#calendar').fullCalendar('removeEvents');
 					var events = {
 						id : m_id,
@@ -526,6 +618,9 @@ $(document).ready(function() {
 					/* $('#calendar').fullCalendar('renderEvent', events, true);
 			        $('#calendar').fullCalendar('addEventSource', events);
 			        $('#calendar').fullCalendar('refetchEvents'); */
+=======
+					alert('거절 처리 되었습니다.11');
+>>>>>>> 78773f7596ab400feba96741946a4b9b229ad823
 				}
 			})	
 		});
@@ -533,12 +628,26 @@ $(document).ready(function() {
 			var m_id = $('#sm_id').val();
 			var o_code = $('#so_code').val();
 			var o_code_1 = $('#so_code_1').val();
+			var resultObject;
 			$.ajax({
 				url:"approvefirstregister.admin",
 				data:{"m_id":m_id,"o_code":o_code_1}, //변경 휴무로 reguloff에 등록되어야 한다.
 				type:"post",
 				success:function(data){
-					alert('등록완료'+calEventObject.id+calEventObject.title);
+<<<<<<< HEAD
+					//alert('등록완료'+calEventObject.id+calEventObject.title);
+					swal({
+	                    title: "",
+	                    text: "등록완료"+calEventObject.id+calEventObject.title,
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    /* setTimeout(function(){
+	                      swal("Ajax request finished!");
+	                    }, 2000); */
+	                  });
 					var resultObject = {
 						id : calEventObject.id,
 						title : calEventObject.title,
@@ -548,19 +657,55 @@ $(document).ready(function() {
 					//$('#calendar').fullCalendar('removeEvents', calEventObject.id);
 					//$('#calendar').fullCalendar('renderEvent', resultObject);
 					//$('#calendar').fullCalendar('unselect');
+=======
+					alert('등록완료'+calEventObject.id+calEventObject.title);
+					resultObject = {
+							id : calEventObject.id,
+							title : calEventObject.title,
+							dow : data.o_code,
+							color : '#FF5A5A'
+						};
+>>>>>>> 78773f7596ab400feba96741946a4b9b229ad823
 				}
 			});
+			$(document).ajaxStop(function(){
+				//$('#calendar').fullCalendar('removeEvents', eventObjecte.id);
+				$('#calendar').fullCalendar('removeEvents', calEventObject.id);
+				$('#calendar').fullCalendar('renderEvent', resultObject);
+				$('#calendar').fullCalendar('unselect');
+				}); 
 		});
 		$('#refusesamebtn').click(function(){
 			var m_id = $('#sm_id').val();
 			var o_code = $('#so_code').val();
 			var o_code_1 = $('#so_code_1').val();
+			var resultObject = {
+					id : calEventObject.id,
+					title : calEventObject.title,
+					dow : data.o_code,
+					color : '#FF5A5A'
+				};
+			var resultObject = {
+					id : calEventObject.id,
+					title : calEventObject.title,
+					dow : data.o_code,
+					color : '#FF5A5A'
+				};
 			$.ajax({
 				url:"refusefirstregister.admin",
 				data:{"m_id":m_id,"o_code":o_code,"o_code_1":o_code_1},
 				type:"post",
 				success:function(data){
-					alert('변경 거절');
+					//alert('변경 거절');
+					swal({
+                    title: "",
+                    text: "변경 거절",
+                    type: "info",
+                    closeOnConfirm: true,
+                    showLoaderOnConfirm: true,
+                  },
+                  function(){
+                  });
 					if(calEventObject.dow==calEventObject.afterdow){
 					var resultObject = {
 							id : calEventObject.id,
@@ -579,7 +724,7 @@ $(document).ready(function() {
 				}
 			});
 		});
-	});
+		});
 	
 		
 	</script>

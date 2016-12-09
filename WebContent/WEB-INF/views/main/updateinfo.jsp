@@ -16,10 +16,12 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-filestyle.js"></script>
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+	<script src="dist/sweetalert.min.js"></script>
 
-<title>KOSBUS</title>
+<title>RoadOneBell</title>
 
 <!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -300,7 +302,7 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-	
+
 	<script type="text/javascript">
 		$(function(){
 			$("#update").click(function(){
@@ -309,7 +311,16 @@
 				}
 				
 				if(($("#m_pw").val() != $("#m_pw2").val())){
-					alert("비밀번호가 일치 하지 않습니다.");
+					//alert("비밀번호가 일치 하지 않습니다.");
+					swal({
+	                    title: "",
+	                    text: "비밀번호가 일치 하지 않습니다.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                  });
 					$("#m_pw2").focus();
 					return false;
 				}else{

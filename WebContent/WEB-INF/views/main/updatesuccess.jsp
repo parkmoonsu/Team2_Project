@@ -5,10 +5,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 </head>
 <body>
 <script type="text/javascript">
-	alert("수정 완료");
+	//alert("수정 완료");
+	swal({
+        title: "",
+        text: "수정 완료",
+        type: "info",
+        closeOnConfirm: true,
+        showLoaderOnConfirm: true,
+      },
+      function(){
+      });
 	location.href = "ChangeForm.htm";
 </script>
 </body>
