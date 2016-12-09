@@ -83,4 +83,10 @@ public class BusStopManageController {
 		busStopManageService.busStopRoadSearch(r_num, dto, busstopdto, request, response);
 	}
 	
+	//수정 정류장 가져오기
+	@RequestMapping(value="/editBusStopRead.admin",method=RequestMethod.GET)
+	public View editBusStopReadCall(String r_num, Model model){
+		return jsonview;	
+	}
+	
 }

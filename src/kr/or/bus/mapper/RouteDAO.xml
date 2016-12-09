@@ -9,10 +9,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="InsertRoute" parameterType="kr.or.bus.dto.RoutePathDTO">
-		insert into roro2(R_NUM,R_X,R_Y,R_ORDER) values(#{r_num},#{r_},#{r_y},#{r_order})
+		insert into rorocopy(R_NUM,R_X,R_Y,R_ORDER) values(#{r_num},#{r_x},#{r_y},#{r_order})
 	</insert>
 	<select id="routeidselect" parameterType="String" resultType="kr.or.bus.dto.RoutePathDTO" >
 		select *from roro where R_NUM=#{r_num} order by R_ORDER+0
+	</select>
+	
+	<select id="editRouteRead" parameterType="String" resultType="kr.or.bus.dto.RoutePathDTO">
+		select R_NUM, R_X, R_Y, R_ORDER from rorocopy where R_NUM = #{r_num} ORDER BY R_ORDER+0
 	</select>
 
 	<!-- 전체 노선 -->
