@@ -70,9 +70,6 @@ public interface ScheduleManageDAO {
 	public List<RouteDTO>getrnum();
 	public List<RouteDTO2> getIntervalStartLast();
 	
-	/*//로그인된 사용자의 차량번호, 노선번호 검색
-	public MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO rnumcheck(String m_id);*/
-	
 
 	// 휴무 상태 정보 가져오기
 	public int getRequestNum();
@@ -98,6 +95,6 @@ public interface ScheduleManageDAO {
 	public int updateBtwByRegrre(String m_id_1); //거절 변경 대상자 update reguloffr
 	public int updateBtwByRegore(String m_id_1,String o_code_1); //거절 변경 대상자 update reguloff
 	
-	public MemberJoinBusDTO rnumcheck(String m_id);
+	public MemberJoinBusDTO RnumCheck(String m_id);
 
 }

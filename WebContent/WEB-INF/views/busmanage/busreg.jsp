@@ -65,6 +65,9 @@
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+
 </head>
 
 <body class="nav-md">
@@ -281,52 +284,149 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#reg").click(function(){
-				$.ajax({
-					url:"alreadyuse.admin",
-					data : {b_vehiclenum : $("#b_vehiclenum").val().trim()},
-					success : function(data){
-						console.log(data.list[0]);
-						if(data.list[0] == 1){
-							alert("버스번호가 이미 존재합니다.");
-							$("#b_vehiclenum").focus();
-						}else{
-							$("#regform").submit();
-						}
-					}
-				});
+				
 
 				if($("#b_vehiclenum").val() == ''){
-					alert("버스 번호를 입력하세요.");
 					$("#b_vehiclenum").focus();
+					//swal("버스 번호를 입력하세요.");
+					swal({
+	                    title: "",
+	                    text: "버스 번호를 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    /* setTimeout(function(){
+	                      swal("Ajax request finished!");
+	                    }, 2000); */
+	                  });
+					
 					return false;
 				}else if($("#b_sdate").val() == ''){
-					alert("구입 시기를 입력하세요.");
 					$("#b_sdate").focus();
+					
+					swal({
+	                    title: "",
+	                    text: "구입 시기를 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
+					
 					return false;
 				}else if($("#b_sprice").val() == ''){
-					alert("구매 가격을 입력하세요.");
 					$("#b_sprice").focus();
+					swal({
+	                    title: "",
+	                    text: "구매 가격을 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
 					return false;
 				}else if($("#b_manuf").val() == ''){
-					alert("제조사를 입력하세요.");
 					$("#b_manuf").focus();
+				
+					swal({
+	                    title: "",
+	                    text: "제조사를 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
+					
 					return false;
 				}else if($("#b_caryear").val() ==''){
-					alert("연식을 입력하세요.");
 					$("#b_caryear").focus();
+				
+					swal({
+	                    title: "",
+	                    text: "연식을 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
+					
 					return false;
 				}else if($("#b_model").val() ==''){
-					alert("모델명을 입력하세요.");
 					$("#b_model").focus();
+					
+					swal({
+	                    title: "",
+	                    text: "모델명을 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
 					return false;
 				}else if($("#b_effic").val() == ''){
-					alert("연비를 입력하세요.");
 					$("#b_effic").focus();
+					
+					swal({
+	                    title: "",
+	                    text: "연비를 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
 					return false;
 				}else if($("#b_pcount").val() == ''){
-					alert("탑승 가능 인원을 입력하세요.");
 					$("#b_pcount").focus();
+					
+					swal({
+	                    title: "",
+	                    text: "탑승 가능 인원을 입력하세요.",
+	                    type: "info",
+	                    closeOnConfirm: true,
+	                    showLoaderOnConfirm: true,
+	                  },
+	                  function(){
+	                    
+	                  });
 					return false;
+				}else{
+					$.ajax({
+						url:"alreadyuse.admin",
+						data : {b_vehiclenum : $("#b_vehiclenum").val().trim()},
+						success : function(data){
+							console.log(data.list[0]);
+							if(data.list[0] == 1){
+								$("#b_vehiclenum").focus();
+							
+								swal({
+				                    title: "",
+				                    text: "버스번호가 이미 존재합니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                    
+				                  });
+							}else{
+								$("#regform").submit();
+							}
+						}
+					});
 				}
 			});
 		});

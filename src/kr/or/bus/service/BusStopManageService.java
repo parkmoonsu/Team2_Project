@@ -1056,5 +1056,9 @@ public class BusStopManageService {
         
 		return jsonmaps;
 	}
+	
+	public List<BusStopDTO> editBusStopRespons(String r_num){
+		return null;	
+	}
 
 }

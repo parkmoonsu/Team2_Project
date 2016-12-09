@@ -185,6 +185,7 @@
 <!-- 	<style="background-image: url(images/background2.jpg);"> -->
 	<%-- <section id="fh5co-home" data-section="home"data-stellar-backgmacubround-ratio="0.5"style="background-image: url(images/background2.jpg);"> --%>
 	     <section id="fh5co-home" data-section="home" data-stellar-backgmacubround-ratio="0.5" style="background-image: url(images/newbackground.jpg);">
+<%-- 		<section id="fh5co-home" data-section="home" data-stellar-backgmacubround-ratio="0.5" style="background-image: url(http://social.lge.co.kr/wp-content/uploads/2012/05/15.jpg);"> --%>
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">
@@ -194,13 +195,17 @@
 							<h1 class="to-animate">북유럽사람들이 책을 사랑하는 이유는..?</h1>
 							<h2 class="to-animate">Book you love.....</h2>
 						</div> -->
+						<div class = "col-md-8 col-md-offset-2">
+							<h1 class="to-animate">버스관제시스템...</h1>
+							<h2 class="to-animate">김지현 개새끼.....</h2>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="slant"></div>
 	</section>
-
+	
 	<section id="fh5co-intro" data-section="work">
 		<div class="container">
 			<div class="row row-bottom-padded-lg">

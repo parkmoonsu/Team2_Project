@@ -14,7 +14,8 @@
 
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <title>노선관리</title>
 
 <!-- Bootstrap -->
@@ -153,7 +154,7 @@ select#selectBus, select#selectBus2 {
 					</select>
 					
 					<select id="selectBus2" >
-						<option>수정</option>
+						<option value="">수정</option>
 						<c:forEach var="i" items="${list}">
 							<option>${i.r_num}</option>
 						</c:forEach>											
@@ -346,6 +347,7 @@ select#selectBus, select#selectBus2 {
 				</div>
 			</div>
 		</div>
+	</div>
 
 		<!-- Bootstrap -->
 		<script
@@ -492,16 +494,37 @@ select#selectBus, select#selectBus2 {
 
 	}
 	function addstop(){
-		$('#pass-modal').modal();
-		//미리 정류장번호를 세팅해야 함
-		//모달의 어느부분? 랜덤함수 구하는 ajax
-		$.ajax({ //정류장 번호 랜덤 값으로 생성
+		//정류장 번호 랜덤 값으로 생성
+		$.ajax({ 
         	url:"getrandomsnum.admin",
         	type:"post",
         	success:function(data){	
         		$('#snum').val(data.s_num);	
         	}
          });
+			
+		var r_num;
+		if($('#createdrnum').val()!=""){
+			r_num=$('#createdrnum').val();
+			$('#pass-modal').modal();
+		}else if ($('#selectBus2').val()!=""){
+			r_num=$('#selectBus2').val();
+			$('#pass-modal').modal();
+		}else {
+			//alert('신규노선번호를 생성하거나 기존 노선번호를 선택하세요.');
+			swal({
+				  title: "",
+				  text: "신규노선번호를 생성하거나 기존 노선번호를 선택하세요.",
+				  type: "info",
+				  closeOnConfirm: true,
+				  showLoaderOnConfirm: true,
+				},
+				function(){
+				  /* setTimeout(function(){
+				    swal("Ajax request finished!");
+				  }, 2000); */
+			});
+		}
 		
 		$('#shy').click(function(){
 					
@@ -513,30 +536,65 @@ select#selectBus, select#selectBus2 {
 				rectangle.setMap(null);	
 			}
 				
-			//ajax db 저장
+			//stop에 저장
 			var param = {
-				"r_num":$('#selectBus2').val(),
+				"r_num":rnum,
 				"s_num":$('#snum').val(),
 				"s_name":$('#sname').val(),
 				"rs_order":$('#end').val(),
 				"s_x":cmarker.getPosition().lng(),
 				"s_y":cmarker.getPosition().lat()
-			};
-			
-			console.log(param);
-			
+			};					
     		$.ajax({
     			url : "editordernumber.admin",
     			type : "post",
     			data : param,
     			success:function(data){
-    				alert('신규 정류장 등록 완료');
+    				//alert('신규 정류장 등록 완료');
+    				swal("신규 정류장 등록 완료!");
     			}
     		});
+    		
+    		// route insert
+			$.ajax({
+				url:'routeInsert.admin',
+				type:'post',
+				data: {
+					r_num: r_num,
+					bd_num: $('#bdnum').val(),
+					g_num: $('#gnum').val()
+			
+				},
+				success:function(data){
+					$('#match-pass').modal("hide");
+					//다른 마커 지우기
+					for(var i=0; i<markerList.length; i++){
+						markerList[i].setMap(null);
+					}
+					markerList=[];
+					dataList=[];
+				}
+			});
+			
+			// routestop insert
+			$.ajax({
+				url:'routeStopInsert.admin',
+				type:'post',
+				data: {
+					r_num: r_num,
+					s_num: dataobject.s_num,
+					rs_order: $('#m_pw2').val()
+				},
+				success:function(data){
+					
+				}
+			});
+    		  		
 		});
 	}
 	
 	function stopclick(s_num){
+		//노선번호+정류장 검색
 		//모달창
 		$('#match-pass').modal("show");
 		
@@ -547,12 +605,8 @@ select#selectBus, select#selectBus2 {
 			changedmarker = new google.maps.Marker({
 				position : markerobject.getPosition(),
 				map : map
-				//label : $('#m_pw2').val()
 			});
-			
-			console.log($('#bdnum').val());
-			console.log($('#gnum').val());
-			
+						
 			// route insert
 			$.ajax({
 				url:'routeInsert.admin',
@@ -576,8 +630,6 @@ select#selectBus, select#selectBus2 {
 			});
 			
 			// routestop insert
-			console.log(dataobject);
-
 			$.ajax({
 				url:'routeStopInsert.admin', //얼루가나??
 				type:'post',
@@ -757,7 +809,7 @@ select#selectBus, select#selectBus2 {
     			type : "post",
     			data : param,
     			success:function(data){
-    				alert(data.alert);
+    				//alert(data.alert);
     				deleteRout();
     				$.each(data.rssdto,function(index,obj){
     					copyMarkerMakes(obj,map);
@@ -818,7 +870,7 @@ select#selectBus, select#selectBus2 {
    		
           	//마커 드래그 끝났을떄
             	copyMarker.addListener('dragend', function() {
-                	alert('hi');
+                	//alert('hi');
             		//마커 라벨을 얻어와 담을 변수
             		var markerLabel = copyMarker.getLabel();
                 	var stopnum = copyMarker.s_num;
@@ -1036,7 +1088,19 @@ select#selectBus, select#selectBus2 {
       		type : "post",
       		data : {"r_num":r_num},
       		success : function(data){
-      			alert($('#stopn1').val()+' 정류장 변경을 취소 하셨습니다.');
+      			//alert($('#stopn1').val()+' 정류장 변경을 취소 하셨습니다.');
+      			swal({
+						  title: "",
+						  text: $('#stopn1').val()+"정류장 변경을 취소 하셨습니다.",
+						  type: "info",
+						  closeOnConfirm: true,
+						  showLoaderOnConfirm: true,
+						},
+						function(){
+						  /* setTimeout(function(){
+						    swal("Ajax request finished!");
+						  }, 2000); */
+						});
       			deleteRoute();
       			$.each(data.rssdto,function(index,obj){
       				copyMarkerMakes(obj, map);   
@@ -1050,7 +1114,7 @@ select#selectBus, select#selectBus2 {
   				type : "post",
   				data : {"r_num":$('#selectBus2').val()},
   				success : function(data){
-  					alert('수정 저장본 불러오기');
+  					//alert('수정 저장본 불러오기');
   					deleteRoute();
   	      			$.each(data.rssdto,function(index,obj){
   	      				copyMarkerMakes(obj, map);   
@@ -1077,7 +1141,7 @@ select#selectBus, select#selectBus2 {
           		type : "post",
           		data : {"r_num":r_num,"s_num":$('#stopno').val(),"rs_order":rs_order},
           		success : function(data){
-          			alert(data.alert);
+          			//alert(data.alert);
           			deleteRoute();
           			$.each(data.rssdto,function(index,obj){
           				copyMarkerMakes(obj, map);   
@@ -1095,7 +1159,7 @@ select#selectBus, select#selectBus2 {
               		type : "post",
               		data : {"r_num":r_num,"s_num":$('#stopno1').val(),"s_name":$('#stopn2').val(),"s_x":$('#ms_x').val(),"s_y":$('#ms_y').val()},
               		success : function(data){
-              			alert(data.alert);
+              			//alert(data.alert);
               			deleteRoute();
               			$.each(data.rssdto,function(index,obj){
               				copyMarkerMakes(obj, map);   
@@ -1218,17 +1282,13 @@ select#selectBus, select#selectBus2 {
                   	success : function(data) {
                      	console.log("DB저장잘됨?");
                      	console.log(data);
-                     	alert(data);
+                     	//alert(data);
                   	}        		
       			});       		     		
       		}
   		}); 
     });
-    
-      
-   		 
-    
-   
+       
    </script>
 		<!-- 구글 맵 인증키 -->
 		<script async defer
