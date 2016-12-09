@@ -186,18 +186,33 @@ placeholder {
 	<c:if test="${param.error != null}">
 
 		<div>
-			로그인 실패 <br>
+			
 			<script>
-				alert("극혐");
-				
+				//alert("극혐");		
+				swal(
+						{
+							title : "로그인 실패",
+							text : "${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}",
+							type : "warning",
+							
+							confirmButtonColor : "#DD6B55",
+							confirmButtonText : "확인",
+							closeOnConfirm : true
+						}, function() {
+							 swal("Deleted!",
+									"Your imaginary file has been deleted.",
+									"success"); 
+						});
+			
 			</script>
-</div>
-		<div> <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+		</div>
+		<%-- <div>
+		 	<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
 				 <font color = "red">
 					 ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 				</font>
 			</c:if>
-		</div>
+		</div> --%>
 	</c:if>
 	<br>
 </body>
