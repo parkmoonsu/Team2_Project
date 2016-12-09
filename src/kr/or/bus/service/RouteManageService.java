@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.View;
 
 import kr.or.bus.dao.BusStopDAO;
 import kr.or.bus.dao.RouteStopDAO;
@@ -100,11 +101,11 @@ public class RouteManageService {
         }
    	}
    	
-   	public List<RouteStopCopyJoinStopDTO> routeRead(HttpServletRequest request, HttpServletResponse response){
-   		String r_num = request.getParameter("r_num");
+   	public List<StopDTO> routeRead(HttpServletRequest request, HttpServletResponse response){
+   		
    		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
-   		System.out.println(r_num);
-   		List<RouteStopCopyJoinStopDTO> list=dao.routeRead(r_num);
+
+   		List<StopDTO> list=dao.routeRead();
 
 		return list;
    	}
@@ -120,6 +121,17 @@ public class RouteManageService {
 		}
 		return String.valueOf(s_num);
 	}
+	public String getRandomRnum(){//4자리 랜덤 값 뽑기
+		int r_num;
+		r_num = (int)(Math.random()*10000+1000);
+		if(r_num>10000){
+			r_num -= 10000;
+		}
+		if(r_num<1000){
+			r_num += 1000;
+		}
+		return String.valueOf(r_num);
+	}
 	public void addStopInfo(String r_num,String s_num, String s_name, String rs_order, String s_x, String s_y,Model model){
 		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
 		String alert;
@@ -128,11 +140,15 @@ public class RouteManageService {
 		sdto.setS_name(s_name);
 		sdto.setS_x(s_x);
 		sdto.setS_y(s_y);
-		System.out.println(sdto.toString());
+
 		int result = dao.addStopInfo(sdto);
 		if (result > 0) {
+
 			RouteStopDTO rsdto = dao.getRouteStopInfo(r_num, rs_order);
+
+			System.out.println(rsdto.toString());
 			rsdto.setS_num(s_num);
+
 			int result1 = dao.addRouteStopInfo(rsdto);
 			if (result1 > 0) {
 				int result2 = dao.updateRouteStopInfo(r_num, rs_order, s_num);
@@ -153,6 +169,12 @@ public class RouteManageService {
 	public int checkStopNum(String s_num){
 		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
 		int result = dao.checkStopNum(s_num);
+		return result;
+	}
+	//노선 번호 유효성 체크
+	public int checkRouteNum(String r_num){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		int result = dao.checkRouteNum(r_num);
 		return result;
 	}
 	//저장된 노선별 경로 불러오기
@@ -245,6 +267,19 @@ public class RouteManageService {
 		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
 		List<RouteStopDTO> rslist = dao.getRsOrderfRsStop(r_num);
 		return rslist;
+	}
+	
+	//route테이블에 insert
+	public void routeInsert(String r_num, String bd_num, String g_num){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		dao.routeInsert(r_num, bd_num, g_num);
+	}
+	
+	//routestop테이블에 insert
+	public void routeStopInsert(String r_num, String s_num, String rsorder){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		int rs_num=Integer.parseInt(rsorder);
+		dao.routeStopInsert(r_num, s_num, rs_num);
 	}
 	
 }

@@ -7,6 +7,7 @@ import kr.or.bus.dto.RoutePathDTO;
 import kr.or.bus.dto.RouteSelectGisaDTO;
 import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
 import kr.or.bus.dto.RouteTypeDTO;
+import kr.or.bus.dto.StopDTO;
 
 public interface RouteDAO {
 	public RouteDTO routeidSearch(String r_num);
@@ -30,7 +31,7 @@ public interface RouteDAO {
 	public int routeDataCheck(RouteDTO routedto);
 	
 	//추가
-	public List<RouteStopCopyJoinStopDTO> routeRead(String r_num);
+	public List<StopDTO> routeRead();
 	
 	//노선 타입 조회
 	

@@ -1,15 +1,27 @@
 package kr.or.bus.dto;
 
 public class BusJoinRdetailJoinRepairDTO {
-//b_vehiclenum, rep_name, re_detail, rd_cost, rd_date
+
+	private int r;
 	private String r_num;
 	private String b_vehiclenum;
-	private String rep_naem;
-	private String re_detail;
+	private String rep_name;
+	private String rd_detail;
 	private int rd_cost;
 	private String rd_date;
 	
 	
+	
+	public int getR() {
+		return r;
+	}
+
+
+	public void setR(int r) {
+		this.r = r;
+	}
+
+
 	public String getR_num() {
 		return r_num;
 	}
@@ -30,23 +42,29 @@ public class BusJoinRdetailJoinRepairDTO {
 	}
 
 
-	public String getRep_naem() {
-		return rep_naem;
+
+
+
+	public String getRep_name() {
+		return rep_name;
 	}
 
 
-	public void setRep_naem(String rep_naem) {
-		this.rep_naem = rep_naem;
+	public void setRep_name(String rep_name) {
+		this.rep_name = rep_name;
 	}
 
 
-	public String getRe_detail() {
-		return re_detail;
+
+
+
+	public String getRd_detail() {
+		return rd_detail;
 	}
 
 
-	public void setRe_detail(String re_detail) {
-		this.re_detail = re_detail;
+	public void setRd_detail(String rd_detail) {
+		this.rd_detail = rd_detail;
 	}
 
 

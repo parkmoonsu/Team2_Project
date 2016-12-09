@@ -183,7 +183,8 @@
 	</header>
 
 <!-- 	<style="background-image: url(images/background2.jpg);"> -->
-	<section id="fh5co-home" data-section="home"data-stellar-background-ratio="0.5"style="background-image: url(images/background2.jpg);">
+	<%-- <section id="fh5co-home" data-section="home"data-stellar-backgmacubround-ratio="0.5"style="background-image: url(images/background2.jpg);"> --%>
+	     <section id="fh5co-home" data-section="home" data-stellar-backgmacubround-ratio="0.5" style="background-image: url(images/newbackground.jpg);">
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">
@@ -207,10 +208,10 @@
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
-						<i class="fh5co-intro-icon icon-bulb"></i>
-						<h2>Plan</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-						<p><a href="#" class="btn btn-primary">Get In Touch</a></p>
+												<img src = "${pageContext.request.contextPath}/images/chart.JPG" width ="150px" height = "100px">
+						<h2>Chart</h2>
+						<p> 연도, 월, 노선</p>
+						
 					</div>
 				</div>
 				<div class="fh5co-block to-animate" style="background-image: url(images/img_8.jpg);">
@@ -218,36 +219,38 @@
 					<div class="overlay"></div>
 					<div class="fh5co-text">
 						<i class="fh5co-intro-icon icon-wrench"></i>
-						<h2>Develop</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-						<p><a href="#" class="btn btn-primary">Click Me</a></p>
+						<h2>Map</h2>
+						<p>나랏말싸미 듕귁에 달아 문자와로 서로 사맛디 아니할새 그런 젼챠로 어랜 뱩셩들이 이르고져 홀베이셔도 마참네 제뜻을 시를 펴지 못할 지니</p>
+						
 					</div>
 				</div>
 				<div class="fh5co-block to-animate" style="background-image: url(images/img_10.jpg);">
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
-						<i class="fh5co-intro-icon icon-rocket"></i>
-						<h2>Launch</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-						<p><a href="#" class="btn btn-primary">Why Us?</a></p>
+						<img src = "${pageContext.request.contextPath}/images/bbaga.png" width ="150px" height = "100px">
+						<h2>Calendar</h2>
+						<p>캘린더를 이용</p>
+						
 					</div>
 				</div>
 			</div>
-			<div class="row watch-video text-center to-animate">
+			<!-- <div class="row watch-video text-center to-animate">
 				<span>Watch the video</span>
 				<a href="https://www.youtube.com/watch?v=PiksIbD5sNc" class="popup-vimeo btn-video"><i class="icon-play2"></i></a>
-			</div>
+			</div> -->
 		</div>
 	</section>
 
+	<footer>
+			<jsp:include page="/sidebar/footer.jsp" />
+		</footer>
 	
-	
-	<footer id="footer" role="contentinfo">
-		<!-- <a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a> -->
+	<!-- <footer id="footer" role="contentinfo">
+		<a href="#" class="gotop js-gotop"><i class="icon-arrow-up2"></i></a>
 		<div class="container">
 			<div class="">
-				<div class="col-md-12 text-center">
+				<div class"col-md-12 text-center">
 					<p>씨바아아아앙아아아알 혀어어어어어어어ㅓ업ㅓ사아아아아앙아아아앙</p>
 					
 				</div>
@@ -262,7 +265,7 @@
 				</div>
 			</div>
 		</div>
-	</footer>
+	</footer> -->
 	
 
 	

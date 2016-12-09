@@ -15,8 +15,8 @@ import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RoutePathDTO;
-import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
 import kr.or.bus.dto.RouteStopJoinStopDTO;
+import kr.or.bus.dto.StopDTO;
 import kr.or.bus.service.BusStopManageService;
 import kr.or.bus.service.RouteManageService;
 import kr.or.bus.service.RoutePathService;
@@ -47,7 +47,7 @@ public class RouteManageController {
 	}
 	//정류장 번호 자동 생성 함수
 		@RequestMapping(value="/getrandomsnum.admin",method=RequestMethod.POST)
-		public View getRandomSnum(String r_num,Model model){
+		public View getRandomSnum(Model model){
 			int result;
 			String s_num;
 			//List<RouteStopDTO> rslist = routeManageSerivce.getRsOrderFromRs(r_num);
@@ -110,7 +110,7 @@ public class RouteManageController {
         @RequestMapping(value="/routeRead.admin",method=RequestMethod.POST)
         public View routeRead(HttpServletRequest request , HttpServletResponse response, Model model) throws Exception{
 
-            List<RouteStopCopyJoinStopDTO> list=routeManageSerivce.routeRead(request , response);
+            List<StopDTO> list=routeManageSerivce.routeRead(request , response);
 
             model.addAttribute("list", list);
             return jsonview;
@@ -179,4 +179,39 @@ public class RouteManageController {
 			return jsonview;       	
         }
 		
+      //노선 번호 자동 생성 함수
+  		@RequestMapping(value="/getrandomrnum.admin",method=RequestMethod.POST)
+  		public View getRandomRnum(Model model){
+  			int result;
+  			String r_num;
+  			do{
+  				r_num = routeManageSerivce.getRandomRnum();
+  				result = routeManageSerivce.checkRouteNum(r_num);	
+  				System.out.println("몇 번 도는 거니?");
+  			}while(result>0);
+  			model.addAttribute("r_num", r_num);
+  			//model.addAttribute("rslist",rslist);
+  			return jsonview;
+  		}
+  		
+  		//route 테이블에 노선 저장
+  		@RequestMapping(value="/routeInsert.admin",method=RequestMethod.POST)
+  		public View routeInsert(String r_num, String bd_num, String g_num, Model model){
+
+      			routeManageSerivce.routeInsert(r_num, bd_num, g_num);
+      			
+				return jsonview;
+      		}
+      		
+      		//routestop 테이블에 노선 저장
+      		@RequestMapping(value="/routeStopInsert.admin",method=RequestMethod.POST)
+      		public View routeStopInsert(String r_num, String s_num, String rs_order, Model model){
+
+      			routeManageSerivce.routeStopInsert(r_num, s_num, rs_order);
+      			
+				return jsonview;
+      		}
+
+   	
+
 }

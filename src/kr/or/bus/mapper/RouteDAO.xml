@@ -39,23 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 추가 -->
-	<!-- 노선번호에 해당되는 정류장 리스트 가져오기  -->
-	<select id="routeRead" parameterType="String" resultType="kr.or.bus.dto.RouteStopCopyJoinStopDTO">
-		select cp.r_num,
-			cp.s_num,
-			cp.st_type,
-			cp.rs_order,
-			cp.rs_check,
-			cp.r_id,
-			cp.rs_start,
-			cp.rs_end,
-			s.s_num,
-			s.s_x,
-			s.s_y,
-			s.s_name
-		from routestopcopy4 cp
-		join stop s on cp.s_num=s.s_num
-		where cp.r_num=#{r_num}
+	<!-- 노선번호에 해당되는 정류장 리스트 가져오기  > 모든 정류장 가져오기로 바뀜 -->
+	<select id="routeRead" resultType="kr.or.bus.dto.StopDTO">
+		select s_num,
+			s_x,
+			s_y,
+			s_name
+		from stop
+		<!-- where cp.r_num=#{r_num} -->
 	</select>
 	
 	<!-- 노선타입 조회 -->
