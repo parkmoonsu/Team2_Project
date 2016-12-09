@@ -14,6 +14,8 @@
 	src="${pageContext.request.contextPath}/loginassets/assets/js/jquery.backstretch.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/loginassets/assets/js/scripts.js"></script>
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <script type="text/javascript">
         $(function() {
 
@@ -42,6 +44,7 @@
             }
             
         }
+ 
 </script>
 <style type="text/css">
 .my-box {
@@ -181,9 +184,15 @@ placeholder {
 	</div>
 
 	<c:if test="${param.error != null}">
-		<div> 
-			
-			<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+
+		<div>
+			로그인 실패 <br>
+			<script>
+				alert("극혐");
+				
+			</script>
+</div>
+		<div> <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
 				 <font color = "red">
 					 ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 				</font>

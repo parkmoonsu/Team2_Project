@@ -252,7 +252,7 @@ p, h5 {
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/loginassets/assets/css/style.css">
 <link rel="stylesheet" id="theme-switch"
-	href="${pageContext.request.contextPath}/mainCss/css/style.css">
+	href="${pageContext.request.contextPath}/mainCss/css/style5.css">
 
 
 </head>
@@ -681,7 +681,6 @@ p, h5 {
 			});
 
 			$('#wizard').smartWizard();
-
 			$('#wizard_verticle').smartWizard({
 				transitionEffect : 'slide'
 			});
