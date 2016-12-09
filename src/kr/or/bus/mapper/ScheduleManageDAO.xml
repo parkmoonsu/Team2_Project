@@ -302,5 +302,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 휴무 요청 상태 관리 끝 -->
-
+	<select id="RnumCheck"  parameterType="String" resultType="kr.or.bus.dto.MemberJoinBusDTO">
+		SELECT M.M_ID,M.B_VEHICLENUM,M.M_NAME,B.R_NUM
+  		FROM MEMBER M JOIN BUS B ON M.B_VEHICLENUM = B.B_VEHICLENUM
+      	WHERE M.M_ID=#{param1}
+	</select>
 </mapper>

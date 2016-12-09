@@ -61,6 +61,8 @@
 <!-- jQuery -->
 	<script
 		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+		<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <style>
 table, th{
 	text-align: center;
@@ -453,8 +455,19 @@ table, th{
 				},
 				url:"agreehistory.admin",
 				success:function(){
-					alert('승인 되었습니다.');
-					
+					//alert('승인 되었습니다.');
+					swal({
+						  title: "",
+						  text: "승인 되었습니다.",
+						  type: "info",
+						  closeOnConfirm: true,
+						  showLoaderOnConfirm: true,
+						},
+						function(){
+						  /* setTimeout(function(){
+						    swal("Ajax request finished!");
+						  }, 2000); */
+						});
 					$('#'+m_id+'n'+ro_object).attr('class', 'btn btn-success');
 					$('#'+m_id+'n'+ro_object).attr('onclick', '');
 					$('#'+m_id+'n'+ro_object).text('승인');

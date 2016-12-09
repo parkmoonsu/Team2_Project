@@ -136,12 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- history DAO -->
 	
-	<select id="rnumcheck" parameterType="String" resultType="kr.or.bus.dto.MemberJoinBusDTO">
-		select m.m_id, m.b_vehiclenum, m.m_name, b.r_num
-    	from member m
-	    join bus b on m.b_vehiclenum=b.b_vehiclenum
-	    where m_id=#{m_id}
-	</select>
+	
 
 		
 </mapper>

@@ -58,7 +58,7 @@
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
-	<script
+<script
 		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 <style>
 th{
