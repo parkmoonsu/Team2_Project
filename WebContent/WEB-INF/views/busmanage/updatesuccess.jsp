@@ -10,7 +10,15 @@
 </head>
 <body>
 	<script type="text/javascript">
-		swal("수정 완료");
+		swal({
+	        title: "",
+	        text: "수정 완료",
+	        type: "info",
+	        closeOnConfirm: true,
+	        showLoaderOnConfirm: true,
+	      },
+	      function(){
+	      })
 		location.href = "busenroll.admin";
 	</script>
 </body>
