@@ -415,10 +415,10 @@ public class ScheduleManageService {
 	}
 	
 	public MemberJoinBusDTO rnumcheck(String m_id){
-		System.out.println("어디까지왓니");
-		System.out.println(m_id);
+		
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
 		MemberJoinBusDTO dto=dao.rnumcheck(m_id);
+		System.out.println("여기가 수상하다");
 		return dto;		
 	}
 
