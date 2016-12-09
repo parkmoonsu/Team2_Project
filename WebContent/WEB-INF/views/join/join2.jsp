@@ -626,8 +626,16 @@ bodoy {
 				
 				$("#emailbtn").click(function() {
 					if(regExp.test($("#m_email").val().trim())){
-						
-						swal("인증번호 전송 완료");
+										
+						swal({
+		                    title: "",
+		                    text: "인증번호 전송 완료",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						$.ajax({
 							url : "popup.htm",
 							type : "post",
@@ -635,7 +643,15 @@ bodoy {
 						});
 						
 					}else{
-						swal("Email 형식이 잘못 되었습니다.          예 ) tukbong2@naver.com");
+						swal({
+		                    title: "",
+		                    text: "Email 형식이 잘못 되었습니다. 예 ) tukbong2@naver.com",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 					}
 					
 				});	
@@ -676,7 +692,15 @@ bodoy {
 						success:function(rd){
 							console.log(rd.echeck);
 							if($.trim(rd.echeck) == "y"){
-								swal("인증 되었습니다.");
+								swal({
+				                    title: "",
+				                    text: "인증 되었습니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                  });
 								$("#change").empty();
 								$("#change").append("<input type = 'hidden' name = 'm_echeck' value = 'y'>");
 								
@@ -685,7 +709,15 @@ bodoy {
 									type:"post"
 								});
 							}else{
-								swal("인증번호를 잘못 입력하셨습니다.");
+								swal({
+				                    title: "",
+				                    text: "인증번호를 잘못 입력하셨습니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                  });
 								$("#m_echeck").focus();
 							}
 							
@@ -705,7 +737,15 @@ bodoy {
 							$("#check").empty();
 							if($.trim(rd.check)=="y"){
 								$('#m_id').focus();
-								swal("이미 있는 ID 입니다.");
+								swal({
+				                    title: "",
+				                    text: "이미 있는 ID입니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                  });
 								//$('#check').append("<font color = 'red'  size='3px'>&nbsp;이미 있는 ID 입니다!</font>");
 								
 							}else if($.trim(rd.check)=="n" && $("#m_id").val().trim().length >= 8){
@@ -713,7 +753,15 @@ bodoy {
 								//$('#check').append("<font color = '#369F36'  size='3px'>사용 가능한 ID 입니다!</font>");
 							}else{
 								$('#m_id').focus();
-								swal("ID는 8자 이상입니다.");
+								swal({
+				                    title: "",
+				                    text: "ID는 8자 이상입니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                  });
 								
 								//$('#check').append("<font color = 'red'  size='3px'>ID는 8자 이상입니다!</font>");
 							}
@@ -726,65 +774,193 @@ bodoy {
 				$("#next").click(function(){
 					if($("#m_id").val() == ""){
 						$("#m_id").focus();
-						swal("ID를 입력하세요.");
+						swal({
+		                    title: "",
+		                    text: "ID를 입력하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 				        return false;
 					}else if($("#m_pw").val() == ""){
 						$("#m_pw").focus();
-						swal("비밀번호를 입력하세요.");
+						swal({
+		                    title: "",
+		                    text: "비밀번호를 입력하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 				        return false;
 					}else if($("#m_pw2").val() == "" || $("#m_pw").val() != $("#m_pw2").val()){
 						$("#m_pw2").focus();
-						swal("비밀번호가 일치 하지 않습니다.");
+						swal({
+		                    title: "",
+		                    text: "비밀번호가 일치하지 않습니다.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_name").val() == ""){
 						$("#m_name").focus();
-						swal("이름을 입력하세요.");
+						swal({
+		                    title: "",
+		                    text: "이름을 입력하세요",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_email").val() == ""){
 						$("#m_email").focus();
-						swal("이메일을 입력하세요.");
+						swal({
+		                    title: "",
+		                    text: "이메일을 입력하세요",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_nocheck").val() == "n"){
 						$("#m_email").focus();
-						swal("이메일을 통해 인증하세요.");
+						swal({
+		                    title: "",
+		                    text: "이메일을 통해서 인증하세요",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#j_code").val() == ""){
-						swal("직책을 선택하세요.");
+						swal({
+		                    title: "",
+		                    text: "직책을 선택하세요",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_birth").val() =="" || !bir.test($("#m_birth").val().trim())){
 						$("#m_birth").focus();
-						swal("생년월일을 형식에 맞게 입력해주세요.");
+						swal({
+		                    title: "",
+		                    text: "생년월일을 형식에 맞게 입력해주세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_phone").val() =="" || !bir2.test($("#m_phone").val().trim())){
 						$("#m_phone").focus();
-						swal("연락처를 형식에맞게 입력해주세요.");
+						swal({
+		                    title: "",
+		                    text: "연락처를 형식에맞게 입력해주세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_license").val() ==""){
 						$("#m_license").focus();
-						swal("운전면허증 사본을 첨부하세요.");
+						swal({
+		                    title: "",
+		                    text: "운전면허증 사본을 첨부하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_photo").val() ==""){
 						$("#m_photo").focus();
-						swal("사진을 첨부하세요.");
+						swal({
+		                    title: "",
+		                    text: "사진을 첨부하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($('#m_resume').val()==""){
 						$('#m_resume').focus();
-						swal("이력서를 첨부하세요.");
+						swal({
+		                    title: "",
+		                    text: "이력서를 첨부하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_addr").val() ==""){
 						$("#m_addr").focus();
-						swal("우편주소를 입력하세요.");
+						swal({
+		                    title: "",
+		                    text: "우편주소를 입력하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_daddr").val() ==""){
 						$("#m_daddr").focus();
-						swal("상세주소를 입력하세요.");
+						swal({
+		                    title: "",
+		                    text: "상세주소를 입력하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#res_num").val() ==""){
 						return false;
-						swal("이력사항을 선택하세요.");
+						swal({
+		                    title: "",
+		                    text: "이력사항을 선택하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 					}else if($("#rr_detail").val() ==""){
 						$("#rr_detail").focus();
-						swal("이력사항을 입력하세요.");
+						swal({
+		                    title: "",
+		                    text: "이력사항을 입력하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else{
 						return true;
