@@ -52,6 +52,8 @@
 <!-- Custom styling plus plugins -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <style>
 
 
@@ -331,7 +333,19 @@ select#selectedgaragename, select#selectedroutenumber {
 					editable : true,
 					eventDrop : function(event, delta, revertFunc, jsEvent, ui, view){
 						if(event.color=="#329632" || event.color=="#FFB432"){
-							alert(event.title + '님은 현재 휴무 변경 승인 대기 중입니다.');
+							//alert(event.title + '님은 현재 휴무 변경 승인 대기 중입니다.');
+							swal({
+								  title: "",
+								  text: event.title + "님은 현재 휴무 변경 승인 대기 중입니다.",
+								  type: "info",
+								  closeOnConfirm: true,
+								  showLoaderOnConfirm: true,
+								},
+								function(){
+								  /* setTimeout(function(){
+								    swal("Ajax request finished!");
+								  }, 2000); */
+								});
 							revertFunc();
 							$('#calendar').fullCalendar('unselect');
 						}else{
@@ -352,7 +366,19 @@ select#selectedgaragename, select#selectedroutenumber {
 								$('#calendar').fullCalendar('removeEvents', event.id);
 								$('#calendar').fullCalendar('renderEvent', eventObjectr);
 								$('#calendar').fullCalendar('unselect');
-								alert(event.title+' 님의 일정이 변경 되었습니다.');
+								//alert(event.title+' 님의 일정이 변경 되었습니다.');
+								swal({
+									  title: "",
+									  text: event.title + "님의 일정이 변경 되었습니다.",
+									  type: "info",
+									  closeOnConfirm: true,
+									  showLoaderOnConfirm: true,
+									},
+									function(){
+									  /* setTimeout(function(){
+									    swal("Ajax request finished!");
+									  }, 2000); */
+									});
 							}
 						});
 						}
@@ -393,7 +419,19 @@ select#selectedgaragename, select#selectedroutenumber {
 								$('#calendar').fullCalendar('renderEvent', eventObject2);
 								$('#calendar').fullCalendar('unselect');
 								$(dragitem).remove();
-								alert(event.title+' 님의 일정을 설정하였습니다.');
+								//alert(event.title+' 님의 일정을 설정하였습니다.');
+								swal({
+									  title: "",
+									  text: event.title + "님의 일정을 설정하였습니다.",
+									  type: "info",
+									  closeOnConfirm: true,
+									  showLoaderOnConfirm: true,
+									},
+									function(){
+									  /* setTimeout(function(){
+									    swal("Ajax request finished!");
+									  }, 2000); */
+									});
 							}
 						});
 						

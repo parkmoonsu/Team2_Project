@@ -51,7 +51,8 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <style type="text/css">
 .element { #map { margin-left:auto;
 	margin-right: auto;
@@ -336,7 +337,19 @@ select#selectBus, #selectRoute, #selectBuscopy {
     		//var locationX = poly.getPath().getAt(i).lng();
     		//var locationY = poly.getPath().getAt(i).lat();
     			if($("#selectBus").val()=='노선 선택' && $("#selectBuscopy").val() =='수정노선 선택'){    			
-    				alert('노선을 선택하여 주십시오');
+    				//alert('노선을 선택하여 주십시오');
+    				swal({
+						  title: "",
+						  text: "노선을 선택하세요.",
+						  type: "info",
+						  closeOnConfirm: true,
+						  showLoaderOnConfirm: true,
+						},
+						function(){
+						  /* setTimeout(function(){
+						    swal("Ajax request finished!");
+						  }, 2000); */
+						});
     				return false;
     			}else if($("#selectBus").val()=='노선 선택'){
     				var savelocation = {
@@ -354,7 +367,19 @@ select#selectBus, #selectRoute, #selectBuscopy {
         	        }    		
         	    	savelocations.push(savelocation);
     			}else if($("#selectBus").val() !='노선 선택' && $("#selectBuscopy").val() !='수정노선 선택'){
-    				alert('둘중에 하나만 선택가능함');
+    				//alert('둘중에 하나만 선택가능함');
+    				swal({
+						  title: "",
+						  text: "하나만 선택하세요",
+						  type: "info",
+						  closeOnConfirm: true,
+						  showLoaderOnConfirm: true,
+						},
+						function(){
+						  /* setTimeout(function(){
+						    swal("Ajax request finished!");
+						  }, 2000); */
+						});
     				return false;
     			}
     		}
