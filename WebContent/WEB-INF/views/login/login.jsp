@@ -14,6 +14,8 @@
 	src="${pageContext.request.contextPath}/loginassets/assets/js/jquery.backstretch.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/loginassets/assets/js/scripts.js"></script>
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <script type="text/javascript">
         $(function() {
 
@@ -42,6 +44,7 @@
             }
             
         }
+ 
 </script>
 <style type="text/css">
 .my-box {
@@ -184,8 +187,27 @@ placeholder {
 		<div>
 			로그인 실패 <br>
 			<script>
-									alert("극혐");
-								</script>
+				//alert("극혐");
+				swal({
+				  title: "로그인실패",
+				  text: "You will not be able to recover this imaginary file!",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "Yes, delete it!",
+				  //cancelButtonText: "No, cancel plx!",
+				  closeOnConfirm: false,
+				  //closeOnCancel: false
+				},
+				function(isConfirm){
+					if (isConfirm) {
+						swal("Deleted!", "Your imaginary file has been deleted.", "success");
+					} else {
+						swal("Cancelled", "Your imaginary file is safe :)", "error");
+				    }
+				});
+				
+			</script>
 			<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
 					                이유 : <c:out
 					value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
