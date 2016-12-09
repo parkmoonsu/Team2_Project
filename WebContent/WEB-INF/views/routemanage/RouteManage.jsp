@@ -200,50 +200,6 @@ select#selectBus, select#selectBus2 {
     <!-- Custom Theme Scripts -->
     <script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
     <script type="text/javascript">
-
-<<<<<<< HEAD
-						if(obj.s_y<high_y && obj.s_y>low_y){
-								dataList.push(obj);
-						}
-						
-					});
-					
-					$.each(dataList, function(index, obj){
-						var loc={
-							lat : Number(obj.s_y),
-							lng : Number(obj.s_x)
-						};
-					
-						var marker = new google.maps.Marker({
-							position : loc,
-							map : map
-							//label : String(obj.rs_order)
-						});
-						
-						var contentString = '<div id="content" style="text-align:left, padding-right:40px">'
-							+'정류장 번호 : '+obj.s_num+'<br>'
-							+'정류장 이름 : '+obj.s_name+'<br>'
-							+'<button class="btn btn-default" onclick="stopclick('
-							+obj.s_num+')">등록하기</button>';
-							+'</div>';
-
-						var infowindow = new google.maps.InfoWindow({
-							content : contentString
-						});
-						
-						marker.addListener('click', function() {
-							markerobject=marker;
-							dataobject=obj;
-							cmarker.setMap(null);
-							infowindow.open(map, marker);
-						});
-						
-						markerList.push(marker);
-									
-					});
-				}
-			});			
-=======
 	
   //구글 지도 전역변수
     var map;
@@ -285,7 +241,7 @@ select#selectBus, select#selectBus2 {
     function polyRemove(){
 		if(poly !=null){
 			poly.setMap(null);
->>>>>>> a9eec70d8c7825fcd5d32b8ce4c24f15a0ca6a74
+
 		}
     }
     
