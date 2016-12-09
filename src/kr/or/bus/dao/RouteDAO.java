@@ -13,7 +13,9 @@ public interface RouteDAO {
 	
 	public List<RouteDTO> routeidselect(String r_num);
 	
-	public void InsertRoute(String r_x,String r_y,String r_num,int r_order);
+	public void InsertRoute(RoutePathDTO dto);
+	
+	public List<RoutePathDTO> editRouteRead(String r_num);
 	
 	//전체 노선 불러오기
 	public List<RouteDTO> route();

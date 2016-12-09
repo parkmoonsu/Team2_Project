@@ -1,5 +1,6 @@
 package kr.or.bus.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,9 @@ import kr.or.bus.dto.RouteStopJoinStopDTO;
 import kr.or.bus.service.BusStopManageService;
 import kr.or.bus.service.RouteManageService;
 import kr.or.bus.service.RoutePathService;
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class RouteManageController {
@@ -138,11 +142,14 @@ public class RouteManageController {
     	}
     	//(r_type)을 받아서 DB에 원본 insert 하는 서비스
     	@RequestMapping(value="/insertpath.admin",method=RequestMethod.GET)
-    	public View insertpath(List<RoutePathDTO> data) throws Exception{
-    		routepathservice.busSingleRouteRead(data);
+    	public void insertpath(HttpServletRequest request , HttpServletResponse response) throws Exception{
+    		System.out.println("컨트롤러 탄다잉");
+    		String datalist =  request.getParameter("data");
+    		System.out.println(datalist);
+    		
+    		routepathservice.busSingleRouteRead(request , response);
     		
     		System.out.println("여길 타긴 하냐?");
-    		return jsonview;
     	}
     	
     	 //있는 데이터 가져오는 서비스(r_type)
@@ -163,6 +170,13 @@ public class RouteManageController {
         	System.out.println("간다");
             return jsonview;
         }
-
+        
+        //수정된 노선경로 데이터 가져오기
+        @RequestMapping(value="/editpath.admin",method=RequestMethod.GET)
+        public View selectEditpath(String r_num, Model model){
+        	List<RoutePathDTO> editlist = routepathservice.selectEditPath(r_num);
+        	model.addAttribute("editlist", editlist);
+			return jsonview;       	
+        }
 		
 }
