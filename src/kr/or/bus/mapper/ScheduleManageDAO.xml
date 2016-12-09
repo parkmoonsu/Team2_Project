@@ -127,7 +127,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  on rego.m_id = mem.m_id
 	  join bus bu
 	  on bu.b_vehiclenum = mem.b_vehiclenum
-	  where bu.r_num = #{r_num} and rego.TEMP = 't' or rego.TEMP = 's')
+	  where bu.r_num = #{r_num} and (rego.TEMP = 't' or rego.TEMP = 's'))
 	</select>
 	
 	<select id="getOcode" resultType="String">

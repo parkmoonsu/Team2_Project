@@ -93,9 +93,9 @@ public interface ScheduleManageDAO {
 	public int updateBtwReqRego(String m_id, String o_code_1);//승인 변경 요청자 update reguloff
 	public int updateBtwByRegr(String m_id_1,String o_code_1); //승인 변경 대상자 update reguloffr
 	public int updateBtwByRego(String m_id_1,String o_code); //승인 변경 대상자 update reguloff
-	public int updateBtwReqRegrre(String m_id, String o_code);//거절 변경 요청자 update reguloffr
+	public int updateBtwReqRegrre(String m_id);//거절 변경 요청자 update reguloffr
 	public int updateBtwReqRegore(String m_id, String o_code);//거절 변경 요청자 update reguloff
-	public int updateBtwByRegrre(String m_id_1,String o_code_1); //거절 변경 대상자 update reguloffr
+	public int updateBtwByRegrre(String m_id_1); //거절 변경 대상자 update reguloffr
 	public int updateBtwByRegore(String m_id_1,String o_code_1); //거절 변경 대상자 update reguloff
 	
 	public MemberJoinBusDTO rnumcheck(String m_id);

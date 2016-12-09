@@ -6,15 +6,21 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import kr.or.bus.dao.RouteDAO;
 import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RoutePathDTO;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.xml.XMLSerializer;
@@ -26,27 +32,30 @@ public class RoutePathService {
 		private SqlSession sqlsession;
 
 			
-			//읽은 데이터가 1개일경우
-			public void busSingleRouteRead(List<RoutePathDTO> data) throws IOException{
-				RouteDAO dao = null;
-				dao = sqlsession.getMapper(RouteDAO.class);
-			
-		        int i = 0;
-
-		        
-		        while(i<data.size()){
-		        	String r_x=data.get(i).getR_x();
-		        	String r_y=data.get(i).getR_y();
-		        	String r_num=data.get(i).getR_num();
-		        	int r_order=i;
-		        	dao.InsertRoute(r_x,r_y,r_num,r_order);
-		        	System.out.println(i);
-		        	i++;
-		        }
-		        System.out.println("다됌");
-		        
-		        //dao.InsertRoute(r_num,r_x,r_y,r_order);
-		        //out.print(jsonmaps);
+			//원본 노선경로 읽어옴
+			public void busSingleRouteRead(HttpServletRequest request , HttpServletResponse response) throws IOException{
+				String datalist =  request.getParameter("data");
+	    		System.out.println(datalist);
+	    		RouteDAO dao = sqlsession.getMapper(RouteDAO.class);
+	    		
+	    		JSONArray jsondata = JSONArray.fromObject(datalist);
+	    		System.out.println(jsondata);
+	    		
+	    		RoutePathDTO dto = new RoutePathDTO();
+	    		int i=0;
+	    		
+	    		int jsonsize = jsondata.size();
+	    		while(i<jsonsize){
+	    			System.out.println(i);
+	    			System.out.println(jsondata.getJSONObject(i));
+	    			dto.setR_num(jsondata.getJSONObject(i).get("r_num").toString());
+	    			dto.setR_x(jsondata.getJSONObject(i).get("r_x").toString());
+	    			dto.setR_y(jsondata.getJSONObject(i).get("r_y").toString());
+	    			dto.setR_order(String.valueOf(i));
+	    			dao.InsertRoute(dto);
+	    			i++;
+	    		}					       
+		        System.out.println("다됌");		        		     
 			}	
 			
 			public List<RouteDTO> Selectpath(String r_num) throws IOException{						
@@ -58,6 +67,12 @@ public class RoutePathService {
 	            		
 	            	return dto;
 	            															
+			}
+			
+			//수정 노선경로 불러오기 서비스
+			public List<RoutePathDTO> selectEditPath(String r_num){
+				RouteDAO dao = sqlsession.getMapper(RouteDAO.class);				
+				return dao.editRouteRead(r_num);				
 			}
 			
 				

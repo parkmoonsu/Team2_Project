@@ -297,7 +297,7 @@ public class ScheduleManageService {
 	목적 : 특정 시간에만 정규휴무를 신청/변경할 수 있도록
 	*/
 
-	@Scheduled(cron="0 00 9 * * *")
+	@Scheduled(cron="* * * * * *")
 	public void reguloffScheduler1(){
 		System.out.println("휴무변경 가능으로 변경");
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
@@ -412,6 +412,10 @@ public class ScheduleManageService {
 	//정보 휴무 교환 정보 거절 업데이트
 	public void updatebtwinforefuse(String m_id, String o_code,String m_id_1, String o_code_1, Model model){
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
+		dao.updateBtwReqRegrre(m_id);
+		dao.updateBtwReqRegore(m_id, o_code);
+		dao.updateBtwByRegrre(m_id_1);
+		dao.updateBtwByRegore(m_id_1, o_code_1);
 	}
 	
 	public MemberJoinBusDTO rnumcheck(String m_id){
@@ -421,5 +425,6 @@ public class ScheduleManageService {
 		MemberJoinBusDTO dto=dao.rnumcheck(m_id);
 		return dto;		
 	}
+	
 
 }

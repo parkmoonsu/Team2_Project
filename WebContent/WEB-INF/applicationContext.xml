@@ -19,7 +19,6 @@
  	4.스케줄러 추가
  -->                          
 	<bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@kosta.cx5bpxu7beao.ap-northeast-2.rds.amazonaws.com:1521:ORCL"></property>
       <property name="username" value="kosta"></property>
       <property name="password" value="kosta129th"></property>
