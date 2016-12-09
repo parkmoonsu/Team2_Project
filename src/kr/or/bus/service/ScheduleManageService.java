@@ -1,25 +1,15 @@
 package kr.or.bus.service;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.View;
 
 import kr.or.bus.dao.ScheduleDAO;
 import kr.or.bus.dao.ScheduleManageDAO;
@@ -30,9 +20,7 @@ import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO;
 import kr.or.bus.dto.MemberJoinRegulOffrJoinBusJoinMoffJoinKoffDTO2;
 import kr.or.bus.dto.MemberJoinReguloffJoinMoffJoinBusJoinRouteJoinDTO;
-
 import kr.or.bus.dto.MemberJoinReguloffrJoinMoffDTO;
-
 import kr.or.bus.dto.OscheduleJoinMemberDTO;
 import kr.or.bus.dto.RegulOffDTO;
 import kr.or.bus.dto.RegulOffrDTO;
@@ -297,7 +285,7 @@ public class ScheduleManageService {
 	목적 : 특정 시간에만 정규휴무를 신청/변경할 수 있도록
 	*/
 
-	@Scheduled(cron="* 00 20 * * *")
+	@Scheduled(cron="0 00 22 * * *")
 	public void reguloffScheduler1(){
 		//System.out.println("휴무변경 가능으로 변경");
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
@@ -419,10 +407,13 @@ public class ScheduleManageService {
 	}
 	
 	public MemberJoinBusDTO rnumcheck(String m_id){
-		
+		System.out.println("2");
+		System.out.println(m_id);
 		ScheduleManageDAO dao = sqlsession.getMapper(ScheduleManageDAO.class);
-		MemberJoinBusDTO dto=dao.rnumcheck(m_id);
-		System.out.println("여기가 수상하다");
+		System.out.println("여기가 수상하다1");
+		MemberJoinBusDTO dto = dao.RnumCheck(m_id);
+		System.out.println("여기가 수상하다2");
+
 		return dto;		
 	}
 	

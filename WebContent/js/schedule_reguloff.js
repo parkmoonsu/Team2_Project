@@ -252,10 +252,11 @@ function loadCalendar(){
 
 		//날짜 선택시 이벤트
 		select : function(start, end, jsEvent) {
+			console.log(loginid);
 			$.ajax({
-				data:{m_id:loginid},
+				data:{"m_id":loginid},
 				url:"rnumcheck.member",
-				type:"post",
+				type:"get",
 				success:function(data){
 					
 						$.ajax({
