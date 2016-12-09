@@ -546,44 +546,26 @@ $(document).ready(function() {
 			var m_id = $('#sm_id').val();
 			var o_code = $('#so_code').val();
 			var o_code_1 = $('#so_code_1').val();
-			var resultObject = {
-					id : calEventObject.id,
-					title : calEventObject.title,
-					dow : data.o_code,
-					color : '#FF5A5A'
-				};
-			var resultObject = {
-					id : calEventObject.id,
-					title : calEventObject.title,
-					dow : data.o_code,
-					color : '#FF5A5A'
-				};
+			var resultObject;
+					
 			$.ajax({
 				url:"refusefirstregister.admin",
 				data:{"m_id":m_id,"o_code":o_code,"o_code_1":o_code_1},
 				type:"post",
 				success:function(data){
 					alert('변경 거절');
-					if(calEventObject.dow==calEventObject.afterdow){
-					var resultObject = {
-							id : calEventObject.id,
-							title : calEventObject.title
-						};
-					}else{
-					var resultObject = {
-							id : calEventObject.id,
-							title : calEventObject.title,
-							dow : data.o_code
-						};	
-					}
-					$('#calendar').fullCalendar('removeEvents', calEventObject.id);
-					$('#calendar').fullCalendar('renderEvent', resultObject);
-					$('#calendar').fullCalendar('unselect');
+					console.log('ddddd');
+					console.log(calEventObject);
+					
+					
 				}
+			});//ajax
+			$(document).ajaxStop(function(){
+				$('#calendar').fullCalendar('removeEvents', calEventObject.id);
 			});
-		});
-		});
-	
+		});//refuse
+	});
+		
 		
 	</script>
 	<!-- Bootstrap -->
