@@ -5,6 +5,7 @@ public class MemberJoinBusDTO {
 	private String b_vehiclenum;
 	private String m_name;
 	private String r_num;
+	
 	public String getM_id() {
 		return m_id;
 	}

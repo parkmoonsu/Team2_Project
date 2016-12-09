@@ -8,18 +8,12 @@
 
 package kr.or.bus.controller;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,15 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
-import kr.or.bus.dao.ScheduleDAO;
-import kr.or.bus.dto.ScheduleDTO;
-import kr.or.bus.service.ScheduleManageService;
 import kr.or.bus.dto.MemberJoinBusDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
-import kr.or.bus.dto.RegulOffDTO;
-import kr.or.bus.dto.RegulOffrDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinMemberJoinBusDTO;
+import kr.or.bus.service.ScheduleManageService;
 
 @Controller
 public class ScheduleController {
@@ -270,9 +260,10 @@ public class ScheduleController {
 		return jsonview;
 	}
 	
-	@RequestMapping(value="/rnumcheck.member", method=RequestMethod.POST)
-	public View rnum_check(String m_id, Model model){
-
+	@RequestMapping("/rnumcheck.member")
+	public View rnumcheck(String m_id, Model model){
+		System.out.println("1");
+		System.out.println(m_id);
 		MemberJoinBusDTO dto=service.rnumcheck(m_id);
 		model.addAttribute("dto", dto);		
 		return jsonview;
