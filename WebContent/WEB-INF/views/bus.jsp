@@ -189,12 +189,11 @@
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">
-				<div class="text-inner" style="padding-top: 15px">
+				<div class="text-inner">
 					<div class="row">
-						<div class = "col-md-9 col-md-offset-2">
+						<div class = "col-md-9 col-md-offset-2"  style="padding-top: 15px">
 							<h1 class="to-animate">새롭고 편리한  통합 버스 관리 시스템, </h1>
-							<h1 class="to-animate">RoadOneBell 입니다.</h1>
-							
+							<h1 class="to-animate">RoadOneBell 입니다.</h1>							
 						</div>
 					</div>
 				</div>
@@ -206,11 +205,11 @@
 	<section id="fh5co-intro" data-section="work">
 		<div class="container">
 			<div class="row row-bottom-padded-lg">
-				<div class="fh5co-block to-animate" style="background-image: url(images/img_7.jpg);">
+				<div class="fh5co-block to-animate" style="background-image: url(images/img_7.jpg); ">
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
-						<img src = "${pageContext.request.contextPath}/images/chart.JPG" width ="150px" height = "100px">
+						<img src = "${pageContext.request.contextPath}/images/chart.JPG" width ="200px" height = "100px">
 						<h2>Chart</h2>
 						<p> 노선별, 정류장별, 탑승객을 시간대별로 차트를 통해 확인 할 수 있습니다.</p>
 						
@@ -220,10 +219,9 @@
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
-						<img src = "${pageContext.request.contextPath}/images/map.PNG" width ="200px" height = "100px" style="margin: 3px">
+						<img src = "${pageContext.request.contextPath}/images/map.PNG" width ="200px" height = "100px">
 						<h2>Map</h2>
-						<p>실시간 버스 위치와 노선, 정류장을 지도로 관리할 수 있습니다. 
-이 지도에 표시 됩니다.</p>
+						<p>실시간 버스 위치와 노선, 정류장을 지도로 관리할 수 있습니다.</p>
 						
 					</div>
 				</div>
@@ -231,9 +229,9 @@
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
-						<img src = "${pageContext.request.contextPath}/images/bbaga.png" width ="150px" height = "100px">
+						<img src = "${pageContext.request.contextPath}/images/cal.PNG" width ="200px" height = "100px">
 						<h2>Calendar</h2>
-						<p>캘린더를 이용하여 일정을 쉽고 편하게 관리할 수 있습니다. </p>
+						<p>캘린더를 이용하여 휴무 및 일정을 쉽고 편하게 관리할 수 있습니다. </p>
 						
 					</div>
 				</div>
