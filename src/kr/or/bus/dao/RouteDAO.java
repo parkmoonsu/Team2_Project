@@ -1,3 +1,12 @@
+/*
+*	@FileName : RouteDAO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.25
+*	@Author	: 김지현
+*	@Discription : 노선관련  DAO interface
+*/
+
+
 package kr.or.bus.dao;
 
 import java.util.List;

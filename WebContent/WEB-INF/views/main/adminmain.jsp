@@ -11,10 +11,9 @@
  
  <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-=======
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
->>>>>>> 657cc70f74fe5e1d0ab680c3b2abc072a9f14bae
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>

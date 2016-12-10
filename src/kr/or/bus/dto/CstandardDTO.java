@@ -1,3 +1,11 @@
+/*
+*	@FileName : CstandardDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.19
+*	@Author	:  길한종
+*	@Discription : CstandardDTO table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class CstandardDTO {

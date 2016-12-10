@@ -343,7 +343,7 @@ select#selectedrnum {
                 
                 	  
                 	 if(Number(obj.o_code)!=i){
-                	  
+                	  //2015-07-17 22:25:00
                       var time00=date+" "+obj.r_start;  //time2 = "2016-12-7 05:30:00" ->첫차시간
                       var time01=new Date(time00);  //time3 = Wed Dec 07 2016 05:30:00  ->(대한민국 표준시)
                       var time02=new Date(time00);  //time4 = Wed Dec 07 2016 05:30:00  ->(대한민국 표준시)

@@ -1,3 +1,11 @@
+/*
+*	@FileName : BusStopDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.25
+*	@Author	: 김용현
+*	@Discription : 버스정류장  table  DTO
+*/
+
 package kr.or.bus.dto;
 
 public class BusStopDTO {

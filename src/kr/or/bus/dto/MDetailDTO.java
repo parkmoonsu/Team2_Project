@@ -1,5 +1,5 @@
 /*
-*	@FileName : MemberDTO.java
+*	@FileName : MDetailDTO.java
 *	@Project	: KosBus
 *	@Date	: 2016. 11.14
 *	@Author	: 박문수

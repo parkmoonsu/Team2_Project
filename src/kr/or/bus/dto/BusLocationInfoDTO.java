@@ -1,3 +1,11 @@
+/*
+*	@FileName : BusLocationInfoDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.24
+*	@Author	: 김지현
+*	@Discription : BusLocation 테이블 DTO
+*/
+
 package kr.or.bus.dto;
 
 public class BusLocationInfoDTO {

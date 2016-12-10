@@ -1,4 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <!-- 
+	@FileName : daylist.jsp
+	@Project	: KosBus
+	@Date	: 2016. 12.02
+	@Author	: 김용현
+	@Discription : 스케줄변경정보list
+ -->
+ 
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <table class="table table-hover projects" style="text-align: center">

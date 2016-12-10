@@ -1,3 +1,12 @@
+/*
+*	@FileName : BusStopDAO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.24
+*	@Author	: 김지현
+*	@Discription : 버스 정류장 관련 DAO interface
+*/
+
+
 package kr.or.bus.dao;
 
 import java.util.List;
