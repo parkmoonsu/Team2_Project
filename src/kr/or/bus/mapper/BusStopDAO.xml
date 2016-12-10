@@ -12,10 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 수정 버스정류장 -->
-	<select id="" parameterType="String" resultType="kr.or.bus.dto.BusStopDTO">
+	<select id="editBusStopreturn" parameterType="String" resultType="kr.or.bus.dto.BusStopDTO">
 		select stop.S_NUM, stop.S_NAME, stop.S_X, stop.S_Y, ROUTESTOP3.RS_ORDER
 		from stop, ROUTESTOP3 
 		where stop.S_NUM = ROUTESTOP3.S_NUM and ROUTESTOP3.R_NUM = #{r_num}
-		ORDER BY ROUTESTOP3.RS_ORDER;
+		ORDER BY ROUTESTOP3.RS_ORDER
 	</select>
 </mapper>

@@ -1,6 +1,13 @@
 package kr.or.bus.dto;
 
 public class RegulOffrJoinDTO {
+	private int rown;
+	public int getRown() {
+		return rown;
+	}
+	public void setRown(int rown) {
+		this.rown = rown;
+	}
 	private String ko_code;
 	private String m_id;
 	private String o_code;

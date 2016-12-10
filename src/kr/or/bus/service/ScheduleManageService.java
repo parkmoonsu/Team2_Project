@@ -232,9 +232,15 @@ public class ScheduleManageService {
 	목적 : reguloffr CRUD
 	*/
 	
-	public List<RegulOffrJoinDTO> viewHistory(String m_id) throws ClassNotFoundException, SQLException{
+	public List<RegulOffrJoinDTO> viewHistory(String m_id , String pg) throws ClassNotFoundException, SQLException{
+		int page = 1;
+		
+		if(pg != null){
+			page = Integer.parseInt(pg);
+		}
+		
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
-		List<RegulOffrJoinDTO> list=dao.history_select(m_id);
+		List<RegulOffrJoinDTO> list=dao.history_select(m_id , page);
 				
 		return list;
 	}
@@ -415,6 +421,15 @@ public class ScheduleManageService {
 		System.out.println("여기가 수상하다2");
 
 		return dto;		
+	}
+	
+	public int historycount(){
+		ScheduleDAO dao = sqlsession.getMapper(ScheduleDAO.class);
+		
+		int count = dao.historycount();
+		
+		return count;
+		
 	}
 	
 

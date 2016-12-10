@@ -25,6 +25,7 @@ import kr.or.bus.dto.MemberJoinBusDTO;
 import kr.or.bus.dto.MemberJoinRegulOffDTO;
 import kr.or.bus.dto.RegulOffrJoinDTO;
 import kr.or.bus.dto.RegulOffrJoinMemberJoinBusDTO;
+import kr.or.bus.service.BusManageService;
 import kr.or.bus.service.ScheduleManageService;
 
 @Controller
@@ -32,6 +33,9 @@ public class ScheduleController {
 	
 	@Autowired
 	private SqlSession sqlsession;
+	
+	@Autowired
+	private BusManageService service2;
 	
 	@Autowired
 	private ScheduleManageService service;
@@ -210,12 +214,22 @@ public class ScheduleController {
 	
 	//기록보기
 	@RequestMapping("/schedule_history.htm")
-	public String viewHistory(String m_id, Model model) throws ClassNotFoundException, SQLException{
+	public String viewHistory(String m_id, Model model , String pg) throws ClassNotFoundException, SQLException{
 
-		List<RegulOffrJoinDTO> list=service.viewHistory(m_id);
-				
+		List<RegulOffrJoinDTO> list=service.viewHistory(m_id , pg);
+		int page = service2.pg(pg);
+		int count = service.historycount();
+		int pagecount = 0;
+		if(count % 10 == 0){
+			pagecount = count/10;
+		}else{
+			pagecount = count/10 + 1;
+		}
+		System.out.println("#### pagecount " + pagecount);
 		model.addAttribute("list", list);
-
+		model.addAttribute("pgs", page);
+		model.addAttribute("pagecount", pagecount);
+		model.addAttribute("count", count); 
 		return "schedule/schedule_history";
 	}
 	
