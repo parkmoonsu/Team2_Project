@@ -418,9 +418,6 @@ select#selectBus, #selectRoute, #selectBuscopy {
 						  showLoaderOnConfirm: true,
 						},
 						function(){
-						  /* setTimeout(function(){
-						    swal("Ajax request finished!");
-						  }, 2000); */
 						});
     				return false;
     			}else if($("#selectBus").val()=='노선 선택'){
@@ -554,19 +551,35 @@ select#selectBus, #selectRoute, #selectBuscopy {
                     success : function(data) {
                     	console.log("시뮬레이션 시작");
                     	console.log(data);
-                    	movingBusMarker(data.editlist,data.businfolist[0],map);
                     	
-                    	var k=0;
-                    	stopSearch = setInterval(function(){
-                			movingBusMarker(data.editlist,data.businfolist[++k],map);	
-                		},20000);
-                    	
-                    	setInterval(function() {
-                    		if(k == data.businfolist.length-1){
-                        		console.log("현재 생성된 버스마커 외 interval 중지");
-                        		clearInterval(stopSearch);
-                        	}                        		
-                    	}, 20000);                 		                   		                 	                   		                   		
+                    	if(data.businfolist.length != 0){
+                    		movingBusMarker(data.editlist,data.businfolist[0],map);
+                        	
+                        	var k=0;
+                        	stopSearch = setInterval(function(){
+                    			movingBusMarker(data.editlist,data.businfolist[++k],map);	
+                    		},20000);
+                        	
+                        	setInterval(function() {
+                        		if(k == data.businfolist.length-1){
+                            		console.log("현재 생성된 버스마커 외 interval 중지");
+                            		clearInterval(stopSearch);
+                            	}                        		
+                        	}, 20000);	
+                    	}else{
+                    		//alert("기사가 배정되지 않았습니다");
+                    		swal({
+      						  title: "",
+      						  text: "기사가 배정되지 않았습니다",
+      						  type: "info",
+      						  closeOnConfirm: true,
+      						  showLoaderOnConfirm: true,
+      						},
+      						 function(){
+      						}); 
+                    		return false;
+                    	}
+                    	                 		                   		                 	                   		                   		
                     }
                 });
         	

@@ -74,7 +74,7 @@ footer {
 	margin-left: 0px;
 }
 select#selectBus, select#selectBus2 {
-	-webkit-appearance: button;
+	-webkit-appearance: button btn-sm;
 	-webkit-border-radius: 2px;
 	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 	-webkit-padding-end: 20px;
@@ -145,22 +145,10 @@ select#selectBus, select#selectBus2 {
 					<!--  -->
 					<div class="x_panel">
 					<div class="row" style="text-align: right">
-						<button id="creaternum" class="btn btn-default">노선번호생성</button>
-						<input type="text" id="createdrnum" readonly style="width:80px; height:34px; padding: 12px 20px; 
+						<button id="creaternum" class="btn btn-default btn-sm">노선번호생성</button>
+						<input type="text" id="createdrnum" readonly style="width:80px; height:30px; padding: 12px 20px; margin-bottom :3px; 
     					   border-radius: 8px;">
-						<!-- <input type="button" id="newsave" value="원본좌표저장" class="btn btn-default">
-						<input type="button" id="newsave2" value="수정좌표저장" class="btn btn-default"> -->
-
-						<input type="button" id="busLoad" value="버스 보기-무쓸모" class="btn btn-default"zdddd>
-					
-					
-					<select id="selectBus" style="margin:5px" >
-						<option>원본-무쓸모</option>
-						<c:forEach var="i" items="${list}">
-							<option>${i.r_num}</option>
-						</c:forEach>												
-					</select>
-					
+										
 					<select id="selectBus2" >
 						<option value="">수정</option>
 						<c:forEach var="i" items="${list}">
@@ -170,7 +158,7 @@ select#selectBus, select#selectBus2 {
 					
 					<span>
 					<input type="text" style="width:210px; height:34px; padding: 12px 20px; 
-    					   border-radius: 8px;" id="inputBusStop" placeholder="&nbsp;노선번호를 입력해주세요">
+    					   border-radius: 8px;" id="inputBusStop" placeholder="&nbsp;노선번호를 입력">
 					<input type="button" class="btn btn-default btn-sm" id="sendBusStop" value="정류장저장"></span>
 					
 					

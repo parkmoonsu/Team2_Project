@@ -1,4 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <!-- 
+	@FileName : join1.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.23
+	@Author	: 조한솔
+	@Discription : 회원가입_이용약관 
+ -->
+ 
+ 
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -270,7 +279,7 @@ p, h5 {
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="bus.htm" data-nav-section="home"><span>Home</span></a></li>
-						<li><a href="login.htm" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
+						<li><a href="login.htm" id="log"><span>로그인</span></a></li>
 						<li><a href="#" id="gaip"><span>회원가입</span></a></li>
 					</ul>
 				</div>
@@ -286,7 +295,7 @@ p, h5 {
 					<hr>
 					<div class="col-sm-1"></div>
 
-					<div class="col-md-10 col-sm-10 col-xs-10 form-box">
+					<div class="col-md-10 col-sm-10 col-xs-12 form-box">
 						<div class="x_panel">
 							<div class="x_title">
 								<div class="form-top" align="center" style="color: black">
@@ -680,10 +689,10 @@ p, h5 {
 				}
 			});
 
-			$('#wizard').smartWizard();
+			/* $('#wizard').smartWizard();
 			$('#wizard_verticle').smartWizard({
 				transitionEffect : 'slide'
-			});
+			}); */
 		});
 	</script>
 

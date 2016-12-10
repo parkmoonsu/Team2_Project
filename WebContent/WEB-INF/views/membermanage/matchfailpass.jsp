@@ -1,3 +1,11 @@
+ <!-- 
+	@FileName : matcjfailpass.jsp
+	@Project	: KosBus
+	@Date	: 2016. 12.04
+	@Author	: 박문수
+	@Discription : 비밀번호 불일치
+ -->
+ 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

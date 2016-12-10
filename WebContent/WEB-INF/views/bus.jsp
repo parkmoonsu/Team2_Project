@@ -177,25 +177,25 @@
 </head>
 <body>
 	<header role="banner" id="fh5co-header">
-		<div class="container">
-			<!-- <div class="row"> -->
-			<nav class="navbar navbar-default">
-				<div class="navbar-header">
-					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"
-						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-						aria-controls="navbar"><i></i></a> <a class="navbar-brand"
-						href="bus.htm">RoadOneBell</a>
-				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
-						<li><a href="#" data-nav-section="work"><span>Work</span></a></li>
-						<li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
-						<li><a href="#" id="gaip"><span>회원가입</span></a></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
+
+			<div class="container">
+				<!-- <div class="row"> -->
+			    <nav class="navbar navbar-default">
+		        <div class="navbar-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		         <a class="navbar-brand" href="bus.htm">RoadOneBell</a> 
+		        </div>
+		        <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav navbar-right">
+		            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
+		            <li><a href="#" data-nav-section="work"><span>Work</span></a></li> 
+		            <li><a href="#" id="log"><span>로그인</span></a></li>
+		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
+		          </ul>
+		        </div>
+			    </nav>
+		  </div>
+
 	</header>
 	<section id="fh5co-home" data-section="home"
 		data-stellar-backgmacubround-ratio="0.5"

@@ -1,4 +1,10 @@
-
+ <!-- 
+	@FileName : jasonNewApprove.jsp
+	@Project	: KosBus
+	@Date	: 2016. 12.01
+	@Author	: 김용현
+	@Discription : 회원승인 알림
+ -->
 
 
 
