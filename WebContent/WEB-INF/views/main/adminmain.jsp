@@ -1,4 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <!-- 
+	@FileName : adminmain.jsp
+	@Project	: KosBus
+	@Date	: 2016. 12.04
+	@Author	: 박문수
+	@Discription : 관리자메인페이지 
+ -->
+ 
+ 
+ 
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
