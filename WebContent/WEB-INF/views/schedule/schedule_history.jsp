@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="se"
 	uri="http://www.springframework.org/security/tags"%>
 
@@ -54,19 +54,31 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-	
+
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
 <script
-		src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
+	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 <style>
-th{
-	text-align: center
+th {
+	text-align: center;
+}
+
+ul.pagination li a.active {
+	background-color: #1ABB9C;
+	color: white;
+}
+
+ul.pagination li a {
+	color: #73879C;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
 }
 </style>
 </head>
-
+<se:authentication property="name" var="LoginUser" />
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -79,10 +91,10 @@ th{
 			<div class="top_nav">
 				<jsp:include page="/sidebar/menuHeader.jsp"></jsp:include>
 			</div>
-			  <!-- page content -->
-        <div class="right_col" role="main">
-        
-         <!--  top tiles
+			<!-- page content -->
+			<div class="right_col" role="main">
+
+				<!--  top tiles
           <div class="row tile_count" style = "text-align: center">
           	<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
           		<span class="count_top"></span>
@@ -105,20 +117,20 @@ th{
             </div>  
           </div>
           top tiles -->
-          
+
 				<div class="">
-				<div class="page-title">
-						<div class="title_left">
-						</div>
+					<div class="page-title">
+						<div class="title_left"></div>
 					</div>
 					<div class="clearfix"></div>
 
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
-						<ul class="nav nav-tabs" style="border-bottom: 0px">
-  				<li role="presentation"><a href="schedule_reguloff.htm">정기휴무신청</a></li>
-  				<li role="presentation" class="active"><a href="schedule_history.htm?m_id=${LoginUser}">신청내역조회</a></li>
-			  </ul>
+							<ul class="nav nav-tabs" style="border-bottom: 0px">
+								<li role="presentation"><a href="schedule_reguloff.htm">정기휴무신청</a></li>
+								<li role="presentation" class="active"><a
+									href="schedule_history.htm?m_id=${LoginUser}">신청내역조회</a></li>
+							</ul>
 							<div class="x_panel">
 								<div class="x_content">
 									<!-- start project list -->
@@ -132,7 +144,8 @@ th{
 											</span> -->
 										</div>
 									</div>
-									<table class="table table-hover projects" style="text-align: center">
+									<table class="table table-hover projects"
+										style="text-align: center">
 										<thead>
 											<tr>
 												<th>번호</th>
@@ -142,141 +155,103 @@ th{
 												<th>승인일</th>
 												<th>변경대상</th>
 												<th>상태</th>
-												
+
 											</tr>
 										</thead>
 										<tbody>
-											<c:set value="${list}" var="d"/>
-										
+											<c:set value="${list}" var="d" />
+
 											<c:forEach var="i" items="${d}" varStatus="status">
-											<tr>
-												<td>${status.count}</td>
-												<td>${i.bd}</td>
-												<td>${i.ad}</td>
-												<td>${i.ro_reqdate}</td>
-												<td>${i.ro_regdate}</td>
-												<td>${i.an}</td>
-												<c:if test="${i.ko_name=='신청중'}">
-													<td><button class="btn btn-info btn-xs">${i.ko_name}</button></td>
-												</c:if>
-												<c:if test="${i.ko_name=='승인'}">
-													<td><button class="btn btn-success btn-xs" style="width:50px; border:0">${i.ko_name}</button></td>
-												</c:if>
-												<c:if test="${i.ko_name=='거절'}">
-													<td><button class="btn btn-danger btn-xs" style="width:50px; border:0">${i.ko_name}</button></td>
-												</c:if>									
-											</tr>
+												<tr>
+													<td>${i.rown}</td>
+													<td>${i.bd}</td>
+													<td>${i.ad}</td>
+													<td>${i.ro_reqdate}</td>
+													<td>${i.ro_regdate}</td>
+													<td>${i.an}</td>
+													<c:if test="${i.ko_name=='신청중'}">
+														<td><button class="btn btn-info btn-xs">${i.ko_name}</button></td>
+													</c:if>
+													<c:if test="${i.ko_name=='승인'}">
+														<td><button class="btn btn-success btn-xs"
+																style="width: 50px; border: 0">${i.ko_name}</button></td>
+													</c:if>
+													<c:if test="${i.ko_name=='거절'}">
+														<td><button class="btn btn-danger btn-xs"
+																style="width: 50px; border: 0">${i.ko_name}</button></td>
+													</c:if>
+												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
 									<!-- end project list -->
-									
+
 									<!-- 요기서부터 페이징처리 -->
-									<c:set var = "count" value = "${count}"/>
-									<c:set var = "pgc" value = "${pgs}"/>
-									<c:choose>
-											<c:when test="${count % 10 == 0}">
-												<c:set value = "${count/10}" var = "pagecount"/>
-											</c:when>
-											<c:otherwise>
-												<c:set value = "${count/10 + 1}" var = "pagecount"/>
-											</c:otherwise>
-									</c:choose>	
-									<ul class="pager">
-										<c:if test="${pgc > 1}">
-											<li><a href="busenroll.admin?pg=${pgc-1}">Previous</a></li>
-										</c:if>
-										
-										
-										<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li><a href="busenroll.admin?pg=${i}">${i}</a></li>
-										</c:forEach>
-										
-										<c:if test="${pgc < count/10 }">
-											<li><a href="busenroll.admin?pg=${pgc+1}">Next</a></li>
-										</c:if>
-									</ul>
-									
-									
+									<c:set var="Count" value="${count}" />
+									<c:set var="pgc" value="${pgs}" />
+									<c:set var="pagecount" value="${pagecount}" />
+
+
+									<div style="text-align: center">
+										<ul class="pagination">
+											<c:if test="${pgc > 1}">
+												<li><a
+													href="schedule_history.htm?m_id=${LoginUser}&pg=${pgc-1}">Prev</a></li>
+											</c:if>
+
+											<c:forEach begin="1" end="${pagecount}" var="i" step="5">
+												<c:forEach begin="${i}" end="${i+4}" step="1" var="x">
+													<c:if test="${x <= pagecount}">
+														<c:choose>
+															<c:when test="${pgc == x}">
+																<li><a class="active" href="#">${x}</a></li>
+															</c:when>
+															<c:when test="${pgc > i-1 && pgc < i+5 }">
+																<li><a
+																	href="schedule_history.htm?m_id=${LoginUser}&pg=${x}">${x}</a></li>
+															</c:when>
+															<c:when test="${x == i+5}">
+																<c:forEach begin="${x}" end="${x+4}" step="1" var="y">
+																	<li><a
+																		href="schedule_history.htm?m_id=${LoginUser}&pg=${y}">${y}</a></li>
+																</c:forEach>
+															</c:when>
+														</c:choose>
+													</c:if>
+
+												</c:forEach>
+											</c:forEach>
+
+											<c:if test="${pgc < Count/10 }">
+
+												<li><a
+													href="schedule_history.htm?m_id=${LoginUser}&pg=${pgc+1}">Next</a></li>
+											</c:if>
+										</ul>
+									</div>
+
 								</div>
-									
-									
-									
-									
-									
-									
-									
-									
-									
+
+
+
 							</div>
-							
-							<div id = "enroll">
-							
-							<!-- 여기에 ajax 내용 삽입됨(enroll.jsp) -->
-							</div>	
-								
-							</div>
-							
-							
-							
+
+
+
 						</div>
 					</div>
 				</div>
 			</div>
-
-      <!-- 수현:삭제모달    -->
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog modal-sm">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">
-								<i class="fa fa-exclamation-triangle"></i> 회원삭제
-							</h4>
-						</div>
-						<div class="modal-body" aria-labelledby="myModalLabel"
-							id="myModalLabel2"></div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal" id="cancelbutton">삭제</button>
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">취소</button>
-							<input type="hidden" id="hvalue">
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- 수현:삭제모달 끝 -->
-
-			<div class="modal fade" id="memberresrecord" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title" id="resrecordtitle">
-								 
-							</h4>
-						</div>
-						<div class="modal-body" aria-labelledby="myModalLabel"
-							id="resrecordtable"></div>
-					</div>
-				</div>
-			</div>
-
-
-
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
 		</div>
+
+
+
+		<!-- footer content -->
+		<footer>
+			<jsp:include page = "/sidebar/footer.jsp"/>
+			<div class="clearfix"></div>
+		</footer>
+	</div>
 
 
 
@@ -340,107 +315,6 @@ th{
 
 	<!-- Custom Theme Scripts -->
 	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-	<script type="text/javascript">
-	var num = 1;
-	function plus(){
-		 num++;
-			var gname = "#g_name" + num;
-			var rnum = "#r_num" + num;
-			var mname = "#mname" + num;	
-			var bvehiclenum = "#b_vehiclenum" + num;
-			var tr = "<tr>";
-			tr += "<td width = 300px>";
-			tr += "<input class='form-control' id='b_vehiclenum"+ num +"' name = 'b_vehiclenum' type='text' size = '3'>";
-			tr += "</td>";
-			tr += "<td width = 300px>";
-			tr += "<select class='form-control' id='g_name" + num + "' name = 'g_name'>";
-			tr += "<option>선택</option>";
-			tr += "</select>";
-			tr += "</td>";
-			tr += "<td width = 300px>";
-			tr += "<select class='form-control' id='r_num" + num + "' name = 'r_num'>";
-			tr += "<option>선택</option>";
-			tr += "</select>";
-			tr += "</td>";
-			tr += "<td width = 300px>";
-			tr += "<select class='form-control' id='mname" + num + "' name = 'm_name'>";
-			tr += "<option>선택</option>";
-			tr += "</select>";
-			tr += "</td>";
-			tr += "</tr>";
-			
-			$("#tbody").append(tr); 
-				
-	}
 	
-	$(function(){
-		
-		var count = 1;
-		
-		//console.log(num);
-
-		$("#ebtn").click(function(){
-			var mname = "#mname" + num;
-			$.ajax({
-				url : "enrollpage.admin",
-				success:function(data){
-						if (count % 2 == 0) {
-							$("#enroll").attr("style", "display:none");
-							count++;
-						} else {
-							$("#enroll").attr("style", "display:inline");
-							count++;
-						}
-						$("#enroll").empty();
-						$("#enroll").append(data);
-						
-						$.ajax({
-							url : "getmember.admin",
-							success:function(data){
-								for(var i = 0 ; i < data.m_id.length ; i++){
-									$(mname).append("<option value = " + data.m_id[i] + ">" + data.m_name[i] + "("+data.m_id[i] +")" + "</option>");
-								}
-							}
-							
-						});
-						
-						$.ajax({
-							url : "getgarage.admin",
-							success:function(data){
-									//console.log(data.gname[0]);
-									
-									for(var i = 0 ; i < data.gname.length; i++){
-										$("#g_name1").append("<option value = " + data.gnum[i] + ">" + data.gname[i] + "</option>");
-									}
-							}
-						});
-						
-						$("#g_name1").change(function(){
-							//console.log($("#g_name").val());
-							$.ajax({
-								url : "getroute.admin",
-								type : "post",
-								data:{g_num : $("#g_name1").val().trim()},
-								success:function(data){
-										$("#r_num1").empty();
-										$("#r_num1").append("<option>선택</option>");
-										for(var i = 0 ; i < data.rnum.length; i++){
-											$("#r_num1").append("<option value = " + data.rnum[i] + ">" + data.rnum[i] + "</option>");
-											
-										}
-								}
-								
-							});
-							
-						});
-				}
-			});
-		});
-		
-		
-		
-	});
-	
-	</script>
-</body> 	
+</body>
 </html>
