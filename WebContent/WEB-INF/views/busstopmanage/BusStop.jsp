@@ -1,4 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <!-- 
+	@FileName : BusStop.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.24
+	@Author	: 김지현
+	@Discription : 버스정류장 정보 수정 페이지
+ -->
+ 
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
@@ -68,7 +76,7 @@ footer {
 	margin-left: 0px;
 }
 select#selectBus, select#selectBus2 {
-	-webkit-appearance: button;
+	-webkit-appearance: button btn-sm;
 	-webkit-border-radius: 2px;
 	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 	-webkit-padding-end: 20px;
@@ -139,6 +147,7 @@ select#selectBus, select#selectBus2 {
 					<!--  -->
 					<div class="x_panel">
 					<div class="row" style="text-align: right">
+
 						<!-- <input type="button" id="newsave" value="원본좌표저장" class="btn btn-default">
 						<input type="button" id="newsave2" value="수정좌표저장" class="btn btn-default"> -->
 						<button id="creaternum" class="btn btn-default">노선번호생성</button>
@@ -154,6 +163,12 @@ select#selectBus, select#selectBus2 {
 						</c:forEach>												
 					</select>
 					
+
+						<button id="creaternum" class="btn btn-default btn-sm">노선번호생성</button>
+						<input type="text" id="createdrnum" readonly style="width:80px; height:30px; padding: 12px 20px; margin-bottom :3px; 
+    					   border-radius: 8px;">
+										
+
 					<select id="selectBus2" >
 						<option value="">수정</option>
 						<c:forEach var="i" items="${list}">
@@ -163,7 +178,7 @@ select#selectBus, select#selectBus2 {
 					
 					<span>
 					<input type="text" style="width:210px; height:34px; padding: 12px 20px; 
-    					   border-radius: 8px;" id="inputBusStop" placeholder="&nbsp;노선번호를 입력해주세요">
+    					   border-radius: 8px;" id="inputBusStop" placeholder="&nbsp;노선번호를 입력">
 					<input type="button" class="btn btn-default btn-sm" id="sendBusStop" value="정류장저장"></span>
 					
 					

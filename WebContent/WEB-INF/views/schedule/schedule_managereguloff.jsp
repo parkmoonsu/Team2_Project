@@ -61,76 +61,13 @@
 	width: 100%;
 	margin: 0 auto;
 }
-#external-events hr{
-	color:red;
-	border:thin;
 
-}
-#external-events {
-	margin-left:65%;
-	margin-top:5%;
-	width: 10%;
-	padding: 2 3%;
-	border: 1% solid #ccc;
-	background: #eee;
-	text-align: left;
-	position: fixed; 
-	font-size:100%;
-    top: 30%; 
-    text-align:center;
-}
-
-#external-events h4 {
-	font-size: 16px;
-	margin-top: 0;
-	padding-top: 1em;
-}
-
-#external-events .fc-event {
-	margin: 10px 0;
-	cursor: pointer;
-}
-
-#external-events p {
-	margin: 1.5em 0;
-	font-size: 11px;
-	color: #666;
-}
-#external-events select{
-	width : 100%;
-}
-#external-events p input {
-	margin: 0;
-	vertical-align: middle;
-}
 
 #calendar {
 	float: left;
-	width: 80%;
+	width: 100%;
 }
 
-select#selectedgaragename, select#selectedroutenumber {
-	-webkit-appearance: button;
-	-webkit-border-radius: 2px;
-	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-	-webkit-padding-end: 20px;
-	-webkit-padding-start: 2px;
-	-webkit-user-select: none;
-	background-image: url(http://i62.tinypic.com/15xvbd5.png),
-		-webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
-	background-position: 97% center;
-	background-repeat: no-repeat;
-	border: 1px solid #AAA;
-	color: #555;
-	font-size: inherit;
-	overflow: hidden;
-	padding: 5px 5px; 
-	margin: 2px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 120px;
-	border-radius: 8px;
-}
 </style>
 
 </head>
@@ -190,16 +127,30 @@ select#selectedgaragename, select#selectedroutenumber {
 								</div>
 								<div class="x_content">
 								<div style="text-align: center">
+								<div class="col-sm-4 col-md-4 col-xs-7">
 									<button style="width:100px; height:30px; background-color: #46AAEB; border:0" class="btn btn-default"></button>
-									휴무 변경 신청 없음&nbsp;&nbsp;&nbsp;
+									휴무 변경 신청 없음
+								</div>
+								<div class="col-sm-4 col-md-4 col-xs-7">
 									<button style="width:100px; height:30px; background-color: #329632; border:0" class="btn btn-default"></button>
-									휴무 변경 신청 (1인)&nbsp;&nbsp;&nbsp;
+									휴무 변경 신청 (1인)
+								</div>
+								<div class="col-sm-4 col-md-4 col-xs-7">
 									<button style="width:100px; height:30px; background-color: #FFB432; border:0" class="btn btn-default"></button>
 									휴무 변경 신청 (2인)
 								</div>
+								</div>
+								<br>
 								<hr>
 									<div id='wrap'>
-										<div id='external-events'>
+										<div class="col-sm-10 col-xs-9 col-md-10">
+										<div id='calendar2'>
+										<div id='calendar'></div>
+										</div>
+										<div style='clear: both'></div>
+										</div>
+										
+										<div  class="col-sm-2 col-xs-2 col-md-2">
 											<div>
 												<select id="selectedgaragename">
 													<option value="0">차고지선택</option>
@@ -219,12 +170,7 @@ select#selectedgaragename, select#selectedroutenumber {
 											<hr>
 											<div id="draggablemember"></div>
 										</div>
-										
-										<div id='calendar2'>
-										<div id='calendar'></div>
-										</div>
-										<div style='clear: both'></div>
-
+									
 									</div>
 
 
@@ -453,24 +399,7 @@ select#selectedgaragename, select#selectedroutenumber {
 				$('#draggablemember').empty();
 				$('#draggablemember').append(view);
 				
-				$('#external-events .fc-event').each(function() {
-					
-					// store data so the calendar knows to render an event upon drop
-					
-					$(this).data('event', {
-						title: $.trim($(this).text()), // use the element's text as the event title
-						id: $(this).find('input').val(),
-						stick: true // maintain when user navigates (see docs on the renderEvent method)
-					});
-					
-					// make the event draggable using jQuery UI
-					$(this).draggable({
-						zIndex: 999,
-						revert: true,      // will cause the event to go back to its
-						revertDuration: 0  //  original position after the drag
-					});
-
-				}); //each
+			
 			}//success
 		});
 	});

@@ -1,4 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <!-- 
+	@FileName : search.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.27
+	@Author	: 강민수
+	@Discription : 아이디/비밀번호 찾기
+ -->
+ 
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -33,7 +41,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/form-elements.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/loginassets/assets/css/style.css">
-        <link rel="stylesheet" id="theme-switch" href="${pageContext.request.contextPath}/mainCss/css/style.css">
+        <link rel="stylesheet" id="theme-switch" href="${pageContext.request.contextPath}/mainCss/css/style5.css">
         
 
 </head>

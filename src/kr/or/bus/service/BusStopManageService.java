@@ -1058,8 +1058,9 @@ public class BusStopManageService {
 	}
 	
 	public List<BusStopDTO> editBusStopRespons(String r_num){
-		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);		
-		return busstopdao.editBusStopreturn(r_num);	
+		BusStopDAO busstopdao = sqlsession.getMapper(BusStopDAO.class);
+		List<BusStopDTO> editbusstop = busstopdao.editBusStopreturn(r_num);
+		return editbusstop;	
 	}
 
 }

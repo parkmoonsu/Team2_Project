@@ -1,4 +1,5 @@
 /*
+
  * @File Name: schedule_reguloff.js
  * @Author: 길한종
  * @Data: 2016. 11. 18
@@ -156,6 +157,26 @@ $(function() {
 	// 업데이트 버튼
 	$(".antosubmit2").on("click", function() {
 
+		swal({
+			  title: "Are you sure?",
+			  text: "You will not be able to recover this imaginary file!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#DD6B55",
+			  confirmButtonText: "Yes, delete it!",
+			  cancelButtonText: "No, cancel plx!",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm){
+			  if (isConfirm) {
+			    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+			  } else {
+			    swal("Cancelled", "Your imaginary file is safe :)", "error");
+			  }
+			});
+		
+		
 		if (confirm("정말 일정을 변경하시겠습니까??") == true) {
 			var o_code = $("#select2").val();
 			
@@ -207,6 +228,27 @@ $(function() {
 	// 삭제버튼
 	$('#deleteschedule').click(function() {
 
+		/*swal({
+			  title: "Are you sure?",
+			  text: "You will not be able to recover this imaginary file!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#DD6B55",
+			  confirmButtonText: "Yes, delete it!",
+			  cancelButtonText: "No, cancel plx!",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm){
+			  if (isConfirm) {
+			    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+			  } else {
+			    swal("Cancelled", "Your imaginary file is safe :)", "error");
+			  }
+			});*/
+		
+		
+		
 		if (confirm("정말 삭제하시겠습니까??") == true) {
 
 			// db삭제
@@ -265,10 +307,30 @@ function loadCalendar(){
 							success:function(data){
 								if(data.str=="false"){
 									console.log(data.str);
-									alert('지금은 휴무 변경 시간이 아닙니다.');
+									//alert('지금은 휴무 변경 시간이 아닙니다.');
+									swal(
+											{
+												title : "",
+												text : "지금은 휴무 변경 시간이 아닙니다.",
+												type : "warning",
+												
+												confirmButtonColor : "#DD6B55",
+												confirmButtonText : "확인",
+												closeOnConfirm : true
+											}, function() {});
 								} else if(data.str==null || data.str==""){
 									console.log(data.str);
-									alert('언디파인드');
+									swal(
+											{
+												title : "",
+												text : "Undefined",
+												type : "warning",
+												
+												confirmButtonColor : "#DD6B55",
+												confirmButtonText : "확인",
+												closeOnConfirm : true
+											}, function() {});
+									
 								} else {
 									console.log(data.str);
 									//중복일정 체크
@@ -278,7 +340,18 @@ function loadCalendar(){
 										type:"post",
 										success:function(data){
 											if (data.row != "0"){
-												alert("더는 일정을 추가할 수 없습니다.");
+												//alert("더는 일정을 추가할 수 없습니다.");
+												swal(
+														{
+															title : "",
+															text : "더는 일정을 추가할 수 없습니다.",
+															type : "warning",															
+															confirmButtonColor : "#DD6B55",
+															confirmButtonText : "확인",
+															closeOnConfirm : true
+														}, function() {
+															 
+														});
 											} else {							
 												//모달 입력창
 												$("#select1").val(start.weekday());
@@ -293,7 +366,18 @@ function loadCalendar(){
 					
 				},
 				error:function(){
-					alert('먼저 차랑/노선을 배정 받아야 합니다.');
+					//alert('먼저 차랑/노선을 배정 받아야 합니다.');
+					swal(
+							{
+								title : "",
+								text : "먼저 차랑/노선을 배정 받아야 합니다.",
+								type : "warning",								
+								confirmButtonColor : "#DD6B55",
+								confirmButtonText : "확인",
+								closeOnConfirm : true
+							}, function() {
+							});
+					
 				}
 			});		
 		},
@@ -306,10 +390,31 @@ function loadCalendar(){
 				success:function(data){
 					if(data.str=="false"){
 						console.log(data.str);
-						alert('지금은 휴무 변경 시간이 아닙니다.');
+						//alert('지금은 휴무 변경 시간이 아닙니다.');
+						swal(
+								{
+									title : "",
+									text : "지금은 휴무 변경 시간이 아닙니다.",
+									type : "warning",									
+									confirmButtonColor : "#DD6B55",
+									confirmButtonText : "확인",
+									closeOnConfirm : true
+								}, function() {});
+						
 					} else if(data.str==null || data.str==""){
 						console.log(data.str);
-						alert('언디파인드');
+						swal(
+								{
+									title : "",
+									text : "Undefined",
+									type : "warning",
+									
+									confirmButtonColor : "#DD6B55",
+									confirmButtonText : "확인",
+									closeOnConfirm : true
+								}, function() {
+									 
+								});
 					} else {
 						$.ajax({
 							url:"mid.member",
@@ -319,7 +424,19 @@ function loadCalendar(){
 							success:function(data){
 								
 								if (data.rid=="" || data.rid==null){
-									alert('먼저 일정을 등록 하세요');
+									//alert('먼저 일정을 등록 하세요');
+									swal(
+											{
+												title : "",
+												text : "먼저 일정을 등록 하세요",
+												type : "warning",
+												
+												confirmButtonColor : "#DD6B55",
+												confirmButtonText : "확인",
+												closeOnConfirm : true
+											}, function() {
+												 
+											});
 								} else {
 									
 									$.ajax({
@@ -349,7 +466,19 @@ function loadCalendar(){
 														data:{m_id:loginid},
 														success:function(data){
 															if(data.row!=0){
-																alert('이미 일정변경을 신청 중 입니다.');
+																//alert('이미 일정변경을 신청 중 입니다.');
+																swal(
+																		{
+																			title : "",
+																			text : "이미 일정변경을 신청 중 입니다.",
+																			type : "warning",
+																			
+																			confirmButtonColor : "#DD6B55",
+																			confirmButtonText : "확인",
+																			closeOnConfirm : true
+																		}, function() {
+																			 
+																		});
 															}else{
 															
 																$.ajax({
@@ -359,7 +488,19 @@ function loadCalendar(){
 																	data:{m_id:calEvent.id},
 																	success:function(data){
 																		if(data.row!=0){
-																			alert('변경 중인 일정입니다.');
+																			//alert('변경 중인 일정입니다.');
+																			swal(
+																					{
+																						title : "",
+																						text : "변경 중인 일정입니다.",
+																						type : "warning",
+																						
+																						confirmButtonColor : "#DD6B55",
+																						confirmButtonText : "확인",
+																						closeOnConfirm : true
+																					}, function() {
+																						 
+																					});
 																		} else {
 																			var event1={
 																					id:calEvent.id,
@@ -502,13 +643,33 @@ function loadCalendar(){
 				success:function(data){
 					if(data.str=="false"){
 						console.log(data.str);
-						alert('지금은 휴무 변경 시간이 아닙니다.');
-						
+						//alert('지금은 휴무 변경 시간이 아닙니다.');
+						swal(
+								{
+									title : "",
+									text : "지금은 휴무 변경 시간이 아닙니다.",
+									type : "warning",
+									
+									confirmButtonColor : "#DD6B55",
+									confirmButtonText : "확인",
+									closeOnConfirm : true
+								}, function() {
+									 
+								});
 						$("#calendar").fullCalendar('refetchEvents');
 						$("#calendar").fullCalendar('unselect');
 					} else if(data.str==null || data.str==""){
 						console.log(data.str);
-						alert('언디파인드');
+						swal(
+								{
+									title : "",
+									text : "Undefined",
+									type : "warning",
+									
+									confirmButtonColor : "#DD6B55",
+									confirmButtonText : "확인",
+									closeOnConfirm : true
+								}, function() {});
 					} else {
 						
 						//동일사용자 확인
@@ -519,8 +680,7 @@ function loadCalendar(){
 							dataType:"json",
 							success:function(data){
 								if(data.rid==loginid){
-									if (confirm("정말 일정을 변경하시겠습니까??") == true) {
-										
+									if (confirm("정말 일정을 변경하시겠습니까??") == true) {												
 										$.ajax({
 											type:"post",
 											url:"checkstatus.member",
@@ -528,7 +688,21 @@ function loadCalendar(){
 											data:{m_id:loginid},
 											success:function(data){
 												if(data.row!=0){
-													alert('이미 일정변경을 신청 중 입니다.');
+													//alert('이미 일정변경을 신청 중 입니다.');
+													swal(
+															{
+																title : "",
+																text : "이미 일정변경을 신청 중 입니다.",
+																type : "warning",
+																
+																confirmButtonColor : "#DD6B55",
+																confirmButtonText : "확인",
+																closeOnConfirm : true
+															}, function() {
+																 
+															});
+													
+													
 													$('#calendar').fullCalendar('refetchEvents');
 													$('#calendar').fullCalendar('unselect');
 												}else{
@@ -611,7 +785,19 @@ function loadCalendar(){
 										$("#calendar").fullCalendar('unselect');
 														
 									}else{
-										alert("해당 일정은 편집할 수 없습니다.");
+										//alert("해당 일정은 편집할 수 없습니다.");
+										swal(
+												{
+													title : "",
+													text : "해당 일정은 편집할 수 없습니다.",
+													type : "warning",
+													
+													confirmButtonColor : "#DD6B55",
+													confirmButtonText : "확인",
+													closeOnConfirm : true
+												}, function() {
+													 
+												});
 										$("#calendar").fullCalendar('refetchEvents');
 										$("#calendar").fullCalendar('unselect');
 										/*//원위치

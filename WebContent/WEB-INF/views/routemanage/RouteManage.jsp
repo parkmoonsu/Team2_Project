@@ -139,6 +139,10 @@ select#selectBus, #selectRoute, #selectBuscopy {
 					<option>수정노선 선택</option>									
 				</select>
 				
+				<select id="selectBusStopEdit">
+					<option>수정정류장 선택</option>									
+				</select>
+				
 				<div>
 				 <button id="newsave" class="btn">저장하기</button>
 				</div>
@@ -224,13 +228,14 @@ select#selectBus, #selectRoute, #selectBuscopy {
 	
    	var BusMarker;
 
+   	var stopSearch;
+   	
     //현 기본 좌표 : 판교역
     var myLatLng = {
     	lat : 37.462050994737076,
      	lng : 126.96109771728516
     };
-      
-    
+   
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
            center : myLatLng,
@@ -259,7 +264,7 @@ select#selectBus, #selectRoute, #selectBuscopy {
      	console.log("옴?");
      	//console.log(data);
      	poly = new google.maps.Polyline({
-     		editable: true,
+     		//editable: true,
      		path: data,
      	    strokeColor: 'red',
      	    strokeOpacity: 1.0,
@@ -280,55 +285,99 @@ select#selectBus, #selectRoute, #selectBuscopy {
      	poly.setMap(map);
     }
     
-    function movingBusMarker(data,map){
+    
+    function movingBusMarker(data,data2,map){   
     	console.log("시뮬레이션 좌표데이터 ? 오냐");
-    	console.log(data.editlist);
+    	//console.log(data);
     	
-    	var i=0;        	
-        	BusMarker = new google.maps.Marker({
+    	
+        	 BusMarker = new google.maps.Marker({
            		map: map,
-           		position:new google.maps.LatLng(data.editlist[0].r_y, data.editlist[0].r_x),
+           		position:new google.maps.LatLng(data[0].r_y, data[0].r_x),
            		icon:"${pageContext.request.contextPath}/images/bus.png"
         	});
+        	BusMarker.setMap(map);
+        	 
         	
+    		
         	var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
-			if(data.businfolist == null){
-				(function (BusMarker, data, infowindow) {
+			if(data2 == null){
+				(function (BusMarker, data2, infowindow) {
 	     	        google.maps.event.addListener(BusMarker, "click", function (e) {
 	     	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">매칭된 기사없음</p>');
 	     	            infowindow.open(map, BusMarker);
 	     	           
 	     	        });
-	     	    })(BusMarker, data.businfolist, infowindow);		
-			}else{
-				(function (BusMarker, data, infowindow) {
-					console.log(data[0].r_num);
-					/* for(var i=0; i<data.length; i++){
-						console.log(data[i].r_num);
-	     	        	google.maps.event.addListener(BusMarker, "click", function (e) {
-	     	            	infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data[i].r_num+ "<br>"+ "<b>차량번호</b>: "+data[i].b_vehiclenum+"<br>"+ "<b>기사명</b>: "+ data[i].m_name + "<br>"+'</p>');
-	     	            	infowindow.open(map, BusMarker);	     	           
-	     	        	});
-					} */
-	     	    })(BusMarker, data.businfolist, infowindow);
-			}
-        		        	
-     	    console.log("너 마커 새로 생성안함??");       		       		       		      		
-        	busmoveBus(BusMarker, map, data);       		    		
+	     	    })(BusMarker, data2, infowindow);		
+			}else{								
+				(function (BusMarker, data2, infowindow) {										
+	     	        	google.maps.event.addListener(BusMarker, "click", function (e) {							
+	     	            	infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>노선번호</b>: "+ data2.r_num + "<br>"+ "<b>차량번호</b>: "+ data2.b_vehiclenum +"<br>"+ "<b>기사명</b>: "+ data2.m_name + "<br>"+'</p>');
+	     	            	infowindow.open(map, BusMarker);	     	           							
+	     	        	});			
+	     	    })(BusMarker, data2, infowindow);				
+			}		
+     	    console.log("너 마커 새로 생성안함??");       		       		       		      		       
+        	busmoveBus(BusMarker, map, data);
+        	
+        	
     }
     
     function busmoveBus(BusMarker, map, data) {
-    	var i=0;
+    	 var i=0;
     	copystopSearch = setInterval(function(){
-    		if(i == data.editlist.length){
+    		if(i == data.length){
     			return false;
     		}else{    			
-    			BusMarker.setPosition(new google.maps.LatLng(data.editlist[i].r_y, data.editlist[i].r_x));
+    			BusMarker.setPosition(new google.maps.LatLng(data[i].r_y, data[i].r_x));
     		}
     		i++;
     	},1000); 	
     };
+	
+    function originalMarkerMake(latLng, map) {
+   	 	for(var i=0; i<latLng.length; i++){
+    	   /* console.log("---------------------------------");
+    	   console.log("진행방향 "+latLng[i].direction);
+    	   console.log("정류장명 "+latLng[i].stationNm);
+    	   console.log("순번 "+latLng[i].seq);
+    	   console.log("정류장 번호 "+latLng[i].stationNo);
+    	   console.log("회차지 번호 "+latLng[i].trnstnid);
+    	   console.log("노선번호 "+latLng[i].busRouteNm);
+    	   console.log("노선ID "+latLng[i].busRouteId);
+    	   console.log("첫차시간 "+latLng[i].beginTm);
+    	   console.log("막차시간 "+latLng[i].lastTm);
+    	   console.log("정류장 간 거리 "+latLng[i].fullSectDist);
+    	   console.log("정류장 X "+latLng[i].gpsX);
+    	   console.log("정류장 Y "+latLng[i].gpsY);
+    	   console.log("---------------------------------"); */    	  
+    	      
+       
+	   		var originalMarker = new google.maps.Marker({
+	           	position: new google.maps.LatLng(latLng[i].s_y, latLng[i].s_x),         
+	          		map: map,           		
+	          		animation: google.maps.Animation.DROP,
+	          		icon : '${pageContext.request.contextPath}/images/busstop.png',
+	          		zindex : "1"
+	       	});
+	    	   
+	    		
+    	  	var infowindow = new google.maps.InfoWindow({ maxWidth: 400});  
+    	    
+    	  	(function (originalMarker, latLng, infowindow) {
+    	        google.maps.event.addListener(originalMarker, "click", function (e) {
+    	            infowindow.setContent('<p style="margin:7px 22px 7px 12px;font:12px/1.5 sans-serif; color: black;"  align="left">' +"<b>정류장 명</b>:"+ latLng.s_name+ "<br>"+ "<b>정차순서</b>:"+latLng.rs_order+"<br>"+ "<b>정류장번호</b>:"+ latLng.s_num + "<br>"+'</p>');    	            
+    	            infowindow.open(map, originalMarker);
+    	           
+    	        });
+    	    })(originalMarker, latLng[i], infowindow);
 
+    	  	map.panTo(originalMarker.getPosition());
+    	  	originalMarkers.push(originalMarker);
+           
+   		}//for문 끝
+   	}
+    
     $(function() {
     	
     	$("#selectBus").change(function() {
@@ -369,9 +418,6 @@ select#selectBus, #selectRoute, #selectBuscopy {
 						  showLoaderOnConfirm: true,
 						},
 						function(){
-						  /* setTimeout(function(){
-						    swal("Ajax request finished!");
-						  }, 2000); */
 						});
     				return false;
     			}else if($("#selectBus").val()=='노선 선택'){
@@ -436,11 +482,15 @@ select#selectBus, #selectRoute, #selectBuscopy {
 						$("#selectBus").append("<option>노선 선택</option>");
 						$("#selectBuscopy").empty();
 						$("#selectBuscopy").append("<option>수정노선 선택</option>");
+						$("#selectBusStopEdit").empty();
+						$("#selectBusStopEdit").append("<option>수정정류장 선택</option>");
+						
                 		for(var i=0; i<data.list.length; i++){
                 			console.log("여긴가..")
                 			console.log(data.list[i].r_num);                			                			
                 			$("#selectBus").append("<option>"+data.list[i].r_num+"</option>");
                 			$("#selectBuscopy").append("<option>"+data.list[i].r_num+"</option>");
+                			$("#selectBusStopEdit").append("<option>"+data.list[i].r_num+"</option>");
                 		}
                 	}else{
                 		console.log("???????");
@@ -448,6 +498,8 @@ select#selectBus, #selectRoute, #selectBuscopy {
 						$("#selectBus").append("<option>노선 선택</option>");
 						$("#selectBuscopy").empty();
 						$("#selectBuscopy").append("<option>수정노선 선택</option>");
+						$("#selectBusStopEdit").empty();
+						$("#selectBusStopEdit").append("<option>수정정류장 선택</option>");
                 	}
                 }
         	});
@@ -463,22 +515,34 @@ select#selectBus, #selectRoute, #selectBuscopy {
                 data : {r_num:$("#selectBuscopy").val()},
                 success : function(data) {                   	
                 	console.log("노선타입 전송잘되냐?");
-                	console.log(data);
-                	console.log(data.editlist);	
+                	//console.log(data);
+                	//console.log(data.editlist);	
                 	var hell =new Array();
            			for(var j=0;j<data.editlist.length;j++){          				
    		      			hell.push(new google.maps.LatLng(parseFloat(data.editlist[j].r_y), parseFloat(data.editlist[j].r_x)));  		      			
            			}    							
                 	loadVector(hell);
                 }
-        	});
-        	
+        	});        	
         	//수정된 버스정류장을 뿌려줌
         });
         
+        
+        $("#selectBusStopEdit").change(function(){            	
+        	$.ajax({
+                url : "editBusStopRead.admin",
+                type : "get",
+                dataType : "json",
+                data : {r_num:$("#selectBusStopEdit").val()},
+                success : function(data) {                   	
+                	console.log("수정 정류장 잘나오냐?");
+                	//console.log(data.busstopedit);
+                	originalMarkerMake(data.busstopedit, map);                
+                }
+        	});        	       	
+        });
+        
         $("#busStart").click(function() {
-        	       	
-        	busmove = setInterval(function(){
         		$.ajax({
                     url : "editpath.admin",
                     type : "get",
@@ -487,10 +551,38 @@ select#selectBus, #selectRoute, #selectBuscopy {
                     success : function(data) {
                     	console.log("시뮬레이션 시작");
                     	console.log(data);
-                    	movingBusMarker(data,map);
+                    	
+                    	if(data.businfolist.length != 0){
+                    		movingBusMarker(data.editlist,data.businfolist[0],map);
+                        	
+                        	var k=0;
+                        	stopSearch = setInterval(function(){
+                    			movingBusMarker(data.editlist,data.businfolist[++k],map);	
+                    		},20000);
+                        	
+                        	setInterval(function() {
+                        		if(k == data.businfolist.length-1){
+                            		console.log("현재 생성된 버스마커 외 interval 중지");
+                            		clearInterval(stopSearch);
+                            	}                        		
+                        	}, 20000);	
+                    	}else{
+                    		//alert("기사가 배정되지 않았습니다");
+                    		swal({
+      						  title: "",
+      						  text: "기사가 배정되지 않았습니다",
+      						  type: "info",
+      						  closeOnConfirm: true,
+      						  showLoaderOnConfirm: true,
+      						},
+      						 function(){
+      						}); 
+                    		return false;
+                    	}
+                    	                 		                   		                 	                   		                   		
                     }
                 });
-        	},20000);
+        	
         });
         
         

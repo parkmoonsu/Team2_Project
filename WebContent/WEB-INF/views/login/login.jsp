@@ -1,4 +1,12 @@
-
+ <!-- 
+	@FileName : login.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.26
+	@Author	: 강민수
+	@Discription : 로그인 실패
+ -->
+ 
+ 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -125,7 +133,7 @@ placeholder {
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="bus.htm" data-nav-section="home"><span>Home</span></a></li>
-						<li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
+						<li><a href="#" id="log"><span>로그인</span></a></li>
 						<li><a href="join.htm" id="gaip"><span>회원가입</span></a></li>
 					</ul>
 				</div>
@@ -198,9 +206,7 @@ placeholder {
 							confirmButtonText : "확인",
 							closeOnConfirm : true
 						}, function() {
-							 swal("Deleted!",
-									"Your imaginary file has been deleted.",
-									"success"); 
+							 
 						});
 			
 			</script>
