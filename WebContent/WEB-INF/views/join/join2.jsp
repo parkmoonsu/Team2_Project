@@ -300,8 +300,8 @@ bodoy {
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="bus.htm" data-nav-section="home"><span>Home</span></a></li>
-						<li><a href="login.htm" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
-						<li><a href="#" id="gaip"><span>회원가입</span></a></li>
+						<li><a href="login.htm" id="log"><span>로그인</span></a></li>
+						<li><a href="join.htm" id="gaip"><span>회원가입</span></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -316,7 +316,7 @@ bodoy {
 				<div class="row">
 					<hr>
 					<div class="col-sm-1"></div>
-					<div class="col-md-10 col-sm-10 col-xs-10 form-box">
+					<div class="col-md-10 col-sm-10 col-xs-12 form-box">
 						<div class="x_panel">
 							<div class="form-top" align="center" style="color: black">
 								<div class="form-top-center">
@@ -354,17 +354,14 @@ bodoy {
 													<div class="form-group">
 														<label class="control-label col-md-3 col-sm-3 col-xs-12"
 															for="m_id">아이디 </label>
-														<div class="col-md-5 col-sm-5 col-xs-12">
+														<div class="col-md-5 col-sm-5 col-xs-9">
 															<input type="text" id="m_id" name="m_id" style="font-size: 12px"
-																class="form-control col-md-7 col-xs-12">
+																class="form-control col-xs-12 col-sm-12 col-md-12">
 														</div>
-														<div class="col-md-1 col-sm-1" align="left"
+														<div class="col-md-1 col-sm-1 col-xs-1" align="left"
 															style="padding: 0px">
 															<input type="button" class="btn btn-default" id="checkid"
 																value="중복확인">
-														</div>
-														<div class="col-md-3 col-sm-2" style="margin-top: 7px">
-															<span id="check"></span>
 														</div>
 													</div>
 
@@ -400,12 +397,12 @@ bodoy {
 														<label for="m_email"
 															class="control-label col-md-3 col-sm-3 col-xs-12">이메일
 														</label>
-														<div class="col-md-5 col-sm-5 col-xs-12">
+														<div class="col-md-5 col-sm-5 col-xs-8">
 															<input id="m_email"
 																class="form-control col-md-7 col-xs-12" type="email"
 																name="m_email" style="font-size: 12px">
 														</div>
-														<div class="col-md-3 col-sm-3" align="left"
+														<div class="col-md-2 col-sm-2 col-xs-2" align="left"
 															style="padding: 0px">
 															<input type="button" value="인증번호전송" id="emailbtn"
 																class="btn btn-default">
@@ -415,7 +412,7 @@ bodoy {
 														<label for="m_echeck"
 															class="control-label col-md-3 col-sm-3 col-xs-12">인증번호
 														</label> <input type='hidden' id='m_nocheck' value='n'>
-														<div class="col-md-5 col-sm-5 col-xs-12"
+														<div class="col-md-5 col-sm-5 col-xs-10"
 															style="padding-left: 15px">
 															<input id="m_echeck"
 																class="form-control col-md-7 col-xs-12" type="text"
@@ -529,13 +526,13 @@ bodoy {
 														<label for="m_addr"
 															class="control-label col-md-3 col-sm-3 col-xs-12">우편주소
 														</label>
-														<div class="col-md-5 col-sm-5 col-xs-12"
+														<div class="col-md-5 col-sm-5 col-xs-9"
 															style="padding-left: 15px">
 															<input id="m_addr"
 																class="form-control col-md-7 col-xs-12" type="text" style="font-size: 12px"
 																name="m_addr">
 														</div>
-														<div class="col-md-3 col-sm-3" style="padding: 0px"
+														<div class="col-md-3 col-sm-3 col-xs-3" style="padding: 0px"
 															align="left">
 															<input type="button" value="주소검색" class="btn btn-default"
 																onclick="sample4_execDaumPostcode()">
@@ -980,11 +977,11 @@ bodoy {
 				});
 				
 				
-				$('#wizard').smartWizard();
+				/* $('#wizard').smartWizard();
 
 				$('#wizard_verticle').smartWizard({
 					transitionEffect : 'slide'
-				});
+				}); */
 
 		});
         function sample4_execDaumPostcode() {
