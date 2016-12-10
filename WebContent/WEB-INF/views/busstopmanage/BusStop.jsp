@@ -493,6 +493,8 @@ select#selectBus, select#selectBus2 {
 		cinfowindow.open(map, cmarker);
 
 	}
+	
+	var r_num;
 	function addstop(){
 		//정류장 번호 랜덤 값으로 생성
 		$.ajax({ 
@@ -503,7 +505,6 @@ select#selectBus, select#selectBus2 {
         	}
          });
 			
-		var r_num;
 		if($('#createdrnum').val()!=""){
 			r_num=$('#createdrnum').val();
 			$('#pass-modal').modal();
@@ -520,9 +521,9 @@ select#selectBus, select#selectBus2 {
 				  showLoaderOnConfirm: true,
 				},
 				function(){
-				  /* setTimeout(function(){
+				  setTimeout(function(){
 				    swal("Ajax request finished!");
-				  }, 2000); */
+				  }, 2000);
 			});
 		}
 		
@@ -538,13 +539,14 @@ select#selectBus, select#selectBus2 {
 				
 			//stop에 저장
 			var param = {
-				"r_num":rnum,
+				"r_num":r_num,
 				"s_num":$('#snum').val(),
 				"s_name":$('#sname').val(),
 				"rs_order":$('#end').val(),
 				"s_x":cmarker.getPosition().lng(),
 				"s_y":cmarker.getPosition().lat()
-			};					
+			};
+			console.log(param);
     		$.ajax({
     			url : "editordernumber.admin",
     			type : "post",
@@ -582,7 +584,7 @@ select#selectBus, select#selectBus2 {
 				type:'post',
 				data: {
 					r_num: r_num,
-					s_num: dataobject.s_num,
+					s_num: $('#snum').val(),
 					rs_order: $('#m_pw2').val()
 				},
 				success:function(data){

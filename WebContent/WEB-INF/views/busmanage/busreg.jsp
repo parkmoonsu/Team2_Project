@@ -411,7 +411,7 @@
 							console.log(data.list[0]);
 							if(data.list[0] == 1){
 								$("#b_vehiclenum").focus();
-							
+								
 								swal({
 				                    title: "",
 				                    text: "버스번호가 이미 존재합니다.",

@@ -1,5 +1,7 @@
 package kr.or.bus.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -85,7 +87,8 @@ public class BusStopManageController {
 	
 	//수정 정류장 가져오기
 	@RequestMapping(value="/editBusStopRead.admin",method=RequestMethod.GET)
-	public View editBusStopReadCall(String r_num, Model model){
+	public View editBusStopReadCall(String r_num, Model model){		
+		model.addAttribute("busstopedit", busStopManageService.editBusStopRespons(r_num));
 		return jsonview;	
 	}
 	

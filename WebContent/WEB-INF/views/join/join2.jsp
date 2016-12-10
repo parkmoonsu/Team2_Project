@@ -745,7 +745,15 @@ bodoy {
 								//$('#check').append("<font color = 'red'  size='3px'>&nbsp;이미 있는 ID 입니다!</font>");
 								
 							}else if($.trim(rd.check)=="n" && $("#m_id").val().trim().length >= 8){
-								swal("사용 가능한 ID 입니다");
+								swal({
+				                    title: "",
+				                    text: "사용 가능한 ID 입니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                  });
 								//$('#check').append("<font color = '#369F36'  size='3px'>사용 가능한 ID 입니다!</font>");
 							}else{
 								$('#m_id').focus();
