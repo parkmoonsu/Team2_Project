@@ -418,9 +418,6 @@ select#selectBus, #selectRoute, #selectBuscopy {
 						  showLoaderOnConfirm: true,
 						},
 						function(){
-						  /* setTimeout(function(){
-						    swal("Ajax request finished!");
-						  }, 2000); */
 						});
     				return false;
     			}else if($("#selectBus").val()=='노선 선택'){
@@ -570,7 +567,16 @@ select#selectBus, #selectRoute, #selectBuscopy {
                             	}                        		
                         	}, 20000);	
                     	}else{
-                    		alert("기사가 배정되지 않았습니다");
+                    		//alert("기사가 배정되지 않았습니다");
+                    		swal({
+      						  title: "",
+      						  text: "기사가 배정되지 않았습니다",
+      						  type: "info",
+      						  closeOnConfirm: true,
+      						  showLoaderOnConfirm: true,
+      						},
+      						 function(){
+      						}); 
                     		return false;
                     	}
                     	                 		                   		                 	                   		                   		
