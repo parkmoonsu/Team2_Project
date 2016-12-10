@@ -1,4 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <!-- 
+	@FileName : clickcount.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.22
+	@Author	: 김수현
+	@Discription : 차량 정보
+ -->
+ 
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <table class="table table-hover projects" style="text-align: center">
