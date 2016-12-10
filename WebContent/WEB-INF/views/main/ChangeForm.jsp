@@ -34,7 +34,7 @@
 <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.oLoader.min.js"></script>
 
 
-<title>KOSBUS</title>
+<title>RoadOneBell</title>
 
 <!-- Bootstrap -->
 <link

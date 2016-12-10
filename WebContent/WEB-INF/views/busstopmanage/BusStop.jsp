@@ -517,9 +517,7 @@ select#selectBus, select#selectBus2 {
 				  showLoaderOnConfirm: true,
 				},
 				function(){
-				  setTimeout(function(){
-				    swal("Ajax request finished!");
-				  }, 2000);
+				
 			});
 		}
 		
@@ -1095,9 +1093,6 @@ select#selectBus, select#selectBus2 {
 						  showLoaderOnConfirm: true,
 						},
 						function(){
-						  /* setTimeout(function(){
-						    swal("Ajax request finished!");
-						  }, 2000); */
 						});
       			deleteRoute();
       			$.each(data.rssdto,function(index,obj){
