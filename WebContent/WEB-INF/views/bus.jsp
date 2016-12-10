@@ -192,7 +192,7 @@
 				<div class="text-inner">
 					<div class="row">
 						<div class = "col-md-9 col-md-offset-2"  style="padding-top: 15px">
-							<h1 class="to-animate">새롭고 편리한  통합 버스 관리 시스템, </h1>
+							<h1 class="to-animate">새로운 통합 버스 관리 시스템, </h1>
 							<h1 class="to-animate">RoadOneBell 입니다.</h1>							
 						</div>
 					</div>
