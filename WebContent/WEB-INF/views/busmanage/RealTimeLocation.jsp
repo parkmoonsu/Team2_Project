@@ -1,4 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <!-- 
+	@FileName : RealTimeLocation.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.22
+	@Author	: 김지현
+	@Discription : 버스 실시간 위치 정보 페이지
+ -->
+ 
+ 
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>

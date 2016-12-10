@@ -2,7 +2,7 @@
    @FileName : chagozi.jsp
    @Project   : KosBus
    @Date   : 2016. 11.26
-   @Author   : 김ㅇㅇ현, 조한솔
+   @Author   : 김용현, 조한솔
    @Discription : (관리자)차고지별 버스 현황 View단
  -->
 
