@@ -198,9 +198,7 @@ placeholder {
 							confirmButtonText : "확인",
 							closeOnConfirm : true
 						}, function() {
-							 swal("Deleted!",
-									"Your imaginary file has been deleted.",
-									"success"); 
+							 
 						});
 			
 			</script>
