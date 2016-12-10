@@ -188,7 +188,6 @@ placeholder {
 		<div>
 			
 			<script>
-				//alert("극혐");		
 				swal(
 						{
 							title : "로그인 실패",

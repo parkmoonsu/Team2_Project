@@ -4,11 +4,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <title>Insert title here</title>
 </head>
 <body>
 <script type="text/javascript">
-	alert("등록 완료");
+	swal({
+        title: "",
+        text: "등록 완료",
+        type: "info",
+        closeOnConfirm: true,
+        showLoaderOnConfirm: true,
+      },
+      function(){
+      });
 	location.href = "busenroll.admin";
 </script>
 </body>

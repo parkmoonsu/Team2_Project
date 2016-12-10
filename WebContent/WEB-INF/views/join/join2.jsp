@@ -227,10 +227,6 @@
 label {
 	font-size: 12px;
 }
-
-.form-group {
-	height: 35px;
-}
 </style>
 </head>
 <script type="text/javascript"
@@ -278,8 +274,10 @@ bodoy {
 	href="${pageContext.request.contextPath}/loginassets/assets/css/style.css">
 <link rel="stylesheet" id="theme-switch"
 	href="${pageContext.request.contextPath}/mainCss/css/style5.css">
-
-
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <body>
 	<header role="banner" id="fh5co-header">
 		<div class="container">
@@ -624,8 +622,16 @@ bodoy {
 				
 				$("#emailbtn").click(function() {
 					if(regExp.test($("#m_email").val().trim())){
-						
-						alert("인증번호 전송 완료");
+										
+						swal({
+		                    title: "",
+		                    text: "인증번호 전송 완료",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						$.ajax({
 							url : "popup.htm",
 							type : "post",
@@ -633,7 +639,15 @@ bodoy {
 						});
 						
 					}else{
-						alert("Email 형식이 잘못 되었습니다.");
+						swal({
+		                    title: "",
+		                    text: "Email 형식이 잘못 되었습니다. 예 ) tukbong2@naver.com",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 					}
 					
 				});	
@@ -645,7 +659,7 @@ bodoy {
 					$("#birth2").empty();
 					
 					if(bir.test($("#m_birth").val().trim())){
-						$('#birth').after("<font color = 'blue' size='3px' id='birth2'>가능합니다</font>");
+						
 					}else{
 						$('#birth').after("<font color = 'red' size='3px' id='birth2'>생년월일 예)1992-02-03</font>");
 					}
@@ -659,7 +673,7 @@ bodoy {
 					
 					if(bir2.test($("#m_phone").val().trim())){
 						
-						$('#phone').after("<font color = 'blue' size='3px' id='phone2'>가능합니다</font>");
+						
 					}else{
 						$('#phone').after("<font color = 'red' size='3px' id='phone2'>전화번호 예)010-0000-0000</font>");
 					}
@@ -674,7 +688,15 @@ bodoy {
 						success:function(rd){
 							console.log(rd.echeck);
 							if($.trim(rd.echeck) == "y"){
-								alert("인증 되었습니다.");
+								swal({
+				                    title: "",
+				                    text: "인증 되었습니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                  });
 								$("#change").empty();
 								$("#change").append("<input type = 'hidden' name = 'm_echeck' value = 'y'>");
 								
@@ -683,7 +705,15 @@ bodoy {
 									type:"post"
 								});
 							}else{
-								alert("인증번호를 잘못 입력하셨습니다.");
+								swal({
+				                    title: "",
+				                    text: "인증번호를 잘못 입력하셨습니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                  });
 								$("#m_echeck").focus();
 							}
 							
@@ -702,12 +732,42 @@ bodoy {
 							console.log($.trim(rd.check));
 							$("#check").empty();
 							if($.trim(rd.check)=="y"){
-								$('#check').append("<font color = 'red'  size='3px'>&nbsp;이미 있는 ID 입니다!</font>");
 								$('#m_id').focus();
+								swal({
+				                    title: "",
+				                    text: "이미 있는 ID입니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                  });
+								//$('#check').append("<font color = 'red'  size='3px'>&nbsp;이미 있는 ID 입니다!</font>");
+								
 							}else if($.trim(rd.check)=="n" && $("#m_id").val().trim().length >= 8){
-								$('#check').append("<font color = '#369F36'  size='3px'>사용 가능한 ID 입니다!</font>");
+								swal({
+				                    title: "",
+				                    text: "사용 가능한 ID 입니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                  });
+								//$('#check').append("<font color = '#369F36'  size='3px'>사용 가능한 ID 입니다!</font>");
 							}else{
-								$('#check').append("<font color = 'red'  size='3px'>ID는 8자 이상입니다!</font>");
+								$('#m_id').focus();
+								swal({
+				                    title: "",
+				                    text: "ID는 8자 이상입니다.",
+				                    type: "info",
+				                    closeOnConfirm: true,
+				                    showLoaderOnConfirm: true,
+				                  },
+				                  function(){
+				                  });
+								
+								//$('#check').append("<font color = 'red'  size='3px'>ID는 8자 이상입니다!</font>");
 							}
 						}
 						
@@ -717,66 +777,194 @@ bodoy {
 				
 				$("#next").click(function(){
 					if($("#m_id").val() == ""){
-						alert("ID를 입력하세요.");
 						$("#m_id").focus();
+						swal({
+		                    title: "",
+		                    text: "ID를 입력하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 				        return false;
 					}else if($("#m_pw").val() == ""){
-						alert("비밀번호를 입력하세요.");
 						$("#m_pw").focus();
+						swal({
+		                    title: "",
+		                    text: "비밀번호를 입력하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 				        return false;
 					}else if($("#m_pw2").val() == "" || $("#m_pw").val() != $("#m_pw2").val()){
-						alert("비밀번호가 일치 하지 않습니다.");
 						$("#m_pw2").focus();
+						swal({
+		                    title: "",
+		                    text: "비밀번호가 일치하지 않습니다.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_name").val() == ""){
-						alert("이름을 입력하세요.");
 						$("#m_name").focus();
+						swal({
+		                    title: "",
+		                    text: "이름을 입력하세요",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_email").val() == ""){
-						alert("이메일을 입력하세요.");
 						$("#m_email").focus();
+						swal({
+		                    title: "",
+		                    text: "이메일을 입력하세요",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_nocheck").val() == "n"){
-						alert("이메일을 통해 인증하세요.");
 						$("#m_email").focus();
+						swal({
+		                    title: "",
+		                    text: "이메일을 통해서 인증하세요",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#j_code").val() == ""){
-						alert("직책을 선택하세요.");
+						swal({
+		                    title: "",
+		                    text: "직책을 선택하세요",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_birth").val() =="" || !bir.test($("#m_birth").val().trim())){
-						alert("생년월일을 형식에 맞게 입력해주세요.");
 						$("#m_birth").focus();
+						swal({
+		                    title: "",
+		                    text: "생년월일을 형식에 맞게 입력해주세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_phone").val() =="" || !bir2.test($("#m_phone").val().trim())){
-						alert("연락처를 형식에맞게 입력해주세요.");
 						$("#m_phone").focus();
+						swal({
+		                    title: "",
+		                    text: "연락처를 형식에맞게 입력해주세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_license").val() ==""){
-						alert("운전면허증 사본을 첨부하세요.");
 						$("#m_license").focus();
+						swal({
+		                    title: "",
+		                    text: "운전면허증 사본을 첨부하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_photo").val() ==""){
-						alert("사진을 첨부하세요.");
 						$("#m_photo").focus();
+						swal({
+		                    title: "",
+		                    text: "사진을 첨부하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($('#m_resume').val()==""){
-						alert("이력서를 첨부하세요.");
 						$('#m_resume').focus();
+						swal({
+		                    title: "",
+		                    text: "이력서를 첨부하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_addr").val() ==""){
-						alert("우편주소를 입력하세요.");
 						$("#m_addr").focus();
+						swal({
+		                    title: "",
+		                    text: "우편주소를 입력하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#m_daddr").val() ==""){
-						alert("상세주소를 입력하세요.");
 						$("#m_daddr").focus();
+						swal({
+		                    title: "",
+		                    text: "상세주소를 입력하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else if($("#res_num").val() ==""){
-						alert("이력사항을 선택하세요.");
 						return false;
+						swal({
+		                    title: "",
+		                    text: "이력사항을 선택하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 					}else if($("#rr_detail").val() ==""){
-						alert("이력사항을 입력하세요.");
 						$("#rr_detail").focus();
+						swal({
+		                    title: "",
+		                    text: "이력사항을 입력하세요.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
 						return false;
 					}else{
 						return true;
@@ -854,7 +1042,16 @@ bodoy {
         function xlscheck(file){
 			var filelen = file.value.length;
 			if(file.value.substring(filelen-3,filelen)!="xls"){
-				alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
+				//alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
+				swal({
+                    title: "",
+                    text: "확장자가 xls인 엑셀파일을 선택해 주세요.",
+                    type: "info",
+                    closeOnConfirm: true,
+                    showLoaderOnConfirm: true,
+                  },
+                  function(){
+                  });
 				file.value = "";
 			}
 		}
@@ -864,7 +1061,16 @@ bodoy {
 			var filelen = file.value.length;
 			if(file.value.substring(filelen-3,filelen)!="png" && file.value.substring(filelen-3,filelen) != "jpg"){
 									
-				alert("JPG 또는 PNG인 이미지파일을 선택해 주세요,");
+				//alert("JPG 또는 PNG인 이미지파일을 선택해 주세요,");
+				swal({
+                    title: "",
+                    text: "JPG 또는 PNG인 이미지파일을 선택해 주세요.",
+                    type: "info",
+                    closeOnConfirm: true,
+                    showLoaderOnConfirm: true,
+                  },
+                  function(){
+                  });
 				file.value= "";
 			}
 		} 

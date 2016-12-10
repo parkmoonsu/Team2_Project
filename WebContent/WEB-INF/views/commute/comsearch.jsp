@@ -59,12 +59,15 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
+<script src="dist/sweetalert.min.js"></script>
+
 <script type="text/javascript">
 var som;
 
@@ -119,7 +122,17 @@ var som;
 
 						
 					} else {
-						alert("이미 출근 하셨습니다.");
+						//alert("이미 출근 하셨습니다.");
+						swal({
+		                    title: "",
+		                    text: "이미 출근 하셨습니다.",
+		                    type: "info",
+		                    closeOnConfirm: true,
+		                    showLoaderOnConfirm: true,
+		                  },
+		                  function(){
+		                  });
+						
 					}
 
 						//window.location.reload();
@@ -163,7 +176,17 @@ var som;
 						});
 						
 						} else {
-							alert("이미 퇴근 하셨습니다.");
+							//alert("이미 퇴근 하셨습니다.");
+							swal({
+			                    title: "",
+			                    text: "이미 퇴근 하셨습니다.",
+			                    type: "info",
+			                    closeOnConfirm: true,
+			                    showLoaderOnConfirm: true,
+			                  },
+			                  function(){
+			                  });
+							
 						}
 					}); 
 

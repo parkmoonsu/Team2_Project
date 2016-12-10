@@ -85,7 +85,7 @@
 			data:{"m_id":"${LoginUser}"},
 			success:function(data){
 				console.log(data.m_photo);
-				
+				console.log("????한글은 위대하다");
 				$("#m_photo").attr("src", "${pageContext.request.contextPath}/join/upload/"+data.m_photo);
 			}
 		});
@@ -98,7 +98,7 @@
 	
 	function bell(){
 		$.ajax({
-			url : "bell.htm",
+			url : "bell.htm", 
 			success : function(data){
 				console.log(data.appcount);
 				$("#bell").empty();

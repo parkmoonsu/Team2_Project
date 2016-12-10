@@ -14,7 +14,8 @@
 
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <title>노선관리</title>
 
 <!-- Bootstrap -->
@@ -492,6 +493,8 @@ select#selectBus, select#selectBus2 {
 		cinfowindow.open(map, cmarker);
 
 	}
+	
+	var r_num;
 	function addstop(){
 		//정류장 번호 랜덤 값으로 생성
 		$.ajax({ 
@@ -502,7 +505,6 @@ select#selectBus, select#selectBus2 {
         	}
          });
 			
-		var r_num;
 		if($('#createdrnum').val()!=""){
 			r_num=$('#createdrnum').val();
 			$('#pass-modal').modal();
@@ -510,7 +512,19 @@ select#selectBus, select#selectBus2 {
 			r_num=$('#selectBus2').val();
 			$('#pass-modal').modal();
 		}else {
-			alert('신규노선번호를 생성하거나 기존 노선번호를 선택하세요.');
+			//alert('신규노선번호를 생성하거나 기존 노선번호를 선택하세요.');
+			swal({
+				  title: "",
+				  text: "신규노선번호를 생성하거나 기존 노선번호를 선택하세요.",
+				  type: "info",
+				  closeOnConfirm: true,
+				  showLoaderOnConfirm: true,
+				},
+				function(){
+				  setTimeout(function(){
+				    swal("Ajax request finished!");
+				  }, 2000);
+			});
 		}
 		
 		$('#shy').click(function(){
@@ -525,19 +539,21 @@ select#selectBus, select#selectBus2 {
 				
 			//stop에 저장
 			var param = {
-				"r_num":rnum,
+				"r_num":r_num,
 				"s_num":$('#snum').val(),
 				"s_name":$('#sname').val(),
 				"rs_order":$('#end').val(),
 				"s_x":cmarker.getPosition().lng(),
 				"s_y":cmarker.getPosition().lat()
-			};					
+			};
+			console.log(param);
     		$.ajax({
     			url : "editordernumber.admin",
     			type : "post",
     			data : param,
     			success:function(data){
-    				alert('신규 정류장 등록 완료');
+    				//alert('신규 정류장 등록 완료');
+    				swal("신규 정류장 등록 완료!");
     			}
     		});
     		
@@ -568,7 +584,7 @@ select#selectBus, select#selectBus2 {
 				type:'post',
 				data: {
 					r_num: r_num,
-					s_num: dataobject.s_num,
+					s_num: $('#snum').val(),
 					rs_order: $('#m_pw2').val()
 				},
 				success:function(data){
@@ -795,7 +811,7 @@ select#selectBus, select#selectBus2 {
     			type : "post",
     			data : param,
     			success:function(data){
-    				alert(data.alert);
+    				//alert(data.alert);
     				deleteRout();
     				$.each(data.rssdto,function(index,obj){
     					copyMarkerMakes(obj,map);
@@ -856,7 +872,7 @@ select#selectBus, select#selectBus2 {
    		
           	//마커 드래그 끝났을떄
             	copyMarker.addListener('dragend', function() {
-                	alert('hi');
+                	//alert('hi');
             		//마커 라벨을 얻어와 담을 변수
             		var markerLabel = copyMarker.getLabel();
                 	var stopnum = copyMarker.s_num;
@@ -1074,7 +1090,19 @@ select#selectBus, select#selectBus2 {
       		type : "post",
       		data : {"r_num":r_num},
       		success : function(data){
-      			alert($('#stopn1').val()+' 정류장 변경을 취소 하셨습니다.');
+      			//alert($('#stopn1').val()+' 정류장 변경을 취소 하셨습니다.');
+      			swal({
+						  title: "",
+						  text: $('#stopn1').val()+"정류장 변경을 취소 하셨습니다.",
+						  type: "info",
+						  closeOnConfirm: true,
+						  showLoaderOnConfirm: true,
+						},
+						function(){
+						  /* setTimeout(function(){
+						    swal("Ajax request finished!");
+						  }, 2000); */
+						});
       			deleteRoute();
       			$.each(data.rssdto,function(index,obj){
       				copyMarkerMakes(obj, map);   
@@ -1088,7 +1116,7 @@ select#selectBus, select#selectBus2 {
   				type : "post",
   				data : {"r_num":$('#selectBus2').val()},
   				success : function(data){
-  					alert('수정 저장본 불러오기');
+  					//alert('수정 저장본 불러오기');
   					deleteRoute();
   	      			$.each(data.rssdto,function(index,obj){
   	      				copyMarkerMakes(obj, map);   
@@ -1115,7 +1143,7 @@ select#selectBus, select#selectBus2 {
           		type : "post",
           		data : {"r_num":r_num,"s_num":$('#stopno').val(),"rs_order":rs_order},
           		success : function(data){
-          			alert(data.alert);
+          			//alert(data.alert);
           			deleteRoute();
           			$.each(data.rssdto,function(index,obj){
           				copyMarkerMakes(obj, map);   
@@ -1133,7 +1161,7 @@ select#selectBus, select#selectBus2 {
               		type : "post",
               		data : {"r_num":r_num,"s_num":$('#stopno1').val(),"s_name":$('#stopn2').val(),"s_x":$('#ms_x').val(),"s_y":$('#ms_y').val()},
               		success : function(data){
-              			alert(data.alert);
+              			//alert(data.alert);
               			deleteRoute();
               			$.each(data.rssdto,function(index,obj){
               				copyMarkerMakes(obj, map);   
@@ -1256,7 +1284,7 @@ select#selectBus, select#selectBus2 {
                   	success : function(data) {
                      	console.log("DB저장잘됨?");
                      	console.log(data);
-                     	alert(data);
+                     	//alert(data);
                   	}        		
       			});       		     		
       		}

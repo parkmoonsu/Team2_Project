@@ -143,10 +143,13 @@ public class RouteManageService {
 
 		int result = dao.addStopInfo(sdto);
 		if (result > 0) {
-
+			System.out.println("이거 뭐에요");
+			System.out.println(r_num);
+			System.out.println(rs_order);
 			RouteStopDTO rsdto = dao.getRouteStopInfo(r_num, rs_order);
-
+			System.out.println("여기가 에러인 것이다");	
 			System.out.println(rsdto.toString());
+			System.out.println("여기는 안나올 것이다");
 			rsdto.setS_num(s_num);
 
 			int result1 = dao.addRouteStopInfo(rsdto);

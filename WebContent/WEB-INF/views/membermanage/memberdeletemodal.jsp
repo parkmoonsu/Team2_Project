@@ -62,7 +62,8 @@
 <!-- jQuery -->
    <script
       src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 </head>
 
 <body class="nav-md">
@@ -439,7 +440,16 @@ $(function() {
                type:"post",
                data: {"param":param},        
                success:function(data){
-                  alert("삭제 완료");
+                  //alert("삭제 완료");
+                  swal({
+                    title: "",
+                    text: "삭제 완료",
+                    type: "info",
+                    closeOnConfirm: true,
+                    showLoaderOnConfirm: true,
+                  },
+                  function(){
+                  });
                   window.location.reload();
                   
                }

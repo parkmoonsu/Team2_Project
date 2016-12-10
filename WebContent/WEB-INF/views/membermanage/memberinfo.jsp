@@ -62,6 +62,8 @@
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js">
 </script>
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <style type="text/css">
 th {
 	text-align: center;
@@ -277,21 +279,6 @@ ul.pagination li a {
 												
 											</c:forEach>
 										</c:forEach>
-											
-											
-											<%-- <c:forEach begin="1" end="${pagecount}" var="i" step = "1">
-												<c:if test="${i==pgc}">
-													<li><a  class="active" href="#">${i}</a></li>
-												</c:if>
-												<c:if test="${i!=pgc}">
-													<li><a href="membermanage.admin?pg=${i}">${i}</a></li>
-												</c:if>
-											</c:forEach> --%>
-
-											<%-- <c:forEach var="i" begin="1" end="${pagecount}" step="1">
-											<li class="active"><a href="membermanage.admin?pg=${i}">${i}</a></li>
-										</c:forEach> --%>
-
 											<c:if test="${pgc < mc/10 }">
 												<li><a href="membermanage.admin?pg=${pgc+1}">Next</a></li>
 											</c:if>
@@ -506,8 +493,17 @@ ul.pagination li a {
 							$("#myModal").modal("show");
 
 						} else {
-							alert("비밀번호가 틀렸습니다.");
-						}
+							//alert("비밀번호가 틀렸습니다.");
+						swal({
+							  title: "",
+							  text: "비밀번호가 틀렸습니다.",
+							  type: "info",
+							  closeOnConfirm: true,
+							  showLoaderOnConfirm: true,
+							},
+							function(){
+							});
+							}
 					}
 				});
 			});
@@ -562,7 +558,19 @@ ul.pagination li a {
 						"param" : param
 					},
 					success : function(data) {
-						alert("삭제 완료");
+						//alert("삭제 완료");
+						swal({
+							  title: "",
+							  text: "삭제 완료",
+							  type: "info",
+							  closeOnConfirm: true,
+							  showLoaderOnConfirm: true,
+							},
+							function(){
+							  /* setTimeout(function(){
+							    swal("Ajax request finished!");
+							  }, 2000); */
+							});
 						window.location.reload();
 
 					}
