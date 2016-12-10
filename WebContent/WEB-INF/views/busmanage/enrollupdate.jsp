@@ -1,4 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <!-- 
+	@FileName : enrollupdate.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.23
+	@Author	: 박문수
+	@Discription : 버스 정보 수정 페이지
+ -->
+ 
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div class="x_panel">
 	<div class="x_content" id="updateenroll">
