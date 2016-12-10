@@ -174,7 +174,7 @@
 		          <ul class="nav navbar-nav navbar-right">
 		            <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
 		            <li><a href="#" data-nav-section="work"><span>Work</span></a></li> 
-		            <li><a href="#" id="log"><span>로그인</span></a>&nbsp;&nbsp;</li>
+		            <li><a href="#" id="log"><span>로그인</span></a></li>
 		           	<li><a href="#" id="gaip"><span>회원가입</span></a></li>
 		          </ul>
 		        </div>
