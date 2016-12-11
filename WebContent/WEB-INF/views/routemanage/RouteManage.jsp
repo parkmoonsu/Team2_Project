@@ -567,7 +567,6 @@ select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
                     	}else{
                     		//alert("기사가 배정되지 않았습니다");
                     		swal({
-<<<<<<< HEAD
                                 title: "",
                                 text: "기사가 배정되지 않았습니다",
                                 type: "info",
@@ -576,16 +575,7 @@ select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
                               },
                               function(){
                               });
-=======
-      						  title: "",
-      						  text: "기사가 배정되지 않았습니다",
-      						  type: "info",
-      						  closeOnConfirm: true,
-      						  showLoaderOnConfirm: true,
-      						},
-      						 function(){
-      						}); 
->>>>>>> 892b177b8904d37664854afea67a584579a9eedf
+
                     		return false;
                     	}
                     	                 		                   		                 	                   		                   		

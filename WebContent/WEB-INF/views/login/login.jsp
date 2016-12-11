@@ -196,20 +196,7 @@ placeholder {
 		<div>
 			
 			<script>
-			swal({
-				  title: "Are you sure?",
-				  text: "You will not be able to recover this imaginary file!",
-				  type: "warning",
-				  showCancelButton: true,
-				  confirmButtonColor: "#DD6B55",
-				  confirmButtonText: "Yes, delete it!",
-				  cancelButtonText: "취소",
-				  closeOnConfirm: false
-				},
-				function(){
-				  swal("Deleted!", "Your imaginary file has been deleted.", "success");
-				});
-				/* swal(
+				 swal(
 						{
 							title : "로그인 실패",
 							text : "${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}",
@@ -220,7 +207,7 @@ placeholder {
 							closeOnConfirm : true
 						}, function() {
 							 
-						}); */
+						}); 
 			
 			</script>
 		</div>
