@@ -5,10 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.or.bus.dao.BusStopDAO">
 	<!-- 원본 버스정류장  -->
 	<select id="makeBusStop" parameterType="String" resultType="kr.or.bus.dto.BusStopDTO">
-		select stop.S_NUM, stop.S_NAME, stop.S_X, stop.S_Y, ROUTESTOPCOPY.RS_ORDER
-		from stop, ROUTESTOPCOPY 
-		where stop.S_NUM = ROUTESTOPCOPY.S_NUM and ROUTESTOPCOPY.R_ID = #{r_id}
-		ORDER BY ROUTESTOPCOPY.RS_ORDER
+		select stop.S_NUM, stop.S_NAME, stop.S_X, stop.S_Y, ROUTESTOP.RS_ORDER
+		from stop, ROUTESTOP 
+		where stop.S_NUM = ROUTESTOP.S_NUM and ROUTESTOP.R_ID = #{r_id}
+		ORDER BY ROUTESTOP.RS_ORDER
 	</select>
 	
 	<!-- 수정 버스정류장 -->
