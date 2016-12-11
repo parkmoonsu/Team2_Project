@@ -1,3 +1,12 @@
+/*
+*	@FileName : busSingleRouteRead.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.25
+*	@Author	: 김지현
+*	@Discription : 버스노선 읽어오는 페이지 Service
+*/
+
+
 package kr.or.bus.service;
 
 import java.io.BufferedReader;

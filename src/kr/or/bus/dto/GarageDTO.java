@@ -1,3 +1,11 @@
+/*
+*	@FileName : GarageDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.20
+*	@Author	:  김수현
+*	@Discription : Garage table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class GarageDTO {

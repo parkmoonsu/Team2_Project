@@ -1,3 +1,11 @@
+/*
+*	@FileName : MemberJoinBusJoinRouteJoinReguloffDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.17
+*	@Author	: 김용현
+*	@Discription : Member,Bus,Route,Reguloff table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class MemberJoinBusJoinRouteJoinReguloffDTO {

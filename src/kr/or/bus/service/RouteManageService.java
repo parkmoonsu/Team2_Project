@@ -1,3 +1,11 @@
+/*
+*	@FileName : RouteManageService.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.26
+*	@Author	: 김지현
+*	@Discription : 버스노선 관리 페이지 Service
+*/
+
 package kr.or.bus.service;
 
 import java.io.BufferedReader;

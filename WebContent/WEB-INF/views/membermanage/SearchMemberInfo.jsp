@@ -1,3 +1,12 @@
+ <!-- 
+	@FileName : SearchMemberInfo.jsp
+	@Project	: KosBus
+	@Date	: 2016. 12.01
+	@Author	: 김수현
+	@Discription : 회원정보검색
+ -->
+ 
+ 
 <%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
