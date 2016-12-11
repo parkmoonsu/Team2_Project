@@ -110,9 +110,9 @@ public class RouteManageController {
         //지현아 이것좀 그만 날려라
         @RequestMapping(value="/routeRead.admin",method=RequestMethod.POST)
         public View routeRead(HttpServletRequest request , HttpServletResponse response, Model model) throws Exception{
-
+        	
             List<StopDTO> list=routeManageSerivce.routeRead(request , response);
-
+            
             model.addAttribute("list", list);
             return jsonview;
         }
@@ -198,11 +198,27 @@ public class RouteManageController {
   			return jsonview;
   		}
   		
+  	//stop 테이블에 정류장 저장
+  		@RequestMapping(value="/stopInsert.admin",method=RequestMethod.POST)
+  		public View stopInsert(String s_num, String s_name, String s_x, String s_y, Model model){
+
+      			routeManageSerivce.stopInsert(s_num, s_name, s_x, s_y);
+      			
+				return jsonview;
+      		}
+  		
   		//route 테이블에 노선 저장
   		@RequestMapping(value="/routeInsert.admin",method=RequestMethod.POST)
   		public View routeInsert(String r_num, String bd_num, String g_num, Model model){
-
-      			routeManageSerivce.routeInsert(r_num, bd_num, g_num);
+  				int result = routeManageSerivce.checkduplicaternum(r_num);
+  				String alert = "";
+  				if(result>0){
+  					alert = "이미 등록되어 있는 노선입니다. 기존 노선에 정류장을 추가 합니다.";
+  				}else{
+  					routeManageSerivce.routeInsert(r_num, bd_num, g_num);
+  					alert = "신규 노선을 생성 하셨습니다.";
+  				}
+      			model.addAttribute("alert", alert);
       			
 				return jsonview;
       		}
@@ -210,12 +226,25 @@ public class RouteManageController {
       		//routestop 테이블에 노선 저장
       		@RequestMapping(value="/routeStopInsert.admin",method=RequestMethod.POST)
       		public View routeStopInsert(String r_num, String s_num, String rs_order, Model model){
-
-      			routeManageSerivce.routeStopInsert(r_num, s_num, rs_order);
+      			String alert = "";
+      			System.out.println("인서트루트스탑"+r_num +"/"+ s_num +"/"+ rs_order);
+      			int result = routeManageSerivce.checkDuplicateRsnum(r_num, rs_order);
+      			if(result>0){
+      				routeManageSerivce.routeStopInsert(r_num, s_num, rs_order);
+      				result = routeManageSerivce.updateRouteStopInfoNotNew(r_num, s_num, rs_order);
+      				if(result>0){
+      					alert = "기존 노선의 정류장 정보를 업데이트 하였습니다.";
+      				}else{
+      					alert = "기존 노선의 정류장 정보 업데이트 실패 하였습니다.";
+      				}
+      			}else{//routestop3에 없는 rs_order
+      				routeManageSerivce.routeStopInsert(r_num, s_num, rs_order);
+      				alert = "새로운 정류장을 추가하였습니다.";
+      			}
+      			List<RouteStopJoinStopDTO> rssdto = routeManageSerivce.getRouteStopInfoList(r_num);
+    			model.addAttribute("rssdto", rssdto);
+      			model.addAttribute("alert", alert);
       			
 				return jsonview;
       		}
-
-   	
-
 }

@@ -19,7 +19,9 @@ public interface RouteStopDAO {
 
 	public void routeUpdate(int rs_order, String r_num);
 	public void routeUpdate2(int rs_order, String s_num);
-
+	public int getRouteStopInfoNum(String r_num, String rs_order);
+	public int addRouteStopInfoNew(String r_num, String s_num, String rs_order);
+	
 	public int deleteStopRoute(String r_num,String s_num); //정류장-삭제
 	public int getDuplicateStop(String s_num);//정류장 - 삭제
 	public int updateDeletedRouteStopInfo(String r_num, String rs_order);//정류장-삭제
@@ -30,7 +32,12 @@ public interface RouteStopDAO {
 	//rs_order를 순서대로 불러온다.
 	public List<RouteStopDTO> getRsOrderfRsStop(String r_num);
 	
+	public void stopInsert(String s_num, String s_name, String s_x, String s_y);
 	public void routeInsert(String r_num, String bd_num, String g_num);
 	public void routeStopInsert(String r_num, String s_num, int rs_order);
-
+	public int checkDuplicateRnum(String r_num);
+	//routestop 테이블에서 r_num, rs_order체크
+	public int checkDuplicateRsnum(String r_num, String rs_order);
+	//routestop 테이블에서 같은 것이 있으면 기준 이후로 rs_order 전부 + 1
+	//public int updateRouteStopInfo(String r_num, String rs_order, String s_num);
 }
