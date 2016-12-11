@@ -136,21 +136,29 @@ public class RouteManageService {
 		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
 		String alert;
 		StopDTO sdto = new StopDTO();
+		System.out.println(r_num + "/" + s_num + "/" + s_name + "/" + rs_order + "/" + s_x +"/"+ s_y);
 		sdto.setS_num(s_num);
 		sdto.setS_name(s_name);
 		sdto.setS_x(s_x);
 		sdto.setS_y(s_y);
-
+		System.out.println(sdto.toString());
 		int result = dao.addStopInfo(sdto);
+		System.out.println("result"+result);
 		if (result > 0) {
 			System.out.println("이거 뭐에요");
 			System.out.println(r_num);
 			System.out.println(rs_order);
-			RouteStopDTO rsdto = dao.getRouteStopInfo(r_num, rs_order);
+			RouteStopDTO rsdto = dao.getRouteStopInfo(r_num, rs_order); //해당 값이 안나올 가능성이 크지?
+			System.out.println(rsdto.getR_num());
+			if(rsdto.getR_num()==null){
+				System.out.println("이거 떠야해!!");
+			}
 			System.out.println("여기가 에러인 것이다");	
 			System.out.println(rsdto.toString());
 			System.out.println("여기는 안나올 것이다");
 			rsdto.setS_num(s_num);
+			//5401 39 55555
+			//5401 39 55554
 
 			int result1 = dao.addRouteStopInfo(rsdto);
 			if (result1 > 0) {
@@ -232,6 +240,9 @@ public class RouteManageService {
 	}
 	//정류장 좌표 수정하기
 	public void modifyStopPosition(String r_num,String s_num,String s_name, String s_x, String s_y, Model model){
+		System.out.println("add r_num");
+		System.out.println(r_num + s_num + s_name + s_x + s_y);
+		
 		//정류장 좌표가 바뀌면 새로운 정류장으로 인식해야함
 		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
 		int result = 0;

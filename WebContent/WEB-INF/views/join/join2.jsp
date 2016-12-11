@@ -1,4 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <!-- 
+	@FileName : join2.jsp
+	@Project	: KosBus
+	@Date	: 2016. 11.26
+	@Author	: 박문수
+	@Discription : 회원가입 
+ -->
+ 
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -1038,11 +1046,11 @@ bodoy {
         
         function xlscheck(file){
 			var filelen = file.value.length;
-			if(file.value.substring(filelen-3,filelen)!="xls"){
+			if(file.value.substring(filelen-3,filelen)!="xls" ||file.value.substring(filelen-3,filelen)!="xlsx"){
 				//alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
 				swal({
                     title: "",
-                    text: "확장자가 xls인 엑셀파일을 선택해 주세요.",
+                    text: "확장자가 xls 또는 xlsx인 엑셀파일을 선택해 주세요.",
                     type: "info",
                     closeOnConfirm: true,
                     showLoaderOnConfirm: true,
