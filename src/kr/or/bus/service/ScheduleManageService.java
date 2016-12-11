@@ -1,3 +1,12 @@
+/*
+*	@FileName : ScheduleManageService.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.24
+*	@Author	: 김수현
+*	@Discription : 기사(회원) 스케줄관리 페이지 관련 Service
+*/
+
+
 package kr.or.bus.service;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -157,6 +166,7 @@ public class ScheduleManageService {
 		
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		List<RegulOffrJoinMemberJoinBusDTO> dtolist=dao.reguloffr_select(m_id);
+		System.out.println(dtolist);
 		
 		return dtolist;
 	}

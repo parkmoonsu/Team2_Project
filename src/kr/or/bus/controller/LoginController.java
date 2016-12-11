@@ -133,7 +133,7 @@ public class LoginController {
 		}else{
 			viewpage = "login/searchpwsuccess";
 		}
-		
+		 
 		return viewpage;
 	}
 	

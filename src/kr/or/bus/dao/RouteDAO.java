@@ -1,3 +1,12 @@
+/*
+*	@FileName : RouteDAO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.25
+*	@Author	: 김지현
+*	@Discription : 노선관련  DAO interface
+*/
+
+
 package kr.or.bus.dao;
 
 import java.util.List;
@@ -14,7 +23,11 @@ public interface RouteDAO {
 	
 	public List<RouteDTO> routeidselect(String r_num);
 	
-	public void InsertRoute(RoutePathDTO dto);
+	//공공데이터 로 부터 노선경로 데이터를 저장함.
+	public void insertOrgRoute(RoutePathDTO dto);
+	
+	
+	public void InsertRoute(RoutePathDTO dto); //원본을 불러와서 수정 노선테이블에 저장.
 	
 	public List<RoutePathDTO> editRouteRead(String r_num);
 	

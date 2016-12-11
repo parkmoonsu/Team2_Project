@@ -39,6 +39,8 @@
 
     <!-- Custom styling plus plugins -->
     <link href="${pageContext.request.contextPath}/build/css/custom.min.css" rel="stylesheet">
+    <script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
   </head>
 
   <body class="nav-md">

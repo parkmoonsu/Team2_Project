@@ -424,9 +424,10 @@ bodoy {
 																class="btn btn-default">
 														</div>
 													</div>
-
-
-													<div class="form-group">
+													
+													<input type = "hidden" name = "j_code" id = "j_code">
+													
+													<!-- <div class="form-group">
 														<label for="j_code"
 															class="control-label col-md-3 col-sm-3 col-xs-12" style="font-size: 12px">직책
 														</label>
@@ -441,7 +442,7 @@ bodoy {
 															</select>
 
 														</div>
-													</div>
+													</div> -->
 
 													<div class="form-group">
 														<label class="control-label col-md-3 col-sm-3 col-xs-12">성별</label>
@@ -853,17 +854,6 @@ bodoy {
 		                  function(){
 		                  });
 						return false;
-					}else if($("#j_code").val() == ""){
-						swal({
-		                    title: "",
-		                    text: "직책을 선택하세요",
-		                    type: "info",
-		                    closeOnConfirm: true,
-		                    showLoaderOnConfirm: true,
-		                  },
-		                  function(){
-		                  });
-						return false;
 					}else if($("#m_birth").val() =="" || !bir.test($("#m_birth").val().trim())){
 						$("#m_birth").focus();
 						swal({
@@ -1046,8 +1036,10 @@ bodoy {
         
         function xlscheck(file){
 			var filelen = file.value.length;
-			if(file.value.substring(filelen-3,filelen)!="xls" ||file.value.substring(filelen-3,filelen)!="xlsx"){
+			if(file.value.substring(filelen-3,filelen)!="xls"){
 				//alert("확장자가 xls인 엑셀파일을 선택해 주세요.");
+				if(file.value.substring(filelen-4,filelen)!="xlsx"){
+				console.log(file.value.substring(filelen-4,filelen));
 				swal({
                     title: "",
                     text: "확장자가 xls 또는 xlsx인 엑셀파일을 선택해 주세요.",
@@ -1059,6 +1051,8 @@ bodoy {
                   });
 				file.value = "";
 			}
+		}
+			
 		}
 		 
 		function imagecheck(file){

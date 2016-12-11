@@ -1,6 +1,12 @@
-package kr.or.bus.controller;
+/*
+*	@FileName : BusStopManageController.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.20
+*	@Author	: 김용현, 김용현
+*	@Discription : 버스정류장 관리 controller
+*/
 
-import java.util.List;
+package kr.or.bus.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import kr.or.bus.dto.BusStopDTO;
@@ -19,8 +24,6 @@ import kr.or.bus.dto.RouteDTO;
 import kr.or.bus.dto.RouteStopDTO;
 import kr.or.bus.dto.StopDTO;
 import kr.or.bus.service.BusStopManageService;
-
-import nu.xom.*;
 @Controller
 public class BusStopManageController {
 	@Autowired

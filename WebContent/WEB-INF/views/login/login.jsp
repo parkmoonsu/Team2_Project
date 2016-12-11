@@ -196,7 +196,7 @@ placeholder {
 		<div>
 			
 			<script>
-				swal(
+				 swal(
 						{
 							title : "로그인 실패",
 							text : "${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}",
@@ -207,7 +207,7 @@ placeholder {
 							closeOnConfirm : true
 						}, function() {
 							 
-						});
+						}); 
 			
 			</script>
 		</div>

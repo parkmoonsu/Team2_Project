@@ -1,4 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <!-- 
+	@FileName : updatesuccess.jsp
+	@Project	: KosBus
+	@Date	: 2016. 12.02
+	@Author	: 김용현
+	@Discription : 회원승인완료
+ -->
+ 
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,8 +27,8 @@
             showLoaderOnConfirm: true,
           },
           function(){
-          });
 		location.href = "joinapprove.admin";
+          });
 	</script>
 </body>
 </html>

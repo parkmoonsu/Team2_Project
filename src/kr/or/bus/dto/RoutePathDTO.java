@@ -1,3 +1,10 @@
+/*
+*	@FileName : RoutePathDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.22
+*	@Author	: 김지현
+*	@Discription :Routepath table DTO
+*/
 package kr.or.bus.dto;
 
 public class RoutePathDTO {

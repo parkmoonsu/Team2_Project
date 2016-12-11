@@ -1,20 +1,21 @@
+/*
+*	@FileName : BusStopManageService.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.24
+*	@Author	: 김지현
+*	@Discription : 버스정류장 관리 페이지 Service
+*/
+
 package kr.or.bus.service;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.bus.dao.BusDataDAO;
 import kr.or.bus.dao.BusLocationInfoDAO;
@@ -33,6 +31,7 @@ import kr.or.bus.dao.BusStopDAO;
 import kr.or.bus.dao.RouteDAO;
 import kr.or.bus.dao.RouteStopDAO;
 import kr.or.bus.dao.StopDAO;
+
 import kr.or.bus.dto.BusDTO;
 import kr.or.bus.dto.BusLocationInfoDTO;
 import kr.or.bus.dto.BusStopDTO;
@@ -41,11 +40,11 @@ import kr.or.bus.dto.RouteSelectGisaDTO;
 import kr.or.bus.dto.RouteStopDTO;
 import kr.or.bus.dto.RouteTypeDTO;
 import kr.or.bus.dto.StopDTO;
+
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.xml.XMLSerializer;
-import nu.xom.*;
 
 @Service
 public class BusStopManageService {

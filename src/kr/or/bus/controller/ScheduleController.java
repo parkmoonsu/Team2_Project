@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
+/*import org.apache.ibatis.session.SqlSession;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +31,9 @@ import kr.or.bus.service.ScheduleManageService;
 @Controller
 public class ScheduleController {
 	
-	@Autowired
+/*	@Autowired
 	private SqlSession sqlsession;
-	
+	*/
 	@Autowired
 	private BusManageService service2;
 	
@@ -276,9 +276,10 @@ public class ScheduleController {
 	
 	@RequestMapping("/rnumcheck.member")
 	public View rnumcheck(String m_id, Model model){
-		System.out.println("1");
+		System.out.println("체크합니다");
 		System.out.println(m_id);
 		MemberJoinBusDTO dto=service.rnumcheck(m_id);
+		System.out.println(dto);
 		model.addAttribute("dto", dto);		
 		return jsonview;
 	}

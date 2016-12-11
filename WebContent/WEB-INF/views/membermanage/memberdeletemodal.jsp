@@ -420,10 +420,10 @@ $(function() {
     $('#myModal').on('show.bs.modal', function (event) {
            var button = $(event.relatedTarget) 
            var recipient = button.data('whatever');
-           console.log(recipient);
+           console.log("너 뭐니" +  recipient);
            var array = recipient.split(',');
           
-           console.log($('#hvalue').val(array[1]));
+           console.log("##########" + $('#hvalue').val(array[1]));
            
            $('#myModalLabel2').html("<span class='blue'>&nbsp;"+array[0]+'</span>님을 삭제하시겠습니까?');
          });  
@@ -434,8 +434,9 @@ $(function() {
          $('#cancelbutton').click(function(){
           //console.log($('#search').val()); 
           var param = $('#hvalue').val();
-           
-          $.ajax({
+          console.log("병신");
+          console.log("####" + param);
+          /* $.ajax({
                url:"deleteMember.admin",
                type:"post",
                data: {"param":param},        
@@ -453,7 +454,7 @@ $(function() {
                   window.location.reload();
                   
                }
-            });
+            }); */
           });
         
          $('#memberresrecord').on('show.bs.modal', function (event) {

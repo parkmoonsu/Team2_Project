@@ -1,13 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
-
 <!--
  * @File Name: schedule_last.jsp
  * @Author: 김수현
  * @Data: 2016. 11. 29
  * @Desc: 일정관리(최종스케줄) - 테이블
 -->
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix = "se" uri = "http://www.springframework.org/security/tags" %>
+
+
 <!DOCTYPE html>
 <html>
   <head>

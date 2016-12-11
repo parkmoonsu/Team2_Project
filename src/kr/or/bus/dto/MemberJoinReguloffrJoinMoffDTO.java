@@ -1,3 +1,11 @@
+/*
+*	@FileName : MemberJoinReguloffrJoinMoffDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.19
+*	@Author	: 김수현
+*	@Discription : Member , Reguloggr,MoffDTO table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class MemberJoinReguloffrJoinMoffDTO {

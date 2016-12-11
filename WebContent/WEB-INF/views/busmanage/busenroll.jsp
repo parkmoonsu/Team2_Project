@@ -131,8 +131,8 @@ cursor: pointer;
 						<div class="count">${n}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "w">
-						<span class="count_top"><i class="fa fa-bus"></i> 순환버스</span>
-						<div class="count">${w}</div>
+						<span class="count_top"><i class="fa fa-bus"></i> 공항버스</span>
+						<div class="count">${a}</div>
 					</div>
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "g">
 						<span class="count_top"><i class="fa fa-bus"></i> 광역버스</span>
@@ -142,7 +142,7 @@ cursor: pointer;
 					<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" id = "allbus">
 						<a href ="busenroll.admin">
 							<span class="count_top"><i class="fa fa-bus"></i> 전체(대)</span>
-							<div class="count green">${m+n+w+g+no}</div>
+							<div class="count green">${m+n+a+g+no}</div>
 						</a>
 					</div>
 					

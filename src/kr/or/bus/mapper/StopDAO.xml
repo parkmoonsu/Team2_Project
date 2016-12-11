@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM TEMPSTOP WHERE S_NUM NOT IN(SELECT S_NUM FROM STOP)
 	</select> -->
 	
-	<insert id="insertStopData" parameterType="String">
+	<insert id="insertStopData" parameterType="kr.or.bus.dto.StopDTO">
 		INSERT INTO stop(S_NUM, S_X, S_Y, S_NAME) VALUES(#{s_num}, #{s_x}, #{s_y}, #{s_name})
 	</insert>
 	

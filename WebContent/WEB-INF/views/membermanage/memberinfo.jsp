@@ -55,7 +55,7 @@
 <!-- Custom Theme Style -->
 <link href="${pageContext.request.contextPath}/build/css/custom.min.css"
 	rel="stylesheet">
-<link rel="stylesheet" href="css/bootstrap.min.css">
+
 <!-- Editor -->
 <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <!-- jQuery -->
@@ -345,7 +345,7 @@ ul.pagination li a {
 								data-dismiss="modal" id="cancelbutton">삭제</button>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">취소</button>
-							<input type="hidden" id="hvalue2"> 
+							<input type="hidden" id="hvalue"> 
 							<!-- <input type="hidden" id=""> -->
 						</div>
 					</div>
@@ -548,8 +548,9 @@ ul.pagination li a {
 			
 			
 			$('#cancelbutton').click(function() {
+				 
 				var param = $('#hvalue').val();
-				console.log(param);
+				console.log( " ### " + param);
 
 				$.ajax({
 					url : "deleteMember.admin",
@@ -567,14 +568,12 @@ ul.pagination li a {
 							  showLoaderOnConfirm: true,
 							},
 							function(){
-							  /* setTimeout(function(){
-							    swal("Ajax request finished!");
-							  }, 2000); */
+							
+								window.location.reload();
 							});
-						window.location.reload();
 
 					}
-				});
+				}); 
 			});
 
 			/*    $('#myModal').on('show.bs.modal', function (event) {

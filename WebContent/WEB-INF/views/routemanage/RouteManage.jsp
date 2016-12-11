@@ -1,3 +1,13 @@
+ <!-- 
+	@FileName : RouteManage.jsp
+	@Project	: KosBus
+	@Date	: 2016. 12.02
+	@Author	: 김용현,김지현
+	@Discription : 노선관리 페이지
+ -->
+ 
+ 
+ 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -62,7 +72,7 @@
 }
 select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
 
-	-webkit-appearance: button;
+	-webkit-appearance: button btn-sm;
 	-webkit-border-radius: 2px;
 	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 	-webkit-padding-end: 20px;
@@ -513,8 +523,6 @@ select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
                 data : {r_num:$("#selectBuscopy").val()},
                 success : function(data) {                   	
                 	console.log("노선타입 전송잘되냐?");
-                	//console.log(data);
-                	//console.log(data.editlist);	
                 	var hell =new Array();
            			for(var j=0;j<data.editlist.length;j++){          				
    		      			hell.push(new google.maps.LatLng(parseFloat(data.editlist[j].r_y), parseFloat(data.editlist[j].r_x)));  		      			
@@ -567,14 +575,15 @@ select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
                     	}else{
                     		//alert("기사가 배정되지 않았습니다");
                     		swal({
-      						  title: "",
-      						  text: "기사가 배정되지 않았습니다",
-      						  type: "info",
-      						  closeOnConfirm: true,
-      						  showLoaderOnConfirm: true,
-      						},
-      						 function(){
-      						}); 
+                                title: "",
+                                text: "기사가 배정되지 않았습니다",
+                                type: "info",
+                                closeOnConfirm: true,
+                                showLoaderOnConfirm: true,
+                              },
+                              function(){
+                              });
+
                     		return false;
                     	}
                     	                 		                   		                 	                   		                   		

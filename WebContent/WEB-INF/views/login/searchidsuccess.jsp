@@ -19,8 +19,8 @@
 </head>
 <body>
 <script type="text/javascript">
-	//alert("입력된 이메일로 ID가 전송되었습니다.");
-	swal({
+	
+	 swal({
         title: "",
         text: "입력된 이메일로 ID가 전송되었습니다.",
         type: "info",
@@ -28,8 +28,11 @@
         showLoaderOnConfirm: true,
       },
       function(){
+		location.href = "login.htm";
       });
-	location.href = "login.htm";
+	 
+	
+	
 </script>
 </body>
 </html>

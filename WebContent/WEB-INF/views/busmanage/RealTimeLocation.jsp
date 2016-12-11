@@ -48,7 +48,7 @@
     .element {
  #map { margin-left:auto; margin-right:auto; width:95%; }}
  select#selectBus, #selectRoute, #selectGisa{
-	-webkit-appearance: button;
+	-webkit-appearance: button btn-sm;
 	-webkit-border-radius: 2px;
 	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 	-webkit-padding-end: 20px;
@@ -128,6 +128,12 @@
 				<select id="selectGisa">
 					<option>기사 명단</option>																	
 				</select>
+				
+				<span>
+					<input type="text" style="width:210px; height:34px; padding: 12px 20px; 
+    					   border-radius: 8px;" id="inputroute" placeholder="&nbsp;노선번호를 입력해주세요">
+					<input type="button" class="btn btn-default btn-sm" id="routeSave" value="노선저장">
+				</span>	
 				
 				<span>
 					<input type="text" style="width:210px; height:34px; padding: 12px 20px; 
@@ -1194,6 +1200,20 @@
                      	console.log("DB저장잘됨?");
                      	console.log(data);
                      	//alert(data);
+                  	}        		
+      			});       		     		
+      		}
+  		});
+        
+        $("#routeSave").click(function(){    	
+      		if($("#inputroute").val() !=null){		
+      			$.ajax({
+                  	url : "routeinsertcall.admin",
+                  	type : "get",
+                  	dataType : "text",
+                  	data : {r_num:$("#inputroute").val()},
+                  	success : function(data) {
+                     	console.log("노선DB저장잘됨?");                     	                    	
                   	}        		
       			});       		     		
       		}

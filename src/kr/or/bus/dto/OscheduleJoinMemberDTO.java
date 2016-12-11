@@ -1,3 +1,12 @@
+/*
+*	@FileName : OscheduleJoinMemberDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.25
+*	@Author	: 강민수
+*	@Discription : Member , Oschedule table DTO
+*/
+
+
 package kr.or.bus.dto;
 
 public class OscheduleJoinMemberDTO {
