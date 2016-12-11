@@ -1,13 +1,15 @@
 /*
-*	@FileName : MemberJoinMDetailRegulOffDTO.java
-*	@Project	: KosBus
-*	@Date	: 2016. 11.23
-*	@Author	: 강민수
-*	@Discription : Member join Reguloff table DTO
-*/
+	*	@FileName : MemberJoinMDetailRegulOffDTO.java
+	*	@Project	: KosBus
+	*	@Date	: 2016. 11.23
+	*	@Author	: 강민수
+	*	@Discription : Member join Reguloff table DTO
+	*/
+
 package kr.or.bus.dto;
 
 public class MemberJoinMDetailRegulOffDTO {
+	
 	private String m_id;
 	private String j_code;
 	private String b_vehiclenum;
