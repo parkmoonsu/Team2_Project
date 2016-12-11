@@ -11,7 +11,6 @@
 package kr.or.bus.service;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,13 +19,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.or.bus.dao.BusDAO;
-
 import kr.or.bus.dao.MemberDAO;
-import kr.or.bus.dao.RnumcommuteDAO;
 import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO;
-import kr.or.bus.dto.BusJoinMemberJoinGarageJoinBstatusJoinStatusDetailDTO;
-import kr.or.bus.dto.MemberDTO;
 import kr.or.bus.dto.BusJoinRdetailJoinRepairDTO;
+import kr.or.bus.dto.MemberDTO;
 
 @Service
 public class BusManageService {

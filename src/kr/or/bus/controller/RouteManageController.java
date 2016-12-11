@@ -8,8 +8,10 @@
 
 package kr.or.bus.controller;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +32,6 @@ import kr.or.bus.dto.StopDTO;
 import kr.or.bus.service.BusStopManageService;
 import kr.or.bus.service.RouteManageService;
 import kr.or.bus.service.RoutePathService;
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 @Controller
 public class RouteManageController {
