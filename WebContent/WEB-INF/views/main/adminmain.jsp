@@ -443,10 +443,10 @@
    
       {device : '간선버스',geekbench : ${m }},
       {device : '지선버스',geekbench : ${n }}, 
-      {device : '순환버스',geekbench : ${w }},
+      {device : '공항버스',geekbench : ${a }},
       {device : '광역버스',geekbench : ${g }},
       
-      {device : '전체버스',geekbench : ${m+n+w+g+no } } 
+      {device : '전체버스',geekbench : ${m+n+a+g+no } } 
 
    ],
    xkey : 'device',

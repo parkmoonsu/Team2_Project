@@ -12,6 +12,7 @@ package kr.or.bus.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -35,13 +36,80 @@ import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.xml.XMLSerializer;
+import nu.xom.*;
 @Service
 public class RoutePathService {
 
 
 		@Autowired
 		private SqlSession sqlsession;
-
+			
+			//공공데이터로 부터 원본 노선을 insert한다
+			public void routeInsert(HttpServletRequest request , HttpServletResponse response) throws IOException{
+				String r_num = request.getParameter("r_num");
+				RouteDAO routedao = sqlsession.getMapper(RouteDAO.class);
+				RouteDTO routedto = routedao.routeidSearch(r_num);
+				RoutePathDTO routepath = null;
+				System.out.println("노선id잘나오냐"+routedto.getR_id());
+				
+				JSONObject jsonmaps = null;
+				StringBuilder urlBuilder = new StringBuilder("http://ws.bus.go.kr/api/rest/busRouteInfo/getRoutePath"); /*URL*/
+		        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=058in59%2BNLwfE3cT76LhIzkAAy2rb6zIQALV3UFT4T8qcZ4oIcYFtMfw75Hvs7H2nbjhZ8hT66mmVaWbzdbltg%3D%3D"); /*Service Key*/
+		        urlBuilder.append("&" + URLEncoder.encode("busRouteId","UTF-8") + "=" + URLEncoder.encode(routedto.getR_id(), "UTF-8")); /*노선ID*/
+		        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("999", "UTF-8")); /*검색건수*/
+		        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호*/
+		        URL url = new URL(urlBuilder.toString());
+		        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		        conn.setRequestMethod("GET");
+		        conn.setRequestProperty("Content-type", "application/xml");
+		        //System.out.println("Response code: " + conn.getResponseCode());
+		        BufferedReader rd;
+		        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+		            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		        } else {
+		            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+		        }
+		        StringBuilder sb = new StringBuilder();
+		        String line;
+		        while ((line = rd.readLine()) != null) {
+		            sb.append(line);
+		        }
+		        rd.close();
+		        conn.disconnect();
+		        
+		        //System.out.println(sb.toString());
+		        jsonmaps = (JSONObject)new XMLSerializer().read(sb.toString());
+		        
+		        //System.out.println(jsonmaps);
+		        
+		        JSONArray jsonlist = (JSONArray) jsonmaps.get("msgBody");
+		        
+		        System.out.println(jsonlist);
+		        
+		        //"gpsX":"126.9278660041","gpsY":"37.3309699673","no":"1"
+		        
+		        int i=0;
+		        int jsonsize = jsonlist.size();
+		        routepath = new RoutePathDTO();
+		        while(i<jsonsize){
+		        	System.out.println(jsonlist.getJSONObject(i).get("gpsX").toString());
+		        	System.out.println(jsonlist.getJSONObject(i).get("gpsY").toString());
+		        	System.out.println(jsonlist.getJSONObject(i).get("no").toString());
+		        	System.out.println(r_num);
+		        	
+		        	routepath.setR_num(r_num);
+		        	routepath.setR_order(jsonlist.getJSONObject(i).get("no").toString());
+		        	routepath.setR_x(jsonlist.getJSONObject(i).get("gpsX").toString());
+		        	routepath.setR_y(jsonlist.getJSONObject(i).get("gpsY").toString());
+		        	
+		        	routedao.insertOrgRoute(routepath);
+		        	System.out.println("경로저장?? "+i);
+		        	i++;
+		        	
+		        }
+		        System.out.println("노선경로 저장 다됨?");
+		        
+			}
 			
 			//원본 노선경로 읽어옴
 			public void busSingleRouteRead(HttpServletRequest request , HttpServletResponse response) throws IOException{

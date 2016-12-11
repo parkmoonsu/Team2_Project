@@ -118,7 +118,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select ROWNUM r , N.*
         	  from (select *
 					from member me natural join mdetail md natural join job
-					order by job.j_name desc) N) 
+					order by job.j_name desc , m_id) N) 
 		where r between 1 + (#{page} - 1) * 10  and 10 + (#{page} - 1) * 10 
 		order by r
 	</select>
@@ -294,7 +294,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select count(*)
 	from commute c join cstart cs
 	on c.cs_code = cs.cs_code
-	where m_name = #{param1} and c_date like '%'||#{param2}||'%' and cs_stat = '출근'
+	where m_name = #{param1} and c_date like '%'||#{param2}||'%' and cs_stat = '정상출근'
 
 	</select>
 

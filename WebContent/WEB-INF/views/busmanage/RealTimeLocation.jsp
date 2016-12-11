@@ -131,6 +131,12 @@
 				
 				<span>
 					<input type="text" style="width:210px; height:34px; padding: 12px 20px; 
+    					   border-radius: 8px;" id="inputroute" placeholder="&nbsp;노선번호를 입력해주세요">
+					<input type="button" class="btn btn-default btn-sm" id="routeSave" value="노선저장">
+				</span>	
+				
+				<span>
+					<input type="text" style="width:210px; height:34px; padding: 12px 20px; 
     					   border-radius: 8px;" id="inputBusStop" placeholder="&nbsp;노선번호를 입력해주세요">
 					<input type="button" class="btn btn-default btn-sm" id="sendBusStop" value="정류장저장">
 				</span>								
@@ -1194,6 +1200,20 @@
                      	console.log("DB저장잘됨?");
                      	console.log(data);
                      	//alert(data);
+                  	}        		
+      			});       		     		
+      		}
+  		});
+        
+        $("#routeSave").click(function(){    	
+      		if($("#inputroute").val() !=null){		
+      			$.ajax({
+                  	url : "routeinsertcall.admin",
+                  	type : "get",
+                  	dataType : "text",
+                  	data : {r_num:$("#inputroute").val()},
+                  	success : function(data) {
+                     	console.log("노선DB저장잘됨?");                     	                    	
                   	}        		
       			});       		     		
       		}

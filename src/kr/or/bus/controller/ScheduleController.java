@@ -276,9 +276,10 @@ public class ScheduleController {
 	
 	@RequestMapping("/rnumcheck.member")
 	public View rnumcheck(String m_id, Model model){
-		System.out.println("1");
+		System.out.println("체크합니다");
 		System.out.println(m_id);
 		MemberJoinBusDTO dto=service.rnumcheck(m_id);
+		System.out.println(dto);
 		model.addAttribute("dto", dto);		
 		return jsonview;
 	}

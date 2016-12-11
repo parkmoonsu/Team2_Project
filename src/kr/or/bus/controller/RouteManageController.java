@@ -8,6 +8,7 @@
 
 package kr.or.bus.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,6 +150,13 @@ public class RouteManageController {
     		
     		return "routemanage/RouteManage";	
     	}
+    	
+    	//공공데이터 로 부터 노선을 insert 하기 위하여 서비스 호출
+    	@RequestMapping(value="/routeinsertcall.admin",method=RequestMethod.GET)
+    	public void routeInsertCall(HttpServletRequest request , HttpServletResponse response) throws IOException{
+    		routepathservice.routeInsert(request, response);
+    	}
+    	
     	//(r_type)을 받아서 DB에 원본 insert 하는 서비스
     	@RequestMapping(value="/insertpath.admin",method=RequestMethod.GET)
     	public void insertpath(HttpServletRequest request , HttpServletResponse response) throws Exception{
