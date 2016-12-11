@@ -1,3 +1,11 @@
+/*
+*	@FileName : TimeDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.26
+*	@Author	: 조한솔
+*	@Discription :Time  table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class TimeDTO {

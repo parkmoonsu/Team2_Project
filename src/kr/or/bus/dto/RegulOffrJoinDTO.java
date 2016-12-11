@@ -1,3 +1,11 @@
+/*
+*	@FileName : RegulOffrJoinDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.23
+*	@Author	: 김수현
+*	@Discription : RegulOffr table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class RegulOffrJoinDTO {

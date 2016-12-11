@@ -1,3 +1,11 @@
+/*
+*	@FileName : BusDataDAO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.28
+*	@Author	: 김용현
+*	@Discription : Bus data etc.. table DAO interface
+*/
+
 package kr.or.bus.dao;
 
 import java.util.ArrayList;

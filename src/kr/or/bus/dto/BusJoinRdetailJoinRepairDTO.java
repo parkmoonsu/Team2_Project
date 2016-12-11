@@ -1,3 +1,11 @@
+/*
+*	@FileName : BusJoinRdetailJoinRepairDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.23
+*	@Author	: 강민수
+*	@Discription : Bus, Rdetail, Repair table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class BusJoinRdetailJoinRepairDTO {

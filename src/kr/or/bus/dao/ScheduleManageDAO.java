@@ -1,3 +1,12 @@
+/*
+*	@FileName : ScheduleManageDAO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.26
+*	@Author	: 강민수
+*	@Discription : 회원 스케줄 관리  관련 DAO interface
+*/
+
+
 
 package kr.or.bus.dao;
 

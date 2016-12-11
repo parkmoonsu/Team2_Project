@@ -27,12 +27,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="getRouteStopInfo" parameterType="String" resultType="kr.or.bus.dto.RouteStopDTO">
-		select r_num, s_num, rs_order, r_id, rs_start, rs_end from routestop3 where r_num = #{param1} and rs_order = #{param2}
+		select nvl(r_num,'설정 없음') as r_num, nvl(s_num,'설정 없음') as s_num, nvl(to_char(rs_order),'설정 없음') as rs_order, nvl(r_id,'설정 없음') as r_id, nvl(rs_start,'설정없음') as rs_start, nvl(rs_end,'설정없음') as rs_end from routestop3 where r_num = #{param1} and rs_order = #{param2}
 	</select>
 	
 	<insert id="addRouteStopInfo" parameterType="kr.or.bus.dto.RouteStopDTO">
 		insert into routestop3(r_num,s_num,rs_order,r_id,rs_start,rs_end) values(#{r_num},#{s_num},#{rs_order},#{r_id},#{rs_start},#{rs_end})
-		<!-- insert into routestop3(r_num,s_num,rs_order,r_id,rs_start,rs_end) values(#{r_num},#{s_num},#{rs_order},#{r_id},#{rs_start},#{rs_end}) -->
 	</insert>
 	
 	<update id="updateRouteStopInfo" parameterType="String">

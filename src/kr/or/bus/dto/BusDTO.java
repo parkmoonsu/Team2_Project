@@ -1,3 +1,11 @@
+/*
+*	@FileName : BusDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.18
+*	@Author	:  강민수 
+*	@Discription :Bus table DTO
+*/
+
 package kr.or.bus.dto;
 
 import java.sql.Date;

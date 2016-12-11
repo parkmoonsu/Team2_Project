@@ -1,3 +1,11 @@
+/*
+*	@FileName : RouteManageController.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.20
+*	@Author	: 김용현, 김지현
+*	@Discription : 노선 관리 Controller
+*/
+
 package kr.or.bus.controller;
 
 import java.util.ArrayList;

@@ -26,7 +26,7 @@
 <script
 	src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
 
-<title>KOSBUS</title>
+<title>RoadOneBell</title>
 <!-- Bootstrap -->
 <link
 	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"

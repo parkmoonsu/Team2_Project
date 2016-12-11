@@ -1,3 +1,11 @@
+/*
+*	@FileName : StopDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.24
+*	@Author	: 김용현
+*	@Discription :Stop table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class StopDTO {

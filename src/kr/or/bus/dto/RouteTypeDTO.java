@@ -1,3 +1,11 @@
+/*
+*	@FileName : RouteTypeDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.25
+*	@Author	: 김용현
+*	@Discription :Route table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class RouteTypeDTO {

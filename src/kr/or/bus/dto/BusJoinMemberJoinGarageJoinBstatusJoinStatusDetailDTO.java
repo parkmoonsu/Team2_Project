@@ -1,3 +1,11 @@
+/*
+*	@FileName : BusJoinMemberJoinGarageJoinBStatusJoinStatusDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.19
+*	@Author	: 강민수
+*	@Discription : bus, garage,Bstatus,StatusDetail table  DTO
+*/
+
 package kr.or.bus.dto;
 
 import java.sql.Date;

@@ -1,3 +1,11 @@
+/*
+*	@FileName : MemberJoinBusDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.14
+*	@Author	: 김수현
+*	@Discription : Member, Bus table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class MemberJoinBusDTO {

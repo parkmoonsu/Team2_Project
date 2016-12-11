@@ -1,3 +1,11 @@
+/*
+*	@FileName : BusStopManageController.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.20
+*	@Author	: 김용현, 김용현
+*	@Discription : 버스정류장 관리 controller
+*/
+
 package kr.or.bus.controller;
 
 import java.util.List;
