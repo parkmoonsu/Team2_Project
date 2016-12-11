@@ -125,7 +125,7 @@ select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
 			<div class="page-title">
 				<div class="title_left">
 					<h3>
-						<small>실시간 버스정보</small>
+						<small>노선 수정&확인</small>
 					</h3>
 				</div>
 
@@ -133,7 +133,13 @@ select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
 			<div class="x_panel">
           <div class="row" style="text-align: right">
             <div class="col-md-12 col-sm-12 col-xs-12">
-				
+            
+            
+            <button id="newsave" class="btn btn-default btn-sm">저장하기</button>
+			<button id="busStart" class="btn btn-default btn-sm">시뮬레이션 시작</button>
+			
+			
+			
 				<select id="selectRoute">
 					<option>노선종류</option>
 					<c:forEach var="i" items="${list}">
@@ -152,15 +158,7 @@ select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
 				<select id="selectBusStopEdit">
 					<option>수정정류장 선택</option>									
 				</select>
-				
-				<div>
-				 <button id="newsave" class="btn">저장하기</button>
-				</div>
-				
-				<div>
-				 <button id="busStart" class="btn">시뮬레이션 시작</button>
-				</div>
-							
+										
      			<div class="container" id="map" style="width:auto;height:500px; border: solid black 1px; margin-left:auto; margin-right: auto;"></div>
             </div>
             </div>
