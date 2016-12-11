@@ -23,19 +23,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.View;
 
-import kr.or.bus.dao.BusStopDAO;
+import kr.or.bus.dao.RouteDAO;
 import kr.or.bus.dao.RouteStopDAO;
 import kr.or.bus.dto.RouteStopDTO;
 import kr.or.bus.dto.RouteStopJoinStopDTO;
 import kr.or.bus.dto.StopDTO;
-
-import kr.or.bus.dao.RouteDAO;
-import kr.or.bus.dao.ScheduleManageDAO;
-import kr.or.bus.dto.RouteStopCopyJoinStopDTO;
 
 @Service
 public class RouteManageService {

@@ -6,13 +6,6 @@
 	@Author	: 박문수
 	@Discription : 관리자메인페이지 
  -->
- 
- 
- 
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 
