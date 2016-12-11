@@ -64,7 +64,7 @@ public class LoginService {
 			String head="회원아이디 찾기 를 위한 RoadOneBell 안내";
 			String content1="RoadOneBell 아이디 찾기 입니다.";
 			String contetn="회원님 아이디는 :"+m_id+"입니다.";
-			String img="https://cdn.pixabay.com/photo/2015/02/03/09/25/question-622164_960_720.jpg";
+			String img="http://kinimage.naver.net/20161211_211/1481437838055aaexH_PNG/%C0%DA%B9%B0%BC%E8.png?type=w620";
 			
 			Map<String,Object> param=new HashMap<>();
 			param.put("content",contetn);
@@ -109,13 +109,13 @@ public class LoginService {
 		if(dao.searchIdEmail(m_id, m_email) > 0){
 			
 			MimeMessage mimemessage = mailSender.createMimeMessage();
-			mimemessage.setSubject("KOSBUS"+ dao.getName(m_id).getM_name() +"님 비밀번호 입니다.", "utf-8");
+			mimemessage.setSubject("RoadOneBell"+ dao.getName(m_id).getM_name() +"님 비밀번호 입니다.", "utf-8");
 			
 			String curTime = new SimpleDateFormat("yyyy-MM-dd-").format(new Date());	 
 			String head="회원아이디 찾기 를 위한 RoadOneBell 안내";
 			String content1="RoadOneBell 비밀번호 찾기 입니다.";
 			String content="회원님 임시 비밀번호는  :"+temp+"입니다.";
-			String img="https://cdn.pixabay.com/photo/2015/02/03/09/25/question-622164_960_720.jpg";
+			String img="http://kinimage.naver.net/20161211_211/1481437838055aaexH_PNG/%C0%DA%B9%B0%BC%E8.png?type=w620";
 			
 			
 			Map<String,Object> param=new HashMap<>();
