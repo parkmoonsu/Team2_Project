@@ -158,26 +158,67 @@ $(function() {
 	$(".antosubmit2").on("click", function() {
 
 		swal({
-			  title: "Are you sure?",
-			  text: "You will not be able to recover this imaginary file!",
+			  title: "정말 일정을 변경하시겠습니까?",
+			  //text: "You will not be able to recover this imaginary file!",
 			  type: "warning",
 			  showCancelButton: true,
 			  confirmButtonColor: "#DD6B55",
-			  confirmButtonText: "Yes, delete it!",
-			  cancelButtonText: "No, cancel plx!",
-			  closeOnConfirm: false,
-			  closeOnCancel: false
+			  confirmButtonText: "확인!",
+			  closeOnConfirm: false
 			},
 			function(isConfirm){
-			  if (isConfirm) {
-			    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-			  } else {
-			    swal("Cancelled", "Your imaginary file is safe :)", "error");
-			  }
-			});
+				if(isConfirm){
+					var o_code = $("#select2").val();
+					
+					$("#calendar").fullCalendar('removeEvents', calEventObj.id);
+
+					$.ajax({
+						url : 'reguloff_update.htm',
+						type : 'post',
+						data : {
+							m_id : calEventObj.id,
+							o_code : o_code,
+							temp : 't'
+						},
+						success : function(data) {
+							
+							event = {
+								id : data.data.m_id,
+								title : data.data.m_name,
+								dow : [ data.data.o_code ]
+							};
+							$("#calendar").fullCalendar('renderEvent', event);
+							$("#calendar").fullCalendar('unselect');
+						}
+					});
+					
+					//history 저장
+					$.ajax({
+						url : 'history_insert.htm',
+						type : 'post',
+						data : { 
+							ko_code:'600',
+							o_code:calEventObj.dow[0],
+							m_id:loginid,
+							ro_code:o_code,
+							ro_object:loginid,
+							o_check:'y'
+						},
+						success : function(data) {
+							
+						}
+					});
+				} else {
+					sw
+				}
+				
+				
+						////
+			$('.antoclose2').click();
+		});
+		////
 		
-		
-		if (confirm("정말 일정을 변경하시겠습니까??") == true) {
+		/*if (confirm("정말 일정을 변경하시겠습니까??") == true) {
 			var o_code = $("#select2").val();
 			
 			$("#calendar").fullCalendar('removeEvents', calEventObj.id);
@@ -220,36 +261,44 @@ $(function() {
 			});
 			
 		}
-
-		$('.antoclose2').click();
+		////
+		$('.antoclose2').click();*/
 
 	});
 
 	// 삭제버튼
 	$('#deleteschedule').click(function() {
-
-		/*swal({
-			  title: "Are you sure?",
-			  text: "You will not be able to recover this imaginary file!",
+		
+		swal({
+			  title: "정말 삭제하시겠습니까?",
+			  //text: "You will not be able to recover this imaginary file!",
 			  type: "warning",
 			  showCancelButton: true,
 			  confirmButtonColor: "#DD6B55",
-			  confirmButtonText: "Yes, delete it!",
-			  cancelButtonText: "No, cancel plx!",
+			  confirmButtonText: "확인",
+			  cancelButtonText: "취소",
 			  closeOnConfirm: false,
-			  closeOnCancel: false
+			  closeOnCancel: true
 			},
 			function(isConfirm){
 			  if (isConfirm) {
-			    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-			  } else {
-			    swal("Cancelled", "Your imaginary file is safe :)", "error");
-			  }
-			});*/
+				  $.ajax({
+						url : 'reguloff_delete.htm',
+						type : 'post',
+						dataType : 'json',
+						data : {
+							m_id : calEventObj.id
+						},
+						success : function(data) {
+							
+						}
+					});
+					$("#calendar").fullCalendar('removeEvents', calEventObj.id);
+					$("#calendar").fullCalendar('unselect');
+			  } 
+			});
 		
-		
-		
-		if (confirm("정말 삭제하시겠습니까??") == true) {
+/*		if (confirm("정말 삭제하시겠습니까??") == true) {
 
 			// db삭제
 			$.ajax({
@@ -265,7 +314,10 @@ $(function() {
 			});
 			$("#calendar").fullCalendar('removeEvents', calEventObj.id);
 			$("#calendar").fullCalendar('unselect');
-		}
+		}*/
+		
+		
+		
 	});
 });
 
@@ -458,7 +510,183 @@ function loadCalendar(){
 											
 											}else{
 												//동일 사용자가 아닌 경우 일정 바꾸기
-												if (confirm("해당 사용자와 일정을 바꾸시겠습니까?") == true) {
+												
+												swal({
+													  title: "해당 사용자와 일정을 바꾸시겠습니까?",
+													  //text: "You will not be able to recover this imaginary file!",
+													  type: "warning",
+													  showCancelButton: true,
+													  confirmButtonColor: "#DD6B55",
+													  confirmButtonText: "확인",
+													  closeOnConfirm: false
+													},
+													function(){
+													  //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+														$.ajax({
+															type:"post",
+															url:"checkstatus.member",
+															dataType:"json",
+															data:{m_id:loginid},
+															success:function(data){
+																if(data.row!=0){
+																	//alert('이미 일정변경을 신청 중 입니다.');
+																	swal(
+																			{
+																				title : "",
+																				text : "이미 일정변경을 신청 중 입니다.",
+																				type : "warning",
+																				
+																				confirmButtonColor : "#DD6B55",
+																				confirmButtonText : "확인",
+																				closeOnConfirm : true,
+																				closeOnCancel: true
+																			}, function() {
+																				 
+																			});
+																}else{
+																
+																	$.ajax({
+																		type:"post",
+																		url:"checkstatus.member",
+																		dataType:"json",
+																		data:{m_id:calEvent.id},
+																		success:function(data){
+																			if(data.row!=0){
+																				//alert('변경 중인 일정입니다.');
+																				swal(
+																						{
+																							title : "",
+																							text : "변경 중인 일정입니다.",
+																							type : "warning",
+																							
+																							confirmButtonColor : "#DD6B55",
+																							confirmButtonText : "확인",
+																							closeOnConfirm : true
+																						}, function() {
+																							 
+																						});
+																			} else {
+																				var event1={
+																						id:calEvent.id,
+																						title:calEvent.title,
+																						dow:calEvent.dow,
+																						color:"black"
+																				};
+																				
+																				//신청자
+																				var event2;
+																				
+																				$.ajax({
+																					url:"selectseq.member",
+																					data:{m_id:loginid},
+																					dataType:"json",
+																					type:"post",
+																					success:function(data){
+																						event2={
+																								id:data.dto.m_id,
+																								title:data.dto.m_name,
+																								dow:[data.dto.o_code],
+																								color:"green"
+																						};
+																						
+																						//바꾸기		
+																						var event3={
+																								id : event1.id,
+																								title : event1.title,
+																								dow:event2.dow,
+																								color:'red'
+																									
+																						};
+																						
+																						var event4={
+																								id: event2.id,
+																								title : event2.title,
+																								dow:event1.dow,
+																								color:'red'
+																						};
+																						
+																						$("#calendar").fullCalendar('renderEvent', event3);
+																						$("#calendar").fullCalendar('unselect');
+																						$("#calendar").fullCalendar('renderEvent', event4);
+																						$("#calendar").fullCalendar('unselect');
+																						
+																						//reguloff 업데이트
+																						$.ajax({
+																							url : 'reguloff_update.htm',
+																							type : 'post',
+																							data : {
+																								m_id:event1.id,
+																								o_code:event1.dow[0],
+																								temp:''
+																							},
+																							success : function(data) {
+																								
+																							}
+																						});
+																						
+																						$.ajax({
+																							url : 'reguloff_update.htm',
+																							type : 'post',
+																							data : {
+																								m_id:event2.id,
+																								o_code:event2.dow[0],
+																								temp:'s'
+																							},
+																							success : function(data) {
+																								
+																							}
+																						});
+																						
+																						//history 저장
+																						$.ajax({
+																							url : 'history_insert.htm',
+																							type : 'post',
+																							data : { 
+																								ko_code:'600',
+																								o_code:event1.dow[0], //변경전 요일
+																								m_id:event1.id, //본인id > 클릭된 사람
+																								ro_code:event2.dow[0], //변경후 요일
+																								ro_object:event2.id, //바꿀사람id
+																								o_check:""
+																							},
+																							success : function(data) {
+																								
+																								console.log('대상자는 o_check 없음');
+																							}
+																						});
+																						
+																						$.ajax({
+																							url : 'history_insert.htm',
+																							type : 'post',
+																							data : { 
+																								ko_code:'600',
+																								o_code:event2.dow[0], //변경전 요일
+																								m_id:event2.id, //본인id > 클릭된 사람
+																								ro_code:event1.dow[0], //변경후 요일
+																								ro_object:event1.id, //바꿀사람id
+																								o_check:'y'
+																							},
+																							success : function(data) {
+																								console.log('신청자는 o_check=y');
+																							}
+																						});
+																						
+																						
+																					} //success
+																				}); //ajax
+																				
+																			} //else
+																		}//success
+																	});//ajax
+
+																} //else
+															}//success
+															
+														});
+													});
+												
+												
+												/*if (confirm("해당 사용자와 일정을 바꾸시겠습니까?") == true) {
 													$.ajax({
 														type:"post",
 														url:"checkstatus.member",
@@ -475,7 +703,8 @@ function loadCalendar(){
 																			
 																			confirmButtonColor : "#DD6B55",
 																			confirmButtonText : "확인",
-																			closeOnConfirm : true
+																			closeOnConfirm : true,
+																			closeOnCancel: true
 																		}, function() {
 																			 
 																		});
@@ -620,6 +849,7 @@ function loadCalendar(){
 														
 													}); //ajax
 												} //if
+												*/
 											} //else
 										} //success
 									}); //ajax							
@@ -637,6 +867,7 @@ function loadCalendar(){
 			var dowafter= Number(event.dow[0])+delta.days();
 			var evt;
 			
+		
 			$.ajax({
 				type:'post',
 				url:'reguloffschedulecheck.member',
@@ -680,7 +911,129 @@ function loadCalendar(){
 							dataType:"json",
 							success:function(data){
 								if(data.rid==loginid){
-									if (confirm("정말 일정을 변경하시겠습니까??") == true) {												
+										
+									swal({
+										  title: "정말 일정을 변경하시겠습니까?",
+										  //text: "You will not be able to recover this imaginary file!",
+										  type: "warning",
+										  showCancelButton: true,
+										  confirmButtonColor: "#DD6B55",
+										  confirmButtonText: "Yes!",
+										  cancelButtonText: "No!",
+										  closeOnConfirm: false,
+										  closeOnCancel: false
+										},
+										function(isConfirm){
+										  if (isConfirm) {
+											  $.ajax({
+													type:"post",
+													url:"checkstatus.member",
+													dataType:"json",
+													data:{m_id:loginid},
+													success:function(data){
+														if(data.row!=0){
+															//alert('이미 일정변경을 신청 중 입니다.');
+															swal(
+																	{
+																		title : "",
+																		text : "이미 일정변경을 신청 중 입니다.",
+																		type : "warning",
+																		
+																		confirmButtonColor : "#DD6B55",
+																		confirmButtonText : "확인",
+																		closeOnConfirm : true
+																	}, function() {
+																		 
+																	});
+															
+															
+															$('#calendar').fullCalendar('refetchEvents');
+															$('#calendar').fullCalendar('unselect');
+														}else{
+															
+															if (dowafter>6){
+																dowafter=dowafter%7;
+															} else if (dowafter<0){
+																dowafter=dowafter%7+7;
+															} else {
+															}
+															
+															$("#calendar").fullCalendar('removeEvents', event.id);
+															
+															$.ajax({
+																url:"reguloff_update.htm",
+																data:{
+																	m_id : event.id,
+																	o_code : dowbefore,
+																	temp:'s'
+																},
+																type:"post",
+																dataType:"json",
+																success:function(data){
+																	
+																	evt={
+																			id:event.id,
+																			title:event.title,
+																			dow:[dowbefore],
+																			color:'green'
+																	};
+																	
+																	$("#calendar").fullCalendar('renderEvent', evt);
+																}
+															});
+															
+															//history 저장
+															$.ajax({
+																url : 'history_insert.htm',
+																type : 'post',
+																data : { 
+																	ko_code:'600',
+																	o_code:dowbefore,
+																	m_id:loginid,
+																	ro_code:dowafter,
+																	ro_object:loginid,
+																	o_check:'y'
+																},
+																success : function(data) {
+																	
+																	var event = {
+																			id : data.data.m_id,
+																			title : data.data.m_name,
+																			dow : [ dowafter ],
+																			color:"red"
+																		};
+																		
+																		$("#calendar").fullCalendar('renderEvent', event);
+																		$("#calendar").fullCalendar('unselect');
+																}
+															});
+														}
+													}
+												});
+											  
+											  
+											  
+										  } else {
+											 swal("취소되었습니다.");
+											  $("#calendar").fullCalendar('refetchEvents');
+												//원위치
+												evt={
+														id:event.id,
+														title:event.title,
+														dow:[dowbefore]
+												};
+												$("#calendar").fullCalendar('removeEvents', event.id);
+												$("#calendar").fullCalendar('renderEvent', evt);
+												$("#calendar").fullCalendar('unselect');
+										  }
+										});
+									
+									
+									
+									
+									
+									
+									/*if (confirm("정말 일정을 변경하시겠습니까??") == true) {												
 										$.ajax({
 											type:"post",
 											url:"checkstatus.member",
@@ -769,7 +1122,7 @@ function loadCalendar(){
 													
 										} else {
 											$("#calendar").fullCalendar('refetchEvents');
-											/*//원위치
+											//원위치
 											evt={
 													id:event.id,
 													title:event.title,
@@ -777,15 +1130,14 @@ function loadCalendar(){
 											};
 											$("#calendar").fullCalendar('removeEvents', event.id);
 											$("#calendar").fullCalendar('renderEvent', evt);
-											$("#calendar").fullCalendar('unselect');*/
+											$("#calendar").fullCalendar('unselect');
 											
 			
-										}
+										}*/
 									
 										$("#calendar").fullCalendar('unselect');
 														
 									}else{
-										//alert("해당 일정은 편집할 수 없습니다.");
 										swal(
 												{
 													title : "",

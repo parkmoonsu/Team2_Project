@@ -19,7 +19,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>KOSBUS</title>
+    <title>RoadOneBell</title>
 	    <!-- jQuery -->
 	    
 	    <script src="${pageContext.request.contextPath}/NewLoader/js/jquery.min.js"></script>

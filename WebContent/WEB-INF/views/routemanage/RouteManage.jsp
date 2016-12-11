@@ -70,9 +70,9 @@
 }
 
 }
-select#selectBus, #selectRoute, #selectBuscopy {
+select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
 
-	-webkit-appearance: button;
+	-webkit-appearance: button btn-sm;
 	-webkit-border-radius: 2px;
 	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 	-webkit-padding-end: 20px;
@@ -525,8 +525,6 @@ select#selectBus, #selectRoute, #selectBuscopy {
                 data : {r_num:$("#selectBuscopy").val()},
                 success : function(data) {                   	
                 	console.log("노선타입 전송잘되냐?");
-                	//console.log(data);
-                	//console.log(data.editlist);	
                 	var hell =new Array();
            			for(var j=0;j<data.editlist.length;j++){          				
    		      			hell.push(new google.maps.LatLng(parseFloat(data.editlist[j].r_y), parseFloat(data.editlist[j].r_x)));  		      			
@@ -579,14 +577,15 @@ select#selectBus, #selectRoute, #selectBuscopy {
                     	}else{
                     		//alert("기사가 배정되지 않았습니다");
                     		swal({
-      						  title: "",
-      						  text: "기사가 배정되지 않았습니다",
-      						  type: "info",
-      						  closeOnConfirm: true,
-      						  showLoaderOnConfirm: true,
-      						},
-      						 function(){
-      						}); 
+                                title: "",
+                                text: "기사가 배정되지 않았습니다",
+                                type: "info",
+                                closeOnConfirm: true,
+                                showLoaderOnConfirm: true,
+                              },
+                              function(){
+                              });
+
                     		return false;
                     	}
                     	                 		                   		                 	                   		                   		
