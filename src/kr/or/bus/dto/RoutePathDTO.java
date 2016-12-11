@@ -1,9 +1,9 @@
 /*
-*	@FileName : RouteJoinGarageDTO.java
+*	@FileName : RoutePathDTO.java
 *	@Project	: KosBus
-*	@Date	: 2016. 11.24
+*	@Date	: 2016. 11.22
 *	@Author	: 김지현
-*	@Discription :Route, Garage table DTO
+*	@Discription :Routepath table DTO
 */
 package kr.or.bus.dto;
 

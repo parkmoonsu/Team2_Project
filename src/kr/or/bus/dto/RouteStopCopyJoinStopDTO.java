@@ -1,3 +1,11 @@
+/*
+*	@FileName : RouteStopCopyJoinStopDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.23
+*	@Author	: 김지현
+*	@Discription :Route, BusStop table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class RouteStopCopyJoinStopDTO {

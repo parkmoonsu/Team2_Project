@@ -1,3 +1,11 @@
+/*
+*	@FileName : SelectDistinctDTO.java
+*	@Project	: KosBus
+*	@Date	: 2016. 11.24
+*	@Author	: 강민수
+*	@Discription : Member , .... ect table DTO
+*/
+
 package kr.or.bus.dto;
 
 public class SelectDistinctDTO {
