@@ -600,176 +600,180 @@ function loadCalendar(){
 													  showCancelButton: true,
 													  confirmButtonColor: "#DD6B55",
 													  confirmButtonText: "확인",
-													  closeOnConfirm: false,
+													  closeOnConfirm: true,
 													  closeOnCancel: true
 													},
-													function(){
+													function(isConfirm){
 														
-													  //swal("Deleted!", "Your imaginary file has been deleted.", "success");
-														$.ajax({
-															type:"post",
-															url:"checkstatus.member",
-															dataType:"json",
-															data:{m_id:loginid},
-															success:function(data){
-																
-																if(data.row!=0){
-																	//////여기여기
-																	swal(
-																			{
-																				title : "",
-																				text : "이미 일정변경을 신청 중 입니다.",
-																				type : "warning",
-																				confirmButtonColor : "#DD6B55",
-																				confirmButtonText : "확인",
-																				closeOnConfirm : true,
-																				closeOnCancel: false,
-																				showCancelButton: false
-																			}, function() {}
-																	);
+														if (isConfirm) {
+															//swal("Deleted!", "Your imaginary file has been deleted.", "success");
+															$.ajax({
+																type:"post",
+																url:"checkstatus.member",
+																dataType:"json",
+																data:{m_id:loginid},
+																success:function(data){
 																	
-																}else{
-																
-																	$.ajax({
-																		type:"post",
-																		url:"checkstatus.member",
-																		dataType:"json",
-																		data:{m_id:calEvent.id},
-																		success:function(data){
-																			console.log('오바야');
-																			console.log(data);
-																			if(data.row!=0){
-																				//alert('변경 중인 일정입니다.');
-																				swal(
-																						{
-																							title : "",
-																							text : "변경 중인 일정입니다.",
-																							type : "warning",
+																	if(data.row!=0){
+																		//////여기여기
+																		swal(
+																				{
+																					title : "",
+																					text : "이미 일정변경을 신청 중 입니다.",
+																					type : "warning",
+																					confirmButtonColor : "#DD6B55",
+																					confirmButtonText : "확인",
+																					closeOnConfirm : true,
+																					closeOnCancel: false,
+																					showCancelButton: false
+																				}, function() {}
+																		);
+																		
+																	}else{
+																	
+																		$.ajax({
+																			type:"post",
+																			url:"checkstatus.member",
+																			dataType:"json",
+																			data:{m_id:calEvent.id},
+																			success:function(data){
+																				console.log('오바야');
+																				console.log(data);
+																				if(data.row!=0){
+																					//alert('변경 중인 일정입니다.');
+																					swal(
+																							{
+																								title : "",
+																								text : "변경 중인 일정입니다.",
+																								type : "warning",
+																								
+																								confirmButtonColor : "#DD6B55",
+																								confirmButtonText : "확인",
+																								closeOnConfirm : true
+																							}, function() {
+																								 
+																							});
+																				} else {
+																					var event1={
+																							id:calEvent.id,
+																							title:calEvent.title,
+																							dow:calEvent.dow,
+																							color:"black"
+																					};
+																					
+																					//신청자
+																					var event2;
+																					
+																					$.ajax({
+																						url:"selectseq.member",
+																						data:{m_id:loginid},
+																						dataType:"json",
+																						type:"post",
+																						success:function(data){
+																							event2={
+																									id:data.dto.m_id,
+																									title:data.dto.m_name,
+																									dow:[data.dto.o_code],
+																									color:"green"
+																							};
 																							
-																							confirmButtonColor : "#DD6B55",
-																							confirmButtonText : "확인",
-																							closeOnConfirm : true
-																						}, function() {
-																							 
-																						});
-																			} else {
-																				var event1={
-																						id:calEvent.id,
-																						title:calEvent.title,
-																						dow:calEvent.dow,
-																						color:"black"
-																				};
-																				
-																				//신청자
-																				var event2;
-																				
-																				$.ajax({
-																					url:"selectseq.member",
-																					data:{m_id:loginid},
-																					dataType:"json",
-																					type:"post",
-																					success:function(data){
-																						event2={
-																								id:data.dto.m_id,
-																								title:data.dto.m_name,
-																								dow:[data.dto.o_code],
-																								color:"green"
-																						};
-																						
-																						//바꾸기		
-																						var event3={
-																								id : event1.id,
-																								title : event1.title,
-																								dow:event2.dow,
-																								color:'red'
+																							//바꾸기		
+																							var event3={
+																									id : event1.id,
+																									title : event1.title,
+																									dow:event2.dow,
+																									color:'red'
+																										
+																							};
+																							
+																							var event4={
+																									id: event2.id,
+																									title : event2.title,
+																									dow:event1.dow,
+																									color:'red'
+																							};
+																							
+																							$("#calendar").fullCalendar('renderEvent', event3);
+																							$("#calendar").fullCalendar('unselect');
+																							$("#calendar").fullCalendar('renderEvent', event4);
+																							$("#calendar").fullCalendar('unselect');
+																							
+																							//reguloff 업데이트
+																							$.ajax({
+																								url : 'reguloff_update.htm',
+																								type : 'post',
+																								data : {
+																									m_id:event1.id,
+																									o_code:event1.dow[0],
+																									temp:''
+																								},
+																								success : function(data) {
 																									
-																						};
-																						
-																						var event4={
-																								id: event2.id,
-																								title : event2.title,
-																								dow:event1.dow,
-																								color:'red'
-																						};
-																						
-																						$("#calendar").fullCalendar('renderEvent', event3);
-																						$("#calendar").fullCalendar('unselect');
-																						$("#calendar").fullCalendar('renderEvent', event4);
-																						$("#calendar").fullCalendar('unselect');
-																						
-																						//reguloff 업데이트
-																						$.ajax({
-																							url : 'reguloff_update.htm',
-																							type : 'post',
-																							data : {
-																								m_id:event1.id,
-																								o_code:event1.dow[0],
-																								temp:''
-																							},
-																							success : function(data) {
-																								
-																							}
-																						});
-																						
-																						$.ajax({
-																							url : 'reguloff_update.htm',
-																							type : 'post',
-																							data : {
-																								m_id:event2.id,
-																								o_code:event2.dow[0],
-																								temp:'s'
-																							},
-																							success : function(data) {
-																								
-																							}
-																						});
-																						
-																						//history 저장
-																						$.ajax({
-																							url : 'history_insert.htm',
-																							type : 'post',
-																							data : { 
-																								ko_code:'600',
-																								o_code:event1.dow[0], //변경전 요일
-																								m_id:event1.id, //본인id > 클릭된 사람
-																								ro_code:event2.dow[0], //변경후 요일
-																								ro_object:event2.id, //바꿀사람id
-																								o_check:""
-																							},
-																							success : function(data) {
-																								
-																								console.log('대상자는 o_check 없음');
-																							}
-																						});
-																						
-																						$.ajax({
-																							url : 'history_insert.htm',
-																							type : 'post',
-																							data : { 
-																								ko_code:'600',
-																								o_code:event2.dow[0], //변경전 요일
-																								m_id:event2.id, //본인id > 클릭된 사람
-																								ro_code:event1.dow[0], //변경후 요일
-																								ro_object:event1.id, //바꿀사람id
-																								o_check:'y'
-																							},
-																							success : function(data) {
-																								console.log('신청자는 o_check=y');
-																							}
-																						});
-																						
-																						
-																					} //success
-																				}); //ajax
-																				
-																			} //else
-																		}//success
-																	});//ajax
-
-																} //else
-															}//success
-															
-														}); //function
+																								}
+																							});
+																							
+																							$.ajax({
+																								url : 'reguloff_update.htm',
+																								type : 'post',
+																								data : {
+																									m_id:event2.id,
+																									o_code:event2.dow[0],
+																									temp:'s'
+																								},
+																								success : function(data) {
+																									
+																								}
+																							});
+																							
+																							//history 저장
+																							$.ajax({
+																								url : 'history_insert.htm',
+																								type : 'post',
+																								data : { 
+																									ko_code:'600',
+																									o_code:event1.dow[0], //변경전 요일
+																									m_id:event1.id, //본인id > 클릭된 사람
+																									ro_code:event2.dow[0], //변경후 요일
+																									ro_object:event2.id, //바꿀사람id
+																									o_check:""
+																								},
+																								success : function(data) {
+																									
+																									console.log('대상자는 o_check 없음');
+																								}
+																							});
+																							
+																							$.ajax({
+																								url : 'history_insert.htm',
+																								type : 'post',
+																								data : { 
+																									ko_code:'600',
+																									o_code:event2.dow[0], //변경전 요일
+																									m_id:event2.id, //본인id > 클릭된 사람
+																									ro_code:event1.dow[0], //변경후 요일
+																									ro_object:event1.id, //바꿀사람id
+																									o_check:'y'
+																								},
+																								success : function(data) {
+																									console.log('신청자는 o_check=y');
+																								}
+																							});
+																							
+																							
+																						} //success
+																					}); //ajax
+																					
+																				} //else
+																			}//success
+																		});//ajax
+	
+																	} //else
+																}//success
+																
+															}); //function
+														} else {
+															//여기여기
+														}
 													}); //swal
 												
 												

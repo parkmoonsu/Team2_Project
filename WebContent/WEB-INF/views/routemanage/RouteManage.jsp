@@ -274,7 +274,7 @@ select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
      	console.log("옴?");
      	//console.log(data);
      	poly = new google.maps.Polyline({
-     		//editable: true,
+     		editable: true,
      		path: data,
      	    strokeColor: 'red',
      	    strokeOpacity: 1.0,
@@ -286,7 +286,8 @@ select#selectBus, #selectRoute, #selectBuscopy, #selectBusStopEdit {
     function loadVector2(data){
      	console.log("옴?");
      	//console.log(data);
-     	poly = new google.maps.Polyline({     		
+     	poly = new google.maps.Polyline({
+     		//editable: true,     	
      		path: data,
      	    strokeColor: 'red',
      	    strokeOpacity: 1.0,

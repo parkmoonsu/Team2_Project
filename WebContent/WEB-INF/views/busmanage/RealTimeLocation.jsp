@@ -514,7 +514,7 @@
           		icon:"${pageContext.request.contextPath}/images/bus.png"
        		});
       		
-			var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
+			/* var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
 			if(data[1] == null){
 				(function (BusMarker, data, infowindow) {
 	     	        google.maps.event.addListener(BusMarker, "click", function (e) {
@@ -531,7 +531,7 @@
 	     	           
 	     	        });
 	     	    })(BusMarker, data[1], infowindow);
-			}
+			} */
      	  	
        }else{
     	    console.log("너 마커 새로 생성안함??");
@@ -670,7 +670,7 @@
            		icon:"${pageContext.request.contextPath}/images/bus4.png"
         		});
         		
-        		var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
+        		/* var infowindow = new google.maps.InfoWindow({ maxWidth: 400 });
         		
         		if(data[1] == null){
     				(function (B4usMarker, data, infowindow) {
@@ -691,7 +691,7 @@
     	     	           
     	     	        });
     	     	    })(B4usMarker, data[1], infowindow);
-    			}
+    			} */
         }else{
      	    console.log("너 마커 새로 생성안함??");
         		B4usMarker.setPosition(new google.maps.LatLng(data[0].msgBody.itemList.tmY, data[0].msgBody.itemList.tmX));
