@@ -524,6 +524,159 @@ select#selectBus, select#selectBus2 {
 
 	}
 	
+
+	var r_num;
+	function addstop(){
+		//정류장 번호 랜덤 값으로 생성
+		$.ajax({ 
+        	url:"getrandomsnum.admin",
+        	type:"post",
+        	success:function(data){	
+        		$('#snum').val(data.s_num);	
+        	}
+         });
+			
+		if($('#createdrnum').val()!=""){
+			r_num=$('#createdrnum').val();
+			$('#pass-modal').modal();
+		}else if ($('#selectBus2').val()!=""){
+			r_num=$('#selectBus2').val();
+			$('#pass-modal').modal();
+		}else {
+			//alert('신규노선번호를 생성하거나 기존 노선번호를 선택하세요.');
+			swal({
+				  title: "",
+				  text: "신규노선번호를 생성하거나 기존 노선번호를 선택하세요.",
+				  type: "info",
+				  closeOnConfirm: true,
+				  showLoaderOnConfirm: true,
+				},
+				function(){
+				
+			});
+		}
+		
+		$('#shy').click(function(){
+					
+			//c마커의 인포윈도우 지우기
+			cinfowindow.close();
+			//마커 표시, c마커로 변경
+			cmarker.setLabel($('#end').val());
+			if(rectangle!=null){
+				rectangle.setMap(null);	
+			}
+				
+			//stop에 저장
+			var param = {
+				"r_num":r_num,
+				"s_num":$('#snum').val(),
+				"s_name":$('#sname').val(),
+				"rs_order":$('#end').val(),
+				"s_x":cmarker.getPosition().lng(),
+				"s_y":cmarker.getPosition().lat()
+			};
+			console.log(param);
+    		$.ajax({
+    			url : "editordernumber.admin",
+    			type : "post",
+    			data : param,
+    			success:function(data){
+    				//alert('신규 정류장 등록 완료');
+    				swal("신규 정류장 등록 완료!");
+    			}
+    		});
+    		
+    		// route insert
+			$.ajax({
+				url:'routeInsert.admin',
+				type:'post',
+				data: {
+					r_num: r_num,
+					bd_num: $('#bdnum').val(),
+					g_num: $('#gnum').val()
+			
+				},
+				success:function(data){
+					$('#match-pass').modal("hide");
+					//다른 마커 지우기
+					for(var i=0; i<markerList.length; i++){
+						markerList[i].setMap(null);
+					}
+					markerList=[];
+					dataList=[];
+				}
+			});
+			
+			// routestop insert
+			$.ajax({
+				url:'routeStopInsert.admin',
+				type:'post',
+				data: {
+					r_num: r_num,
+					s_num: $('#snum').val(),
+					rs_order: $('#m_pw2').val()
+				},
+				success:function(data){
+					
+				}
+			});
+    		  		
+		});
+	}
+	
+	function stopclick(s_num){
+		//노선번호+정류장 검색
+		//모달창
+		$('#match-pass').modal("show");
+		
+		//클릭하면
+		$('#passtrue').click(function(){
+			//확인버튼 누르면
+			//지도 표시 변경			
+			changedmarker = new google.maps.Marker({
+				position : markerobject.getPosition(),
+				map : map
+			});
+						
+			// route insert
+			$.ajax({
+				url:'routeInsert.admin',
+				type:'post',
+				data: {
+					r_num: $('#createdrnum').val(),
+					bd_num: $('#bdnum').val(),
+					g_num: $('#gnum').val()
+			
+				},
+				success:function(data){
+					console.log('성공');
+					$('#match-pass').modal("hide");
+					//다른 마커 지우기
+					for(var i=0; i<markerList.length; i++){
+						markerList[i].setMap(null);
+					}
+					markerList=[];
+					dataList=[];
+				}
+			});
+			
+			// routestop insert
+			$.ajax({
+				url:'routeStopInsert.admin', //얼루가나??
+				type:'post',
+				data: {
+					r_num: $('#createdrnum').val(),
+					s_num: dataobject.s_num,
+					rs_order: $('#m_pw2').val()
+				},
+				success:function(data){
+					
+				}
+			});
+		});
+				
+	}
+
 	
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -1133,7 +1286,20 @@ select#selectBus, select#selectBus2 {
       		type : "post",
       		data : {"r_num":r_num},
       		success : function(data){
-      			alert($('#stopn1').val()+' 정류장 변경을 취소 하셨습니다.');
+
+      			//alert($('#stopn1').val()+' 정류장 변경을 취소 하셨습니다.');
+      			swal({
+						  title: "",
+						  text: $('#stopn1').val()+"정류장 변경을 취소 하셨습니다.",
+						  type: "info",
+						  closeOnConfirm: true,
+						  showLoaderOnConfirm: true,
+						},
+						function(){
+						});
+
+      		
+
       			deleteRoute();
       			$.each(data.rssdto,function(index,obj){
       				copyMarkerMakes(obj, map);   

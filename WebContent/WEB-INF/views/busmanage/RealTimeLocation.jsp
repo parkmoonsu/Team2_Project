@@ -48,7 +48,7 @@
     .element {
  #map { margin-left:auto; margin-right:auto; width:95%; }}
  select#selectBus, #selectRoute, #selectGisa{
-	-webkit-appearance: button;
+	-webkit-appearance: button btn-sm;
 	-webkit-border-radius: 2px;
 	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 	-webkit-padding-end: 20px;
