@@ -67,7 +67,7 @@
 
 }
 #external-events {
-   margin-left:65%;
+   margin-left:70%;
    margin-top:5%;
    width: 10%;
    padding: 2 3%;
