@@ -279,7 +279,7 @@ public class BusManageService {
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
 		int icount = dao.iBus();
 		return icount;
-	}
+	} 
 	//경기
 	public int kBus(){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
@@ -289,8 +289,8 @@ public class BusManageService {
 	//폐지
 	public int dBus(){
 		BusDAO dao = sqlsession.getMapper(BusDAO.class);
-		int dcount = dao.dBus();
-		return dcount;
+		int dcount = dao.dBus(); 
+		return dcount; 
 	}
 	//공용
 	public int pBus(){

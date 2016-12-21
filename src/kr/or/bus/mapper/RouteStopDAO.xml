@@ -27,51 +27,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="getRouteStopInfo" parameterType="String" resultType="kr.or.bus.dto.RouteStopDTO">
-		select nvl(r_num,'설정 없음') as r_num, nvl(s_num,'설정 없음') as s_num, nvl(to_char(rs_order),'설정 없음') as rs_order, nvl(r_id,'설정 없음') as r_id, nvl(rs_start,'설정없음') as rs_start, nvl(rs_end,'설정없음') as rs_end from routestop3 where r_num = #{param1} and rs_order = #{param2}
+		select nvl(r_num,'설정 없음') as r_num, nvl(s_num,'설정 없음') as s_num, nvl(to_char(rs_order),'설정 없음') as rs_order, nvl(r_id,'설정 없음') as r_id, nvl(rs_start,'설정없음') as rs_start, nvl(rs_end,'설정없음') as rs_end from routestop where r_num = #{param1} and rs_order = #{param2}
 	</select>
 	
+	<select id="getRouteStopInfoNum" parameterType="String" resultType="Integer">
+		select count(*) from routestop where r_num = #{param1} and rs_order = #{param2}
+	</select>
+	
+	<insert id="addRouteStopInfoNew" parameterType="String">
+		insert into routestop(r_num, s_num, rs_order) values(#{param1}, #{param2}, #{param3})
+	</insert>
+	
 	<insert id="addRouteStopInfo" parameterType="kr.or.bus.dto.RouteStopDTO">
-		insert into routestop3(r_num,s_num,rs_order,r_id,rs_start,rs_end) values(#{r_num},#{s_num},#{rs_order},#{r_id},#{rs_start},#{rs_end})
+		insert into routestop(r_num,s_num,rs_order,r_id,rs_start,rs_end) values(#{r_num},#{s_num},#{rs_order},#{r_id},#{rs_start},#{rs_end})
 	</insert>
 	
 	<update id="updateRouteStopInfo" parameterType="String">
-		update routestop3 set rs_order = rs_order+1 where r_num = #{param1} and rs_order <![CDATA[>=]]> #{param2} and s_num != #{param3}
+		update routestop set rs_order = rs_order+1 where r_num = #{param1} and rs_order <![CDATA[>=]]> #{param2} and s_num != #{param3}
 	</update>
 	
 	<update id="updateRouteStopNewStop" parameterType="String">
-		update routestop3 set s_num = #{param1} where s_num = #{param2} and r_num = #{param3}
+		update routestop set s_num = #{param1} where s_num = #{param2} and r_num = #{param3}
 	</update>
 	
 	<select id="getRouteStopInfoList" parameterType="String" resultType="kr.or.bus.dto.RouteStopJoinStopDTO">
 		select sto.s_num, sto.s_x, sto.s_y, sto.s_name, rs3.r_num, rs3.rs_order, rs3.r_id, rs3.rs_start, rs3.rs_end
 		from stop sto
-		join routestop3 rs3
+		join routestop rs3
 		on sto.S_NUM = rs3.S_NUM 
 		where rs3.r_num = #{r_num}
 	</select>
 	
 
 	<update id="routeUpdate">
-		update routestop3
+		update routestop
 		set rs_order=rs_order+1
 		where rs_order > #{param1}-1 and r_num=#{param2}
 	</update>
 	<update id="routeUpdate2">
-		update routestop3
+		update routestop
 		set rs_order=#{param1}
 		where s_num=#{param2}
 	</update>
 
 	<delete id="deleteStopRoute" parameterType="String">
-		delete from routestop3 where r_num = #{param1} and s_num = #{param2}
+		delete from routestop where r_num = #{param1} and s_num = #{param2}
 	</delete>
 	
 	<update id="updateDeletedRouteStopInfo" parameterType="String">
-		update routestop3 set rs_order = rs_order - 1 where r_num = #{param1}  and rs_order <![CDATA[>=]]> #{param2}
+		update routestop set rs_order = rs_order - 1 where r_num = #{param1}  and rs_order <![CDATA[>=]]> #{param2}
 	</update>
 	
 	<select id="getDuplicateStopNum" resultType="Integer" parameterType="String">
-		select count(s_num) from routestop3 where s_num = #{s_num}
+		select count(s_num) from routestop where s_num = #{s_num}
 	</select>
 	
 	<delete id="deleteStopInfo" parameterType="String">
@@ -79,13 +87,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="getRsOrderfRsStop" resultType="kr.or.bus.dto.RouteStopDTO">
-		select rs_order from routestop3 where r_num = #{r_num} order by rs_order asc
+		select rs_order from routestop where r_num = #{r_num} order by rs_order asc
 	</select>
 	
+	
+	<insert id="stopInsert">
+		insert into stop(s_num, s_name, s_x, s_y) values(#{param1}, #{param2}, #{param3}, #{param4})
+	</insert>
 	<insert id="routeInsert">
 		insert into route(r_num, bd_num, g_num, r_start, r_last, r_interval) values(#{param1}, #{param2}, #{param3}, '00:00:00', '00:00:00', '10')
 	</insert>
+	
 	<insert id="routeStopInsert">
-		insert into routestop3(r_num, s_num, rs_order) values(#{param1}, #{param2}, #{param3})
+		insert into routestop(r_num, s_num, rs_order) values(#{param1}, #{param2}, #{param3})
 	</insert>
+	
+	<select id="checkDuplicateRnum" parameterType="String" resultType="Integer">
+		select count(*) from route where r_num = #{r_num}
+	</select>
+	
+	<select id="checkDuplicateRsnum" parameterType="String" resultType="Integer">
+		select count(*) from routestop where r_num = #{param1} and rs_order = #{param2}
+	</select>
 </mapper>

@@ -166,6 +166,7 @@ public class ScheduleManageService {
 		
 		ScheduleDAO dao=sqlsession.getMapper(ScheduleDAO.class);
 		List<RegulOffrJoinMemberJoinBusDTO> dtolist=dao.reguloffr_select(m_id);
+		System.out.println(dtolist);
 		
 		return dtolist;
 	}

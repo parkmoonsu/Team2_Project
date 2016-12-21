@@ -1,10 +1,4 @@
-/*
-*	@FileName : RouteSelectGisaDTO.java
-*	@Project	: KosBus
-*	@Date	: 2016. 11.23
-*	@Author	: 김지현
-*	@Discription :Route, Member table DTO
-*/
+
 
 package kr.or.bus.dto;
 

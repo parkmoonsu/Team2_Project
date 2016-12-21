@@ -27,8 +27,8 @@
             showLoaderOnConfirm: true,
           },
           function(){
-          });
 		location.href = "joinapprove.admin";
+          });
 	</script>
 </body>
 </html>

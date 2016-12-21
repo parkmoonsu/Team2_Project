@@ -149,28 +149,34 @@ public class RouteManageService {
 			System.out.println("이거 뭐에요");
 			System.out.println(r_num);
 			System.out.println(rs_order);
-			RouteStopDTO rsdto = dao.getRouteStopInfo(r_num, rs_order); //해당 값이 안나올 가능성이 크지?
-			System.out.println(rsdto.getR_num());
-			if(rsdto.getR_num()==null){
-				System.out.println("이거 떠야해!!");
-			}
-			System.out.println("여기가 에러인 것이다");	
-			System.out.println(rsdto.toString());
-			System.out.println("여기는 안나올 것이다");
-			rsdto.setS_num(s_num);
-			//5401 39 55555
-			//5401 39 55554
-
-			int result1 = dao.addRouteStopInfo(rsdto);
-			if (result1 > 0) {
-				int result2 = dao.updateRouteStopInfo(r_num, rs_order, s_num);
-				if (result2 > 0) {
-					alert = "정류장 생성에 성공했습니다.";
+			int cresult = dao.getRouteStopInfoNum(r_num, rs_order);
+			if(cresult>0){ //기존 routestop3에 정보가 있을때 insert
+				RouteStopDTO rsdto = dao.getRouteStopInfo(r_num, rs_order); //해당 값이 안나올 가능성이 크지?
+				
+				System.out.println(rsdto.getR_num());
+				System.out.println("여기가 에러인 것이다");	
+				System.out.println(rsdto.toString());
+				System.out.println("여기는 안나올 것이다");
+				rsdto.setS_num(s_num);
+				int result1 = dao.addRouteStopInfo(rsdto);
+				if (result1 > 0) {
+					int result2 = dao.updateRouteStopInfo(r_num, rs_order, s_num);
+					if (result2 > 0) {
+						alert = "정류장 생성에 성공했습니다.";
+					} else {
+						alert = "정류장 생성에 실패 했습니다.";
+					}
 				} else {
 					alert = "정류장 생성에 실패 했습니다.";
 				}
-			} else {
-				alert = "정류장 생성에 실패 했습니다.";
+			}else{
+				int result3 = dao.addRouteStopInfoNew(r_num, s_num, rs_order);
+				if(result3>0){
+					alert = "새로운 노선에 정류장을 추가 하였습니다.";
+					
+				}else{
+					alert = "새로운 노선에 정류장 생성을 실패 했습니다.";
+				}
 			}
 		} else {
 			alert = "정류장 생성에 실패 했습니다.";
@@ -229,7 +235,7 @@ public class RouteManageService {
 					}
 					alert = "정류장 삭제 처리 되었습니다.3";
 				}else{
-					alert = "정류장 삭제 처리에 오류가 생겼습니다.2";
+					alert = "정류장 삭제 처리 되었습니다.";
 				}
 			}else{
 				alert = "정류장 삭제 처리에 오류가 생겼습니다.1";
@@ -284,6 +290,12 @@ public class RouteManageService {
 		return rslist;
 	}
 	
+	//stop테이블에 insert
+		public void stopInsert(String s_num, String s_name, String s_x, String s_y){
+			RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+			dao.stopInsert(s_num, s_name, s_x, s_y);
+	}
+		
 	//route테이블에 insert
 	public void routeInsert(String r_num, String bd_num, String g_num){
 		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
@@ -297,4 +309,23 @@ public class RouteManageService {
 		dao.routeStopInsert(r_num, s_num, rs_num);
 	}
 	
+	//route테이블에서 r_num 중복체크하기-민수
+	public int checkduplicaternum(String r_num){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		int result = dao.checkDuplicateRnum(r_num);
+		return result;
+	}
+	
+	//routestop 테이블에서 r_num, rs_order 중복체크하기
+	public int checkDuplicateRsnum(String r_num, String rs_order){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		int result = dao.checkDuplicateRsnum(r_num, rs_order);
+		return result;
+	}
+	
+	public int updateRouteStopInfoNotNew(String r_num, String s_num, String rs_order){
+		RouteStopDAO dao = sqlsession.getMapper(RouteStopDAO.class);
+		int result = dao.updateRouteStopInfo(r_num, rs_order, s_num);
+		return result;
+	}
 }
